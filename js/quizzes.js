@@ -41,6 +41,71 @@ const QUIZ_QUESTIONS = [
     correct: 1,
     explanation: "In Hamming codes, parity bits are placed at bit positions that are powers of two (2^0 = 1, 2^1 = 2, 2^2 = 4, etc.) so that each bit position's binary expansion uniquely determines which parity bits monitor it."
   },
+  {
+    id: 101,
+    unit: "Unit II",
+    question: "What is the maximum theoretical channel throughput of Pure ALOHA and Slotted ALOHA, respectively?",
+    options: [
+      "Pure ALOHA: 50.0%, Slotted ALOHA: 100.0%",
+      "Pure ALOHA: 18.4% (1/2e), Slotted ALOHA: 36.8% (1/e)",
+      "Pure ALOHA: 36.8%, Slotted ALOHA: 18.4%",
+      "Pure ALOHA: 10.0%, Slotted ALOHA: 90.0%"
+    ],
+    correct: 1,
+    explanation: "According to Tanenbaum (Ch. 4) and Forouzan (Ch. 12), Pure ALOHA throughput is S = G e^(-2G) with a maximum of 1/(2e) ≈ 18.4% at G = 0.5. Slotted ALOHA throughput is S = G e^(-G) with a maximum of 1/e ≈ 36.8% at G = 1.0."
+  },
+  {
+    id: 102,
+    unit: "Unit II",
+    question: "In CSMA protocols, what does a '1-persistent' station do when it senses that the shared channel is currently busy?",
+    options: [
+      "It aborts immediately and generates a fatal protocol exception.",
+      "It waits a random backoff time before sensing again.",
+      "It continues sensing continuously until the channel becomes idle, and then transmits immediately with probability 1.",
+      "It transmits immediately anyway, ignoring the carrier sense signal."
+    ],
+    correct: 2,
+    explanation: "In 1-persistent CSMA, the station greedily monitors the medium. As soon as the channel becomes idle, it transmits immediately (probability = 1). If two stations were waiting for the channel to become idle, both transmit immediately and collide."
+  },
+  {
+    id: 103,
+    unit: "Unit II",
+    question: "How does the MACA / IEEE 802.11 RTS/CTS handshake resolve the Hidden Terminal problem in Wireless LANs?",
+    options: [
+      "By increasing transmission power to cover all possible hidden stations.",
+      "The receiver replies with a CTS frame, informing all stations within the receiver's range (including hidden senders) to defer transmission using NAV.",
+      "By using wired Ethernet coaxial cables instead of radio frequencies.",
+      "By switching automatically to TDMA fixed frequency channels."
+    ],
+    correct: 1,
+    explanation: "Because a hidden terminal cannot hear the sender's RTS, it DOES hear the receiver's CTS frame. The CTS contains a duration value, allowing all stations in hearing range of the receiver to set their Network Allocation Vector (NAV) and refrain from transmitting."
+  },
+  {
+    id: 104,
+    unit: "Unit II",
+    question: "When a transparent learning bridge receives a frame with an unknown destination MAC address, what action does it take?",
+    options: [
+      "It immediately drops the frame and sends an ICMP Host Unreachable error.",
+      "It floods (broadcasts) the frame out of all ports except the port on which it was received.",
+      "It stores the frame permanently until a human administrator configures the route.",
+      "It returns the frame back to the sender as a collision warning."
+    ],
+    correct: 1,
+    explanation: "In transparent bridge backward learning (Tanenbaum Ch. 4.7), if a destination MAC is not found in the bridge table, the bridge floods the frame to all ports except the arrival port. Once the destination responds, the bridge learns which port that MAC resides on."
+  },
+  {
+    id: 105,
+    unit: "Unit II",
+    question: "Which networking device separates BOTH collision domains AND broadcast domains?",
+    options: [
+      "Repeater (Layer 1)",
+      "Hub (Layer 1)",
+      "Switch / Transparent Bridge (Layer 2)",
+      "Router (Layer 3)"
+    ],
+    correct: 3,
+    explanation: "Switches and bridges separate collision domains on each port, but maintain a single shared broadcast domain across all ports (unless partitioned by VLANs). Only Routers (Layer 3) separate both collision domains AND broadcast domains across subnets."
+  },
 
   // UNIT III QUESTIONS
   {

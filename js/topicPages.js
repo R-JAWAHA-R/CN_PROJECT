@@ -3,11 +3,13 @@
 
 var TOPIC_REPOSITORY = Object.assign(
   {},
-  typeof TOPICS_U1 !== 'undefined' ? TOPICS_U1 : {},
-  typeof TOPICS_U2 !== 'undefined' ? TOPICS_U2 : {},
-  typeof TOPICS_U3 !== 'undefined' ? TOPICS_U3 : {},
-  typeof TOPICS_U4 !== 'undefined' ? TOPICS_U4 : {},
-  typeof TOPICS_U5 !== 'undefined' ? TOPICS_U5 : {}
+  typeof TOPICS_U1 !== 'undefined' ? TOPICS_U1 : (typeof window !== 'undefined' && window.TOPICS_U1 ? window.TOPICS_U1 : {}),
+  typeof TOPICS_U2 !== 'undefined' ? TOPICS_U2 : (typeof window !== 'undefined' && window.TOPICS_U2 ? window.TOPICS_U2 : {}),
+  typeof TOPICS_U2_EXT !== 'undefined' ? TOPICS_U2_EXT : (typeof window !== 'undefined' && window.TOPICS_U2_EXT ? window.TOPICS_U2_EXT : {}),
+  typeof TOPICS_U3 !== 'undefined' ? TOPICS_U3 : (typeof window !== 'undefined' && window.TOPICS_U3 ? window.TOPICS_U3 : {}),
+  typeof TOPICS_U3_EXT !== 'undefined' ? TOPICS_U3_EXT : (typeof window !== 'undefined' && window.TOPICS_U3_EXT ? window.TOPICS_U3_EXT : {}),
+  typeof TOPICS_U4 !== 'undefined' ? TOPICS_U4 : (typeof window !== 'undefined' && window.TOPICS_U4 ? window.TOPICS_U4 : {}),
+  typeof TOPICS_U5 !== 'undefined' ? TOPICS_U5 : (typeof window !== 'undefined' && window.TOPICS_U5 ? window.TOPICS_U5 : {})
 );
 
 if (typeof window !== 'undefined') window.TOPIC_REPOSITORY = TOPIC_REPOSITORY;

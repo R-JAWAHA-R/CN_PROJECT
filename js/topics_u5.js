@@ -1405,6 +1405,7 @@ Signature S -> [ h'' = S^e mod n ] -> h''`,
   }
 };
 
+if (typeof window !== 'undefined') window.TOPICS_U5 = TOPICS_U5;
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = TOPICS_U5;
 }

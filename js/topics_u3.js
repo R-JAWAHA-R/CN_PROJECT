@@ -955,6 +955,7 @@ D_x(z) = min{ c(x,y) + D_y(z) } = 1 + 2 = 3. Converged!`,
   }
 };
 
+if (typeof window !== 'undefined') window.TOPICS_U3 = TOPICS_U3;
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = TOPICS_U3;
 }

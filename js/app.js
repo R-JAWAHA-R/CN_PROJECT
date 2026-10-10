@@ -63,8 +63,19 @@ const App = {
       link.classList.remove('active');
     });
 
-    const mainContainer = document.getElementById('main-content-container');
+    const mainContainer = document.getElementById('main-content') || document.getElementById('main-content-container');
+    if (mainContainer) mainContainer.scrollTop = 0;
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (typeof markTopicCompleted === 'function') {
+      markTopicCompleted(topicId);
+    }
+    if (typeof highlightSyllabusTopic === 'function') {
+      highlightSyllabusTopic(topicId);
+    }
+    if (typeof updateTopicMetaCard === 'function') {
+      updateTopicMetaCard(topicId);
+    }
 
     if (typeof TopicPageEngine !== 'undefined') {
       TopicPageEngine.renderTopicPage(topicId, mainContainer);
@@ -83,7 +94,10 @@ const App = {
         });
       }
       App.autoLinkConcepts(mainContainer);
-    }, 60);
+      if (typeof buildToc === 'function') {
+        buildToc();
+      }
+    }, 80);
   },
 
   loadView: function(viewName, targetParam, updateHash = true) {
@@ -101,8 +115,13 @@ const App = {
       }
     });
 
-    const mainContainer = document.getElementById('main-content-container');
+    const mainContainer = document.getElementById('main-content') || document.getElementById('main-content-container');
+    if (mainContainer) mainContainer.scrollTop = 0;
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (typeof updateTopicMetaCard === 'function') {
+      updateTopicMetaCard(null);
+    }
 
     if (viewName === 'home') {
       App.renderHomeDashboard(mainContainer);
@@ -152,7 +171,10 @@ const App = {
         });
       }
       App.autoLinkConcepts(mainContainer);
-    }, 60);
+      if (typeof buildToc === 'function') {
+        buildToc();
+      }
+    }, 80);
   },
 
   loadComparison: function(compKey, updateHash = true) {
@@ -162,275 +184,238 @@ const App = {
     App.loadView('comparisons', compKey, false);
   },
 
-  // 1. HOME DASHBOARD (STUDYLY STYLE)
+  // 1. HOME DASHBOARD (GEEKSFORGEEKS PORTAL STYLE)
   renderHomeDashboard: function(container) {
+    const totalCount = typeof getTotalTopicsCount === 'function' ? getTotalTopicsCount() : 90;
+    const completed = (typeof completedTopics !== 'undefined' ? completedTopics.length : 0);
+    const pct = Math.round((completed / totalCount) * 100);
+
     container.innerHTML = `
-      <!-- Welcome Hero Banner -->
-      <div class="welcome-banner">
-        <div class="welcome-text">
-          <h2>Good evening, Alex 👋</h2>
-          <p>Ready to make a little progress today?</p>
-        </div>
-        <div class="welcome-scene">
-          <div class="better-note">
-            Better<br>Than<br>Yesterday<br>♡
+      <!-- GeeksforGeeks Welcome Hero Banner -->
+      <div class="p-6 md:p-8 rounded-xl bg-gradient-to-r from-green-50 via-white to-emerald-50 dark:from-gfg-darkcard dark:via-gray-900 dark:to-gfg-darkcard border border-green-200 dark:border-gray-800 shadow-sm mb-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div class="space-y-2 max-w-2xl">
+            <div class="inline-flex items-center space-x-2 px-2.5 py-1 rounded-full bg-gfg-light dark:bg-gray-800 text-gfg-green border border-gfg-green/30 text-[11px] font-bold uppercase tracking-wider">
+              <span>GFG Portal</span>
+              <span>•</span>
+              <span>Semester V Academic Syllabus</span>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Computer Networks Encyclopedia</h2>
+            <p class="text-xs md:text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+              University-grade study portal and interactive practice suite covering all 5 curricular units, 90 comprehensive encyclopedic articles, interactive protocol laboratories, and GATE exam test sets.
+            </p>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <button onclick="App.loadView('unit1')" class="px-4 py-2 bg-gfg-green hover:bg-gfg-dark text-white rounded text-xs font-semibold shadow-sm transition-all flex items-center space-x-1.5">
+                <span>Start Unit I (Fundamentals)</span>
+                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+              <button onclick="openModal('subnet')" class="px-3.5 py-2 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-700 rounded text-xs font-semibold transition-all flex items-center space-x-1.5">
+                <i class="fa-solid fa-calculator text-gfg-green"></i>
+                <span>Subnet Tool</span>
+              </button>
+              <button onclick="App.loadView('graph')" class="px-3.5 py-2 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-700 rounded text-xs font-semibold transition-all flex items-center space-x-1.5">
+                <i class="fa-solid fa-diagram-project text-gfg-green"></i>
+                <span>Knowledge Graph</span>
+              </button>
+              <button onclick="App.loadView('quiz')" class="px-3.5 py-2 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-700 rounded text-xs font-semibold transition-all flex items-center space-x-1.5">
+                <i class="fa-solid fa-graduation-cap text-gfg-green"></i>
+                <span>Exam Quizzes</span>
+              </button>
+            </div>
           </div>
-          <svg class="cozy-desk-art" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="20" y="70" width="160" height="8" rx="4" fill="#d97706" opacity="0.4"/>
-            <path d="M40 70 L40 110 M160 70 L160 110" stroke="#b45309" stroke-width="4" stroke-linecap="round"/>
-            <path d="M50 70 L55 45 L75 45 L80 70 Z" fill="#b45309" opacity="0.8"/>
-            <path d="M65 45 C65 25, 45 20, 50 15 C65 15, 65 35, 65 45 Z" fill="#10b981"/>
-            <path d="M65 45 C65 25, 85 20, 80 15 C65 15, 65 35, 65 45 Z" fill="#059669"/>
-            <rect x="100" y="58" width="55" height="12" rx="3" fill="#0284c7"/>
-            <rect x="105" y="44" width="45" height="12" rx="3" fill="#10b981"/>
-            <rect x="110" y="32" width="40" height="10" rx="3" fill="#f59e0b"/>
-            <rect x="165" y="52" width="16" height="18" rx="3" fill="#7c3aed"/>
-            <path d="M181 56 C186 56, 186 64, 181 64" stroke="#7c3aed" stroke-width="2"/>
-          </svg>
+
+          <!-- Live Circular Progress Badge -->
+          <div class="bg-white dark:bg-gray-800 p-5 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm flex flex-col items-center justify-center shrink-0 w-48 text-center">
+            <div class="w-16 h-16 rounded-full border-4 border-gfg-green/20 border-t-gfg-green flex items-center justify-center font-extrabold text-base text-gfg-green mb-2">
+              ${pct}%
+            </div>
+            <div class="text-xs font-bold text-gray-800 dark:text-gray-200">Syllabus Progress</div>
+            <div class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5">${completed} of ${totalCount} read</div>
+          </div>
         </div>
       </div>
 
-      <!-- 3 Stat Cards Row -->
-      <div class="stats-cards-row">
-        <!-- Card 1: Today's Progress -->
-        <div class="stat-card-clean bg-green-soft">
+      <!-- 4 Core Metric Stat Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="bg-white dark:bg-gfg-darkcard p-4 rounded-lg border border-gray-200 dark:border-gfg-darkborder shadow-sm flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-lg bg-gfg-light dark:bg-gray-800 text-gfg-green flex items-center justify-center text-lg">
+            <i class="fa-solid fa-book-open"></i>
+          </div>
           <div>
-            <div class="stat-card-header">
-              <div class="stat-card-icon" style="background: #dcfce7; color: #15803d;">🎯</div>
-              <span>Today's Progress</span>
-            </div>
-            <div class="progress-ring-group">
-              <div class="ring-wrap">
-                <svg width="72" height="72" viewBox="0 0 36 36">
-                  <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#d1fae5" stroke-width="3.5" />
-                  <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#10b981" stroke-dasharray="68, 100" stroke-linecap="round" stroke-width="3.5" />
-                </svg>
-                <div class="ring-percent-text">68%</div>
-              </div>
-              <div>
-                <div style="font-size: 0.95rem; font-weight: 800; color: #1e293b;">4 of 6 tasks completed</div>
-                <div class="progress-bar-wrap">
-                  <div class="progress-bar-fill" style="width: 68%; background: #10b981;"></div>
-                </div>
-                <div class="stat-subtitle">Keep going! You're doing great!</div>
-              </div>
-            </div>
+            <div class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase">Curriculum</div>
+            <div class="text-base font-extrabold text-gray-900 dark:text-white">90 Full Topics</div>
           </div>
         </div>
 
-        <!-- Card 2: 7 Day Streak -->
-        <div class="stat-card-clean bg-orange-soft">
-          <div>
-            <div class="stat-card-header">
-              <div class="stat-card-icon" style="background: #ffedd5; color: #c2410c;">🔥</div>
-              <span>7 Day Streak</span>
-            </div>
-            <div style="font-size: 1.15rem; font-weight: 800; color: #1e293b; margin-bottom: 0.4rem;">Keep it up!</div>
-            <div style="display: flex; align-items: center; gap: 0.5rem; color: #475569; font-weight: 700; font-size: 0.95rem;">
-              <span>📅</span>
-              <span>2h 24m studied this week</span>
-            </div>
+        <div class="bg-white dark:bg-gfg-darkcard p-4 rounded-lg border border-gray-200 dark:border-gfg-darkborder shadow-sm flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-blue-500 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-toolbox"></i>
           </div>
-          <div class="stat-subtitle" style="margin-top: 1rem;">Consistent study boosts exam retention by 4x.</div>
+          <div>
+            <div class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase">Interactive Tools</div>
+            <div class="text-base font-extrabold text-gray-900 dark:text-white">5 Simulators</div>
+          </div>
         </div>
 
-        <!-- Card 3: Completed Goals -->
-        <div class="stat-card-clean bg-blue-soft">
-          <div>
-            <div class="stat-card-header">
-              <div class="stat-card-icon" style="background: #e0f2fe; color: #0284c7;">🏆</div>
-              <span>Completed Goals</span>
-            </div>
-            <div style="font-size: 1.15rem; font-weight: 800; color: #1e293b; margin-bottom: 0.4rem;">3 of 5 this month</div>
-            <div class="progress-bar-wrap">
-              <div class="progress-bar-fill" style="width: 60%; background: #0284c7;"></div>
-            </div>
+        <div class="bg-white dark:bg-gfg-darkcard p-4 rounded-lg border border-gray-200 dark:border-gfg-darkborder shadow-sm flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-lg bg-purple-50 dark:bg-purple-900/30 text-purple-500 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-graduation-cap"></i>
           </div>
-          <div class="stat-subtitle">You're on the right track!</div>
+          <div>
+            <div class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase">Exam Practice</div>
+            <div class="text-base font-extrabold text-gray-900 dark:text-white">50+ GATE MCQs</div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gfg-darkcard p-4 rounded-lg border border-gray-200 dark:border-gfg-darkborder shadow-sm flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-lg bg-amber-50 dark:bg-amber-900/30 text-amber-500 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-scale-balanced"></i>
+          </div>
+          <div>
+            <div class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase">Comparisons</div>
+            <div class="text-base font-extrabold text-gray-900 dark:text-white">12 Matrices</div>
+          </div>
         </div>
       </div>
 
-      <!-- Quick Exploration Hub Bar -->
-      <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
-        <button class="topic-nav-btn active" onclick="App.loadView('graph')" style="padding: 0.65rem 1.25rem; font-size: 0.9rem;">
-          🌐 Open Interactive Knowledge Graph
-        </button>
-        <button class="topic-nav-btn" onclick="App.loadView('comparisons')" style="padding: 0.65rem 1.25rem; font-size: 0.9rem;">
-          ⚖️ Protocol Comparisons (TCP vs UDP, etc.)
-        </button>
-        <button class="topic-nav-btn" onclick="App.loadView('paths')" style="padding: 0.65rem 1.25rem; font-size: 0.9rem;">
-          🗺️ 5 Guided Learning Pathways
-        </button>
-      </div>
-
-      <!-- Continue Learning Feature Section -->
-      <div class="section-heading-row">
-        <h3 class="section-title">Continue learning</h3>
-        <span class="view-all-link" onclick="App.loadView('notebook')">View all topics →</span>
-      </div>
-
-      <div class="continue-card">
-        <div class="continue-left">
-          <div class="continue-icon-box">🌐</div>
-          <div class="continue-info">
-            <div class="continue-subject">Unit III • Network Layer Control Plane</div>
-            <div class="continue-lesson">Dijkstra's Shortest Path Algorithm & Forwarding Tables</div>
-            <div style="display: flex; align-items: center; gap: 1rem; margin-top: 0.4rem;">
-              <span style="font-size: 0.85rem; font-weight: 700; color: #64748b;">Chapter 5 • 72% complete</span>
-              <div class="progress-bar-wrap" style="width: 140px; margin: 0;">
-                <div class="progress-bar-fill" style="width: 72%; background: #10b981;"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button class="continue-btn" onclick="App.loadTopic('dijkstra')">
-          <span>Continue Article</span>
-          <span>→</span>
-        </button>
-      </div>
-
-      <!-- Your Subjects / Units (Units I, II, III, IV, V) -->
-      <div class="section-heading-row">
-        <h3 class="section-title">Curriculum Units</h3>
-        <span class="view-all-link" onclick="App.loadView('notebook')">All 64 Articles →</span>
-      </div>
-
-      <div class="units-grid-4" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
-        <div class="unit-card-pill u1" onclick="App.loadView('unit1')">
-          <div>
-            <div class="unit-badge-icon" style="background: #ecfdf5; color: #047857;">🌐</div>
-            <h4 class="unit-card-title">Unit I: Fundamentals</h4>
-            <div class="unit-card-tasks">8 dedicated articles</div>
-            <div class="unit-progress-row">
-              <div class="progress-bar-wrap" style="flex: 1; margin: 0;">
-                <div class="progress-bar-fill" style="width: 100%; background: #047857;"></div>
-              </div>
-              <span style="font-size: 0.82rem; font-weight: 700; color: #047857;">100%</span>
-            </div>
-          </div>
-          <div class="unit-card-btn-arrow">→</div>
+      <!-- Curriculum Units (5 Units Grid) -->
+      <div class="mb-8">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="font-bold text-sm uppercase tracking-wider text-gray-800 dark:text-gray-200 flex items-center">
+            <i class="fa-solid fa-layer-group text-gfg-green mr-2"></i> Course Syllabus Units
+          </h3>
+          <span class="text-xs text-gfg-green font-semibold cursor-pointer hover:underline" onclick="App.loadView('notebook')">Browse All Directory →</span>
         </div>
 
-        <div class="unit-card-pill u2" onclick="App.loadView('unit2')">
-          <div>
-            <div class="unit-badge-icon" style="background: #e0f2fe; color: #0284c7;">📦</div>
-            <h4 class="unit-card-title">Unit II: Data Link</h4>
-            <div class="unit-card-tasks">17 dedicated articles</div>
-            <div class="unit-progress-row">
-              <div class="progress-bar-wrap" style="flex: 1; margin: 0;">
-                <div class="progress-bar-fill" style="width: 72%; background: #0284c7;"></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Unit 1 -->
+          <div onclick="App.loadView('unit1')" class="bg-white dark:bg-gfg-darkcard p-4 rounded-lg border border-gray-200 dark:border-gfg-darkborder hover:border-gfg-green dark:hover:border-gfg-green transition-all cursor-pointer group shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="px-2 py-0.5 rounded bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 text-[10px] font-bold">Unit I</span>
+                <span class="text-[11px] text-gray-500">8 Articles</span>
               </div>
-              <span style="font-size: 0.82rem; font-weight: 700; color: #0284c7;">72%</span>
+              <h4 class="font-bold text-sm text-gray-900 dark:text-white group-hover:text-gfg-green transition-colors">Networking Fundamentals</h4>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">Network topologies, switching techniques, physical media, OSI and TCP/IP protocol architectures.</p>
+            </div>
+            <div class="pt-3 border-t border-gray-100 dark:border-gray-800 mt-3 flex items-center justify-between text-xs text-gfg-green font-semibold">
+              <span>View Module</span>
+              <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
             </div>
           </div>
-          <div class="unit-card-btn-arrow">→</div>
-        </div>
 
-        <div class="unit-card-pill u3" onclick="App.loadView('unit3')">
-          <div>
-            <div class="unit-badge-icon" style="background: #ecfdf5; color: #10b981;">🗺️</div>
-            <h4 class="unit-card-title">Unit III: Network Layer</h4>
-            <div class="unit-card-tasks">12 dedicated articles</div>
-            <div class="unit-progress-row">
-              <div class="progress-bar-wrap" style="flex: 1; margin: 0;">
-                <div class="progress-bar-fill" style="width: 56%; background: #10b981;"></div>
+          <!-- Unit 2 -->
+          <div onclick="App.loadView('unit2')" class="bg-white dark:bg-gfg-darkcard p-4 rounded-lg border border-gray-200 dark:border-gfg-darkborder hover:border-gfg-green dark:hover:border-gfg-green transition-all cursor-pointer group shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-[10px] font-bold">Unit II</span>
+                <span class="text-[11px] text-gray-500">27 Articles</span>
               </div>
-              <span style="font-size: 0.82rem; font-weight: 700; color: #10b981;">56%</span>
+              <h4 class="font-bold text-sm text-gray-900 dark:text-white group-hover:text-gfg-green transition-colors">Data Link Layer &amp; MAC</h4>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">Framing, byte/bit stuffing, CRC polynomial division, Hamming codes, ARQ protocols, Ethernet and CSMA/CD.</p>
+            </div>
+            <div class="pt-3 border-t border-gray-100 dark:border-gray-800 mt-3 flex items-center justify-between text-xs text-gfg-green font-semibold">
+              <span>View Module</span>
+              <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
             </div>
           </div>
-          <div class="unit-card-btn-arrow">→</div>
-        </div>
 
-        <div class="unit-card-pill u4" onclick="App.loadView('unit4')">
-          <div>
-            <div class="unit-badge-icon" style="background: #ede7f6; color: #7c3aed;">⚡</div>
-            <h4 class="unit-card-title">Unit IV: Transport Layer</h4>
-            <div class="unit-card-tasks">10 dedicated articles</div>
-            <div class="unit-progress-row">
-              <div class="progress-bar-wrap" style="flex: 1; margin: 0;">
-                <div class="progress-bar-fill" style="width: 40%; background: #7c3aed;"></div>
+          <!-- Unit 3 -->
+          <div onclick="App.loadView('unit3')" class="bg-white dark:bg-gfg-darkcard p-4 rounded-lg border border-gray-200 dark:border-gfg-darkborder hover:border-gfg-green dark:hover:border-gfg-green transition-all cursor-pointer group shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300 text-[10px] font-bold">Unit III</span>
+                <span class="text-[11px] text-gray-500">28 Articles</span>
               </div>
-              <span style="font-size: 0.82rem; font-weight: 700; color: #7c3aed;">40%</span>
+              <h4 class="font-bold text-sm text-gray-900 dark:text-white group-hover:text-gfg-green transition-colors">Network Layer &amp; Routing</h4>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">IPv4/IPv6, CIDR Subnetting, Dijkstra SPF, Distance Vector, OSPF, BGP-4, NAT, and congestion control.</p>
+            </div>
+            <div class="pt-3 border-t border-gray-100 dark:border-gray-800 mt-3 flex items-center justify-between text-xs text-gfg-green font-semibold">
+              <span>View Module</span>
+              <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
             </div>
           </div>
-          <div class="unit-card-btn-arrow">→</div>
-        </div>
 
-        <div class="unit-card-pill u5" onclick="App.loadView('unit5')">
-          <div>
-            <div class="unit-badge-icon" style="background: #fef3c7; color: #b45309;">🛡️</div>
-            <h4 class="unit-card-title">Unit V: App & Security</h4>
-            <div class="unit-card-tasks">17 dedicated articles</div>
-            <div class="unit-progress-row">
-              <div class="progress-bar-wrap" style="flex: 1; margin: 0;">
-                <div class="progress-bar-fill" style="width: 63%; background: #b45309;"></div>
+          <!-- Unit 4 -->
+          <div onclick="App.loadView('unit4')" class="bg-white dark:bg-gfg-darkcard p-4 rounded-lg border border-gray-200 dark:border-gfg-darkborder hover:border-gfg-green dark:hover:border-gfg-green transition-all cursor-pointer group shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 text-[10px] font-bold">Unit IV</span>
+                <span class="text-[11px] text-gray-500">10 Articles</span>
               </div>
-              <span style="font-size: 0.82rem; font-weight: 700; color: #b45309;">63%</span>
+              <h4 class="font-bold text-sm text-gray-900 dark:text-white group-hover:text-gfg-green transition-colors">Transport Layer &amp; Reliability</h4>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">UDP vs TCP, 3-way handshake, sequence numbers, flow control window (rwnd), AIMD, and Slow Start congestion.</p>
+            </div>
+            <div class="pt-3 border-t border-gray-100 dark:border-gray-800 mt-3 flex items-center justify-between text-xs text-gfg-green font-semibold">
+              <span>View Module</span>
+              <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
             </div>
           </div>
-          <div class="unit-card-btn-arrow">→</div>
+
+          <!-- Unit 5 -->
+          <div onclick="App.loadView('unit5')" class="bg-white dark:bg-gfg-darkcard p-4 rounded-lg border border-gray-200 dark:border-gfg-darkborder hover:border-gfg-green dark:hover:border-gfg-green transition-all cursor-pointer group shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300 text-[10px] font-bold">Unit V</span>
+                <span class="text-[11px] text-gray-500">17 Articles</span>
+              </div>
+              <h4 class="font-bold text-sm text-gray-900 dark:text-white group-hover:text-gfg-green transition-colors">Application Layer &amp; Security</h4>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">DNS, HTTP/2 &amp; HTTP/3, SMTP/IMAP, Firewalls, IDS/IPS, Public-Key Cryptography, and RSA encryption algorithms.</p>
+            </div>
+            <div class="pt-3 border-t border-gray-100 dark:border-gray-800 mt-3 flex items-center justify-between text-xs text-gfg-green font-semibold">
+              <span>View Module</span>
+              <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </div>
+
+          <!-- Quick Interactive Simulators Card -->
+          <div onclick="openModal('subnet')" class="bg-gradient-to-br from-gfg-green to-emerald-700 text-white p-4 rounded-lg shadow-sm flex flex-col justify-between cursor-pointer hover:shadow-md transition-all">
+            <div>
+              <div class="flex items-center space-x-2 text-[10px] font-bold uppercase tracking-wider bg-black/20 px-2 py-0.5 rounded w-fit mb-2">
+                <span>Interactive Tools</span>
+              </div>
+              <h4 class="font-extrabold text-sm mb-1">Subnet &amp; Protocol Simulators</h4>
+              <p class="text-xs text-white/90 leading-relaxed">Calculate CIDR masks, simulate CRC binary division, and visualize IPv4 / TCP packet bit grids live.</p>
+            </div>
+            <div class="pt-3 mt-3 flex items-center justify-between text-xs font-bold text-white">
+              <span>Launch Subnet Tool</span>
+              <i class="fa-solid fa-calculator"></i>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Bottom Split: Upcoming Schedule & Motivational Landscape -->
-      <div class="bottom-split-grid">
-        <div class="schedule-card">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 1.05rem; font-weight: 800; color: #1e293b;">
-              <span>📅</span>
-              <span>Study Schedule & Featured Articles</span>
-            </div>
-            <span class="view-all-link" onclick="App.loadView('notebook')">View all →</span>
+      <!-- Featured Core Articles -->
+      <div>
+        <h3 class="font-bold text-sm uppercase tracking-wider text-gray-800 dark:text-gray-200 mb-3 flex items-center">
+          <i class="fa-solid fa-star text-amber-500 mr-2"></i> Must-Read Core Articles
+        </h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div onclick="App.loadTopic('ip-addressing')" class="p-3 bg-white dark:bg-gfg-darkcard rounded border border-gray-200 dark:border-gfg-darkborder hover:border-gfg-green transition-colors cursor-pointer group">
+            <div class="text-[10px] font-mono text-gfg-green font-bold mb-1">Unit III • Network Layer</div>
+            <div class="font-bold text-xs text-gray-900 dark:text-white group-hover:text-gfg-green">IPv4 Addresses, CIDR &amp; Subnetting</div>
+            <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-1">Classless addressing, subnet masks, wildcard math, and host IP calculations.</p>
           </div>
 
-          <div class="schedule-list">
-            <div class="schedule-item" onclick="App.loadTopic('crc')">
-              <span class="schedule-time">09:00 AM</span>
-              <div class="schedule-name">
-                <span class="status-dot blue"></span>
-                <span>Unit II • Cyclic Redundancy Check (CRC Lab)</span>
-              </div>
-              <span style="font-size: 0.8rem; color: #0284c7; font-weight: 700;">Read Page →</span>
-            </div>
+          <div onclick="App.loadTopic('crc')" class="p-3 bg-white dark:bg-gfg-darkcard rounded border border-gray-200 dark:border-gfg-darkborder hover:border-gfg-green transition-colors cursor-pointer group">
+            <div class="text-[10px] font-mono text-blue-500 font-bold mb-1">Unit II • Data Link</div>
+            <div class="font-bold text-xs text-gray-900 dark:text-white group-hover:text-gfg-green">Cyclic Redundancy Check (CRC)</div>
+            <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-1">Polynomial modulo-2 binary division and error detection codewords.</p>
+          </div>
 
-            <div class="schedule-item" onclick="App.loadTopic('dijkstra')">
-              <span class="schedule-time">11:00 AM</span>
-              <div class="schedule-name">
-                <span class="status-dot green"></span>
-                <span>Unit III • Dijkstra Shortest Path Solver</span>
-              </div>
-              <span style="font-size: 0.8rem; color: #10b981; font-weight: 700;">Read Page →</span>
-            </div>
+          <div onclick="App.loadTopic('tcp-three-way-handshake')" class="p-3 bg-white dark:bg-gfg-darkcard rounded border border-gray-200 dark:border-gfg-darkborder hover:border-gfg-green transition-colors cursor-pointer group">
+            <div class="text-[10px] font-mono text-purple-500 font-bold mb-1">Unit IV • Transport</div>
+            <div class="font-bold text-xs text-gray-900 dark:text-white group-hover:text-gfg-green">TCP 3-Way Handshake (SYN, ACK)</div>
+            <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-1">Reliable sequence number exchange and state machine transitions.</p>
+          </div>
 
-            <div class="schedule-item" onclick="App.loadTopic('tcp-three-way-handshake')">
-              <span class="schedule-time">02:00 PM</span>
-              <div class="schedule-name">
-                <span class="status-dot purple"></span>
-                <span>Unit IV • TCP 3-Way Handshake Animator</span>
-              </div>
-              <span style="font-size: 0.8rem; color: #7c3aed; font-weight: 700;">Read Page →</span>
-            </div>
-
-            <div class="schedule-item" onclick="App.loadTopic('rsa')">
-              <span class="schedule-time">04:00 PM</span>
-              <div class="schedule-name">
-                <span class="status-dot amber"></span>
-                <span>Unit V • RSA Cryptosystem & Modular Math Lab</span>
-              </div>
-              <span style="font-size: 0.8rem; color: #b45309; font-weight: 700;">Read Page →</span>
-            </div>
+          <div onclick="App.loadTopic('rsa')" class="p-3 bg-white dark:bg-gfg-darkcard rounded border border-gray-200 dark:border-gfg-darkborder hover:border-gfg-green transition-colors cursor-pointer group">
+            <div class="text-[10px] font-mono text-amber-500 font-bold mb-1">Unit V • Security</div>
+            <div class="font-bold text-xs text-gray-900 dark:text-white group-hover:text-gfg-green">RSA Cryptosystem &amp; Modular Math</div>
+            <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-1">Euler totient theorem, keypair generation, and modular exponentiation.</p>
           </div>
         </div>
-
-        <div class="quote-landscape-card">
-          <div class="quote-landscape-title">
-            Progress,<br>not perfection.<br>♡
-          </div>
-          <button class="keep-going-btn" onclick="App.loadView('quiz')">
-            Take Practice Quiz →
-          </button>
-        </div>
-      </div>
     `;
   },
 
@@ -502,23 +487,31 @@ const App = {
         <div class="study-card">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
             <h3 style="color: #10b981; font-size: 1.25rem; font-weight: 800; margin: 0;">
-              Unit III: Network Layer & Routing
+              Unit III: Network Layer, Routing & Internetworking
             </h3>
-            <span class="badge" style="background: #ecfdf5; color: #10b981; font-weight: 700; padding: 4px 10px; border-radius: 9999px;">12 Pages</span>
+            <span class="badge" style="background: #ecfdf5; color: #10b981; font-weight: 700; padding: 4px 10px; border-radius: 9999px;">20 Pages</span>
           </div>
           <div style="display: flex; flex-direction: column; gap: 0.45rem;">
-            <button class="topic-nav-btn" onclick="App.loadTopic('network-layer')">1. Network Layer & Plane Distinction ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('forwarding')">2. Packet Forwarding Mechanism ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('routing')">3. Routing Algorithms & Protocols ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('dijkstra')">4. Dijkstra's Algorithm & Interactive Lab ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('link-state-routing')">5. Link-State Routing Architecture ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('distance-vector')">6. Distance Vector Routing & Lab ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('ospf')">7. Open Shortest Path First (OSPF) ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('bgp')">8. Border Gateway Protocol (BGP) ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('sdn')">9. Software-Defined Networking (SDN) ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('ipv4')">10. IPv4 Header (RFC 791) & Subnetting ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('ipv6')">11. IPv6 Header (RFC 8200) & Addresses ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('nat')">12. Network Address Translation (NAT) ➔</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('routing-design-issues')">1. Network Layer Design Issues ➔</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('optimality-principle')">2. Optimality Principle & Sink Trees ➔</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('shortest-path-algorithm')">3. Shortest Path (Dijkstra SPF) ➔</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('flooding')">4. Flooding Routing & Damping ➔</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('distance-vector-routing')">5. Distance Vector & Count-to-Infinity ➔</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('link-state-routing')">6. Link State Routing & Reliable Flooding ➔</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('congestion-control')">7. Congestion Control Principles ➔</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('traffic-aware-routing')">8. Traffic-Aware Routing & Oscillation ➔</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('admission-control')">9. Admission Control & Traffic Shaping ➔</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('traffic-throttling')">10. Traffic Throttling, Choke Packets & ECN ➔</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('load-shedding')">11. Load Shedding: Wine vs Milk Policies ➔</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('internetworking')">12. Internetworking Architecture ➔</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('tunneling')">13. Tunneling & Protocol Encapsulation ➔</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('internetwork-routing')">14. Internetwork & Hierarchical Routing ➔</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('ipv4-protocol')">15. IPv4 Protocol & Header Architecture ➔</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('ip-addressing')">16. IPv4 Addresses, CIDR & Subnetting ➔</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('ipv6-protocol')">17. IPv6 Architecture & 128-Bit Addressing ➔</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('ospf')">18. Open Shortest Path First (OSPF) ➔</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('bgp')">19. Border Gateway Protocol (BGP-4) ➔</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('nat')">20. Network Address Translation (NAT) ➔</button>
           </div>
         </div>
 

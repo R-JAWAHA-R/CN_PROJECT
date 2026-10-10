@@ -799,6 +799,7 @@ Sender cannot have more than 10,000 unacknowledged bytes in flight!`,
   }
 };
 
+if (typeof window !== 'undefined') window.TOPICS_U4 = TOPICS_U4;
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = TOPICS_U4;
 }

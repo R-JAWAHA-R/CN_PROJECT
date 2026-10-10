@@ -605,6 +605,7 @@ Host: example.com\\r\\n\\r\\n</pre>
   }
 };
 
+if (typeof window !== 'undefined') window.TOPICS_U1 = TOPICS_U1;
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = TOPICS_U1;
 }

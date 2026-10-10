@@ -1,203 +1,1234 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" class="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>jabak • Computer Networks Learning Platform (Units II, III, IV & V)</title>
-  <meta name="description"
-    content="College project study portal for Computer Networks Sem-V covering Unit II (Data Link, CRC, ARQ, Ethernet), Unit III (Network Layer, Dijkstra, DV, IPv6), Unit IV (TCP, UDP, Congestion Control), and Unit V (DNS, HTTP/S, Mail, Security, RSA).">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JABAK | GeeksforGeeks Portal</title>
+    <meta name="description" content="Computer Networks Encyclopedia and GATE/Interview Practice Portal covering Networking Fundamentals, Data Link Layer, Network Layer, Transport Layer, Application Protocols, and Security.">
 
-  <!-- Plus Jakarta Sans & Caveat for handwritten motivational notes -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet">
+    <!-- Tailwind CSS with custom GFG theme -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gfg: {
+                            green: '#008000',
+                            dark: '#005b00',
+                            light: '#f1f8f5',
+                            hover: '#e2f2e7',
+                            border: '#d4d4d4',
+                            darkborder: '#333333',
+                            darkbg: '#121212',
+                            darkcard: '#1e1e1e',
+                            text: '#222222',
+                            darktext: '#e0e0e0'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
-  <!-- KaTeX for crystal-clear mathematical formulas -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    <!-- Google Fonts: Inter & Fira Code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/components.css">
+    <!-- Font Awesome 6.4.0 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- KaTeX for math formulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Core Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        code, pre, .mono { font-family: 'Fira Code', monospace; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        .dark ::-webkit-scrollbar-thumb { background: #475569; }
+        .gfg-shadow { box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade { animation: fadeIn 0.2s ease-out forwards; }
+    </style>
 </head>
+<body class="bg-[#f8f9fa] text-gfg-text dark:bg-gfg-darkbg dark:text-gfg-darktext h-screen max-h-screen overflow-hidden flex flex-col transition-colors duration-200">
 
-<body>
-
-  <!-- LEFT SIDEBAR (EXACT STUDYLY STYLE) -->
-  <aside class="app-sidebar">
-    <div>
-      <!-- Brand Logo -->
-      <div class="sidebar-brand" onclick="App.loadView('home')">
-        <div class="brand-leaf-icon">🍃</div>
-        <div>
-          <div class="brand-title">JABAK</div>
-          <span class="brand-badge">Networks Sem-V</span>
+    <!-- TOP NAVIGATION BAR -->
+    <header class="bg-white dark:bg-gfg-darkcard border-b border-gray-300 dark:border-gfg-darkborder h-16 shrink-0 z-50 flex items-center justify-between px-4 lg:px-8 gfg-shadow select-none">
+        <div class="flex items-center space-x-3 sm:space-x-4">
+            <!-- Sidebar Desktop & Mobile Toggle Button -->
+            <button id="sidebar-toggle-btn" onclick="toggleLeftSidebar()" class="text-gray-700 dark:text-gray-300 p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gfg-green focus:outline-none transition-colors" title="Toggle Syllabus Sidebar (Ctrl+B)">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+            <div class="flex items-center space-x-3 cursor-pointer select-none" onclick="App.loadView('home')">
+                <div class="bg-gfg-green text-white font-bold px-3 py-1.5 rounded text-lg tracking-wider flex items-center space-x-1 shadow-sm">
+                    <span>GFG</span>
+                    <span class="text-[10px] bg-black/20 px-1 py-0.5 rounded font-mono">NETS</span>
+                </div>
+                <div class="hidden sm:block">
+                    <h1 class="font-bold text-sm tracking-tight text-gray-900 dark:text-white leading-tight">Computer Networks</h1>
+                    <p class="text-[10px] text-gray-500 dark:text-gray-400">Encyclopedia &amp; Practice Portal</p>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <!-- Navigation Menu -->
-      <nav class="sidebar-nav">
-        <div class="sidebar-section-label">Curriculum</div>
-        <a class="sidebar-link active" data-view="home">
-          <span class="nav-icon">🏠</span>
-          <span>Home</span>
-        </a>
-        <a class="sidebar-link" data-view="notebook">
-          <span class="nav-icon">📑</span>
-          <span>Topic Directory</span>
-        </a>
-        <a class="sidebar-link" data-view="unit1">
-          <span class="nav-icon">🌐</span>
-          <span>Unit I: Fundamentals</span>
-        </a>
-        <a class="sidebar-link" data-view="unit2">
-          <span class="nav-icon">📦</span>
-          <span>Unit II: Data Link</span>
-        </a>
-        <a class="sidebar-link" data-view="unit3">
-          <span class="nav-icon">🗺️</span>
-          <span>Unit III: Network Layer</span>
-        </a>
-        <a class="sidebar-link" data-view="unit4">
-          <span class="nav-icon">⚡</span>
-          <span>Unit IV: Transport Layer</span>
-        </a>
-        <a class="sidebar-link" data-view="unit5">
-          <span class="nav-icon">🛡️</span>
-          <span>Unit V: App & Security</span>
-        </a>
+        <!-- Global Search Bar with Live Suggestions Dropdown -->
+        <div class="flex-1 max-w-xl mx-3 sm:mx-6 relative">
+            <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-gray-400">
+                    <i class="fa-solid fa-search text-xs"></i>
+                </span>
+                <input type="text" id="global-search" placeholder="Search topics, protocols, algorithms (e.g., OSPF, TCP, Subnet, CRC)... [Ctrl+K]" class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-full pl-9 pr-10 py-2 text-xs text-gray-800 dark:text-gray-200 placeholder-gray-400 focus:outline-none focus:border-gfg-green focus:bg-white dark:focus:bg-gray-900 transition-all shadow-inner">
+                <span class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                    <kbd class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-300 dark:border-gray-600">/</kbd>
+                </span>
+            </div>
 
-        <div class="sidebar-section-label">Explore & Connect</div>
-        <a class="sidebar-link" data-view="graph">
-          <span class="nav-icon">🕸️</span>
-          <span>Knowledge Graph</span>
-        </a>
-        <a class="sidebar-link" data-view="comparisons">
-          <span class="nav-icon">⚖️</span>
-          <span>Comparisons Hub</span>
-        </a>
-        <a class="sidebar-link" data-view="paths">
-          <span class="nav-icon">🧭</span>
-          <span>Learning Paths</span>
-        </a>
-
-        <div class="sidebar-section-label">Practice & Tools</div>
-        <a class="sidebar-link" data-view="labs">
-          <span class="nav-icon">🔬</span>
-          <span>Interactive Labs</span>
-        </a>
-        <a class="sidebar-link" data-view="quiz">
-          <span class="nav-icon">🎯</span>
-          <span>Exam Quizzes</span>
-        </a>
-        <a class="sidebar-link" data-view="resources">
-          <span class="nav-icon">📚</span>
-          <span>Resource Hub</span>
-        </a>
-      </nav>
-    </div>
-
-    <!-- Motivational Footer with Book Illustration -->
-    <div class="sidebar-footer">
-      <div class="quote-leaf">🌱</div>
-      <div class="motivational-quote">
-        Small steps<br>every day lead<br>to big results<br>♡
-      </div>
-      <!-- SVG Book Stack Illustration matching screenshot -->
-      <svg class="sidebar-book-illustration" viewBox="0 0 160 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Desk edge -->
-        <path d="M10 90 L150 90" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" />
-        <!-- Bottom Book (Teal) -->
-        <rect x="25" y="72" width="95" height="15" rx="3" fill="#0284c7" />
-        <rect x="28" y="75" width="89" height="9" fill="#f8fafc" />
-        <path d="M25 72 L32 87" stroke="#0369a1" stroke-width="2" />
-        <!-- Middle Book (Red/Coral) -->
-        <rect x="30" y="56" width="85" height="14" rx="3" fill="#ef4444" />
-        <rect x="33" y="59" width="79" height="8" fill="#f8fafc" />
-        <!-- Top Book (Green) -->
-        <rect x="38" y="42" width="72" height="13" rx="3" fill="#10b981" />
-        <rect x="41" y="45" width="66" height="7" fill="#f8fafc" />
-        <!-- Pencil Cup -->
-        <rect x="120" y="55" width="22" height="32" rx="4" fill="#047857" />
-        <!-- Pencils -->
-        <path d="M125 55 L123 35 M131 55 L131 30 M137 55 L139 37" stroke="#f59e0b" stroke-width="3"
-          stroke-linecap="round" />
-        <!-- Cute sprout on top of books -->
-        <path d="M74 42 C74 25, 58 20, 64 12 C78 12, 74 32, 74 42 Z" fill="#10b981" />
-      </svg>
-    </div>
-  </aside>
-
-  <!-- MAIN APP CONTAINER -->
-  <div class="app-main">
-    <!-- Top Header -->
-    <header class="top-header">
-      <div class="header-search" onclick="App.openSearchModal()">
-        <span class="search-glass-icon">🔍</span>
-        <input type="text" placeholder="Search for topics, lessons, RFCs, or protocols... (Ctrl+K)" readonly>
-      </div>
-
-      <div class="header-profile-group">
-        <button class="notif-bell-btn" title="Quick Graph" onclick="App.loadView('graph')">
-          <span>🕸️</span>
-        </button>
-        <button class="notif-bell-btn" title="Notifications & Updates" onclick="App.loadView('notebook')">
-          <span>🔔</span>
-          <span class="notif-dot"></span>
-        </button>
-
-        <div class="profile-pill" onclick="App.loadView('home')">
-          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
-            alt="Alex" class="profile-avatar">
-          <span class="profile-name">Alex</span>
-          <span style="font-size: 0.75rem; color: #94a3b8;">▾</span>
+            <!-- Instant Search Results Dropdown -->
+            <div id="search-dropdown" class="absolute left-0 right-0 top-full mt-2 bg-white dark:bg-gfg-darkcard border border-gray-300 dark:border-gfg-darkborder rounded-lg shadow-2xl max-h-96 overflow-y-auto hidden z-50 p-2">
+                <div id="search-dropdown-list" class="space-y-1"></div>
+            </div>
         </div>
-      </div>
+
+        <!-- Quick Actions & Theme Control -->
+        <div class="flex items-center space-x-2 sm:space-x-3">
+            <button onclick="toggleDarkMode()" id="theme-toggle" class="p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors" title="Toggle Theme">
+                <i id="theme-icon" class="fa-solid fa-moon text-sm"></i>
+            </button>
+            <button onclick="openModal('subnet')" class="hidden md:flex items-center space-x-1.5 bg-gfg-green hover:bg-gfg-dark text-white px-3.5 py-2 rounded text-xs font-semibold transition-all shadow-sm">
+                <i class="fa-solid fa-calculator text-xs"></i>
+                <span>Subnet Tool</span>
+            </button>
+            <button onclick="App.loadView('quiz')" class="hidden lg:flex items-center space-x-1.5 bg-gray-100 dark:bg-gray-800 hover:bg-gfg-light dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-700 px-3 py-2 rounded text-xs font-semibold transition-all">
+                <i class="fa-solid fa-graduation-cap text-gfg-green"></i>
+                <span>Quiz Hub</span>
+            </button>
+            <button id="right-sidebar-toggle-btn" onclick="toggleRightSidebar()" class="p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors" title="Toggle Right Panel (TOC & Tools)">
+                <i class="fa-solid fa-table-columns text-sm"></i>
+            </button>
+            <div class="w-8 h-8 rounded-full bg-gfg-green/10 border border-gfg-green text-gfg-green font-bold flex items-center justify-center text-xs shadow-sm cursor-pointer" onclick="App.loadView('home')" title="Computer Science Student Profile">CS</div>
+        </div>
     </header>
 
-    <!-- Main Content Area (Dynamically swapped) -->
-    <main class="page-body-container" id="main-content-container">
-      <!-- Injected by JavaScript -->
-    </main>
-  </div>
+    <!-- 3-COLUMN MAIN LAYOUT (Independent Scrolling Per Column) -->
+    <div class="flex-1 flex overflow-hidden min-h-0 w-full relative">
+        
+        <!-- Mobile Sidebar Overlay Backdrop -->
+        <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-30 hidden lg:hidden"></div>
 
-  <!-- Global Search Modal Dialog -->
-  <div class="drawer-overlay" id="search-modal-overlay" onclick="App.closeSearchModal(); App.closeExplainModal();">
-  </div>
-  <div class="search-modal" id="search-modal-box">
-    <div class="search-modal-header">
-      <span style="color: #10b981; font-size: 1.25rem;">🔍</span>
-      <input type="text" id="global-search-input" placeholder="Search any topic, algorithm, standard, or example..."
-        oninput="App.handleGlobalSearch(this.value)">
-      <span
-        style="font-size: 0.75rem; font-weight: 700; color: #94a3b8; border: 1px solid #e2e8f0; padding: 3px 8px; border-radius: 6px;">ESC</span>
+        <!-- Floating Re-open Left Sidebar Button (when collapsed) -->
+        <button id="reopen-left-sidebar-btn" onclick="toggleLeftSidebar()" class="hidden fixed left-3 bottom-6 z-30 p-2.5 bg-white dark:bg-gfg-darkcard border border-gray-300 dark:border-gray-700 rounded-full shadow-xl text-gfg-green hover:bg-gfg-light dark:hover:bg-gray-800 transition-all flex items-center justify-center" title="Show Syllabus Sidebar">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <!-- LEFT SIDEBAR: SYLLABUS NAVIGATION & MODULES -->
+        <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 z-40 w-80 shrink-0 bg-white dark:bg-gfg-darkcard border-r border-gray-300 dark:border-gfg-darkborder transform -translate-x-full lg:translate-x-0 flex flex-col h-full shadow-lg lg:shadow-none">
+            
+            <!-- Sidebar Header with Collapse Button -->
+            <div class="p-3 border-b border-gray-200 dark:border-gfg-darkborder flex items-center justify-between bg-gray-50 dark:bg-gray-800 shrink-0">
+                <span class="font-bold text-xs uppercase tracking-wider text-gray-700 dark:text-gray-300">Syllabus Index</span>
+                <button onclick="toggleLeftSidebar()" class="text-gray-500 hover:text-black dark:hover:text-white p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" title="Collapse Sidebar">
+                    <i class="fa-solid fa-angles-left text-sm"></i>
+                </button>
+            </div>
+            
+            <!-- Syllabus Progress Bar Section -->
+            <div class="p-3.5 border-b border-gray-200 dark:border-gfg-darkborder bg-gray-50/70 dark:bg-gray-900/40 shrink-0">
+                <div class="flex items-center justify-between text-xs font-bold text-gray-600 dark:text-gray-400 px-0.5 mb-1.5">
+                    <span class="tracking-wide">SYLLABUS PROGRESS</span>
+                    <span id="progress-text" class="text-gfg-green font-bold">0%</span>
+                </div>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 h-2 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="bg-gfg-green h-full w-0 transition-all duration-300"></div>
+                </div>
+                <div class="flex items-center justify-between mt-2 text-[11px] text-gray-500 dark:text-gray-400">
+                    <span><strong id="completed-count-text" class="text-gfg-green font-bold">0</strong> of 90 completed</span>
+                    <button onclick="resetProgress()" class="hover:text-red-500 transition-colors underline cursor-pointer text-[10px]">Reset</button>
+                </div>
+            </div>
+
+            <!-- Quick Hubs Shortcuts -->
+            <div class="p-2 border-b border-gray-200 dark:border-gfg-darkborder bg-white dark:bg-gfg-darkcard grid grid-cols-4 gap-1 text-[11px] shrink-0">
+                <button onclick="App.loadView('home')" class="p-1.5 rounded hover:bg-gfg-light dark:hover:bg-gray-800 text-center text-gray-700 dark:text-gray-300 flex flex-col items-center group" title="Home Dashboard">
+                    <i class="fa-solid fa-house text-gfg-green text-xs mb-0.5"></i>
+                    <span class="text-[10px] group-hover:text-gfg-green">Home</span>
+                </button>
+                <button onclick="App.loadView('notebook')" class="p-1.5 rounded hover:bg-gfg-light dark:hover:bg-gray-800 text-center text-gray-700 dark:text-gray-300 flex flex-col items-center group" title="Master Catalog">
+                    <i class="fa-solid fa-book-open text-gfg-green text-xs mb-0.5"></i>
+                    <span class="text-[10px] group-hover:text-gfg-green">Catalog</span>
+                </button>
+                <button onclick="App.loadView('graph')" class="p-1.5 rounded hover:bg-gfg-light dark:hover:bg-gray-800 text-center text-gray-700 dark:text-gray-300 flex flex-col items-center group" title="Knowledge Graph">
+                    <i class="fa-solid fa-diagram-project text-gfg-green text-xs mb-0.5"></i>
+                    <span class="text-[10px] group-hover:text-gfg-green">Graph</span>
+                </button>
+                <button onclick="App.loadView('comparisons')" class="p-1.5 rounded hover:bg-gfg-light dark:hover:bg-gray-800 text-center text-gray-700 dark:text-gray-300 flex flex-col items-center group" title="Protocol Comparisons">
+                    <i class="fa-solid fa-scale-balanced text-gfg-green text-xs mb-0.5"></i>
+                    <span class="text-[10px] group-hover:text-gfg-green">Compare</span>
+                </button>
+            </div>
+
+            <!-- Sidebar Topics Filter Input -->
+            <div class="p-2 border-b border-gray-200 dark:border-gfg-darkborder shrink-0">
+                <div class="relative">
+                    <i class="fa-solid fa-filter absolute left-2.5 top-2.5 text-gray-400 text-[10px]"></i>
+                    <input type="text" id="sidebar-filter" placeholder="Filter syllabus topics..." class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded pl-7 pr-3 py-1.5 text-[11px] text-gray-800 dark:text-gray-200 placeholder-gray-400 focus:outline-none focus:border-gfg-green">
+                </div>
+            </div>
+
+            <!-- Scrollable Dynamic Syllabus Tree -->
+            <nav class="flex-1 overflow-y-auto p-3 space-y-3" id="syllabus-nav">
+                <!-- Dynamically populated by renderSidebar() -->
+            </nav>
+
+            <!-- Bottom Information Footer -->
+            <div class="p-3 border-t border-gray-200 dark:border-gfg-darkborder bg-gray-50 dark:bg-gray-800 text-[11px] text-gray-500 dark:text-gray-400 flex items-center justify-between shrink-0">
+                <span>Total Topics: <strong id="total-topics-count" class="text-gfg-green font-bold">90</strong></span>
+                <span class="text-gray-400 text-[10px]">Sem-V Kurose &amp; Ross</span>
+            </div>
+        </aside>
+
+        <!-- CENTER COLUMN: MAIN ARTICLE & PORTAL ENGINE CONTAINER (Independent Vertical Scroll) -->
+        <main id="main-content" class="flex-1 h-full overflow-y-auto bg-white dark:bg-gfg-darkbg p-6 md:p-10 lg:p-12 animate-fade focus:outline-none">
+            <!-- Article and dynamic modules render here -->
+        </main>
+
+        <!-- RIGHT SIDEBAR: TOOLS, TABLE OF CONTENTS & PRACTICE (Independent Vertical Scroll & Toggleable Cards) -->
+        <aside id="right-sidebar" class="hidden xl:flex flex-col w-72 shrink-0 bg-gray-50 dark:bg-gfg-darkcard border-l border-gray-300 dark:border-gfg-darkborder h-full overflow-y-auto p-4 space-y-4">
+            
+            <!-- Right Sidebar Header with Collapse Button -->
+            <div class="flex items-center justify-between pb-2 border-b border-gray-200 dark:border-gray-700 shrink-0">
+                <span class="font-bold text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">Navigation &amp; Tools</span>
+                <button onclick="toggleRightSidebar()" class="text-gray-400 hover:text-black dark:hover:text-white p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors" title="Hide Right Panel">
+                    <i class="fa-solid fa-angles-right text-xs"></i>
+                </button>
+            </div>
+
+            <!-- Table of Contents Dynamic Card (Toggleable) -->
+            <div class="bg-white dark:bg-gray-800 p-3.5 rounded-lg border border-gray-200 dark:border-gray-700 gfg-shadow">
+                <div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-2 mb-2">
+                    <h3 class="font-bold text-xs uppercase tracking-wider text-gray-800 dark:text-gray-200 flex items-center">
+                        <i class="fa-solid fa-list-ul text-gfg-green mr-2"></i> Table of Contents
+                    </h3>
+                    <button onclick="toggleCard('toc-card-body', this)" class="text-gray-400 hover:text-gfg-green p-1 transition-colors" title="Toggle Table of Contents">
+                        <i class="fa-solid fa-chevron-up text-xs transition-transform duration-200"></i>
+                    </button>
+                </div>
+                <div id="toc-card-body">
+                    <ul id="toc-list" class="space-y-1.5 text-xs text-gray-600 dark:text-gray-400 max-h-56 overflow-y-auto pr-1">
+                        <li class="text-gray-400 italic">Select a topic to view sections</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Interactive Simulators Card (Toggleable) -->
+            <div class="bg-white dark:bg-gray-800 p-3.5 rounded-lg border border-gray-200 dark:border-gray-700 gfg-shadow">
+                <div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-2 mb-2">
+                    <h3 class="font-bold text-xs uppercase tracking-wider text-gray-800 dark:text-gray-200 flex items-center">
+                        <i class="fa-solid fa-toolbox text-gfg-green mr-2"></i> Interactive Tools
+                    </h3>
+                    <button onclick="toggleCard('tools-card-body', this)" class="text-gray-400 hover:text-gfg-green p-1 transition-colors" title="Toggle Interactive Tools">
+                        <i class="fa-solid fa-chevron-up text-xs transition-transform duration-200"></i>
+                    </button>
+                </div>
+                <div id="tools-card-body" class="space-y-2">
+                    <button onclick="openModal('subnet')" class="w-full text-left px-3 py-2 rounded bg-gray-50 dark:bg-gray-900 hover:bg-gfg-light dark:hover:bg-gray-700 text-xs font-semibold text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 flex items-center justify-between group transition-colors">
+                        <span><i class="fa-solid fa-calculator text-gfg-green mr-2"></i> Subnet Calculator</span>
+                        <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-gfg-green text-[10px]"></i>
+                    </button>
+                    <button onclick="openModal('osi')" class="w-full text-left px-3 py-2 rounded bg-gray-50 dark:bg-gray-900 hover:bg-gfg-light dark:hover:bg-gray-700 text-xs font-semibold text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 flex items-center justify-between group transition-colors">
+                        <span><i class="fa-solid fa-layer-group text-gfg-green mr-2"></i> OSI Inspector</span>
+                        <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-gfg-green text-[10px]"></i>
+                    </button>
+                    <button onclick="openModal('crc')" class="w-full text-left px-3 py-2 rounded bg-gray-50 dark:bg-gray-900 hover:bg-gfg-light dark:hover:bg-gray-700 text-xs font-semibold text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 flex items-center justify-between group transition-colors">
+                        <span><i class="fa-solid fa-shield-halved text-gfg-green mr-2"></i> CRC Simulator</span>
+                        <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-gfg-green text-[10px]"></i>
+                    </button>
+                    <button onclick="openModal('packet')" class="w-full text-left px-3 py-2 rounded bg-gray-50 dark:bg-gray-900 hover:bg-gfg-light dark:hover:bg-gray-700 text-xs font-semibold text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 flex items-center justify-between group transition-colors">
+                        <span><i class="fa-solid fa-cube text-gfg-green mr-2"></i> Packet Visualizer</span>
+                        <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-gfg-green text-[10px]"></i>
+                    </button>
+                    <button onclick="openModal('dijkstra')" class="w-full text-left px-3 py-2 rounded bg-gray-50 dark:bg-gray-900 hover:bg-gfg-light dark:hover:bg-gray-700 text-xs font-semibold text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 flex items-center justify-between group transition-colors">
+                        <span><i class="fa-solid fa-route text-gfg-green mr-2"></i> Dijkstra SPF Solver</span>
+                        <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-gfg-green text-[10px]"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- GATE & Interview Prep Banner Card (Toggleable) -->
+            <div class="bg-gfg-light dark:bg-gray-800 p-3.5 rounded-lg border border-gfg-green/30">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-6 h-6 rounded-full bg-gfg-green text-white flex items-center justify-center text-xs shadow-sm">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <h4 class="font-bold text-xs text-gray-900 dark:text-white">GATE &amp; Interview Hub</h4>
+                    </div>
+                    <button onclick="toggleCard('gate-card-body', this)" class="text-gray-400 hover:text-gfg-green p-1 transition-colors" title="Toggle GATE Hub">
+                        <i class="fa-solid fa-chevron-up text-xs transition-transform duration-200"></i>
+                    </button>
+                </div>
+                <div id="gate-card-body">
+                    <p class="text-[11px] text-gray-600 dark:text-gray-300 mb-2.5 leading-relaxed">Practice top 50+ network MCQs, viva questions, and placement coding interview scenarios.</p>
+                    <button onclick="App.loadView('quiz')" class="w-full bg-gfg-green hover:bg-gfg-dark text-white text-xs font-semibold py-1.5 rounded transition-colors shadow-sm">
+                        View Practice Set →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Topic Quick Metadata Card (Toggleable) -->
+            <div id="topic-meta-card" class="bg-white dark:bg-gray-800 p-3.5 rounded-lg border border-gray-200 dark:border-gray-700 text-xs hidden">
+                <div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-1.5 mb-2">
+                    <h4 class="font-bold text-gray-800 dark:text-gray-200 flex items-center">
+                        <i class="fa-solid fa-circle-info text-gfg-green mr-1.5"></i> Topic Facts
+                    </h4>
+                    <button onclick="toggleCard('facts-card-body', this)" class="text-gray-400 hover:text-gfg-green p-1 transition-colors" title="Toggle Topic Facts">
+                        <i class="fa-solid fa-chevron-up text-xs transition-transform duration-200"></i>
+                    </button>
+                </div>
+                <div id="facts-card-body" class="space-y-1.5">
+                    <div class="flex justify-between py-1 border-b border-gray-100 dark:border-gray-700">
+                        <span class="text-gray-500">Stack Layer:</span>
+                        <span id="meta-layer" class="font-semibold text-gray-800 dark:text-gray-200">Layer 3</span>
+                    </div>
+                    <div class="flex justify-between py-1 border-b border-gray-100 dark:border-gray-700">
+                        <span class="text-gray-500">Standard:</span>
+                        <span id="meta-standard" class="font-semibold text-gray-800 dark:text-gray-200 font-mono text-[10px]">RFC 791</span>
+                    </div>
+                    <div class="flex justify-between py-1">
+                        <span class="text-gray-500">Difficulty:</span>
+                        <span id="meta-difficulty" class="font-semibold text-gfg-green">Core</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
     </div>
-    <div class="search-results-list" id="search-results-box"></div>
-  </div>
 
-  <!-- Application Modules -->
-  <script src="js/conceptDatabase.js"></script>
-  <script src="js/topics_u1.js"></script>
-  <script src="js/topics_u2.js"></script>
-  <script src="js/topics_u3.js"></script>
-  <script src="js/topics_u4.js"></script>
-  <script src="js/topics_u5.js"></script>
-  <script src="js/topicPages.js"></script>
-  <script src="js/comparisons.js"></script>
-  <script src="js/learningPaths.js"></script>
-  <script src="js/knowledgeGraph.js"></script>
-  <script src="js/resources.js"></script>
-  <script src="js/unit1.js"></script>
-  <script src="js/unit2.js"></script>
-  <script src="js/unit3.js"></script>
-  <script src="js/unit4.js"></script>
-  <script src="js/unit5.js"></script>
-  <script src="js/quizzes.js"></script>
-  <script src="js/app.js"></script>
+    <!-- UNIVERSAL INTERACTIVE MODAL DIALOG -->
+    <div id="universal-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white dark:bg-gfg-darkcard w-full max-w-3xl rounded-lg shadow-2xl border border-gray-300 dark:border-gfg-darkborder overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="bg-gray-100 dark:bg-gray-800 px-6 py-4 border-b border-gray-300 dark:border-gray-700 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div id="modal-icon" class="w-8 h-8 rounded bg-gfg-green text-white flex items-center justify-center text-sm shadow-sm">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                    <h3 id="modal-title" class="font-bold text-gray-900 dark:text-white text-sm">Tool Modal</h3>
+                </div>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-black dark:hover:text-white p-2 rounded focus:outline-none" title="Close Modal">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div id="modal-body" class="p-6 overflow-y-auto flex-1 bg-white dark:bg-gfg-darkcard text-gray-800 dark:text-gray-200">
+                <!-- Dynamic tool rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Concept Popover Overlay Dialog -->
+    <div id="concept-popover-box" class="fixed z-50 bg-white dark:bg-gfg-darkcard border border-gray-300 dark:border-gfg-darkborder rounded-lg shadow-2xl p-4 max-w-sm hidden text-xs">
+        <div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-2 mb-2">
+            <h4 id="popover-title" class="font-bold text-gray-900 dark:text-white text-xs">Concept</h4>
+            <span id="popover-unit" class="text-[10px] bg-gfg-light dark:bg-gray-800 text-gfg-green font-bold px-2 py-0.5 rounded">Unit</span>
+        </div>
+        <p id="popover-body" class="text-gray-600 dark:text-gray-300 text-xs leading-relaxed mb-3"></p>
+        <div class="flex items-center justify-between pt-1">
+            <span id="popover-category" class="text-[10px] text-gray-400 font-mono">Category</span>
+            <button id="popover-action" class="text-gfg-green hover:underline font-bold text-xs">Explore Topic →</button>
+        </div>
+    </div>
+
+    <!-- SCRIPT INCLUSIONS -->
+    <script src="js/conceptDatabase.js"></script>
+    <script src="js/topics_u1.js"></script>
+    <script src="js/topics_u2.js"></script>
+    <script src="js/topics_u2_extended.js"></script>
+    <script src="js/topics_u3.js"></script>
+    <script src="js/topics_u3_extended.js"></script>
+    <script src="js/topics_u4.js"></script>
+    <script src="js/topics_u5.js"></script>
+    <script src="js/topicPages.js"></script>
+    <script src="js/comparisons.js"></script>
+    <script src="js/learningPaths.js"></script>
+    <script src="js/knowledgeGraph.js"></script>
+    <script src="js/resources.js"></script>
+    <script src="js/unit1.js"></script>
+    <script src="js/unit2.js"></script>
+    <script src="js/unit3.js"></script>
+    <script src="js/unit4.js"></script>
+    <script src="js/unit5.js"></script>
+    <script src="js/quizzes.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- PORTAL CONTROLLER & INTERACTIVE SUITE -->
+    <script>
+        // SYLLABUS CURRICULUM DEFINITION (All 90 topics categorized across 5 units)
+        const syllabusModules = [
+            {
+                id: "unit1",
+                module: "Module 1: Networking Fundamentals & Physical Layer",
+                badge: "8 Topics",
+                topicIds: [
+                    "computer-network", "protocol", "host", "router",
+                    "switch", "packet", "protocol-stack", "encapsulation"
+                ]
+            },
+            {
+                id: "unit2",
+                module: "Module 2: Data Link Layer, Framing & MAC Sublayer",
+                badge: "27 Topics",
+                topicIds: [
+                    "framing", "byte-stuffing", "bit-stuffing", "error-detection",
+                    "parity", "checksum", "crc", "hamming-code", "flow-control",
+                    "stop-and-wait", "sliding-window", "go-back-n", "selective-repeat",
+                    "ethernet", "mac-address", "arp", "vlan", "dll-design-issues",
+                    "simplex-protocol", "channel-allocation", "aloha", "csma-protocols",
+                    "collision-free-protocols", "wireless-lan-protocols", "wifi-mac-sublayer",
+                    "dll-switching", "network-devices"
+                ]
+            },
+            {
+                id: "unit3",
+                module: "Module 3: Network Layer, IP Addressing & Routing",
+                badge: "28 Topics",
+                topicIds: [
+                    "network-layer", "forwarding", "routing", "dijkstra",
+                    "link-state-routing", "distance-vector", "ospf", "bgp", "sdn",
+                    "ipv4", "ip-addressing", "ipv6", "nat", "routing-design-issues",
+                    "optimality-principle", "shortest-path-algorithm", "flooding",
+                    "distance-vector-routing", "congestion-control", "traffic-aware-routing",
+                    "admission-control", "traffic-throttling", "load-shedding",
+                    "internetworking", "tunneling", "internetwork-routing",
+                    "ipv4-protocol", "ipv6-protocol"
+                ]
+            },
+            {
+                id: "unit4",
+                module: "Module 4: Transport Layer & Congestion Control",
+                badge: "10 Topics",
+                topicIds: [
+                    "transport-layer", "tcp", "udp", "udp-header",
+                    "tcp-three-way-handshake", "tcp-header", "sequence-number",
+                    "acknowledgement", "tcp-flow-control", "tcp-congestion-control"
+                ]
+            },
+            {
+                id: "unit5",
+                module: "Module 5: Application Layer, Protocols & Security",
+                badge: "17 Topics",
+                topicIds: [
+                    "application-layer", "dns", "dns-records", "http",
+                    "https", "email-system", "smtp", "pop3", "imap",
+                    "firewall", "ids", "ips", "public-key-cryptography",
+                    "rsa", "rsa-encryption", "rsa-digital-signature", "rsa-padding"
+                ]
+            }
+        ];
+
+        let activeTopicId = 'computer-network';
+        let completedTopics = JSON.parse(localStorage.getItem('gfg_completed_topics') || '[]');
+        let collapsedModules = JSON.parse(localStorage.getItem('gfg_collapsed_modules') || '{}');
+
+        function getTotalTopicsCount() {
+            let total = 0;
+            syllabusModules.forEach(m => total += m.topicIds.length);
+            return total;
+        }
+
+        function markTopicCompleted(id) {
+            if (!completedTopics.includes(id)) {
+                completedTopics.push(id);
+                localStorage.setItem('gfg_completed_topics', JSON.stringify(completedTopics));
+            }
+            updateProgressDisplay();
+        }
+
+        function resetProgress() {
+            if (confirm("Are you sure you want to reset your syllabus progress?")) {
+                completedTopics = [];
+                localStorage.removeItem('gfg_completed_topics');
+                updateProgressDisplay();
+                renderSidebar();
+            }
+        }
+
+        function updateProgressDisplay() {
+            const total = getTotalTopicsCount();
+            const count = completedTopics.length;
+            const pct = Math.round((count / total) * 100);
+            const pb = document.getElementById('progress-bar');
+            const pt = document.getElementById('progress-text');
+            const ct = document.getElementById('completed-count-text');
+            if (pb) pb.style.width = pct + '%';
+            if (pt) pt.textContent = pct + '%';
+            if (ct) ct.textContent = count;
+        }
+
+        function toggleModule(modId) {
+            collapsedModules[modId] = !collapsedModules[modId];
+            localStorage.setItem('gfg_collapsed_modules', JSON.stringify(collapsedModules));
+            renderSidebar(document.getElementById('sidebar-filter').value);
+        }
+
+        // RENDER SYLLABUS NAVIGATION ACCORDION
+        function renderSidebar(filterQuery = '') {
+            const nav = document.getElementById('syllabus-nav');
+            if (!nav) return;
+            nav.innerHTML = '';
+            updateProgressDisplay();
+
+            const repo = window.TOPIC_REPOSITORY || {};
+            const cleanQuery = filterQuery.trim().toLowerCase();
+
+            syllabusModules.forEach(mod => {
+                const topicsList = mod.topicIds.map(id => repo[id]).filter(Boolean);
+                const filtered = cleanQuery 
+                    ? topicsList.filter(t => t.title.toLowerCase().includes(cleanQuery) || (t.oneLiner && t.oneLiner.toLowerCase().includes(cleanQuery)) || t.id.toLowerCase().includes(cleanQuery))
+                    : topicsList;
+
+                if (cleanQuery && filtered.length === 0) return;
+
+                const modDiv = document.createElement('div');
+                modDiv.className = 'space-y-1';
+
+                const isCollapsed = !cleanQuery && !!collapsedModules[mod.id];
+
+                // Module Section Header
+                const modHeader = document.createElement('div');
+                modHeader.className = 'text-[11px] font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide px-2.5 py-1.5 bg-gray-100 dark:bg-gray-800 rounded flex items-center justify-between cursor-pointer select-none hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors';
+                modHeader.innerHTML = `
+                    <div class="flex items-center space-x-2 truncate">
+                        <i class="fa-solid fa-chevron-${isCollapsed ? 'right' : 'down'} text-[10px] text-gray-400"></i>
+                        <span class="truncate">${mod.module}</span>
+                    </div>
+                    <span class="text-[10px] font-mono text-gray-500 dark:text-gray-400 ml-1 shrink-0">${filtered.length}</span>
+                `;
+                modHeader.onclick = () => toggleModule(mod.id);
+                modDiv.appendChild(modHeader);
+
+                if (!isCollapsed) {
+                    const listContainer = document.createElement('div');
+                    listContainer.className = 'space-y-0.5 pt-0.5 pl-1';
+
+                    filtered.forEach(topic => {
+                        const isCurrent = activeTopicId === topic.id;
+                        const isRead = completedTopics.includes(topic.id);
+                        const btn = document.createElement('button');
+                        btn.id = 'sidebar-topic-' + topic.id;
+                        btn.className = `w-full text-left px-2.5 py-1.5 rounded text-xs transition-all flex items-center justify-between group ${
+                            isCurrent 
+                                ? 'bg-gfg-green text-white font-bold shadow-sm' 
+                                : 'text-gray-700 dark:text-gray-300 hover:bg-gfg-light dark:hover:bg-gray-800 hover:text-gfg-green'
+                        }`;
+
+                        btn.innerHTML = `
+                            <div class="flex items-center space-x-2 truncate">
+                                <i class="fa-solid fa-file-lines text-[10px] ${isCurrent ? 'text-white' : 'text-gray-400 group-hover:text-gfg-green'}"></i>
+                                <span class="truncate">${topic.title}</span>
+                            </div>
+                            <div class="flex items-center space-x-1 shrink-0 ml-1">
+                                ${isRead ? `<i class="fa-solid fa-check text-[10px] ${isCurrent ? 'text-white' : 'text-gfg-green'}" title="Completed"></i>` : ''}
+                            </div>
+                        `;
+
+                        btn.onclick = () => {
+                            App.loadTopic(topic.id);
+                            if (window.innerWidth < 1024) toggleMobileSidebar();
+                        };
+
+                        listContainer.appendChild(btn);
+                    });
+
+                    modDiv.appendChild(listContainer);
+                }
+
+                nav.appendChild(modDiv);
+            });
+        }
+
+        function highlightSyllabusTopic(topicId) {
+            activeTopicId = topicId;
+            document.querySelectorAll('#syllabus-nav button').forEach(b => {
+                b.classList.remove('bg-gfg-green', 'text-white', 'font-bold', 'shadow-sm');
+                b.classList.add('text-gray-700', 'dark:text-gray-300');
+                const icon = b.querySelector('.fa-file-lines');
+                if (icon) {
+                    icon.classList.remove('text-white');
+                    icon.classList.add('text-gray-400');
+                }
+            });
+
+            const activeBtn = document.getElementById('sidebar-topic-' + topicId);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-gray-700', 'dark:text-gray-300');
+                activeBtn.classList.add('bg-gfg-green', 'text-white', 'font-bold', 'shadow-sm');
+                const icon = activeBtn.querySelector('.fa-file-lines');
+                if (icon) {
+                    icon.classList.remove('text-gray-400');
+                    icon.classList.add('text-white');
+                }
+            }
+        }
+
+        // BUILD RIGHT SIDEBAR TABLE OF CONTENTS
+        function buildToc() {
+            const main = document.getElementById('main-content');
+            const tocList = document.getElementById('toc-list');
+            if (!main || !tocList) return;
+            tocList.innerHTML = '';
+
+            const headings = main.querySelectorAll('h2, h3');
+            if (headings.length === 0) {
+                tocList.innerHTML = '<li class="text-gray-400 italic text-[11px]">No subheadings available</li>';
+                return;
+            }
+
+            headings.forEach((h, idx) => {
+                if (!h.id) h.id = 'heading-sec-' + idx;
+                const li = document.createElement('li');
+                const isSub = h.tagName === 'H3';
+                li.className = isSub 
+                    ? 'pl-3 text-gray-500 dark:text-gray-400 text-[11px] truncate' 
+                    : 'font-semibold text-gray-800 dark:text-gray-200 text-xs truncate';
+                
+                li.innerHTML = `
+                    <a href="#${h.id}" class="hover:text-gfg-green transition-colors block truncate" title="${h.textContent}">
+                        ${h.textContent}
+                    </a>
+                `;
+
+                li.querySelector('a').onclick = (e) => {
+                    e.preventDefault();
+                    h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                };
+
+                tocList.appendChild(li);
+            });
+        }
+
+        // UPDATE RIGHT SIDEBAR TOPIC METADATA CARD
+        function updateTopicMetaCard(topicId) {
+            const repo = window.TOPIC_REPOSITORY || {};
+            const topic = repo[topicId];
+            const card = document.getElementById('topic-meta-card');
+            if (!card) return;
+
+            if (topic) {
+                card.classList.remove('hidden');
+                document.getElementById('meta-layer').textContent = (topic.infobox && topic.infobox.layer) ? topic.infobox.layer.split('(')[0] : 'General';
+                document.getElementById('meta-standard').textContent = topic.standard || 'IEEE / IETF';
+                document.getElementById('meta-difficulty').textContent = topic.difficulty || 'Core';
+            } else {
+                card.classList.add('hidden');
+            }
+        }
+
+        // GLOBAL SEARCH DROP-DOWN CONTROLLER
+        const searchInput = document.getElementById('global-search');
+        const searchDropdown = document.getElementById('search-dropdown');
+        const searchDropdownList = document.getElementById('search-dropdown-list');
+
+        function handleGlobalSearch(query) {
+            const q = query.trim().toLowerCase();
+            if (!q) {
+                searchDropdown.classList.add('hidden');
+                return;
+            }
+
+            const repo = window.TOPIC_REPOSITORY || {};
+            const concepts = window.CONCEPT_REGISTRY || {};
+            const matches = [];
+
+            // Search topics
+            for (const [id, t] of Object.entries(repo)) {
+                if (t.title.toLowerCase().includes(q) || (t.oneLiner && t.oneLiner.toLowerCase().includes(q)) || id.includes(q)) {
+                    matches.push({ type: 'topic', id: t.id, title: t.title, badge: t.unit ? t.unit.split(':')[0] : 'Topic', desc: t.oneLiner });
+                }
+            }
+
+            // Search concepts
+            for (const [cId, c] of Object.entries(concepts)) {
+                if (c.name.toLowerCase().includes(q) || (c.oneLiner && c.oneLiner.toLowerCase().includes(q))) {
+                    if (!matches.some(m => m.id === cId)) {
+                        matches.push({ type: 'concept', id: c.id, title: c.name, badge: 'Concept', desc: c.oneLiner });
+                    }
+                }
+            }
+
+            if (matches.length === 0) {
+                searchDropdownList.innerHTML = `<div class="p-3 text-xs text-gray-500 text-center">No networking topics found matching "${query}"</div>`;
+                searchDropdown.classList.remove('hidden');
+                return;
+            }
+
+            searchDropdownList.innerHTML = matches.slice(0, 8).map(m => `
+                <div onclick="selectSearchResult('${m.type}', '${m.id}')" class="p-2.5 hover:bg-gfg-light dark:hover:bg-gray-800 rounded cursor-pointer transition-colors flex items-center justify-between border-b border-gray-100 dark:border-gray-800 last:border-none">
+                    <div class="truncate mr-2">
+                        <div class="font-bold text-xs text-gray-900 dark:text-gray-100 flex items-center space-x-2 truncate">
+                            <i class="fa-solid ${m.type === 'topic' ? 'fa-file-lines text-gfg-green' : 'fa-lightbulb text-amber-500'} text-[10px]"></i>
+                            <span class="truncate">${m.title}</span>
+                        </div>
+                        <p class="text-[11px] text-gray-500 dark:text-gray-400 truncate mt-0.5">${m.desc || ''}</p>
+                    </div>
+                    <span class="text-[10px] font-semibold bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded shrink-0">${m.badge}</span>
+                </div>
+            `).join('');
+
+            searchDropdown.classList.remove('hidden');
+        }
+
+        function selectSearchResult(type, id) {
+            searchDropdown.classList.add('hidden');
+            searchInput.value = '';
+            if (type === 'topic') {
+                App.loadTopic(id);
+            } else {
+                if (window.TOPIC_REPOSITORY && window.TOPIC_REPOSITORY[id]) {
+                    App.loadTopic(id);
+                } else if (typeof App.showExplainModal === 'function') {
+                    App.showExplainModal(id);
+                }
+            }
+        }
+
+        searchInput.addEventListener('input', (e) => handleGlobalSearch(e.target.value));
+
+        document.addEventListener('click', (e) => {
+            if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
+                searchDropdown.classList.add('hidden');
+            }
+        });
+
+        // SIDEBAR FILTER LISTENER
+        document.getElementById('sidebar-filter').addEventListener('input', (e) => {
+            renderSidebar(e.target.value);
+        });
+
+        // UNIVERSAL INTERACTIVE MODAL CONTROLLER
+        function openModal(type) {
+            const modal = document.getElementById('universal-modal');
+            const title = document.getElementById('modal-title');
+            const icon = document.getElementById('modal-icon');
+            const body = document.getElementById('modal-body');
+            modal.classList.remove('hidden');
+
+            if (type === 'subnet') {
+                title.textContent = "IPv4 CIDR Subnet Calculator";
+                icon.innerHTML = '<i class="fa-solid fa-calculator"></i>';
+                body.innerHTML = `
+                    <div class="space-y-4 text-xs">
+                        <p class="text-gray-600 dark:text-gray-400">Calculate network boundaries, broadcast addresses, usable host ranges, and wildcard bitmasks for any IPv4 address and CIDR prefix.</p>
+                        
+                        <!-- Presets -->
+                        <div class="flex flex-wrap gap-1.5 pb-1">
+                            <span class="text-[10px] font-bold text-gray-400 uppercase py-1">Presets:</span>
+                            <button onclick="setSubnetPreset('192.168.1.1', 24)" class="px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-800 hover:bg-gfg-light dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 text-[11px] font-mono">/24 Home LAN</button>
+                            <button onclick="setSubnetPreset('10.0.0.1', 16)" class="px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-800 hover:bg-gfg-light dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 text-[11px] font-mono">/16 Campus</button>
+                            <button onclick="setSubnetPreset('172.16.5.10', 28)" class="px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-800 hover:bg-gfg-light dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 text-[11px] font-mono">/28 Department</button>
+                            <button onclick="setSubnetPreset('198.51.100.1', 30)" class="px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-800 hover:bg-gfg-light dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 text-[11px] font-mono">/30 Router Link</button>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <div class="sm:col-span-2">
+                                <label class="block font-semibold uppercase mb-1 text-[11px]">IPv4 Address</label>
+                                <input type="text" id="calc-ip" value="192.168.1.10" class="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded px-3 py-2 font-mono text-xs focus:outline-none focus:border-gfg-green">
+                            </div>
+                            <div>
+                                <label class="block font-semibold uppercase mb-1 text-[11px]">CIDR Prefix</label>
+                                <select id="calc-cidr" class="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded px-3 py-2 font-mono text-xs focus:outline-none focus:border-gfg-green">
+                                    ${Array.from({length: 33}, (_, i) => `<option value="${i}" ${i===24?'selected':''}>/${i} (${Math.pow(2, 32-i).toLocaleString()} addresses)</option>`).join('')}
+                                </select>
+                            </div>
+                        </div>
+
+                        <button onclick="runSubnetCalc()" class="w-full py-2.5 bg-gfg-green hover:bg-gfg-dark text-white font-bold rounded shadow transition-colors">
+                            Calculate Subnet
+                        </button>
+                        
+                        <div id="calc-output" class="bg-gray-50 dark:bg-gray-900 p-4 rounded border border-gray-200 dark:border-gray-700 space-y-2 font-mono text-xs">
+                            <div class="grid grid-cols-2 gap-2 pb-2 border-b border-gray-200 dark:border-gray-800">
+                                <div><span class="text-gray-500">Subnet Mask:</span> <strong id="out-mask" class="text-gfg-green"></strong></div>
+                                <div><span class="text-gray-500">Wildcard Mask:</span> <strong id="out-wildcard"></strong></div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 pb-2 border-b border-gray-200 dark:border-gray-800">
+                                <div><span class="text-gray-500">Network IP:</span> <strong id="out-net" class="text-blue-500"></strong></div>
+                                <div><span class="text-gray-500">Broadcast IP:</span> <strong id="out-bcast" class="text-purple-500"></strong></div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 pb-2 border-b border-gray-200 dark:border-gray-800">
+                                <div><span class="text-gray-500">Usable Hosts:</span> <strong id="out-hosts" class="text-gfg-green"></strong></div>
+                                <div><span class="text-gray-500">Total IP Slots:</span> <strong id="out-total"></strong></div>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Usable Host Range:</span>
+                                <div id="out-range" class="font-bold text-gray-900 dark:text-gray-100 text-xs mt-0.5"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                runSubnetCalc();
+            } else if (type === 'osi') {
+                title.textContent = "OSI Reference Model Inspector";
+                icon.innerHTML = '<i class="fa-solid fa-layer-group"></i>';
+                const layers = [
+                    { num: 7, name: "Application Layer", pdu: "Data", protocols: "HTTP/3, HTTPS, DNS, SMTP, FTP, SSH, DHCP", desc: "Provides application software interfaces directly to user processes and network network-aware applications." },
+                    { num: 6, name: "Presentation Layer", pdu: "Data", protocols: "TLS 1.3, SSL, JPEG, MPEG, ASCII, JSON", desc: "Handles syntax formatting, data compression, cryptographic encryption/decryption, and character code conversions." },
+                    { num: 5, name: "Session Layer", pdu: "Data", protocols: "NetBIOS, RPC, Sockets, PPTP, SMB", desc: "Coordinates dialogues, checkpointing, token arbitration, and session recovery between distributed applications." },
+                    { num: 4, name: "Transport Layer", pdu: "Segments / Datagrams", protocols: "TCP (RFC 9293), UDP (RFC 768), SCTP, QUIC", desc: "Guarantees end-to-end process-to-process delivery, port multiplexing, segmentation, flow control, and error recovery." },
+                    { num: 3, name: "Network Layer", pdu: "Packets / Datagrams", protocols: "IPv4, IPv6, ICMP, OSPF, BGP-4, IPsec", desc: "Performs logical addressing (IP addresses), packet forwarding, routing table construction, and cross-network path selection." },
+                    { num: 2, name: "Data Link Layer", pdu: "Frames", protocols: "Ethernet (IEEE 802.3), Wi-Fi (802.11), ARP, PPP", desc: "Provides node-to-node framing across physical links, 48-bit MAC addressing, CRC error detection, and media access control." },
+                    { num: 1, name: "Physical Layer", pdu: "Bits", protocols: "1000BASE-T RJ45, Single-Mode Fiber, 802.11 RF", desc: "Transmits raw electrical pulses, light flashes, or RF electromagnetic signals across physical cables and wireless channels." }
+                ];
+                body.innerHTML = `
+                    <div class="space-y-3 text-xs">
+                        <p class="text-gray-600 dark:text-gray-400">Click any layer in the 7-layer stack below to inspect its Protocol Data Unit (PDU), standard protocols, and hardware functions:</p>
+                        <div class="space-y-1.5">
+                            ${layers.map(l => `
+                                <div onclick="inspectOsi(${l.num}, '${l.name}', '${l.pdu}', '${l.protocols}', '${l.desc}')" class="p-2.5 bg-gray-50 dark:bg-gray-900 hover:bg-gfg-light dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded cursor-pointer transition-all flex items-center justify-between group">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="w-6 h-6 rounded bg-gfg-green text-white flex items-center justify-center font-bold text-xs shadow-sm">L${l.num}</span>
+                                        <div>
+                                            <div class="font-bold text-xs group-hover:text-gfg-green">${l.name} <span class="text-[10px] text-gray-400 font-normal">[PDU: ${l.pdu}]</span></div>
+                                            <p class="text-[10px] text-gray-500 dark:text-gray-400 font-mono">${l.protocols}</p>
+                                        </div>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-gfg-green text-xs"></i>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div id="osi-inspect-box" class="p-4 bg-gray-900 text-gray-100 rounded text-xs font-mono mt-3 space-y-1 border border-gray-700">
+                            <span class="text-gfg-green font-bold">Select any layer above to view architectural specifications.</span>
+                        </div>
+                    </div>
+                `;
+                inspectOsi(4, "Transport Layer", "Segments / Datagrams", "TCP (RFC 9293), UDP (RFC 768), SCTP, QUIC", "Guarantees end-to-end process-to-process delivery, port multiplexing, segmentation, flow control, and error recovery.");
+            } else if (type === 'crc') {
+                title.textContent = "CRC Error Detection Simulator";
+                icon.innerHTML = '<i class="fa-solid fa-shield-halved"></i>';
+                body.innerHTML = `
+                    <div class="space-y-4 text-xs">
+                        <p class="text-gray-600 dark:text-gray-400">Simulate Modulo-2 binary polynomial division (XOR without arithmetic borrows/carries) used in Ethernet (CRC-32) and Data Link frame check sequences.</p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block font-semibold uppercase mb-1 text-[11px]">Data Message Bits</label>
+                                <input type="text" id="crc-data-input" value="1101011011" class="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded px-3 py-2 font-mono text-xs focus:outline-none focus:border-gfg-green">
+                            </div>
+                            <div>
+                                <label class="block font-semibold uppercase mb-1 text-[11px]">Generator Polynomial G(x)</label>
+                                <div class="flex space-x-1">
+                                    <input type="text" id="crc-poly-input" value="1001" class="flex-1 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded px-3 py-2 font-mono text-xs focus:outline-none focus:border-gfg-green">
+                                    <select onchange="document.getElementById('crc-poly-input').value = this.value; runCrcSimulation();" class="bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded px-2 text-xs">
+                                        <option value="1001">x³ + 1 (1001)</option>
+                                        <option value="1101">x³ + x² + 1 (1101)</option>
+                                        <option value="100000111">CRC-8 (100000111)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="runCrcSimulation()" class="w-full py-2 bg-gfg-green hover:bg-gfg-dark text-white font-bold rounded shadow transition-colors">
+                            Compute Modulo-2 Polynomial Division
+                        </button>
+
+                        <div id="crc-result-box" class="bg-gray-900 text-gray-100 p-4 rounded font-mono text-xs space-y-2 border border-gray-700"></div>
+                    </div>
+                `;
+                runCrcSimulation();
+            } else if (type === 'packet') {
+                title.textContent = "IPv4 & TCP Packet Header Visualizer";
+                icon.innerHTML = '<i class="fa-solid fa-cube"></i>';
+                body.innerHTML = `
+                    <div class="space-y-4 text-xs">
+                        <div class="flex space-x-2 border-b border-gray-200 dark:border-gray-700 pb-2">
+                            <button id="tab-btn-ip" onclick="switchPacketTab('ip')" class="px-3 py-1 bg-gfg-green text-white font-bold rounded">IPv4 Header (20 Bytes)</button>
+                            <button id="tab-btn-tcp" onclick="switchPacketTab('tcp')" class="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-semibold rounded">TCP Segment Header (20 Bytes)</button>
+                        </div>
+
+                        <div id="packet-ip-view" class="space-y-2">
+                            <p class="text-gray-600 dark:text-gray-400">Click any 32-bit field below to inspect bit offset, size, and operational semantics:</p>
+                            <div class="bg-gray-900 text-gray-200 p-3 rounded font-mono text-[11px] space-y-1 overflow-x-auto border border-gray-700">
+                                <div class="grid grid-cols-4 gap-1 text-center">
+                                    <div onclick="inspectHeaderField('Version', '4 bits', 'Specifies the IP version (0100 for IPv4).')" class="bg-gray-800 hover:bg-gfg-green/40 p-2 rounded cursor-pointer">Ver (4b)</div>
+                                    <div onclick="inspectHeaderField('IHL', '4 bits', 'Internet Header Length in 32-bit words (Default 5 = 20 bytes).')" class="bg-gray-800 hover:bg-gfg-green/40 p-2 rounded cursor-pointer">IHL (4b)</div>
+                                    <div onclick="inspectHeaderField('TOS / DiffServ', '8 bits', 'Type of Service / Quality of Service priority tags.')" class="bg-gray-800 hover:bg-gfg-green/40 p-2 rounded cursor-pointer">DSCP / ECN (8b)</div>
+                                    <div onclick="inspectHeaderField('Total Length', '16 bits', 'Entire datagram size including header and payload (max 65,535 bytes).')" class="bg-gray-800 hover:bg-gfg-green/40 p-2 rounded cursor-pointer">Total Length (16b)</div>
+                                </div>
+                                <div class="grid grid-cols-3 gap-1 text-center">
+                                    <div onclick="inspectHeaderField('Identification', '16 bits', 'Unique identifier to reassemble fragmented packets.')" class="bg-gray-800 hover:bg-gfg-green/40 p-2 rounded cursor-pointer">Identification (16b)</div>
+                                    <div onclick="inspectHeaderField('Flags', '3 bits', 'Bit 0: Reserved, Bit 1: DF (Do not Fragment), Bit 2: MF (More Fragments).')" class="bg-gray-800 hover:bg-gfg-green/40 p-2 rounded cursor-pointer">Flags (3b)</div>
+                                    <div onclick="inspectHeaderField('Fragment Offset', '13 bits', 'Position of fragment in original datagram measured in 8-byte units.')" class="bg-gray-800 hover:bg-gfg-green/40 p-2 rounded cursor-pointer">Fragment Offset (13b)</div>
+                                </div>
+                                <div class="grid grid-cols-3 gap-1 text-center">
+                                    <div onclick="inspectHeaderField('Time to Live (TTL)', '8 bits', 'Hop limit decremented by each router to avoid infinite routing loops.')" class="bg-gray-800 hover:bg-gfg-green/40 p-2 rounded cursor-pointer">TTL (8b)</div>
+                                    <div onclick="inspectHeaderField('Protocol', '8 bits', 'Higher layer protocol: 6 for TCP, 17 for UDP, 1 for ICMP.')" class="bg-gray-800 hover:bg-gfg-green/40 p-2 rounded cursor-pointer">Protocol (8b)</div>
+                                    <div onclick="inspectHeaderField('Header Checksum', '16 bits', '16-bit 1s complement checksum verifying IP header integrity only.')" class="bg-gray-800 hover:bg-gfg-green/40 p-2 rounded cursor-pointer">Checksum (16b)</div>
+                                </div>
+                                <div onclick="inspectHeaderField('Source IP Address', '32 bits', 'Originator 32-bit IPv4 address (e.g. 192.168.1.10).')" class="bg-gfg-green/20 border border-gfg-green p-2.5 rounded text-center text-gfg-green font-bold cursor-pointer hover:bg-gfg-green/30">
+                                    Source IP Address (32 bits)
+                                </div>
+                                <div onclick="inspectHeaderField('Destination IP Address', '32 bits', 'Recipient 32-bit IPv4 address (e.g. 8.8.8.8).')" class="bg-blue-500/20 border border-blue-500 p-2.5 rounded text-center text-blue-400 font-bold cursor-pointer hover:bg-blue-500/30">
+                                    Destination IP Address (32 bits)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="packet-tcp-view" class="space-y-2 hidden">
+                            <p class="text-gray-600 dark:text-gray-400">Click any field in the 20-byte TCP header:</p>
+                            <div class="bg-gray-900 text-gray-200 p-3 rounded font-mono text-[11px] space-y-1 overflow-x-auto border border-gray-700">
+                                <div class="grid grid-cols-2 gap-1 text-center">
+                                    <div onclick="inspectHeaderField('Source Port', '16 bits', 'Port number of sending process (1 - 65535).')" class="bg-gray-800 hover:bg-gfg-green/40 p-2 rounded cursor-pointer">Source Port (16b)</div>
+                                    <div onclick="inspectHeaderField('Destination Port', '16 bits', 'Port number of recipient process (e.g. 80 HTTP, 443 HTTPS).')" class="bg-gray-800 hover:bg-gfg-green/40 p-2 rounded cursor-pointer">Destination Port (16b)</div>
+                                </div>
+                                <div onclick="inspectHeaderField('Sequence Number', '32 bits', 'Byte offset index of the first data byte in this segment.')" class="bg-gfg-green/20 border border-gfg-green p-2 rounded text-center text-gfg-green font-bold cursor-pointer">Sequence Number (32 bits)</div>
+                                <div onclick="inspectHeaderField('Acknowledgment Number', '32 bits', 'Cumulative next expected byte sequence number from other endpoint.')" class="bg-blue-500/20 border border-blue-500 p-2 rounded text-center text-blue-400 font-bold cursor-pointer">Acknowledgment Number (32 bits)</div>
+                                <div class="grid grid-cols-3 gap-1 text-center">
+                                    <div onclick="inspectHeaderField('Data Offset', '4 bits', 'TCP header length in 32-bit words.')" class="bg-gray-800 p-2 rounded cursor-pointer">Offset (4b)</div>
+                                    <div onclick="inspectHeaderField('TCP Flags', '9 bits', 'SYN, ACK, FIN, RST, PSH, URG, ECE, CWR.')" class="bg-gray-800 p-2 rounded cursor-pointer text-gfg-green font-bold">Control Flags (9b)</div>
+                                    <div onclick="inspectHeaderField('Window Size', '16 bits', 'Number of bytes receiver buffer is willing to accept (rwnd).')" class="bg-gray-800 p-2 rounded cursor-pointer">Window Size (16b)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="header-detail-box" class="p-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded text-xs space-y-1">
+                            <div class="font-bold text-gray-900 dark:text-white" id="field-name">Field: Source IP Address</div>
+                            <div class="text-gfg-green font-mono text-[11px]" id="field-bits">Size: 32 bits</div>
+                            <p class="text-gray-600 dark:text-gray-400 text-xs" id="field-desc">Click any field in the grid above to inspect its semantics.</p>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'dijkstra') {
+                title.textContent = "Dijkstra Shortest Path First (SPF) Simulator";
+                icon.innerHTML = '<i class="fa-solid fa-route"></i>';
+                body.innerHTML = `
+                    <div class="space-y-4 text-xs">
+                        <p class="text-gray-600 dark:text-gray-400">Dijkstra's Link-State SPF algorithm computes the least-cost path from a designated source node (Root) to all destination routers in the network topology.</p>
+                        
+                        <div class="p-3 bg-gray-900 text-gray-100 rounded font-mono text-xs">
+                            <p class="text-gfg-green font-bold mb-1">// Sample Network Topology & Edge Weights</p>
+                            <p>(A) ──[2]── (B) ──[1]── (C)</p>
+                            <p> │           │           │ </p>
+                            <p>[4]         [3]         [2] </p>
+                            <p> │           │           │ </p>
+                            <p>(D) ──[1]── (E) ──────────┘ </p>
+                        </div>
+
+                        <div class="flex items-center space-x-3">
+                            <span class="font-bold text-xs">Select Source Node:</span>
+                            <select id="spf-source" onchange="runDijkstraSim(this.value)" class="bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded px-3 py-1 font-mono text-xs">
+                                <option value="A" selected>Router A</option>
+                                <option value="B">Router B</option>
+                                <option value="C">Router C</option>
+                                <option value="D">Router D</option>
+                                <option value="E">Router E</option>
+                            </select>
+                        </div>
+
+                        <div id="spf-output-table" class="overflow-x-auto"></div>
+                    </div>
+                `;
+                runDijkstraSim('A');
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('universal-modal').classList.add('hidden');
+        }
+
+        // TOOL HELPER SCRIPTS
+        function setSubnetPreset(ip, cidr) {
+            document.getElementById('calc-ip').value = ip;
+            document.getElementById('calc-cidr').value = cidr;
+            runSubnetCalc();
+        }
+
+        function runSubnetCalc() {
+            const ip = document.getElementById('calc-ip').value.trim();
+            const cidr = parseInt(document.getElementById('calc-cidr').value);
+            const parts = ip.split('.').map(Number);
+            if (parts.length !== 4 || parts.some(p => isNaN(p) || p < 0 || p > 255)) return;
+
+            const ipInt = ((parts[0] << 24) >>> 0) + ((parts[1] << 16) >>> 0) + ((parts[2] << 8) >>> 0) + (parts[3] >>> 0);
+            const maskInt = cidr === 0 ? 0 : (~((1 << (32 - cidr)) - 1)) >>> 0;
+            const netInt = (ipInt & maskInt) >>> 0;
+            const bcastInt = (netInt | ~maskInt) >>> 0;
+            const wildcardInt = (~maskInt) >>> 0;
+
+            const intToIp = (n) => [(n>>>24)&255, (n>>>16)&255, (n>>>8)&255, n&255].join('.');
+            const total = Math.pow(2, 32 - cidr);
+            const usable = cidr >= 31 ? (cidr === 31 ? 2 : 1) : Math.max(0, total - 2);
+            const firstHost = cidr >= 31 ? intToIp(netInt) : intToIp(netInt + 1);
+            const lastHost = cidr >= 31 ? intToIp(bcastInt) : intToIp(bcastInt - 1);
+
+            document.getElementById('out-mask').textContent = intToIp(maskInt);
+            document.getElementById('out-wildcard').textContent = intToIp(wildcardInt);
+            document.getElementById('out-net').textContent = intToIp(netInt);
+            document.getElementById('out-bcast').textContent = intToIp(bcastInt);
+            document.getElementById('out-hosts').textContent = usable.toLocaleString();
+            document.getElementById('out-total').textContent = total.toLocaleString();
+            document.getElementById('out-range').textContent = cidr === 32 ? intToIp(netInt) : `${firstHost} — ${lastHost}`;
+        }
+
+        function inspectOsi(num, name, pdu, protocols, desc) {
+            document.getElementById('osi-inspect-box').innerHTML = `
+                <div class="flex items-center space-x-2 mb-1">
+                    <span class="bg-gfg-green text-white font-bold px-2 py-0.5 rounded text-[10px]">LAYER ${num}</span>
+                    <strong class="text-white text-xs">${name}</strong>
+                    <span class="text-blue-400 text-[11px]">[PDU: ${pdu}]</span>
+                </div>
+                <p class="text-gray-300 text-xs mb-2 leading-relaxed">${desc}</p>
+                <div class="text-gray-400 text-[11px]"><strong class="text-gray-200">Standard Protocols:</strong> ${protocols}</div>
+            `;
+        }
+
+        function runCrcSimulation() {
+            const dataStr = document.getElementById('crc-data-input').value.trim();
+            const polyStr = document.getElementById('crc-poly-input').value.trim();
+            const box = document.getElementById('crc-result-box');
+
+            if (!/^[01]+$/.test(dataStr) || !/^[01]+$/.test(polyStr) || polyStr.length < 2 || polyStr[0] !== '1') {
+                box.innerHTML = `<span class="text-red-400">Error: Please enter valid binary strings (0s and 1s only). Generator polynomial must begin with 1.</span>`;
+                return;
+            }
+
+            const degree = polyStr.length - 1;
+            const data = dataStr.split('').map(Number);
+            const poly = polyStr.split('').map(Number);
+            const augmented = [...data, ...new Array(degree).fill(0)];
+            const current = [...augmented];
+
+            for (let i = 0; i <= augmented.length - poly.length; i++) {
+                if (current[i] === 1) {
+                    for (let j = 0; j < poly.length; j++) {
+                        current[i + j] ^= poly[j];
+                    }
+                }
+            }
+
+            const remainder = current.slice(current.length - degree).join('');
+            const codeword = dataStr + remainder;
+
+            box.innerHTML = `
+                <div class="text-gfg-green font-bold">// Modulo-2 Division Results</div>
+                <div>Message M(x): <span class="text-white font-bold">${dataStr}</span> (${dataStr.length} bits)</div>
+                <div>Generator G(x): <span class="text-yellow-400 font-bold">${polyStr}</span> (Degree ${degree})</div>
+                <div>Appended Zeros: <span class="text-gray-400 font-bold">${new Array(degree).fill(0).join('')}</span></div>
+                <div class="pt-2 border-t border-gray-700">
+                    <span class="text-gray-400">Calculated CRC Remainder (FCS):</span> 
+                    <strong class="text-gfg-green text-sm">${remainder}</strong>
+                </div>
+                <div>
+                    <span class="text-gray-400">Transmitted Codeword T(x):</span> 
+                    <strong class="text-blue-400 text-sm">${codeword}</strong>
+                </div>
+                <div class="mt-2 text-[10px] text-gray-400 bg-gray-800 p-2 rounded">
+                    Verification: Dividing T(x) by G(x) produces remainder 0 (Syndrome = 0). Frame accepted as error-free.
+                </div>
+            `;
+        }
+
+        function switchPacketTab(tab) {
+            document.getElementById('packet-ip-view').classList.toggle('hidden', tab !== 'ip');
+            document.getElementById('packet-tcp-view').classList.toggle('hidden', tab !== 'tcp');
+            const btnIp = document.getElementById('tab-btn-ip');
+            const btnTcp = document.getElementById('tab-btn-tcp');
+            if (tab === 'ip') {
+                btnIp.className = "px-3 py-1 bg-gfg-green text-white font-bold rounded";
+                btnTcp.className = "px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-semibold rounded";
+            } else {
+                btnTcp.className = "px-3 py-1 bg-gfg-green text-white font-bold rounded";
+                btnIp.className = "px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-semibold rounded";
+            }
+        }
+
+        function inspectHeaderField(name, bits, desc) {
+            document.getElementById('field-name').textContent = "Field: " + name;
+            document.getElementById('field-bits').textContent = "Size: " + bits;
+            document.getElementById('field-desc').textContent = desc;
+        }
+
+        function runDijkstraSim(src) {
+            const graph = {
+                A: { B: 2, D: 4 },
+                B: { A: 2, C: 1, E: 3 },
+                C: { B: 1, E: 2 },
+                D: { A: 4, E: 1 },
+                E: { B: 3, C: 2, D: 1 }
+            };
+
+            const nodes = ['A', 'B', 'C', 'D', 'E'];
+            const dist = {};
+            const prev = {};
+            const visited = new Set();
+
+            nodes.forEach(n => { dist[n] = Infinity; prev[n] = null; });
+            dist[src] = 0;
+
+            while (visited.size < nodes.length) {
+                let u = null;
+                nodes.forEach(n => {
+                    if (!visited.has(n)) {
+                        if (u === null || dist[n] < dist[u]) u = n;
+                    }
+                });
+
+                if (u === null || dist[u] === Infinity) break;
+                visited.add(u);
+
+                for (const [v, w] of Object.entries(graph[u])) {
+                    if (!visited.has(v)) {
+                        const alt = dist[u] + w;
+                        if (alt < dist[v]) {
+                            dist[v] = alt;
+                            prev[v] = u;
+                        }
+                    }
+                }
+            }
+
+            const tableHtml = `
+                <table class="w-full text-left border-collapse border border-gray-300 dark:border-gray-700 text-xs">
+                    <thead>
+                        <tr class="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+                            <th class="border border-gray-300 dark:border-gray-700 p-2">Destination</th>
+                            <th class="border border-gray-300 dark:border-gray-700 p-2">Shortest Cost</th>
+                            <th class="border border-gray-300 dark:border-gray-700 p-2">Path Traversed</th>
+                            <th class="border border-gray-300 dark:border-gray-700 p-2">Next-Hop Router</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700 dark:text-gray-300 font-mono">
+                        ${nodes.map(n => {
+                            let curr = n;
+                            const path = [];
+                            while (curr) { path.unshift(curr); curr = prev[curr]; }
+                            const nextHop = path.length > 1 ? path[1] : 'Direct (Local)';
+                            return `
+                                <tr class="${n === src ? 'bg-gfg-light dark:bg-gray-800 font-bold' : ''}">
+                                    <td class="border border-gray-300 dark:border-gray-700 p-2 font-bold">${n}</td>
+                                    <td class="border border-gray-300 dark:border-gray-700 p-2 text-gfg-green font-bold">${dist[n]}</td>
+                                    <td class="border border-gray-300 dark:border-gray-700 p-2">${path.join(' → ')}</td>
+                                    <td class="border border-gray-300 dark:border-gray-700 p-2 font-bold">${nextHop}</td>
+                                </tr>
+                            `;
+                        }).join('')}
+                    </tbody>
+                </table>
+            `;
+            document.getElementById('spf-output-table').innerHTML = tableHtml;
+        }
+
+        // DARK MODE TOGGLE & PERSISTENCE
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            const isDark = html.classList.toggle('dark');
+            const icon = document.getElementById('theme-icon');
+            if (isDark) {
+                icon.className = "fa-solid fa-sun text-yellow-400 text-sm";
+                localStorage.setItem('gfg_theme', 'dark');
+            } else {
+                icon.className = "fa-solid fa-moon text-gray-700 text-sm";
+                localStorage.setItem('gfg_theme', 'light');
+            }
+        }
+
+        if (localStorage.getItem('gfg_theme') === 'dark' || (!localStorage.getItem('gfg_theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            const icon = document.getElementById('theme-icon');
+            if (icon) icon.className = "fa-solid fa-sun text-yellow-400 text-sm";
+        }
+
+        // SIDEBAR & CARD TOGGLE CONTROLLERS
+        function toggleLeftSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            const reopenBtn = document.getElementById('reopen-left-sidebar-btn');
+            
+            if (window.innerWidth < 1024) {
+                const isHidden = sidebar.classList.toggle('-translate-x-full');
+                if (overlay) overlay.classList.toggle('hidden', isHidden);
+            } else {
+                const isCollapsed = sidebar.classList.toggle('desktop-collapsed');
+                if (reopenBtn) reopenBtn.classList.toggle('hidden', !isCollapsed);
+                localStorage.setItem('gfg_left_sidebar_collapsed', isCollapsed ? 'true' : 'false');
+            }
+        }
+
+        function toggleRightSidebar() {
+            const rSidebar = document.getElementById('right-sidebar');
+            if (!rSidebar) return;
+            const isCollapsed = rSidebar.classList.toggle('desktop-collapsed');
+            localStorage.setItem('gfg_right_sidebar_collapsed', isCollapsed ? 'true' : 'false');
+        }
+
+        function toggleCard(cardBodyId, btn) {
+            const body = document.getElementById(cardBodyId);
+            if (!body) return;
+            const isHidden = body.classList.toggle('hidden');
+            const icon = btn.querySelector('i');
+            if (icon) {
+                if (isHidden) {
+                    icon.className = "fa-solid fa-chevron-down text-xs transition-transform duration-200";
+                } else {
+                    icon.className = "fa-solid fa-chevron-up text-xs transition-transform duration-200";
+                }
+            }
+        }
+
+        const overlay = document.getElementById('sidebar-overlay');
+        if (overlay) {
+            overlay.onclick = () => {
+                const sidebar = document.getElementById('sidebar');
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            };
+        }
+
+        // KEYBOARD SHORTCUTS
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey && e.key.toLowerCase() === 'k') || (e.key === '/' && document.activeElement !== searchInput && document.activeElement.tagName !== 'INPUT')) {
+                e.preventDefault();
+                searchInput.focus();
+            } else if (e.ctrlKey && e.key.toLowerCase() === 'b') {
+                e.preventDefault();
+                toggleLeftSidebar();
+            } else if (e.ctrlKey && e.key.toLowerCase() === 'j') {
+                e.preventDefault();
+                toggleRightSidebar();
+            } else if (e.key === 'Escape') {
+                closeModal();
+                searchDropdown.classList.add('hidden');
+            }
+        });
+
+        // BOOTSTRAP APPLICATION
+        window.addEventListener('DOMContentLoaded', () => {
+            // Restore sidebar preferences on desktop
+            if (window.innerWidth >= 1024 && localStorage.getItem('gfg_left_sidebar_collapsed') === 'true') {
+                const sb = document.getElementById('sidebar');
+                if (sb) sb.classList.add('desktop-collapsed');
+                const reopenBtn = document.getElementById('reopen-left-sidebar-btn');
+                if (reopenBtn) reopenBtn.classList.remove('hidden');
+            }
+            if (localStorage.getItem('gfg_right_sidebar_collapsed') === 'true') {
+                const rsb = document.getElementById('right-sidebar');
+                if (rsb) rsb.classList.add('desktop-collapsed');
+            }
+
+            renderSidebar();
+            if (typeof App !== 'undefined') {
+                App.init();
+            }
+        });
+    </script>
 </body>
-
 </html>

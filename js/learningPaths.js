@@ -32,7 +32,9 @@ const LEARNING_PATHS = [
       { name: "Pipelined Sliding Window", conceptId: "sliding-window", desc: "Bandwidth-delay product and utilization." },
       { name: "Go-Back-N Protocol", conceptId: "gbn", desc: "Cumulative ACKs and window retransmission." },
       { name: "Selective Repeat Protocol", conceptId: "selective-repeat", desc: "Receiver buffering and individual retransmission." },
-      { name: "Ethernet (IEEE 802.3)", conceptId: "ethernet", desc: "64-byte slot time, CSMA/CD, and switches." }
+      { name: "ALOHA & Channel Allocation", conceptId: "aloha", desc: "Pure vs Slotted ALOHA random access derivations." },
+      { name: "CSMA/CD & Ethernet (802.3)", conceptId: "ethernet", desc: "Carrier sense, collision detection, and 64-byte frame." },
+      { name: "Switching & Learning Bridges", conceptId: "switch", desc: "Transparent bridges, MAC tables, and Spanning Tree." }
     ]
   },
   {

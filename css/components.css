@@ -1576,3 +1576,190 @@
   }
 }
 
+/* ========================================================
+   GEEKSFORGEEKS THEME & DARK MODE COMPONENT OVERRIDES
+   ======================================================== */
+.dark .wiki-article-container,
+.dark .study-card,
+.dark .simulator-shell,
+.dark .continue-card,
+.dark .schedule-card,
+.dark .practice-interactive-card,
+.dark .quiz-card,
+.dark .quiz-box,
+.dark .resource-card {
+  background: var(--bg-card);
+  border-color: var(--border-card);
+  color: var(--text-main);
+}
+
+.dark .wiki-section-heading,
+.dark .sim-title,
+.dark .study-card-title,
+.dark .section-title,
+.dark .wiki-article-title,
+.dark .infobox-header h3 {
+  color: #f3f4f6;
+}
+
+.dark .wiki-infobox {
+  background: #18181b;
+  border-color: #27272a;
+}
+
+.dark .infobox-table th {
+  background: #27272a;
+  color: #d4d4d8;
+  border-color: #3f3f46;
+}
+
+.dark .infobox-table td {
+  border-color: #3f3f46;
+  color: #e4e4e7;
+}
+
+.dark .wiki-toc-box {
+  background: #18181b;
+  border-color: #27272a;
+}
+
+.dark .wiki-toc-list a {
+  color: #a1a1aa;
+}
+
+.dark .wiki-toc-list a:hover {
+  color: #4ade80;
+}
+
+.dark .wiki-table {
+  border-color: #27272a;
+}
+
+.dark .wiki-table th {
+  background: #27272a;
+  color: #e4e4e7;
+  border-color: #3f3f46;
+}
+
+.dark .wiki-table td {
+  border-color: #3f3f46;
+  color: #d4d4d8;
+}
+
+.dark .wiki-table tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.dark .wiki-callout.note {
+  background: rgba(0, 128, 0, 0.12);
+  border-left-color: #008000;
+  color: #e4e4e7;
+}
+
+.dark .wiki-callout.info {
+  background: rgba(37, 99, 235, 0.12);
+  border-left-color: #3b82f6;
+  color: #e4e4e7;
+}
+
+.dark .wiki-callout.warning {
+  background: rgba(239, 68, 68, 0.12);
+  border-left-color: #ef4444;
+  color: #e4e4e7;
+}
+
+.dark .sim-input,
+.dark .search-modal input,
+.dark input[type="text"],
+.dark select {
+  background: #27272a;
+  border-color: #3f3f46;
+  color: #f4f4f5;
+}
+
+.dark .worked-example-box {
+  background: #18181b;
+  border-left-color: #008000;
+  color: #e4e4e7;
+}
+
+.dark .worked-example-box.blue {
+  background: #111827;
+  border-left-color: #3b82f6;
+}
+
+.dark .wiki-ascii-diagram,
+.dark pre {
+  background: #18181b;
+  color: #38bdf8;
+  border: 1px solid #27272a;
+}
+
+.dark .wiki-action-btn {
+  background: #27272a;
+  border-color: #3f3f46;
+  color: #d4d4d8;
+}
+
+.dark .wiki-action-btn:hover {
+  background: #3f3f46;
+  color: #ffffff;
+}
+
+.dark .wiki-action-btn.active {
+  background: #008000;
+  color: #ffffff;
+}
+
+.dark .wiki-breadcrumbs a {
+  color: #4ade80;
+}
+
+.dark .wiki-breadcrumbs .bc-current {
+  color: #a1a1aa;
+}
+
+.dark .wiki-lead-text,
+.dark .wiki-section-body,
+.dark .concept-explanation {
+  color: #d4d4d8;
+}
+
+.dark .practice-opt-label {
+  background: #18181b;
+  border-color: #27272a;
+  color: #e4e4e7;
+}
+
+.dark .practice-opt-label:hover {
+  background: #27272a;
+}
+
+.dark .wiki-pager-card {
+  background: #18181b;
+  border-color: #27272a;
+}
+
+.dark .wiki-pager-card:hover {
+  border-color: #008000;
+}
+
+.dark .unit-card-pill {
+  background: #1e1e1e;
+  border-color: #333333;
+}
+
+.dark .unit-card-title {
+  color: #ffffff;
+}
+
+.dark .schedule-item {
+  background: #27272a;
+  color: #e4e4e7;
+}
+
+.dark .schedule-item:hover {
+  background: #3f3f46;
+}
+
+

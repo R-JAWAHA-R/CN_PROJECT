@@ -54,6 +54,26 @@ const RESOURCE_DATA = [
     description: "Comprehensive coverage of framing, error detection (parity, checksum, CRC), Ethernet IEEE 802.3, MAC addressing, ARP, and link-layer switches."
   },
   {
+    id: 101,
+    title: "Tanenbaum & Wetherall: Computer Networks (6th Edition, Pearson, 2021)",
+    category: "Prescribed Reference Book",
+    units: ["Unit I", "Unit II", "Unit III", "Unit IV", "Unit V"],
+    url: "https://www.pearson.com/en-us/subject-catalog/p/computer-networks/P200000003193",
+    type: "Textbook",
+    status: "Prescribed",
+    description: "Standard primary university reference by Andrew S. Tanenbaum & David J. Wetherall. Covers DLL services, framing, error control, Hamming codes, ALOHA derivations, CSMA protocols, 802.11 WiFi MAC, learning bridges, and network connecting devices."
+  },
+  {
+    id: 102,
+    title: "Behrouz A. Forouzan: Data Communications and Networking with TCP/IP (6th Edition, McGraw Hill, 2022)",
+    category: "Prescribed Reference Book",
+    units: ["Unit I", "Unit II", "Unit III", "Unit IV", "Unit V"],
+    url: "https://www.mheducation.com/",
+    type: "Textbook",
+    status: "Prescribed",
+    description: "Standard primary university textbook by Behrouz A. Forouzan. Comprehensive coverage of Data Link Control, Error Detection & Correction (CRC, Checksum, Hamming), Multiple Access (Pure/Slotted ALOHA, CSMA/CD, CSMA/CA), and Connecting Devices (Hubs, Bridges, Switches, Routers, Gateways)."
+  },
+  {
     id: 6,
     title: "Kurose & Ross 8th Edition - Complete Table of Contents",
     category: "Course Syllabus",
