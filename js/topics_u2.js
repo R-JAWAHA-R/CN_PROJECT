@@ -1274,6 +1274,7 @@ Internet Address      Physical Address      Type
   }
 };
 
+if (typeof window !== 'undefined') window.TOPICS_U2 = TOPICS_U2;
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = TOPICS_U2;
 }

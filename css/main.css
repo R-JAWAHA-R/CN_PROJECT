@@ -1,59 +1,89 @@
-/* Studyly-Inspired Light Aesthetic & Modern EdTech Design System */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600;700&family=Fira+Code:wght@400;500;600&display=swap');
+/* GeeksforGeeks Portal & Modern Computer Networks Encyclopedia Design System */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap');
 
 :root {
-  /* Studyly Soft Pastel & Modern Palette */
-  --bg-app: #f8fafc;
+  /* GeeksforGeeks Green & Clean Light Palette */
+  --bg-app: #f8f9fa;
   --bg-sidebar: #ffffff;
   --bg-card: #ffffff;
-  --bg-card-subtle: #f1f5f9;
-  --bg-input: #f1f5f9;
+  --bg-card-subtle: #f1f8f5;
+  --bg-input: #f8f9fa;
   
-  --border-light: #e2e8f0;
-  --border-card: #edf2f7;
-  --border-focus: #10b981;
+  --border-light: #d4d4d4;
+  --border-card: #e5e7eb;
+  --border-focus: #008000;
 
-  --text-main: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
+  --text-main: #222222;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
 
-  /* Theme Accents (Matching Screenshot) */
-  --accent-green-bg: #e8f5e9;
-  --accent-green-text: #1b5e20;
-  --accent-green-btn: #10b981;
-  --accent-green-hover: #059669;
+  /* Theme Accents (GeeksforGeeks Green) */
+  --accent-green-bg: #f1f8f5;
+  --accent-green-text: #008000;
+  --accent-green-btn: #008000;
+  --accent-green-hover: #005b00;
 
-  --accent-blue-bg: #e0f2fe;
-  --accent-blue-text: #0369a1;
-  --accent-blue-btn: #0284c7;
+  --accent-blue-bg: #eff6ff;
+  --accent-blue-text: #1d4ed8;
+  --accent-blue-btn: #2563eb;
 
-  --accent-purple-bg: #ede7f6;
-  --accent-purple-text: #5e35b1;
+  --accent-purple-bg: #f5f3ff;
+  --accent-purple-text: #6d28d9;
   --accent-purple-btn: #7c3aed;
 
-  --accent-amber-bg: #fef3c7;
+  --accent-amber-bg: #fffbeb;
   --accent-amber-text: #b45309;
-  --accent-amber-btn: #f59e0b;
+  --accent-amber-btn: #d97706;
 
-  --accent-coral-bg: #ffe4e6;
-  --accent-coral-text: #be123c;
+  --accent-coral-bg: #fef2f2;
+  --accent-coral-text: #b91c1c;
 
   /* Fonts */
-  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-hand: 'Caveat', cursive, sans-serif;
+  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-hand: 'Inter', sans-serif;
   --font-mono: 'Fira Code', monospace;
 
   /* Elevation */
-  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
-  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
-  --shadow-hover: 0 10px 25px -4px rgba(0, 0, 0, 0.08);
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.1);
 
-  --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
   --radius-full: 9999px;
 
-  --transition-smooth: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.2s ease;
+}
+
+html.dark, .dark {
+  --bg-app: #121212;
+  --bg-sidebar: #1e1e1e;
+  --bg-card: #1e1e1e;
+  --bg-card-subtle: #262626;
+  --bg-input: #262626;
+
+  --border-light: #333333;
+  --border-card: #333333;
+  --border-focus: #008000;
+
+  --text-main: #e0e0e0;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+
+  --accent-green-bg: rgba(0, 128, 0, 0.2);
+  --accent-green-text: #4ade80;
+  --accent-green-btn: #008000;
+  --accent-green-hover: #005b00;
+
+  --accent-blue-bg: rgba(37, 99, 235, 0.15);
+  --accent-blue-text: #60a5fa;
+
+  --accent-purple-bg: rgba(124, 58, 237, 0.15);
+  --accent-purple-text: #c084fc;
+
+  --accent-amber-bg: rgba(217, 119, 6, 0.15);
+  --accent-amber-text: #fbbf24;
 }
 
 * {
@@ -62,13 +92,40 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
 body {
   background-color: var(--bg-app);
   color: var(--text-main);
   font-family: var(--font-main);
   line-height: 1.6;
-  min-height: 100vh;
   display: flex;
+  flex-direction: column;
+}
+
+/* Smooth Sidebar Transitions & Collapsible States */
+#sidebar {
+  transition: margin-left 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+}
+
+#sidebar.desktop-collapsed {
+  margin-left: -20rem !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#right-sidebar {
+  transition: margin-right 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+}
+
+#right-sidebar.desktop-collapsed {
+  margin-right: -18rem !important;
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* Custom Scrollbar */

@@ -1,5 +1,6 @@
 // Unit III: Network Layer & Routing - Curriculum & Topic Hub
 // Provides curriculum overview and topic catalog linking directly to dedicated topic pages
+// Aligned with Tanenbaum & Wetherall (6th Ed.) Ch. 5 and Forouzan (6th Ed.) Ch. 18-19
 
 const Unit3Module = {
   render: function(container) {
@@ -8,10 +9,10 @@ const Unit3Module = {
       <div class="welcome-banner" style="background: linear-gradient(100deg, #ecfdf5 0%, #d1fae5 50%, #bbf7d0 100%);">
         <div class="welcome-text">
           <div style="font-size: 0.85rem; font-weight: 800; color: #047857; text-transform: uppercase; margin-bottom: 0.35rem;">
-            Semester V • Computer Networks • Kurose & Ross Chapters 4 & 5
+            Semester V • Computer Networks • Tanenbaum Ch. 5 & Forouzan Ch. 18–19
           </div>
-          <h2>Unit III: Network Layer, IP & Routing Protocols</h2>
-          <p>Complete curriculum package covering the Data Plane vs Control Plane distinction, Dijkstra SPF, Distance-Vector Bellman-Ford, OSPF, BGP, IPv4, IPv6, and NAT.</p>
+          <h2>Unit III: Network Layer, Routing & Internetworking</h2>
+          <p>Comprehensive curriculum package covering Store-and-Forward Design Issues, the Optimality Principle, Shortest Path (Dijkstra), Flooding, Distance Vector & Count-to-Infinity, Link State & Flooding, Congestion Control & Traffic-Aware Routing, Admission Control (Leaky/Token Bucket), Traffic Throttling (ECN/RED), Load Shedding (Wine vs Milk), Tunneling, Hierarchical Routing, IPv4 Headers & Subnetting Mathematics, and IPv6.</p>
         </div>
         <div class="welcome-scene">
           <div class="better-note" style="color: #047857;">
@@ -27,7 +28,7 @@ const Unit3Module = {
             <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Curriculum Guide</span>
             <h3 class="study-card-title">Unit III Learning Objectives</h3>
           </div>
-          <span class="badge" style="background: #d1fae5; color: #047857; font-weight: 700; padding: 6px 12px; border-radius: 9999px;">12 Dedicated Articles</span>
+          <span class="badge" style="background: #d1fae5; color: #047857; font-weight: 700; padding: 6px 12px; border-radius: 9999px;">20 Dedicated Articles</span>
         </div>
         <div class="concept-explanation">
           <p>
@@ -35,16 +36,16 @@ const Unit3Module = {
           </p>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-top: 1rem;">
             <div style="background: #f8fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 1rem;">
-              <strong style="color: #047857;">1. Data Plane Forwarding (Ch 4)</strong>
-              <p style="font-size: 0.85rem; color: #64748b; margin-top: 0.3rem;">Hardware TCAM longest prefix match lookups, crossbar switching fabrics, IPv4 headers, IPv6 40-byte headers, and NAT gateways.</p>
+              <strong style="color: #047857;">1. Design Issues & Routing Algorithms</strong>
+              <p style="font-size: 0.85rem; color: #64748b; margin-top: 0.3rem;">Store-and-forward switching, connectionless vs virtual circuits, Bellman optimality principle, sink trees, Dijkstra SPF, flooding damping, distance vector count-to-infinity, and link-state flooding.</p>
             </div>
             <div style="background: #f8fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 1rem;">
-              <strong style="color: #047857;">2. Control Plane Routing (Ch 5)</strong>
-              <p style="font-size: 0.85rem; color: #64748b; margin-top: 0.3rem;">Centralized Link-State Dijkstra SPF, decentralized Distance-Vector Bellman-Ford, count-to-infinity mitigation, and SDN controllers.</p>
+              <strong style="color: #047857;">2. Congestion Control Approaches</strong>
+              <p style="font-size: 0.85rem; color: #64748b; margin-top: 0.3rem;">Open-loop vs closed-loop principles, knee and cliff dynamics, traffic-aware route oscillation, leaky bucket and token bucket traffic shaping, ECN/RED traffic throttling, and Wine vs Milk load shedding.</p>
             </div>
             <div style="background: #f8fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 1rem;">
-              <strong style="color: #047857;">3. Scalable Internet Protocols</strong>
-              <p style="font-size: 0.85rem; color: #64748b; margin-top: 0.3rem;">OSPF Area 0 hierarchical backbone routing and BGP inter-domain path vector policy routing with AS-PATH attributes.</p>
+              <strong style="color: #047857;">3. Internetworking & IP Protocols</strong>
+              <p style="font-size: 0.85rem; color: #64748b; margin-top: 0.3rem;">Heterogeneous network gateways, tunneling protocol encapsulation, two-level hierarchical AS routing, IPv4 header dissection & fragmentation calculations, CIDR subnetting mathematics, and IPv6.</p>
             </div>
           </div>
         </div>
@@ -54,122 +55,126 @@ const Unit3Module = {
       <div class="topic-navigator-bar">
         <div class="nav-bar-title">
           <span>⚡ Direct Topic Navigator (Click to open full article page):</span>
-          <span style="color: #047857; font-size: 0.78rem;">12 Topics</span>
+          <span style="color: #047857; font-size: 0.78rem;">20 Topics</span>
         </div>
         <div class="topic-pills-wrap">
-          <button class="topic-nav-btn" onclick="App.loadTopic('network-layer')">1. Data vs Control Plane</button>
-          <button class="topic-nav-btn" onclick="App.loadTopic('forwarding')">2. Packet Forwarding</button>
-          <button class="topic-nav-btn" onclick="App.loadTopic('routing')">3. Routing Architecture</button>
-          <button class="topic-nav-btn" onclick="App.loadTopic('dijkstra')">4. Dijkstra SPF Algorithm</button>
-          <button class="topic-nav-btn" onclick="App.loadTopic('link-state-routing')">5. Link-State Protocols</button>
-          <button class="topic-nav-btn" onclick="App.loadTopic('distance-vector')">6. Distance-Vector Routing</button>
-          <button class="topic-nav-btn" onclick="App.loadTopic('ospf')">7. OSPF Protocol</button>
-          <button class="topic-nav-btn" onclick="App.loadTopic('bgp')">8. BGP-4 Internet Routing</button>
-          <button class="topic-nav-btn" onclick="App.loadTopic('sdn')">9. Software-Defined Networking</button>
-          <button class="topic-nav-btn" onclick="App.loadTopic('ipv4')">10. IPv4 Protocol</button>
-          <button class="topic-nav-btn" onclick="App.loadTopic('ipv6')">11. IPv6 Protocol</button>
-          <button class="topic-nav-btn" onclick="App.loadTopic('nat')">12. NAT Translation</button>
+          <button class="topic-nav-btn" onclick="App.loadTopic('routing-design-issues')">1. Design Issues & Routing</button>
+          <button class="topic-nav-btn" onclick="App.loadTopic('optimality-principle')">2. Optimality Principle & Sink Trees</button>
+          <button class="topic-nav-btn" onclick="App.loadTopic('shortest-path-algorithm')">3. Shortest Path (Dijkstra SPF)</button>
+          <button class="topic-nav-btn" onclick="App.loadTopic('flooding')">4. Flooding & Damping</button>
+          <button class="topic-nav-btn" onclick="App.loadTopic('distance-vector-routing')">5. Distance Vector & Count-to-Infinity</button>
+          <button class="topic-nav-btn" onclick="App.loadTopic('link-state-routing')">6. Link State & Reliable Flooding</button>
+          <button class="topic-nav-btn" onclick="App.loadTopic('congestion-control')">7. Congestion Control Principles</button>
+          <button class="topic-nav-btn" onclick="App.loadTopic('traffic-aware-routing')">8. Traffic-Aware Routing</button>
+          <button class="topic-nav-btn" onclick="App.loadTopic('admission-control')">9. Admission Control & Shaping</button>
+          <button class="topic-nav-btn" onclick="App.loadTopic('traffic-throttling')">10. Traffic Throttling & ECN</button>
+          <button class="topic-nav-btn" onclick="App.loadTopic('load-shedding')">11. Load Shedding (Wine vs Milk)</button>
+          <button class="topic-nav-btn" onclick="App.loadTopic('internetworking')">12. Internetworking Architecture</button>
+          <button class="topic-nav-btn" onclick="App.loadTopic('tunneling')">13. Tunneling & Encapsulation</button>
+          <button class="topic-nav-btn" onclick="App.loadTopic('internetwork-routing')">14. Internetwork & AS Routing</button>
+          <button class="topic-nav-btn" onclick="App.loadTopic('ipv4-protocol')">15. IPv4 Header & Fragmentation</button>
+          <button class="topic-nav-btn" onclick="App.loadTopic('ip-addressing')">16. IP Addresses & Subnetting</button>
+          <button class="topic-nav-btn" onclick="App.loadTopic('ipv6-protocol')">17. IPv6 Header & Addressing</button>
+          <button class="topic-nav-btn" onclick="App.loadTopic('ospf')">18. OSPF Backbone Areas</button>
+          <button class="topic-nav-btn" onclick="App.loadTopic('bgp')">19. BGP-4 Internet Routing</button>
+          <button class="topic-nav-btn" onclick="App.loadTopic('nat')">20. NAT Gateways</button>
         </div>
       </div>
 
-      <!-- TOPIC CATALOG -->
-      <div class="section-heading-row" style="margin-top: 1.5rem;">
-        <div>
-          <h3 class="section-title">Unit III Topic Articles</h3>
-          <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.2rem;">Select any topic to navigate directly to its dedicated Wikipedia-style article page.</p>
-        </div>
+      <!-- SECTION 1: DESIGN ISSUES & ROUTING ALGORITHMS -->
+      <div style="margin: 2rem 0 0.75rem 0;">
+        <h4 style="font-size: 1.15rem; color: #047857; border-left: 4px solid #10b981; padding-left: 0.6rem;">Section 1: Network Layer Design Issues & Routing Algorithms</h4>
       </div>
-
-      <div class="content-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+      <div class="content-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
         
-        <!-- Network Layer -->
-        <div class="study-card topic-catalog-card" onclick="App.loadTopic('network-layer')">
+        <!-- Design Issues -->
+        <div class="study-card topic-catalog-card" onclick="App.loadTopic('routing-design-issues')">
           <div class="catalog-card-top">
-            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 1 • Major Module</span>
+            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 1 • Foundation</span>
             <span class="badge-difficulty core">Core</span>
           </div>
-          <h4 class="catalog-card-title">Network Layer: Data vs Control Plane</h4>
-          <p class="catalog-card-desc">The architectural split: nanosecond per-router hardware forwarding vs network-wide software routing logic.</p>
+          <h4 class="catalog-card-title">Network Layer Design Issues</h4>
+          <p class="catalog-card-desc">Store-and-forward packet switching, connectionless datagrams vs virtual-circuit subnets, and static vs adaptive routing classification.</p>
+          <div class="catalog-card-meta">
+            <span>⏱️ 8 min read</span>
+            <span>Prereqs: Network Devices</span>
+          </div>
+          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('routing-design-issues')">Read Full Article →</button>
+        </div>
+
+        <!-- Optimality Principle -->
+        <div class="study-card topic-catalog-card" onclick="App.loadTopic('optimality-principle')">
+          <div class="catalog-card-top">
+            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 2 • Theory</span>
+            <span class="badge-difficulty core">Core</span>
+          </div>
+          <h4 class="catalog-card-title">The Optimality Principle & Sink Trees</h4>
+          <p class="catalog-card-desc">Bellman's optimality proof by contradiction, sink tree properties, and mathematical guarantees of loop-free shortest path routing.</p>
           <div class="catalog-card-meta">
             <span>⏱️ 7 min read</span>
-            <span>Prereqs: Packet</span>
+            <span>Prereqs: Design Issues</span>
           </div>
-          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('network-layer')">Read Full Article →</button>
+          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('optimality-principle')">Read Full Article →</button>
         </div>
 
-        <!-- Forwarding -->
-        <div class="study-card topic-catalog-card" onclick="App.loadTopic('forwarding')">
+        <!-- Shortest Path Algorithm (Dijkstra) -->
+        <div class="study-card topic-catalog-card" onclick="App.loadTopic('shortest-path-algorithm')">
           <div class="catalog-card-top">
-            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 2 • Standard</span>
+            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 3 • Major Module</span>
             <span class="badge-difficulty core">Core</span>
           </div>
-          <h4 class="catalog-card-title">Packet Forwarding & FIB</h4>
-          <p class="catalog-card-desc">Line-rate hardware lookups, Ternary Content-Addressable Memory (TCAM), and Longest Prefix Matching.</p>
+          <h4 class="catalog-card-title">Shortest Path Algorithm (Dijkstra SPF)</h4>
+          <p class="catalog-card-desc">Greedy shortest-path algorithm, link weight metrics, step-by-step 6-node state table trace, and next-hop forwarding table generation.</p>
           <div class="catalog-card-meta">
-            <span>⏱️ 5 min read</span>
-            <span>Prereqs: Network Layer</span>
-          </div>
-          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('forwarding')">Read Full Article →</button>
-        </div>
-
-        <!-- Routing -->
-        <div class="study-card topic-catalog-card" onclick="App.loadTopic('routing')">
-          <div class="catalog-card-top">
-            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 3 • Standard</span>
-            <span class="badge-difficulty core">Core</span>
-          </div>
-          <h4 class="catalog-card-title">Routing & Control Plane Architecture</h4>
-          <p class="catalog-card-desc">Graph modeling G=(V,E), least-cost path determination, and centralized vs distributed path computation.</p>
-          <div class="catalog-card-meta">
-            <span>⏱️ 6 min read</span>
-            <span>Prereqs: Forwarding</span>
-          </div>
-          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('routing')">Read Full Article →</button>
-        </div>
-
-        <!-- Dijkstra -->
-        <div class="study-card topic-catalog-card" onclick="App.loadTopic('dijkstra')">
-          <div class="catalog-card-top">
-            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 4 • Major Module</span>
-            <span class="badge-difficulty advanced">Advanced</span>
-          </div>
-          <h4 class="catalog-card-title">Dijkstra's Shortest Path Algorithm</h4>
-          <p class="catalog-card-desc">Link-State SPF derivation, worked 6-node iteration table, binary min-heap complexity, and interactive graph solver.</p>
-          <div class="catalog-card-meta">
-            <span>⏱️ 7 min read</span>
+            <span>⏱️ 9 min read</span>
             <span>🧪 Includes Live Lab</span>
           </div>
-          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('dijkstra')">Read Full Article →</button>
+          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('shortest-path-algorithm')">Read Full Article →</button>
         </div>
 
-        <!-- Link State -->
+        <!-- Flooding -->
+        <div class="study-card topic-catalog-card" onclick="App.loadTopic('flooding')">
+          <div class="catalog-card-top">
+            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 4 • Standard</span>
+            <span class="badge-difficulty core">Core</span>
+          </div>
+          <h4 class="catalog-card-title">Flooding Routing & Damping</h4>
+          <p class="catalog-card-desc">Zero-state broadcast routing, broadcast storm prevention via Hop Counters (TTL), sequence number duplicate caches, and selective flooding.</p>
+          <div class="catalog-card-meta">
+            <span>⏱️ 8 min read</span>
+            <span>Prereqs: Design Issues</span>
+          </div>
+          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('flooding')">Read Full Article →</button>
+        </div>
+
+        <!-- Distance Vector Routing -->
+        <div class="study-card topic-catalog-card" onclick="App.loadTopic('distance-vector-routing')">
+          <div class="catalog-card-top">
+            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 5 • Major Module</span>
+            <span class="badge-difficulty core">Core</span>
+          </div>
+          <h4 class="catalog-card-title">Distance Vector & Count-to-Infinity</h4>
+          <p class="catalog-card-desc">Distributed Bellman-Ford equation, periodic vector exchange, step-by-step trace of count-to-infinity, Split Horizon, and Poisoned Reverse.</p>
+          <div class="catalog-card-meta">
+            <span>⏱️ 9 min read</span>
+            <span>Prereqs: Shortest Path</span>
+          </div>
+          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('distance-vector-routing')">Read Full Article →</button>
+        </div>
+
+        <!-- Link State Routing -->
         <div class="study-card topic-catalog-card" onclick="App.loadTopic('link-state-routing')">
           <div class="catalog-card-top">
-            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 5 • Standard</span>
+            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 6 • Major Module</span>
             <span class="badge-difficulty core">Core</span>
           </div>
-          <h4 class="catalog-card-title">Link-State Routing Protocol</h4>
-          <p class="catalog-card-desc">Reliable LSA flooding, building the identical Link-State Database (LSDB), and loop-free shortest path trees.</p>
+          <h4 class="catalog-card-title">Link State Routing & Reliable Flooding</h4>
+          <p class="catalog-card-desc">The 5-step operational lifecycle: HELLO discovery, ECHO delay measurement, LSA creation, reliable flooding, and local Dijkstra SPF.</p>
           <div class="catalog-card-meta">
-            <span>⏱️ 5 min read</span>
-            <span>Prereqs: Dijkstra</span>
+            <span>⏱️ 9 min read</span>
+            <span>Prereqs: Flooding, Dijkstra</span>
           </div>
           <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('link-state-routing')">Read Full Article →</button>
-        </div>
-
-        <!-- Distance Vector -->
-        <div class="study-card topic-catalog-card" onclick="App.loadTopic('distance-vector')">
-          <div class="catalog-card-top">
-            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 6 • Standard</span>
-            <span class="badge-difficulty core">Core</span>
-          </div>
-          <h4 class="catalog-card-title">Distance-Vector Routing (Bellman-Ford)</h4>
-          <p class="catalog-card-desc">Bellman-Ford iterative equation, direct neighbor exchange, count-to-infinity problem, and poisoned reverse.</p>
-          <div class="catalog-card-meta">
-            <span>⏱️ 6 min read</span>
-            <span>Prereqs: Routing</span>
-          </div>
-          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('distance-vector')">Read Full Article →</button>
         </div>
 
         <!-- OSPF -->
@@ -182,7 +187,7 @@ const Unit3Module = {
           <p class="catalog-card-desc">Hierarchical Area 0 backbone, Area Border Routers (ABRs), cryptographic authentication, and multi-area scaling.</p>
           <div class="catalog-card-meta">
             <span>⏱️ 6 min read</span>
-            <span>Prereqs: Dijkstra</span>
+            <span>Prereqs: Link State</span>
           </div>
           <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('ospf')">Read Full Article →</button>
         </div>
@@ -190,7 +195,7 @@ const Unit3Module = {
         <!-- BGP -->
         <div class="study-card topic-catalog-card" onclick="App.loadTopic('bgp')">
           <div class="catalog-card-top">
-            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 8 • Standard</span>
+            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 8 • Advanced</span>
             <span class="badge-difficulty advanced">Advanced</span>
           </div>
           <h4 class="catalog-card-title">Border Gateway Protocol (BGP-4)</h4>
@@ -202,62 +207,198 @@ const Unit3Module = {
           <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('bgp')">Read Full Article →</button>
         </div>
 
-        <!-- SDN -->
-        <div class="study-card topic-catalog-card" onclick="App.loadTopic('sdn')">
+      </div>
+
+      <!-- SECTION 2: CONGESTION CONTROL APPROACHES -->
+      <div style="margin: 2rem 0 0.75rem 0;">
+        <h4 style="font-size: 1.15rem; color: #047857; border-left: 4px solid #10b981; padding-left: 0.6rem;">Section 2: Congestion Control Approaches & Traffic Management</h4>
+      </div>
+      <div class="content-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+
+        <!-- Congestion Control Principles -->
+        <div class="study-card topic-catalog-card" onclick="App.loadTopic('congestion-control')">
           <div class="catalog-card-top">
-            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 9 • Concept Card</span>
-            <span class="badge-difficulty advanced">Advanced</span>
+            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 9 • Major Module</span>
+            <span class="badge-difficulty core">Core</span>
           </div>
-          <h4 class="catalog-card-title">Software-Defined Networking (SDN)</h4>
-          <p class="catalog-card-desc">Decoupled control plane, centralized OpenFlow controllers, Match-Plus-Action flow tables, and cloud scale.</p>
+          <h4 class="catalog-card-title">Congestion Control Principles</h4>
+          <p class="catalog-card-desc">Flow vs congestion control, offered load vs carried throughput curve, knee and cliff dynamics, and open-loop vs closed-loop classification.</p>
           <div class="catalog-card-meta">
-            <span>⏱️ 5 min read</span>
-            <span>Prereqs: Routing</span>
+            <span>⏱️ 8 min read</span>
+            <span>Prereqs: Design Issues</span>
           </div>
-          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('sdn')">Read Full Article →</button>
+          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('congestion-control')">Read Full Article →</button>
         </div>
 
-        <!-- IPv4 -->
-        <div class="study-card topic-catalog-card" onclick="App.loadTopic('ipv4')">
+        <!-- Traffic-Aware Routing -->
+        <div class="study-card topic-catalog-card" onclick="App.loadTopic('traffic-aware-routing')">
           <div class="catalog-card-top">
             <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 10 • Standard</span>
             <span class="badge-difficulty core">Core</span>
           </div>
-          <h4 class="catalog-card-title">IPv4 Protocol & Addressing (RFC 791)</h4>
-          <p class="catalog-card-desc">32-bit dotted-decimal addresses, 20-byte base header, CIDR subnetting, TTL hop count, and fragmentation fields.</p>
+          <h4 class="catalog-card-title">Traffic-Aware Routing & Oscillation</h4>
+          <p class="catalog-card-desc">Dynamic load-sensitive link metrics, the route oscillation (flapping) cycle, EWMA metric smoothing, and multipath routing (ECMP).</p>
           <div class="catalog-card-meta">
-            <span>⏱️ 6 min read</span>
-            <span>Prereqs: Packet</span>
+            <span>⏱️ 8 min read</span>
+            <span>Prereqs: Congestion Control</span>
           </div>
-          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('ipv4')">Read Full Article →</button>
+          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('traffic-aware-routing')">Read Full Article →</button>
         </div>
 
-        <!-- IPv6 -->
-        <div class="study-card topic-catalog-card" onclick="App.loadTopic('ipv6')">
+        <!-- Admission Control & Traffic Shaping -->
+        <div class="study-card topic-catalog-card" onclick="App.loadTopic('admission-control')">
           <div class="catalog-card-top">
-            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 11 • Standard</span>
+            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 11 • Major Module</span>
             <span class="badge-difficulty core">Core</span>
           </div>
-          <h4 class="catalog-card-title">IPv6 Architecture (RFC 8200)</h4>
-          <p class="catalog-card-desc">128-bit hexadecimal addressing, streamlined fixed 40-byte header, no router checksum, and SLAAC autoconfiguration.</p>
+          <h4 class="catalog-card-title">Admission Control & Traffic Shaping</h4>
+          <p class="catalog-card-desc">Virtual circuit admission rejection, Leaky Bucket CBR smoothing, Token Bucket burst allowance, and mathematical burst duration derivation.</p>
           <div class="catalog-card-meta">
-            <span>⏱️ 6 min read</span>
-            <span>Prereqs: IPv4</span>
+            <span>⏱️ 9 min read</span>
+            <span>Prereqs: Congestion Control</span>
           </div>
-          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('ipv6')">Read Full Article →</button>
+          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('admission-control')">Read Full Article →</button>
+        </div>
+
+        <!-- Traffic Throttling -->
+        <div class="study-card topic-catalog-card" onclick="App.loadTopic('traffic-throttling')">
+          <div class="catalog-card-top">
+            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 12 • Standard</span>
+            <span class="badge-difficulty core">Core</span>
+          </div>
+          <h4 class="catalog-card-title">Traffic Throttling, Choke Packets & ECN</h4>
+          <p class="catalog-card-desc">Hop-by-hop choke packets, Explicit Congestion Notification (ECN ECT/CE bits, TCP ECE/CWR), and Random Early Detection (RED) queueing.</p>
+          <div class="catalog-card-meta">
+            <span>⏱️ 8 min read</span>
+            <span>Prereqs: Admission Control</span>
+          </div>
+          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('traffic-throttling')">Read Full Article →</button>
+        </div>
+
+        <!-- Load Shedding -->
+        <div class="study-card topic-catalog-card" onclick="App.loadTopic('load-shedding')">
+          <div class="catalog-card-top">
+            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 13 • Standard</span>
+            <span class="badge-difficulty core">Core</span>
+          </div>
+          <h4 class="catalog-card-title">Load Shedding: Wine vs Milk Policies</h4>
+          <p class="catalog-card-desc">Emergency packet discard strategies: Wine policy (drop new, keep old) for bulk files vs Milk policy (drop old, keep new) for real-time video/VoIP.</p>
+          <div class="catalog-card-meta">
+            <span>⏱️ 8 min read</span>
+            <span>Prereqs: Traffic Throttling</span>
+          </div>
+          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('load-shedding')">Read Full Article →</button>
+        </div>
+
+      </div>
+
+      <!-- SECTION 3: INTERNETWORKING & IP PROTOCOLS -->
+      <div style="margin: 2rem 0 0.75rem 0;">
+        <h4 style="font-size: 1.15rem; color: #047857; border-left: 4px solid #10b981; padding-left: 0.6rem;">Section 3: Internetworking & IP Protocols</h4>
+      </div>
+      <div class="content-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+
+        <!-- Internetworking -->
+        <div class="study-card topic-catalog-card" onclick="App.loadTopic('internetworking')">
+          <div class="catalog-card-top">
+            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 14 • Foundation</span>
+            <span class="badge-difficulty core">Core</span>
+          </div>
+          <h4 class="catalog-card-title">Internetworking Architecture</h4>
+          <p class="catalog-card-desc">Heterogeneous networks, why networks differ (MTU, addressing, QoS), internetwork gateways, and the universal connectionless IP overlay model.</p>
+          <div class="catalog-card-meta">
+            <span>⏱️ 8 min read</span>
+            <span>Prereqs: Design Issues</span>
+          </div>
+          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('internetworking')">Read Full Article →</button>
+        </div>
+
+        <!-- Tunneling -->
+        <div class="study-card topic-catalog-card" onclick="App.loadTopic('tunneling')">
+          <div class="catalog-card-top">
+            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 15 • Standard</span>
+            <span class="badge-difficulty core">Core</span>
+          </div>
+          <h4 class="catalog-card-title">Tunneling & Protocol Encapsulation</h4>
+          <p class="catalog-card-desc">Passenger and carrier protocols, dual-stack ingress/egress encapsulation, IPv6-over-IPv4 (6to4), IPsec VPN tunnels, and MTU MSS clamping.</p>
+          <div class="catalog-card-meta">
+            <span>⏱️ 8 min read</span>
+            <span>Prereqs: Internetworking</span>
+          </div>
+          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('tunneling')">Read Full Article →</button>
+        </div>
+
+        <!-- Internetwork Routing -->
+        <div class="study-card topic-catalog-card" onclick="App.loadTopic('internetwork-routing')">
+          <div class="catalog-card-top">
+            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 16 • Standard</span>
+            <span class="badge-difficulty core">Core</span>
+          </div>
+          <h4 class="catalog-card-title">Internetwork & Hierarchical Routing</h4>
+          <p class="catalog-card-desc">Autonomous Systems (AS), IGP vs EGP distinction, Stub/Transit AS types, and mathematical proof of table reduction from N to 2*sqrt(N).</p>
+          <div class="catalog-card-meta">
+            <span>⏱️ 9 min read</span>
+            <span>Prereqs: Tunneling</span>
+          </div>
+          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('internetwork-routing')">Read Full Article →</button>
+        </div>
+
+        <!-- IPv4 Protocol -->
+        <div class="study-card topic-catalog-card" onclick="App.loadTopic('ipv4-protocol')">
+          <div class="catalog-card-top">
+            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 17 • Major Module</span>
+            <span class="badge-difficulty core">Core</span>
+          </div>
+          <h4 class="catalog-card-title">IPv4 Protocol & Fragmentation</h4>
+          <p class="catalog-card-desc">Complete 20-to-60 byte header dissection, field-by-field breakdown, and comprehensive numerical worked example of fragmentation offset calculations.</p>
+          <div class="catalog-card-meta">
+            <span>⏱️ 9 min read</span>
+            <span>Prereqs: Internetworking</span>
+          </div>
+          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('ipv4-protocol')">Read Full Article →</button>
+        </div>
+
+        <!-- IPv4 Addressing & Subnetting -->
+        <div class="study-card topic-catalog-card" onclick="App.loadTopic('ip-addressing')">
+          <div class="catalog-card-top">
+            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 18 • Major Module</span>
+            <span class="badge-difficulty core">Core</span>
+          </div>
+          <h4 class="catalog-card-title">IPv4 Addresses, CIDR & Subnetting</h4>
+          <p class="catalog-card-desc">Classful addressing (Class A/B/C), CIDR prefix notation (/24), subnet mask block size calculations, usable host ranges, and RFC 1918 private IPs.</p>
+          <div class="catalog-card-meta">
+            <span>⏱️ 10 min read</span>
+            <span>Prereqs: IPv4 Protocol</span>
+          </div>
+          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('ip-addressing')">Read Full Article →</button>
+        </div>
+
+        <!-- IPv6 Protocol -->
+        <div class="study-card topic-catalog-card" onclick="App.loadTopic('ipv6-protocol')">
+          <div class="catalog-card-top">
+            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 19 • Major Module</span>
+            <span class="badge-difficulty core">Core</span>
+          </div>
+          <h4 class="catalog-card-title">IPv6 Architecture & 128-Bit Addressing</h4>
+          <p class="catalog-card-desc">Streamlined fixed 40-byte base header, elimination of checksum & router fragmentation, extension header chaining, colon-hexadecimal compression, and transition.</p>
+          <div class="catalog-card-meta">
+            <span>⏱️ 10 min read</span>
+            <span>Prereqs: IPv4 Addresses</span>
+          </div>
+          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('ipv6-protocol')">Read Full Article →</button>
         </div>
 
         <!-- NAT -->
         <div class="study-card topic-catalog-card" onclick="App.loadTopic('nat')">
           <div class="catalog-card-top">
-            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 12 • Supporting</span>
+            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 20 • Supporting</span>
             <span class="badge-difficulty core">Core</span>
           </div>
           <h4 class="catalog-card-title">Network Address Translation (NAT)</h4>
-          <p class="catalog-card-desc">Multiplexing thousands of private RFC 1918 IPs through one public address, NAT translation tables, and port forwarding.</p>
+          <p class="catalog-card-desc">Multiplexing private RFC 1918 subnets through public IPv4 addresses, NAPT port translation tables, and traversal techniques.</p>
           <div class="catalog-card-meta">
             <span>⏱️ 5 min read</span>
-            <span>Prereqs: IPv4</span>
+            <span>Prereqs: IPv4 Addresses</span>
           </div>
           <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('nat')">Read Full Article →</button>
         </div>

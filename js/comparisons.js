@@ -262,6 +262,99 @@ const COMPARISONS_DATA = {
     ],
     commonConfusion: "Common Mistake: Thinking a firewall replaces an IDS/IPS. A firewall checks whether port 80/443 is open, but blindly lets through an SQL injection attack embedded inside an HTTP request! An IPS is required to inspect deep payload contents and block the SQL exploit!",
     relatedTopics: ["firewall", "ids", "ips", "https", "tls", "rsa"]
+  },
+
+  "pure-aloha-vs-slotted-aloha": {
+    id: "pure-aloha-vs-slotted-aloha",
+    title: "Pure ALOHA vs Slotted ALOHA",
+    subtitle: "Unsynchronized Continuous Transmission vs Slot-Synchronized Contention",
+    shortAnswer: "Pure ALOHA allows stations to transmit whenever data is ready, resulting in a vulnerable period of 2 frame times and a maximum throughput of 18.4% (S = G e^(-2G) at G = 0.5). Slotted ALOHA restricts transmissions to synchronized slot boundaries, halving the vulnerable period to 1 frame time and doubling maximum throughput to 36.8% (S = G e^(-G) at G = 1.0).",
+    tableHeaders: ["Dimension", "Pure ALOHA (Norman Abramson, 1970)", "Slotted ALOHA (Larry Roberts, 1972)"],
+    tableRows: [
+      ["Transmission Time", "Any arbitrary continuous time instant", "Only at the beginning of synchronized discrete time slots"],
+      ["Vulnerable Period", "2 × T_fr (from t0 - T_fr to t0 + T_fr)", "1 × T_fr (only within the current slot boundary)"],
+      ["Throughput Equation", "S = G · e^(-2G)", "S = G · e^(-G)"],
+      ["Maximum Throughput", "18.4% (1 / 2e) achieved when G = 0.5", "36.8% (1 / e) achieved when G = 1.0"],
+      ["Collision Probability", "High (any overlapping bit destroys both frames)", "Moderate (collisions occur only when 2+ stations choose the same slot)"],
+      ["Clock Synchronization", "None required (completely asynchronous)", "Strict global clock or master beacon synchronization required"],
+      ["Channel Utilization", "Very low under heavy loads", "Double the capacity of Pure ALOHA"],
+      ["Primary References", "Tanenbaum 6th Ed. Ch. 4.2.1 / Forouzan 6th Ed. Ch. 12.1", "Tanenbaum 6th Ed. Ch. 4.2.2 / Forouzan 6th Ed. Ch. 12.1"]
+    ],
+    visualDiff: `
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0;">
+        <div style="background: #fff7ed; border: 1px solid #fed7aa; border-radius: 12px; padding: 1.25rem;">
+          <h5 style="color: #c2410c; font-weight: 800; margin-bottom: 0.5rem;">Pure ALOHA: Vulnerable Time = 2T</h5>
+          <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #1e293b; line-height: 1.8;">
+            Station A: ──[ FRAME ]──►<br>
+            Station B: ─────[ COLLISION ]──►<br>
+            <span style="color: #c2410c; font-weight: 700;">✗ Any partial overlap destroys BOTH frames</span><br>
+            <span style="color: #64748b;">Max Throughput: 18.4% at G = 0.5</span>
+          </div>
+        </div>
+        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 1.25rem;">
+          <h5 style="color: #15803d; font-weight: 800; margin-bottom: 0.5rem;">Slotted ALOHA: Vulnerable Time = 1T</h5>
+          <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #1e293b; line-height: 1.8;">
+            Slot 1: |──[FRAME A]──| (Clean Success!)<br>
+            Slot 2: |──[FRAME B+C]──| (Collision in slot)<br>
+            <span style="color: #15803d; font-weight: 700;">✓ Frames align with slot boundaries</span><br>
+            <span style="color: #64748b;">Max Throughput: 36.8% at G = 1.0</span>
+          </div>
+        </div>
+      </div>
+    `,
+    whenToUse: [
+      { protocol: "Choose Pure ALOHA when:", points: ["System simplicity and zero clock synchronization are paramount.", "Traffic is extremely sporadic and low volume (e.g. low-power environmental sensor beacons)."] },
+      { protocol: "Choose Slotted ALOHA when:", points: ["Higher throughput is needed and global synchronization can be distributed cheaply (e.g. cellular LTE/5G RACH initial attachment channels)."] }
+    ],
+    commonConfusion: "Common Mistake: Thinking Slotted ALOHA completely prevents collisions. Slotted ALOHA only prevents PARTIAL collisions; full collisions still occur whenever two stations decide to transmit during the very same slot!",
+    relatedTopics: ["aloha", "channel-allocation", "csma-protocols", "ethernet"]
+  },
+
+  "hub-vs-bridge-vs-switch-vs-router": {
+    id: "hub-vs-bridge-vs-switch-vs-router",
+    title: "Hub vs Bridge vs Switch vs Router vs Gateway",
+    subtitle: "Complete Multi-Layer Network Connecting Devices Comparison",
+    shortAnswer: "Hubs (L1) repeat bits blindly and share a single collision domain. Bridges (L2) filter traffic between LAN segments using MAC addresses. Switches (L2) are multiport bridges providing dedicated collision domains per port. Routers (L3) forward packets based on IP addresses and separate both collision and broadcast domains. Gateways (L4-7) translate between incompatible protocol suites.",
+    tableHeaders: ["Dimension", "Hub", "Bridge", "Switch", "Router"],
+    tableRows: [
+      ["OSI Layer", "Layer 1 (Physical)", "Layer 2 (Data Link)", "Layer 2 (Data Link)", "Layer 3 (Network)"],
+      ["Addresses Used", "None (electrical bits only)", "48-bit MAC addresses", "48-bit MAC addresses", "32-bit / 128-bit IP addresses"],
+      ["Collision Domains", "Single shared domain across all ports", "Separates into 2 collision domains", "Dedicated collision domain per port", "Separates collision domains per port"],
+      ["Broadcast Domains", "Single broadcast domain", "Single broadcast domain", "Single broadcast domain (unless VLANs)", "Separates broadcast domains per subnet"],
+      ["Forwarding Logic", "Blind broadcast to all other ports", "Software MAC table lookup & filtering", "Hardware ASIC wire-speed CAM table lookup", "Routing table longest prefix match lookup"],
+      ["Transmission Mode", "Half-duplex only (collisions occur)", "Half / Full duplex", "Full-duplex (simultaneous Tx and Rx, 0 collisions)", "Full-duplex point-to-point or switched"],
+      ["Intelligence Level", "Dumb signal repeater", "Moderate (software learning)", "High (hardware CAM table, microsegmentation)", "Very high (routing protocols, ACLs, NAT, QoS)"],
+      ["Primary References", "Tanenbaum 6th Ed. Ch. 4.7 / Forouzan 6th Ed. Ch. 13", "Tanenbaum 6th Ed. Ch. 4.7 / Forouzan 6th Ed. Ch. 13", "Tanenbaum 6th Ed. Ch. 4.7 / Forouzan 6th Ed. Ch. 13", "Tanenbaum 6th Ed. Ch. 4.7 / Forouzan 6th Ed. Ch. 13"]
+    ],
+    visualDiff: `
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0;">
+        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 12px; padding: 1.25rem;">
+          <h5 style="color: #475569; font-weight: 800; margin-bottom: 0.5rem;">Switch (Layer 2)</h5>
+          <div style="font-size: 0.88rem; color: #334155;">
+            • Separates Collision Domains (1 per port)<br>
+            • Keeps single Broadcast Domain<br>
+            • Forwards frames based on MAC address<br>
+            • Ultra-low microsecond latency via ASICs
+          </div>
+        </div>
+        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 1.25rem;">
+          <h5 style="color: #1d4ed8; font-weight: 800; margin-bottom: 0.5rem;">Router (Layer 3)</h5>
+          <div style="font-size: 0.88rem; color: #334155;">
+            • Separates Collision Domains AND Broadcast Domains<br>
+            • Forwards packets based on IP addresses<br>
+            • Connects different subnets and WANs<br>
+            • Implements firewall ACLs and NAT
+          </div>
+        </div>
+      </div>
+    `,
+    whenToUse: [
+      { protocol: "Deploy a Switch when:", points: ["Connecting local devices (PCs, servers, printers) within the same office or department subnet with maximum wire-speed performance."] },
+      { protocol: "Deploy a Router when:", points: ["Interconnecting different IP subnets, connecting a LAN to an ISP/WAN, or enforcing network security boundaries."] },
+      { protocol: "Deploy a Gateway when:", points: ["Translating between incompatible communication protocol architectures (e.g. VoIP SIP phone system to traditional PSTN telephone network)."] }
+    ],
+    commonConfusion: "Common Mistake: Thinking a switch and a router perform the same function. A switch forwards frames locally within one network using hardware MAC addresses. A router routes packets across different networks using software/hardware IP routing tables. In real-world enterprise architectures, you need both!",
+    relatedTopics: ["network-devices", "dll-switching", "ethernet", "vlan", "mac-address"]
   }
 };
 
@@ -390,6 +483,22 @@ const ComparisonsModule = {
           <h4 class="unit-card-title">Go-Back-N vs Selective Repeat</h4>
           <div class="unit-card-tasks">Data Link Layer ARQ</div>
           <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 1rem;">Window sizes, receiver buffering, and retransmissions.</p>
+          <div class="unit-card-btn-arrow">→</div>
+        </div>
+
+        <div class="unit-card-pill u2" onclick="App.loadComparison('pure-aloha-vs-slotted-aloha')">
+          <div class="unit-badge-icon">📡</div>
+          <h4 class="unit-card-title">Pure vs Slotted ALOHA</h4>
+          <div class="unit-card-tasks">MAC Sublayer Contention</div>
+          <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 1rem;">Vulnerable time 2T vs 1T, throughput 18.4% vs 36.8%.</p>
+          <div class="unit-card-btn-arrow">→</div>
+        </div>
+
+        <div class="unit-card-pill u2" onclick="App.loadComparison('hub-vs-bridge-vs-switch-vs-router')">
+          <div class="unit-badge-icon">🔀</div>
+          <h4 class="unit-card-title">Connecting Devices</h4>
+          <div class="unit-card-tasks">Hardware Architecture</div>
+          <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 1rem;">Hub vs Bridge vs Switch vs Router vs Gateway layers.</p>
           <div class="unit-card-btn-arrow">→</div>
         </div>
 
