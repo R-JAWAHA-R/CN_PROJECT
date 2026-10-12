@@ -257,6 +257,7 @@ Least cost path from A to D: A -> B -> D (Cost = 2 + 3 = 5).`,
       primaryUses: ["OSPF Routing, IS-IS Backbone, Google Maps GPS Navigation"]
     },
     sections: {
+      interactiveLabKey: "dijkstra",
       overview: `Invented by Dutch computer scientist Edsger Dijkstra in 1959, <strong>Dijkstra's Shortest Path Algorithm</strong> is a greedy graph search algorithm. In Link-State routing, each router floods link states so all nodes construct an identical graph, and then independently runs Dijkstra's algorithm to compute its shortest-path tree.`,
       howItWorks: `
         <ol class="wiki-ordered-list">
@@ -421,6 +422,7 @@ All nodes obtain IDENTICAL Link-State Database (LSDB)!`,
       primaryUses: ["Routing Information Protocol (RIP), BGP Path Vector, Cisco EIGRP"]
     },
     sections: {
+      interactiveLabKey: "distance-vector",
       overview: `<strong>Distance-Vector (DV)</strong> routing is a distributed, iterative algorithm based on the classic Bellman-Ford shortest-path algorithm. Rather than requiring knowledge of the entire network map, each router knows only the cost to its direct physical neighbors and the distance vectors sent by those neighbors.`,
       howItWorks: `
         <ol class="wiki-ordered-list">
@@ -739,6 +741,7 @@ D_x(z) = min{ c(x,y) + D_y(z) } = 1 + 2 = 3. Converged!`,
       primaryUses: ["Global Internet Addressing, Subnetting, Enterprise LANs"]
     },
     sections: {
+      interactiveLabKey: "cidr-calc",
       overview: `<strong>Internet Protocol version 4 (IPv4)</strong> is the core routing protocol of the Internet. It provides connectionless, best-effort packet delivery across networks, relying on 32-bit addresses conventionally written in dotted-decimal notation (e.g. \`192.168.1.1\`).`,
       howItWorks: `
         <ol class="wiki-ordered-list">
@@ -818,6 +821,7 @@ D_x(z) = min{ c(x,y) + D_y(z) } = 1 + 2 = 3. Converged!`,
       primaryUses: ["5G Cellular Networks, Cloud Hyper-Scalers, IoT Deployments"]
     },
     sections: {
+      interactiveLabKey: "ip-header",
       overview: `Standardized as a full Internet Standard in RFC 8200, <strong>Internet Protocol version 6 (IPv6)</strong> replaces IPv4. In addition to a virtually inexhaustible 128-bit address space, IPv6 was deliberately designed to accelerate hardware routing by fixing the base header size at exactly 40 bytes and removing header checksums.`,
       howItWorks: `
         <ol class="wiki-ordered-list">

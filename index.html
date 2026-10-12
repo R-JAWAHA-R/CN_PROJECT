@@ -127,20 +127,25 @@
     <div class="flex-1 flex overflow-hidden min-h-0 w-full relative">
         
         <!-- Mobile Sidebar Overlay Backdrop -->
-        <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-30 hidden lg:hidden"></div>
+        <div id="sidebar-overlay" onclick="toggleLeftSidebar(false)" class="fixed inset-0 top-16 bg-black/50 z-30 hidden lg:hidden"></div>
 
         <!-- Floating Re-open Left Sidebar Button (when collapsed) -->
-        <button id="reopen-left-sidebar-btn" onclick="toggleLeftSidebar()" class="hidden fixed left-3 bottom-6 z-30 p-2.5 bg-white dark:bg-gfg-darkcard border border-gray-300 dark:border-gray-700 rounded-full shadow-xl text-gfg-green hover:bg-gfg-light dark:hover:bg-gray-800 transition-all flex items-center justify-center" title="Show Syllabus Sidebar">
+        <button id="reopen-left-sidebar-btn" onclick="toggleLeftSidebar(true)" class="hidden fixed left-3 bottom-6 z-30 p-2.5 bg-white dark:bg-gfg-darkcard border border-gray-300 dark:border-gray-700 rounded-full shadow-xl text-gfg-green hover:bg-gfg-light dark:hover:bg-gray-800 transition-all flex items-center justify-center" title="Show Syllabus Sidebar">
             <i class="fa-solid fa-bars"></i>
         </button>
 
+        <!-- Floating Re-open Right Sidebar Button (when collapsed) -->
+        <button id="reopen-right-sidebar-btn" onclick="toggleRightSidebar(true)" class="hidden fixed right-3 bottom-6 z-30 p-2.5 bg-white dark:bg-gfg-darkcard border border-gray-300 dark:border-gray-700 rounded-full shadow-xl text-gfg-green hover:bg-gfg-light dark:hover:bg-gray-800 transition-all flex items-center justify-center" title="Show Right Panel">
+            <i class="fa-solid fa-table-columns"></i>
+        </button>
+
         <!-- LEFT SIDEBAR: SYLLABUS NAVIGATION & MODULES -->
-        <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 z-40 w-80 shrink-0 bg-white dark:bg-gfg-darkcard border-r border-gray-300 dark:border-gfg-darkborder transform -translate-x-full lg:translate-x-0 flex flex-col h-full shadow-lg lg:shadow-none">
+        <aside id="sidebar" class="fixed lg:static top-16 lg:top-0 bottom-0 left-0 z-40 w-80 shrink-0 bg-white dark:bg-gfg-darkcard border-r border-gray-300 dark:border-gfg-darkborder transform -translate-x-full lg:translate-x-0 flex flex-col h-[calc(100vh-4rem)] lg:h-full shadow-lg lg:shadow-none">
             
             <!-- Sidebar Header with Collapse Button -->
             <div class="p-3 border-b border-gray-200 dark:border-gfg-darkborder flex items-center justify-between bg-gray-50 dark:bg-gray-800 shrink-0">
                 <span class="font-bold text-xs uppercase tracking-wider text-gray-700 dark:text-gray-300">Syllabus Index</span>
-                <button onclick="toggleLeftSidebar()" class="text-gray-500 hover:text-black dark:hover:text-white p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" title="Collapse Sidebar">
+                <button onclick="toggleLeftSidebar(false)" class="text-gray-500 hover:text-black dark:hover:text-white p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" title="Collapse Sidebar">
                     <i class="fa-solid fa-angles-left text-sm"></i>
                 </button>
             </div>
@@ -206,7 +211,7 @@
         </main>
 
         <!-- RIGHT SIDEBAR: TOOLS, TABLE OF CONTENTS & PRACTICE (Independent Vertical Scroll & Toggleable Cards) -->
-        <aside id="right-sidebar" class="hidden xl:flex flex-col w-72 shrink-0 bg-gray-50 dark:bg-gfg-darkcard border-l border-gray-300 dark:border-gfg-darkborder h-full overflow-y-auto p-4 space-y-4">
+        <aside id="right-sidebar" class="hidden lg:flex flex-col w-72 shrink-0 bg-gray-50 dark:bg-gfg-darkcard border-l border-gray-300 dark:border-gfg-darkborder h-full overflow-y-auto p-4 space-y-4">
             
             <!-- Right Sidebar Header with Collapse Button -->
             <div class="flex items-center justify-between pb-2 border-b border-gray-200 dark:border-gray-700 shrink-0">
@@ -388,29 +393,157 @@
                 id: "unit2",
                 module: "Module 2: Data Link Layer, Framing & MAC Sublayer",
                 badge: "27 Topics",
+                chapters: [
+                    {
+                        id: "ch-dll-design",
+                        number: 1,
+                        title: "1. Design Issues of the Data Link Layer",
+                        shortTitle: "1. DLL Design Issues",
+                        subtopicIds: ["dll-design-issues"]
+                    },
+                    {
+                        id: "ch-framing",
+                        number: 2,
+                        title: "2. Framing in the Data Link Layer",
+                        shortTitle: "2. Framing Techniques",
+                        subtopicIds: ["framing", "byte-stuffing", "bit-stuffing"]
+                    },
+                    {
+                        id: "ch-error-detect",
+                        number: 3,
+                        title: "3. Error Detection and Correction",
+                        shortTitle: "3. Error Detection & Correction",
+                        subtopicIds: ["error-detection", "parity", "checksum"]
+                    },
+                    {
+                        id: "ch-hamming",
+                        number: 4,
+                        title: "4. Hamming Code (SECDED)",
+                        shortTitle: "4. Hamming Code",
+                        subtopicIds: ["hamming-code"]
+                    },
+                    {
+                        id: "ch-crc",
+                        number: 5,
+                        title: "5. Cyclic Redundancy Check (CRC)",
+                        shortTitle: "5. CRC Modulo-2 Division",
+                        subtopicIds: ["crc"]
+                    },
+                    {
+                        id: "ch-sliding-window",
+                        number: 6,
+                        title: "6. Sliding Window & DLL Protocols",
+                        shortTitle: "6. Sliding Window Protocols",
+                        subtopicIds: ["flow-control", "simplex-protocol", "stop-and-wait", "sliding-window", "go-back-n", "selective-repeat"]
+                    },
+                    {
+                        id: "ch-mac-sublayer",
+                        number: 7,
+                        title: "7. MAC Sublayer & Channel Allocation",
+                        shortTitle: "7. MAC & Channel Allocation",
+                        subtopicIds: ["channel-allocation"]
+                    },
+                    {
+                        id: "ch-multiple-access",
+                        number: 8,
+                        title: "8. Multiple Access Protocols",
+                        shortTitle: "8. Multiple Access Protocols",
+                        subtopicIds: ["aloha", "csma-protocols", "collision-free-protocols"]
+                    },
+                    {
+                        id: "ch-ethernet",
+                        number: 9,
+                        title: "9. Ethernet MAC Sublayer",
+                        shortTitle: "9. Ethernet MAC Sublayer",
+                        subtopicIds: ["ethernet", "mac-address"]
+                    },
+                    {
+                        id: "ch-wifi",
+                        number: 10,
+                        title: "10. IEEE 802.11 Wireless LAN (Wi-Fi)",
+                        shortTitle: "10. IEEE 802.11 Wi-Fi",
+                        subtopicIds: ["wireless-lan-protocols", "wifi-mac-sublayer"]
+                    },
+                    {
+                        id: "ch-switching",
+                        number: 11,
+                        title: "11. Data Link Layer Switching & Bridges",
+                        shortTitle: "11. DLL Switching & VLAN",
+                        subtopicIds: ["dll-switching", "vlan"]
+                    },
+                    {
+                        id: "ch-devices",
+                        number: 12,
+                        title: "12. Connecting Devices & Layer 2 Protocols",
+                        shortTitle: "12. Connecting Devices & ARP",
+                        subtopicIds: ["network-devices", "arp"]
+                    }
+                ],
                 topicIds: [
-                    "framing", "byte-stuffing", "bit-stuffing", "error-detection",
-                    "parity", "checksum", "crc", "hamming-code", "flow-control",
-                    "stop-and-wait", "sliding-window", "go-back-n", "selective-repeat",
-                    "ethernet", "mac-address", "arp", "vlan", "dll-design-issues",
-                    "simplex-protocol", "channel-allocation", "aloha", "csma-protocols",
-                    "collision-free-protocols", "wireless-lan-protocols", "wifi-mac-sublayer",
-                    "dll-switching", "network-devices"
+                    "dll-design-issues", "framing", "byte-stuffing", "bit-stuffing",
+                    "error-detection", "parity", "checksum", "hamming-code", "crc",
+                    "flow-control", "simplex-protocol", "stop-and-wait", "sliding-window",
+                    "go-back-n", "selective-repeat", "channel-allocation", "aloha",
+                    "csma-protocols", "collision-free-protocols", "ethernet", "mac-address",
+                    "wireless-lan-protocols", "wifi-mac-sublayer", "dll-switching",
+                    "network-devices", "arp", "vlan"
                 ]
             },
             {
                 id: "unit3",
                 module: "Module 3: Network Layer, IP Addressing & Routing",
                 badge: "28 Topics",
+                chapters: [
+                    {
+                        id: "ch-u3-design",
+                        number: 1,
+                        title: "1. Network Layer Design Issues & Routing Fundamentals",
+                        shortTitle: "1. NL Design & Routing",
+                        subtopicIds: ["routing-design-issues", "network-layer", "forwarding", "routing", "optimality-principle"]
+                    },
+                    {
+                        id: "ch-u3-algorithms",
+                        number: 2,
+                        title: "2. Routing Algorithms (Dijkstra, Flooding, DV, Link-State)",
+                        shortTitle: "2. Routing Algorithms",
+                        subtopicIds: ["shortest-path-algorithm", "dijkstra", "flooding", "distance-vector-routing", "distance-vector", "link-state-routing"]
+                    },
+                    {
+                        id: "ch-u3-congestion",
+                        number: 3,
+                        title: "3. Congestion Control in Computer Networks",
+                        shortTitle: "3. Congestion Control",
+                        subtopicIds: ["congestion-control", "traffic-aware-routing", "admission-control", "traffic-throttling", "load-shedding"]
+                    },
+                    {
+                        id: "ch-u3-internetworking",
+                        number: 4,
+                        title: "4. Internetworking and IP Routing",
+                        shortTitle: "4. Internetworking & Routing",
+                        subtopicIds: ["internetworking", "tunneling", "internetwork-routing"]
+                    },
+                    {
+                        id: "ch-u3-addressing",
+                        number: 5,
+                        title: "5. IP Addressing — IPv4 and IPv6",
+                        shortTitle: "5. IPv4 & IPv6 Addressing",
+                        subtopicIds: ["ipv4-protocol", "ipv4", "ip-addressing", "nat", "ipv6-protocol", "ipv6"]
+                    },
+                    {
+                        id: "ch-u3-protocols",
+                        number: 6,
+                        title: "6. Routing Protocols & Internet Architecture (OSPF, BGP, SDN)",
+                        shortTitle: "6. Internet Routing Protocols",
+                        subtopicIds: ["ospf", "bgp", "sdn"]
+                    }
+                ],
                 topicIds: [
-                    "network-layer", "forwarding", "routing", "dijkstra",
-                    "link-state-routing", "distance-vector", "ospf", "bgp", "sdn",
-                    "ipv4", "ip-addressing", "ipv6", "nat", "routing-design-issues",
-                    "optimality-principle", "shortest-path-algorithm", "flooding",
-                    "distance-vector-routing", "congestion-control", "traffic-aware-routing",
-                    "admission-control", "traffic-throttling", "load-shedding",
+                    "routing-design-issues", "network-layer", "forwarding", "routing", "optimality-principle",
+                    "shortest-path-algorithm", "dijkstra", "flooding", "distance-vector-routing", "distance-vector", "link-state-routing",
+                    "congestion-control", "traffic-aware-routing", "admission-control", "traffic-throttling", "load-shedding",
                     "internetworking", "tunneling", "internetwork-routing",
-                    "ipv4-protocol", "ipv6-protocol"
+                    "ipv4-protocol", "ipv4", "ip-addressing", "nat", "ipv6-protocol", "ipv6",
+                    "ospf", "bgp", "sdn"
                 ]
             },
             {
@@ -439,6 +572,7 @@
         let activeTopicId = 'computer-network';
         let completedTopics = JSON.parse(localStorage.getItem('gfg_completed_topics') || '[]');
         let collapsedModules = JSON.parse(localStorage.getItem('gfg_collapsed_modules') || '{}');
+        let collapsedChapters = JSON.parse(localStorage.getItem('gfg_collapsed_chapters') || '{}');
 
         function getTotalTopicsCount() {
             let total = 0;
@@ -481,7 +615,13 @@
             renderSidebar(document.getElementById('sidebar-filter').value);
         }
 
-        // RENDER SYLLABUS NAVIGATION ACCORDION
+        function toggleChapter(chapId) {
+            collapsedChapters[chapId] = !collapsedChapters[chapId];
+            localStorage.setItem('gfg_collapsed_chapters', JSON.stringify(collapsedChapters));
+            renderSidebar(document.getElementById('sidebar-filter').value);
+        }
+
+        // RENDER SYLLABUS NAVIGATION ACCORDION WITH HIERARCHICAL CHAPTER SUPPORT
         function renderSidebar(filterQuery = '') {
             const nav = document.getElementById('syllabus-nav');
             if (!nav) return;
@@ -518,39 +658,118 @@
                 modDiv.appendChild(modHeader);
 
                 if (!isCollapsed) {
-                    const listContainer = document.createElement('div');
-                    listContainer.className = 'space-y-0.5 pt-0.5 pl-1';
+                    if (mod.chapters && mod.chapters.length > 0) {
+                        // RENDER HIERARCHICAL CHAPTERS
+                        const chapContainer = document.createElement('div');
+                        chapContainer.className = 'space-y-1 pt-0.5 pl-1';
 
-                    filtered.forEach(topic => {
-                        const isCurrent = activeTopicId === topic.id;
-                        const isRead = completedTopics.includes(topic.id);
-                        const btn = document.createElement('button');
-                        btn.id = 'sidebar-topic-' + topic.id;
-                        btn.className = `w-full text-left px-2.5 py-1.5 rounded text-xs transition-all flex items-center justify-between group ${
-                            isCurrent 
-                                ? 'bg-gfg-green text-white font-bold shadow-sm' 
-                                : 'text-gray-700 dark:text-gray-300 hover:bg-gfg-light dark:hover:bg-gray-800 hover:text-gfg-green'
-                        }`;
+                        mod.chapters.forEach(chap => {
+                            const chapTopics = chap.subtopicIds.map(id => repo[id]).filter(Boolean);
+                            const filteredChapTopics = cleanQuery
+                                ? chapTopics.filter(t => t.title.toLowerCase().includes(cleanQuery) || (t.oneLiner && t.oneLiner.toLowerCase().includes(cleanQuery)) || t.id.toLowerCase().includes(cleanQuery) || chap.title.toLowerCase().includes(cleanQuery))
+                                : chapTopics;
 
-                        btn.innerHTML = `
-                            <div class="flex items-center space-x-2 truncate">
-                                <i class="fa-solid fa-file-lines text-[10px] ${isCurrent ? 'text-white' : 'text-gray-400 group-hover:text-gfg-green'}"></i>
-                                <span class="truncate">${topic.title}</span>
-                            </div>
-                            <div class="flex items-center space-x-1 shrink-0 ml-1">
-                                ${isRead ? `<i class="fa-solid fa-check text-[10px] ${isCurrent ? 'text-white' : 'text-gfg-green'}" title="Completed"></i>` : ''}
-                            </div>
-                        `;
+                            if (cleanQuery && filteredChapTopics.length === 0) return;
 
-                        btn.onclick = () => {
-                            App.loadTopic(topic.id);
-                            if (window.innerWidth < 1024) toggleMobileSidebar();
-                        };
+                            const containsActive = chap.subtopicIds.includes(activeTopicId);
+                            // By default, expand if contains active topic, or if user explicitly uncollapsed, or if searching
+                            const isChapCollapsed = !cleanQuery && (collapsedChapters[chap.id] === true || (collapsedChapters[chap.id] === undefined && !containsActive));
 
-                        listContainer.appendChild(btn);
-                    });
+                            const chapDiv = document.createElement('div');
+                            chapDiv.className = 'rounded border border-gray-100 dark:border-gray-800/80 bg-white/50 dark:bg-gray-800/30 overflow-hidden';
 
-                    modDiv.appendChild(listContainer);
+                            // Chapter Header
+                            const chapHeader = document.createElement('div');
+                            chapHeader.className = `text-[11px] font-bold text-gray-800 dark:text-gray-200 px-2 py-1.5 flex items-center justify-between cursor-pointer select-none transition-colors ${
+                                containsActive ? 'bg-blue-50/70 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300' : 'hover:bg-gray-50 dark:hover:bg-gray-800/80'
+                            }`;
+                            chapHeader.innerHTML = `
+                                <div class="flex items-center space-x-1.5 truncate">
+                                    <i class="fa-solid fa-chevron-${isChapCollapsed ? 'right' : 'down'} text-[9px] ${containsActive ? 'text-blue-500' : 'text-gray-400'} w-3"></i>
+                                    <i class="fa-solid fa-${isChapCollapsed ? 'folder' : 'folder-open'} text-[11px] text-blue-500"></i>
+                                    <span class="truncate tracking-tight">${chap.shortTitle || chap.title}</span>
+                                </div>
+                                <span class="text-[9px] font-mono px-1 py-0.2 rounded bg-gray-100 dark:bg-gray-700/60 text-gray-500 dark:text-gray-400 ml-1 shrink-0">${filteredChapTopics.length}</span>
+                            `;
+                            chapHeader.onclick = () => toggleChapter(chap.id);
+                            chapDiv.appendChild(chapHeader);
+
+                            if (!isChapCollapsed) {
+                                const subtopicsList = document.createElement('div');
+                                subtopicsList.className = 'ml-3 pl-2 py-1 space-y-0.5 border-l-2 border-blue-200 dark:border-blue-900/60';
+
+                                filteredChapTopics.forEach(topic => {
+                                    const isCurrent = activeTopicId === topic.id;
+                                    const isRead = completedTopics.includes(topic.id);
+                                    const btn = document.createElement('button');
+                                    btn.id = 'sidebar-topic-' + topic.id;
+                                    btn.className = `w-full text-left px-2 py-1.5 rounded text-xs transition-all flex items-center justify-between group ${
+                                        isCurrent 
+                                            ? 'bg-gfg-green text-white font-bold shadow-sm' 
+                                            : 'text-gray-700 dark:text-gray-300 hover:bg-gfg-light dark:hover:bg-gray-800 hover:text-gfg-green'
+                                    }`;
+
+                                    btn.innerHTML = `
+                                        <div class="flex items-center space-x-2 truncate">
+                                            <i class="fa-solid fa-file-lines text-[10px] ${isCurrent ? 'text-white' : 'text-gray-400 group-hover:text-gfg-green'}"></i>
+                                            <span class="truncate">${topic.title}</span>
+                                        </div>
+                                        <div class="flex items-center space-x-1 shrink-0 ml-1">
+                                            ${isRead ? `<i class="fa-solid fa-check text-[10px] ${isCurrent ? 'text-white' : 'text-gfg-green'}" title="Completed"></i>` : ''}
+                                        </div>
+                                    `;
+
+                                    btn.onclick = () => {
+                                        App.loadTopic(topic.id);
+                                        if (window.innerWidth < 1024) toggleLeftSidebar(false);
+                                    };
+
+                                    subtopicsList.appendChild(btn);
+                                });
+
+                                chapDiv.appendChild(subtopicsList);
+                            }
+
+                            chapContainer.appendChild(chapDiv);
+                        });
+
+                        modDiv.appendChild(chapContainer);
+                    } else {
+                        // FLAT TOPICS LIST FOR MODULES WITHOUT CHAPTERS
+                        const listContainer = document.createElement('div');
+                        listContainer.className = 'space-y-0.5 pt-0.5 pl-1';
+
+                        filtered.forEach(topic => {
+                            const isCurrent = activeTopicId === topic.id;
+                            const isRead = completedTopics.includes(topic.id);
+                            const btn = document.createElement('button');
+                            btn.id = 'sidebar-topic-' + topic.id;
+                            btn.className = `w-full text-left px-2.5 py-1.5 rounded text-xs transition-all flex items-center justify-between group ${
+                                isCurrent 
+                                    ? 'bg-gfg-green text-white font-bold shadow-sm' 
+                                    : 'text-gray-700 dark:text-gray-300 hover:bg-gfg-light dark:hover:bg-gray-800 hover:text-gfg-green'
+                            }`;
+
+                            btn.innerHTML = `
+                                <div class="flex items-center space-x-2 truncate">
+                                    <i class="fa-solid fa-file-lines text-[10px] ${isCurrent ? 'text-white' : 'text-gray-400 group-hover:text-gfg-green'}"></i>
+                                    <span class="truncate">${topic.title}</span>
+                                </div>
+                                <div class="flex items-center space-x-1 shrink-0 ml-1">
+                                    ${isRead ? `<i class="fa-solid fa-check text-[10px] ${isCurrent ? 'text-white' : 'text-gfg-green'}" title="Completed"></i>` : ''}
+                                </div>
+                            `;
+
+                            btn.onclick = () => {
+                                App.loadTopic(topic.id);
+                                if (window.innerWidth < 1024) toggleLeftSidebar(false);
+                            };
+
+                            listContainer.appendChild(btn);
+                        });
+
+                        modDiv.appendChild(listContainer);
+                    }
                 }
 
                 nav.appendChild(modDiv);
@@ -559,6 +778,19 @@
 
         function highlightSyllabusTopic(topicId) {
             activeTopicId = topicId;
+
+            // Ensure parent chapter is uncollapsed in any module with chapters
+            syllabusModules.forEach(mod => {
+                if (mod.chapters) {
+                    const parentChap = mod.chapters.find(c => c.subtopicIds.includes(topicId));
+                    if (parentChap && collapsedChapters[parentChap.id]) {
+                        collapsedChapters[parentChap.id] = false;
+                        localStorage.setItem('gfg_collapsed_chapters', JSON.stringify(collapsedChapters));
+                        renderSidebar(document.getElementById('sidebar-filter')?.value || '');
+                    }
+                }
+            });
+
             document.querySelectorAll('#syllabus-nav button').forEach(b => {
                 b.classList.remove('bg-gfg-green', 'text-white', 'font-bold', 'shadow-sm');
                 b.classList.add('text-gray-700', 'dark:text-gray-300');
@@ -578,6 +810,7 @@
                     icon.classList.remove('text-gray-400');
                     icon.classList.add('text-white');
                 }
+                activeBtn.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
             }
         }
 
@@ -1148,27 +1381,108 @@
         }
 
         // SIDEBAR & CARD TOGGLE CONTROLLERS
-        function toggleLeftSidebar() {
+        function toggleLeftSidebar(forceOpen) {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebar-overlay');
             const reopenBtn = document.getElementById('reopen-left-sidebar-btn');
-            
-            if (window.innerWidth < 1024) {
-                const isHidden = sidebar.classList.toggle('-translate-x-full');
-                if (overlay) overlay.classList.toggle('hidden', isHidden);
+            if (!sidebar) return;
+
+            const isDesktop = window.innerWidth >= 1024;
+
+            if (isDesktop) {
+                // DESKTOP: toggles 'desktop-collapsed'
+                sidebar.classList.remove('-translate-x-full', 'mobile-open');
+                
+                let shouldCollapse;
+                if (typeof forceOpen === 'boolean') {
+                    shouldCollapse = !forceOpen;
+                } else {
+                    shouldCollapse = !sidebar.classList.contains('desktop-collapsed');
+                }
+
+                if (shouldCollapse) {
+                    sidebar.classList.add('desktop-collapsed');
+                    if (reopenBtn) reopenBtn.classList.remove('hidden');
+                    localStorage.setItem('gfg_left_sidebar_collapsed', 'true');
+                } else {
+                    sidebar.classList.remove('desktop-collapsed');
+                    if (reopenBtn) reopenBtn.classList.add('hidden');
+                    localStorage.setItem('gfg_left_sidebar_collapsed', 'false');
+                }
             } else {
-                const isCollapsed = sidebar.classList.toggle('desktop-collapsed');
-                if (reopenBtn) reopenBtn.classList.toggle('hidden', !isCollapsed);
-                localStorage.setItem('gfg_left_sidebar_collapsed', isCollapsed ? 'true' : 'false');
+                // MOBILE / TABLET (<1024px): slides drawer in / out
+                sidebar.classList.remove('desktop-collapsed');
+                if (reopenBtn) reopenBtn.classList.add('hidden');
+
+                let shouldOpen;
+                if (typeof forceOpen === 'boolean') {
+                    shouldOpen = forceOpen;
+                } else {
+                    const isCurrentlyHidden = sidebar.classList.contains('-translate-x-full') && !sidebar.classList.contains('mobile-open');
+                    shouldOpen = isCurrentlyHidden;
+                }
+
+                if (shouldOpen) {
+                    sidebar.classList.remove('-translate-x-full');
+                    sidebar.classList.add('mobile-open', 'translate-x-0');
+                    if (overlay) overlay.classList.remove('hidden');
+                } else {
+                    sidebar.classList.add('-translate-x-full');
+                    sidebar.classList.remove('mobile-open', 'translate-x-0');
+                    if (overlay) overlay.classList.add('hidden');
+                }
             }
         }
 
-        function toggleRightSidebar() {
+        // Global functions and aliases
+        window.toggleLeftSidebar = toggleLeftSidebar;
+        window.toggleMobileSidebar = toggleLeftSidebar;
+        window.closeMobileSidebar = () => toggleLeftSidebar(false);
+
+        function toggleRightSidebar(forceOpen) {
             const rSidebar = document.getElementById('right-sidebar');
+            const reopenBtn = document.getElementById('reopen-right-sidebar-btn');
             if (!rSidebar) return;
-            const isCollapsed = rSidebar.classList.toggle('desktop-collapsed');
-            localStorage.setItem('gfg_right_sidebar_collapsed', isCollapsed ? 'true' : 'false');
+
+            const isDesktop = window.innerWidth >= 1024;
+
+            if (isDesktop) {
+                rSidebar.classList.remove('fixed', 'right-0', 'top-16', 'bottom-0', 'z-40', 'shadow-2xl');
+                
+                let shouldCollapse;
+                if (typeof forceOpen === 'boolean') {
+                    shouldCollapse = !forceOpen;
+                } else {
+                    shouldCollapse = !rSidebar.classList.contains('desktop-collapsed');
+                }
+
+                if (shouldCollapse) {
+                    rSidebar.classList.add('desktop-collapsed');
+                    if (reopenBtn) reopenBtn.classList.remove('hidden');
+                    localStorage.setItem('gfg_right_sidebar_collapsed', 'true');
+                } else {
+                    rSidebar.classList.remove('desktop-collapsed');
+                    if (reopenBtn) reopenBtn.classList.add('hidden');
+                    localStorage.setItem('gfg_right_sidebar_collapsed', 'false');
+                }
+            } else {
+                // Mobile / Tablet (< 1024px)
+                rSidebar.classList.remove('desktop-collapsed');
+                if (reopenBtn) reopenBtn.classList.add('hidden');
+
+                const isHidden = rSidebar.classList.contains('hidden');
+                let shouldOpen = (typeof forceOpen === 'boolean') ? forceOpen : isHidden;
+
+                if (shouldOpen) {
+                    rSidebar.classList.remove('hidden');
+                    rSidebar.classList.add('fixed', 'right-0', 'top-16', 'bottom-0', 'z-40', 'shadow-2xl');
+                } else {
+                    rSidebar.classList.add('hidden');
+                    rSidebar.classList.remove('fixed', 'right-0', 'top-16', 'bottom-0', 'z-40', 'shadow-2xl');
+                }
+            }
         }
+        window.toggleRightSidebar = toggleRightSidebar;
 
         function toggleCard(cardBodyId, btn) {
             const body = document.getElementById(cardBodyId);
@@ -1183,15 +1497,53 @@
                 }
             }
         }
+        window.toggleCard = toggleCard;
 
         const overlay = document.getElementById('sidebar-overlay');
         if (overlay) {
-            overlay.onclick = () => {
-                const sidebar = document.getElementById('sidebar');
-                sidebar.classList.add('-translate-x-full');
-                overlay.classList.add('hidden');
-            };
+            overlay.onclick = () => toggleLeftSidebar(false);
         }
+
+        // RESPONSIVE RESIZE WATCHER
+        window.addEventListener('resize', () => {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            const reopenBtn = document.getElementById('reopen-left-sidebar-btn');
+            const rSidebar = document.getElementById('right-sidebar');
+            const reopenRBtn = document.getElementById('reopen-right-sidebar-btn');
+
+            if (window.innerWidth >= 1024) {
+                if (sidebar) {
+                    sidebar.classList.remove('mobile-open', '-translate-x-full');
+                    if (overlay) overlay.classList.add('hidden');
+                    const isCollapsed = localStorage.getItem('gfg_left_sidebar_collapsed') === 'true';
+                    sidebar.classList.toggle('desktop-collapsed', isCollapsed);
+                    if (reopenBtn) reopenBtn.classList.toggle('hidden', !isCollapsed);
+                }
+                if (rSidebar) {
+                    rSidebar.classList.remove('fixed', 'right-0', 'top-16', 'bottom-0', 'z-40', 'shadow-2xl');
+                    const isRCollapsed = localStorage.getItem('gfg_right_sidebar_collapsed') === 'true';
+                    rSidebar.classList.toggle('desktop-collapsed', isRCollapsed);
+                    if (reopenRBtn) reopenRBtn.classList.toggle('hidden', !isRCollapsed);
+                }
+            } else {
+                if (sidebar) {
+                    sidebar.classList.remove('desktop-collapsed');
+                    if (reopenBtn) reopenBtn.classList.add('hidden');
+                    if (!sidebar.classList.contains('mobile-open')) {
+                        sidebar.classList.add('-translate-x-full');
+                        if (overlay) overlay.classList.add('hidden');
+                    }
+                }
+                if (rSidebar) {
+                    rSidebar.classList.remove('desktop-collapsed');
+                    if (reopenRBtn) reopenRBtn.classList.add('hidden');
+                    if (!rSidebar.classList.contains('fixed')) {
+                        rSidebar.classList.add('hidden');
+                    }
+                }
+            }
+        });
 
         // KEYBOARD SHORTCUTS
         document.addEventListener('keydown', (e) => {
@@ -1207,21 +1559,37 @@
             } else if (e.key === 'Escape') {
                 closeModal();
                 searchDropdown.classList.add('hidden');
+                if (window.innerWidth < 1024) toggleLeftSidebar(false);
             }
         });
 
         // BOOTSTRAP APPLICATION
         window.addEventListener('DOMContentLoaded', () => {
             // Restore sidebar preferences on desktop
-            if (window.innerWidth >= 1024 && localStorage.getItem('gfg_left_sidebar_collapsed') === 'true') {
+            if (window.innerWidth >= 1024) {
+                if (localStorage.getItem('gfg_left_sidebar_collapsed') === 'true') {
+                    const sb = document.getElementById('sidebar');
+                    if (sb) sb.classList.add('desktop-collapsed');
+                    const reopenBtn = document.getElementById('reopen-left-sidebar-btn');
+                    if (reopenBtn) reopenBtn.classList.remove('hidden');
+                }
+                if (localStorage.getItem('gfg_right_sidebar_collapsed') === 'true') {
+                    const rsb = document.getElementById('right-sidebar');
+                    if (rsb) rsb.classList.add('desktop-collapsed');
+                    const reopenRBtn = document.getElementById('reopen-right-sidebar-btn');
+                    if (reopenRBtn) reopenRBtn.classList.remove('hidden');
+                }
+            } else {
                 const sb = document.getElementById('sidebar');
-                if (sb) sb.classList.add('desktop-collapsed');
-                const reopenBtn = document.getElementById('reopen-left-sidebar-btn');
-                if (reopenBtn) reopenBtn.classList.remove('hidden');
-            }
-            if (localStorage.getItem('gfg_right_sidebar_collapsed') === 'true') {
+                if (sb) {
+                    sb.classList.remove('desktop-collapsed');
+                    sb.classList.add('-translate-x-full');
+                }
                 const rsb = document.getElementById('right-sidebar');
-                if (rsb) rsb.classList.add('desktop-collapsed');
+                if (rsb) {
+                    rsb.classList.remove('desktop-collapsed');
+                    rsb.classList.add('hidden');
+                }
             }
 
             renderSidebar();

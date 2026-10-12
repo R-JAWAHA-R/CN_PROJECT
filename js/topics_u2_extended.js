@@ -1,1491 +1,1466 @@
-// Unit II Extended Topics: MAC Sublayer, Protocols, Switching & Devices
-// Covers Tanenbaum Ch.3 & Forouzan Ch.11-13 topics from syllabus
-// Design Issues, Simplex Protocol, ALOHA, CSMA, Collision-Free, Wireless LAN,
-// 802.11 MAC, DLL Switching, Learning Bridges, Network Devices
+// Unit II Extended Topics Database: Data Link Layer, MAC Sublayer & Network Devices
+// Aligned with Tanenbaum & Wetherall (6th Ed.), Forouzan (6th Ed.), and Kurose & Ross
+// Full 17-Point Structural Article Architecture with Multi-Question Quizzes & Progressive Examples
 
 const TOPICS_U2_EXT = {
 
+  // =========================================================================
+  // TOPIC 18: DLL DESIGN ISSUES & SERVICES (Topic 1 in PDF, pp. 19-48)
+  // =========================================================================
   "dll-design-issues": {
     id: "dll-design-issues",
-    title: "Data Link Layer Design Issues & Services",
-    unit: "Unit II: Data Link Layer & Reliable Transfer",
+    title: "Design Issues of the Data Link Layer",
+    unit: "Unit II: Data Link Layer & MAC Sublayer",
     unitId: "unit2",
-    level: "Level 2 — Standard Topic",
+    level: "Beginner → Intermediate",
     category: "datalink",
     difficulty: "Core",
-    readingTime: "8 min read",
-    standard: "ISO/IEC 7498-1 (OSI Model)",
-    oneLiner: "The Data Link Layer provides three classes of service to the network layer: unacknowledged connectionless, acknowledged connectionless, and connection-oriented.",
-    quickAnswer: "The DLL transforms a raw, unreliable physical channel into a reliable link by addressing four key design issues: services to the network layer, framing, error control, and flow control.",
-    whyItMatters: "Every frame traversing a network depends on proper framing, error handling, and flow regulation—without these, packets would be lost, duplicated, or delivered out of order.",
+    readingTime: "25–35 min",
+    standard: "OSI Layer 2 / IEEE 802 / Tanenbaum Ch. 3",
+    oneLiner: "The four pillars of Layer 2: services provided to Network Layer, framing, error control, and flow control.",
+    quickAnswer: "The Data Link Layer transforms raw, unreliable physical bitstreams into discrete, error-checked frames, providing services to the network layer, framing boundaries, error detection/correction, and receiver flow pacing.",
+    whyItMatters: "The physical layer only transmits unstructured bit pulses. Without Layer 2 design mechanisms, receivers cannot identify frame boundaries, know which device should receive data, detect electrical noise corruption, or prevent buffer overflow.",
+    prerequisitesList: [
+      { concept: "Bit", meaning: "A binary digit: 0 or 1." },
+      { concept: "Byte", meaning: "A group of 8 bits (octet)." },
+      { concept: "Packet", meaning: "A unit of data handled by the Network Layer (OSI Layer 3)." },
+      { concept: "Frame", meaning: "A unit of data organized by the Data Link Layer (OSI Layer 2)." },
+      { concept: "Network Layer", meaning: "OSI Layer 3, responsible for host-to-host packet delivery across networks." },
+      { concept: "Physical Layer", meaning: "OSI Layer 1, responsible for transmitting raw signals representing bits." }
+    ],
+    learningObjectives: [
+      "Define the Data Link Layer and explain its architectural purpose.",
+      "Identify the four major design issues: Services, Framing, Error Control, Flow Control.",
+      "Explain the three classic services offered to the Network Layer.",
+      "Describe and compare the four main framing methods.",
+      "Distinguish flow control from error control and congestion control.",
+      "Apply these concepts to real networking technologies (Ethernet, Wi-Fi, HDLC)."
+    ],
     infobox: {
       layer: "Layer 2 (Data Link Layer)",
-      standard: "ISO/IEC 7498-1, IEEE 802 series",
-      type: "Layer Architecture & Services",
-      keyFormula: "\\text{DLL Services} = \\text{Framing} + \\text{Error Control} + \\text{Flow Control}",
-      prerequisites: ["encapsulation", "protocol-stack"],
-      relatedConcepts: ["framing", "error-detection", "flow-control", "sliding-window"],
-      compareWith: ["framing"],
-      primaryUses: ["All data communication systems", "LAN/WAN link management", "Point-to-point & broadcast links"]
+      standard: "ISO/IEC 7498-1 (OSI), IEEE 802",
+      type: "Architectural Foundations",
+      keyFormula: "\\text{L2 Services} = \\{\\text{Unack Connectionless}, \\text{Ack Connectionless}, \\text{Ack Connection-Oriented}\\}",
+      prerequisites: ["protocol-stack", "encapsulation"],
+      relatedConcepts: ["framing", "error-detection", "flow-control", "ethernet"],
+      compareWith: ["network-layer"],
+      primaryUses: ["Ethernet links, Wi-Fi associations, Point-to-Point serial links, cellular radio links"]
     },
     sections: {
-      overview: `<p>The <strong>Data Link Layer (DLL)</strong> sits between the Physical Layer (Layer 1) and the Network Layer (Layer 3) in the OSI reference model. Its primary responsibility is to take packets from the network layer and encapsulate them into <strong>frames</strong> for transmission over a physical link.</p>
-        <p>According to Tanenbaum (6th Ed., Ch. 3), the DLL must solve four fundamental design issues:</p>
-        <ol class="wiki-ordered-list">
-          <li><strong>Providing services to the Network Layer:</strong> Offering well-defined service interfaces.</li>
-          <li><strong>Framing:</strong> Breaking the physical bitstream into discrete frames.</li>
-          <li><strong>Error Control:</strong> Detecting and correcting transmission errors.</li>
-          <li><strong>Flow Control:</strong> Preventing a fast sender from overwhelming a slow receiver.</li>
-        </ol>`,
+      overview: `the architectural responsibilities of OSI Layer 2, which sits between the Physical Layer and Network Layer. It defines how network-layer packets are encapsulated into frames, what delivery guarantees are offered across a single link hop, how transmission errors are handled, and how the sender avoids overwhelming receiver memory.`,
+      eli10: `Imagine the post office only knows how to lay down miles of train tracks (Layer 1). Layer 2 is the team that builds the train cars (framing), paints the boxcar numbers (addressing), inspects the locks for rust or damage (error control), and makes sure the trains don't arrive faster than workers can unload them (flow control)!`,
+      analogy: `A regional courier delivery service transporting parcels between warehouses. The courier must identify each parcel (framing and addressing), know where each box begins and ends (boundaries), check boxes for crushed corners (error detection), and avoid dumping boxes faster than the unloading dock can scan them (flow control).`,
       howItWorks: `
-        <h4>Three Classes of DLL Service</h4>
         <ol class="wiki-ordered-list">
-          <li><strong>Unacknowledged Connectionless Service:</strong>
+          <li><strong>Layer 2 Interface:</strong> The Data Link Layer receives IP packets from Layer 3, encapsulates them into link frames with headers and trailers, and passes them to Layer 1.</li>
+          <li><strong>Single-Hop Scope:</strong> A frame normally travels across <em>one physical link at a time</em>. When a packet traverses five routers, its Layer 2 frame is stripped and rebuilt with new link headers at each routed hop!</li>
+          <li><strong>Four Design Issues:</strong>
             <ul class="wiki-bullet-list">
-              <li>No connection establishment or release.</li>
-              <li>No acknowledgements are sent. Lost frames are not recovered at this layer.</li>
-              <li>Appropriate when the error rate is very low (e.g., Ethernet on fiber) or for real-time traffic where late data is worse than lost data.</li>
-              <li><em>Example:</em> Most wired Ethernet (IEEE 802.3) LANs.</li>
+              <li><strong>1. Services:</strong> Decides delivery guarantees (unacknowledged vs. acknowledged, connectionless vs. connection-oriented).</li>
+              <li><strong>2. Framing:</strong> Breaks continuous bitstreams into identifiable units (character count, byte stuffing, bit stuffing, coding violations).</li>
+              <li><strong>3. Error Control:</strong> Handles corrupted, lost, or duplicate frames using redundancy (parity, checksum, CRC, Hamming code, FEC, ARQ).</li>
+              <li><strong>4. Flow Control:</strong> Regulates transmission speed to prevent overwhelming receiver buffer capacity (Stop-and-Wait, Sliding Window).</li>
             </ul>
           </li>
-          <li><strong>Acknowledged Connectionless Service:</strong>
-            <ul class="wiki-bullet-list">
-              <li>No connection is established, but each frame sent is individually acknowledged.</li>
-              <li>The sender knows whether a frame has arrived correctly. If no ACK within timeout, it retransmits.</li>
-              <li>Useful over unreliable channels such as wireless links (IEEE 802.11).</li>
-              <li><em>Example:</em> Wi-Fi (802.11) frame acknowledgements.</li>
-            </ul>
-          </li>
-          <li><strong>Acknowledged Connection-Oriented Service:</strong>
-            <ul class="wiki-bullet-list">
-              <li>A logical connection is established before data transfer begins.</li>
-              <li>Each frame is numbered, acknowledged, and guaranteed to be received exactly once and in order.</li>
-              <li>Three phases: <strong>Connection establishment → Data transfer → Connection release</strong>.</li>
-              <li><em>Example:</em> HDLC in balanced mode over satellite/WAN links.</li>
-            </ul>
-          </li>
-        </ol>
-        <h4>Error Control Mechanisms</h4>
-        <p>Error control ensures reliable delivery by:</p>
-        <ul class="wiki-bullet-list">
-          <li>Adding <strong>error-detection codes</strong> (parity, checksum, CRC) to each frame's trailer.</li>
-          <li>Using <strong>acknowledgement (ACK)</strong> frames from receiver to sender.</li>
-          <li>Employing <strong>timers</strong> to retransmit frames when ACK is not received.</li>
-          <li>Assigning <strong>sequence numbers</strong> to frames to detect duplicates.</li>
-        </ul>
-        <h4>Flow Control Mechanisms</h4>
-        <p>Flow control prevents sender from overwhelming receiver:</p>
-        <ul class="wiki-bullet-list">
-          <li><strong>Feedback-based:</strong> Receiver sends permission to sender (e.g., ACKs, window advertisements).</li>
-          <li><strong>Rate-based:</strong> Protocol has a built-in rate limit (less common at DLL).</li>
-          <li><strong>Sliding Window:</strong> Allows multiple frames in flight, bounded by window size W.</li>
-        </ul>`,
+        </ol>`,
       diagram: `
-┌──────────────────────────────────────────────────┐
-│              NETWORK LAYER (Layer 3)             │
-│          Sends/receives IP packets               │
-└──────────────────────┬───────────────────────────┘
-                       │ Service Interface
-┌──────────────────────▼───────────────────────────┐
-│            DATA LINK LAYER (Layer 2)             │
-│                                                  │
-│  ┌─────────────┐  ┌──────────┐  ┌────────────┐  │
-│  │   FRAMING   │  │  ERROR   │  │    FLOW    │  │
-│  │ Flag/Stuff  │  │ CONTROL  │  │  CONTROL   │  │
-│  │ Byte/Bit    │  │ CRC/ACK  │  │  Window    │  │
-│  └─────────────┘  └──────────┘  └────────────┘  │
-│                                                  │
-│  Service Types:                                  │
-│  1. Unacknowledged Connectionless (Ethernet)     │
-│  2. Acknowledged Connectionless  (Wi-Fi)         │
-│  3. Connection-Oriented          (HDLC)          │
-└──────────────────────┬───────────────────────────┘
-                       │
-┌──────────────────────▼───────────────────────────┐
-│            PHYSICAL LAYER (Layer 1)              │
-│        Raw bit transmission over medium          │
-└──────────────────────────────────────────────────┘`,
++------------------------------------------------------------------------+
+|                      OSI LAYER 2: THE FOUR PILLARS                     |
++-------------------+------------------+----------------+----------------+
+|    1. SERVICES    |    2. FRAMING    |3. ERROR CONTROL| 4. FLOW CONTROL|
++-------------------+------------------+----------------+----------------+
+| Unack Connection- | Character Count  | Parity / CRC   | Stop-and-Wait  |
+| less (Ethernet)   | Byte Stuffing    | Checksum       | Sliding Window |
+| Ack Connectionless| Bit Stuffing     | FEC (Hamming)  | Credit / PAUSE |
+| (802.11 Wi-Fi)    | Coding Violation | ARQ (GBN / SR) | (Buffer space) |
+| Ack Connection-   | (Preamble / SFD) | (FCS Trailer)  |                |
+| Oriented (HDLC)   |                  |                |                |
++-------------------+------------------+----------------+----------------+`,
+      interactiveLabKey: "stuffing",
       technicalDetails: `
-        <h4>Relationship Between Services and Mechanisms</h4>
+        <p><strong>The Three Classic Service Types:</strong></p>
         <table class="wiki-table">
-          <thead><tr><th>Service Type</th><th>ACKs?</th><th>Connection?</th><th>Sequence Nums?</th><th>Retransmission?</th><th>Example</th></tr></thead>
+          <thead><tr><th>Feature</th><th>Unacknowledged Connectionless</th><th>Acknowledged Connectionless</th><th>Acknowledged Connection-Oriented</th></tr></thead>
           <tbody>
-            <tr><td>Unacknowledged Connectionless</td><td>No</td><td>No</td><td>No</td><td>No (left to higher layers)</td><td>Ethernet 802.3</td></tr>
-            <tr><td>Acknowledged Connectionless</td><td>Yes</td><td>No</td><td>Yes</td><td>Yes (timer-based)</td><td>Wi-Fi 802.11</td></tr>
-            <tr><td>Connection-Oriented</td><td>Yes</td><td>Yes (3 phases)</td><td>Yes</td><td>Yes (guaranteed order)</td><td>HDLC ABM</td></tr>
-          </tbody>
-        </table>
-        <h4>Framing Techniques Summary</h4>
-        <ul class="wiki-bullet-list">
-          <li><strong>Byte Count:</strong> Length field in header. Fragile to bit errors in count field.</li>
-          <li><strong>Flag Bytes with Byte Stuffing:</strong> Delimiter 0x7E, escape 0x7D (PPP/RFC 1661).</li>
-          <li><strong>Flag Bits with Bit Stuffing:</strong> Delimiter 01111110, zero-insertion after five 1s (HDLC).</li>
-          <li><strong>Physical Layer Coding Violations:</strong> Use reserved signal patterns (Manchester/4B5B).</li>
-        </ul>`,
-      workedExample: `<p><strong>Scenario:</strong> A sender needs to send 5 frames over an unreliable wireless channel using acknowledged connectionless service.</p>
-        <p><strong>Process:</strong></p>
-        <ol class="wiki-ordered-list">
-          <li>Sender transmits Frame 0 and starts timer T<sub>out</sub>.</li>
-          <li>Receiver gets Frame 0, checks CRC → valid → sends ACK 0.</li>
-          <li>Sender receives ACK 0 before timeout → transmits Frame 1.</li>
-          <li>Frame 1 is corrupted → receiver discards, sends nothing.</li>
-          <li>Sender's timer expires → retransmits Frame 1.</li>
-          <li>This time receiver gets Frame 1 correctly → ACK 1.</li>
-          <li>Process continues for Frames 2, 3, 4.</li>
-        </ol>
-        <p>This is the basis of the <strong>Stop-and-Wait ARQ</strong> protocol.</p>`,
-      advantagesLimitations: `
-        <table class="wiki-table">
-          <thead><tr><th>Service Type</th><th>Advantages</th><th>Limitations</th></tr></thead>
-          <tbody>
-            <tr><td>Unacknowledged Connectionless</td><td>Lowest overhead, fastest, simplest</td><td>No reliability guarantee at link layer</td></tr>
-            <tr><td>Acknowledged Connectionless</td><td>Reliability without connection setup cost</td><td>ACK overhead, retransmission delays</td></tr>
-            <tr><td>Connection-Oriented</td><td>Guaranteed in-order, exactly-once delivery</td><td>Highest overhead, connection setup latency</td></tr>
+            <tr><td>Connection Setup?</td><td>No</td><td>No</td><td>Yes (3-phase: Setup, Transfer, Teardown)</td></tr>
+            <tr><td>Layer 2 ACKs?</td><td>No</td><td>Yes (per-frame link ACKs)</td><td>Yes (sliding window sequence ACKs)</td></tr>
+            <tr><td>Link-Layer Recovery?</td><td>Not provided</td><td>Provided via retransmissions</td><td>Provided with strict in-order delivery</td></tr>
+            <tr><td>Overhead</td><td>Lowest</td><td>Medium</td><td>Highest</td></tr>
+            <tr><td>Typical Example</td><td>Traditional Ethernet (IEEE 802.3)</td><td>IEEE 802.11 Wi-Fi unicast</td><td>HDLC, LAPB, ATM</td></tr>
           </tbody>
         </table>`,
-      whereUsed: ["All IEEE 802 LAN/WAN standards", "Point-to-point links (PPP, HDLC)", "Satellite communication links", "Industrial SCADA serial connections"],
-      commonMistakes: "Confusing DLL flow control with TCP congestion control. DLL flow control is a point-to-point mechanism between adjacent nodes. TCP congestion control is an end-to-end mechanism across the entire network path.",
-      compareWith: { title: "DLL Error Control vs Transport Layer Error Control", note: "DLL error control operates hop-by-hop between adjacent nodes. Transport layer (TCP) error control operates end-to-end between source and destination hosts." },
-      practice: {
-        question: "Which type of Data Link Layer service is typically used by IEEE 802.11 (Wi-Fi)?",
-        choices: ["Unacknowledged connectionless", "Acknowledged connectionless", "Acknowledged connection-oriented", "Rate-based connectionless"],
-        correctIndex: 1,
-        explanation: "IEEE 802.11 Wi-Fi uses acknowledged connectionless service because wireless channels are unreliable, so each frame is individually acknowledged without establishing a full connection."
+      workedExamples: {
+        level1: `<strong>Problem:</strong> A network link carries packets across a reliable, low-noise fiber optic cable in a data center. Which Layer 2 service type is most appropriate?<br><br>
+<strong>Solution:</strong><br>
+<strong>Unacknowledged connectionless service</strong> (like standard Ethernet). Because fiber optic bit error rates are negligible ($< 10^{-12}$), adding per-frame Layer 2 acknowledgments would introduce unnecessary bandwidth and latency overhead. Any rare lost packets are recovered end-to-end by TCP at Layer 4.`,
+        level2: `<strong>Problem:</strong> A fast sender transmits 100 frames/sec to a receiver that processes only 60 frames/sec. Calculate backlog accumulation over 5 seconds and explain which design issue resolves this.<br><br>
+<strong>Working:</strong><br>
+1. $\\text{Backlog growth rate} = 100 - 60 = 40\\text{ frames/second}$.<br>
+2. After 5 seconds: $40 \\times 5 = \\mathbf{200\\text{ frames}}$ accumulated in buffer queue.<br>
+3. Without intervention, receiver buffers overflow and frames are dropped.<br>
+4. Design Issue: <strong>Flow Control</strong> (Stop-and-Wait or Sliding Window) throttles the sender to match receiver processing rate.`,
+        level3: `<strong>Problem:</strong> Contrast how error control is handled when an Ethernet frame fails its FCS vs. when an 802.11 Wi-Fi frame fails its FCS.<br><br>
+<strong>Analysis:</strong><br>
+1. <strong>Ethernet (Unacknowledged connectionless):</strong> When the receiver detects an FCS failure, it silently drops the frame. The Ethernet MAC does NOT retransmit it.<br>
+2. <strong>Wi-Fi (Acknowledged connectionless):</strong> Wireless air is prone to RF noise. The receiver does not send an ACK for the corrupted frame. The sender's link-layer timer expires, and the Wi-Fi MAC layer automatically retransmits the frame up to its retry limit!`
       },
+      advantagesLimitations: `
+        <table class="wiki-table">
+          <thead><tr><th>Design Aspect</th><th>Primary Advantage</th><th>Trade-Off / Limitation</th></tr></thead>
+          <tbody>
+            <tr><td>Services</td><td>Allows link guarantees tailored to physical media</td><td>Guarantees differ substantially across technologies</td></tr>
+            <tr><td>Framing</td><td>Organizes raw bits into manageable units</td><td>Header, trailer, and stuffing overhead</td></tr>
+            <tr><td>Error Control</td><td>Prevents undetected delivery of corrupted data</td><td>Detection alone does not repair data; ARQ adds delay</td></tr>
+            <tr><td>Flow Control</td><td>Protects receiver buffer queues from exhaustion</td><td>Can reduce transmission rate below full wire speed</td></tr>
+          </tbody>
+        </table>`,
+      whereUsed: [
+        "Ethernet (IEEE 802.3): Unacknowledged connectionless service, preamble framing, CRC-32 error detection.",
+        "Wi-Fi (IEEE 802.11): Acknowledged connectionless service with link-layer Stop-and-Wait ACKs.",
+        "HDLC / PPP (RFC 1662): Point-to-point links with bit stuffing and byte stuffing."
+      ],
+      commonMistakes: `
+        <ul class="wiki-bullet-list">
+          <li><strong>Misconception 1: Every frame is acknowledged:</strong> FALSE. Ethernet never acknowledges frames at Layer 2; Wi-Fi does.</li>
+          <li><strong>Misconception 2: Error detection corrects data:</strong> FALSE. Error detection (CRC) only determines if bits were corrupted; it does not repair them.</li>
+          <li><strong>Misconception 3: Flow control and congestion control are identical:</strong> FALSE. Flow control protects the receiving station; congestion control protects intermediate network links.</li>
+          <li><strong>Misconception 4: A packet and a frame are identical:</strong> FALSE. A packet belongs to Layer 3 (Network); a frame belongs to Layer 2 (Data Link).</li>
+        </ul>`,
+      compareWith: {
+        title: "Flow Control vs. Error Control",
+        note: "Flow control prevents receiver buffer overrun; error control handles corrupted or lost frames."
+      },
+      quiz: [
+        {
+          question: "Which Data Link Layer function is responsible for identifying where data units begin and end?",
+          options: ["Flow control", "Framing", "Error correction", "Routing"],
+          correctIndex: 1,
+          explanation: "Framing establishes identifiable boundaries in a stream of physical bits."
+        },
+        {
+          question: "Which framing method inserts an escape byte when a reserved delimiter occurs in payload?",
+          options: ["Bit stuffing", "Character count", "Byte stuffing", "Forward Error Correction"],
+          correctIndex: 2,
+          explanation: "Byte stuffing inserts an escape byte before any delimiter byte appearing inside payload data."
+        },
+        {
+          question: "What is the primary purpose of flow control?",
+          options: ["Choose the network route", "Prevent receiver buffer overload", "Encrypt the payload", "Correct every bit error"],
+          correctIndex: 1,
+          explanation: "Flow control matches transmission rate to receiver capacity to prevent buffer overflow."
+        },
+        {
+          question: "What does CRC primarily provide at the Data Link Layer?",
+          options: ["Error detection", "Guaranteed error correction", "Dynamic routing", "Receiver buffering"],
+          correctIndex: 0,
+          explanation: "CRC detects many common patterns of bit corruption; it does not correct corrupted bits."
+        },
+        {
+          question: "Which technique can correct supported bit errors without requiring retransmission?",
+          options: ["ARQ only", "Forward Error Correction (FEC)", "Character count", "Congestion control"],
+          correctIndex: 1,
+          explanation: "FEC adds structured redundant check bits (e.g. Hamming code) allowing receiver to repair errors locally."
+        },
+        {
+          question: "What is the main difference between flow control and congestion control?",
+          options: ["They are identical", "Flow control protects the receiver; congestion control protects the network", "Flow control selects routes; congestion control detects frame boundaries", "Flow control is Layer 1; congestion control is Layer 7"],
+          correctIndex: 1,
+          explanation: "Flow control prevents receiver buffer overrun; congestion control prevents network infrastructure collapse."
+        },
+        {
+          question: "Which statement about traditional Ethernet is correct?",
+          options: ["Every frame is acknowledged at Layer 2", "It retransmits every corrupted frame automatically at Layer 2", "It uses an FCS for error detection but does not acknowledge every frame at Layer 2", "It always uses Stop-and-Wait flow control"],
+          correctIndex: 2,
+          explanation: "Traditional Ethernet provides unacknowledged connectionless service; it verifies FCS and discards corrupted frames without Layer 2 ACKs."
+        }
+      ],
       references: [
-        { cite: "Tanenbaum & Wetherall, Computer Networks, 6th Ed., Ch. 3.1: Data Link Layer Design Issues", url: "https://www.pearson.com/en-us/subject-catalog/p/computer-networks/P200000003193" },
-        { cite: "Forouzan, Data Communications & Networking, 6th Ed., Ch. 11: Data Link Control", url: "https://www.mheducation.com/" }
+        { cite: "Tanenbaum, A. S., & Feamster, N. Computer Networks (6th Ed.) - Chapter 3: The Data Link Layer.", url: "https://www.pearson.com" },
+        { cite: "Kurose, J. F., & Ross, K. W. Computer Networking: A Top-Down Approach (8th Ed.) - Chapter 6.", url: "https://www.pearson.com" },
+        { cite: "RFC 1662 - PPP in HDLC-like Framing.", url: "https://www.rfc-editor.org/rfc/rfc1662" }
       ]
     },
-    prevTopicId: "encapsulation",
-    nextTopicId: "framing"
+    prevTopicId: "encapsulation", nextTopicId: "framing"
   },
 
+  // =========================================================================
+  // TOPIC 19: SIMPLEX PROTOCOLS (PDF Topic 6, pp. 144-152)
+  // =========================================================================
   "simplex-protocol": {
     id: "simplex-protocol",
-    title: "Simplex & Elementary Data Link Protocols",
-    unit: "Unit II: Data Link Layer & Reliable Transfer",
+    title: "Simplex Data Link Protocols",
+    unit: "Unit II: Data Link Layer & MAC Sublayer",
     unitId: "unit2",
-    level: "Level 2 — Standard Topic",
+    level: "Beginner → Intermediate",
     category: "datalink",
     difficulty: "Core",
-    readingTime: "7 min read",
-    standard: "Tanenbaum Ch. 3.3",
-    oneLiner: "A simplex protocol allows data flow in only one direction—the simplest DLL protocol assumes an ideal channel with no errors and infinite receiver buffer.",
-    quickAnswer: "Elementary protocols (Utopia, Simplex Stop-and-Wait, Simplex for Noisy Channel) progressively add error and flow control to handle real-world transmission challenges.",
-    whyItMatters: "These idealized protocols form the theoretical foundation for understanding all practical ARQ protocols like Go-Back-N and Selective Repeat used in real networks.",
+    readingTime: "20–25 min",
+    standard: "Tanenbaum Protocols 1 & 2 / Forouzan",
+    oneLiner: "Theoretical foundational protocols: Unrestricted Simplex (Utopian) and Simplex Stop-and-Wait.",
+    quickAnswer: "Unrestricted Simplex assumes an ideal, error-free channel with infinite receiver buffers; Simplex Stop-and-Wait adds receiver pacing feedback to accommodate finite processing speed.",
+    whyItMatters: "These protocols form the conceptual baseline for all modern reliable transport design, isolating the problem of transmission speed mismatch before introducing error recovery.",
+    prerequisitesList: [
+      { concept: "Simplex Communication", meaning: "Data travels strictly in one direction from sender to receiver." },
+      { concept: "Half-Duplex", meaning: "Both devices can transmit, but not simultaneously." },
+      { concept: "Full-Duplex", meaning: "Both devices can transmit simultaneously in both directions." }
+    ],
+    learningObjectives: [
+      "Distinguish simplex, half-duplex, and full-duplex communication modes.",
+      "Explain the ideal assumptions of the Unrestricted Simplex (Utopian) Protocol.",
+      "Understand why Simplex Stop-and-Wait introduces a reverse feedback acknowledgment.",
+      "Analyze the state transition model and timeline of Stop-and-Wait."
+    ],
     infobox: {
       layer: "Layer 2 (Data Link Layer)",
-      standard: "Tanenbaum Ch. 3.3, Forouzan Ch. 11",
-      type: "Elementary Protocol Design",
-      keyFormula: "\\text{Utilization}_{\\text{Stop-Wait}} = \\frac{1}{1 + 2a}, \\quad a = \\frac{t_{prop}}{t_{frame}}",
-      prerequisites: ["framing", "flow-control"],
-      relatedConcepts: ["stop-and-wait", "sliding-window", "flow-control", "error-detection"],
+      standard: "Theoretical Protocol Models",
+      type: "Foundational Flow Protocols",
+      keyFormula: "\\text{Simplex: } A \\to B \\quad | \\quad \\text{Stop-and-Wait: } A \\xrightarrow{\\text{Frame}} B \\implies B \\xrightarrow{\\text{Ready}} A",
+      prerequisites: ["dll-design-issues"],
+      relatedConcepts: ["stop-and-wait", "flow-control", "sliding-window"],
       compareWith: ["stop-and-wait"],
-      primaryUses: ["Theoretical protocol design", "Teaching fundamentals of reliable transfer", "Base for all ARQ protocols"]
+      primaryUses: ["Classroom protocol foundations, radio broadcast telemetry, simplex sensors"]
     },
     sections: {
-      overview: `<p>Tanenbaum introduces three progressively more realistic <strong>elementary data link protocols</strong> to illustrate how framing, flow control, and error control are combined:</p>
-        <ol class="wiki-ordered-list">
-          <li><strong>Protocol 1 – Utopia (Simplex, Unrestricted):</strong> An ideal, error-free channel with infinite receiver buffer. No flow or error control needed.</li>
-          <li><strong>Protocol 2 – Simplex Stop-and-Wait:</strong> Error-free channel but finite receiver buffer. Sender waits for a dummy ACK before sending the next frame (flow control only).</li>
-          <li><strong>Protocol 3 – Simplex for a Noisy Channel:</strong> Channel can lose or corrupt frames. Adds sequence numbers, ACKs, timeouts, and retransmission (both error and flow control).</li>
-        </ol>`,
+      overview: `the foundational baseline protocols that demonstrate how devices communicate over a unidirectional or half-duplex channel, starting with ideal theoretical assumptions and progressing to flow-regulated transmission.`,
+      eli10: `Imagine you are talking to someone over a one-way loudspeaker. In the "Utopian" world, you assume the listener never blinks, never gets tired, and understands every word instantly. But in real life, you must pause after every sentence and wait for them to give a thumbs-up before you say the next sentence!`,
+      analogy: `Broadcasting television vs. walking with a walkie-talkie: TV towers blast signals without ever checking if your TV is turned on (Unrestricted Simplex). A walkie-talkie requires saying "Over!" so the other person can acknowledge before you speak again (Stop-and-Wait).`,
       howItWorks: `
-        <h4>Protocol 1: Utopia (An Unrestricted Simplex Protocol)</h4>
-        <ul class="wiki-bullet-list">
-          <li>Data flows in <strong>one direction only</strong> (sender → receiver).</li>
-          <li><strong>Assumptions:</strong> Error-free channel, receiver can process frames infinitely fast.</li>
-          <li><strong>Sender:</strong> Continuously fetches packets from the network layer, frames them, and sends.</li>
-          <li><strong>Receiver:</strong> Waits for a frame, extracts the packet, delivers to its network layer.</li>
-          <li>This protocol is <em>purely theoretical</em>—no real channel is error-free.</li>
-        </ul>
-        <h4>Protocol 2: Simplex Stop-and-Wait (for Error-Free Channel)</h4>
-        <ul class="wiki-bullet-list">
-          <li>Still assumes <strong>no errors</strong>, but the receiver has a <strong>finite buffer</strong>.</li>
-          <li>After sending a frame, the sender <strong>waits for a dummy acknowledgement</strong> (ACK) before sending the next frame.</li>
-          <li>The ACK frame carries no data—it merely signals that the receiver is ready.</li>
-          <li>This achieves <strong>flow control</strong> via feedback.</li>
-        </ul>
-        <h4>Protocol 3: Simplex Protocol for a Noisy Channel</h4>
-        <ul class="wiki-bullet-list">
-          <li>Channel can <strong>corrupt or lose</strong> frames (both data and ACKs).</li>
-          <li>Sender adds a <strong>1-bit sequence number</strong> (0 or 1) to each frame.</li>
-          <li>Receiver sends a <strong>positive ACK</strong> only for correctly received frames.</li>
-          <li>Sender uses a <strong>countdown timer</strong>: if ACK not received within timeout, it retransmits.</li>
-          <li>Sequence numbers prevent <strong>duplicate acceptance</strong> when ACK is lost and frame is retransmitted.</li>
-          <li>This is the full <strong>Stop-and-Wait ARQ</strong> protocol.</li>
-        </ul>`,
-      diagram: `
-Protocol 1 (Utopia):              Protocol 2 (Stop-Wait):           Protocol 3 (Noisy Channel):
-                                                                     
-Sender    Channel    Receiver     Sender    Channel    Receiver     Sender    Channel    Receiver
-  |                    |            |                    |            |                    |
-  |---Frame 0--------->|            |---Frame 0--------->|            |---Frame 0--------->|
-  |---Frame 1--------->|            |<------ACK----------|            |   [Start Timer]    |
-  |---Frame 2--------->|            |---Frame 1--------->|            |<------ACK 0--------|
-  |---Frame 3--------->|            |<------ACK----------|            |   [Stop Timer]     |
-  |   (no waiting)     |            |   (waits each time)|            |---Frame 1--------->|
-  |        ...         |            |        ...         |            |   [Timer Expires]  |
-  |                    |            |                    |            |---Frame 1--------->|
-                                                                     |   [Retransmit!]    |
-                                                                     |<------ACK 1--------|`,
-      technicalDetails: `
-        <h4>Comparison of Elementary Protocols</h4>
-        <table class="wiki-table">
-          <thead><tr><th>Feature</th><th>Protocol 1 (Utopia)</th><th>Protocol 2 (Stop-Wait)</th><th>Protocol 3 (Noisy)</th></tr></thead>
-          <tbody>
-            <tr><td>Error Control</td><td>None</td><td>None</td><td>CRC + ACK + Timer</td></tr>
-            <tr><td>Flow Control</td><td>None</td><td>ACK feedback</td><td>ACK feedback</td></tr>
-            <tr><td>Sequence Numbers</td><td>None</td><td>None</td><td>1-bit (0 and 1)</td></tr>
-            <tr><td>Timeout/Retransmit</td><td>No</td><td>No</td><td>Yes</td></tr>
-            <tr><td>Practical?</td><td>No (purely theoretical)</td><td>Only on perfect channels</td><td>Yes — basis of real ARQ</td></tr>
-            <tr><td>Channel Utilization</td><td>100% (ideal)</td><td>1/(1+2a)</td><td>1/(1+2a) × (1-BER)</td></tr>
-          </tbody>
-        </table>
-        <h4>Why Only 1-Bit Sequence Number?</h4>
-        <p>In Stop-and-Wait, only <strong>one frame</strong> is outstanding at a time. The receiver only needs to distinguish between the <em>current</em> frame and the <em>previous</em> frame. Two states (0 and 1) suffice: if the receiver gets a frame with the same sequence number as the last accepted frame, it knows this is a <strong>duplicate retransmission</strong> and discards it.</p>`,
-      workedExample: `<p><strong>Scenario (Protocol 3):</strong> Sender transmits frames over a noisy channel with a 200ms round-trip time and frame transmission time of 50ms.</p>
         <ol class="wiki-ordered-list">
-          <li>Sender sends <code>Frame[seq=0]</code>, starts timer (timeout = 300ms).</li>
-          <li>Receiver gets frame correctly → extracts packet → sends <code>ACK[0]</code>.</li>
-          <li>Sender receives ACK[0] at t=250ms (before timeout) → sends <code>Frame[seq=1]</code>.</li>
-          <li><strong>ACK[1] is lost!</strong> Sender's timer expires at t=550ms.</li>
-          <li>Sender retransmits <code>Frame[seq=1]</code>.</li>
-          <li>Receiver checks: seq=1 matches expected → this is a <strong>duplicate</strong> → discards frame, resends <code>ACK[1]</code>.</li>
-          <li>Sender receives ACK[1] → moves to <code>Frame[seq=0]</code> (sequence wraps).</li>
-        </ol>
-        <p><strong>Channel Utilization:</strong> $U = \\frac{1}{1 + 2a} = \\frac{1}{1 + 2(200/50)} = \\frac{1}{9} \\approx 11.1\\%$</p>`,
-      advantagesLimitations: `
+          <li><strong>Unrestricted Simplex Protocol (Protocol 1):</strong>
+            <ul class="wiki-bullet-list">
+              <li>Assumptions: Completely error-free channel, zero lost frames, infinite receiver buffer capacity, sender transmits continuously.</li>
+              <li>Sender loop: <code>get_packet() &rarr; make_frame() &rarr; to_physical_layer()</code> forever.</li>
+              <li>Receiver loop: <code>from_physical_layer() &rarr; deliver_packet()</code> forever.</li>
+              <li>Fatal Flaw: Unrealistic. Channels experience noise, and real receivers have finite buffers that overflow.</li>
+            </ul>
+          </li>
+          <li><strong>Simplex Stop-and-Wait Protocol (Protocol 2):</strong>
+            <ul class="wiki-bullet-list">
+              <li>Assumptions: Channel is still assumed error-free, but receiver has finite processing speed.</li>
+              <li>Sender sends one frame, then <strong>waits</strong> until the receiver accepts it and returns a dummy "Ready" acknowledgment frame.</li>
+              <li>Receiver processes the frame, then returns the "Ready" signal.</li>
+              <li>Sender receives the signal, advances, and sends the next frame.</li>
+            </ul>
+          </li>
+        </ol>`,
+      diagram: `
+Protocol 1: Unrestricted Simplex       Protocol 2: Simplex Stop-and-Wait
+Sender           Receiver             Sender           Receiver
+  |                 |                   |                 |
+  |--- Frame 1 ---->|                   |--- Frame 1 ---->|
+  |--- Frame 2 ---->|                   |                 | (Processing)
+  |--- Frame 3 ---->|                   |<-- Ready -------|
+  |                 |                   |--- Frame 2 ---->|
+(Assumes infinite buffer!)              (Waits for receiver capacity!)`,
+      interactiveLabKey: "sliding-window",
+      technicalDetails: `
         <table class="wiki-table">
-          <thead><tr><th>Advantages</th><th>Limitations</th></tr></thead>
+          <thead><tr><th>Mode</th><th>Direction</th><th>Simultaneous?</th><th>Example</th></tr></thead>
           <tbody>
-            <tr><td>Conceptually simple; easy to implement</td><td>Very low channel utilization on long-delay links</td></tr>
-            <tr><td>Protocol 3 handles all error/loss scenarios</td><td>Only 1 frame in transit at a time</td></tr>
-            <tr><td>Foundation for understanding complex protocols</td><td>Sliding window protocols vastly outperform it</td></tr>
+            <tr><td>Simplex</td><td>One direction only ($A \\to B$)</td><td>No return channel</td><td>FM Radio, GPS broadcast, telemetry sensors</td></tr>
+            <tr><td>Half-Duplex</td><td>Both directions ($A \\leftrightarrow B$)</td><td>No (Take turns)</td><td>Walkie-talkies, classic shared Ethernet hubs</td></tr>
+            <tr><td>Full-Duplex</td><td>Both directions ($A \\leftrightarrow B$)</td><td>Yes (Simultaneous)</td><td>Modern switched Ethernet, telephone call</td></tr>
           </tbody>
         </table>`,
-      whereUsed: ["Theoretical teaching of protocol design", "Simple embedded system serial links", "IoT devices with very low data rates", "Foundation for Stop-and-Wait ARQ in HDLC"],
-      commonMistakes: "Thinking Protocol 1 (Utopia) can be used in practice. No real channel is error-free and no real receiver has infinite processing speed. Utopia exists purely to illustrate what happens when you remove all constraints.",
-      compareWith: { title: "Simplex vs Sliding Window", note: "Simplex protocols allow only 1 frame in flight. Sliding window protocols allow W frames in flight simultaneously, dramatically improving throughput on high-delay links." },
-      practice: {
-        question: "In Tanenbaum's Protocol 3 (Simplex for Noisy Channel), why does the sender use a 1-bit sequence number instead of no sequence number?",
-        choices: ["To identify the frame type", "To detect duplicate frames caused by lost ACKs", "To calculate CRC", "To measure round-trip time"],
-        correctIndex: 1,
-        explanation: "When an ACK is lost, the sender retransmits the same frame. Without a sequence number, the receiver cannot distinguish a retransmission from a new frame. The 1-bit sequence number (alternating 0/1) lets the receiver detect and discard duplicates."
+      workedExamples: {
+        level1: `<strong>Problem:</strong> Explain why the Unrestricted Simplex protocol does not require acknowledgments or sequence numbers.<br><br>
+<strong>Solution:</strong><br>
+Because the protocol assumes an ideal channel where frames are <em>never corrupted, never lost, and never delayed</em>, and the receiver has infinite processing speed. Every frame transmitted is guaranteed to arrive and be processed instantly.`,
+        level2: `<strong>Problem:</strong> In Simplex Stop-and-Wait, what happens if the receiver takes 5 ms to process a frame, while the wire transmission takes 1 ms? Trace the timeline.<br><br>
+<strong>Working:</strong><br>
+- T = 0 ms: Sender begins transmission.<br>
+- T = 1 ms: Frame leaves wire and arrives at receiver.<br>
+- T = 1 to 6 ms: Receiver processes frame (5 ms delay). Sender remains idle.<br>
+- T = 6 ms: Receiver sends "Ready" signal.<br>
+- T = 7 ms: Sender receives "Ready" and dispatches Frame 2.<br>
+<em>Result: Flow control successfully prevented buffer overflow at the cost of sender idle waiting.</em>`,
+        level3: `<strong>Problem:</strong> If a noise burst corrupts Frame 1 in the Simplex Stop-and-Wait protocol (Protocol 2), what catastrophic failure occurs?<br><br>
+<strong>Analysis:</strong><br>
+Protocol 2 has <strong>no retransmission timer</strong>! The damaged frame is discarded by the receiver, so the receiver never sends the "Ready" acknowledgment. The sender sits blocked forever waiting for "Ready" (Deadlock!). This proves why Stop-and-Wait ARQ (Protocol 3) MUST incorporate timers and sequence numbers.`
       },
+      advantagesLimitations: `
+        <table class="wiki-table">
+          <thead><tr><th>Protocol</th><th>Advantage</th><th>Fatal Limitation</th></tr></thead>
+          <tbody>
+            <tr><td>Unrestricted Simplex</td><td>Zero overhead, maximum channel throughput</td><td>Completely unrealistic; crashes on any real channel</td></tr>
+            <tr><td>Simplex Stop-and-Wait</td><td>Prevents receiver buffer overrun</td><td>Deadlocks permanently if a frame or ACK is lost in noise</td></tr>
+          </tbody>
+        </table>`,
+      whereUsed: [
+        "Unidirectional fiber-optic data diodes in high-security military networks.",
+        "Satellite TV (DVB-S) and radio broadcasts.",
+        "Foundational computer science curriculum (Tanenbaum Ch. 3)."
+      ],
+      commonMistakes: `
+        <ul class="wiki-bullet-list">
+          <li><strong>Assuming simplex means unreliable:</strong> Simplex describes direction of transmission, not reliability. A simplex protocol can incorporate Forward Error Correction (FEC) for high reliability.</li>
+        </ul>`,
+      quiz: [
+        {
+          question: "What does the Unrestricted Simplex protocol assume about the communication channel?",
+          options: ["High noise and packet loss", "Error-free channel and an always-ready receiver with infinite buffer", "Full-duplex bidirectional switching", "CSMA collision detection"],
+          correctIndex: 1,
+          explanation: "The Utopian protocol assumes the channel never corrupts or loses frames and the receiver never runs out of buffer space."
+        },
+        {
+          question: "Why does the Simplex Stop-and-Wait protocol introduce a reverse acknowledgment signal?",
+          options: ["To encrypt data", "To pace transmission and prevent overwhelming the receiver's processing capacity", "To measure cable length", "To assign MAC addresses"],
+          correctIndex: 1,
+          explanation: "The reverse signal allows the receiver to tell the sender when it has finished processing the previous frame and is ready for the next."
+        }
+      ],
       references: [
-        { cite: "Tanenbaum & Wetherall, Computer Networks, 6th Ed., Ch. 3.3: Elementary Data Link Protocols", url: "https://www.pearson.com/en-us/subject-catalog/p/computer-networks/P200000003193" },
-        { cite: "Forouzan, Data Communications & Networking, 6th Ed., Ch. 11.3: Simple Protocol & Stop-and-Wait", url: "https://www.mheducation.com/" }
+        { cite: "Tanenbaum & Wetherall, Computer Networks (6th Ed.) - Section 3.3.1 & 3.3.2.", url: "https://www.pearson.com" }
       ]
     },
-    prevTopicId: "flow-control",
-    nextTopicId: "stop-and-wait"
+    prevTopicId: "flow-control", nextTopicId: "stop-and-wait"
   },
 
+  // =========================================================================
+  // TOPIC 20: CHANNEL ALLOCATION PROBLEM (PDF Topic 7, pp. 166-179)
+  // =========================================================================
   "channel-allocation": {
     id: "channel-allocation",
-    title: "Channel Allocation Problem & MAC Sublayer",
-    unit: "Unit II: Data Link Layer & Reliable Transfer",
+    title: "MAC Sublayer & The Channel Allocation Problem",
+    unit: "Unit II: Data Link Layer & MAC Sublayer",
     unitId: "unit2",
-    level: "Level 2 — Standard Topic",
+    level: "Beginner → Intermediate",
     category: "datalink",
     difficulty: "Core",
-    readingTime: "7 min read",
-    standard: "Tanenbaum Ch. 4.1",
-    oneLiner: "The channel allocation problem asks how to divide a single broadcast channel among N competing stations efficiently—static methods (FDM/TDM) vs dynamic multiple access protocols.",
-    quickAnswer: "Static allocation (FDM/TDM) wastes bandwidth for bursty traffic. Dynamic allocation allows stations to contend for the channel on demand, leading to higher utilization for typical LAN workloads.",
-    whyItMatters: "Shared media like Ethernet, Wi-Fi, and satellite links require fair, efficient channel access—choosing the wrong strategy can reduce throughput to near zero under heavy load.",
+    readingTime: "30 min",
+    standard: "IEEE 802 LAN / Tanenbaum Ch. 4",
+    oneLiner: "How multiple competing devices share a single broadcast communication channel efficiently and fairly.",
+    quickAnswer: "The Medium Access Control (MAC) sublayer coordinates how devices share a single transmission channel, resolving the Channel Allocation Problem via Static (FDM/TDM) or Dynamic (Random/Controlled) allocation.",
+    whyItMatters: "When multiple computers share a single cable or radio frequency, simultaneous transmissions collide and destroy data. MAC protocols define the traffic rules that prevent or resolve contention.",
+    prerequisitesList: [
+      { concept: "Shared Channel", meaning: "A transmission medium (cable, airwaves) shared by multiple stations." },
+      { concept: "Collision", meaning: "Overlapping transmissions interfering so that no receiver can decode the signal." },
+      { concept: "MAC Sublayer", meaning: "The lower sublayer of Layer 2 managing access to physical media." }
+    ],
+    learningObjectives: [
+      "Distinguish the MAC sublayer from the Logical Link Control (LLC) sublayer.",
+      "Understand the Channel Allocation Problem and key performance metrics (throughput, delay, fairness).",
+      "Compare Static Channel Allocation (FDM/TDM) against Dynamic Channel Allocation.",
+      "Classify dynamic MAC protocols: Random Access, Controlled Access, Channelization."
+    ],
     infobox: {
-      layer: "Layer 2 (Data Link — MAC Sublayer)",
-      standard: "Tanenbaum Ch. 4.1, IEEE 802 series",
-      type: "Medium Access Control",
-      keyFormula: "T_{FDM} = N \\cdot T_{\\text{single}}, \\quad \\text{for } N \\text{ users each getting } C/N \\text{ bandwidth}",
-      prerequisites: ["dll-design-issues", "framing"],
+      layer: "Layer 2 (Lower MAC Sublayer)",
+      standard: "IEEE 802 Architecture, ITU-T",
+      type: "Multi-Access Coordination",
+      keyFormula: "\\text{Delay}_{\\text{FDM}} = \\frac{T}{1 - \\lambda / (C/N)} \\gg \\text{Delay}_{\\text{Dynamic}}",
+      prerequisites: ["dll-design-issues"],
       relatedConcepts: ["aloha", "csma-protocols", "collision-free-protocols", "ethernet"],
-      compareWith: ["aloha"],
-      primaryUses: ["LAN design", "Satellite channel sharing", "Wireless spectrum management"]
+      compareWith: ["ethernet"],
+      primaryUses: ["Ethernet broadcast bus, Wi-Fi radio bands, satellite transponders, cellular base stations"]
     },
     sections: {
-      overview: `<p>When multiple stations share a single broadcast channel (like a coaxial Ethernet cable or a wireless frequency), they need a way to decide <strong>who gets to transmit and when</strong>. This is the <strong>Channel Allocation Problem</strong>, handled by the <strong>Medium Access Control (MAC) sublayer</strong>—the lower part of the Data Link Layer.</p>
-        <p>Tanenbaum identifies two fundamental approaches:</p>
-        <ul class="wiki-bullet-list">
-          <li><strong>Static Channel Allocation:</strong> Pre-divide the channel using FDM (frequency slots) or TDM (time slots). Each station gets a fixed share.</li>
-          <li><strong>Dynamic Channel Allocation:</strong> Stations contend for the channel in real-time using various multiple access protocols (ALOHA, CSMA, etc.).</li>
-        </ul>`,
+      overview: `the central design challenge of the Medium Access Control (MAC) sublayer: how to divide or allocate a single shared broadcast channel among multiple competing stations so that bandwidth is used efficiently, collisions are minimized, and all stations receive fair access.`,
+      eli10: `Imagine 30 students in a classroom who all want to speak. If everyone talks at once, nobody understands anything (a collision!). You need a system: either assign each student 1 minute on the clock (TDM), give each student their own private room (FDM), or have students raise their hands and take turns (MAC protocols)!`,
+      analogy: `A round-table discussion with one shared microphone: Either a moderator passes the mic in order (controlled access), or whoever sees the mic free grabs it (contention), with a rule for what to do if two hands grab it at the same moment.`,
       howItWorks: `
-        <h4>Static Channel Allocation</h4>
-        <ul class="wiki-bullet-list">
-          <li><strong>FDM (Frequency Division Multiplexing):</strong> Divides total bandwidth C into N equal sub-bands of C/N each. Each station permanently owns one sub-band.</li>
-          <li><strong>TDM (Time Division Multiplexing):</strong> Divides time into recurring frames of N slots. Each station transmits only during its designated slot.</li>
-          <li><strong>Problem:</strong> If N = 100 stations and only 5 are active, 95% of the bandwidth is wasted. Mean delay increases by factor of N (proven by queuing theory).</li>
-        </ul>
-        <h4>Why Static Allocation Fails for LANs</h4>
-        <p>According to queuing theory (M/D/1 queue): If the mean frame arrival rate is λ and frame length is 1/μ bits, then mean delay for a single channel of capacity C is:</p>
-        <p style="text-align:center">$T = \\frac{1}{\\mu C - \\lambda}$</p>
-        <p>If the channel is divided into N sub-channels by FDM, each with capacity C/N, and the arrival rate per sub-channel is λ/N:</p>
-        <p style="text-align:center">$T_{FDM} = \\frac{1}{\\mu(C/N) - \\lambda/N} = \\frac{N}{\\mu C - \\lambda} = N \\cdot T$</p>
-        <p>This proves that <strong>FDM increases mean delay by a factor of N</strong> compared to dynamic allocation—unacceptable for bursty LAN traffic.</p>
-        <h4>Dynamic Channel Allocation Assumptions</h4>
-        <p>Tanenbaum lists five key assumptions for dynamic allocation:</p>
         <ol class="wiki-ordered-list">
-          <li><strong>Station Model:</strong> N independent stations, each generating frames with probability λΔt in interval Δt.</li>
-          <li><strong>Single Channel:</strong> One shared broadcast channel available for all communication.</li>
-          <li><strong>Collision Assumption:</strong> If two frames overlap in time, they collide and both are garbled.</li>
-          <li><strong>Continuous or Slotted Time:</strong> Transmission can begin at any instant (continuous) or only at slot boundaries (slotted).</li>
-          <li><strong>Carrier Sense or No Carrier Sense:</strong> Stations may or may not be able to detect whether the channel is in use before transmitting.</li>
+          <li><strong>Layer 2 Sublayer Split (IEEE 802):</strong>
+            <ul class="wiki-bullet-list">
+              <li><em>LLC (Logical Link Control - 802.2):</em> Upper sublayer providing a uniform interface and flow/error control to Layer 3, hiding media differences.</li>
+              <li><em>MAC (Medium Access Control):</em> Lower sublayer managing medium-specific framing, addressing, and channel access arbitration.</li>
+            </ul>
+          </li>
+          <li><strong>Static Channel Allocation:</strong> Divides capacity in advance.
+            <ul class="wiki-bullet-list">
+              <li><em>FDM:</em> Divides total bandwidth into $N$ fixed frequency bands.</li>
+              <li><em>TDM:</em> Divides time into repeating round-robin slots.</li>
+              <li><em>Flaw with Computer Traffic:</em> Computer data is bursty (peak-to-average ratio $1000:1$). If a station has no traffic, its assigned slot sits empty and wasted!</li>
+            </ul>
+          </li>
+          <li><strong>Dynamic Channel Allocation:</strong> Stations compete for or receive channel capacity on demand as traffic arises.</li>
         </ol>`,
       diagram: `
-STATIC ALLOCATION (FDM):                    DYNAMIC ALLOCATION:
-
-Frequency ▲                                 Time ──────────────────────►
-          │ ┌────────┐                       
-     f4   │ │Station D│                      Station A ███░░░░░███░░░░░░
-     f3   │ │Station C│                      Station B ░░░███░░░░░███░░░
-     f2   │ │Station B│                      Station C ░░░░░░███░░░░░███
-     f1   │ │Station A│                      Station D ░░░░░░░░░███░░░░░
-          └─┴────────┴──► Time               
-                                             Contention   Collision    
-     Each station gets 1/N bandwidth         Stations transmit on demand
-     Wastes BW when station is idle          Higher utilization for bursty traffic`,
++-------------------------------------------------------------+
+|                    IEEE 802 LAN ARCHITECTURE                |
++-------------------------------------------------------------+
+| NETWORK LAYER (OSI Layer 3 - IP Packets & Routing)          |
++-------------------------------------------------------------+
+| DATA LINK LAYER (OSI Layer 2):                              |
+|   +-------------------------------------------------------+ |
+|   | LLC Sublayer (IEEE 802.2 - Logical Link Control)      | |
+|   +-------------------------------------------------------+ |
+|   | MAC Sublayer (IEEE 802.3 Ethernet / 802.11 Wi-Fi)     | |
+|   +-------------------------------------------------------+ |
++-------------------------------------------------------------+
+| PHYSICAL LAYER (OSI Layer 1 - Signals, Bits, Radio Spectrum)|
++-------------------------------------------------------------+`,
+      interactiveLabKey: "aloha-csma",
       technicalDetails: `
-        <h4>Classification of Multiple Access Protocols</h4>
         <table class="wiki-table">
-          <thead><tr><th>Category</th><th>Protocol</th><th>Carrier Sense?</th><th>Time Model</th><th>Collision Handling</th></tr></thead>
+          <thead><tr><th>Feature</th><th>Static Allocation (FDM/TDM)</th><th>Dynamic Allocation (Random/Controlled)</th></tr></thead>
           <tbody>
-            <tr><td rowspan="2">Random Access</td><td>Pure ALOHA</td><td>No</td><td>Continuous</td><td>Random backoff</td></tr>
-            <tr><td>Slotted ALOHA</td><td>No</td><td>Slotted</td><td>Random backoff</td></tr>
-            <tr><td rowspan="3">Carrier Sense</td><td>1-persistent CSMA</td><td>Yes</td><td>Continuous</td><td>Detect & backoff</td></tr>
-            <tr><td>Non-persistent CSMA</td><td>Yes</td><td>Continuous</td><td>Random wait</td></tr>
-            <tr><td>CSMA/CD</td><td>Yes</td><td>Continuous</td><td>Jam & binary exp. backoff</td></tr>
-            <tr><td rowspan="2">Collision-Free</td><td>Bitmap</td><td>N/A</td><td>Slotted</td><td>Reservation (no collisions)</td></tr>
-            <tr><td>Binary Countdown</td><td>N/A</td><td>Slotted</td><td>Priority arbitration</td></tr>
+            <tr><td>Resource Assignment</td><td>Predetermined, fixed division</td><td>Assigned on demand as frames arrive</td></tr>
+            <tr><td>Performance with Bursty Traffic</td><td>Poor; idle stations waste capacity</td><td>Excellent; active stations use full channel</td></tr>
+            <tr><td>Delay at Low Load</td><td>High (must wait for assigned slot)</td><td>Very low (transmit immediately)</td></tr>
+            <tr><td>Collisions</td><td>Impossible by design</td><td>Possible in random access contention</td></tr>
+            <tr><td>Typical Use</td><td>Traditional telephone voice circuits</td><td>Ethernet, Wi-Fi, Internet packet data</td></tr>
           </tbody>
         </table>`,
-      workedExample: `<p><strong>Problem:</strong> A LAN has 20 stations sharing a 10 Mbps channel. Average frame size is 1000 bits. Only 3 stations are active at any time.</p>
-        <p><strong>Static FDM:</strong> Each station gets 10/20 = 0.5 Mbps. Active stations can only use 0.5 Mbps each → total utilization = 3 × 0.5 = 1.5 Mbps out of 10 Mbps = <strong>15% utilization</strong>.</p>
-        <p><strong>Dynamic Allocation:</strong> Each active station contends for the full 10 Mbps channel. Even with collision overhead, utilization can reach <strong>80-90%</strong> with CSMA/CD.</p>
-        <p><strong>Conclusion:</strong> Dynamic allocation is 5-6× more efficient for bursty LAN traffic.</p>`,
+      workedExamples: {
+        level1: `<strong>Problem:</strong> Explain why static FDM is inefficient for bursty computer traffic.<br><br>
+<strong>Solution:</strong><br>
+In FDM, channel capacity $C$ is divided into $N$ independent sub-channels of capacity $C/N$. If only 1 out of 10 stations has data to send, that active station is throttled to only $1/10$th of the wire speed, while the other $9/10$ths of the channel sit completely empty and wasted.`,
+        level2: `<strong>Problem:</strong> A channel has total capacity $C = 100$ Mbps and $N = 10$ stations. A bursty station has 10 Mb of data to send. Compare transmission time under FDM vs. Dynamic access.<br><br>
+<strong>Working:</strong><br>
+- Under FDM: Station is restricted to bandwidth $C/N = 10$ Mbps. Transmission time $= \\frac{10\\text{ Mb}}{10\\text{ Mbps}} = \\mathbf{1.0\\text{ second}}$.<br>
+- Under Dynamic allocation: Station uses full 100 Mbps channel. Transmission time $= \\frac{10\\text{ Mb}}{100\\text{ Mbps}} = \\mathbf{0.1\\text{ seconds}}$ (10x faster!).`,
+        level3: `<strong>Problem:</strong> Name the 3 broad families of dynamic channel allocation and cite one real-world protocol for each.<br><br>
+<strong>Analysis:</strong><br>
+1. <strong>Random Access (Contention):</strong> Stations transmit without centralized permission; collisions can occur (e.g. Ethernet CSMA/CD, Wi-Fi CSMA/CA).<br>
+2. <strong>Controlled Access:</strong> Stations coordinate or take turns; zero collisions (e.g. Token Ring IEEE 802.5, Bit-Map reservation).<br>
+3. <strong>Channelization:</strong> Shared medium divided dynamically by codes/frequencies (e.g. Cellular CDMA, 4G/5G OFDMA).`
+      },
       advantagesLimitations: `
         <table class="wiki-table">
-          <thead><tr><th>Approach</th><th>Advantages</th><th>Limitations</th></tr></thead>
+          <thead><tr><th>Method</th><th>Advantages</th><th>Disadvantages</th></tr></thead>
           <tbody>
-            <tr><td>Static (FDM/TDM)</td><td>Guaranteed bandwidth, no collisions, predictable</td><td>Wastes bandwidth for bursty traffic, delay ×N</td></tr>
-            <tr><td>Dynamic (Contention)</td><td>Efficient for bursty traffic, adapts to load</td><td>Collisions possible, variable delay under heavy load</td></tr>
+            <tr><td>Random Access</td><td>Simple, zero setup delay at low load</td><td>Collisions increase and throughput drops under heavy load</td></tr>
+            <tr><td>Controlled Access</td><td>Collision-free; orderly and predictable</td><td>Coordination overhead; stations wait for tokens/polls</td></tr>
           </tbody>
         </table>`,
-      whereUsed: ["Ethernet LANs (dynamic/CSMA/CD)", "Cellular networks (static/TDMA, FDMA, CDMA)", "Satellite channels (ALOHA, TDMA)", "Wi-Fi (dynamic/CSMA/CA)"],
-      commonMistakes: "Assuming static allocation is always bad. For constant-bit-rate traffic like voice circuits (telephone networks), static TDM is actually optimal because every station always has data to send.",
-      compareWith: { title: "Static vs Dynamic Channel Allocation", note: "Static allocation is optimal for constant traffic (telephony). Dynamic allocation is optimal for bursty, variable traffic (data networks)." },
-      practice: {
-        question: "According to queuing theory, if a channel of capacity C is divided into N sub-channels using FDM, the mean delay increases by a factor of:",
-        choices: ["2", "N", "N²", "log N"],
-        correctIndex: 1,
-        explanation: "Tanenbaum proves using M/D/1 queuing theory that FDM with N sub-channels increases mean frame delay by exactly a factor of N compared to a single dynamic channel."
-      },
+      whereUsed: [
+        "Ethernet LANs (Random Access CSMA/CD / Switched).",
+        "Wi-Fi Wireless LANs (Random Access CSMA/CA).",
+        "Cellular networks (TDMA, CDMA, OFDMA).",
+        "Cable Internet DOCSIS (Reservation & Contention requests)."
+      ],
+      commonMistakes: `
+        <ul class="wiki-bullet-list">
+          <li><strong>Confusing MAC addressing with MAC sublayer:</strong> MAC addressing is just one feature. The MAC sublayer encompasses channel allocation, framing, collision management, and media rules.</li>
+        </ul>`,
+      quiz: [
+        {
+          question: "What is the primary function of the MAC sublayer in IEEE 802 architectures?",
+          options: ["To route IP packets across the Internet", "To coordinate access to the shared communication medium", "To encrypt user files", "To replace physical cables"],
+          correctIndex: 1,
+          explanation: "The Medium Access Control sublayer defines the rules for sharing the physical transmission medium."
+        },
+        {
+          question: "Which method divides a channel into separate frequency bands?",
+          options: ["Frequency Division Multiplexing (FDM)", "Time Division Multiplexing (TDM)", "Polling", "Token passing"],
+          correctIndex: 0,
+          explanation: "FDM divides the spectrum into distinct frequency slices for different users."
+        },
+        {
+          question: "Why is static channel allocation considered inefficient for computer networks?",
+          options: ["Computers cannot understand frequencies", "Computer traffic is bursty, leaving pre-allocated channels idle while others are congested", "It causes infinite collisions", "It requires fiber optics"],
+          correctIndex: 1,
+          explanation: "Because computer traffic occurs in sporadic bursts, static channels waste capacity during quiet periods."
+        },
+        {
+          question: "Which of the following is an example of controlled access?",
+          options: ["Token passing", "Pure ALOHA", "1-persistent CSMA", "Uncoordinated transmission"],
+          correctIndex: 0,
+          explanation: "Token passing coordinates access by requiring a station to hold a token before transmitting, preventing collisions."
+        }
+      ],
       references: [
-        { cite: "Tanenbaum & Wetherall, Computer Networks, 6th Ed., Ch. 4.1: The Channel Allocation Problem", url: "https://www.pearson.com/en-us/subject-catalog/p/computer-networks/P200000003193" },
-        { cite: "Forouzan, Data Communications & Networking, 6th Ed., Ch. 12.1: Random Access", url: "https://www.mheducation.com/" }
+        { cite: "Tanenbaum & Wetherall, Computer Networks (6th Ed.) - Chapter 4: The Medium Access Control Sublayer.", url: "https://www.pearson.com" }
       ]
     },
-    prevTopicId: "selective-repeat",
-    nextTopicId: "aloha"
+    prevTopicId: "selective-repeat", nextTopicId: "aloha"
   },
 
+  // =========================================================================
+  // TOPIC 21: ALOHA (PURE & SLOTTED) (PDF Topic 8, pp. 179-186)
+  // =========================================================================
   "aloha": {
     id: "aloha",
     title: "ALOHA Protocols (Pure & Slotted)",
-    unit: "Unit II: Data Link Layer & Reliable Transfer",
+    unit: "Unit II: Data Link Layer & MAC Sublayer",
     unitId: "unit2",
-    level: "Level 2 — Standard Topic",
+    level: "Beginner → Intermediate",
     category: "datalink",
     difficulty: "Core",
-    readingTime: "8 min read",
-    standard: "Tanenbaum Ch. 4.2",
-    oneLiner: "ALOHA is the earliest random access protocol—stations transmit whenever they have data; collisions are resolved by random backoff and retransmission.",
-    quickAnswer: "Pure ALOHA achieves maximum throughput of 18.4% (1/2e) because the vulnerable period is 2×frame time. Slotted ALOHA doubles this to 36.8% (1/e) by synchronizing transmissions to slot boundaries.",
-    whyItMatters: "ALOHA was the first practical wireless networking protocol (1970, University of Hawaii) and its contention-based approach directly influenced Ethernet, Wi-Fi, and modern cellular random access channels.",
+    readingTime: "25 min",
+    standard: "Norman Abramson (1970) / University of Hawaii",
+    oneLiner: "The pioneering random access protocols establishing the mathematical foundations of channel contention.",
+    quickAnswer: "In Pure ALOHA, stations transmit whenever ready (max throughput 18.4% at G=0.5). Slotted ALOHA restricts transmissions to time slot boundaries, doubling throughput to 36.8% at G=1.0.",
+    whyItMatters: "ALOHA introduced random backoff and contention-based transmission, forming the foundational ancestor of Ethernet CSMA/CD, Wi-Fi CSMA/CA, and cellular random access channels (RACH).",
+    prerequisitesList: [
+      { concept: "Vulnerable Period", meaning: "The time interval during which the start of another frame causes a collision." },
+      { concept: "Offered Load (G)", meaning: "Average number of transmission attempts per frame time, including retransmissions." },
+      { concept: "Throughput (S)", meaning: "The fraction of channel capacity successfully delivering useful frames." }
+    ],
+    learningObjectives: [
+      "Explain the operational transmission rules of Pure and Slotted ALOHA.",
+      "Derive the vulnerable period for Pure ALOHA ($2T$) and Slotted ALOHA ($T$).",
+      "Analyze the throughput equations: $S = G e^{-2G}$ and $S = G e^{-G}$.",
+      "Understand why random exponential backoff is required after collisions."
+    ],
     infobox: {
-      layer: "Layer 2 (Data Link — MAC Sublayer)",
-      standard: "Abramson, 1970 (ALOHAnet)",
-      type: "Random Access Protocol",
-      keyFormula: "S_{\\text{Pure}} = G \\cdot e^{-2G}, \\quad S_{\\text{Slotted}} = G \\cdot e^{-G}",
+      layer: "Layer 2 (MAC Sublayer)",
+      standard: "ALOHANET (1970)",
+      type: "Random Access Contention",
+      keyFormula: "S_{\\text{pure}} = Ge^{-2G} \\ (18.4\\%), \\quad S_{\\text{slotted}} = Ge^{-G} \\ (36.8\\%)",
       prerequisites: ["channel-allocation"],
-      relatedConcepts: ["csma-protocols", "ethernet", "collision-free-protocols"],
+      relatedConcepts: ["csma-protocols", "collision-free-protocols", "ethernet"],
       compareWith: ["csma-protocols"],
-      primaryUses: ["ALOHAnet (1970)", "Satellite random access", "RFID anti-collision", "LTE/5G RACH"]
+      primaryUses: ["Cellular RACH initial access, satellite uplink contention, RFID tags"]
     },
     sections: {
-      overview: `<p>The <strong>ALOHA</strong> protocol, invented by Norman Abramson at the University of Hawaii in 1970, was the first system to demonstrate random wireless data networking. The ALOHAnet connected the Hawaiian islands using a shared UHF radio channel.</p>
-        <p>The core idea is radically simple: <strong>transmit whenever you have data</strong>. If a collision occurs, wait a random time and try again.</p>
-        <p>Two variants exist:</p>
-        <ul class="wiki-bullet-list">
-          <li><strong>Pure ALOHA:</strong> Stations transmit at any time (continuous time model).</li>
-          <li><strong>Slotted ALOHA:</strong> Time is divided into uniform slots; stations can only transmit at slot boundaries.</li>
-        </ul>`,
+      overview: `the pioneering random access protocol developed at the University of Hawaii under Norman Abramson to connect island campuses over shared radio frequencies, establishing the principles of packet collision and retransmission.`,
+      eli10: `Imagine a group chat where anyone can text at any millisecond. If two people text at the exact same second, both messages get garbled and unreadable! In Slotted ALOHA, the teacher rings a bell every minute, and you are only allowed to send a message right on the chime. That cut collisions in half!`,
+      analogy: `Entering a busy roundabout: In Pure ALOHA, cars enter the roundabout whenever they feel like it without looking. In Slotted ALOHA, a traffic officer allows cars to enter only on green light pulses every 5 seconds.`,
       howItWorks: `
-        <h4>Pure ALOHA</h4>
         <ol class="wiki-ordered-list">
-          <li>When a station has a frame to send, it <strong>transmits immediately</strong>.</li>
-          <li>After transmission, the station listens for an <strong>acknowledgement</strong> from the receiver.</li>
-          <li>If an ACK is received, the frame was successful.</li>
-          <li>If <strong>no ACK</strong> (collision occurred), the station waits a <strong>random backoff time</strong> and retransmits.</li>
-          <li>The <strong>vulnerable period</strong> = 2 × frame time (t₀). A frame sent at time t can collide with any frame sent in the interval [t - t₀, t + t₀].</li>
-        </ol>
-        <h4>Throughput Analysis (Pure ALOHA)</h4>
-        <p>Let G = offered load (average number of transmission attempts per frame time, including retransmissions).</p>
-        <p>Probability of a successful frame = probability of <strong>no other transmission</strong> during the vulnerable period 2t₀:</p>
-        <p style="text-align:center">$S = G \\cdot e^{-2G}$</p>
-        <p>Maximum throughput occurs at G = 0.5: $S_{max} = \\frac{1}{2e} \\approx 0.184$ (18.4%)</p>
-
-        <h4>Slotted ALOHA</h4>
-        <ol class="wiki-ordered-list">
-          <li>Time is divided into <strong>discrete slots</strong>, each exactly one frame time long.</li>
-          <li>Stations are <strong>synchronized</strong> and can only begin transmission at a slot boundary.</li>
-          <li>If two stations transmit in the same slot, both frames collide → both wait random number of slots and retry.</li>
-          <li><strong>Vulnerable period = 1 × frame time</strong> (halved from Pure ALOHA).</li>
-        </ol>
-        <h4>Throughput Analysis (Slotted ALOHA)</h4>
-        <p style="text-align:center">$S = G \\cdot e^{-G}$</p>
-        <p>Maximum throughput at G = 1: $S_{max} = \\frac{1}{e} \\approx 0.368$ (36.8%)</p>`,
+          <li><strong>Pure ALOHA:</strong>
+            <ul class="wiki-bullet-list">
+              <li>Whenever a station has a frame ready, it transmits immediately without sensing the channel.</li>
+              <li>Sender listens for an ACK. If received, success!</li>
+              <li>If no ACK arrives within timeout, a collision is assumed. The station waits a <strong>random backoff time</strong> and retransmits.</li>
+            </ul>
+          </li>
+          <li><strong>Slotted ALOHA:</strong>
+            <ul class="wiki-bullet-list">
+              <li>Time is synchronized into discrete slots of duration $T$ (one frame transmission time).</li>
+              <li>Stations are permitted to transmit <em>only at the beginning of a slot</em>.</li>
+              <li>If two stations have frames ready mid-slot, both must wait for the next boundary, preventing partial frame overlaps!</li>
+            </ul>
+          </li>
+        </ol>`,
       diagram: `
-PURE ALOHA - Vulnerable Period = 2 × Frame Time:
+Pure ALOHA Vulnerable Period = 2T:
+Frame t0:                [------ Frame t0 ------]
+Collision Range:   [--- Frame A ---]      [--- Frame B ---]
+Time:             (t0 - T)        t0     (t0 + T)
+Any frame starting between (t0 - T) and (t0 + T) destroys Frame t0!
 
-     t₀          t₀
-  ◄────────►◄────────►
-  ┌────────┐┌────────┐
-  │ DANGER │█ Frame █│ DANGER │
-  │ ZONE   ││ by A   │ ZONE   │
-  └────────┘└────────┘
-  Any frame starting in     Frame A
-  this 2t₀ window collides  starts here
-  with Frame A.
-
-SLOTTED ALOHA - Vulnerable Period = 1 × Frame Time:
-
-  Slot 1    Slot 2    Slot 3    Slot 4    Slot 5
-  ┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐
-  │  A     ││  B+C   ││  (empty)││  B     ││  C     │
-  │ (ok)   ││COLLISION││        ││ (ok)   ││ (ok)   │
-  └────────┘└────────┘└────────┘└────────┘└────────┘
-              ▲ Both B and C chose same slot → collision`,
+Slotted ALOHA Vulnerable Period = T:
+Slot k-1               Slot k (Starts at t0)        Slot k+1
+|-------------------|---[ Frame t0 ]----|-------------------|
+Frames only collide if transmitted in the EXACT same slot boundary!`,
+      interactiveLabKey: "aloha-csma",
       technicalDetails: `
-        <h4>Comparison: Pure ALOHA vs Slotted ALOHA</h4>
         <table class="wiki-table">
-          <thead><tr><th>Feature</th><th>Pure ALOHA</th><th>Slotted ALOHA</th></tr></thead>
+          <thead><tr><th>Parameter</th><th>Pure ALOHA</th><th>Slotted ALOHA</th></tr></thead>
           <tbody>
-            <tr><td>Time Model</td><td>Continuous</td><td>Slotted (synchronized)</td></tr>
-            <tr><td>Vulnerable Period</td><td>2 × frame time (2t₀)</td><td>1 × frame time (t₀)</td></tr>
-            <tr><td>Max Throughput</td><td>1/2e ≈ 18.4%</td><td>1/e ≈ 36.8%</td></tr>
-            <tr><td>Optimal G</td><td>G = 0.5</td><td>G = 1.0</td></tr>
-            <tr><td>Throughput Formula</td><td>S = G·e⁻²ᴳ</td><td>S = G·e⁻ᴳ</td></tr>
-            <tr><td>Synchronization</td><td>Not required</td><td>Global clock needed</td></tr>
-            <tr><td>Complexity</td><td>Simplest possible</td><td>Slightly more complex</td></tr>
-          </tbody>
-        </table>
-        <h4>Backoff Strategy</h4>
-        <p>After a collision, each station independently chooses a random number of frame times to wait (typically uniform over [0, 2<sup>k</sup> - 1] where k = collision count). This is <strong>Binary Exponential Backoff (BEB)</strong>—the same strategy later used by Ethernet.</p>`,
-      workedExample: `<p><strong>Problem:</strong> In a Pure ALOHA system, 1000 stations each generate a frame every 100 seconds. Frame time = 1 second. Calculate the offered load G and throughput S.</p>
-        <p><strong>Solution:</strong></p>
-        <ol class="wiki-ordered-list">
-          <li>Frame generation rate per station = 1/100 frames/sec.</li>
-          <li>Total frame generation rate = 1000 × (1/100) = <strong>10 frames/sec</strong>.</li>
-          <li>Frame time t₀ = 1 sec, so <strong>G = 10 × 1 = 10</strong>.</li>
-          <li>$S = G \\cdot e^{-2G} = 10 \\cdot e^{-20} \\approx 10 \\times 2.06 \\times 10^{-9} \\approx 0.0000$ (virtually zero!).</li>
-          <li><strong>Conclusion:</strong> The system is extremely overloaded (G >> 0.5). Almost all frames collide.</li>
-        </ol>
-        <p><strong>Optimal case:</strong> For G = 0.5, $S = 0.5 \\cdot e^{-1} = 0.184$ → only 18.4% of channel time produces successful frames.</p>`,
-      advantagesLimitations: `
-        <table class="wiki-table">
-          <thead><tr><th>Advantages</th><th>Limitations</th></tr></thead>
-          <tbody>
-            <tr><td>Extremely simple to implement</td><td>Very low maximum throughput (18.4% or 36.8%)</td></tr>
-            <tr><td>No coordination needed (Pure ALOHA)</td><td>Performance degrades catastrophically under heavy load</td></tr>
-            <tr><td>Works for any number of stations</td><td>Unstable: collisions cause more retransmissions which cause more collisions</td></tr>
-            <tr><td>Low delay at very light loads</td><td>No carrier sensing—wastes bandwidth transmitting into collisions</td></tr>
+            <tr><td>Transmission Start Time</td><td>Any instant</td><td>Only at synchronized slot boundaries</td></tr>
+            <tr><td>Clock Synchronization</td><td>Not required</td><td>Strict network-wide clock sync required</td></tr>
+            <tr><td>Vulnerable Period</td><td>$2T$</td><td>$T$</td></tr>
+            <tr><td>Throughput Equation</td><td>$S = G e^{-2G}$</td><td>$S = G e^{-G}$</td></tr>
+            <tr><td>Max Throughput ($S_{\\max}$)</td><td>$\\frac{1}{2e} \\approx \\mathbf{18.4\\%}$ (at $G = 0.5$)</td><td>$\\frac{1}{e} \\approx \\mathbf{36.8\\%}$ (at $G = 1.0$)</td></tr>
           </tbody>
         </table>`,
-      whereUsed: ["Original ALOHAnet (1970, University of Hawaii)", "Satellite random access channels", "RFID tag anti-collision protocols", "LTE/5G Random Access Channel (RACH)", "LoRaWAN uplink transmission"],
-      commonMistakes: "Confusing 'throughput' with 'offered load'. Throughput S is the rate of successful transmissions; offered load G includes retransmissions. When G > 1 (Pure) or G > 1 (Slotted), the system becomes unstable with throughput dropping toward zero.",
-      compareWith: { title: "Pure ALOHA vs Slotted ALOHA vs CSMA", note: "Pure ALOHA: simplest, 18.4% max. Slotted ALOHA: 36.8% max. CSMA/CD (Ethernet): up to 90%+ because stations sense the channel before transmitting." },
-      practice: {
-        question: "What is the maximum channel throughput achievable by Slotted ALOHA?",
-        choices: ["18.4% (1/2e)", "36.8% (1/e)", "50%", "100%"],
-        correctIndex: 1,
-        explanation: "Slotted ALOHA achieves maximum throughput of 1/e ≈ 36.8% when the offered load G = 1.0. This is exactly double Pure ALOHA's maximum because the vulnerable period is halved."
+      workedExamples: {
+        level1: `<strong>Problem:</strong> Frame transmission time $T = 4$ ms. Calculate the vulnerable period for Pure ALOHA and Slotted ALOHA.<br><br>
+<strong>Solution:</strong><br>
+- Pure ALOHA: $\\text{Vulnerable Period} = 2T = 2 \\times 4\\text{ ms} = \\mathbf{8\\text{ ms}}$.<br>
+- Slotted ALOHA: $\\text{Vulnerable Period} = T = \\mathbf{4\\text{ ms}}$.`,
+        level2: `<strong>Problem:</strong> A Pure ALOHA channel has an offered load of $G = 0.5$. Calculate the throughput $S$ and explain its significance.<br><br>
+<strong>Working:</strong><br>
+$S = G e^{-2G} = 0.5 \\cdot e^{-2(0.5)} = 0.5 \\cdot e^{-1} = \\frac{0.5}{2.71828} \\approx \\mathbf{0.1839\\text{ (18.4\\%)}}$.<br>
+This is the theoretical mathematical peak of Pure ALOHA. If offered load increases to $G = 1.0$, throughput falls to $S = 1.0 \\cdot e^{-2} \\approx 13.5\\%$ due to rampant collisions.`,
+        level3: `<strong>Problem:</strong> Why does Slotted ALOHA achieve exactly twice the throughput of Pure ALOHA?<br><br>
+<strong>Analysis:</strong><br>
+In Pure ALOHA, a frame can collide with another frame that started up to $T$ seconds before it, OR another frame starting up to $T$ seconds after it (total vulnerability window $2T$). Slotted ALOHA forces all frames to start at the exact same slot tick, completely eliminating partial overlaps and halving the vulnerable interval to $T$. Because $P(\\text{no collision}) = e^{-G}$ instead of $e^{-2G}$, maximum throughput doubles from $18.4\\%$ to $36.8\\%$.`
       },
+      advantagesLimitations: `
+        <table class="wiki-table">
+          <thead><tr><th>Advantages</th><th>Disadvantages</th></tr></thead>
+          <tbody>
+            <tr><td>Completely decentralized; zero carrier sensing required; perfect for low-duty-cycle bursty stations.</td><td>Low channel efficiency ($> 63\\%$ of channel wasted); collapses into zero throughput under heavy congestion.</td></tr>
+          </tbody>
+        </table>`,
+      whereUsed: [
+        "Cellular GSM/LTE/5G Random Access Channel (RACH) for phone initial connection.",
+        "Automatic Identification System (AIS) transponders on maritime ships.",
+        "Passive RFID tag reader interrogation."
+      ],
+      commonMistakes: `
+        <ul class="wiki-bullet-list">
+          <li><strong>Believing Slotted ALOHA eliminates collisions:</strong> FALSE. Slotted ALOHA eliminates <em>partial</em> overlaps, but collisions still occur whenever two stations choose the same time slot.</li>
+        </ul>`,
+      quiz: [
+        {
+          question: "What is the vulnerable period of Pure ALOHA for a frame of duration T?",
+          options: ["T/2", "T", "2T", "4T"],
+          correctIndex: 2,
+          explanation: "In Pure ALOHA, any frame starting between t0 - T and t0 + T will collide, spanning a 2T vulnerable interval."
+        },
+        {
+          question: "What is the maximum theoretical throughput of Slotted ALOHA?",
+          options: ["18.4%", "25.0%", "36.8% (1/e)", "100%"],
+          correctIndex: 2,
+          explanation: "Slotted ALOHA reaches a peak throughput of S = 1/e ≈ 36.8% at offered load G = 1.0."
+        },
+        {
+          question: "What is the primary operational requirement of Slotted ALOHA over Pure ALOHA?",
+          options: ["Coaxial cables", "Global time synchronization among all participating stations", "Full-duplex transceivers", "Token ring cards"],
+          correctIndex: 1,
+          explanation: "All stations must share synchronized clock timing so frames are dispatched precisely at slot boundaries."
+        }
+      ],
       references: [
-        { cite: "Tanenbaum & Wetherall, Computer Networks, 6th Ed., Ch. 4.2: Multiple Access Protocols — ALOHA", url: "https://www.pearson.com/en-us/subject-catalog/p/computer-networks/P200000003193" },
-        { cite: "Abramson, N. 'The ALOHA System' (1970)", url: "https://doi.org/10.1145/1478462.1478502" },
-        { cite: "Forouzan, Data Communications & Networking, 6th Ed., Ch. 12.1: Random Access — ALOHA", url: "https://www.mheducation.com/" }
+        { cite: "Abramson, N. (1970). THE ALOHA SYSTEM: another alternative for computer communications. AFIPS Fall Joint Computer Conference.", url: "https://dl.acm.org" }
       ]
     },
     prevTopicId: "channel-allocation",
     nextTopicId: "csma-protocols"
   },
 
+  // =========================================================================
+  // TOPIC 22: CSMA PROTOCOLS (PDF Topic 8, pp. 186-193)
+  // =========================================================================
   "csma-protocols": {
     id: "csma-protocols",
-    title: "CSMA Protocols (Carrier Sense Multiple Access)",
-    unit: "Unit II: Data Link Layer & Reliable Transfer",
+    title: "CSMA Protocols (CSMA, CSMA/CD, CSMA/CA)",
+    unit: "Unit II: Data Link Layer & MAC Sublayer",
     unitId: "unit2",
-    level: "Level 2 — Standard Topic",
+    level: "Intermediate → Advanced",
     category: "datalink",
     difficulty: "Core",
-    readingTime: "9 min read",
-    standard: "IEEE 802.3 (CSMA/CD), IEEE 802.11 (CSMA/CA)",
-    oneLiner: "CSMA protocols improve upon ALOHA by requiring stations to sense the channel before transmitting—'listen before talk' reduces collisions dramatically.",
-    quickAnswer: "CSMA adds carrier sensing to ALOHA. CSMA/CD (Ethernet) detects collisions during transmission and aborts immediately. CSMA/CA (Wi-Fi) avoids collisions using RTS/CTS and acknowledgements.",
-    whyItMatters: "CSMA/CD is the foundation of Ethernet (the world's most widely deployed LAN technology), and CSMA/CA powers every Wi-Fi network—together they connect billions of devices.",
+    readingTime: "30 min",
+    standard: "IEEE 802.3 (CSMA/CD) / IEEE 802.11 (CSMA/CA)",
+    oneLiner: "Carrier sense multiple access: sensing the medium before transmitting, with collision detection or avoidance.",
+    quickAnswer: "CSMA listens to the channel before transmitting. CSMA/CD detects collisions during transmission on wired shared media; CSMA/CA avoids collisions using backoff counters on wireless channels.",
+    whyItMatters: "CSMA dramatically increases channel throughput beyond ALOHA by verifying the channel is idle before blasting data. It is the core algorithm behind Ethernet and Wi-Fi.",
+    prerequisitesList: [
+      { concept: "Carrier Sensing", meaning: "Checking the physical medium for voltage or RF energy before transmitting." },
+      { concept: "Propagation Delay (τ)", meaning: "Time taken for electrical/radio signals to travel end-to-end across the wire." }
+    ],
+    learningObjectives: [
+      "Explain the fundamental principle of CSMA ('Listen Before Talking').",
+      "Compare 1-persistent, Non-persistent, and p-persistent CSMA.",
+      "Understand why collisions still occur in CSMA due to propagation delay.",
+      "Trace CSMA/CD collision detection, jam signal, and Binary Exponential Backoff.",
+      "Explain why wireless networks must use CSMA/CA instead of CSMA/CD."
+    ],
     infobox: {
-      layer: "Layer 2 (Data Link — MAC Sublayer)",
-      standard: "IEEE 802.3 (CSMA/CD), IEEE 802.11 (CSMA/CA)",
-      type: "Carrier Sense Multiple Access",
-      keyFormula: "\\text{CSMA/CD: Min frame} = 2 \\times \\text{propagation delay} \\times \\text{data rate}",
-      prerequisites: ["channel-allocation", "aloha"],
-      relatedConcepts: ["ethernet", "collision-free-protocols", "wireless-lan-protocols"],
-      compareWith: ["aloha"],
-      primaryUses: ["Ethernet (IEEE 802.3)", "Wi-Fi (IEEE 802.11)", "CAN bus (automotive)", "Industrial networks"]
+      layer: "Layer 2 (MAC Sublayer)",
+      standard: "IEEE 802.3, IEEE 802.11",
+      type: "Carrier Sense Contention",
+      keyFormula: "T_{\\text{frame}} \\ge 2\\tau, \\quad \\text{Backoff: } [0, 2^k - 1]",
+      prerequisites: ["aloha"],
+      relatedConcepts: ["ethernet", "wifi-mac-sublayer", "channel-allocation"],
+      compareWith: ["collision-free-protocols"],
+      primaryUses: ["Classic shared Ethernet, IEEE 802.11 Wi-Fi, Apple LocalTalk"]
     },
     sections: {
-      overview: `<p><strong>Carrier Sense Multiple Access (CSMA)</strong> protocols improve upon ALOHA by adding a simple but powerful rule: <strong>listen before you talk</strong>. Before transmitting, a station senses the channel. If it's busy, the station defers. This dramatically reduces collisions compared to ALOHA.</p>
-        <p>However, collisions can still occur because of <strong>propagation delay</strong>—a station may sense the channel as idle while another station's frame is still propagating toward it. Three persistence strategies and two collision-handling variants address this.</p>`,
+      overview: `the family of contention protocols in which a network interface monitors (senses) the physical communication channel for the presence of a carrier signal before attempting to transmit its frame.`,
+      eli10: `ALOHA is like shouting in a dark room without listening first. CSMA is like pausing, listening with your ear to hear if anyone else is speaking, and only speaking if the room is quiet!`,
+      analogy: `Entering an intersection without a traffic light: You stop, look both ways to see if a car is coming, and only pull out when the road looks clear. (A collision can still happen if another car pulls out from behind a blind corner at the exact same instant!).`,
       howItWorks: `
-        <h4>CSMA Persistence Strategies</h4>
         <ol class="wiki-ordered-list">
-          <li><strong>1-Persistent CSMA:</strong>
+          <li><strong>Carrier Sense (Listen):</strong> Station listens to channel.</li>
+          <li><strong>If Channel Busy:</strong> Follows persistence algorithm:
             <ul class="wiki-bullet-list">
-              <li>Sense channel: if idle → transmit immediately (probability 1).</li>
-              <li>If busy → keep sensing continuously until idle → transmit immediately.</li>
-              <li><strong>Problem:</strong> If two stations are waiting for a busy channel, both transmit the instant it becomes idle → guaranteed collision.</li>
-              <li>Used by: Ethernet (802.3) with modifications.</li>
+              <li><em>1-Persistent:</em> Keeps listening continuously; transmits with probability 1 the instant channel becomes idle. (High collision if multiple stations wait!).</li>
+              <li><em>Non-Persistent:</em> Waits a random time, then senses again. (Reduces collisions, but adds idle delay).</li>
+              <li><em>p-Persistent:</em> If idle, transmits with probability $p$; defers to next slot with probability $1-p$.</li>
             </ul>
           </li>
-          <li><strong>Non-Persistent CSMA:</strong>
-            <ul class="wiki-bullet-list">
-              <li>Sense channel: if idle → transmit.</li>
-              <li>If busy → wait a <strong>random time</strong>, then sense again.</li>
-              <li><strong>Advantage:</strong> Reduces collision probability because waiting stations don't all pounce simultaneously.</li>
-              <li><strong>Disadvantage:</strong> Channel may sit idle even when stations have data (wasted capacity).</li>
-            </ul>
-          </li>
-          <li><strong>p-Persistent CSMA (for slotted channels):</strong>
-            <ul class="wiki-bullet-list">
-              <li>Sense channel: if idle → transmit with probability <strong>p</strong>, defer to next slot with probability <strong>(1-p)</strong>.</li>
-              <li>If busy → wait for next slot, repeat algorithm.</li>
-              <li>Balances between 1-persistent (greedy) and non-persistent (conservative).</li>
-              <li>Used by: IEEE 802.11 (Wi-Fi) uses a variant.</li>
-            </ul>
-          </li>
-        </ol>
-        <h4>CSMA/CD (Collision Detection) — Ethernet</h4>
-        <ol class="wiki-ordered-list">
-          <li>Sense channel: if idle → begin transmitting.</li>
-          <li>While transmitting, <strong>monitor the signal on the wire</strong>.</li>
-          <li>If the detected signal differs from what was sent → <strong>collision detected!</strong></li>
-          <li>Immediately stop transmitting and send a <strong>48-bit jam signal</strong> to ensure all stations detect the collision.</li>
-          <li>Wait a random backoff time using <strong>Binary Exponential Backoff (BEB)</strong>:
-            <ul class="wiki-bullet-list">
-              <li>After i-th collision (i = 1, 2, ..., 10), choose random k from [0, 2<sup>min(i,10)</sup> - 1].</li>
-              <li>Wait k × slot time (512 bit times for 10 Mbps Ethernet).</li>
-              <li>After 16 collisions, give up and report failure to network layer.</li>
-            </ul>
-          </li>
-          <li><strong>Minimum frame size:</strong> The frame must be long enough that the sender is still transmitting when a collision at the far end of the network propagates back. For 10 Mbps Ethernet: min frame = 64 bytes = 2 × propagation delay × data rate.</li>
-        </ol>
-        <h4>CSMA/CA (Collision Avoidance) — Wi-Fi</h4>
-        <ol class="wiki-ordered-list">
-          <li>Cannot detect collisions during wireless transmission (half-duplex radio, near-far problem).</li>
-          <li>Instead, <strong>avoids collisions</strong> using:
-            <ul class="wiki-bullet-list">
-              <li><strong>Inter-Frame Spacing (IFS):</strong> Wait DIFS (Distributed IFS) before sensing.</li>
-              <li><strong>Random Backoff:</strong> Choose random backoff counter, decrement only when channel is idle.</li>
-              <li><strong>RTS/CTS (optional):</strong> Sender sends Request to Send → receiver replies Clear to Send → reserves the channel.</li>
-              <li><strong>ACK:</strong> Receiver sends ACK for every successfully received frame.</li>
-            </ul>
-          </li>
+          <li><strong>Why Collisions Still Happen:</strong> Signal propagation delay $\\tau$. Station A starts sending; Station B senses channel before A's signal reaches B. B assumes channel is idle and transmits &rarr; COLLISION!</li>
+          <li><strong>CSMA/CD (Collision Detection - Ethernet):</strong> Station listens WHILE transmitting. If signal voltage exceeds normal threshold, collision detected! Station halts transmission immediately, emits a 32-bit JAM signal, and runs <strong>Binary Exponential Backoff</strong>.</li>
+          <li><strong>CSMA/CA (Collision Avoidance - Wi-Fi):</strong> Wireless radios cannot reliably detect collisions while transmitting (transmitter drowns out receiver). Station uses random backoff counters and DIFS/SIFS intervals before transmitting.</li>
         </ol>`,
       diagram: `
-CSMA/CD (Ethernet) Timeline:
-
-Station A        |████████ Frame A ████████|
-                 ▲ Starts transmitting
-
-Station B              |██|JAM|  (collision detected!)
-                       ▲ B doesn't hear A yet
-                         (propagation delay)
-                              ▼
-                         Both stop, send jam,
-                         wait random backoff
-
-CSMA/CA (Wi-Fi) Timeline:
-
-         DIFS    Backoff  DATA         SIFS  ACK
-Sender:  |═══|░░░░|██████████████████|      |
-Receiver:                              |═══|████|
-                                       Wait  Reply
-
-RTS/CTS Variant:
-         DIFS  RTS    SIFS  CTS    SIFS  DATA         SIFS  ACK
-Sender:  |═══|████|        |      |═══|██████████████|      |
-Receiver:          |═══|████|                          |═══|████|`,
+Station A                                                 Station B
+    |                                                         |
+    |--- Transmits Frame ---------------->                   | (Signal propagating...)
+    |                                     <-- Senses Idle! --| (A's signal has NOT arrived yet!)
+    |                                     <-- Transmits! ----|
+    |                                                         |
+    |                     💥 COLLISION! 💥                    |
+    |               (Signals overlap in the middle!)          |`,
+      interactiveLabKey: "aloha-csma",
       technicalDetails: `
-        <h4>Comparison of CSMA Variants</h4>
-        <table class="wiki-table">
-          <thead><tr><th>Feature</th><th>1-Persistent</th><th>Non-Persistent</th><th>p-Persistent</th><th>CSMA/CD</th><th>CSMA/CA</th></tr></thead>
-          <tbody>
-            <tr><td>Carrier Sense</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-            <tr><td>If Channel Busy</td><td>Wait & grab</td><td>Random wait</td><td>Wait for slot</td><td>Wait & grab</td><td>Backoff timer</td></tr>
-            <tr><td>Collision Detection</td><td>No</td><td>No</td><td>No</td><td>Yes (during TX)</td><td>No (impossible in wireless)</td></tr>
-            <tr><td>Collision Recovery</td><td>Timeout/retransmit</td><td>Timeout</td><td>Timeout</td><td>Jam + BEB</td><td>ACK-based</td></tr>
-            <tr><td>Used In</td><td>—</td><td>—</td><td>—</td><td>Ethernet 802.3</td><td>Wi-Fi 802.11</td></tr>
-            <tr><td>Throughput</td><td>Medium</td><td>High at low load</td><td>Tunable</td><td>Very High (~90%)</td><td>Good (~60-70%)</td></tr>
-          </tbody>
-        </table>
-        <h4>Binary Exponential Backoff (BEB)</h4>
-        <p>After the i-th collision (i = 1, 2, ..., 16):</p>
+        <p><strong>Binary Exponential Backoff Algorithm (IEEE 802.3):</strong></p>
+        <p>After collision number $i$ (up to 10 collisions):</p>
         <ul class="wiki-bullet-list">
-          <li>Choose random integer k uniformly from [0, 2<sup>min(i,10)</sup> - 1].</li>
-          <li>Wait k × 51.2 μs (slot time for 10 Mbps Ethernet).</li>
-          <li>Maximum backoff window = 2<sup>10</sup> = 1024 slot times.</li>
-          <li>After 16 unsuccessful attempts, abort and report failure.</li>
-        </ul>`,
-      workedExample: `<p><strong>Problem:</strong> Two Ethernet stations collide. Calculate the range of backoff times after the 1st, 2nd, and 3rd collision for 10 Mbps Ethernet (slot time = 51.2 μs).</p>
+          <li>Set $k = \\min(i, 10)$.</li>
+          <li>Randomly choose an integer slot delay $r$ from range: $[0, 2^k - 1]$.</li>
+          <li>Wait $r \\times 512$ bit times (slot time on 10 Mbps = 51.2 µs).</li>
+          <li>After 16 consecutive collisions, abort frame and report error to higher layer!</li>
+        </ul>
         <table class="wiki-table">
-          <thead><tr><th>Collision #</th><th>i</th><th>k range</th><th>Backoff range</th></tr></thead>
+          <thead><tr><th>Collision #</th><th>Range of r</th><th>Max Wait (Slot Times)</th></tr></thead>
           <tbody>
-            <tr><td>1st</td><td>1</td><td>[0, 1]</td><td>0 or 51.2 μs</td></tr>
-            <tr><td>2nd</td><td>2</td><td>[0, 1, 2, 3]</td><td>0 to 153.6 μs</td></tr>
-            <tr><td>3rd</td><td>3</td><td>[0, 1, ..., 7]</td><td>0 to 358.4 μs</td></tr>
-          </tbody>
-        </table>
-        <p><strong>Minimum Ethernet frame size:</strong></p>
-        <p>For 10 Mbps Ethernet with max cable length 2.5 km (max RTT ≈ 51.2 μs):</p>
-        <p style="text-align:center">$\\text{Min frame} = 10 \\times 10^6 \\times 51.2 \\times 10^{-6} = 512 \\text{ bits} = 64 \\text{ bytes}$</p>`,
-      advantagesLimitations: `
-        <table class="wiki-table">
-          <thead><tr><th>Protocol</th><th>Advantages</th><th>Limitations</th></tr></thead>
-          <tbody>
-            <tr><td>CSMA/CD</td><td>Up to 90%+ throughput, low delay at moderate load</td><td>Cannot work on wireless (can't detect own collisions)</td></tr>
-            <tr><td>CSMA/CA</td><td>Works on wireless, avoids hidden terminal problem with RTS/CTS</td><td>Lower throughput than CSMA/CD due to overhead</td></tr>
+            <tr><td>1st</td><td>0 to 1</td><td>1</td></tr>
+            <tr><td>2nd</td><td>0 to 3</td><td>3</td></tr>
+            <tr><td>3rd</td><td>0 to 7</td><td>7</td></tr>
+            <tr><td>10th</td><td>0 to 1023</td><td>1023</td></tr>
           </tbody>
         </table>`,
-      whereUsed: ["Ethernet (IEEE 802.3) — CSMA/CD", "Wi-Fi (IEEE 802.11) — CSMA/CA", "CAN bus (automotive) — CSMA/CR (Collision Resolution)", "HomeRF, Bluetooth (variants)"],
-      commonMistakes: "Thinking CSMA/CD is used in Wi-Fi. Wireless stations cannot detect collisions during transmission because the transmitted signal overwhelms any incoming signal at the antenna. Wi-Fi uses CSMA/CA (Collision Avoidance) instead.",
-      compareWith: { title: "CSMA/CD vs CSMA/CA", note: "CSMA/CD detects collisions during transmission (wired only). CSMA/CA avoids collisions using backoff and optional RTS/CTS (wireless)." },
-      practice: {
-        question: "Why can't CSMA/CD (Collision Detection) be used in wireless networks?",
-        choices: [
-          "Wireless channels are too fast",
-          "The transmitted signal drowns out incoming signals, making collision detection impossible",
-          "Wireless frames are too short",
-          "FCC regulations prohibit it"
-        ],
-        correctIndex: 1,
-        explanation: "In wireless, the transmitted signal power at the antenna is millions of times stronger than any received signal. The station cannot simultaneously transmit and listen for collisions—this is the 'near-far' problem."
+      workedExamples: {
+        level1: `<strong>Problem:</strong> Why can collisions still occur in CSMA even though every station senses the medium before sending?<br><br>
+<strong>Solution:</strong><br>
+Because electromagnetic signals propagate through wires at finite speed (typically $2 \\times 10^8$ m/s, or 5 µs per km). If Station A begins sending at $t = 0$, Station B (1 km away) will sense the cable as completely idle until $t = 5\\text{ µs}$. If B transmits during this window, a collision is inevitable.`,
+        level2: `<strong>Problem:</strong> In CSMA/CD, two stations collide for the 3rd time. What is the range of backoff slots from which each station will select?<br><br>
+<strong>Working:</strong><br>
+For collision $i = 3$:<br>
+Range $= [0, 2^i - 1] = [0, 2^3 - 1] = [0, 7]$.<br>
+Each station picks a random integer from $\\{0, 1, 2, 3, 4, 5, 6, 7\\}$ and waits that number of slot times.`,
+        level3: `<strong>Problem:</strong> Why can CSMA/CD not be used in IEEE 802.11 Wi-Fi networks?<br><br>
+<strong>Analysis:</strong><br>
+1. <strong>Dynamic Range / Self-Interference:</strong> A wireless radio transmits at high power (e.g. +20 dBm). Its own transmitter overwhelms its receiving antenna, making it impossible to hear faint incoming collision signals from other stations.<br>
+2. <strong>Hidden Terminals:</strong> Stations may be hidden behind walls or out of radio range of each other, yet both reach the same Access Point. They cannot detect each other's collisions via carrier sensing.`
       },
+      advantagesLimitations: `
+        <table class="wiki-table">
+          <thead><tr><th>Protocol</th><th>Approach</th><th>Suitability</th></tr></thead>
+          <tbody>
+            <tr><td>CSMA/CD</td><td>Detect collisions during transmission, abort immediately</td><td>Wired half-duplex links (coax/hubs)</td></tr>
+            <tr><td>CSMA/CA</td><td>Avoid collisions before transmission via backoff & ACKs</td><td>Wireless shared radio channels (Wi-Fi)</td></tr>
+          </tbody>
+        </table>`,
+      whereUsed: [
+        "Traditional half-duplex Ethernet (10BASE5, 10BASE2, 10BASE-T with hubs).",
+        "IEEE 802.11 Wi-Fi (DCF with CSMA/CA).",
+        "IEEE 802.15.4 (Zigbee wireless sensor networks)."
+      ],
+      commonMistakes: `
+        <ul class="wiki-bullet-list">
+          <li><strong>Assuming CSMA/CD is used on modern switched Ethernet:</strong> Switches provide dedicated full-duplex links; CSMA/CD is completely disabled during modern operation.</li>
+        </ul>`,
+      quiz: [
+        {
+          question: "What does the 'CS' in CSMA stand for?",
+          options: ["Collision Sensing", "Carrier Sense", "Circuit Switching", "Channel Synchronous"],
+          correctIndex: 1,
+          explanation: "Carrier Sense: the network adapter monitors the physical medium to verify whether a transmission signal is currently present."
+        },
+        {
+          question: "Why can collisions still occur in standard CSMA?",
+          options: ["Adapters never check the channel", "Signal propagation delay allows stations to sense an idle channel before another station's signal reaches them", "Frames have no headers", "KaTeX formulas are disabled"],
+          correctIndex: 1,
+          explanation: "Due to finite propagation speed of light/electricity, there is a vulnerability window equal to propagation delay τ."
+        },
+        {
+          question: "What does an Ethernet station do immediately upon detecting a collision under CSMA/CD?",
+          options: ["Continues transmitting the rest of the frame", "Immediately aborts transmission and emits a jam signal", "Shuts down its power supply", "Sends an email alert"],
+          correctIndex: 1,
+          explanation: "It stops transmitting to avoid wasting wire time and sends a jam signal to ensure all stations recognize the collision."
+        },
+        {
+          question: "Why does IEEE 802.11 Wi-Fi use CSMA/CA instead of CSMA/CD?",
+          options: ["Wi-Fi has zero collisions", "A wireless station cannot reliably detect collisions while transmitting because its own signal drowns out incoming signals", "Wi-Fi frames are too long", "IEEE 802.11 standards forbid collision detection"],
+          correctIndex: 1,
+          explanation: "Wireless transceivers cannot transmit and listen simultaneously with sufficient sensitivity; therefore they use Collision Avoidance."
+        }
+      ],
       references: [
-        { cite: "Tanenbaum & Wetherall, Computer Networks, 6th Ed., Ch. 4.2: CSMA Protocols", url: "https://www.pearson.com/en-us/subject-catalog/p/computer-networks/P200000003193" },
-        { cite: "IEEE 802.3: Ethernet CSMA/CD Standard", url: "https://standards.ieee.org/ieee/802.3/10422/" },
-        { cite: "Forouzan, Data Communications & Networking, 6th Ed., Ch. 12.2: CSMA, CSMA/CD, CSMA/CA", url: "https://www.mheducation.com/" }
+        { cite: "IEEE Std 802.3-2022 - Section 4: Media Access Control (CSMA/CD).", url: "https://standards.ieee.org" },
+        { cite: "IEEE Std 802.11-2020 - Wireless LAN MAC and PHY Specifications.", url: "https://standards.ieee.org" }
       ]
     },
     prevTopicId: "aloha",
     nextTopicId: "collision-free-protocols"
   },
 
+  // =========================================================================
+  // TOPIC 23: COLLISION-FREE PROTOCOLS (PDF Topic 8, pp. 193-197)
+  // =========================================================================
   "collision-free-protocols": {
     id: "collision-free-protocols",
     title: "Collision-Free Protocols",
-    unit: "Unit II: Data Link Layer & Reliable Transfer",
+    unit: "Unit II: Data Link Layer & MAC Sublayer",
     unitId: "unit2",
-    level: "Level 2 — Standard Topic",
+    level: "Intermediate",
     category: "datalink",
     difficulty: "Core",
-    readingTime: "7 min read",
-    standard: "Tanenbaum Ch. 4.2",
-    oneLiner: "Collision-free protocols guarantee that only one station transmits at a time through reservation or priority arbitration—eliminating collisions entirely.",
-    quickAnswer: "Unlike ALOHA and CSMA which allow collisions and recover, collision-free protocols (Bitmap, Binary Countdown, Token Passing) use reservation slots or token circulation to ensure zero collisions.",
-    whyItMatters: "For real-time and industrial applications where collision-induced delays are unacceptable, collision-free protocols provide deterministic, bounded access times.",
+    readingTime: "20 min",
+    standard: "Tanenbaum Ch. 4 / IEEE 802.5 / FDDI",
+    oneLiner: "Deterministic MAC protocols that eliminate contention collisions by scheduling access in advance.",
+    quickAnswer: "Collision-free protocols resolve contention prior to data transmission using reservation phases (Bit-Map), binary arbitration (Binary Countdown), or circulating permission tokens (Token Passing).",
+    whyItMatters: "Random access protocols collapse under heavy traffic due to runaway collisions. Collision-free protocols guarantee deterministic upper bounds on latency and 100% stable channel throughput.",
+    prerequisitesList: [
+      { concept: "Reservation Phase", meaning: "A preliminary control phase where stations declare their intent to transmit." },
+      { concept: "Token", meaning: "A special control frame circulating among stations that grants transmission permission." }
+    ],
+    learningObjectives: [
+      "Explain the fundamental design principles of collision-free access.",
+      "Trace the Bit-Map (Reservation) protocol and calculate its overhead.",
+      "Demonstrate the Binary Countdown bit-by-bit arbitration process.",
+      "Explain the operation, advantages, and failure recovery of Token Passing."
+    ],
     infobox: {
-      layer: "Layer 2 (Data Link — MAC Sublayer)",
-      standard: "Tanenbaum Ch. 4.2, IEEE 802.4 (Token Bus), IEEE 802.5 (Token Ring)",
-      type: "Contention-Free Multiple Access",
-      keyFormula: "\\text{Bitmap overhead} = N \\text{ bits per cycle for } N \\text{ stations}",
-      prerequisites: ["channel-allocation", "aloha", "csma-protocols"],
-      relatedConcepts: ["ethernet", "channel-allocation"],
+      layer: "Layer 2 (MAC Sublayer)",
+      standard: "IEEE 802.5 (Token Ring), ANSI X3T9.5 (FDDI)",
+      type: "Deterministic Access Protocol",
+      keyFormula: "\\text{Overhead}_{\\text{BitMap}} = \\frac{d}{d + N} \\quad (d = \\text{frame size}, N = \\text{stations})",
+      prerequisites: ["channel-allocation", "csma-protocols"],
+      relatedConcepts: ["aloha", "csma-protocols", "ethernet"],
       compareWith: ["csma-protocols"],
-      primaryUses: ["Token Ring (IEEE 802.5)", "Token Bus (IEEE 802.4)", "Industrial CAN/PROFIBUS", "Deterministic real-time networks"]
+      primaryUses: ["Token Ring, FDDI fiber backbones, Avionics MIL-STD-1553, CAN bus"]
     },
     sections: {
-      overview: `<p>While contention-based protocols (ALOHA, CSMA) are simple, they cannot guarantee bounded access delay because collisions introduce unpredictable delays. <strong>Collision-free protocols</strong> solve this by ensuring that at any given time, exactly one station has the right to transmit.</p>
-        <p>Tanenbaum describes three main collision-free approaches:</p>
-        <ol class="wiki-ordered-list">
-          <li><strong>Bitmap Protocol (Reservation-Based)</strong></li>
-          <li><strong>Binary Countdown (Priority-Based)</strong></li>
-          <li><strong>Token Passing (Turn-Based)</strong></li>
-        </ol>`,
+      overview: `the family of Medium Access Control protocols designed to ensure that competing stations never transmit simultaneous data frames, eliminating contention collisions by allocating transmission turns deterministically.`,
+      eli10: `Instead of kids fighting over who gets to play on the swing set, the teacher hangs a sign-up sheet on the wall (Bit-Map reservation) or gives a golden ticket to one child at a time who passes it around the circle (Token Passing). Nobody fights!`,
+      analogy: `Parliamentary debate: Lawmakers do not scream over one another. A Speaker calls on members based on a priority queue, or an electronic voting board registers who wants to take the podium.`,
       howItWorks: `
-        <h4>1. Bitmap Protocol (Basic Reservation)</h4>
         <ol class="wiki-ordered-list">
-          <li>There are N stations numbered 0 to N-1.</li>
-          <li>Each cycle begins with a <strong>reservation period</strong> of N contention slots, one per station.</li>
-          <li>In slot j, station j broadcasts a <strong>1-bit</strong> if it has a frame to send, <strong>0</strong> otherwise.</li>
-          <li>After the N-slot reservation phase, all stations know who wants to transmit.</li>
-          <li>The stations with reservations transmit <strong>in numerical order</strong>, one after another.</li>
-          <li><strong>No collisions possible</strong> because each station knows exactly when it's its turn.</li>
-        </ol>
-        <h4>2. Binary Countdown Protocol</h4>
-        <ol class="wiki-ordered-list">
-          <li>Each station has a unique binary address (e.g., 4 bits for 16 stations).</li>
-          <li>Stations with frames to send <strong>broadcast their addresses bit-by-bit</strong> starting from the most significant bit (MSB).</li>
-          <li>At each bit position, if a station sees a '1' on the channel but its own address bit is '0', it <strong>drops out</strong> of contention.</li>
-          <li>The station with the <strong>highest address always wins</strong> (higher priority).</li>
-          <li>After the winner transmits its frame, a new round begins.</li>
-          <li><strong>Overhead:</strong> Only log₂N bits per contention round (much better than N bits for Bitmap).</li>
-        </ol>
-        <h4>3. Token Passing</h4>
-        <ol class="wiki-ordered-list">
-          <li>A special <strong>token frame</strong> circulates among stations in a logical ring.</li>
-          <li>Only the station <strong>holding the token</strong> may transmit data.</li>
-          <li>After transmitting (or if it has nothing to send), the station <strong>passes the token</strong> to the next station.</li>
-          <li><strong>Token Ring (IEEE 802.5):</strong> Physical ring topology; token circulates around the ring.</li>
-          <li><strong>Token Bus (IEEE 802.4):</strong> Physical bus topology; logical ring established in software.</li>
+          <li><strong>Bit-Map Protocol (Basic Reservation):</strong>
+            <ul class="wiki-bullet-list">
+              <li>Each contention period consists of $N$ reservation bits (one bit per station $0$ to $N-1$).</li>
+              <li>If Station $j$ has a frame to send, it transmits a <code>1</code> in time slot $j$.</li>
+              <li>After all $N$ slots finish, all stations know exactly who wants to transmit.</li>
+              <li>Stations transmit their data frames in numerical order, completely collision-free!</li>
+            </ul>
+          </li>
+          <li><strong>Binary Countdown Protocol (Moxa / CAN Bus style):</strong>
+            <ul class="wiki-bullet-list">
+              <li>Stations transmit their binary address bits one by one (most significant bit first) over a wired-OR channel.</li>
+              <li>If a station transmits a <code>0</code> but hears a <code>1</code> on the bus, a higher-priority station is competing; it immediately drops out!</li>
+              <li>The station with the highest binary address wins the channel and transmits its frame.</li>
+            </ul>
+          </li>
+          <li><strong>Token Passing (IEEE 802.5 / FDDI):</strong>
+            <ul class="wiki-bullet-list">
+              <li>A special 3-byte token frame circulates in a logical ring.</li>
+              <li>A station wanting to transmit catches the token, changes it to a start-of-frame flag, appends its data, and transmits.</li>
+              <li>Upon frame completion, it regenerates and passes the token to its downstream neighbor.</li>
+            </ul>
+          </li>
         </ol>`,
       diagram: `
-BITMAP PROTOCOL (N=4 stations):
+Bit-Map Reservation Protocol (N = 4 Stations: A, B, C, D):
+Contention Period (4 bits): [ 1 | 0 | 1 | 0 ]
+                             A   B   C   D
+Stations A and C requested access.
+Data Period (Collision-Free): [--- Frame A ---] [--- Frame C ---]
 
-Reservation Phase (4 slots)    Data Phase
-┌───┬───┬───┬───┐              ┌──────────┬──────────┐
-│ 1 │ 0 │ 1 │ 0 │              │ Station 0│ Station 2│
-│St0│St1│St2│St3│              │  Frame   │  Frame   │
-└───┴───┴───┴───┘              └──────────┴──────────┘
- St0 wants  St2 wants           Transmit in order
-
-BINARY COUNTDOWN (4-bit addresses):
-Station 5 = 0101       Station 9 = 1001       Station 12 = 1100
-
-Round:  Bit3  Bit2  Bit1  Bit0
-St 5:    0     1     0     1  → drops at bit 3 (sees 1, has 0)
-St 9:    1     0     0     1  → drops at bit 2 (sees 1, has 0)
-St 12:   1     1     0     0  → WINS! (highest address)
-
-TOKEN PASSING:
-        ┌──→ Station A ──→ Station B ──┐
-        │                              │
-        │    TOKEN circulates          ▼
-        │                              │
-        └── Station D ←── Station C ◄──┘
-        
-Only the station holding the token can transmit.`,
+Next Contention Period repeats!`,
+      interactiveLabKey: "aloha-csma",
       technicalDetails: `
-        <h4>Protocol Comparison</h4>
         <table class="wiki-table">
-          <thead><tr><th>Feature</th><th>Bitmap</th><th>Binary Countdown</th><th>Token Passing</th></tr></thead>
+          <thead><tr><th>Method</th><th>Coordination Mechanism</th><th>Main Advantage</th><th>Main Limitation</th></tr></thead>
           <tbody>
-            <tr><td>Overhead per cycle</td><td>N bits (reservation slots)</td><td>log₂N bits</td><td>Token frame (≈ 3 bytes)</td></tr>
-            <tr><td>Fairness</td><td>Fair (all stations get equal chance)</td><td>Unfair (higher address = higher priority)</td><td>Fair (round-robin)</td></tr>
-            <tr><td>Bounded Delay</td><td>Yes</td><td>Yes</td><td>Yes (max = N × token holding time)</td></tr>
-            <tr><td>Best For</td><td>Moderate N, high traffic</td><td>Small N, priority-based systems</td><td>Real-time, deterministic access</td></tr>
-            <tr><td>Efficiency at Low Load</td><td>Poor (N-bit overhead even if 1 station active)</td><td>Better (log₂N bits)</td><td>Moderate (token must still circulate)</td></tr>
-            <tr><td>Efficiency at High Load</td><td>Excellent (every cycle carries data)</td><td>Excellent</td><td>Excellent</td></tr>
+            <tr><td>Bit-Map</td><td>$N$-bit reservation header phase</td><td>Fair, collision-free under load</td><td>$N$ bits wasted even if only 1 station transmits</td></tr>
+            <tr><td>Binary Countdown</td><td>Bit-by-bit address arbitration</td><td>Overhead is only $\\log_2 N$ bits</td><td>Lower-addressed stations can starve unless priority rotates</td></tr>
+            <tr><td>Token Passing</td><td>Circulating permission frame</td><td>Predictable bound on latency</td><td>Token loss or ring break requires complex recovery</td></tr>
           </tbody>
         </table>`,
-      workedExample: `<p><strong>Problem:</strong> A network has 64 stations using the Bitmap protocol. Frame size = 1000 bits. Calculate the overhead per cycle if all 64 stations have frames to send.</p>
-        <p><strong>Solution:</strong></p>
-        <ul class="wiki-bullet-list">
-          <li>Reservation overhead = N = 64 bits.</li>
-          <li>Data transmitted = 64 × 1000 = 64,000 bits.</li>
-          <li>Overhead ratio = 64 / (64 + 64,000) = 64/64,064 ≈ <strong>0.1%</strong> → excellent!</li>
-        </ul>
-        <p><strong>But if only 1 station has data:</strong></p>
-        <ul class="wiki-bullet-list">
-          <li>Data = 1000 bits, overhead = 64 bits.</li>
-          <li>Overhead ratio = 64/1064 ≈ <strong>6%</strong> → acceptable but worse.</li>
-        </ul>
-        <p><strong>Binary Countdown alternative:</strong> Only log₂(64) = 6 bits overhead per round → 6/1006 ≈ 0.6%.</p>`,
+      workedExamples: {
+        level1: `<strong>Problem:</strong> In a 4-station network (A, B, C, D), stations A and C have frames ready. Show the Bit-Map reservation pattern.<br><br>
+<strong>Solution:</strong><br>
+- Slot 0 (A): <code>1</code> (Wants to transmit)<br>
+- Slot 1 (B): <code>0</code> (No traffic)<br>
+- Slot 2 (C): <code>1</code> (Wants to transmit)<br>
+- Slot 3 (D): <code>0</code> (No traffic)<br>
+Reservation pattern: <code>1 0 1 0</code>. After the 4-bit reservation period, Station A transmits its frame, followed immediately by Station C. Zero collisions occur.`,
+        level2: `<strong>Problem:</strong> In a Binary Countdown channel, three stations with addresses <code>011</code> (3), <code>101</code> (5), and <code>110</code> (6) want to transmit. Trace the bit-by-bit arbitration.<br><br>
+<strong>Working:</strong><br>
+1. Bit 2 (MSB):<br>
+   - Station 011 transmits <code>0</code>. Hears <code>1</code> on the channel &rarr; <strong>DROPS OUT!</strong><br>
+   - Stations 101 and 110 both transmit <code>1</code> &rarr; Remain in contention.<br>
+2. Bit 1 (Middle bit):<br>
+   - Station 101 transmits <code>0</code>. Station 110 transmits <code>1</code>.<br>
+   - Channel is <code>1</code> &rarr; Station 101 drops out!<br>
+3. Winner: <strong>Station 110</strong> (Highest binary address) wins channel arbitration and sends its data frame!`,
+        level3: `<strong>Problem:</strong> Compare Random Access vs. Collision-Free protocols under light traffic vs. heavy traffic.<br><br>
+<strong>Analysis:</strong><br>
+- <strong>Light Traffic:</strong> Random access is vastly superior. A station transmits immediately with zero reservation delay. Collision-free protocols waste time passing tokens or waiting through reservation bit-maps.<br>
+- <strong>Heavy Traffic:</strong> Collision-free protocols dominate. Contention in random access causes collisions to spike and throughput to plunge to near zero. Collision-free channels maintain nearly $100\\%$ efficient, orderly data delivery.`
+      },
       advantagesLimitations: `
         <table class="wiki-table">
-          <thead><tr><th>Advantages</th><th>Limitations</th></tr></thead>
+          <thead><tr><th>Advantages</th><th>Disadvantages</th></tr></thead>
           <tbody>
-            <tr><td>Zero collisions → predictable, bounded delays</td><td>Higher protocol complexity than CSMA</td></tr>
-            <tr><td>Excellent throughput at high load</td><td>Token loss requires recovery protocol</td></tr>
-            <tr><td>Fair access (Bitmap, Token) or priority-based (Binary Countdown)</td><td>Overhead at low load (wasted reservation/token time)</td></tr>
-            <tr><td>Suitable for real-time industrial systems</td><td>Largely superseded by switched Ethernet in modern LANs</td></tr>
+            <tr><td>Completely collision-free data transmissions; predictable bounded latency; high efficiency under heavy load.</td><td>High control overhead at light load; complex token recovery and ring management state machines.</td></tr>
           </tbody>
         </table>`,
-      whereUsed: ["IEEE 802.5 Token Ring (historical)", "IEEE 802.4 Token Bus (manufacturing)", "PROFIBUS/PROFINET (industrial automation)", "FDDI fiber networks", "CAN bus (automotive — uses Binary Countdown variant)"],
-      commonMistakes: "Thinking collision-free protocols are always better than CSMA. At low loads, CSMA has lower delay because a station can transmit immediately. Collision-free protocols force stations to wait for their turn even if the channel is idle.",
-      compareWith: { title: "Collision-Free vs CSMA Protocols", note: "CSMA: simple, low delay at light load, but unpredictable delay at heavy load. Collision-free: deterministic delay, excellent under heavy load, but unnecessary overhead at light load." },
-      practice: {
-        question: "In the Binary Countdown protocol, which station wins the contention?",
-        choices: ["The station with the lowest address", "The station with the highest address", "A randomly selected station", "The station that transmitted first"],
-        correctIndex: 1,
-        explanation: "Binary Countdown uses bit-by-bit arbitration from MSB to LSB. Stations with a '0' bit drop out when they see a '1' on the channel, so the station with the highest binary address always wins contention."
-      },
+      whereUsed: [
+        "Controller Area Network (CAN bus in modern automobiles uses binary arbitration).",
+        "MIL-STD-1553 avionics bus in fighter jets and spacecraft.",
+        "Token Ring (IEEE 802.5) and FDDI fiber backbones."
+      ],
+      commonMistakes: `
+        <ul class="wiki-bullet-list">
+          <li><strong>Assuming collision-free protocols eliminate all network errors:</strong> They eliminate <em>contention collisions</em>; electrical noise, hardware breaks, or bit errors can still occur and require CRC/FCS.</li>
+        </ul>`,
+      quiz: [
+        {
+          question: "Which access method uses a circulating permission frame to grant transmission rights?",
+          options: ["Token passing", "Pure ALOHA", "Slotted ALOHA", "Binary countdown"],
+          correctIndex: 0,
+          explanation: "In token passing, a station can only transmit ordinary data frames when it currently holds the token."
+        },
+        {
+          question: "How does the Binary Countdown protocol select a winning station?",
+          options: ["Random lottery", "Bit-by-bit address arbitration over a shared channel where lower bits yield to higher bits", "First-come first-served queue", "Centralized polling server"],
+          correctIndex: 1,
+          explanation: "Stations assert address bits simultaneously; any station that reads a 1 while asserting a 0 immediately withdraws."
+        }
+      ],
       references: [
-        { cite: "Tanenbaum & Wetherall, Computer Networks, 6th Ed., Ch. 4.2: Collision-Free Protocols", url: "https://www.pearson.com/en-us/subject-catalog/p/computer-networks/P200000003193" },
-        { cite: "Forouzan, Data Communications & Networking, 6th Ed., Ch. 12.3: Controlled Access", url: "https://www.mheducation.com/" }
+        { cite: "Tanenbaum & Wetherall, Computer Networks (6th Ed.) - Section 4.2.3: Collision-Free Protocols.", url: "https://www.pearson.com" }
       ]
     },
-    prevTopicId: "csma-protocols",
-    nextTopicId: "wireless-lan-protocols"
+    prevTopicId: "csma-protocols", nextTopicId: "ethernet"
   },
 
+  // =========================================================================
+  // TOPIC 24: WIRELESS LAN PROTOCOLS (PDF Topic 10, pp. 214-233)
+  // =========================================================================
   "wireless-lan-protocols": {
     id: "wireless-lan-protocols",
-    title: "Wireless LAN Protocols & IEEE 802.11",
-    unit: "Unit II: Data Link Layer & Reliable Transfer",
+    title: "IEEE 802.11 Wireless LAN Architecture",
+    unit: "Unit II: Data Link Layer & MAC Sublayer",
     unitId: "unit2",
-    level: "Level 2 — Standard Topic",
+    level: "Beginner → Intermediate",
     category: "datalink",
     difficulty: "Core",
-    readingTime: "9 min read",
-    standard: "IEEE 802.11 (Wi-Fi)",
-    oneLiner: "Wireless LANs face unique challenges—hidden terminals, exposed terminals, and multipath fading—that require specialized MAC protocols like CSMA/CA with RTS/CTS.",
-    quickAnswer: "IEEE 802.11 (Wi-Fi) uses CSMA/CA with optional RTS/CTS handshake to handle the hidden terminal problem, plus MAC-level ACKs because wireless channels are inherently unreliable.",
-    whyItMatters: "Wi-Fi is the dominant wireless LAN technology with billions of devices worldwide. Understanding its MAC layer explains why Wi-Fi performance differs dramatically from wired Ethernet.",
+    readingTime: "30 min",
+    standard: "IEEE 802.11-2020 / Wi-Fi Alliance",
+    oneLiner: "The ubiquitous Wi-Fi architecture: BSS, ESS, APs, infrastructure vs ad-hoc modes, and standards evolution.",
+    quickAnswer: "IEEE 802.11 governs wireless LANs. Devices (STAs) communicate via Access Points (APs) in a Basic Service Set (BSS) or directly in ad-hoc mode (IBSS), interconnected by a Distribution System (ESS).",
+    whyItMatters: "Wi-Fi carries over 60% of modern Internet client traffic. Understanding wireless topologies, AP association, and RF constraints is essential for all networking engineers.",
+    prerequisitesList: [
+      { concept: "Access Point (AP)", meaning: "A central wireless transceiver connecting STAs to the wired network." },
+      { concept: "Station (STA)", meaning: "Any client device equipped with an 802.11 wireless network interface." },
+      { concept: "BSSID", meaning: "The 48-bit MAC address of the Access Point radio interface." }
+    ],
+    learningObjectives: [
+      "Explain the components of 802.11 architecture: STA, AP, BSS, ESS, and Distribution System (DS).",
+      "Differentiate Infrastructure Mode from Ad-Hoc Mode (IBSS).",
+      "Summarize the evolution of 802.11 amendments (b, a, g, n, ac, ax, be).",
+      "Explain Wi-Fi management operations: Beacon frames, Probe requests, Authentication, Association."
+    ],
     infobox: {
-      layer: "Layer 2 (Data Link — MAC Sublayer)",
-      standard: "IEEE 802.11a/b/g/n/ac/ax/be (Wi-Fi 1-7)",
-      type: "Wireless LAN MAC Protocol",
-      keyFormula: "\\text{NAV (Network Allocation Vector)} = \\text{Duration field in RTS/CTS}",
-      prerequisites: ["csma-protocols", "channel-allocation"],
-      relatedConcepts: ["wifi-mac-sublayer", "csma-protocols", "ethernet"],
+      layer: "Layer 2 (MAC) & Layer 1 (PHY)",
+      standard: "IEEE 802.11a/b/g/n/ac/ax/be",
+      type: "Wireless Local Area Network",
+      keyFormula: "\\text{Architecture} = \\text{STAs} + \\text{AP (BSS)} \\xrightarrow{\\text{DS}} \\text{ESS}",
+      prerequisites: ["channel-allocation", "csma-protocols"],
+      relatedConcepts: ["wifi-mac-sublayer", "ethernet"],
       compareWith: ["ethernet"],
-      primaryUses: ["Home/office Wi-Fi", "Enterprise WLANs", "Public hotspots", "IoT wireless connectivity"]
+      primaryUses: ["Home broadband routers, campus Wi-Fi, enterprise hotspot roaming"]
     },
     sections: {
-      overview: `<p>Wireless LANs face challenges that don't exist in wired networks:</p>
-        <ul class="wiki-bullet-list">
-          <li><strong>Hidden Terminal Problem:</strong> Station A can hear the AP, Station C can hear the AP, but A and C cannot hear each other. Both may transmit simultaneously, causing collision at the AP.</li>
-          <li><strong>Exposed Terminal Problem:</strong> Station B is transmitting to A. Station C hears B's transmission and incorrectly defers, even though C could safely transmit to D (in the opposite direction).</li>
-          <li><strong>Signal Fading & Multipath:</strong> Wireless signals reflect, refract, and attenuate unpredictably.</li>
-          <li><strong>No Collision Detection:</strong> A wireless station cannot detect collisions during transmission (near-far problem).</li>
-        </ul>
-        <p>These challenges make wired CSMA/CD impossible for wireless. Instead, <strong>IEEE 802.11</strong> uses <strong>CSMA/CA (Collision Avoidance)</strong> with several additional mechanisms.</p>`,
+      overview: `the family of technical standards developed by IEEE that defines physical-layer radio transmissions and Data Link Layer MAC specifications for Wireless Local Area Networks (branded commercially as Wi-Fi).`,
+      eli10: `Wi-Fi is like walking around your house while listening to music with Bluetooth headphones. Instead of plugging a wire into your computer, the computer talks to a little radio antenna on your ceiling (the Access Point), which is connected to the Internet wire in the wall!`,
+      analogy: `Cell phone towers: Multiple cell phones talk over the air to a nearby cellular tower. The tower is plugged into the wired telephone network. In Wi-Fi, the Access Point is like your own personal micro cell-tower.`,
       howItWorks: `
-        <h4>IEEE 802.11 Architecture</h4>
-        <ul class="wiki-bullet-list">
-          <li><strong>Infrastructure Mode:</strong> Stations (STAs) communicate via an Access Point (AP). The AP bridges the wireless and wired networks.</li>
-          <li><strong>Ad-Hoc Mode (IBSS):</strong> Stations communicate directly peer-to-peer without an AP.</li>
-          <li><strong>BSS (Basic Service Set):</strong> The coverage area of a single AP.</li>
-          <li><strong>ESS (Extended Service Set):</strong> Multiple BSSs connected via a Distribution System (DS), enabling roaming.</li>
-        </ul>
-        <h4>DCF (Distributed Coordination Function) — CSMA/CA</h4>
         <ol class="wiki-ordered-list">
-          <li><strong>Sense channel:</strong> Wait for DIFS (Distributed Inter-Frame Space) silence period.</li>
-          <li><strong>If idle:</strong> Start random backoff counter (slots = random[0, CW]).</li>
-          <li><strong>Decrement counter</strong> only while channel remains idle. Freeze if channel becomes busy.</li>
-          <li><strong>When counter reaches 0:</strong> Transmit the frame.</li>
-          <li><strong>Receiver:</strong> If frame received correctly, wait SIFS (Short IFS), then send ACK.</li>
-          <li><strong>If no ACK:</strong> Double the contention window (CW) and try again.</li>
-        </ol>
-        <h4>RTS/CTS (Request to Send / Clear to Send)</h4>
-        <ol class="wiki-ordered-list">
-          <li>Sender transmits a short <strong>RTS frame</strong> containing the duration of the upcoming data transfer.</li>
-          <li>If the receiver hears the RTS, it replies with a <strong>CTS frame</strong> (also containing duration).</li>
-          <li>All stations hearing RTS or CTS set their <strong>NAV (Network Allocation Vector)</strong> timer and defer for that duration.</li>
-          <li>This <strong>solves the hidden terminal problem</strong>: even if station C can't hear the sender, it hears the CTS from the AP and defers.</li>
-        </ol>
-        <h4>Inter-Frame Spacing (IFS) Priority</h4>
-        <table class="wiki-table">
-          <thead><tr><th>IFS Type</th><th>Duration</th><th>Used For</th><th>Priority</th></tr></thead>
-          <tbody>
-            <tr><td>SIFS (Short)</td><td>Shortest</td><td>ACK, CTS, next fragment</td><td>Highest</td></tr>
-            <tr><td>PIFS (PCF)</td><td>Medium</td><td>PCF polling by AP</td><td>Medium</td></tr>
-            <tr><td>DIFS (Distributed)</td><td>Longest</td><td>New data frames</td><td>Lowest</td></tr>
-          </tbody>
-        </table>`,
-      diagram: `
-HIDDEN TERMINAL PROBLEM:
-
-     ┌──── Range of A ────┐
-     │                    │
-  Station A ──── AP ──── Station C
-                 │
-     └──── Range of C ────┘
-     
-  A cannot hear C. Both may transmit to AP simultaneously → COLLISION!
-
-RTS/CTS SOLUTION:
-
-Sender (A):  |DIFS|Backoff|  RTS  |          |SIFS|   DATA   |     |
-AP:          |                    |SIFS| CTS  |          |SIFS| ACK  |
-Station C:   |    (hears CTS) ──→ NAV Timer ─────── DEFER ──────────|
-
-C defers because it heard the CTS from the AP, even though it can't hear A.`,
-      technicalDetails: `
-        <h4>IEEE 802.11 Protocol Stack</h4>
-        <table class="wiki-table">
-          <thead><tr><th>Layer</th><th>Sublayer</th><th>Function</th></tr></thead>
-          <tbody>
-            <tr><td rowspan="2">Data Link</td><td>LLC (Logical Link Control)</td><td>Interface to network layer, optional flow/error control</td></tr>
-            <tr><td>MAC (Medium Access Control)</td><td>CSMA/CA, RTS/CTS, fragmentation, encryption</td></tr>
-            <tr><td>Physical</td><td>PHY (PLCP + PMD)</td><td>OFDM/DSSS modulation, channel coding, antenna</td></tr>
-          </tbody>
-        </table>
-        <h4>802.11 Frame Format (MAC Header)</h4>
-        <table class="wiki-table">
-          <thead><tr><th>Field</th><th>Size</th><th>Purpose</th></tr></thead>
-          <tbody>
-            <tr><td>Frame Control</td><td>2 bytes</td><td>Protocol version, type, subtype, flags</td></tr>
-            <tr><td>Duration/ID</td><td>2 bytes</td><td>NAV value or association ID</td></tr>
-            <tr><td>Address 1</td><td>6 bytes</td><td>Receiver address</td></tr>
-            <tr><td>Address 2</td><td>6 bytes</td><td>Transmitter address</td></tr>
-            <tr><td>Address 3</td><td>6 bytes</td><td>Filtering (BSSID or final destination)</td></tr>
-            <tr><td>Sequence Control</td><td>2 bytes</td><td>Fragment and sequence numbers</td></tr>
-            <tr><td>Address 4</td><td>6 bytes</td><td>Used only in mesh/WDS</td></tr>
-            <tr><td>Payload</td><td>0-2304 bytes</td><td>Data (larger than Ethernet's 1500)</td></tr>
-            <tr><td>FCS</td><td>4 bytes</td><td>CRC-32 error detection</td></tr>
-          </tbody>
-        </table>`,
-      workedExample: `<p><strong>Scenario:</strong> Three stations A, B, C share a Wi-Fi channel. A and C are hidden from each other but both can reach the AP. A wants to send a 1500-byte frame.</p>
-        <p><strong>Without RTS/CTS:</strong></p>
-        <ol class="wiki-ordered-list">
-          <li>A senses channel idle (can't hear C) → transmits 1500-byte frame.</li>
-          <li>C also senses channel idle (can't hear A) → transmits simultaneously.</li>
-          <li>Both frames collide at AP → both destroyed → 1500 bytes wasted by each.</li>
-        </ol>
-        <p><strong>With RTS/CTS:</strong></p>
-        <ol class="wiki-ordered-list">
-          <li>A sends tiny RTS (20 bytes) to AP.</li>
-          <li>AP broadcasts CTS (14 bytes) — C hears this and defers.</li>
-          <li>A safely sends 1500-byte frame without collision.</li>
-          <li>Even if RTS collides, only 20 bytes are wasted (not 1500).</li>
+          <li><strong>Basic Service Set (BSS):</strong> The fundamental building block. Consists of one Access Point (AP) and associated wireless client stations (STAs).</li>
+          <li><strong>Extended Service Set (ESS):</strong> Multiple APs connected via a wired Distribution System (DS - usually Ethernet), sharing a common SSID. Allows seamless roaming!</li>
+          <li><strong>Independent BSS (IBSS / Ad-Hoc):</strong> Peer-to-peer wireless network formed directly between client devices without an Access Point.</li>
+          <li><strong>Discovery & Connection Process:</strong>
+            <ul class="wiki-bullet-list">
+              <li><em>Passive Scanning:</em> AP broadcasts <strong>Beacon frames</strong> periodically (typically every 100 ms).</li>
+              <li><em>Active Scanning:</em> STA transmits <strong>Probe Request</strong>; AP replies with <strong>Probe Response</strong>.</li>
+              <li><em>Authentication & Association:</em> STA negotiates 802.11 authentication and association frames before data transfer begins.</li>
+            </ul>
+          </li>
         </ol>`,
+      diagram: `
++-------------------------------------------------------------------------+
+|                  EXTENDED SERVICE SET (ESS: SSID="CampusNet")           |
+|                                                                         |
+|   +-----------------------+           +-----------------------+         |
+|   |   BSS 1               |           |   BSS 2               |         |
+|   |   [Access Point 1]    |           |   [Access Point 2]    |         |
+|   |     /     \\          |           |     /     \\          |         |
+|   |  STA-A   STA-B        |           |  STA-C   STA-D        |         |
+|   +-----------|-----------+           +-----------|-----------+         |
++---------------|-----------------------------------|---------------------+
+                v                                   v
++-------------------------------------------------------------------------+
+|        WIRED DISTRIBUTION SYSTEM (DS - Gigabit Ethernet LAN)            |
+|                                                                         |
+|                     [ROUTER / GATEWAY TO INTERNET]                      |
++-------------------------------------------------------------------------+`,
+      interactiveLabKey: "frame-explorer",
+      technicalDetails: `
+        <table class="wiki-table">
+          <thead><tr><th>Standard</th><th>Year</th><th>Frequency</th><th>Max PHY Rate</th><th>Key Technology</th></tr></thead>
+          <tbody>
+            <tr><td>802.11b</td><td>1999</td><td>2.4 GHz</td><td>11 Mbps</td><td>DSSS, CCK modulation</td></tr>
+            <tr><td>802.11a</td><td>1999</td><td>5 GHz</td><td>54 Mbps</td><td>OFDM modulation</td></tr>
+            <tr><td>802.11g</td><td>2003</td><td>2.4 GHz</td><td>54 Mbps</td><td>OFDM in 2.4 GHz band</td></tr>
+            <tr><td>802.11n (Wi-Fi 4)</td><td>2009</td><td>2.4 / 5 GHz</td><td>600 Mbps</td><td>MIMO (Multiple Input Multiple Output), 40 MHz</td></tr>
+            <tr><td>802.11ac (Wi-Fi 5)</td><td>2013</td><td>5 GHz</td><td>6.9 Gbps</td><td>MU-MIMO, 80/160 MHz channels, 256-QAM</td></tr>
+            <tr><td>802.11ax (Wi-Fi 6/6E)</td><td>2021</td><td>2.4 / 5 / 6 GHz</td><td>9.6 Gbps</td><td>OFDMA, 1024-QAM, Target Wake Time (TWT)</td></tr>
+            <tr><td>802.11be (Wi-Fi 7)</td><td>2024</td><td>2.4 / 5 / 6 GHz</td><td>46 Gbps</td><td>320 MHz channels, 4096-QAM, Multi-Link (MLO)</td></tr>
+          </tbody>
+        </table>`,
+      workedExamples: {
+        level1: `<strong>Problem:</strong> What is the difference between a BSSID and an SSID?<br><br>
+<strong>Solution:</strong><br>
+- <strong>SSID (Service Set Identifier):</strong> The human-readable name of the wireless network (e.g. <code>"Starbucks_Guest"</code> or <code>"Home_5G"</code>). Multiple APs across a building can share the same SSID.<br>
+- <strong>BSSID (Basic Service Set Identifier):</strong> The unique 48-bit hardware MAC address of a specific Access Point radio interface.`,
+        level2: `<strong>Problem:</strong> A user walks from building A to building B while maintaining an active VoIP call. What 802.11 architecture enables this?<br><br>
+<strong>Working:</strong><br>
+An <strong>Extended Service Set (ESS)</strong>. Both APs are connected via a common wired Distribution System and broadcast the same SSID. As the client's signal from AP 1 weakens, its wireless NIC automatically disassociates from AP 1 and associates with AP 2 (Roaming) without changing its Layer 3 IP address!`,
+        level3: `<strong>Problem:</strong> Contrast Infrastructure Mode with Ad-Hoc Mode.<br><br>
+<strong>Analysis:</strong><br>
+- <strong>Infrastructure Mode:</strong> Centralized. All traffic between STAs must pass through the Access Point, which handles bridging to the wired LAN.<br>
+- <strong>Ad-Hoc Mode (IBSS):</strong> Peer-to-peer. Stations communicate directly using their wireless NICs without any Access Point or wired infrastructure (used for direct Apple AirDrop or Wi-Fi Direct file sharing).`
+      },
       advantagesLimitations: `
         <table class="wiki-table">
-          <thead><tr><th>Advantages</th><th>Limitations</th></tr></thead>
+          <thead><tr><th>Advantages</th><th>Disadvantages</th></tr></thead>
           <tbody>
-            <tr><td>Wireless mobility & convenience</td><td>Lower throughput than wired Ethernet</td></tr>
-            <tr><td>RTS/CTS solves hidden terminal problem</td><td>RTS/CTS overhead reduces throughput for small frames</td></tr>
-            <tr><td>ACK-based reliability</td><td>Exposed terminal problem not fully solved</td></tr>
-            <tr><td>Backward compatible across Wi-Fi generations</td><td>Shared medium → throughput drops with more users</td></tr>
+            <tr><td>Full user mobility; eliminates expensive Ethernet wall drops; easy scalability.</td><td>Shared airtime contention; RF interference from microwaves/walls; signal attenuation over distance.</td></tr>
           </tbody>
         </table>`,
-      whereUsed: ["IEEE 802.11ax (Wi-Fi 6/6E) in homes and offices", "Enterprise campus WLANs", "Public Wi-Fi hotspots", "IoT smart devices", "Industrial wireless (802.11ah)"],
-      commonMistakes: "Thinking RTS/CTS is always used in Wi-Fi. RTS/CTS is optional and typically only enabled for frames above a configurable size threshold (RTS Threshold, default ~2347 bytes). For small frames, the overhead of RTS/CTS exceeds the potential collision cost.",
-      compareWith: { title: "Wi-Fi CSMA/CA vs Ethernet CSMA/CD", note: "Ethernet detects collisions during transmission. Wi-Fi avoids collisions preemptively. Wi-Fi has 3 addresses (vs Ethernet's 2) and MAC-level ACKs." },
-      practice: {
-        question: "What is the purpose of the NAV (Network Allocation Vector) in IEEE 802.11?",
-        choices: [
-          "To store the destination MAC address",
-          "To indicate how long a station must defer from transmitting",
-          "To calculate the CRC checksum",
-          "To manage power saving mode"
-        ],
-        correctIndex: 1,
-        explanation: "The NAV is a timer set by stations that hear RTS/CTS frames. It indicates the expected duration of the current transmission, causing other stations to defer and avoid collisions for that period."
-      },
+      whereUsed: [
+        "Home Wi-Fi routers and wireless mesh systems.",
+        "Enterprise campus networks (Cisco Catalyst, Aruba, Ubiquiti).",
+        "Public hotspots and in-flight airline Wi-Fi."
+      ],
+      commonMistakes: `
+        <ul class="wiki-bullet-list">
+          <li><strong>Confusing Wi-Fi generation names with frequencies:</strong> Wi-Fi 6 (802.11ax) is NOT 6 GHz only; it runs on 2.4 GHz, 5 GHz, and 6 GHz (Wi-Fi 6E).</li>
+        </ul>`,
+      quiz: [
+        {
+          question: "Which IEEE standard family defines Wireless LAN (Wi-Fi) operations?",
+          options: ["IEEE 802.3", "IEEE 802.11", "IEEE 802.15", "IEEE 802.1X"],
+          correctIndex: 1,
+          explanation: "IEEE 802.11 is the official standard for wireless local area networking."
+        },
+        {
+          question: "What is an Extended Service Set (ESS)?",
+          options: ["A single standalone laptop", "Multiple Access Points connected via a Distribution System sharing an SSID", "A Bluetooth personal network", "A fiber optic switch"],
+          correctIndex: 1,
+          explanation: "An ESS links multiple BSSs together through a distribution backbone to allow seamless roaming across large areas."
+        },
+        {
+          question: "Which frame type is broadcast periodically by Access Points to advertise their presence?",
+          options: ["Data frame", "Beacon frame (Management)", "RTS control frame", "FCS trailer"],
+          correctIndex: 1,
+          explanation: "APs broadcast Beacon management frames (typically 10 times a second) containing network capabilities and SSID."
+        }
+      ],
       references: [
-        { cite: "Tanenbaum & Wetherall, Computer Networks, 6th Ed., Ch. 4.4: Wireless LANs", url: "https://www.pearson.com/en-us/subject-catalog/p/computer-networks/P200000003193" },
-        { cite: "IEEE 802.11: Wireless LAN Medium Access Control", url: "https://standards.ieee.org/ieee/802.11/7028/" },
-        { cite: "Forouzan, Data Communications & Networking, 6th Ed., Ch. 15: Wireless LANs", url: "https://www.mheducation.com/" }
+        { cite: "IEEE Std 802.11-2020 - Wireless LAN MAC and PHY Specifications.", url: "https://standards.ieee.org" }
       ]
     },
-    prevTopicId: "collision-free-protocols",
-    nextTopicId: "wifi-mac-sublayer"
+    prevTopicId: "mac-address", nextTopicId: "wifi-mac-sublayer"
   },
 
+  // =========================================================================
+  // TOPIC 25: IEEE 802.11 WI-FI MAC SUBLAYER (PDF Topic 10, pp. 218-233)
+  // =========================================================================
   "wifi-mac-sublayer": {
     id: "wifi-mac-sublayer",
-    title: "IEEE 802.11 MAC Sublayer Protocol",
-    unit: "Unit II: Data Link Layer & Reliable Transfer",
+    title: "IEEE 802.11 MAC Sublayer (CSMA/CA & Frame Structure)",
+    unit: "Unit II: Data Link Layer & MAC Sublayer",
     unitId: "unit2",
-    level: "Level 2 — Standard Topic",
+    level: "Intermediate → Advanced",
     category: "datalink",
     difficulty: "Advanced",
-    readingTime: "8 min read",
-    standard: "IEEE 802.11-2020",
-    oneLiner: "The 802.11 MAC sublayer manages channel access through DCF (contention-based CSMA/CA) and PCF (polling-based), with QoS extensions in 802.11e (EDCA/HCCA) for multimedia traffic.",
-    quickAnswer: "The Wi-Fi MAC sublayer uses DCF (Distributed Coordination Function) as its primary access method with CSMA/CA, and optionally PCF (Point Coordination Function) for polling. Modern Wi-Fi 6 adds OFDMA and TWT for efficiency.",
-    whyItMatters: "The MAC sublayer determines Wi-Fi's real-world performance—understanding DCF/EDCA explains why video calls stutter, why throughput drops with distance, and how QoS prioritization works.",
+    readingTime: "35 min",
+    standard: "IEEE 802.11 MAC / DCF",
+    oneLiner: "Collision avoidance, interframe spaces (SIFS/DIFS), RTS/CTS, hidden/exposed nodes, and 4-address frame layout.",
+    quickAnswer: "Wi-Fi coordinates access using CSMA/CA with random backoff, priority interframe spaces (SIFS < PIFS < DIFS), positive link-layer ACKs, and optional RTS/CTS to solve hidden node problems.",
+    whyItMatters: "Wireless cannot detect collisions while sending. Understanding DCF backoff, the hidden terminal problem, and the complex 802.11 4-address MAC header is critical for wireless engineering.",
+    prerequisitesList: [
+      { concept: "CSMA/CA", meaning: "Carrier Sense Multiple Access with Collision Avoidance." },
+      { concept: "Interframe Space (IFS)", meaning: "Mandatory quiet waiting periods between transmissions (SIFS, PIFS, DIFS)." },
+      { concept: "NAV (Network Allocation Vector)", meaning: "A timer maintained by stations representing virtual carrier sensing." }
+    ],
+    learningObjectives: [
+      "Explain the exact step-by-step operation of CSMA/CA under Distributed Coordination Function (DCF).",
+      "Compare the hierarchy of interframe spaces: SIFS, PIFS, DIFS.",
+      "Explain the Hidden-Node Problem and Exposed-Node Problem with diagrams.",
+      "Describe how RTS/CTS frames and the NAV vector eliminate hidden node collisions.",
+      "Deconstruct the IEEE 802.11 MAC frame format and explain why it requires four MAC address fields."
+    ],
     infobox: {
-      layer: "Layer 2 (Data Link — MAC Sublayer)",
-      standard: "IEEE 802.11-2020, 802.11e (QoS), 802.11ax (Wi-Fi 6)",
+      layer: "Layer 2 (MAC Sublayer)",
+      standard: "IEEE 802.11 DCF / PCF",
       type: "Wireless MAC Protocol",
-      keyFormula: "\\text{CW}_{\\text{new}} = \\min(2 \\times \\text{CW}_{\\text{old}} + 1, \\text{CW}_{\\text{max}})",
+      keyFormula: "\\text{IFS Hierarchy: } \\text{SIFS} < \\text{PIFS} < \\text{DIFS}",
       prerequisites: ["wireless-lan-protocols", "csma-protocols"],
-      relatedConcepts: ["wireless-lan-protocols", "ethernet", "csma-protocols"],
+      relatedConcepts: ["ethernet", "csma-protocols", "mac-address"],
       compareWith: ["ethernet"],
-      primaryUses: ["Wi-Fi 1–7 (802.11a/b/g/n/ac/ax/be)", "Mesh networks (802.11s)", "Vehicle-to-Vehicle (802.11p/bd)"]
+      primaryUses: ["Wi-Fi contention arbitration, enterprise wireless QoS, airtime fairness"]
     },
     sections: {
-      overview: `<p>The <strong>IEEE 802.11 MAC sublayer</strong> sits between the Logical Link Control (LLC) sublayer above and the Physical (PHY) layer below. It is responsible for:</p>
-        <ul class="wiki-bullet-list">
-          <li><strong>Channel access control</strong> (who transmits when)</li>
-          <li><strong>Frame formatting</strong> (30-byte header with up to 4 MAC addresses)</li>
-          <li><strong>Fragmentation & reassembly</strong> of large frames</li>
-          <li><strong>Encryption</strong> (WEP → WPA → WPA2/3)</li>
-          <li><strong>Power management</strong> (sleep/wake scheduling)</li>
-          <li><strong>Association & authentication</strong> with the AP</li>
-        </ul>`,
+      overview: `the Media Access Control protocol for IEEE 802.11 wireless networks, responsible for channel contention arbitration via CSMA/CA, priority scheduling via Interframe Spaces, transmission acknowledgment, and multi-address frame encapsulation.`,
+      eli10: `Two kids sitting in different rooms want to talk to their dad in the hallway. Because there is a wall between them, they cannot hear each other. If both start talking to dad at the same time, dad hears garbled noise! (The hidden node problem!). To fix this, a kid sends a quick whisper: "Can I talk?" (RTS). Dad shouts: "Yes, go ahead!" (CTS). The other kid hears dad and waits!`,
+      analogy: `Air Traffic Control: Planes on the tarmac cannot see around hangars. They call tower with "Request clearance to cross runway" (RTS). Tower broadcasts "Cleared to cross, all other aircraft hold position" (CTS).`,
       howItWorks: `
-        <h4>DCF (Distributed Coordination Function)</h4>
-        <p>The default, mandatory access mechanism based on <strong>CSMA/CA</strong>:</p>
         <ol class="wiki-ordered-list">
-          <li>Station waits for channel to be idle for DIFS duration.</li>
-          <li>Generates random backoff = random(0, CW) × slot_time.</li>
-          <li>Backoff counter decrements only when channel is idle; freezes when busy.</li>
-          <li>When counter = 0, transmit the frame.</li>
-          <li>Wait for SIFS + ACK. If no ACK → double CW (up to CW<sub>max</sub>) and retry.</li>
-          <li>If ACK received → reset CW to CW<sub>min</sub>.</li>
-        </ol>
-        <h4>PCF (Point Coordination Function)</h4>
-        <p>An <strong>optional polling-based</strong> access mechanism managed by the AP:</p>
-        <ul class="wiki-bullet-list">
-          <li>AP acts as a <strong>Point Coordinator (PC)</strong>.</li>
-          <li>Alternates between <strong>contention-free period (CFP)</strong> and <strong>contention period (CP)</strong>.</li>
-          <li>During CFP: AP polls each station in turn using PIFS (higher priority than DIFS).</li>
-          <li>During CP: Normal DCF (CSMA/CA) operation.</li>
-          <li>Rarely implemented in practice.</li>
-        </ul>
-        <h4>EDCA (Enhanced Distributed Channel Access) — 802.11e QoS</h4>
-        <p>Extends DCF with <strong>four traffic categories</strong> for QoS:</p>
-        <table class="wiki-table">
-          <thead><tr><th>Access Category</th><th>Priority</th><th>AIFS</th><th>CW<sub>min</sub></th><th>CW<sub>max</sub></th><th>Example Traffic</th></tr></thead>
-          <tbody>
-            <tr><td>AC_VO (Voice)</td><td>Highest</td><td>SIFS + 2 slots</td><td>3</td><td>7</td><td>VoIP, video calls</td></tr>
-            <tr><td>AC_VI (Video)</td><td>High</td><td>SIFS + 2 slots</td><td>7</td><td>15</td><td>Streaming video</td></tr>
-            <tr><td>AC_BE (Best Effort)</td><td>Medium</td><td>SIFS + 3 slots</td><td>15</td><td>1023</td><td>Web browsing, email</td></tr>
-            <tr><td>AC_BK (Background)</td><td>Lowest</td><td>SIFS + 7 slots</td><td>15</td><td>1023</td><td>File downloads, updates</td></tr>
-          </tbody>
-        </table>
-        <h4>Key 802.11 MAC Operations</h4>
-        <ul class="wiki-bullet-list">
-          <li><strong>Scanning:</strong> Active (send Probe Request) or Passive (listen for Beacons).</li>
-          <li><strong>Authentication:</strong> Open System or Shared Key (WPA2/3 uses 4-way handshake).</li>
-          <li><strong>Association:</strong> Station registers with AP, receives Association ID (AID).</li>
-          <li><strong>Fragmentation:</strong> Large frames split into smaller fragments, each individually ACKed.</li>
-          <li><strong>Power Save:</strong> Station sleeps; AP buffers frames; station wakes periodically to check beacon's TIM (Traffic Indication Map).</li>
-        </ul>`,
+          <li><strong>Carrier Sensing (Physical & Virtual):</strong> Station checks RF energy (physical) and checks its <strong>NAV (Network Allocation Vector)</strong> timer (virtual).</li>
+          <li><strong>DIFS Wait:</strong> If channel is idle, station must wait for a <strong>DIFS (Distributed Interframe Space)</strong> interval.</li>
+          <li><strong>Random Backoff:</strong> Station selects random backoff counter from Contention Window $[0, CW]$. Counter decrements while channel is idle; freezes if channel becomes busy!</li>
+          <li><strong>Frame Transmission:</strong> When counter reaches 0, station transmits data frame.</li>
+          <li><strong>SIFS & ACK:</strong> Receiver validates CRC. After a tiny <strong>SIFS (Short Interframe Space)</strong> delay, receiver transmits <code>ACK</code> frame. Because SIFS < DIFS, the ACK takes immediate priority before any other station can start contending!</li>
+          <li><strong>RTS/CTS Exchange (Optional):</strong>
+            <ul class="wiki-bullet-list">
+              <li>Sender transmits <code>RTS (Request to Send)</code> specifying frame duration.</li>
+              <li>Receiver replies with <code>CTS (Clear to Send)</code> after SIFS.</li>
+              <li>All stations hearing either RTS or CTS set their NAV to sleep during the transaction!</li>
+            </ul>
+          </li>
+        </ol>`,
       diagram: `
-802.11 MAC Frame Format (30 bytes header):
-
-┌──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬────────────┬──────┐
-│ Frame    │Duration/ │Address 1 │Address 2 │Address 3 │ Seq      │Address 4 │   Frame    │ FCS  │
-│ Control  │  ID      │ (RA)     │ (TA)     │ (DA/SA)  │ Control  │ (opt)    │   Body     │      │
-│ 2 bytes  │ 2 bytes  │ 6 bytes  │ 6 bytes  │ 6 bytes  │ 2 bytes  │ 6 bytes  │ 0-2304 B   │4 bytes│
-└──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴────────────┴──────┘
-
-Four Address Fields (vs Ethernet's 2):
-┌─────────────────────────────┬──────────┬──────────┬──────────┬──────────┐
-│ Scenario                    │ Addr 1   │ Addr 2   │ Addr 3   │ Addr 4   │
-├─────────────────────────────┼──────────┼──────────┼──────────┼──────────┤
-│ STA → AP (To DS)            │ BSSID(AP)│ Source   │ Final Dst│ —        │
-│ AP → STA (From DS)          │ Dest     │ BSSID(AP)│ Source   │ —        │
-│ STA → STA (Ad-hoc)          │ Dest     │ Source   │ BSSID    │ —        │
-│ AP → AP (WDS/Mesh)          │ Rx AP    │ Tx AP    │ Final Dst│ Orig Src │
-└─────────────────────────────┴──────────┴──────────┴──────────┴──────────┘`,
+Sender          [--- DIFS ---] [ Backoff ] [=== DATA FRAME ===]
+                                                               |
+Receiver                                        [-- SIFS --] [= ACK =]
+                                                                  |
+Other Stations  [------------------- NAV (Channel Reserved) -------]`,
+      interactiveLabKey: "frame-explorer",
       technicalDetails: `
-        <h4>Ethernet (802.3) vs Wi-Fi (802.11) MAC Comparison</h4>
-        <table class="wiki-table">
-          <thead><tr><th>Feature</th><th>Ethernet (802.3)</th><th>Wi-Fi (802.11)</th></tr></thead>
-          <tbody>
-            <tr><td>Access Method</td><td>CSMA/CD</td><td>CSMA/CA</td></tr>
-            <tr><td>Collision Handling</td><td>Detect during TX</td><td>Avoid before TX</td></tr>
-            <tr><td>MAC Addresses</td><td>2 (Src + Dst)</td><td>3 or 4</td></tr>
-            <tr><td>ACK at MAC layer</td><td>No</td><td>Yes (mandatory)</td></tr>
-            <tr><td>Max Payload</td><td>1500 bytes</td><td>2304 bytes</td></tr>
-            <tr><td>Fragmentation</td><td>No (done at IP layer)</td><td>Yes (MAC-level)</td></tr>
-            <tr><td>Encryption</td><td>None at MAC</td><td>WPA2/WPA3 at MAC</td></tr>
-            <tr><td>Full-Duplex</td><td>Yes (switched)</td><td>No (half-duplex radio)</td></tr>
-            <tr><td>Min Frame Size</td><td>64 bytes</td><td>No minimum</td></tr>
-          </tbody>
-        </table>`,
-      workedExample: `<p><strong>Scenario:</strong> A Wi-Fi station sends a frame using DCF. CW<sub>min</sub>=15, slot time=9μs, SIFS=16μs, DIFS=34μs.</p>
-        <ol class="wiki-ordered-list">
-          <li>Station waits DIFS = 34μs after channel becomes idle.</li>
-          <li>Random backoff = random(0, 15) × 9μs. Say random picks 7 → backoff = 63μs.</li>
-          <li>Channel stays idle → counter decrements to 0 → transmit frame.</li>
-          <li>Frame transmission time = 500μs (for a 1000-byte frame at 16 Mbps).</li>
-          <li>Receiver waits SIFS = 16μs → sends ACK (takes ~24μs).</li>
-          <li><strong>Total exchange time = 34 + 63 + 500 + 16 + 24 = 637μs.</strong></li>
-        </ol>
-        <p>If a collision occurs (no ACK received), CW doubles: CW = min(2×15+1, 1023) = 31. New backoff from [0,31].</p>`,
+        <p><strong>Hidden-Node vs. Exposed-Node Problems:</strong></p>
+        <ul class="wiki-bullet-list">
+          <li><strong>Hidden-Node Problem:</strong> Station A and Station C can both communicate with Access Point B, but cannot hear each other. Both sense channel idle and transmit simultaneously to B &rarr; Collision at B! <em>Solved by RTS/CTS.</em></li>
+          <li><strong>Exposed-Node Problem:</strong> Station B is sending to A. Station C wants to send to D. C hears B's carrier and needlessly defers, even though transmitting to D would NOT interfere with A receiving from B! <em>Causes wasted capacity.</em></li>
+        </ul>
+        <p><strong>802.11 MAC Frame Layout (Up to 34 Bytes Header):</strong></p>
+        <ul class="wiki-bullet-list">
+          <li><strong>Frame Control (2B):</strong> Type (Mgmt/Control/Data), Subtype, To DS, From DS, Retry, Power Mgt.</li>
+          <li><strong>Duration / ID (2B):</strong> Channel reservation duration in microseconds (updates NAV).</li>
+          <li><strong>Address 1 (6B):</strong> Receiver Address (RA - immediate radio receiver).</li>
+          <li><strong>Address 2 (6B):</strong> Transmitter Address (TA - immediate radio transmitter).</li>
+          <li><strong>Address 3 (6B):</strong> Destination Address (DA) or Source Address (SA) for distribution system.</li>
+          <li><strong>Sequence Control (2B):</strong> 4-bit fragment number, 12-bit sequence number.</li>
+          <li><strong>Address 4 (6B):</strong> Only present in Wireless Distribution Systems (WDS mesh bridging) when both To DS=1 and From DS=1!</li>
+          <li><strong>FCS (4B):</strong> 32-bit CRC.</li>
+        </ul>`,
+      workedExamples: {
+        level1: `<strong>Problem:</strong> Why is SIFS strictly shorter than DIFS in IEEE 802.11?<br><br>
+<strong>Solution:</strong><br>
+<strong>Priority!</strong> SIFS is used for immediate control responses (ACK, CTS). Because a station waiting to send new data must wait through the longer DIFS, the receiver's ACK can seize the channel first without colliding with new contending transmissions.`,
+        level2: `<strong>Problem:</strong> In the hidden node topology A &mdash; B &mdash; C, explain why Carrier Sensing alone fails to prevent collisions at B.<br><br>
+<strong>Working:</strong><br>
+Station A and Station C are out of radio range of each other. When A transmits to B, C cannot detect A's RF energy. C's carrier sense reports the channel is "IDLE". C begins transmitting to B. Both signals arrive simultaneously at B's antenna, destroying both frames!`,
+        level3: `<strong>Problem:</strong> Under what exact condition are ALL FOUR MAC address fields present in an 802.11 frame?<br><br>
+<strong>Analysis:</strong><br>
+When a frame is transmitted across a <strong>Wireless Distribution System (WDS mesh bridge)</strong> between two Access Points! Both <code>To DS = 1</code> and <code>From DS = 1</code> flags are set in the Frame Control byte:<br>
+- Addr 1: Receiving AP (RA)<br>
+- Addr 2: Transmitting AP (TA)<br>
+- Addr 3: Final Destination Host MAC (DA)<br>
+- Addr 4: Original Source Host MAC (SA).`
+      },
       advantagesLimitations: `
         <table class="wiki-table">
-          <thead><tr><th>Advantages</th><th>Limitations</th></tr></thead>
+          <thead><tr><th>Advantages</th><th>Disadvantages</th></tr></thead>
           <tbody>
-            <tr><td>Wireless mobility, no cabling</td><td>Half-duplex limits throughput</td></tr>
-            <tr><td>EDCA provides QoS for multimedia</td><td>Shared medium → throughput per user drops</td></tr>
-            <tr><td>MAC-level fragmentation handles diverse PHY rates</td><td>High overhead (30-byte header + ACK + IFS gaps)</td></tr>
-            <tr><td>Power save mode extends battery life</td><td>Security complexity (WPA2/3 handshake)</td></tr>
+            <tr><td>Prevents collisions on half-duplex RF media; solves hidden terminals via RTS/CTS; link-layer ACKs provide immediate loss detection.</td><td>High protocol overhead (SIFS, DIFS, backoffs, control frames); RTS/CTS adds airtime penalty for short packets.</td></tr>
           </tbody>
         </table>`,
-      whereUsed: ["All Wi-Fi certified devices worldwide", "Enterprise WPA2/3-Enterprise networks", "802.11s mesh networks", "802.11p/bd vehicular communication (V2X)", "802.11ah IoT (sub-1GHz)"],
-      commonMistakes: "Thinking Wi-Fi frames have only 2 MAC addresses like Ethernet. Wi-Fi frames can have up to 4 addresses: receiver, transmitter, destination, and source—because the AP acts as a relay between wireless and wired segments.",
-      compareWith: { title: "Ethernet MAC vs 802.11 MAC", note: "Ethernet: 2 addresses, CSMA/CD, no ACK, full-duplex. Wi-Fi: 3-4 addresses, CSMA/CA, mandatory ACK, half-duplex, encryption at MAC." },
-      practice: {
-        question: "Why does the IEEE 802.11 MAC frame have up to 4 address fields while Ethernet has only 2?",
-        choices: [
-          "To support higher data rates",
-          "Because the AP acts as an intermediary relay, requiring separate source/destination and transmitter/receiver addresses",
-          "For encryption key distribution",
-          "To support IPv6 addressing"
-        ],
-        correctIndex: 1,
-        explanation: "In infrastructure mode, the AP relays frames between the wireless and wired networks. The 'transmitter' (AP or STA on the wireless side) may differ from the original 'source'. Similarly, the immediate 'receiver' (AP) may differ from the final 'destination'."
-      },
+      whereUsed: [
+        "All Wi-Fi 802.11 devices (smartphones, laptops, IoT, access points).",
+        "Enterprise wireless controllers for airtime fairness.",
+        "Wireless mesh backhaul bridging."
+      ],
+      commonMistakes: `
+        <ul class="wiki-bullet-list">
+          <li><strong>Assuming RTS/CTS is used for every single Wi-Fi packet:</strong> FALSE. RTS/CTS introduces significant overhead. It is only triggered for packets exceeding the configured <code>RTS Threshold</code> (typically 2347 bytes).</li>
+        </ul>`,
+      quiz: [
+        {
+          question: "Which medium-access method is associated with IEEE 802.11 Wi-Fi?",
+          options: ["CSMA/CD", "CSMA/CA", "Token Ring only", "Pure ALOHA only"],
+          correctIndex: 1,
+          explanation: "Wi-Fi uses Carrier Sense Multiple Access with Collision Avoidance (CSMA/CA)."
+        },
+        {
+          question: "What is the primary purpose of a Wi-Fi link-layer ACK frame?",
+          options: ["To encrypt user passwords", "To confirm successful reception of a unicast frame at the MAC layer", "To assign an IP address", "To route packets between subnets"],
+          correctIndex: 1,
+          explanation: "Because wireless transmissions frequently suffer from interference, receivers return immediate MAC-layer ACKs."
+        },
+        {
+          question: "What is the Hidden-Node Problem in wireless networks?",
+          options: ["A device has no MAC address", "Two stations cannot hear each other but their transmissions collide at a shared receiver", "An Access Point hides its SSID", "A switch CAM table is full"],
+          correctIndex: 1,
+          explanation: "Two stations out of radio range of each other both transmit to a common AP, causing a collision at the AP."
+        },
+        {
+          question: "Which interframe space has the shortest duration?",
+          options: ["SIFS (Short Interframe Space)", "DIFS (Distributed Interframe Space)", "PIFS (PCF Interframe Space)", "EIFS (Extended Interframe Space)"],
+          correctIndex: 0,
+          explanation: "SIFS is the shortest interframe space, giving immediate response frames (ACK, CTS) the highest channel priority."
+        }
+      ],
       references: [
-        { cite: "Tanenbaum & Wetherall, Computer Networks, 6th Ed., Ch. 4.4: The 802.11 Protocol Stack", url: "https://www.pearson.com/en-us/subject-catalog/p/computer-networks/P200000003193" },
-        { cite: "IEEE 802.11-2020 Standard", url: "https://standards.ieee.org/ieee/802.11/7028/" },
-        { cite: "Forouzan, Data Communications & Networking, 6th Ed., Ch. 15: IEEE 802.11", url: "https://www.mheducation.com/" }
+        { cite: "IEEE Std 802.11-2020 - Wireless LAN MAC and PHY Specifications.", url: "https://standards.ieee.org" },
+        { cite: "Tanenbaum & Wetherall, Computer Networks (6th Ed.) - Section 4.4: Wireless LANs.", url: "https://www.pearson.com" }
       ]
     },
     prevTopicId: "wireless-lan-protocols",
-    nextTopicId: "ethernet"
+    nextTopicId: "dll-switching"
   },
 
+  // =========================================================================
+  // TOPIC 26: DATA LINK LAYER SWITCHING & BRIDGES (PDF Topic 9, pp. 210-211)
+  // =========================================================================
   "dll-switching": {
     id: "dll-switching",
     title: "Data Link Layer Switching & Learning Bridges",
-    unit: "Unit II: Data Link Layer & Reliable Transfer",
+    unit: "Unit II: Data Link Layer & MAC Sublayer",
     unitId: "unit2",
-    level: "Level 2 — Standard Topic",
+    level: "Intermediate",
     category: "datalink",
     difficulty: "Core",
-    readingTime: "8 min read",
-    standard: "IEEE 802.1D (Bridging), IEEE 802.1Q (VLAN)",
-    oneLiner: "Bridges and switches operate at Layer 2 to forward frames based on MAC addresses—learning bridges build forwarding tables automatically by observing source addresses.",
-    quickAnswer: "A learning bridge/switch examines the source MAC address of every incoming frame to build a forwarding table. When a frame arrives, it checks the destination MAC: if known, forward to that port only; if unknown, flood to all ports except the source port.",
-    whyItMatters: "Modern Ethernet switches are learning bridges—they are the backbone of every LAN. Understanding how they learn, forward, and prevent loops (Spanning Tree Protocol) is essential for network administration.",
+    readingTime: "25 min",
+    standard: "IEEE 802.1D / IEEE 802.1w (RSTP)",
+    oneLiner: "Transparent learning bridges, frame forwarding, filtering, and loop resolution via Spanning Tree.",
+    quickAnswer: "A Layer 2 switch is a multi-port learning bridge that inspects source MAC addresses to populate its forwarding database, selectively forwarding frames to destination ports without collisions.",
+    whyItMatters: "Switching replaced legacy shared hubs, creating dedicated full-duplex collision domains for every connected host and dramatically increasing enterprise network capacity.",
+    prerequisitesList: [
+      { concept: "Collision Domain", meaning: "A network segment where simultaneous transmissions can collide." },
+      { concept: "Broadcast Domain", meaning: "The scope of devices that receive a broadcast frame." }
+    ],
+    learningObjectives: [
+      "Explain the backward learning algorithm of transparent bridges.",
+      "Distinguish frame filtering from frame flooding.",
+      "Understand why redundant switch links cause broadcast storms without STP.",
+      "Explain Spanning Tree Protocol (IEEE 802.1D) port states and BPDU root election."
+    ],
     infobox: {
       layer: "Layer 2 (Data Link Layer)",
-      standard: "IEEE 802.1D (STP), IEEE 802.1w (RSTP), IEEE 802.1Q (VLAN)",
-      type: "LAN Interconnection & Switching",
-      keyFormula: "\\text{Forwarding Decision: } \\text{if dst MAC in table} \\to \\text{forward} \\mid \\text{else} \\to \\text{flood}",
-      prerequisites: ["ethernet", "mac-address"],
-      relatedConcepts: ["vlan", "ethernet", "mac-address", "network-devices"],
-      compareWith: ["vlan"],
-      primaryUses: ["Ethernet LAN switching", "Campus network backbone", "Data center leaf-spine switching"]
+      standard: "IEEE 802.1D (STP), IEEE 802.1w (RSTP)",
+      type: "Link-Layer Packet Switching",
+      keyFormula: "\\text{Port Filtering: If Port}(Dst) == Port(Src) \\implies \\text{Discard}",
+      prerequisites: ["mac-address", "ethernet"],
+      relatedConcepts: ["ethernet", "vlan", "network-devices"],
+      compareWith: ["network-devices"],
+      primaryUses: ["Enterprise campus switching, data center top-of-rack switches"]
     },
     sections: {
-      overview: `<p>As LANs grew, connecting multiple network segments became necessary. <strong>Bridges</strong> (and their modern successors, <strong>switches</strong>) operate at Layer 2 to interconnect LAN segments while confining traffic to only the segments that need it.</p>
-        <p>Key concepts in DLL switching:</p>
-        <ul class="wiki-bullet-list">
-          <li><strong>Bridges:</strong> Connect two LAN segments, forward/filter frames based on MAC addresses.</li>
-          <li><strong>Learning Bridges:</strong> Automatically build a MAC address table by inspecting source addresses of incoming frames.</li>
-          <li><strong>Switches:</strong> Multi-port bridges with hardware-speed forwarding (each port is a separate collision domain).</li>
-          <li><strong>Spanning Tree Protocol (STP):</strong> Prevents loops in networks with redundant bridge connections.</li>
-        </ul>`,
+      overview: `the operation of Layer 2 bridges and switches that connect multiple physical network segments, forwarding frames based on destination MAC addresses while dynamically learning network topology.`,
+      eli10: `A hub is like a town crier who shouts every message out to the entire village. A switch is like a smart postal sorter who looks at the name on the envelope and drops it into only that person's private mailbox!`,
+      analogy: `A smart security guard at a building entrance: When someone walks in through Door 3, the guard notes down their badge ID and writes "Badge 102 is in Wing 3". Next time someone has a package for Badge 102, the guard directs the delivery driver straight to Wing 3.`,
       howItWorks: `
-        <h4>The Learning Bridge Algorithm</h4>
         <ol class="wiki-ordered-list">
-          <li><strong>Learning (Backward Learning):</strong> When a frame arrives on port P with source MAC address S:
+          <li><strong>Backward Learning:</strong> Arriving frame on Port $P$ with Source MAC $S$: switch records $(S, P, \\text{timestamp})$ in its Forwarding Database (CAM table).</li>
+          <li><strong>Forwarding Lookup:</strong> Switch examines Destination MAC $D$:
             <ul class="wiki-bullet-list">
-              <li>Record the mapping: <code>MAC S → Port P</code> in the forwarding table.</li>
-              <li>Set an aging timer (typically 5 minutes) for this entry.</li>
+              <li><em>Destination Found on Port $P$:</em> Frame originated on same segment; <strong>Filter (Discard)</strong>.</li>
+              <li><em>Destination Found on Port $Q \\neq P$:</em> <strong>Forward</strong> frame out Port $Q$ only!</li>
+              <li><em>Destination Unknown or Broadcast (FF:FF:FF:FF:FF:FF):</em> <strong>Flood</strong> frame out all ports except $P$!</li>
             </ul>
           </li>
-          <li><strong>Forwarding Decision:</strong> Look up the destination MAC address D in the forwarding table:
-            <ul class="wiki-bullet-list">
-              <li><strong>If D is found on port Q (Q ≠ P):</strong> Forward the frame to port Q only.</li>
-              <li><strong>If D is found on port P (same as source):</strong> Drop/filter the frame (both source and destination are on the same segment).</li>
-              <li><strong>If D is not in the table:</strong> <strong>Flood</strong>—forward the frame to ALL ports except port P.</li>
-              <li><strong>If D is broadcast (FF:FF:FF:FF:FF:FF):</strong> Always flood to all ports except source.</li>
-            </ul>
-          </li>
-          <li><strong>Aging:</strong> Entries that haven't been refreshed within the aging time are deleted, allowing the bridge to adapt to topology changes.</li>
-        </ol>
-        <h4>Spanning Tree Protocol (STP — IEEE 802.1D)</h4>
-        <p>When multiple bridges create <strong>redundant paths</strong>, frames can loop forever (broadcast storms). STP prevents this:</p>
-        <ol class="wiki-ordered-list">
-          <li>Bridges exchange <strong>BPDU (Bridge Protocol Data Unit)</strong> messages.</li>
-          <li>A <strong>Root Bridge</strong> is elected (lowest Bridge ID = priority + MAC).</li>
-          <li>Each non-root bridge finds its shortest path to the root.</li>
-          <li>Redundant ports are placed in <strong>Blocking state</strong> (not forwarding data).</li>
-          <li>Result: A <strong>loop-free spanning tree</strong> covering all bridges.</li>
-          <li><strong>RSTP (802.1w):</strong> Rapid STP converges in seconds instead of 30-50 seconds.</li>
-        </ol>
-        <h4>Store-and-Forward vs Cut-Through Switching</h4>
-        <table class="wiki-table">
-          <thead><tr><th>Method</th><th>How It Works</th><th>Latency</th><th>Error Checking</th></tr></thead>
-          <tbody>
-            <tr><td>Store-and-Forward</td><td>Receive entire frame, check CRC, then forward</td><td>Higher</td><td>Full CRC check</td></tr>
-            <tr><td>Cut-Through</td><td>Read destination MAC (first 6 bytes), start forwarding immediately</td><td>Very low</td><td>No CRC check (may forward corrupt frames)</td></tr>
-            <tr><td>Fragment-Free</td><td>Read first 64 bytes (collision fragment size), then forward</td><td>Medium</td><td>Filters runts/collision fragments</td></tr>
-          </tbody>
-        </table>`,
+          <li><strong>Table Aging:</strong> Entries are purged if inactive for 300 seconds to adapt to moved devices.</li>
+          <li><strong>Spanning Tree Protocol (STP - 802.1D):</strong> Redundant cables between switches cause infinite broadcast loops. STP exchanges BPDUs (Bridge Protocol Data Units) to elect a Root Bridge and disables redundant links into a <strong>Blocking state</strong>, creating a loop-free logical tree.</li>
+        </ol>`,
       diagram: `
-LEARNING BRIDGE IN ACTION:
-
-Step 1: Frame arrives from A (Port 1)                Step 2: Frame from A to C
-┌──────────┐                    ┌──────────┐         Table: A→Port1
-│ Station A │──Port 1──┐  ┌──Port 3──│ Station C │         
-└──────────┘          │  │          └──────────┘         
-                    ┌─▼──▼─┐                             
-                    │BRIDGE │  ← Learns: A is on Port 1  
-                    │ TABLE │  ← C unknown → FLOOD all   
-                    └─┬──┬─┘     ports except Port 1     
-┌──────────┐          │  │          ┌──────────┐         
-│ Station B │──Port 2──┘  └──Port 4──│ Station D │         
-└──────────┘                    └──────────┘         
-
-Step 3: C replies to A                               
-Table: A→Port1, C→Port3                              
-Bridge knows A is on Port 1 → forward ONLY to Port 1 
-(No flooding! Traffic filtered from Ports 2, 4)       
-
-SPANNING TREE (Loop Prevention):
-       ┌─── Bridge 1 ───┐
-       │   (Root)        │
-    Port1             Port2
-       │                 │
-   ┌───▼───┐        ┌───▼───┐
-   │Bridge 2│────────│Bridge 3│
-   └───────┘  ▲     └───────┘
-              │
-         This port is BLOCKED
-         by STP to prevent loops`,
+                    +---------------------------+
+                    |    LAYER 2 SWITCH         |
+                    |   Forwarding Database     |
+                    |   MAC A  -->  Port 1      |
+                    |   MAC B  -->  Port 2      |
+                    +---------------------------+
+                       /          |          \\
+                  Port 1        Port 2       Port 3
+                    /             |            \\
+                [ Host A ]    [ Host B ]   [ Host C ]
+      Frame A -> B: Sent ONLY to Port 2! (Port 3 is completely quiet!)`,
+      interactiveLabKey: "frame-explorer",
       technicalDetails: `
-        <h4>Bridge Forwarding Table Example</h4>
         <table class="wiki-table">
-          <thead><tr><th>MAC Address</th><th>Port</th><th>Age (seconds)</th></tr></thead>
+          <thead><tr><th>Switching Mode</th><th>Latency</th><th>Error Handling</th><th>Mechanism</th></tr></thead>
           <tbody>
-            <tr><td>AA:BB:CC:11:22:33</td><td>Port 1</td><td>42</td></tr>
-            <tr><td>AA:BB:CC:44:55:66</td><td>Port 3</td><td>18</td></tr>
-            <tr><td>AA:BB:CC:77:88:99</td><td>Port 2</td><td>125</td></tr>
-            <tr><td>AA:BB:CC:AA:BB:CC</td><td>Port 1</td><td>7</td></tr>
-          </tbody>
-        </table>
-        <h4>STP Port States</h4>
-        <table class="wiki-table">
-          <thead><tr><th>State</th><th>Learns MACs?</th><th>Forwards Data?</th><th>Duration</th></tr></thead>
-          <tbody>
-            <tr><td>Blocking</td><td>No</td><td>No</td><td>20s (max age)</td></tr>
-            <tr><td>Listening</td><td>No</td><td>No</td><td>15s (forward delay)</td></tr>
-            <tr><td>Learning</td><td>Yes</td><td>No</td><td>15s (forward delay)</td></tr>
-            <tr><td>Forwarding</td><td>Yes</td><td>Yes</td><td>Active</td></tr>
-            <tr><td>Disabled</td><td>No</td><td>No</td><td>Admin down</td></tr>
+            <tr><td>Store-and-Forward</td><td>Higher (buffers entire frame)</td><td>Validates FCS CRC-32; discards corrupt frames</td><td>Default mode on modern enterprise switches</td></tr>
+            <tr><td>Cut-Through</td><td>Lowest (sub-microsecond)</td><td>No FCS check; forwards corrupted frames</td><td>Begins forwarding as soon as Dest MAC (first 6B) is read</td></tr>
           </tbody>
         </table>`,
-      workedExample: `<p><strong>Problem:</strong> A bridge has 4 ports. Its MAC table is initially empty. Trace the learning process for this sequence of frames:</p>
-        <ol class="wiki-ordered-list">
-          <li><strong>Frame 1:</strong> A→B arrives on Port 1
-            <ul class="wiki-bullet-list"><li>Learn: A→Port 1. B not in table → <strong>Flood to Ports 2, 3, 4</strong>.</li></ul>
-          </li>
-          <li><strong>Frame 2:</strong> B→A arrives on Port 3
-            <ul class="wiki-bullet-list"><li>Learn: B→Port 3. A in table on Port 1 → <strong>Forward to Port 1 only</strong>.</li></ul>
-          </li>
-          <li><strong>Frame 3:</strong> A→B arrives on Port 1
-            <ul class="wiki-bullet-list"><li>Refresh: A→Port 1. B in table on Port 3 → <strong>Forward to Port 3 only</strong>.</li></ul>
-          </li>
-          <li><strong>Frame 4:</strong> C→A arrives on Port 2
-            <ul class="wiki-bullet-list"><li>Learn: C→Port 2. A in table on Port 1 → <strong>Forward to Port 1 only</strong>.</li></ul>
-          </li>
-        </ol>
-        <p><strong>Result:</strong> After just 4 frames, the bridge has learned 3 MAC addresses and can forward efficiently without flooding.</p>`,
+      workedExamples: {
+        level1: `<strong>Problem:</strong> Host A sends a frame to Host B. The switch CAM table has an entry for Host A, but NOT Host B. What does the switch do?<br><br>
+<strong>Solution:</strong><br>
+The switch performs an <strong>Unknown Unicast Flood</strong>: it replicates and transmits the frame out every active port in that VLAN except the port on which the frame arrived.`,
+        level2: `<strong>Problem:</strong> Why does an Ethernet loop without Spanning Tree crash a network within seconds?<br><br>
+<strong>Working:</strong><br>
+Unlike IP packets, Layer 2 Ethernet frames have <strong>NO TTL (Time to Live) field</strong>! When an ARP broadcast enters a redundant switch loop, the switches flood the broadcast to each other continuously, multiplying copies exponentially (Broadcast Storm). Network bandwidth reaches 100% saturation and CPU queues crash.`,
+        level3: `<strong>Problem:</strong> Contrast the collision domains and broadcast domains of a 24-port Hub vs. a 24-port Switch.<br><br>
+<strong>Analysis:</strong><br>
+- <strong>24-Port Hub:</strong> 1 single collision domain (all 24 ports share electrical wire) and 1 broadcast domain.<br>
+- <strong>24-Port Switch:</strong> 24 separate collision domains (each port is isolated and full-duplex) and 1 broadcast domain.`
+      },
       advantagesLimitations: `
         <table class="wiki-table">
-          <thead><tr><th>Advantages</th><th>Limitations</th></tr></thead>
+          <thead><tr><th>Advantages</th><th>Disadvantages</th></tr></thead>
           <tbody>
-            <tr><td>Self-learning: no manual configuration needed</td><td>Broadcast storms if STP fails or loops exist</td></tr>
-            <tr><td>Microsecond-level forwarding (hardware ASICs)</td><td>Flat MAC address space doesn't scale beyond ~10K entries</td></tr>
-            <tr><td>Each switch port is a separate collision domain</td><td>Cannot route between subnets (Layer 2 only)</td></tr>
-            <tr><td>Full-duplex per port eliminates collisions entirely</td><td>STP wastes bandwidth by blocking redundant links</td></tr>
+            <tr><td>Eliminates collisions; full wire-speed bandwidth per port; transparent plug-and-play operation.</td><td>Single broadcast domain; vulnerable to broadcast storms; requires STP for redundancy.</td></tr>
           </tbody>
         </table>`,
-      whereUsed: ["Every modern Ethernet switch", "Data center leaf-spine architectures", "Campus network access/distribution layers", "Industrial Ethernet switches"],
-      commonMistakes: "Confusing bridges with routers. Bridges operate at Layer 2 using MAC addresses and are transparent to network-layer protocols. Routers operate at Layer 3 using IP addresses and can connect different network types.",
-      compareWith: { title: "Bridge/Switch vs Router", note: "Bridges forward based on MAC addresses (Layer 2, fast, plug-and-play). Routers forward based on IP addresses (Layer 3, slower, requires configuration, but scales to billions of hosts)." },
-      practice: {
-        question: "When a learning bridge receives a frame with a destination MAC address not in its forwarding table, what does it do?",
-        choices: [
-          "Drop the frame",
-          "Send an error message to the source",
-          "Flood the frame to all ports except the source port",
-          "Send the frame to the default gateway"
-        ],
-        correctIndex: 2,
-        explanation: "When the destination MAC is unknown, the bridge floods the frame to all ports except the one it arrived on. This ensures the frame reaches its destination regardless of which port it's connected to. The destination's reply will teach the bridge the correct port mapping."
-      },
+      whereUsed: [
+        "Enterprise access switches (Cisco, Juniper, Arista).",
+        "Data center spine-and-leaf fabrics.",
+        "Industrial Ethernet switches."
+      ],
+      commonMistakes: `
+        <ul class="wiki-bullet-list">
+          <li><strong>Confusing switching with routing:</strong> Switches forward frames using Layer 2 MAC addresses within a broadcast domain; routers forward packets using Layer 3 IP addresses across different networks.</li>
+        </ul>`,
+      quiz: [
+        {
+          question: "Which field does a transparent learning switch inspect to populate its forwarding database?",
+          options: ["Destination MAC address", "Source MAC address", "IP Time-to-Live", "TCP sequence number"],
+          correctIndex: 1,
+          explanation: "Switches learn host locations by recording the Source MAC address and the physical port it arrived on."
+        },
+        {
+          question: "What happens when a switch receives a frame destined for an unknown unicast MAC address?",
+          options: ["It drops the frame silently", "It floods the frame out all ports in the VLAN except the arrival port", "It returns an error packet", "It disables the incoming port"],
+          correctIndex: 1,
+          explanation: "Unknown unicast frames are flooded to all ports in the broadcast domain until the destination responds and its location is learned."
+        },
+        {
+          question: "What protocol prevents bridge loops and broadcast storms in interconnected switch topologies?",
+          options: ["Spanning Tree Protocol (STP - IEEE 802.1D)", "Border Gateway Protocol (BGP)", "Address Resolution Protocol (ARP)", "Dynamic Host Configuration Protocol (DHCP)"],
+          correctIndex: 0,
+          explanation: "STP builds a loop-free logical tree by placing redundant switch ports into a blocking state."
+        }
+      ],
       references: [
-        { cite: "Tanenbaum & Wetherall, Computer Networks, 6th Ed., Ch. 4.7: Data Link Layer Switching", url: "https://www.pearson.com/en-us/subject-catalog/p/computer-networks/P200000003193" },
-        { cite: "IEEE 802.1D: MAC Bridges", url: "https://standards.ieee.org/" },
-        { cite: "Forouzan, Data Communications & Networking, 6th Ed., Ch. 13: Connecting Devices", url: "https://www.mheducation.com/" }
+        { cite: "IEEE Std 802.1D-2004 - Media Access Control (MAC) Bridges.", url: "https://standards.ieee.org" }
       ]
     },
-    prevTopicId: "arp",
+    prevTopicId: "wifi-mac-sublayer",
     nextTopicId: "network-devices"
   },
 
+  // =========================================================================
+  // TOPIC 27: CONNECTING DEVICES (PDF Topic 10 & Hardware Reference)
+  // =========================================================================
   "network-devices": {
     id: "network-devices",
-    title: "Repeaters, Hubs, Bridges, Switches, Routers & Gateways",
-    unit: "Unit II: Data Link Layer & Reliable Transfer",
+    title: "Network Connecting Devices (Repeaters, Hubs, Bridges, Switches, Routers, Gateways)",
+    unit: "Unit II: Data Link Layer & MAC Sublayer",
     unitId: "unit2",
-    level: "Level 2 — Standard Topic",
+    level: "Beginner → Intermediate",
     category: "datalink",
     difficulty: "Core",
-    readingTime: "8 min read",
-    standard: "IEEE 802, IETF RFCs",
-    oneLiner: "Network interconnection devices operate at different OSI layers—repeaters/hubs at Layer 1, bridges/switches at Layer 2, routers at Layer 3, and gateways at all layers.",
-    quickAnswer: "Each device operates at a specific OSI layer: Repeaters & Hubs (Layer 1, signal regeneration), Bridges & Switches (Layer 2, MAC-based forwarding), Routers (Layer 3, IP-based routing), Gateways (Layer 4-7, protocol conversion).",
-    whyItMatters: "Choosing the right interconnection device determines network performance, security, and scalability. Using a hub where a switch is needed creates collisions; using a switch where a router is needed prevents inter-subnet communication.",
+    readingTime: "25 min",
+    standard: "OSI Layer Hierarchy / Forouzan Ch. 15",
+    oneLiner: "The comprehensive classification of hardware interconnects across Layers 1, 2, 3, and 7.",
+    quickAnswer: "Network devices operate at distinct OSI layers: Repeaters/Hubs at Layer 1 (signals), Bridges/Switches at Layer 2 (MAC frames), Routers at Layer 3 (IP packets), and Gateways at Layers 4-7.",
+    whyItMatters: "Every network design relies on choosing the correct device for the job. Knowing which device breaks collision domains versus broadcast domains is the #1 question in computer networking exams.",
+    prerequisitesList: [
+      { concept: "OSI Layers", meaning: "Layer 1 Physical, Layer 2 Data Link, Layer 3 Network, Layer 4+ Transport/Application." },
+      { concept: "Collision Domain", meaning: "Segment where packet transmissions can interfere." },
+      { concept: "Broadcast Domain", meaning: "Network scope receiving Layer 2 broadcast frames." }
+    ],
+    learningObjectives: [
+      "Classify networking devices by their operating OSI layer.",
+      "Explain how repeaters and hubs regenerate physical electrical signals.",
+      "Compare Layer 2 switches against Layer 3 routers.",
+      "Analyze collision domain and broadcast domain separation for every device."
+    ],
     infobox: {
-      layer: "Layers 1-7 (varies by device)",
-      standard: "IEEE 802.3, IEEE 802.1D/Q, IETF RFCs",
-      type: "Network Interconnection Devices",
-      keyFormula: "\\text{Higher Layer} \\Rightarrow \\text{More Intelligence} \\Rightarrow \\text{More Overhead}",
-      prerequisites: ["ethernet", "mac-address", "dll-switching"],
-      relatedConcepts: ["dll-switching", "vlan", "ethernet"],
-      compareWith: ["dll-switching"],
-      primaryUses: ["LAN/WAN interconnection", "Network segmentation", "Inter-network routing", "Protocol translation"]
+      layer: "Layer 1 to Layer 7 (Comparative Taxonomy)",
+      standard: "OSI Reference Model, IEEE 802",
+      type: "Hardware Device Classification",
+      keyFormula: "\\text{Device Domain Matrix: Hub (1/1), Switch (N/1), Router (N/N)}",
+      prerequisites: ["dll-switching", "ethernet"],
+      relatedConcepts: ["dll-switching", "ethernet", "vlan"],
+      compareWith: ["router"],
+      primaryUses: ["Campus network design, enterprise perimeter routing, LAN extension"]
     },
     sections: {
-      overview: `<p>Network interconnection devices can be classified by the <strong>OSI layer</strong> at which they operate. Each higher layer provides more intelligent processing but also more overhead and latency.</p>
+      overview: `the systematic hierarchy of hardware devices used to interconnect transmission media, LAN segments, and autonomous systems across the different layers of the OSI reference model.`,
+      eli10: `A Repeater is a megaphone that makes quiet whispers loud again. A Hub is a megaphone connected to 10 speakers at once. A Switch is a mail sorter who sends letters only to the right house. A Router is an international airport that routes planes between different countries!`,
+      analogy: `Traffic intersections: Repeaters are streetlights that make lines visible. Hubs are unmonitored 4-way intersections where cars crash. Switches are roundabouts where cars merge smoothly. Routers are border checkpoints between two states with passports and signs.`,
+      howItWorks: `
+        <ol class="wiki-ordered-list">
+          <li><strong>Layer 1 (Physical): Repeaters & Hubs:</strong>
+            <ul class="wiki-bullet-list">
+              <li><em>Repeater:</em> 2-port device that cleans, amplifies, and reshapes attenuated analog/digital signals to extend cable distance. Zero understanding of bits, frames, or addresses.</li>
+              <li><em>Hub:</em> Multi-port repeater. Bits arriving on one port are blindly repeated to all other ports. Single collision domain; single broadcast domain.</li>
+            </ul>
+          </li>
+          <li><strong>Layer 2 (Data Link): Bridges & Switches:</strong>
+            <ul class="wiki-bullet-list">
+              <li><em>Bridge:</em> 2-port device that reads MAC addresses and filters/forwards frames between two LAN segments.</li>
+              <li><em>Switch:</em> Multi-port bridge. Creates a dedicated collision domain per port; single broadcast domain per VLAN.</li>
+            </ul>
+          </li>
+          <li><strong>Layer 3 (Network): Routers & Layer 3 Switches:</strong>
+            <ul class="wiki-bullet-list">
+              <li>Reads IP addresses. Forwards packets across different subnets using routing tables (OSPF, BGP). Separates both collision domains AND broadcast domains!</li>
+            </ul>
+          </li>
+          <li><strong>Layers 4–7: Gateways & Firewalls:</strong>
+            <ul class="wiki-bullet-list">
+              <li>Translates between completely different protocol suites (e.g., IPv4 to IPv6 gateway, VoIP SIP gateway, API gateways).</li>
+            </ul>
+          </li>
+        </ol>`,
+      diagram: `
++--------------------------------------------------------------------------+
+|                     OSI DEVICE TAXONOMY & DOMAINS                        |
++---------------------+-------+-------------+------------------+-----------+
+| Device              | Layer | PDU Handled | Collision Domain | Broadcast |
++---------------------+-------+-------------+------------------+-----------+
+| Repeater / Hub      | L1    | Bits        | 1 Shared Domain  | 1 Domain  |
+| Bridge / L2 Switch  | L2    | Frames      | Separated/Port   | 1 Domain  |
+| Router / L3 Switch  | L3    | Packets     | Separated/Port   | Separated |
+| Protocol Gateway    | L4-L7 | Messages    | Separated        | Separated |
++---------------------+-------+-------------+------------------+-----------+`,
+      interactiveLabKey: "frame-explorer",
+      technicalDetails: `
         <table class="wiki-table">
-          <thead><tr><th>OSI Layer</th><th>Device</th><th>Operates On</th><th>Intelligence Level</th></tr></thead>
+          <thead><tr><th>Device</th><th>OSI Layer</th><th>Intelligence</th><th>Addressing Used</th><th>Key Advantage</th></tr></thead>
           <tbody>
-            <tr><td>Layer 1 (Physical)</td><td>Repeater, Hub</td><td>Electrical signals / bits</td><td>None (signal regeneration only)</td></tr>
-            <tr><td>Layer 2 (Data Link)</td><td>Bridge, Switch</td><td>MAC addresses, frames</td><td>Medium (filtering, forwarding)</td></tr>
-            <tr><td>Layer 3 (Network)</td><td>Router</td><td>IP addresses, packets</td><td>High (routing decisions, ACLs)</td></tr>
-            <tr><td>Layers 4-7</td><td>Gateway</td><td>Full protocol conversion</td><td>Very High (protocol translation)</td></tr>
+            <tr><td>Repeater</td><td>Layer 1</td><td>None (Physical)</td><td>None</td><td>Extends physical distance</td></tr>
+            <tr><td>Hub</td><td>Layer 1</td><td>None (Broadcasts bits)</td><td>None</td><td>Inexpensive multiport wiring</td></tr>
+            <tr><td>Bridge</td><td>Layer 2</td><td>Software / Hardware</td><td>48-bit MAC</td><td>Divides large LAN into 2 collision zones</td></tr>
+            <tr><td>Switch</td><td>Layer 2</td><td>Hardware ASIC (Fast)</td><td>48-bit MAC</td><td>Dedicated full-duplex bandwidth per port</td></tr>
+            <tr><td>Router</td><td>Layer 3</td><td>Routing tables (Software/ASIC)</td><td>32b/128b IP</td><td>Connects disparate networks; stops broadcasts</td></tr>
+            <tr><td>Gateway</td><td>Layers 4–7</td><td>Application protocol logic</td><td>Port / URI / Protocol</td><td>Translates incompatible protocols</td></tr>
           </tbody>
         </table>`,
-      howItWorks: `
-        <h4>1. Repeater (Layer 1)</h4>
-        <ul class="wiki-bullet-list">
-          <li>Receives a weakened analog/digital signal and <strong>regenerates it at full strength</strong>.</li>
-          <li>Does NOT examine frame content, addresses, or errors.</li>
-          <li>Extends the physical distance of a network segment.</li>
-          <li><strong>Collision domains:</strong> Does NOT separate collision domains—collisions propagate through.</li>
-          <li><em>Analogy:</em> A megaphone that amplifies sound without understanding the words.</li>
-        </ul>
-        <h4>2. Hub (Layer 1 — Multiport Repeater)</h4>
-        <ul class="wiki-bullet-list">
-          <li>A hub is a <strong>multi-port repeater</strong>: any signal received on one port is regenerated and sent to ALL other ports.</li>
-          <li>Creates a single <strong>shared collision domain</strong> and <strong>shared broadcast domain</strong>.</li>
-          <li>No intelligence: cannot filter, forward selectively, or learn addresses.</li>
-          <li><strong>Half-duplex:</strong> All devices share the same bandwidth.</li>
-          <li>Largely <strong>obsolete</strong>—replaced by switches in all modern networks.</li>
-        </ul>
-        <h4>3. Bridge (Layer 2)</h4>
-        <ul class="wiki-bullet-list">
-          <li>Reads the <strong>MAC destination address</strong> of each incoming frame.</li>
-          <li>Maintains a <strong>forwarding table</strong> (learned from source addresses).</li>
-          <li><strong>Filters:</strong> Does not forward frames whose source and destination are on the same segment.</li>
-          <li><strong>Forwards:</strong> Sends frames only to the correct port (or floods if unknown).</li>
-          <li><strong>Separates collision domains</strong> but NOT broadcast domains.</li>
-          <li>Typically has 2-4 ports (vs switches which have many more).</li>
-        </ul>
-        <h4>4. Switch (Layer 2 — Multiport Bridge)</h4>
-        <ul class="wiki-bullet-list">
-          <li>A switch is a <strong>high-speed, multi-port bridge</strong> with hardware-based forwarding (ASICs).</li>
-          <li>Each port is a <strong>separate collision domain</strong>.</li>
-          <li><strong>Full-duplex:</strong> Each port can send and receive simultaneously → NO collisions!</li>
-          <li>Wire-speed forwarding using <strong>Content Addressable Memory (CAM)</strong> tables.</li>
-          <li>Supports <strong>VLANs (IEEE 802.1Q)</strong> for logical network segmentation.</li>
-          <li>Can use <strong>store-and-forward</strong> or <strong>cut-through</strong> switching methods.</li>
-        </ul>
-        <h4>5. Router (Layer 3)</h4>
-        <ul class="wiki-bullet-list">
-          <li>Examines the <strong>destination IP address</strong> in each packet.</li>
-          <li>Consults a <strong>routing table</strong> (built by routing protocols: OSPF, BGP, RIP).</li>
-          <li>Determines the <strong>best next hop</strong> and the outgoing interface.</li>
-          <li><strong>Separates both collision domains AND broadcast domains.</strong></li>
-          <li>Can connect <strong>different network types</strong> (e.g., Ethernet to Wi-Fi, LAN to WAN).</li>
-          <li>Performs <strong>NAT, ACLs, QoS, firewall</strong> functions.</li>
-          <li>Each interface has its own <strong>IP address and MAC address</strong>.</li>
-        </ul>
-        <h4>6. Gateway (Layer 4-7)</h4>
-        <ul class="wiki-bullet-list">
-          <li>Performs <strong>full protocol conversion</strong> between incompatible networks.</li>
-          <li>Operates at the <strong>transport layer or above</strong>.</li>
-          <li>Examples: Email gateway (SMTP ↔ X.400), VoIP gateway (PSTN ↔ SIP), application-level proxy.</li>
-          <li>Most complex and highest latency of all interconnection devices.</li>
-        </ul>`,
-      diagram: `
-OSI Layer Model and Device Placement:
-
-Layer 7 ─ Application  ─────── Gateway
-Layer 6 ─ Presentation ─────── Gateway  
-Layer 5 ─ Session      ─────── Gateway
-Layer 4 ─ Transport    ─────── Gateway
-Layer 3 ─ Network      ─────── Router
-Layer 2 ─ Data Link    ─────── Bridge / Switch
-Layer 1 ─ Physical     ─────── Repeater / Hub
-
-Device Impact on Domains:
-┌──────────────────────────────────────────────────────────┐
-│                      HUB                                 │
-│  ┌──────┐  ┌──────┐  ┌──────┐  ┌──────┐                │
-│  │ PC A │  │ PC B │  │ PC C │  │ PC D │                │
-│  └──────┘  └──────┘  └──────┘  └──────┘                │
-│  ONE collision domain │ ONE broadcast domain             │
-└──────────────────────────────────────────────────────────┘
-
-┌──────────────────────────────────────────────────────────┐
-│                     SWITCH                               │
-│  ┌──────┐  ┌──────┐  ┌──────┐  ┌──────┐                │
-│  │ PC A │  │ PC B │  │ PC C │  │ PC D │                │
-│  └──────┘  └──────┘  └──────┘  └──────┘                │
-│  FOUR collision domains │ ONE broadcast domain           │
-└──────────────────────────────────────────────────────────┘
-
-┌──────────────────────┐   ┌──────────────────────┐
-│      ROUTER          │   │                      │
-│  ┌──────┐  ┌──────┐  │   │  ┌──────┐  ┌──────┐  │
-│  │ PC A │  │ PC B │  │───│  │ PC C │  │ PC D │  │
-│  └──────┘  └──────┘  │   │  └──────┘  └──────┘  │
-│  Broadcast Domain 1  │   │  Broadcast Domain 2  │
-└──────────────────────┘   └──────────────────────┘`,
-      technicalDetails: `
-        <h4>Comprehensive Device Comparison</h4>
-        <table class="wiki-table">
-          <thead><tr><th>Feature</th><th>Repeater</th><th>Hub</th><th>Bridge</th><th>Switch</th><th>Router</th><th>Gateway</th></tr></thead>
-          <tbody>
-            <tr><td>OSI Layer</td><td>1</td><td>1</td><td>2</td><td>2</td><td>3</td><td>4-7</td></tr>
-            <tr><td>Addresses Used</td><td>None</td><td>None</td><td>MAC</td><td>MAC</td><td>IP</td><td>Protocol-specific</td></tr>
-            <tr><td>Collision Domain</td><td>Extends</td><td>Shared</td><td>Separates</td><td>Separates</td><td>Separates</td><td>Separates</td></tr>
-            <tr><td>Broadcast Domain</td><td>Same</td><td>Same</td><td>Same</td><td>Same*</td><td>Separates</td><td>Separates</td></tr>
-            <tr><td>Filtering</td><td>No</td><td>No</td><td>Yes (MAC)</td><td>Yes (MAC)</td><td>Yes (IP/ACL)</td><td>Yes (deep)</td></tr>
-            <tr><td>Speed</td><td>Wire speed</td><td>Wire speed</td><td>Fast</td><td>Wire speed</td><td>Slower</td><td>Slowest</td></tr>
-            <tr><td>Cost</td><td>Lowest</td><td>Low</td><td>Medium</td><td>Medium</td><td>High</td><td>Highest</td></tr>
-            <tr><td>Intelligence</td><td>None</td><td>None</td><td>Medium</td><td>Medium-High</td><td>High</td><td>Very High</td></tr>
-          </tbody>
-        </table>
-        <p>* Switches keep all ports in one broadcast domain unless VLANs are configured.</p>`,
-      workedExample: `<p><strong>Scenario:</strong> A company has 100 PCs. Initially connected via a single hub. They upgrade to switches, then add a router.</p>
-        <table class="wiki-table">
-          <thead><tr><th>Configuration</th><th>Collision Domains</th><th>Broadcast Domains</th><th>Effective BW per PC</th></tr></thead>
-          <tbody>
-            <tr><td>1 Hub (100 ports)</td><td>1</td><td>1</td><td>100 Mbps / 100 = 1 Mbps shared</td></tr>
-            <tr><td>1 Switch (100 ports)</td><td>100</td><td>1</td><td>100 Mbps each (full-duplex)</td></tr>
-            <tr><td>2 Switches + Router</td><td>100</td><td>2</td><td>100 Mbps each + broadcast isolation</td></tr>
-          </tbody>
-        </table>
-        <p><strong>Key insight:</strong> Upgrading from hub to switch gives each PC dedicated bandwidth. Adding a router between switches creates separate broadcast domains, reducing broadcast traffic overhead.</p>`,
+      workedExamples: {
+        level1: `<strong>Problem:</strong> A network administrator replaces a 16-port Hub with a 16-port Switch. What changes regarding collision and broadcast domains?<br><br>
+<strong>Solution:</strong><br>
+- <strong>Collision Domains:</strong> Changed from <strong>1 shared collision domain</strong> to <strong>16 isolated collision domains</strong> (one per port). Collisions are completely eliminated.<br>
+- <strong>Broadcast Domains:</strong> Remains <strong>1 single broadcast domain</strong> (switches flood broadcasts to all ports).`,
+        level2: `<strong>Problem:</strong> Which device must be used to connect an internal private LAN (<code>192.168.1.0/24</code>) to the public Internet, and why?<br><br>
+<strong>Working:</strong><br>
+A <strong>Router</strong> (Layer 3). Switches cannot forward between different IP network subnets because switches only inspect Layer 2 MAC addresses. A Router inspects the Layer 3 destination IP, performs Network Address Translation (NAT), and consults its routing table to forward packets across network boundaries.`,
+        level3: `<strong>Problem:</strong> Explain what a "Layer 3 Switch" is and how it differs from a traditional router.<br><br>
+<strong>Analysis:</strong><br>
+A Layer 3 Switch combines high-density Layer 2 Ethernet switching with hardware-based IP routing performed directly in specialized silicon (ASIC chips). While traditional software routers are designed for WAN connectivity with diverse interfaces (T1, DSL, cellular), Layer 3 switches provide ultra-fast gigabit line-rate routing between internal campus VLANs.`
+      },
       advantagesLimitations: `
         <table class="wiki-table">
-          <thead><tr><th>Device</th><th>Best For</th><th>Not Suitable For</th></tr></thead>
+          <thead><tr><th>Device</th><th>Collision Domains</th><th>Broadcast Domains</th><th>Primary Function</th></tr></thead>
           <tbody>
-            <tr><td>Repeater/Hub</td><td>Extending cable distance (obsolete)</td><td>Any modern network (creates collisions)</td></tr>
-            <tr><td>Bridge/Switch</td><td>LAN segmentation, microsecond forwarding</td><td>WAN routing, inter-subnet communication</td></tr>
-            <tr><td>Router</td><td>Connecting networks, WAN access, security</td><td>Simple LAN extension (overkill)</td></tr>
-            <tr><td>Gateway</td><td>Protocol conversion between different systems</td><td>Simple forwarding (too slow, too complex)</td></tr>
+            <tr><td>Hub</td><td>Does NOT separate</td><td>Does NOT separate</td><td>Multiport physical repeater</td></tr>
+            <tr><td>Switch</td><td>Separates per port</td><td>Does NOT separate (without VLANs)</td><td>Layer 2 MAC forwarding</td></tr>
+            <tr><td>Router</td><td>Separates per port</td><td>Separates per port</td><td>Layer 3 IP routing & packet filtering</td></tr>
           </tbody>
         </table>`,
-      whereUsed: ["Switches: every enterprise and home LAN", "Routers: Internet backbone, WAN connections", "Gateways: VoIP, email, IoT protocol translation", "Repeaters: fiber optic long-haul (optical amplifiers)"],
-      commonMistakes: "Thinking a switch and a router do the same thing. A switch forwards based on MAC addresses within a single LAN. A router forwards based on IP addresses between different networks. You need both in most real networks.",
-      compareWith: { title: "Switch vs Router", note: "Switches: fast, Layer 2, MAC-based, same broadcast domain. Routers: Layer 3, IP-based, separate broadcast domains, connect different networks, implement security policies." },
-      practice: {
-        question: "Which device separates BOTH collision domains AND broadcast domains?",
-        choices: ["Hub", "Switch", "Router", "Repeater"],
-        correctIndex: 2,
-        explanation: "Only routers (Layer 3) separate both collision and broadcast domains. Switches separate collision domains but keep all ports in the same broadcast domain (unless VLANs are configured). Hubs and repeaters separate neither."
-      },
+      whereUsed: [
+        "Home Wi-Fi routers (combines 4 devices: switch, router, AP, and NAT gateway).",
+        "Data center spine switches (Layer 3 switches).",
+        "Edge border routers connecting enterprises to ISPs."
+      ],
+      commonMistakes: `
+        <ul class="wiki-bullet-list">
+          <li><strong>Thinking switches separate broadcast domains:</strong> Standard Layer 2 switches do NOT separate broadcast domains. An ARP broadcast floods to all ports unless partitioned into separate VLANs.</li>
+          <li><strong>Confusing a Gateway with a Router:</strong> A router routes packets between identical protocols (IP to IP). A gateway translates between <em>incompatible protocols</em> (e.g. SIP VoIP to PSTN analog telephone).</li>
+        </ul>`,
+      quiz: [
+        {
+          question: "Which of the following devices operates strictly at Layer 1 (Physical Layer)?",
+          options: ["Hub", "Switch", "Router", "Bridge"],
+          correctIndex: 0,
+          explanation: "Hubs and repeaters operate at Layer 1, regenerating electrical/optical signals without inspecting frames or packets."
+        },
+        {
+          question: "Which device separates both collision domains AND broadcast domains?",
+          options: ["Repeater", "Hub", "Layer 2 Switch", "Router"],
+          correctIndex: 3,
+          explanation: "Routers operate at Layer 3 and do not forward Layer 2 broadcast frames, creating separate broadcast domains on each interface."
+        },
+        {
+          question: "What is the primary difference between a bridge and a switch?",
+          options: ["A bridge operates at Layer 3; a switch operates at Layer 1", "A switch is essentially a high-port-density, hardware-accelerated bridge", "A bridge encrypts packets", "A switch cannot connect to PCs"],
+          correctIndex: 1,
+          explanation: "Historically, bridges had 2 to 4 ports and relied on software; modern switches have dozens of ports with wire-speed ASIC hardware forwarding."
+        }
+      ],
       references: [
-        { cite: "Tanenbaum & Wetherall, Computer Networks, 6th Ed., Ch. 4.7: Repeaters, Hubs, Bridges, Switches, Routers, Gateways", url: "https://www.pearson.com/en-us/subject-catalog/p/computer-networks/P200000003193" },
-        { cite: "Forouzan, Data Communications & Networking, 6th Ed., Ch. 13: Connecting Devices", url: "https://www.mheducation.com/" }
+        { cite: "Forouzan, B. A. Data Communications and Networking (6th Ed.) - Chapter 15: Connecting Devices.", url: "https://www.mheducation.com" },
+        { cite: "Tanenbaum & Wetherall, Computer Networks (6th Ed.) - Section 4.7.", url: "https://www.pearson.com" }
       ]
     },
-    prevTopicId: "dll-switching",
-    nextTopicId: "vlan"
+    prevTopicId: "dll-switching", nextTopicId: "arp"
   }
-
 };
 
 // Merge with existing TOPICS_U2 if loaded
@@ -1498,8 +1473,8 @@ if (typeof window !== 'undefined') {
   } else {
     window.TOPICS_U2 = Object.assign({}, TOPICS_U2_EXT);
   }
+  window.TOPICS_U2_EXT = TOPICS_U2_EXT;
 }
-
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = TOPICS_U2_EXT;
 }
