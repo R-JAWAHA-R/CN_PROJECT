@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" class="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JABAK | GeeksforGeeks Portal</title>
-    <meta name="description" content="Computer Networks Encyclopedia and GATE/Interview Practice Portal covering Networking Fundamentals, Data Link Layer, Network Layer, Transport Layer, Application Protocols, and Security.">
+    <meta name="description"
+        content="Computer Networks Encyclopedia and GATE/Interview Practice Portal covering Networking Fundamentals, Data Link Layer, Network Layer, Transport Layer, Application Protocols, and Security.">
 
     <!-- Tailwind CSS with custom GFG theme -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -35,7 +37,9 @@
     <!-- Google Fonts: Inter & Fira Code -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap"
+        rel="stylesheet">
 
     <!-- Font Awesome 6.4.0 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -50,36 +54,78 @@
     <link rel="stylesheet" href="css/components.css">
 
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        code, pre, .mono { font-family: 'Fira Code', monospace; }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-        .dark ::-webkit-scrollbar-thumb { background: #475569; }
-        .gfg-shadow { box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
-            to { opacity: 1; transform: translateY(0); }
+        body {
+            font-family: 'Inter', sans-serif;
         }
-        .animate-fade { animation: fadeIn 0.2s ease-out forwards; }
+
+        code,
+        pre,
+        .mono {
+            font-family: 'Fira Code', monospace;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+
+        .gfg-shadow {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade {
+            animation: fadeIn 0.2s ease-out forwards;
+        }
     </style>
 </head>
-<body class="bg-[#f8f9fa] text-gfg-text dark:bg-gfg-darkbg dark:text-gfg-darktext h-screen max-h-screen overflow-hidden flex flex-col transition-colors duration-200">
+
+<body
+    class="bg-[#f8f9fa] text-gfg-text dark:bg-gfg-darkbg dark:text-gfg-darktext h-screen max-h-screen overflow-hidden flex flex-col transition-colors duration-200">
 
     <!-- TOP NAVIGATION BAR -->
-    <header class="bg-white dark:bg-gfg-darkcard border-b border-gray-300 dark:border-gfg-darkborder h-16 shrink-0 z-50 flex items-center justify-between px-4 lg:px-8 gfg-shadow select-none">
+    <header
+        class="bg-white dark:bg-gfg-darkcard border-b border-gray-300 dark:border-gfg-darkborder h-16 shrink-0 z-50 flex items-center justify-between px-4 lg:px-8 gfg-shadow select-none">
         <div class="flex items-center space-x-3 sm:space-x-4">
             <!-- Sidebar Desktop & Mobile Toggle Button -->
-            <button id="sidebar-toggle-btn" onclick="toggleLeftSidebar()" class="text-gray-700 dark:text-gray-300 p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gfg-green focus:outline-none transition-colors" title="Toggle Syllabus Sidebar (Ctrl+B)">
+            <button id="sidebar-toggle-btn" onclick="toggleLeftSidebar()"
+                class="text-gray-700 dark:text-gray-300 p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gfg-green focus:outline-none transition-colors"
+                title="Toggle Syllabus Sidebar (Ctrl+B)">
                 <i class="fa-solid fa-bars text-xl"></i>
             </button>
             <div class="flex items-center space-x-3 cursor-pointer select-none" onclick="App.loadView('home')">
-                <div class="bg-gfg-green text-white font-bold px-3 py-1.5 rounded text-lg tracking-wider flex items-center space-x-1 shadow-sm">
+                <div
+                    class="bg-gfg-green text-white font-bold px-3 py-1.5 rounded text-lg tracking-wider flex items-center space-x-1 shadow-sm">
                     <span>GFG</span>
                     <span class="text-[10px] bg-black/20 px-1 py-0.5 rounded font-mono">NETS</span>
                 </div>
                 <div class="hidden sm:block">
-                    <h1 class="font-bold text-sm tracking-tight text-gray-900 dark:text-white leading-tight">Computer Networks</h1>
+                    <h1 class="font-bold text-sm tracking-tight text-gray-900 dark:text-white leading-tight">Computer
+                        Networks</h1>
                     <p class="text-[10px] text-gray-500 dark:text-gray-400">Encyclopedia &amp; Practice Portal</p>
                 </div>
             </div>
@@ -91,68 +137,91 @@
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-gray-400">
                     <i class="fa-solid fa-search text-xs"></i>
                 </span>
-                <input type="text" id="global-search" placeholder="Search topics, protocols, algorithms (e.g., OSPF, TCP, Subnet, CRC)... [Ctrl+K]" class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-full pl-9 pr-10 py-2 text-xs text-gray-800 dark:text-gray-200 placeholder-gray-400 focus:outline-none focus:border-gfg-green focus:bg-white dark:focus:bg-gray-900 transition-all shadow-inner">
+                <input type="text" id="global-search"
+                    placeholder="Search topics, protocols, algorithms (e.g., OSPF, TCP, Subnet, CRC)... [Ctrl+K]"
+                    class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-full pl-9 pr-10 py-2 text-xs text-gray-800 dark:text-gray-200 placeholder-gray-400 focus:outline-none focus:border-gfg-green focus:bg-white dark:focus:bg-gray-900 transition-all shadow-inner">
                 <span class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                    <kbd class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-300 dark:border-gray-600">/</kbd>
+                    <kbd
+                        class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-300 dark:border-gray-600">/</kbd>
                 </span>
             </div>
 
             <!-- Instant Search Results Dropdown -->
-            <div id="search-dropdown" class="absolute left-0 right-0 top-full mt-2 bg-white dark:bg-gfg-darkcard border border-gray-300 dark:border-gfg-darkborder rounded-lg shadow-2xl max-h-96 overflow-y-auto hidden z-50 p-2">
+            <div id="search-dropdown"
+                class="absolute left-0 right-0 top-full mt-2 bg-white dark:bg-gfg-darkcard border border-gray-300 dark:border-gfg-darkborder rounded-lg shadow-2xl max-h-96 overflow-y-auto hidden z-50 p-2">
                 <div id="search-dropdown-list" class="space-y-1"></div>
             </div>
         </div>
 
         <!-- Quick Actions & Theme Control -->
         <div class="flex items-center space-x-2 sm:space-x-3">
-            <button onclick="toggleDarkMode()" id="theme-toggle" class="p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors" title="Toggle Theme">
+            <button onclick="toggleDarkMode()" id="theme-toggle"
+                class="p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
+                title="Toggle Theme">
                 <i id="theme-icon" class="fa-solid fa-moon text-sm"></i>
             </button>
-            <button onclick="openModal('subnet')" class="hidden md:flex items-center space-x-1.5 bg-gfg-green hover:bg-gfg-dark text-white px-3.5 py-2 rounded text-xs font-semibold transition-all shadow-sm">
+            <button onclick="openModal('subnet')"
+                class="hidden md:flex items-center space-x-1.5 bg-gfg-green hover:bg-gfg-dark text-white px-3.5 py-2 rounded text-xs font-semibold transition-all shadow-sm">
                 <i class="fa-solid fa-calculator text-xs"></i>
                 <span>Subnet Tool</span>
             </button>
-            <button onclick="App.loadView('quiz')" class="hidden lg:flex items-center space-x-1.5 bg-gray-100 dark:bg-gray-800 hover:bg-gfg-light dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-700 px-3 py-2 rounded text-xs font-semibold transition-all">
+            <button onclick="App.loadView('quiz')"
+                class="hidden lg:flex items-center space-x-1.5 bg-gray-100 dark:bg-gray-800 hover:bg-gfg-light dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-700 px-3 py-2 rounded text-xs font-semibold transition-all">
                 <i class="fa-solid fa-graduation-cap text-gfg-green"></i>
                 <span>Quiz Hub</span>
             </button>
-            <button id="right-sidebar-toggle-btn" onclick="toggleRightSidebar()" class="p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors" title="Toggle Right Panel (TOC & Tools)">
+            <button id="right-sidebar-toggle-btn" onclick="toggleRightSidebar()"
+                class="p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
+                title="Toggle Right Panel (TOC & Tools)">
                 <i class="fa-solid fa-table-columns text-sm"></i>
             </button>
-            <div class="w-8 h-8 rounded-full bg-gfg-green/10 border border-gfg-green text-gfg-green font-bold flex items-center justify-center text-xs shadow-sm cursor-pointer" onclick="App.loadView('home')" title="Computer Science Student Profile">CS</div>
+            <div class="w-8 h-8 rounded-full bg-gfg-green/10 border border-gfg-green text-gfg-green font-bold flex items-center justify-center text-xs shadow-sm cursor-pointer"
+                onclick="App.loadView('home')" title="Computer Science Student Profile">CS</div>
         </div>
     </header>
 
     <!-- 3-COLUMN MAIN LAYOUT (Independent Scrolling Per Column) -->
     <div class="flex-1 flex overflow-hidden min-h-0 w-full relative">
-        
+
         <!-- Mobile Sidebar Overlay Backdrop -->
-        <div id="sidebar-overlay" onclick="toggleLeftSidebar(false)" class="fixed inset-0 top-16 bg-black/50 z-30 hidden lg:hidden"></div>
+        <div id="sidebar-overlay" onclick="toggleLeftSidebar(false)"
+            class="fixed inset-0 top-16 bg-black/50 z-30 hidden lg:hidden"></div>
 
         <!-- Floating Re-open Left Sidebar Button (when collapsed) -->
-        <button id="reopen-left-sidebar-btn" onclick="toggleLeftSidebar(true)" class="hidden fixed left-3 bottom-6 z-30 p-2.5 bg-white dark:bg-gfg-darkcard border border-gray-300 dark:border-gray-700 rounded-full shadow-xl text-gfg-green hover:bg-gfg-light dark:hover:bg-gray-800 transition-all flex items-center justify-center" title="Show Syllabus Sidebar">
+        <button id="reopen-left-sidebar-btn" onclick="toggleLeftSidebar(true)"
+            class="hidden fixed left-3 bottom-6 z-30 p-2.5 bg-white dark:bg-gfg-darkcard border border-gray-300 dark:border-gray-700 rounded-full shadow-xl text-gfg-green hover:bg-gfg-light dark:hover:bg-gray-800 transition-all flex items-center justify-center"
+            title="Show Syllabus Sidebar">
             <i class="fa-solid fa-bars"></i>
         </button>
 
         <!-- Floating Re-open Right Sidebar Button (when collapsed) -->
-        <button id="reopen-right-sidebar-btn" onclick="toggleRightSidebar(true)" class="hidden fixed right-3 bottom-6 z-30 p-2.5 bg-white dark:bg-gfg-darkcard border border-gray-300 dark:border-gray-700 rounded-full shadow-xl text-gfg-green hover:bg-gfg-light dark:hover:bg-gray-800 transition-all flex items-center justify-center" title="Show Right Panel">
+        <button id="reopen-right-sidebar-btn" onclick="toggleRightSidebar(true)"
+            class="hidden fixed right-3 bottom-6 z-30 p-2.5 bg-white dark:bg-gfg-darkcard border border-gray-300 dark:border-gray-700 rounded-full shadow-xl text-gfg-green hover:bg-gfg-light dark:hover:bg-gray-800 transition-all flex items-center justify-center"
+            title="Show Right Panel">
             <i class="fa-solid fa-table-columns"></i>
         </button>
 
         <!-- LEFT SIDEBAR: SYLLABUS NAVIGATION & MODULES -->
-        <aside id="sidebar" class="fixed lg:static top-16 lg:top-0 bottom-0 left-0 z-40 w-80 shrink-0 bg-white dark:bg-gfg-darkcard border-r border-gray-300 dark:border-gfg-darkborder transform -translate-x-full lg:translate-x-0 flex flex-col h-[calc(100vh-4rem)] lg:h-full shadow-lg lg:shadow-none">
-            
+        <aside id="sidebar"
+            class="fixed lg:static top-16 lg:top-0 bottom-0 left-0 z-40 w-80 shrink-0 bg-white dark:bg-gfg-darkcard border-r border-gray-300 dark:border-gfg-darkborder transform -translate-x-full lg:translate-x-0 flex flex-col h-[calc(100vh-4rem)] lg:h-full shadow-lg lg:shadow-none">
+
             <!-- Sidebar Header with Collapse Button -->
-            <div class="p-3 border-b border-gray-200 dark:border-gfg-darkborder flex items-center justify-between bg-gray-50 dark:bg-gray-800 shrink-0">
-                <span class="font-bold text-xs uppercase tracking-wider text-gray-700 dark:text-gray-300">Syllabus Index</span>
-                <button onclick="toggleLeftSidebar(false)" class="text-gray-500 hover:text-black dark:hover:text-white p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" title="Collapse Sidebar">
+            <div
+                class="p-3 border-b border-gray-200 dark:border-gfg-darkborder flex items-center justify-between bg-gray-50 dark:bg-gray-800 shrink-0">
+                <span class="font-bold text-xs uppercase tracking-wider text-gray-700 dark:text-gray-300">Syllabus
+                    Index</span>
+                <button onclick="toggleLeftSidebar(false)"
+                    class="text-gray-500 hover:text-black dark:hover:text-white p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                    title="Collapse Sidebar">
                     <i class="fa-solid fa-angles-left text-sm"></i>
                 </button>
             </div>
-            
+
             <!-- Syllabus Progress Bar Section -->
-            <div class="p-3.5 border-b border-gray-200 dark:border-gfg-darkborder bg-gray-50/70 dark:bg-gray-900/40 shrink-0">
-                <div class="flex items-center justify-between text-xs font-bold text-gray-600 dark:text-gray-400 px-0.5 mb-1.5">
+            <div
+                class="p-3.5 border-b border-gray-200 dark:border-gfg-darkborder bg-gray-50/70 dark:bg-gray-900/40 shrink-0">
+                <div
+                    class="flex items-center justify-between text-xs font-bold text-gray-600 dark:text-gray-400 px-0.5 mb-1.5">
                     <span class="tracking-wide">SYLLABUS PROGRESS</span>
                     <span id="progress-text" class="text-gfg-green font-bold">0%</span>
                 </div>
@@ -160,26 +229,37 @@
                     <div id="progress-bar" class="bg-gfg-green h-full w-0 transition-all duration-300"></div>
                 </div>
                 <div class="flex items-center justify-between mt-2 text-[11px] text-gray-500 dark:text-gray-400">
-                    <span><strong id="completed-count-text" class="text-gfg-green font-bold">0</strong> of 90 completed</span>
-                    <button onclick="resetProgress()" class="hover:text-red-500 transition-colors underline cursor-pointer text-[10px]">Reset</button>
+                    <span><strong id="completed-count-text" class="text-gfg-green font-bold">0</strong> of 90
+                        completed</span>
+                    <button onclick="resetProgress()"
+                        class="hover:text-red-500 transition-colors underline cursor-pointer text-[10px]">Reset</button>
                 </div>
             </div>
 
             <!-- Quick Hubs Shortcuts -->
-            <div class="p-2 border-b border-gray-200 dark:border-gfg-darkborder bg-white dark:bg-gfg-darkcard grid grid-cols-4 gap-1 text-[11px] shrink-0">
-                <button onclick="App.loadView('home')" class="p-1.5 rounded hover:bg-gfg-light dark:hover:bg-gray-800 text-center text-gray-700 dark:text-gray-300 flex flex-col items-center group" title="Home Dashboard">
+            <div
+                class="p-2 border-b border-gray-200 dark:border-gfg-darkborder bg-white dark:bg-gfg-darkcard grid grid-cols-4 gap-1 text-[11px] shrink-0">
+                <button onclick="App.loadView('home')"
+                    class="p-1.5 rounded hover:bg-gfg-light dark:hover:bg-gray-800 text-center text-gray-700 dark:text-gray-300 flex flex-col items-center group"
+                    title="Home Dashboard">
                     <i class="fa-solid fa-house text-gfg-green text-xs mb-0.5"></i>
                     <span class="text-[10px] group-hover:text-gfg-green">Home</span>
                 </button>
-                <button onclick="App.loadView('notebook')" class="p-1.5 rounded hover:bg-gfg-light dark:hover:bg-gray-800 text-center text-gray-700 dark:text-gray-300 flex flex-col items-center group" title="Master Catalog">
+                <button onclick="App.loadView('notebook')"
+                    class="p-1.5 rounded hover:bg-gfg-light dark:hover:bg-gray-800 text-center text-gray-700 dark:text-gray-300 flex flex-col items-center group"
+                    title="Master Catalog">
                     <i class="fa-solid fa-book-open text-gfg-green text-xs mb-0.5"></i>
                     <span class="text-[10px] group-hover:text-gfg-green">Catalog</span>
                 </button>
-                <button onclick="App.loadView('graph')" class="p-1.5 rounded hover:bg-gfg-light dark:hover:bg-gray-800 text-center text-gray-700 dark:text-gray-300 flex flex-col items-center group" title="Knowledge Graph">
+                <button onclick="App.loadView('graph')"
+                    class="p-1.5 rounded hover:bg-gfg-light dark:hover:bg-gray-800 text-center text-gray-700 dark:text-gray-300 flex flex-col items-center group"
+                    title="Knowledge Graph">
                     <i class="fa-solid fa-diagram-project text-gfg-green text-xs mb-0.5"></i>
                     <span class="text-[10px] group-hover:text-gfg-green">Graph</span>
                 </button>
-                <button onclick="App.loadView('comparisons')" class="p-1.5 rounded hover:bg-gfg-light dark:hover:bg-gray-800 text-center text-gray-700 dark:text-gray-300 flex flex-col items-center group" title="Protocol Comparisons">
+                <button onclick="App.loadView('comparisons')"
+                    class="p-1.5 rounded hover:bg-gfg-light dark:hover:bg-gray-800 text-center text-gray-700 dark:text-gray-300 flex flex-col items-center group"
+                    title="Protocol Comparisons">
                     <i class="fa-solid fa-scale-balanced text-gfg-green text-xs mb-0.5"></i>
                     <span class="text-[10px] group-hover:text-gfg-green">Compare</span>
                 </button>
@@ -189,7 +269,8 @@
             <div class="p-2 border-b border-gray-200 dark:border-gfg-darkborder shrink-0">
                 <div class="relative">
                     <i class="fa-solid fa-filter absolute left-2.5 top-2.5 text-gray-400 text-[10px]"></i>
-                    <input type="text" id="sidebar-filter" placeholder="Filter syllabus topics..." class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded pl-7 pr-3 py-1.5 text-[11px] text-gray-800 dark:text-gray-200 placeholder-gray-400 focus:outline-none focus:border-gfg-green">
+                    <input type="text" id="sidebar-filter" placeholder="Filter syllabus topics..."
+                        class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded pl-7 pr-3 py-1.5 text-[11px] text-gray-800 dark:text-gray-200 placeholder-gray-400 focus:outline-none focus:border-gfg-green">
                 </div>
             </div>
 
@@ -199,73 +280,93 @@
             </nav>
 
             <!-- Bottom Information Footer -->
-            <div class="p-3 border-t border-gray-200 dark:border-gfg-darkborder bg-gray-50 dark:bg-gray-800 text-[11px] text-gray-500 dark:text-gray-400 flex items-center justify-between shrink-0">
+            <div
+                class="p-3 border-t border-gray-200 dark:border-gfg-darkborder bg-gray-50 dark:bg-gray-800 text-[11px] text-gray-500 dark:text-gray-400 flex items-center justify-between shrink-0">
                 <span>Total Topics: <strong id="total-topics-count" class="text-gfg-green font-bold">90</strong></span>
                 <span class="text-gray-400 text-[10px]">Sem-V Kurose &amp; Ross</span>
             </div>
         </aside>
 
         <!-- CENTER COLUMN: MAIN ARTICLE & PORTAL ENGINE CONTAINER (Independent Vertical Scroll) -->
-        <main id="main-content" class="flex-1 h-full overflow-y-auto bg-white dark:bg-gfg-darkbg p-6 md:p-10 lg:p-12 animate-fade focus:outline-none">
+        <main id="main-content"
+            class="flex-1 h-full overflow-y-auto bg-white dark:bg-gfg-darkbg p-6 md:p-10 lg:p-12 animate-fade focus:outline-none">
             <!-- Article and dynamic modules render here -->
         </main>
 
         <!-- RIGHT SIDEBAR: TOOLS, TABLE OF CONTENTS & PRACTICE (Independent Vertical Scroll & Toggleable Cards) -->
-        <aside id="right-sidebar" class="hidden lg:flex flex-col w-72 shrink-0 bg-gray-50 dark:bg-gfg-darkcard border-l border-gray-300 dark:border-gfg-darkborder h-full overflow-y-auto p-4 space-y-4">
-            
+        <aside id="right-sidebar"
+            class="hidden lg:flex flex-col w-72 shrink-0 bg-gray-50 dark:bg-gfg-darkcard border-l border-gray-300 dark:border-gfg-darkborder h-full overflow-y-auto p-4 space-y-4">
+
             <!-- Right Sidebar Header with Collapse Button -->
             <div class="flex items-center justify-between pb-2 border-b border-gray-200 dark:border-gray-700 shrink-0">
-                <span class="font-bold text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">Navigation &amp; Tools</span>
-                <button onclick="toggleRightSidebar()" class="text-gray-400 hover:text-black dark:hover:text-white p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors" title="Hide Right Panel">
+                <span class="font-bold text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">Navigation
+                    &amp; Tools</span>
+                <button onclick="toggleRightSidebar()"
+                    class="text-gray-400 hover:text-black dark:hover:text-white p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
+                    title="Hide Right Panel">
                     <i class="fa-solid fa-angles-right text-xs"></i>
                 </button>
             </div>
 
             <!-- Table of Contents Dynamic Card (Toggleable) -->
-            <div class="bg-white dark:bg-gray-800 p-3.5 rounded-lg border border-gray-200 dark:border-gray-700 gfg-shadow">
+            <div
+                class="bg-white dark:bg-gray-800 p-3.5 rounded-lg border border-gray-200 dark:border-gray-700 gfg-shadow">
                 <div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-2 mb-2">
-                    <h3 class="font-bold text-xs uppercase tracking-wider text-gray-800 dark:text-gray-200 flex items-center">
+                    <h3
+                        class="font-bold text-xs uppercase tracking-wider text-gray-800 dark:text-gray-200 flex items-center">
                         <i class="fa-solid fa-list-ul text-gfg-green mr-2"></i> Table of Contents
                     </h3>
-                    <button onclick="toggleCard('toc-card-body', this)" class="text-gray-400 hover:text-gfg-green p-1 transition-colors" title="Toggle Table of Contents">
+                    <button onclick="toggleCard('toc-card-body', this)"
+                        class="text-gray-400 hover:text-gfg-green p-1 transition-colors"
+                        title="Toggle Table of Contents">
                         <i class="fa-solid fa-chevron-up text-xs transition-transform duration-200"></i>
                     </button>
                 </div>
                 <div id="toc-card-body">
-                    <ul id="toc-list" class="space-y-1.5 text-xs text-gray-600 dark:text-gray-400 max-h-56 overflow-y-auto pr-1">
+                    <ul id="toc-list"
+                        class="space-y-1.5 text-xs text-gray-600 dark:text-gray-400 max-h-56 overflow-y-auto pr-1">
                         <li class="text-gray-400 italic">Select a topic to view sections</li>
                     </ul>
                 </div>
             </div>
 
             <!-- Interactive Simulators Card (Toggleable) -->
-            <div class="bg-white dark:bg-gray-800 p-3.5 rounded-lg border border-gray-200 dark:border-gray-700 gfg-shadow">
+            <div
+                class="bg-white dark:bg-gray-800 p-3.5 rounded-lg border border-gray-200 dark:border-gray-700 gfg-shadow">
                 <div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-2 mb-2">
-                    <h3 class="font-bold text-xs uppercase tracking-wider text-gray-800 dark:text-gray-200 flex items-center">
+                    <h3
+                        class="font-bold text-xs uppercase tracking-wider text-gray-800 dark:text-gray-200 flex items-center">
                         <i class="fa-solid fa-toolbox text-gfg-green mr-2"></i> Interactive Tools
                     </h3>
-                    <button onclick="toggleCard('tools-card-body', this)" class="text-gray-400 hover:text-gfg-green p-1 transition-colors" title="Toggle Interactive Tools">
+                    <button onclick="toggleCard('tools-card-body', this)"
+                        class="text-gray-400 hover:text-gfg-green p-1 transition-colors"
+                        title="Toggle Interactive Tools">
                         <i class="fa-solid fa-chevron-up text-xs transition-transform duration-200"></i>
                     </button>
                 </div>
                 <div id="tools-card-body" class="space-y-2">
-                    <button onclick="openModal('subnet')" class="w-full text-left px-3 py-2 rounded bg-gray-50 dark:bg-gray-900 hover:bg-gfg-light dark:hover:bg-gray-700 text-xs font-semibold text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 flex items-center justify-between group transition-colors">
+                    <button onclick="openModal('subnet')"
+                        class="w-full text-left px-3 py-2 rounded bg-gray-50 dark:bg-gray-900 hover:bg-gfg-light dark:hover:bg-gray-700 text-xs font-semibold text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 flex items-center justify-between group transition-colors">
                         <span><i class="fa-solid fa-calculator text-gfg-green mr-2"></i> Subnet Calculator</span>
                         <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-gfg-green text-[10px]"></i>
                     </button>
-                    <button onclick="openModal('osi')" class="w-full text-left px-3 py-2 rounded bg-gray-50 dark:bg-gray-900 hover:bg-gfg-light dark:hover:bg-gray-700 text-xs font-semibold text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 flex items-center justify-between group transition-colors">
+                    <button onclick="openModal('osi')"
+                        class="w-full text-left px-3 py-2 rounded bg-gray-50 dark:bg-gray-900 hover:bg-gfg-light dark:hover:bg-gray-700 text-xs font-semibold text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 flex items-center justify-between group transition-colors">
                         <span><i class="fa-solid fa-layer-group text-gfg-green mr-2"></i> OSI Inspector</span>
                         <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-gfg-green text-[10px]"></i>
                     </button>
-                    <button onclick="openModal('crc')" class="w-full text-left px-3 py-2 rounded bg-gray-50 dark:bg-gray-900 hover:bg-gfg-light dark:hover:bg-gray-700 text-xs font-semibold text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 flex items-center justify-between group transition-colors">
+                    <button onclick="openModal('crc')"
+                        class="w-full text-left px-3 py-2 rounded bg-gray-50 dark:bg-gray-900 hover:bg-gfg-light dark:hover:bg-gray-700 text-xs font-semibold text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 flex items-center justify-between group transition-colors">
                         <span><i class="fa-solid fa-shield-halved text-gfg-green mr-2"></i> CRC Simulator</span>
                         <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-gfg-green text-[10px]"></i>
                     </button>
-                    <button onclick="openModal('packet')" class="w-full text-left px-3 py-2 rounded bg-gray-50 dark:bg-gray-900 hover:bg-gfg-light dark:hover:bg-gray-700 text-xs font-semibold text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 flex items-center justify-between group transition-colors">
+                    <button onclick="openModal('packet')"
+                        class="w-full text-left px-3 py-2 rounded bg-gray-50 dark:bg-gray-900 hover:bg-gfg-light dark:hover:bg-gray-700 text-xs font-semibold text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 flex items-center justify-between group transition-colors">
                         <span><i class="fa-solid fa-cube text-gfg-green mr-2"></i> Packet Visualizer</span>
                         <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-gfg-green text-[10px]"></i>
                     </button>
-                    <button onclick="openModal('dijkstra')" class="w-full text-left px-3 py-2 rounded bg-gray-50 dark:bg-gray-900 hover:bg-gfg-light dark:hover:bg-gray-700 text-xs font-semibold text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 flex items-center justify-between group transition-colors">
+                    <button onclick="openModal('dijkstra')"
+                        class="w-full text-left px-3 py-2 rounded bg-gray-50 dark:bg-gray-900 hover:bg-gfg-light dark:hover:bg-gray-700 text-xs font-semibold text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 flex items-center justify-between group transition-colors">
                         <span><i class="fa-solid fa-route text-gfg-green mr-2"></i> Dijkstra SPF Solver</span>
                         <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-gfg-green text-[10px]"></i>
                     </button>
@@ -276,30 +377,37 @@
             <div class="bg-gfg-light dark:bg-gray-800 p-3.5 rounded-lg border border-gfg-green/30">
                 <div class="flex items-center justify-between mb-2">
                     <div class="flex items-center space-x-2">
-                        <div class="w-6 h-6 rounded-full bg-gfg-green text-white flex items-center justify-center text-xs shadow-sm">
+                        <div
+                            class="w-6 h-6 rounded-full bg-gfg-green text-white flex items-center justify-center text-xs shadow-sm">
                             <i class="fa-solid fa-graduation-cap"></i>
                         </div>
                         <h4 class="font-bold text-xs text-gray-900 dark:text-white">GATE &amp; Interview Hub</h4>
                     </div>
-                    <button onclick="toggleCard('gate-card-body', this)" class="text-gray-400 hover:text-gfg-green p-1 transition-colors" title="Toggle GATE Hub">
+                    <button onclick="toggleCard('gate-card-body', this)"
+                        class="text-gray-400 hover:text-gfg-green p-1 transition-colors" title="Toggle GATE Hub">
                         <i class="fa-solid fa-chevron-up text-xs transition-transform duration-200"></i>
                     </button>
                 </div>
                 <div id="gate-card-body">
-                    <p class="text-[11px] text-gray-600 dark:text-gray-300 mb-2.5 leading-relaxed">Practice top 50+ network MCQs, viva questions, and placement coding interview scenarios.</p>
-                    <button onclick="App.loadView('quiz')" class="w-full bg-gfg-green hover:bg-gfg-dark text-white text-xs font-semibold py-1.5 rounded transition-colors shadow-sm">
+                    <p class="text-[11px] text-gray-600 dark:text-gray-300 mb-2.5 leading-relaxed">Practice top 50+
+                        network MCQs, viva questions, and placement coding interview scenarios.</p>
+                    <button onclick="App.loadView('quiz')"
+                        class="w-full bg-gfg-green hover:bg-gfg-dark text-white text-xs font-semibold py-1.5 rounded transition-colors shadow-sm">
                         View Practice Set →
                     </button>
                 </div>
             </div>
 
             <!-- Topic Quick Metadata Card (Toggleable) -->
-            <div id="topic-meta-card" class="bg-white dark:bg-gray-800 p-3.5 rounded-lg border border-gray-200 dark:border-gray-700 text-xs hidden">
-                <div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-1.5 mb-2">
+            <div id="topic-meta-card"
+                class="bg-white dark:bg-gray-800 p-3.5 rounded-lg border border-gray-200 dark:border-gray-700 text-xs hidden">
+                <div
+                    class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-1.5 mb-2">
                     <h4 class="font-bold text-gray-800 dark:text-gray-200 flex items-center">
                         <i class="fa-solid fa-circle-info text-gfg-green mr-1.5"></i> Topic Facts
                     </h4>
-                    <button onclick="toggleCard('facts-card-body', this)" class="text-gray-400 hover:text-gfg-green p-1 transition-colors" title="Toggle Topic Facts">
+                    <button onclick="toggleCard('facts-card-body', this)"
+                        class="text-gray-400 hover:text-gfg-green p-1 transition-colors" title="Toggle Topic Facts">
                         <i class="fa-solid fa-chevron-up text-xs transition-transform duration-200"></i>
                     </button>
                 </div>
@@ -310,7 +418,8 @@
                     </div>
                     <div class="flex justify-between py-1 border-b border-gray-100 dark:border-gray-700">
                         <span class="text-gray-500">Standard:</span>
-                        <span id="meta-standard" class="font-semibold text-gray-800 dark:text-gray-200 font-mono text-[10px]">RFC 791</span>
+                        <span id="meta-standard"
+                            class="font-semibold text-gray-800 dark:text-gray-200 font-mono text-[10px]">RFC 791</span>
                     </div>
                     <div class="flex justify-between py-1">
                         <span class="text-gray-500">Difficulty:</span>
@@ -323,34 +432,43 @@
 
     <!-- UNIVERSAL INTERACTIVE MODAL DIALOG -->
     <div id="universal-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white dark:bg-gfg-darkcard w-full max-w-3xl rounded-lg shadow-2xl border border-gray-300 dark:border-gfg-darkborder overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="bg-gray-100 dark:bg-gray-800 px-6 py-4 border-b border-gray-300 dark:border-gray-700 flex items-center justify-between">
+        <div
+            class="bg-white dark:bg-gfg-darkcard w-full max-w-3xl rounded-lg shadow-2xl border border-gray-300 dark:border-gfg-darkborder overflow-hidden flex flex-col max-h-[90vh]">
+            <div
+                class="bg-gray-100 dark:bg-gray-800 px-6 py-4 border-b border-gray-300 dark:border-gray-700 flex items-center justify-between">
                 <div class="flex items-center space-x-3">
-                    <div id="modal-icon" class="w-8 h-8 rounded bg-gfg-green text-white flex items-center justify-center text-sm shadow-sm">
+                    <div id="modal-icon"
+                        class="w-8 h-8 rounded bg-gfg-green text-white flex items-center justify-center text-sm shadow-sm">
                         <i class="fa-solid fa-calculator"></i>
                     </div>
                     <h3 id="modal-title" class="font-bold text-gray-900 dark:text-white text-sm">Tool Modal</h3>
                 </div>
-                <button onclick="closeModal()" class="text-gray-500 hover:text-black dark:hover:text-white p-2 rounded focus:outline-none" title="Close Modal">
+                <button onclick="closeModal()"
+                    class="text-gray-500 hover:text-black dark:hover:text-white p-2 rounded focus:outline-none"
+                    title="Close Modal">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
-            <div id="modal-body" class="p-6 overflow-y-auto flex-1 bg-white dark:bg-gfg-darkcard text-gray-800 dark:text-gray-200">
+            <div id="modal-body"
+                class="p-6 overflow-y-auto flex-1 bg-white dark:bg-gfg-darkcard text-gray-800 dark:text-gray-200">
                 <!-- Dynamic tool rendered here -->
             </div>
         </div>
     </div>
 
     <!-- Concept Popover Overlay Dialog -->
-    <div id="concept-popover-box" class="fixed z-50 bg-white dark:bg-gfg-darkcard border border-gray-300 dark:border-gfg-darkborder rounded-lg shadow-2xl p-4 max-w-sm hidden text-xs">
+    <div id="concept-popover-box"
+        class="fixed z-50 bg-white dark:bg-gfg-darkcard border border-gray-300 dark:border-gfg-darkborder rounded-lg shadow-2xl p-4 max-w-sm hidden text-xs">
         <div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-2 mb-2">
             <h4 id="popover-title" class="font-bold text-gray-900 dark:text-white text-xs">Concept</h4>
-            <span id="popover-unit" class="text-[10px] bg-gfg-light dark:bg-gray-800 text-gfg-green font-bold px-2 py-0.5 rounded">Unit</span>
+            <span id="popover-unit"
+                class="text-[10px] bg-gfg-light dark:bg-gray-800 text-gfg-green font-bold px-2 py-0.5 rounded">Unit</span>
         </div>
         <p id="popover-body" class="text-gray-600 dark:text-gray-300 text-xs leading-relaxed mb-3"></p>
         <div class="flex items-center justify-between pt-1">
             <span id="popover-category" class="text-[10px] text-gray-400 font-mono">Category</span>
-            <button id="popover-action" class="text-gfg-green hover:underline font-bold text-xs">Explore Topic →</button>
+            <button id="popover-action" class="text-gfg-green hover:underline font-bold text-xs">Explore Topic
+                →</button>
         </div>
     </div>
 
@@ -382,7 +500,7 @@
         const syllabusModules = [
             {
                 id: "unit1",
-                module: "Module 1: Networking Fundamentals & Physical Layer",
+                module: "Unit 1: Basics of Computer Networks",
                 badge: "8 Topics",
                 topicIds: [
                     "computer-network", "protocol", "host", "router",
@@ -391,7 +509,7 @@
             },
             {
                 id: "unit2",
-                module: "Module 2: Data Link Layer, Framing & MAC Sublayer",
+                module: "Unit 2: Datalink Layer",
                 badge: "27 Topics",
                 chapters: [
                     {
@@ -491,7 +609,7 @@
             },
             {
                 id: "unit3",
-                module: "Module 3: Network Layer, IP Addressing & Routing",
+                module: "Unit 3: Network Layer",
                 badge: "28 Topics",
                 chapters: [
                     {
@@ -548,7 +666,7 @@
             },
             {
                 id: "unit4",
-                module: "Module 4: Transport Layer & Congestion Control",
+                module: "Unit 4: Transport Layer",
                 badge: "10 Topics",
                 topicIds: [
                     "transport-layer", "tcp", "udp", "udp-header",
@@ -558,7 +676,7 @@
             },
             {
                 id: "unit5",
-                module: "Module 5: Application Layer, Protocols & Security",
+                module: "Unit 5: Application Layer",
                 badge: "17 Topics",
                 topicIds: [
                     "application-layer", "dns", "dns-records", "http",
@@ -633,7 +751,7 @@
 
             syllabusModules.forEach(mod => {
                 const topicsList = mod.topicIds.map(id => repo[id]).filter(Boolean);
-                const filtered = cleanQuery 
+                const filtered = cleanQuery
                     ? topicsList.filter(t => t.title.toLowerCase().includes(cleanQuery) || (t.oneLiner && t.oneLiner.toLowerCase().includes(cleanQuery)) || t.id.toLowerCase().includes(cleanQuery))
                     : topicsList;
 
@@ -680,9 +798,8 @@
 
                             // Chapter Header
                             const chapHeader = document.createElement('div');
-                            chapHeader.className = `text-[11px] font-bold text-gray-800 dark:text-gray-200 px-2 py-1.5 flex items-center justify-between cursor-pointer select-none transition-colors ${
-                                containsActive ? 'bg-blue-50/70 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300' : 'hover:bg-gray-50 dark:hover:bg-gray-800/80'
-                            }`;
+                            chapHeader.className = `text-[11px] font-bold text-gray-800 dark:text-gray-200 px-2 py-1.5 flex items-center justify-between cursor-pointer select-none transition-colors ${containsActive ? 'bg-blue-50/70 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300' : 'hover:bg-gray-50 dark:hover:bg-gray-800/80'
+                                }`;
                             chapHeader.innerHTML = `
                                 <div class="flex items-center space-x-1.5 truncate">
                                     <i class="fa-solid fa-chevron-${isChapCollapsed ? 'right' : 'down'} text-[9px] ${containsActive ? 'text-blue-500' : 'text-gray-400'} w-3"></i>
@@ -703,11 +820,10 @@
                                     const isRead = completedTopics.includes(topic.id);
                                     const btn = document.createElement('button');
                                     btn.id = 'sidebar-topic-' + topic.id;
-                                    btn.className = `w-full text-left px-2 py-1.5 rounded text-xs transition-all flex items-center justify-between group ${
-                                        isCurrent 
-                                            ? 'bg-gfg-green text-white font-bold shadow-sm' 
+                                    btn.className = `w-full text-left px-2 py-1.5 rounded text-xs transition-all flex items-center justify-between group ${isCurrent
+                                            ? 'bg-gfg-green text-white font-bold shadow-sm'
                                             : 'text-gray-700 dark:text-gray-300 hover:bg-gfg-light dark:hover:bg-gray-800 hover:text-gfg-green'
-                                    }`;
+                                        }`;
 
                                     btn.innerHTML = `
                                         <div class="flex items-center space-x-2 truncate">
@@ -744,11 +860,10 @@
                             const isRead = completedTopics.includes(topic.id);
                             const btn = document.createElement('button');
                             btn.id = 'sidebar-topic-' + topic.id;
-                            btn.className = `w-full text-left px-2.5 py-1.5 rounded text-xs transition-all flex items-center justify-between group ${
-                                isCurrent 
-                                    ? 'bg-gfg-green text-white font-bold shadow-sm' 
+                            btn.className = `w-full text-left px-2.5 py-1.5 rounded text-xs transition-all flex items-center justify-between group ${isCurrent
+                                    ? 'bg-gfg-green text-white font-bold shadow-sm'
                                     : 'text-gray-700 dark:text-gray-300 hover:bg-gfg-light dark:hover:bg-gray-800 hover:text-gfg-green'
-                            }`;
+                                }`;
 
                             btn.innerHTML = `
                                 <div class="flex items-center space-x-2 truncate">
@@ -831,10 +946,10 @@
                 if (!h.id) h.id = 'heading-sec-' + idx;
                 const li = document.createElement('li');
                 const isSub = h.tagName === 'H3';
-                li.className = isSub 
-                    ? 'pl-3 text-gray-500 dark:text-gray-400 text-[11px] truncate' 
+                li.className = isSub
+                    ? 'pl-3 text-gray-500 dark:text-gray-400 text-[11px] truncate'
                     : 'font-semibold text-gray-800 dark:text-gray-200 text-xs truncate';
-                
+
                 li.innerHTML = `
                     <a href="#${h.id}" class="hover:text-gfg-green transition-colors block truncate" title="${h.textContent}">
                         ${h.textContent}
@@ -980,7 +1095,7 @@
                             <div>
                                 <label class="block font-semibold uppercase mb-1 text-[11px]">CIDR Prefix</label>
                                 <select id="calc-cidr" class="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded px-3 py-2 font-mono text-xs focus:outline-none focus:border-gfg-green">
-                                    ${Array.from({length: 33}, (_, i) => `<option value="${i}" ${i===24?'selected':''}>/${i} (${Math.pow(2, 32-i).toLocaleString()} addresses)</option>`).join('')}
+                                    ${Array.from({ length: 33 }, (_, i) => `<option value="${i}" ${i === 24 ? 'selected' : ''}>/${i} (${Math.pow(2, 32 - i).toLocaleString()} addresses)</option>`).join('')}
                                 </select>
                             </div>
                         </div>
@@ -1197,7 +1312,7 @@
             const bcastInt = (netInt | ~maskInt) >>> 0;
             const wildcardInt = (~maskInt) >>> 0;
 
-            const intToIp = (n) => [(n>>>24)&255, (n>>>16)&255, (n>>>8)&255, n&255].join('.');
+            const intToIp = (n) => [(n >>> 24) & 255, (n >>> 16) & 255, (n >>> 8) & 255, n & 255].join('.');
             const total = Math.pow(2, 32 - cidr);
             const usable = cidr >= 31 ? (cidr === 31 ? 2 : 1) : Math.max(0, total - 2);
             const firstHost = cidr >= 31 ? intToIp(netInt) : intToIp(netInt + 1);
@@ -1341,11 +1456,11 @@
                     </thead>
                     <tbody class="text-gray-700 dark:text-gray-300 font-mono">
                         ${nodes.map(n => {
-                            let curr = n;
-                            const path = [];
-                            while (curr) { path.unshift(curr); curr = prev[curr]; }
-                            const nextHop = path.length > 1 ? path[1] : 'Direct (Local)';
-                            return `
+                let curr = n;
+                const path = [];
+                while (curr) { path.unshift(curr); curr = prev[curr]; }
+                const nextHop = path.length > 1 ? path[1] : 'Direct (Local)';
+                return `
                                 <tr class="${n === src ? 'bg-gfg-light dark:bg-gray-800 font-bold' : ''}">
                                     <td class="border border-gray-300 dark:border-gray-700 p-2 font-bold">${n}</td>
                                     <td class="border border-gray-300 dark:border-gray-700 p-2 text-gfg-green font-bold">${dist[n]}</td>
@@ -1353,7 +1468,7 @@
                                     <td class="border border-gray-300 dark:border-gray-700 p-2 font-bold">${nextHop}</td>
                                 </tr>
                             `;
-                        }).join('')}
+            }).join('')}
                     </tbody>
                 </table>
             `;
@@ -1392,7 +1507,7 @@
             if (isDesktop) {
                 // DESKTOP: toggles 'desktop-collapsed'
                 sidebar.classList.remove('-translate-x-full', 'mobile-open');
-                
+
                 let shouldCollapse;
                 if (typeof forceOpen === 'boolean') {
                     shouldCollapse = !forceOpen;
@@ -1448,7 +1563,7 @@
 
             if (isDesktop) {
                 rSidebar.classList.remove('fixed', 'right-0', 'top-16', 'bottom-0', 'z-40', 'shadow-2xl');
-                
+
                 let shouldCollapse;
                 if (typeof forceOpen === 'boolean') {
                     shouldCollapse = !forceOpen;
@@ -1599,4 +1714,5 @@
         });
     </script>
 </body>
+
 </html>
