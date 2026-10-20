@@ -1,17 +1,34 @@
-// Unit I: Networking Fundamentals - Curriculum Overview & Topics Hub
-// Matches Section 4 of Computer Networks Content Blueprint
+// Unit I: Networking Fundamentals & Physical Layer - Curriculum Overview & Topics Hub
+// Comprehensive 14-topic curriculum based on Kurose & Ross Chapter 1, Tanenbaum Chapters 1-2, and Forouzan Chapters 1-6
 
 const Unit1Module = {
   render: function(container) {
+    const u1Topics = [
+      { id: "computer-network", num: 1, title: "Computer Networks & The Global Internet", desc: "Network definitions, client-server/P2P, global ISP hierarchy (Tier 1/2/3), IXPs, and network classifications (LAN, MAN, WAN).", diff: "Core", time: "7 min read", prereq: "None" },
+      { id: "network-edge-core", num: 2, title: "Network Edge, Core & Access Networks", desc: "End systems vs mesh packet-switched core, store-and-forward routing, and broadband access (FTTH GPON, DOCSIS cable, DSL, 5G).", diff: "Core", time: "8 min read", prereq: "Computer Network" },
+      { id: "hosts-routers-switches", num: 3, title: "Network Hardware: Hosts, Routers, Switches & NICs", desc: "Layer 1 Hubs vs Layer 2 Switches vs Layer 3 Routers, collision domains, broadcast domains, and TCAM FIB lookups.", diff: "Core", time: "7 min read", prereq: "Network Edge & Core" },
+      { id: "protocol", num: 4, title: "Network Protocols, Services & Interfaces", desc: "Rules of communication: Syntax, Semantics, Timing, Service Access Points (SAPs), and service primitives (Request/Indication/Confirm).", diff: "Foundation", time: "6 min read", prereq: "Computer Network" },
+      { id: "osi-model", num: 5, title: "The 7-Layer OSI Reference Model (ISO 7498)", desc: "Complete functional breakdown of Physical, Data Link, Network, Transport, Session, Presentation, and Application layers.", diff: "Core", time: "9 min read", prereq: "Protocol" },
+      { id: "tcp-ip-model", num: 6, title: "The TCP/IP Architecture & Hourglass Model", desc: "The 4-layer Internet model (RFC 1122) vs OSI, why IP became the universal narrow waist, and the End-to-End design principle.", diff: "Core", time: "8 min read", prereq: "OSI Model" },
+      { id: "protocol-stack", num: 7, title: "Protocol Stacks & Layered Architecture", desc: "Hierarchical layering, layer independence, peer-to-peer virtual dialogues vs physical bit flows, and protocol stack overhead.", diff: "Core", time: "6 min read", prereq: "TCP/IP Model" },
+      { id: "encapsulation", num: 8, title: "Encapsulation, Decapsulation & Multiplexing", desc: "How payloads become Segments, Packets, and Frames; header/trailer wrapping, and demultiplexing keys (EtherType, Protocol, Port).", diff: "Core", time: "7 min read", prereq: "Protocol Stack" },
+      { id: "network-topologies", num: 9, title: "Network Topologies: Mesh, Star, Bus, Ring & Hybrid", desc: "Geometric layouts: Full Mesh N(N-1)/2 links, Star central switch, Bus collision domains, Ring loops, and Tree hierarchies.", diff: "Core", time: "7 min read", prereq: "Hardware" },
+      { id: "circuit-vs-packet-switching", num: 10, title: "Circuit Switching vs Packet Switching", desc: "Dedicated reserved paths vs statistical packet multiplexing, FDM/TDM vs on-demand sharing, and mathematical multiplexing gain.", diff: "Core", time: "8 min read", prereq: "Computer Network" },
+      { id: "transmission-media", num: 11, title: "Physical Layer Transmission Media", desc: "Guided media (Cat5e/6/6a Twisted Pair, Coaxial, Single-Mode and Multi-Mode Optical Fiber) vs Unguided radio/microwave channels.", diff: "Core", time: "8 min read", prereq: "Hardware" },
+      { id: "network-delay-loss", num: 12, title: "Performance: Delays, Loss & Bandwidth-Delay Product", desc: "The 4 nodal delays (d_proc, d_queue, d_trans = L/R, d_prop = d/s), traffic intensity, Little's Law, and BDP pipe sizing.", diff: "Core", time: "9 min read", prereq: "Transmission Media" },
+      { id: "multiplexing", num: 13, title: "Multiplexing Techniques: FDM, TDM, WDM & STDM", desc: "Frequency Division Multiplexing, Synchronous vs Statistical TDM, and Dense Wavelength Division Multiplexing (DWDM) in optical fiber.", diff: "Core", time: "7 min read", prereq: "Transmission Media" },
+      { id: "analog-digital-signals", num: 14, title: "Signal Fundamentals: Nyquist Rate & Shannon Capacity", desc: "Analog vs digital waveforms, SNR in decibels, Nyquist noiseless limit C = 2B log2(M), and Shannon noisy capacity C = B log2(1 + SNR).", diff: "Advanced", time: "9 min read", prereq: "Transmission Media" }
+    ];
+
     container.innerHTML = `
       <!-- Unit Banner -->
       <div class="welcome-banner" style="background: linear-gradient(100deg, #ecfdf5 0%, #d1fae5 50%, #a7f3d0 100%);">
         <div class="welcome-text">
           <div style="font-size: 0.85rem; font-weight: 800; color: #047857; text-transform: uppercase; margin-bottom: 0.35rem;">
-            Semester V • Computer Networks • Kurose & Ross Chapter 1
+            Semester V • Computer Networks • Kurose & Ross Ch 1 / Tanenbaum Ch 1-2
           </div>
-          <h2>Unit I: Networking Fundamentals & Architecture</h2>
-          <p>Foundational principles of computer communication: hosts, routers, switches, packets, the 5-layer Internet protocol stack, and encapsulation.</p>
+          <h2>Unit I: Networking Fundamentals & Physical Layer</h2>
+          <p>Comprehensive foundation: network edge & core, hosts, switches, routers, the 7-layer OSI & 4-layer TCP/IP models, encapsulation, transmission media, delays, multiplexing, and Shannon capacity limits.</p>
         </div>
         <div class="welcome-scene">
           <div class="better-note" style="color: #047857;">
@@ -27,7 +44,7 @@ const Unit1Module = {
             <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Curriculum Guide</span>
             <h3 class="study-card-title">What You Will Master in Unit I</h3>
           </div>
-          <span class="badge" style="background: #ecfdf5; color: #047857; font-weight: 700; padding: 6px 12px; border-radius: 9999px;">8 Dedicated Articles</span>
+          <span class="badge" style="background: #ecfdf5; color: #047857; font-weight: 700; padding: 6px 12px; border-radius: 9999px;">14 Comprehensive Lessons</span>
         </div>
         <div class="concept-explanation">
           <p>
@@ -39,165 +56,53 @@ const Unit1Module = {
               <p style="font-size: 0.85rem; color: #64748b; margin-top: 0.3rem;">Distinguish between end systems (hosts, servers) and packet-switching network infrastructure (routers, switches).</p>
             </div>
             <div style="background: #f8fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 1rem;">
-              <strong style="color: #047857;">✓ The 5-Layer Protocol Stack</strong>
-              <p style="font-size: 0.85rem; color: #64748b; margin-top: 0.3rem;">Understand Application, Transport, Network, Link, and Physical layers and their distinct responsibilities.</p>
+              <strong style="color: #047857;">✓ The OSI & TCP/IP Reference Models</strong>
+              <p style="font-size: 0.85rem; color: #64748b; margin-top: 0.3rem;">Master all 7 layers of the OSI model and the pragmatic 4-layer TCP/IP hourglass architecture.</p>
             </div>
             <div style="background: #f8fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 1rem;">
-              <strong style="color: #047857;">✓ Encapsulation & Decapsulation</strong>
-              <p style="font-size: 0.85rem; color: #64748b; margin-top: 0.3rem;">Trace how messages gain headers to become segments, packets, and frames as they descend the stack.</p>
+              <strong style="color: #047857;">✓ Encapsulation & Demultiplexing</strong>
+              <p style="font-size: 0.85rem; color: #64748b; margin-top: 0.3rem;">Trace messages to segments, packets, and frames with Protocol/EtherType/Port demultiplexing.</p>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 1rem;">
+              <strong style="color: #047857;">✓ Physical Media & Capacity Bounds</strong>
+              <p style="font-size: 0.85rem; color: #64748b; margin-top: 0.3rem;">Analyze Twisted Pair, Single-Mode Optical Fiber, DWDM, and calculate Nyquist and Shannon channel limits.</p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- TOPIC CATALOG (Dedicated Pages, not scrolling down) -->
+      <!-- TOPIC CATALOG -->
       <div class="section-heading-row">
         <div>
           <h3 class="section-title">Unit I Topic Catalog</h3>
-          <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.2rem;">Select any topic to open its dedicated Wikipedia-style article page with full technical details, interactive diagrams, and practice.</p>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.2rem;">Select any topic to open its dedicated Wikipedia-style article page with full technical details, interactive diagrams, worked examples, and practice exercises.</p>
         </div>
-        <span class="badge" style="background: #d1fae5; color: #047857; font-weight: 700; padding: 6px 12px; border-radius: 9999px;">8 Articles</span>
+        <span class="badge" style="background: #d1fae5; color: #047857; font-weight: 700; padding: 6px 12px; border-radius: 9999px;">14 Articles</span>
       </div>
 
       <div class="content-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
-        
-        <!-- Topic 1 -->
-        <div class="study-card topic-catalog-card" onclick="App.loadTopic('computer-network')">
-          <div class="catalog-card-top">
-            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 1 • Foundation</span>
-            <span class="badge-difficulty foundation">Foundation</span>
+        ${u1Topics.map(t => `
+          <div class="study-card topic-catalog-card" onclick="App.loadTopic('${t.id}')">
+            <div class="catalog-card-top">
+              <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic ${t.num} • Unit I</span>
+              <span class="badge-difficulty ${t.diff.toLowerCase()}">${t.diff}</span>
+            </div>
+            <h4 class="catalog-card-title">${t.title}</h4>
+            <p class="catalog-card-desc">${t.desc}</p>
+            <div class="catalog-card-meta">
+              <span>⏱️ ${t.time}</span>
+              <span>Prerequisites: ${t.prereq}</span>
+            </div>
+            <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('${t.id}')">
+              Read Full Article →
+            </button>
           </div>
-          <h4 class="catalog-card-title">Computer Network & Infrastructure</h4>
-          <p class="catalog-card-desc">Definition, why networks exist, nodes, links, hosts, and the Internet as a network of networks.</p>
-          <div class="catalog-card-meta">
-            <span>⏱️ 5 min read</span>
-            <span>Prerequisites: None</span>
-          </div>
-          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('computer-network')">
-            Read Full Article →
-          </button>
-        </div>
-
-        <!-- Topic 2 -->
-        <div class="study-card topic-catalog-card" onclick="App.loadTopic('protocol')">
-          <div class="catalog-card-top">
-            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 2 • Foundation</span>
-            <span class="badge-difficulty foundation">Foundation</span>
-          </div>
-          <h4 class="catalog-card-title">Network Protocols</h4>
-          <p class="catalog-card-desc">Rules of communication: message format, syntax, semantics, and actions taken upon message receipt.</p>
-          <div class="catalog-card-meta">
-            <span>⏱️ 5 min read</span>
-            <span>Prerequisites: Computer Network</span>
-          </div>
-          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('protocol')">
-            Read Full Article →
-          </button>
-        </div>
-
-        <!-- Topic 3 -->
-        <div class="study-card topic-catalog-card" onclick="App.loadTopic('host')">
-          <div class="catalog-card-top">
-            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 3 • Core</span>
-            <span class="badge-difficulty core">Core</span>
-          </div>
-          <h4 class="catalog-card-title">Host Systems (Clients & Servers)</h4>
-          <p class="catalog-card-desc">End systems residing at the network edge: clients, servers, and network interface cards (NICs).</p>
-          <div class="catalog-card-meta">
-            <span>⏱️ 4 min read</span>
-            <span>Prerequisites: Computer Network</span>
-          </div>
-          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('host')">
-            Read Full Article →
-          </button>
-        </div>
-
-        <!-- Topic 4 -->
-        <div class="study-card topic-catalog-card" onclick="App.loadTopic('router')">
-          <div class="catalog-card-top">
-            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 4 • Core</span>
-            <span class="badge-difficulty core">Core</span>
-          </div>
-          <h4 class="catalog-card-title">Router & Forwarding Engine</h4>
-          <p class="catalog-card-desc">Layer-3 forwarding device: input/output interfaces, switching fabric, and forwarding table lookups.</p>
-          <div class="catalog-card-meta">
-            <span>⏱️ 6 min read</span>
-            <span>Prerequisites: Host, Packet</span>
-          </div>
-          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('router')">
-            Read Full Article →
-          </button>
-        </div>
-
-        <!-- Topic 5 -->
-        <div class="study-card topic-catalog-card" onclick="App.loadTopic('switch')">
-          <div class="catalog-card-top">
-            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 5 • Core</span>
-            <span class="badge-difficulty core">Core</span>
-          </div>
-          <h4 class="catalog-card-title">Link-Layer Switch</h4>
-          <p class="catalog-card-desc">Layer-2 multi-port forwarding device: collision domain isolation, self-learning MAC tables, and full-duplex operation.</p>
-          <div class="catalog-card-meta">
-            <span>⏱️ 5 min read</span>
-            <span>Prerequisites: Router, Host</span>
-          </div>
-          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('switch')">
-            Read Full Article →
-          </button>
-        </div>
-
-        <!-- Topic 6 -->
-        <div class="study-card topic-catalog-card" onclick="App.loadTopic('packet')">
-          <div class="catalog-card-top">
-            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 6 • Core</span>
-            <span class="badge-difficulty core">Core</span>
-          </div>
-          <h4 class="catalog-card-title">Packet & Statistical Multiplexing</h4>
-          <p class="catalog-card-desc">Formatted blocks of data: header, payload, packet switching vs circuit switching, and encapsulation units.</p>
-          <div class="catalog-card-meta">
-            <span>⏱️ 5 min read</span>
-            <span>Prerequisites: Protocol</span>
-          </div>
-          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('packet')">
-            Read Full Article →
-          </button>
-        </div>
-
-        <!-- Topic 7 -->
-        <div class="study-card topic-catalog-card" onclick="App.loadTopic('protocol-stack')">
-          <div class="catalog-card-top">
-            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 7 • Core</span>
-            <span class="badge-difficulty core">Core</span>
-          </div>
-          <h4 class="catalog-card-title">Internet Protocol Stack & OSI Model</h4>
-          <p class="catalog-card-desc">The 5-layer Internet architecture (Application, Transport, Network, Link, Physical) compared to 7-layer OSI.</p>
-          <div class="catalog-card-meta">
-            <span>⏱️ 7 min read</span>
-            <span>Prerequisites: Protocol, Packet</span>
-          </div>
-          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('protocol-stack')">
-            Read Full Article →
-          </button>
-        </div>
-
-        <!-- Topic 8 -->
-        <div class="study-card topic-catalog-card" onclick="App.loadTopic('encapsulation')">
-          <div class="catalog-card-top">
-            <span class="topic-number-badge" style="background: #d1fae5; color: #047857;">Topic 8 • Major Module</span>
-            <span class="badge-difficulty advanced">Advanced</span>
-          </div>
-          <h4 class="catalog-card-title">Encapsulation & Decapsulation</h4>
-          <p class="catalog-card-desc">How data is wrapped with headers down the stack: Messages → Segments → Packets → Frames → Bits with interactive diagram.</p>
-          <div class="catalog-card-meta">
-            <span>⏱️ 6 min read</span>
-            <span>Prerequisites: Protocol Stack</span>
-          </div>
-          <button class="read-article-btn" onclick="event.stopPropagation(); App.loadTopic('encapsulation')">
-            Read Full Article →
-          </button>
-        </div>
-
+        `).join('')}
       </div>
     `;
   }
 };
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = Unit1Module;
+}

@@ -67,8 +67,8 @@ const App = {
     if (mainContainer) mainContainer.scrollTop = 0;
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    if (typeof markTopicCompleted === 'function') {
-      markTopicCompleted(topicId);
+    if (typeof trackTopicViewed === 'function') {
+      trackTopicViewed(topicId);
     }
     if (typeof highlightSyllabusTopic === 'function') {
       highlightSyllabusTopic(topicId);
@@ -814,14 +814,16 @@ const App = {
       </div>
     `;
 
-    document.getElementById('search-modal-overlay').classList.add('active');
+    const overlay = document.getElementById('search-modal-overlay');
+    if (overlay) overlay.classList.add('active');
     modal.classList.add('active');
   },
 
   closeExplainModal: function() {
     const modal = document.getElementById('explain-this-modal');
     if (modal) modal.classList.remove('active');
-    document.getElementById('search-modal-overlay').classList.remove('active');
+    const overlay = document.getElementById('search-modal-overlay');
+    if (overlay) overlay.classList.remove('active');
   },
 
   autoLinkConcepts: function(container) {
@@ -892,18 +894,23 @@ const App = {
   },
 
   openSearchModal: function() {
-    document.getElementById('search-modal-overlay').classList.add('active');
+    const overlay = document.getElementById('search-modal-overlay');
+    if (overlay) overlay.classList.add('active');
     const modal = document.getElementById('search-modal-box');
-    modal.classList.add('active');
+    if (modal) modal.classList.add('active');
     const input = document.getElementById('global-search-input');
-    input.value = "";
-    input.focus();
+    if (input) {
+      input.value = "";
+      input.focus();
+    }
     App.handleGlobalSearch("");
   },
 
   closeSearchModal: function() {
-    document.getElementById('search-modal-overlay').classList.remove('active');
-    document.getElementById('search-modal-box').classList.remove('active');
+    const overlay = document.getElementById('search-modal-overlay');
+    if (overlay) overlay.classList.remove('active');
+    const modal = document.getElementById('search-modal-box');
+    if (modal) modal.classList.remove('active');
   },
 
   handleGlobalSearch: function(query) {
