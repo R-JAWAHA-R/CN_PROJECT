@@ -456,20 +456,15 @@
         </div>
     </div>
 
-    <!-- Concept Popover Overlay Dialog -->
-    <div id="concept-popover-box"
-        class="fixed z-50 bg-white dark:bg-gfg-darkcard border border-gray-300 dark:border-gfg-darkborder rounded-lg shadow-2xl p-4 max-w-sm hidden text-xs">
-        <div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-2 mb-2">
-            <h4 id="popover-title" class="font-bold text-gray-900 dark:text-white text-xs">Concept</h4>
-            <span id="popover-unit"
-                class="text-[10px] bg-gfg-light dark:bg-gray-800 text-gfg-green font-bold px-2 py-0.5 rounded">Unit</span>
+    <!-- SEARCH MODAL OVERLAY & BOX FOR GLOBAL SEARCH & EXPLAIN SYSTEM -->
+    <div id="search-modal-overlay" class="drawer-overlay" onclick="App.closeSearchModal(); App.closeExplainModal();"></div>
+    <div id="search-modal-box" class="search-modal">
+        <div class="search-modal-header">
+            <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+            <input type="text" id="global-search-input" placeholder="Search topics, protocols, RFCs, comparisons, or labs..." oninput="App.handleGlobalSearch(this.value)" autocomplete="off">
+            <button onclick="App.closeSearchModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 text-lg px-2">✕</button>
         </div>
-        <p id="popover-body" class="text-gray-600 dark:text-gray-300 text-xs leading-relaxed mb-3"></p>
-        <div class="flex items-center justify-between pt-1">
-            <span id="popover-category" class="text-[10px] text-gray-400 font-mono">Category</span>
-            <button id="popover-action" class="text-gfg-green hover:underline font-bold text-xs">Explore Topic
-                →</button>
-        </div>
+        <div id="search-results-box" class="search-results-list"></div>
     </div>
 
     <!-- SCRIPT INCLUSIONS -->
@@ -500,11 +495,36 @@
         const syllabusModules = [
             {
                 id: "unit1",
-                module: "Unit 1: Basics of Computer Networks",
-                badge: "8 Topics",
+                module: "Unit 1: Basics of Computer Networks & Physical Layer",
+                badge: "14 Topics",
+                chapters: [
+                    {
+                        id: "ch-u1-foundations",
+                        number: 1,
+                        title: "1. Network Architecture, Edge/Core & Devices",
+                        shortTitle: "1. Architecture & Core",
+                        subtopicIds: ["computer-network", "network-edge-core", "hosts-routers-switches", "protocol"]
+                    },
+                    {
+                        id: "ch-u1-models",
+                        number: 2,
+                        title: "2. Reference Models & Encapsulation",
+                        shortTitle: "2. OSI & TCP/IP Stack",
+                        subtopicIds: ["osi-model", "tcp-ip-model", "protocol-stack", "encapsulation"]
+                    },
+                    {
+                        id: "ch-u1-physical",
+                        number: 3,
+                        title: "3. Topologies, Switching & Physical Transmission",
+                        shortTitle: "3. Topologies & Media",
+                        subtopicIds: ["network-topologies", "circuit-vs-packet-switching", "transmission-media", "network-delay-loss", "multiplexing", "analog-digital-signals"]
+                    }
+                ],
                 topicIds: [
-                    "computer-network", "protocol", "host", "router",
-                    "switch", "packet", "protocol-stack", "encapsulation"
+                    "computer-network", "network-edge-core", "hosts-routers-switches", "protocol",
+                    "osi-model", "tcp-ip-model", "protocol-stack", "encapsulation",
+                    "network-topologies", "circuit-vs-packet-switching", "transmission-media",
+                    "network-delay-loss", "multiplexing", "analog-digital-signals"
                 ]
             },
             {
@@ -610,7 +630,7 @@
             {
                 id: "unit3",
                 module: "Unit 3: Network Layer",
-                badge: "28 Topics",
+                badge: "24 Topics",
                 chapters: [
                     {
                         id: "ch-u3-design",
@@ -624,7 +644,7 @@
                         number: 2,
                         title: "2. Routing Algorithms (Dijkstra, Flooding, DV, Link-State)",
                         shortTitle: "2. Routing Algorithms",
-                        subtopicIds: ["shortest-path-algorithm", "dijkstra", "flooding", "distance-vector-routing", "distance-vector", "link-state-routing"]
+                        subtopicIds: ["dijkstra", "flooding", "distance-vector", "link-state-routing"]
                     },
                     {
                         id: "ch-u3-congestion",
@@ -645,7 +665,7 @@
                         number: 5,
                         title: "5. IP Addressing — IPv4 and IPv6",
                         shortTitle: "5. IPv4 & IPv6 Addressing",
-                        subtopicIds: ["ipv4-protocol", "ipv4", "ip-addressing", "nat", "ipv6-protocol", "ipv6"]
+                        subtopicIds: ["ipv4", "ip-addressing", "nat", "ipv6"]
                     },
                     {
                         id: "ch-u3-protocols",
@@ -657,10 +677,10 @@
                 ],
                 topicIds: [
                     "routing-design-issues", "network-layer", "forwarding", "routing", "optimality-principle",
-                    "shortest-path-algorithm", "dijkstra", "flooding", "distance-vector-routing", "distance-vector", "link-state-routing",
+                    "dijkstra", "flooding", "distance-vector", "link-state-routing",
                     "congestion-control", "traffic-aware-routing", "admission-control", "traffic-throttling", "load-shedding",
                     "internetworking", "tunneling", "internetwork-routing",
-                    "ipv4-protocol", "ipv4", "ip-addressing", "nat", "ipv6-protocol", "ipv6",
+                    "ipv4", "ip-addressing", "nat", "ipv6",
                     "ospf", "bgp", "sdn"
                 ]
             },
@@ -698,12 +718,46 @@
             return total;
         }
 
+        function toggleTopicCompleted(id) {
+            const idx = completedTopics.indexOf(id);
+            if (idx === -1) {
+                completedTopics.push(id);
+            } else {
+                completedTopics.splice(idx, 1);
+            }
+            try {
+                localStorage.setItem('gfg_completed_topics', JSON.stringify(completedTopics));
+            } catch(e) {}
+            updateProgressDisplay();
+            renderSidebar(document.getElementById('sidebar-filter')?.value || '');
+            if (typeof updateTopicMetaCard === 'function') {
+                updateTopicMetaCard(id);
+            }
+            return completedTopics.includes(id);
+        }
+
         function markTopicCompleted(id) {
             if (!completedTopics.includes(id)) {
                 completedTopics.push(id);
-                localStorage.setItem('gfg_completed_topics', JSON.stringify(completedTopics));
+                try {
+                    localStorage.setItem('gfg_completed_topics', JSON.stringify(completedTopics));
+                } catch(e) {}
             }
             updateProgressDisplay();
+            renderSidebar(document.getElementById('sidebar-filter')?.value || '');
+        }
+
+        function trackTopicViewed(id) {
+            let viewed = [];
+            try {
+                viewed = JSON.parse(localStorage.getItem('gfg_viewed_topics') || '[]');
+            } catch(e) { viewed = []; }
+            if (!viewed.includes(id)) {
+                viewed.push(id);
+                try {
+                    localStorage.setItem('gfg_viewed_topics', JSON.stringify(viewed));
+                } catch(e) {}
+            }
         }
 
         function resetProgress() {
@@ -1044,6 +1098,8 @@
             } else {
                 if (window.TOPIC_REPOSITORY && window.TOPIC_REPOSITORY[id]) {
                     App.loadTopic(id);
+                } else if (typeof App.openExplainModal === 'function') {
+                    App.openExplainModal(id);
                 } else if (typeof App.showExplainModal === 'function') {
                     App.showExplainModal(id);
                 }

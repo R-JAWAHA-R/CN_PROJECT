@@ -103,6 +103,7 @@ var TopicPageEngine = {
 
     const prevTopic = topic.prevTopicId ? TOPIC_REPOSITORY[topic.prevTopicId] : null;
     const nextTopic = topic.nextTopicId ? TOPIC_REPOSITORY[topic.nextTopicId] : null;
+    const isCompleted = typeof completedTopics !== 'undefined' && Array.isArray(completedTopics) && completedTopics.includes(topicId);
 
     // Build Infobox Prerequisites & Related Links
     const prereqLinks = (topic.infobox.prerequisites || []).map(pId => {
@@ -352,6 +353,9 @@ var TopicPageEngine = {
             <button class="wiki-action-btn" onclick="document.getElementById('sec-practice').scrollIntoView({behavior: 'smooth'})">
               🎯 Knowledge Check
             </button>
+            <button id="toggle-complete-btn-${topic.id}" class="wiki-action-btn ${isCompleted ? 'bg-emerald-600 text-white hover:bg-emerald-700' : 'bg-gray-100 text-gray-700 hover:bg-emerald-50 dark:bg-gray-800 dark:text-gray-300'}" onclick="TopicPageEngine.handleToggleComplete('${topic.id}')" title="Mark this lesson completed">
+              ${isCompleted ? '✅ Completed' : '⭕ Mark as Complete'}
+            </button>
             <button class="wiki-action-btn secondary" onclick="App.loadView('${topic.unitId}')">
               ⬅ Back to ${topic.unit.split(':')[0]}
             </button>
@@ -556,6 +560,27 @@ var TopicPageEngine = {
               </div>
             </section>
 
+            <!-- Lesson Completion Banner -->
+            <div class="completion-banner my-8 p-5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gradient-to-r from-emerald-50/60 to-blue-50/60 dark:from-gray-800 dark:to-gray-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center text-lg ${isCompleted ? 'bg-emerald-500 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-500'}">
+                  <i class="fa-solid ${isCompleted ? 'fa-check' : 'fa-graduation-cap'}"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-sm text-gray-900 dark:text-white">
+                    ${isCompleted ? 'Lesson Mastered!' : 'Finished Reading & Practicing?'}
+                  </h4>
+                  <p class="text-xs text-gray-600 dark:text-gray-300">
+                    ${isCompleted ? 'You have marked this lesson as complete. Click below if you want to revise again later.' : 'Track your academic syllabus progress by marking this topic complete.'}
+                  </p>
+                </div>
+              </div>
+              <button id="toggle-complete-footer-btn-${topic.id}" class="px-5 py-2.5 rounded-lg text-xs font-bold transition-all shadow-sm ${isCompleted ? 'bg-emerald-600 text-white hover:bg-emerald-700' : 'bg-gfg-green text-white hover:bg-gfg-dark'}" onclick="TopicPageEngine.handleToggleComplete('${topic.id}')">
+                <i class="fa-solid ${isCompleted ? 'fa-check-circle' : 'fa-circle-check'} mr-1.5"></i>
+                ${isCompleted ? 'Marked Completed (Undo)' : 'Mark Topic as Completed'}
+              </button>
+            </div>
+
             <!-- BOTTOM PAGINATION: PREV & NEXT TOPIC -->
             <nav class="wiki-pager-nav">
               ${prevTopic ? `
@@ -638,6 +663,48 @@ var TopicPageEngine = {
       setTimeout(() => {
         TopicPageEngine.initLab(topic.sections.interactiveLabKey);
       }, 50);
+    }
+  },
+
+  handleToggleComplete: function(topicId) {
+    let completed = false;
+    if (typeof toggleTopicCompleted === 'function') {
+      completed = toggleTopicCompleted(topicId);
+    } else {
+      let completedTopics = JSON.parse(localStorage.getItem('gfg_completed_topics') || '[]');
+      const idx = completedTopics.indexOf(topicId);
+      if (idx === -1) {
+        completedTopics.push(topicId);
+        completed = true;
+      } else {
+        completedTopics.splice(idx, 1);
+        completed = false;
+      }
+      localStorage.setItem('gfg_completed_topics', JSON.stringify(completedTopics));
+      if (typeof updateProgressDisplay === 'function') updateProgressDisplay();
+      if (typeof renderSidebar === 'function') renderSidebar();
+    }
+
+    const headerBtn = document.getElementById(`toggle-complete-btn-${topicId}`);
+    if (headerBtn) {
+      if (completed) {
+        headerBtn.className = "wiki-action-btn bg-emerald-600 text-white hover:bg-emerald-700";
+        headerBtn.innerHTML = "✅ Completed";
+      } else {
+        headerBtn.className = "wiki-action-btn bg-gray-100 text-gray-700 hover:bg-emerald-50 dark:bg-gray-800 dark:text-gray-300";
+        headerBtn.innerHTML = "⭕ Mark as Complete";
+      }
+    }
+
+    const footerBtn = document.getElementById(`toggle-complete-footer-btn-${topicId}`);
+    if (footerBtn) {
+      if (completed) {
+        footerBtn.className = "px-5 py-2.5 rounded-lg text-xs font-bold transition-all shadow-sm bg-emerald-600 text-white hover:bg-emerald-700";
+        footerBtn.innerHTML = '<i class="fa-solid fa-check-circle mr-1.5"></i> Marked Completed (Undo)';
+      } else {
+        footerBtn.className = "px-5 py-2.5 rounded-lg text-xs font-bold transition-all shadow-sm bg-gfg-green text-white hover:bg-gfg-dark";
+        footerBtn.innerHTML = '<i class="fa-solid fa-circle-check mr-1.5"></i> Mark Topic as Completed';
+      }
     }
   },
 

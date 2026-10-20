@@ -176,8 +176,8 @@ const TOPICS_U3_EXT = {
     "prevTopicId": "routing-design-issues",
     "nextTopicId": "shortest-path-algorithm"
   },
-  "shortest-path-algorithm": {
-    "id": "shortest-path-algorithm",
+  "dijkstra": {
+    "id": "dijkstra",
     "title": "Shortest Path Algorithm (Dijkstra's SPF)",
     "unit": "Unit III: Network Layer & Routing",
     "unitId": "unit3",
@@ -333,8 +333,8 @@ const TOPICS_U3_EXT = {
     "prevTopicId": "shortest-path-algorithm",
     "nextTopicId": "distance-vector-routing"
   },
-  "distance-vector-routing": {
-    "id": "distance-vector-routing",
+  "distance-vector": {
+    "id": "distance-vector",
     "title": "Distance Vector Routing & Count-to-Infinity",
     "unit": "Unit III: Network Layer & Routing",
     "unitId": "unit3",
@@ -1124,8 +1124,8 @@ const TOPICS_U3_EXT = {
     "prevTopicId": "tunneling",
     "nextTopicId": "ipv4-protocol"
   },
-  "ipv4-protocol": {
-    "id": "ipv4-protocol",
+  "ipv4": {
+    "id": "ipv4",
     "title": "IPv4 Protocol & Header Architecture",
     "unit": "Unit III: Network Layer & Routing",
     "unitId": "unit3",
@@ -1284,330 +1284,6 @@ const TOPICS_U3_EXT = {
     "prevTopicId": "ipv4-protocol",
     "nextTopicId": "ipv6-protocol"
   },
-  "ipv6-protocol": {
-    "id": "ipv6-protocol",
-    "title": "IPv6 Architecture, 128-Bit Addressing & Transition",
-    "unit": "Unit III: Network Layer & Routing",
-    "unitId": "unit3",
-    "level": "Level 2 — Standard Topic",
-    "category": "network",
-    "difficulty": "Core",
-    "readingTime": "10 min read",
-    "standard": "Tanenbaum Ch 5.6.3 & 5.6.4 / RFC 8200 (Internet Standard)",
-    "oneLiner": "IPv6 expands network addressing to 128 bits, eliminates router header checksums and hop-by-hop fragmentation, and streamlines packet processing via a fixed 40-byte base header and extension header chaining.",
-    "quickAnswer": "IPv6 solves IPv4 address exhaustion with 128-bit addresses ($3.4 \\times 10^{38}$ total). Its simplified fixed 40-byte header improves router throughput, replaces broadcast with multicast, and enables seamless transition via Dual-Stack, Tunneling, and NAT64.",
-    "whyItMatters": "Standardized as full Internet Standard RFC 8200 in 2017, IPv6 now powers over 45% of global Internet traffic and dominates cellular carriers worldwide (T-Mobile, Jio, Verizon).",
-    "infobox": {
-      "layer": "Layer 3 (Network Layer)",
-      "standard": "RFC 8200 (IPv6 Standard, 2017), RFC 4291 (Addressing Architecture)",
-      "type": "Next-Generation Internet Protocol",
-      "keyFormula": "2^{128} \\approx 3.4028 \\times 10^{38} \\text{ Addresses}, \\quad \\text{Fixed Header: } 40 \\text{ bytes}",
-      "prerequisites": [
-        "ipv4-protocol",
-        "ip-addressing"
-      ],
-      "relatedConcepts": [
-        "ipv4-protocol",
-        "tunneling",
-        "nat"
-      ],
-      "compareWith": [
-        "ipv4-protocol"
-      ],
-      "primaryUses": [
-        "Global Internet 5G/Mobile Routing",
-        "Cloud Hyperscale Virtualization",
-        "Internet of Things (IoT)"
-      ]
-    },
-    "sections": {
-      interactiveLabKey: "ip-header",
-      "overview": "<p>By the early 1990s, the explosive growth of the Internet made it clear that IPv4's 32-bit address space (4.3 billion addresses) would eventually be completely exhausted. In response, the IETF developed <strong>IPv6 (Internet Protocol Version 6)</strong>, officially ratified as an Internet Standard in <strong>RFC 8200</strong>.</p>\n      <p>As detailed in <em>Tanenbaum & Wetherall (6th Ed., Ch. 5.6.3 & 5.6.4)</em>, IPv6 was not merely an address expansion—it was a major architectural overhaul designed to streamline hardware packet forwarding in high-speed optical routers.</p>",
-      "howItWorks": "<h5 style=\"color:#0369a1;\">1. The Fixed 40-Byte Base Header</h5>\n      <p>Unlike IPv4's variable-length header (20–60 bytes), IPv6 uses a strictly fixed <strong>40-byte base header</strong> containing only 8 fields:</p>\n      <ol class=\"wiki-ordered-list\">\n        <li><strong>Version (4 bits):</strong> Binary <code>0110</code> (decimal 6).</li>\n        <li><strong>Traffic Class (8 bits):</strong> Equivalent to IPv4 DSCP (6 bits) + ECN (2 bits) for QoS and congestion notification.</li>\n        <li><strong>Flow Label (20 bits):</strong> Allows a source to label sequences of packets belonging to a specific non-default QoS flow (e.g., real-time video), enabling routers to forward them along pre-established paths without inspecting inner headers.</li>\n        <li><strong>Payload Length (16 bits):</strong> Length of the payload in bytes (including any extension headers). Maximum standard payload is 65,535 bytes (can be expanded up to 4 GB with the Jumbo Payload option).</li>\n        <li><strong>Next Header (8 bits):</strong> Replaces IPv4's Protocol field. Identifies the type of header immediately following the base header (either an Extension Header or upper-layer protocol like TCP=6, UDP=17).</li>\n        <li><strong>Hop Limit (8 bits):</strong> Replaces IPv4's TTL. Decremented by 1 at each router; packet is discarded when it reaches 0.</li>\n        <li><strong>Source Address (128 bits / 16 bytes):</strong> Address of the originating interface.</li>\n        <li><strong>Destination Address (128 bits / 16 bytes):</strong> Address of the final recipient.</li>\n      </ol>\n      <h5 style=\"color:#0369a1; margin-top:1rem;\">2. Major Simplifications over IPv4:</h5>\n      <ul class=\"wiki-bullet-list\">\n        <li><strong>No Header Checksum:</strong> Checksums were eliminated to speed up router processing. Integrity is verified by Layer 2 FCS (Ethernet CRC) and Layer 4 TCP/UDP checksums. Routers no longer recalculate checksums at every hop!</li>\n        <li><strong>No Hop-by-Hop Fragmentation:</strong> Intermediate routers NEVER fragment packets in IPv6. If a packet exceeds link MTU, the router drops it and sends an ICMPv6 \"Packet Too Big\" message (Type 2) containing the MTU. The source host performs <em>Path MTU Discovery (PMTUD)</em>.</li>\n        <li><strong>No Broadcast:</strong> Broadcast was completely eliminated, replaced by targeted <strong>Multicast</strong> and <strong>Anycast</strong>.</li>\n      </ul>\n      <h5 style=\"color:#0369a1; margin-top:1rem;\">3. Extension Header Chaining</h5>\n      <p>Instead of cramming optional fields into the base header, IPv6 chains <strong>Extension Headers</strong> between the base header and the transport layer payload:</p>\n      <p style=\"text-align:center;\">$$\\text{[Base Header (Next=0)]} \\to \\text{[Hop-by-Hop (Next=43)]} \\to \\text{[Routing (Next=6)]} \\to \\text{[TCP Data]}$$</p>",
-      "diagram": "\n+--------------------------------------------------------------------------+\n|                     IPV6 FIXED 40-BYTE BASE HEADER (RFC 8200)            |\n|                                                                          |\n| 0                   1                   2                   3            |\n| 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 Bit      |\n|+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+         |\n||Version| Traffic Class |           Flow Label                  | Byte 0  |\n|+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+         |\n||         Payload Length        |  Next Header  |   Hop Limit   | Byte 4  |\n|+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+         |\n||                                                               | Byte 8  |\n|+                                                               +         |\n||                                                               | Byte 12 |\n|+                     Source IP Address                         +         |\n||                        (128 bits)                             | Byte 16 |\n|+                                                               +         |\n||                                                               | Byte 20 |\n|+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+         |\n||                                                               | Byte 24 |\n|+                                                               +         |\n||                                                               | Byte 28 |\n|+                  Destination IP Address                       +         |\n||                        (128 bits)                             | Byte 32 |\n|+                                                               +         |\n||                                                               | Byte 36 |\n|+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+         |\n||    Extension Headers (Optional)  ...  |   TCP / UDP Payload   | Byte 40 |\n+--------------------------------------------------------------------------+",
-      "technicalDetails": "<p>IPv6 128-Bit Addressing Architecture & Notation Rules (RFC 4291):</p>\n      <ul class=\"wiki-bullet-list\">\n        <li><strong>Hexadecimal Colon Notation:</strong> 128 bits divided into 8 groups of 16-bit blocks (quartets) written in hex:\n          <br><code>2001:0db8:85a3:0000:0000:8a2e:0370:7334</code>\n        </li>\n        <li><strong>Compression Rule 1 (Omit Leading Zeros):</strong> Leading zeros in any quartet can be omitted:\n          <br><code>0db8</code> $\\to$ <code>db8</code>, <code>0000</code> $\\to$ <code>0</code>, <code>0370</code> $\\to$ <code>370</code>.\n        </li>\n        <li><strong>Compression Rule 2 (Double Colon <code>::</code>):</strong> A single contiguous run of one or more all-zero quartets can be replaced by <code>::</code>.\n          <br><strong>Critical Rule:</strong> <code>::</code> can appear ONLY ONCE in an address!\n          <br>Example: <code>2001:0db8:0000:0000:0000:0000:0000:0001</code> $\\implies$ <code>2001:db8::1</code>.\n        </li>\n        <li><strong>Loopback Address:</strong> <code>::1</code> (equivalent to 127.0.0.1).</li>\n        <li><strong>Unspecified Address:</strong> <code>::</code> (equivalent to 0.0.0.0).</li>\n        <li><strong>IPv6 Address Scopes:</strong>\n          <br>- <strong>Global Unicast (2000::/3):</strong> Publicly routable across the worldwide Internet.\n          <br>- <strong>Link-Local (fe80::/10):</strong> Automatically configured on every interface for communication on the local link only (never routed).\n          <br>- <strong>Unique Local (fc00::/7):</strong> Private internal addressing (replacement for RFC 1918).\n          <br>- <strong>Multicast (ff00::/8):</strong> Replaces broadcast.\n        </li>\n      </ul>",
-      "workedExample": "<strong>Worked Exercise: IPv6 Address Compression & Expansion</strong><br>\n      <br><strong>Problem 1: Compress this full IPv6 address:</strong><br>\n      <code>2001:0db8:0000:0000:0042:0000:0000:0001</code><br>\n      - Step 1: Omit leading zeros $\\to$ <code>2001:db8:0:0:42:0:0:1</code><br>\n      - Step 2: Choose longest run of zeros for <code>::</code> (tie between two runs of two 0s; choose the first) $\\to$<br>\n      <strong>Compressed: <code>2001:db8::42:0:0:1</code></strong><br><br>\n      <strong>Problem 2: Expand this compressed address to full 8 quartets:</strong><br>\n      <code>fe80::215:5dff:fe8a:412b</code><br>\n      - Count existing quartets: <code>fe80</code> (1), <code>215</code> (2), <code>5dff</code> (3), <code>fe8a</code> (4), <code>412b</code> (5) = 5 quartets present.<br>\n      - Missing quartets replaced by <code>::</code> = $8 - 5 = 3\\text{ quartets of all-zeros}$.<br>\n      - Restore leading zeros to 4 hex digits per block:<br>\n      <strong>Expanded: <code>fe80:0000:0000:0000:0215:5dff:fe8a:412b</code></strong>",
-      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Feature</th><th>IPv4</th><th>IPv6</th></tr></thead>\n        <tbody>\n          <tr><td>Address Space</td><td>32 bits ($4.3 \\times 10^9$)</td><td>128 bits ($3.4 \\times 10^{38}$)</td></tr>\n          <tr><td>Base Header Size</td><td>20–60 bytes (Variable)</td><td>40 bytes (Strictly Fixed)</td></tr>\n          <tr><td>Checksum</td><td>Yes (recomputed at every hop)</td><td>None (faster forwarding in routers)</td></tr>\n          <tr><td>Fragmentation</td><td>By source host AND intermediate routers</td><td>By <strong>source host only</strong> (PMTUD)</td></tr>\n          <tr><td>Broadcast Support</td><td>Yes (255.255.255.255)</td><td>None (Multicast only)</td></tr>\n          <tr><td>Security</td><td>IPsec optional add-on</td><td>IPsec natively architected</td></tr>\n        </tbody>\n      </table>",
-      "whereUsed": [
-        "Cellular Mobile Networks: T-Mobile US, Reliance Jio, and Verizon operate pure IPv6-only single-stack mobile backbones",
-        "Major Cloud Service Providers: AWS Dual-Stack VPCs, Cloudflare, Google Cloud",
-        "Global Internet Backbone: Over 45% of users accessing Google services connect over native IPv6"
-      ],
-      "commonMistakes": "Using '::' more than once in an IPv6 address (e.g. 2001::db8::1 is INVALID!). If used twice, it is mathematically impossible to know how many zeros belong to each group.",
-      "compareWith": {
-        "title": "IPv4 vs. IPv6 Transition Strategies",
-        "note": "1. Dual Stack: Nodes run both IPv4 and IPv6 simultaneously. 2. Tunneling: Encapsulating IPv6 inside IPv4 packets across legacy islands. 3. Translation (NAT64/DNS64): Translating packet headers between IPv6-only hosts and IPv4-only servers."
-      },
-      "practice": {
-        "question": "Which of the following is a syntactically INVALID IPv6 address?",
-        "choices": [
-          "::1",
-          "2001:db8::1",
-          "fe80::1::45",
-          "::"
-        ],
-        "correctIndex": 2,
-        "explanation": "fe80::1::45 is invalid because the double colon '::' is used twice. The double colon can be used only once per address to prevent ambiguous quartet counts."
-      },
-      "references": [
-        {
-          "cite": "Tanenbaum & Wetherall, Computer Networks, 6th Ed., Ch. 5.6.3 & 5.6.4: The IPv6 Protocol & Transition",
-          "url": "https://www.pearson.com/"
-        },
-        {
-          "cite": "RFC 8200: Internet Protocol, Version 6 (IPv6) Specification (Internet Standard)",
-          "url": "https://datatracker.ietf.org/doc/html/rfc8200"
-        },
-        {
-          "cite": "RFC 4291: IP Version 6 Addressing Architecture",
-          "url": "https://datatracker.ietf.org/doc/html/rfc4291"
-        }
-      ]
-    },
-    "prevTopicId": "ip-addressing",
-    "nextTopicId": "transport-layer"
-  },
-  "dijkstra": {
-    "id": "dijkstra",
-    "title": "Shortest Path Algorithm (Dijkstra's SPF)",
-    "unit": "Unit III: Network Layer & Routing",
-    "unitId": "unit3",
-    "level": "Level 2 — Standard Topic",
-    "category": "network",
-    "difficulty": "Core",
-    "readingTime": "9 min read",
-    "standard": "Tanenbaum Ch 5.2.2 / Dijkstra (1959) / RFC 2328",
-    "oneLiner": "Dijkstra's algorithm finds the shortest paths from a source router to all other routers in a weighted graph by greedily expanding confirmed nodes.",
-    "quickAnswer": "Dijkstra's algorithm models the network as a graph of routers (nodes) and links (edges). It iteratively promotes the tentative node with the lowest cumulative cost into a confirmed set, relaxing adjacent edges until all nodes form the shortest-path tree.",
-    "whyItMatters": "Dijkstra's algorithm powers Open Shortest Path First (OSPF) and IS-IS, the two dominant interior gateway routing protocols in enterprise and service provider networks worldwide.",
-    "infobox": {
-      "layer": "Layer 3 (Control Plane)",
-      "standard": "Edsger W. Dijkstra (1959), RFC 2328 (OSPFv2)",
-      "type": "Greedy Shortest Path Graph Algorithm",
-      "keyFormula": "D(v) = \\min(D(v), D(u) + c(u,v)), \\quad \\text{Complexity: } O(V^2) \\text{ or } O((V+E)\\log V)",
-      "prerequisites": [
-        "optimality-principle"
-      ],
-      "relatedConcepts": [
-        "dijkstra",
-        "link-state-routing",
-        "ospf",
-        "distance-vector-routing"
-      ],
-      "compareWith": [
-        "distance-vector-routing"
-      ],
-      "primaryUses": [
-        "OSPF Routing Table Calculation",
-        "IS-IS Link-State Computation",
-        "GPS Navigation Systems"
-      ]
-    },
-    "sections": {
-      interactiveLabKey: "dijkstra",
-      "overview": "<p>The <strong>Shortest Path Algorithm</strong> developed by Dutch computer scientist Edsger W. Dijkstra (1959) computes the least-cost path from a given source node to every other node in a weighted directed or undirected graph with non-negative edge weights.</p>\n      <p>As detailed in <em>Tanenbaum & Wetherall (6th Ed., Ch. 5.2.2)</em>, link weights in computer networks can represent:</p>\n      <ul class=\"wiki-bullet-list\">\n        <li><strong>Hop Count:</strong> Every link weight = 1 (minimizes total router hops).</li>\n        <li><strong>Geographic Distance:</strong> Physical distance in kilometers (minimizes propagation delay).</li>\n        <li><strong>Inverse Bandwidth:</strong> Standard in OSPF: $\\text{Metric} = \\frac{10^8}{\\text{Bandwidth in bps}}$ (steers traffic over high-speed links).</li>\n        <li><strong>Queue Delay:</strong> Measured real-time latency under current traffic.</li>\n      </ul>",
-      "howItWorks": "<h5 style=\"color:#0369a1;\">Dijkstra's Algorithm Step-by-Step:</h5>\n      <ol class=\"wiki-ordered-list\">\n        <li><strong>Initialization:</strong>\n          <br>Define set of confirmed permanent nodes $N' = \\{s\\}$, where $s$ is the source router.\n          <br>For every node $v \\notin N'$:\n          <br>If $v$ is a direct neighbor of $s$, set cumulative cost $D(v) = c(s, v)$ and predecessor $p(v) = s$.\n          <br>Otherwise, set $D(v) = \\infty$ and $p(v) = \\text{null}$.\n        </li>\n        <li><strong>Selection:</strong>\n          <br>Find node $w \\notin N'$ such that $D(w)$ is minimum.\n          <br>Add $w$ to confirmed set: $N' = N' \\cup \\{w\\}$.\n        </li>\n        <li><strong>Edge Relaxation:</strong>\n          <br>For each neighbor $v$ of $w$ that is not in $N'$:\n          <br>Calculate new tentative cost: $D_{new}(v) = D(w) + c(w, v)$.\n          <br>If $D_{new}(v) < D(v)$, update: $D(v) = D_{new}(v)$ and $p(v) = w$.\n        </li>\n        <li><strong>Termination:</strong>\n          <br>Repeat Steps 2 and 3 until all vertices in graph are included in $N'$.\n        </li>\n      </ol>",
-      "diagram": "\n+--------------------------------------------------------------------------+\n|                  6-NODE NETWORK TOPOLOGY FOR DIJKSTRA TRACE              |\n|                                                                          |\n|                  (B)--------3--------(C)                                 |\n|                 / |                 / |                                  |\n|                2  |                /  |                                  |\n|               /   1               2   |                                  |\n|             (A)   |              /    4                                  |\n|               \\   |             /     |                                  |\n|                5  |            /      |                                  |\n|                 \\ |           /       |                                  |\n|                  (D)--------1--------(E)--------2--------(F)             |\n|                                                                          |\n|   Links & Undirected Costs:                                              |\n|   (A,B)=2, (A,D)=5, (B,C)=3, (B,D)=1, (C,D)=2, (C,E)=4, (D,E)=1, (E,F)=2 |\n+--------------------------------------------------------------------------+",
-      "technicalDetails": "<p>Detailed execution trace starting from Source Node <strong>A</strong>:</p>\n      <table class=\"wiki-table\">\n        <thead>\n          <tr><th>Step</th><th>Confirmed Node Added $w$</th><th>$D(B), p(B)$</th><th>$D(C), p(C)$</th><th>$D(D), p(D)$</th><th>$D(E), p(E)$</th><th>$D(F), p(F)$</th></tr>\n        </thead>\n        <tbody>\n          <tr><td>Init</td><td>$N' = \\{A\\}$</td><td><strong>2, A</strong></td><td>$\\infty$</td><td>5, A</td><td>$\\infty$</td><td>$\\infty$</td></tr>\n          <tr><td>1</td><td>Add <strong>B</strong> (cost 2)</td><td>2, A (Done)</td><td>5, B</td><td><strong>3, B</strong></td><td>$\\infty$</td><td>$\\infty$</td></tr>\n          <tr><td>2</td><td>Add <strong>D</strong> (cost 3)</td><td>2, A (Done)</td><td>5, B</td><td>3, B (Done)</td><td><strong>4, D</strong></td><td>$\\infty$</td></tr>\n          <tr><td>3</td><td>Add <strong>E</strong> (cost 4)</td><td>2, A (Done)</td><td><strong>5, B</strong></td><td>3, B (Done)</td><td>4, D (Done)</td><td><strong>6, E</strong></td></tr>\n          <tr><td>4</td><td>Add <strong>C</strong> (cost 5)</td><td>2, A (Done)</td><td>5, B (Done)</td><td>3, B (Done)</td><td>4, D (Done)</td><td><strong>6, E</strong></td></tr>\n          <tr><td>5</td><td>Add <strong>F</strong> (cost 6)</td><td>2, A (Done)</td><td>5, B (Done)</td><td>3, B (Done)</td><td>4, D (Done)</td><td>6, E (Done)</td></tr>\n        </tbody>\n      </table>",
-      "workedExample": "<strong>Constructing Forwarding Table at Source Router A:</strong><br>\n      Tracing predecessors backwards from each destination to determine the outgoing Next-Hop from A:<br>\n      <ul class=\"wiki-bullet-list\">\n        <li><strong>Dest B:</strong> $p(B) = A$. Path: $A \\to B$. Cost = 2. <strong>Next Hop: B</strong></li>\n        <li><strong>Dest D:</strong> $p(D) = B, p(B) = A$. Path: $A \\to B \\to D$. Cost = $2 + 1 = 3$. (Cheaper than direct link $(A, D)=5$!). <strong>Next Hop: B</strong></li>\n        <li><strong>Dest C:</strong> $p(C) = B, p(B) = A$. Path: $A \\to B \\to C$. Cost = $2 + 3 = 5$. <strong>Next Hop: B</strong></li>\n        <li><strong>Dest E:</strong> $p(E) = D, p(D) = B, p(B) = A$. Path: $A \\to B \\to D \\to E$. Cost = $2 + 1 + 1 = 4$. <strong>Next Hop: B</strong></li>\n        <li><strong>Dest F:</strong> $p(F) = E, p(E) = D, p(D) = B, p(B) = A$. Path: $A \\to B \\to D \\to E \\to F$. Cost = $4 + 2 = 6$. <strong>Next Hop: B</strong></li>\n      </ul>\n      <p>Final Forwarding Table at Router A:</p>\n      <table class=\"wiki-table\">\n        <thead><tr><th>Destination</th><th>Cost</th><th>Next Hop Interface</th></tr></thead>\n        <tbody>\n          <tr><td>B</td><td>2</td><td>Interface to B</td></tr>\n          <tr><td>C</td><td>5</td><td>Interface to B</td></tr>\n          <tr><td>D</td><td>3</td><td>Interface to B</td></tr>\n          <tr><td>E</td><td>4</td><td>Interface to B</td></tr>\n          <tr><td>F</td><td>6</td><td>Interface to B</td></tr>\n        </tbody>\n      </table>",
-      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Metric</th><th>Array Implementation</th><th>Binary Heap / Priority Queue</th><th>Fibonacci Heap</th></tr></thead>\n        <tbody>\n          <tr><td>Time Complexity</td><td>$O(|V|^2)$</td><td>$O((|V| + |E|) \\log |V|)$</td><td>$O(|E| + |V| \\log |V|)$</td></tr>\n          <tr><td>Best Used In</td><td>Dense graphs ($|E| \\approx |V|^2$)</td><td>Sparse network topologies (most WANs)</td><td>Theoretical optimum, high constant factor</td></tr>\n          <tr><td>Negative Weights</td><td colspan=\"3\"><strong>Unsupported!</strong> Dijkstra fails with negative weights; requires Bellman-Ford algorithm.</td></tr>\n        </tbody>\n      </table>",
-      "whereUsed": [
-        "Open Shortest Path First (OSPF - RFC 2328): Every router executes Dijkstra SPF on its synchronized Link-State Database",
-        "Intermediate System to Intermediate System (IS-IS - RFC 1195): Core ISP routing protocol",
-        "SDN Controllers: Centralized computation of flow table rules (e.g., OpenFlow controllers)"
-      ],
-      "commonMistakes": "Applying Dijkstra's algorithm to graphs with negative edge weights. Negative weights can cause Dijkstra to lock in an incorrect sub-path before discovering a cheaper route later. In computer networks, link costs (delay, hop count, inverse bandwidth) are always non-negative.",
-      "compareWith": {
-        "title": "Dijkstra vs. Bellman-Ford",
-        "note": "Dijkstra requires global knowledge of all link states (centralized/link-state) and runs in $O(E \\log V)$. Bellman-Ford runs in a distributed manner with neighbor-only exchanges (distance-vector) in $O(V \\cdot E)$."
-      },
-      "practice": {
-        "question": "In OSPF, if a router has a 1 Gbps link and the reference bandwidth is 100 Mbps (default), what is the calculated OSPF metric for that link?",
-        "choices": [
-          "10",
-          "1",
-          "0.1",
-          "100"
-        ],
-        "correctIndex": 1,
-        "explanation": "OSPF metric = Reference Bandwidth / Link Bandwidth = 100 Mbps / 1000 Mbps = 0.1, but since OSPF metrics are integers with minimum value 1, the metric is clamped to 1."
-      },
-      "references": [
-        {
-          "cite": "Tanenbaum & Wetherall, Computer Networks, 6th Ed., Ch. 5.2.2: Shortest Path Routing",
-          "url": "https://www.pearson.com/"
-        },
-        {
-          "cite": "E. W. Dijkstra, 'A note on two problems in connexion with graphs', Numerische Mathematik 1, 1959",
-          "url": "https://link.springer.com/article/10.1007/BF01386390"
-        }
-      ]
-    },
-    "prevTopicId": "optimality-principle",
-    "nextTopicId": "flooding"
-  },
-  "distance-vector": {
-    "id": "distance-vector",
-    "title": "Distance Vector Routing & Count-to-Infinity",
-    "unit": "Unit III: Network Layer & Routing",
-    "unitId": "unit3",
-    "level": "Level 2 — Standard Topic",
-    "category": "network",
-    "difficulty": "Core",
-    "readingTime": "9 min read",
-    "standard": "Tanenbaum Ch 5.2.4 / RFC 1058 (RIP) / Bellman-Ford (1958)",
-    "oneLiner": "Distance Vector routing is a distributed, iterative algorithm where routers periodically exchange distance estimates with direct neighbors to compute least-cost paths via the Bellman-Ford equation.",
-    "quickAnswer": "Each router maintains a table with destination, next hop, and cost. It periodically sends this vector to adjacent neighbors. While simple and low-overhead, distance vector suffers from the Count-to-Infinity problem when links fail, requiring Split Horizon and Poisoned Reverse.",
-    "whyItMatters": "Distance Vector algorithms formed the original ARPANET routing architecture and RIP. Understanding the Count-to-Infinity flaw is essential for understanding modern loop-prevention techniques in BGP and EIGRP.",
-    "infobox": {
-      "layer": "Layer 3 (Control Plane)",
-      "standard": "RFC 1058 (RIPv1), RFC 2453 (RIPv2), RFC 7868 (EIGRP)",
-      "type": "Distributed Iterative Routing Algorithm",
-      "keyFormula": "D_x(y) = \\min_{v \\in N(x)} \\{ c(x,v) + D_v(y) \\}, \\quad \\infty = 16 \\text{ (in RIP)}",
-      "prerequisites": [
-        "flooding",
-        "shortest-path-algorithm"
-      ],
-      "relatedConcepts": [
-        "distance-vector",
-        "link-state-routing",
-        "rip",
-        "bgp"
-      ],
-      "compareWith": [
-        "link-state-routing"
-      ],
-      "primaryUses": [
-        "Routing Information Protocol (RIP)",
-        "Cisco EIGRP (DUAL)",
-        "Small Enterprise LANs"
-      ]
-    },
-    "sections": {
-      interactiveLabKey: "distance-vector",
-      "overview": "<p><strong>Distance Vector Routing (DVR)</strong>, also known as the distributed Bellman-Ford algorithm, was the original routing algorithm used in the ARPANET and is standardized in the <strong>Routing Information Protocol (RIP)</strong>.</p>\n      <p>As detailed in <em>Tanenbaum & Wetherall (6th Ed., Ch. 5.2.4)</em>, each router operates with purely localized information:</p>\n      <ul class=\"wiki-bullet-list\">\n        <li><strong>Distributed:</strong> Each router receives vectors only from its directly connected neighbors, performs calculations, and sends results back to neighbors.</li>\n        <li><strong>Iterative:</strong> The process continues asynchronously until no more updates are exchanged (convergence).</li>\n        <li><strong>Routing Table Structure:</strong> Each entry stores: Destination IP, Next-Hop Router, and Cost Metric (measured in hops or delay).</li>\n      </ul>",
-      "howItWorks": "<h5 style=\"color:#0369a1;\">1. The Bellman-Ford Equation</h5>\n      <p>Let $c(x, v)$ be the direct cost of the link from router $x$ to neighbor $v$. Let $D_v(y)$ be neighbor $v$'s estimated shortest distance to destination $y$. The cost from $x$ to $y$ via neighbor $v$ is $c(x, v) + D_v(y)$.</p>\n      <p>Router $x$ updates its own distance vector using the <strong>Bellman-Ford Equation</strong>:</p>\n      <p style=\"text-align:center;\">$$D_x(y) = \\min_{v \\in N(x)} \\{ c(x, v) + D_v(y) \\}$$</p>\n      <p>The neighbor $v^*$ that achieves this minimum becomes the designated <strong>Next Hop</strong> for packets destined for $y$.</p>\n      <h5 style=\"color:#0369a1; margin-top:1rem;\">2. Periodic Vector Exchange</h5>\n      <p>Every router periodically (e.g., every 30 seconds in RIP) broadcasts its current distance vector to all direct neighbors. If a neighbor advertises a shorter route to some destination, the router immediately updates its table.</p>\n      <h5 style=\"color:#0369a1; margin-top:1rem;\">3. The Count-to-Infinity Problem</h5>\n      <p>Distance Vector algorithms react quickly to \"good news\" (link cost reductions or new links), but react disastrously slowly to \"bad news\" (link failures or cost increases). When a link breaks, routers form a mutual dependency loop, incrementally updating costs by +1 in each round until reaching an arbitrary threshold defined as $\\infty$.</p>",
-      "diagram": "\n+--------------------------------------------------------------------------+\n|                 THE COUNT-TO-INFINITY PROBLEM STEP-BY-STEP               |\n|                                                                          |\n|   Linear Topology:      (A)----(B)----(C)----(D)                         |\n|   Link cost = 1 each.                                                    |\n|                                                                          |\n|   Normal Converged State for Destination A:                              |\n|   - B's table: Dest A, Cost = 1, Next Hop = A                            |\n|   - C's table: Dest A, Cost = 2, Next Hop = B                            |\n|   - D's table: Dest A, Cost = 3, Next Hop = C                            |\n|                                                                          |\n|   NOW LINK BETWEEN A AND B CUTS! (A goes offline):                       |\n|   +-------+--------------------------+-------------------------+         |\n|   | Round | Router B's state for A   | Router C's state for A  |         |\n|   +-------+--------------------------+-------------------------+         |\n|   | Start | Direct link to A FAILS   | Believes dist to A = 2  |         |\n|   | 1     | B hears C has path=2.    | C still has path=2      |         |\n|   |       | B sets: Cost = 2+1 = 3!  | (Next Hop = B)          |         |\n|   | 2     | B announces cost=3 to C. | C sets: Cost = 3+1 = 4! |         |\n|   | 3     | C announces cost=4 to B. | B sets: Cost = 4+1 = 5! |         |\n|   | 4     | B announces cost=5 to C. | C sets: Cost = 5+1 = 6! |         |\n|   | ...   | Counting up forever...   | Counting up forever...  |         |\n|   | N     | Finally stops when cost reaches infinity (16 in RIP) |         |\n|   +-------+--------------------------+-------------------------+         |\n|   Packets for A bounce between B and C until TTL expires!                |\n+--------------------------------------------------------------------------+",
-      "technicalDetails": "<p>Mitigation Strategies for Count-to-Infinity (Tanenbaum Ch. 5.2.4):</p>\n      <ol class=\"wiki-ordered-list\">\n        <li><strong>Defining Infinity:</strong> In RIP (RFC 1058), $\\infty$ is defined as 16 hops. This bounds the count-to-infinity loop to at most 16 iterations (taking $\\approx 8$ minutes).</li>\n        <li><strong>Split Horizon:</strong> A router must <em>never</em> advertise a route back out the same interface through which it learned that route. If B routes to A via interface 1, B does not tell interface 1 about route A.</li>\n        <li><strong>Split Horizon with Poisoned Reverse:</strong> Instead of keeping silent, the router explicitly advertises the route back to the source with cost set to $\\infty$ (16). This immediately breaks two-node loops: C tells B that $D_C(A) = 16$.</li>\n        <li><strong>Limitation of Poisoned Reverse:</strong> Poisoned reverse only solves two-node loops ($B \\leftrightarrow C$). It CANNOT prevent loops involving three or more nodes (e.g., $A \\to B \\to C \\to D \\to B$).</li>\n        <li><strong>Hold-Down Timers:</strong> When a router learns that a route has failed, it starts a timer (e.g., 180 seconds) during which it ignores any new updates with equal or worse cost, allowing network-wide convergence.</li>\n        <li><strong>Triggered Updates:</strong> When a link metric changes, the router sends an immediate update without waiting for the 30-second periodic timer.</li>\n      </ol>",
-      "workedExample": "<strong>Bellman-Ford Numerical Calculation:</strong><br>\n      Router X has direct neighbors Y and Z.<br>\n      Direct link costs from X: $c(X, Y) = 2$, $c(X, Z) = 7$.<br><br>\n      Router X receives distance vectors from Y and Z for destinations U and V:<br>\n      - Vector from Y: $D_Y(U) = 1$, $D_Y(V) = 3$<br>\n      - Vector from Z: $D_Z(U) = 5$, $D_Z(V) = 2$<br><br>\n      Compute X's shortest path to Destination U:<br>\n      - Via Y: $c(X, Y) + D_Y(U) = 2 + 1 = 3$<br>\n      - Via Z: $c(X, Z) + D_Z(U) = 7 + 5 = 12$<br>\n      - Best: $D_X(U) = \\min(3, 12) = 3$. <strong>Next Hop: Y</strong><br><br>\n      Compute X's shortest path to Destination V:<br>\n      - Via Y: $c(X, Y) + D_Y(V) = 2 + 3 = 5$<br>\n      - Via Z: $c(X, Z) + D_Z(V) = 7 + 2 = 9$<br>\n      - Best: $D_X(V) = \\min(5, 9) = 5$. <strong>Next Hop: Y</strong><br><br>\n      Updated Distance Vector sent by X to its neighbors: $\\{ (U: 3), (V: 5) \\}$.",
-      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Feature</th><th>Distance Vector (RIP)</th><th>Link State (OSPF)</th></tr></thead>\n        <tbody>\n          <tr><td>Algorithm</td><td>Bellman-Ford (Distributed)</td><td>Dijkstra SPF (Global topology)</td></tr>\n          <tr><td>Knowledge Scope</td><td>Knows only direct neighbors & their vectors</td><td>Knows complete network topology map</td></tr>\n          <tr><td>Message Size</td><td>Full routing table sent to neighbors</td><td>Small Link-State Advertisements (LSAs)</td></tr>\n          <tr><td>Convergence Speed</td><td>Slow; vulnerable to count-to-infinity</td><td>Fast; instant event-driven flooding</td></tr>\n          <tr><td>Memory / CPU</td><td>Minimal; suitable for small devices</td><td>Higher memory for LSDB and Dijkstra CPU</td></tr>\n        </tbody>\n      </table>",
-      "whereUsed": [
-        "Routing Information Protocol (RIPv1 / RIPv2 / RIPng): Classic Distance Vector for small networks (< 15 hops)",
-        "Cisco EIGRP: Advanced Distance Vector using the Diffusing Update Algorithm (DUAL) to guarantee 100% loop-freedom without counting to infinity",
-        "BGP: Path Vector protocol (an evolution of Distance Vector that includes the full AS-PATH list to eliminate loops)"
-      ],
-      "commonMistakes": "Assuming Split Horizon with Poisoned Reverse eliminates ALL loops. It only eliminates 2-node loops. Loops spanning 3 or more routers (e.g. triangle or diamond loops) still cause count-to-infinity unless path-vector or DUAL logic is used.",
-      "compareWith": {
-        "title": "Distance Vector vs. Link State",
-        "note": "Distance Vector is like getting directions from people at each intersection ('Turn left in 2 miles'). Link State is like downloading the entire Google Maps satellite view to your GPS and computing the path locally."
-      },
-      "practice": {
-        "question": "In RIP, why is infinity defined as 16 hops rather than a larger number like 1,000?",
-        "choices": [
-          "Because IPv4 headers only allocate 4 bits for hop count",
-          "To limit the time and iterations required to terminate a count-to-infinity loop",
-          "Because Ethernet cables cannot physically carry signals beyond 16 switches",
-          "To conserve memory in the router's hardware TCAM tables"
-        ],
-        "correctIndex": 1,
-        "explanation": "Setting infinity to 16 caps the count-to-infinity loop at 16 rounds, ensuring failed routes are purged within several minutes rather than circulating indefinitely."
-      },
-      "references": [
-        {
-          "cite": "Tanenbaum & Wetherall, Computer Networks, 6th Ed., Ch. 5.2.4: Distance Vector Routing",
-          "url": "https://www.pearson.com/"
-        },
-        {
-          "cite": "RFC 1058: Routing Information Protocol (RIP)",
-          "url": "https://datatracker.ietf.org/doc/html/rfc1058"
-        },
-        {
-          "cite": "RFC 2453: RIP Version 2",
-          "url": "https://datatracker.ietf.org/doc/html/rfc2453"
-        }
-      ]
-    },
-    "prevTopicId": "flooding",
-    "nextTopicId": "link-state-routing"
-  },
-  "ipv4": {
-    "id": "ipv4",
-    "title": "IPv4 Protocol & Header Architecture",
-    "unit": "Unit III: Network Layer & Routing",
-    "unitId": "unit3",
-    "level": "Level 2 — Standard Topic",
-    "category": "network",
-    "difficulty": "Core",
-    "readingTime": "9 min read",
-    "standard": "Tanenbaum Ch 5.6.1 / RFC 791 / RFC 6864",
-    "oneLiner": "The Internet Protocol Version 4 (IPv4) defines the universal 20-to-60 byte datagram header format enabling packet forwarding, quality-of-service, and fragmentation across the global Internet.",
-    "quickAnswer": "IPv4 is the core connectionless network protocol of the Internet. Its 20-byte base header contains 14 distinct fields managing version, length, fragmentation (ID, Flags, Offset), lifetime (TTL), protocol demultiplexing, error checking (Checksum), and 32-bit source/destination IP addresses.",
-    "whyItMatters": "Every network engineer, cybersecurity analyst, and systems programmer must know the IPv4 header bit-by-bit to analyze Wireshark captures, configure firewalls, and debug packet fragmentation.",
-    "infobox": {
-      "layer": "Layer 3 (Network Layer)",
-      "standard": "RFC 791 (DARPA Internet Program Protocol Specification, 1981)",
-      "type": "Connectionless Unreliable Datagram Protocol",
-      "keyFormula": "\\text{Header Size: } 20 \\text{ to } 60 \\text{ bytes (IHL } \\times 4\\text{)}, \\quad \\text{Max Length: } 65,535 \\text{ bytes}",
-      "prerequisites": [
-        "internetworking"
-      ],
-      "relatedConcepts": [
-        "ip-addressing",
-        "ipv6-protocol",
-        "tunneling"
-      ],
-      "compareWith": [
-        "ipv6-protocol"
-      ],
-      "primaryUses": [
-        "Global Internet Datagram Transport",
-        "Wireshark Packet Inspection",
-        "Firewall Header Filtering"
-      ]
-    },
-    "sections": {
-      interactiveLabKey: "cidr-calc",
-      "overview": "<p>The <strong>Internet Protocol Version 4 (IPv4)</strong>, standardized in 1981 by Jon Postel in <strong>RFC 791</strong>, is the foundation of the global Internet. IPv4 provides a connectionless, best-effort datagram delivery service: it does not guarantee delivery, order, or integrity of payload data, delegating reliability to higher layers (TCP).</p>\n      <p>As detailed in <em>Tanenbaum & Wetherall (6th Ed., Ch. 5.6.1)</em>, the IPv4 header consists of a mandatory 20-byte base header followed by optional variable-length fields up to a maximum of 60 bytes.</p>",
-      "howItWorks": "<h5 style=\"color:#0369a1;\">Field-by-Field Breakdown of the IPv4 Header:</h5>\n      <ol class=\"wiki-ordered-list\">\n        <li><strong>Version (4 bits):</strong> Identifies the IP version. For IPv4, this field is always binary <code>0100</code> (decimal 4).</li>\n        <li><strong>IHL (Internet Header Length - 4 bits):</strong> Length of the header measured in <strong>32-bit (4-byte) words</strong>.\n          <br>Minimum value is 5 ($5 \\times 4 = 20$ bytes, no options). Maximum value is 15 ($15 \\times 4 = 60$ bytes).\n        </li>\n        <li><strong>Type of Service / Differentiated Services (8 bits):</strong> Originally defined for TOS (Precedence, Delay, Throughput, Reliability). Modern RFCs divide this into:\n          <br>- <strong>DSCP (6 bits):</strong> Differentiated Services Code Point for QoS traffic classification.\n          <br>- <strong>ECN (2 bits):</strong> Explicit Congestion Notification (Non-ECT, ECT(0), ECT(1), CE).\n        </li>\n        <li><strong>Total Length (16 bits):</strong> Total length of the entire datagram (header + payload) in bytes.\n          <br>Maximum theoretical size: $2^{16} - 1 = 65,535$ bytes. Minimum size is 20 bytes.\n        </li>\n        <li><strong>Identification (16 bits):</strong> Unique identifier assigned by the source host to all fragments of a single original datagram, enabling reassembly.</li>\n        <li><strong>Flags (3 bits):</strong>\n          <br>- Bit 0: Reserved; must be 0 (used in RFC 3514 as the humorous \"Evil Bit\").\n          <br>- Bit 1 (<strong>DF - Don't Fragment</strong>): If set to 1, routers must NOT fragment this packet. If MTU is exceeded, the router drops the packet and sends ICMP \"Fragmentation Needed\" (enabling Path MTU Discovery).\n          <br>- Bit 2 (<strong>MF - More Fragments</strong>): Set to 1 for all fragments except the very last fragment (MF = 0).\n        </li>\n        <li><strong>Fragment Offset (13 bits):</strong> Specifies the position of this fragment's data in the original unfragmented payload, measured in <strong>8-byte (64-bit) blocks</strong>.\n          <br>Maximum offset: $8191 \\times 8 = 65,528$ bytes.\n        </li>\n        <li><strong>Time to Live (TTL - 8 bits):</strong> Counter to prevent packets from circulating indefinitely in routing loops. Decremented by 1 at every router hop. When TTL reaches 0, the packet is discarded and an ICMP Time Exceeded (Type 11) is returned to the source. Used by <code>traceroute</code>.</li>\n        <li><strong>Protocol (8 bits):</strong> Identifies the transport/network protocol payload:\n          <br><code>1</code> = ICMP, <code>2</code> = IGMP, <code>6</code> = TCP, <code>17</code> = UDP, <code>41</code> = IPv6 Encapsulation, <code>89</code> = OSPF.\n        </li>\n        <li><strong>Header Checksum (16 bits):</strong> 1's complement sum covering the <strong>header only</strong> (not data). Must be recomputed by every router along the path because TTL changes on every hop!</li>\n        <li><strong>Source IP Address (32 bits):</strong> IP address of the originating host.</li>\n        <li><strong>Destination IP Address (32 bits):</strong> IP address of the intended receiving host.</li>\n        <li><strong>Options (Variable, 0 to 40 bytes):</strong> Security, Record Route, Timestamp, Strict Source Route, Loose Source Route. Padded to a multiple of 4 bytes.</li>\n      </ol>",
-      "diagram": "\n+--------------------------------------------------------------------------+\n|                     IPV4 DATAGRAM HEADER FORMAT (RFC 791)                |\n|                                                                          |\n| 0                   1                   2                   3            |\n| 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 Bit      |\n|+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+         |\n||Version|  IHL  |   DSCP    |ECN|          Total Length         | Byte 0  |\n|+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+         |\n||        Identification         |Flags|      Fragment Offset    | Byte 4  |\n|+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+         |\n|| Time to Live  |    Protocol   |        Header Checksum        | Byte 8  |\n|+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+         |\n||                       Source IP Address                       | Byte 12 |\n|+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+         |\n||                    Destination IP Address                     | Byte 16 |\n|+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+         |\n||                    Options (0 - 40 bytes, if IHL > 5)         | Byte 20 |\n|+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+         |\n||                            DATA PAYLOAD ...                   | Byte 24 |\n+--------------------------------------------------------------------------+",
-      "technicalDetails": "<p>IPv4 Fragmentation & Reassembly Mechanics (Tanenbaum Ch. 5.6.1):</p>\n      <ul class=\"wiki-bullet-list\">\n        <li><strong>Why Fragment?</strong> Different physical links have different Maximum Transmission Units (MTU). For example, Ethernet has MTU = 1500 bytes; if a router receives a 4000-byte packet and must send it over Ethernet, it must fragment it.</li>\n        <li><strong>Intermediate Fragmentation:</strong> In IPv4, <em>intermediate routers</em> are permitted to perform fragmentation on the fly (unlike IPv6, where only end hosts fragment).</li>\n        <li><strong>Destination Reassembly:</strong> Reassembly is performed strictly at the <strong>destination host</strong>, NEVER at intermediate routers. This is because fragments may travel over different paths and arrive at different times.</li>\n        <li><strong>Offset Rule:</strong> Because Fragment Offset is measured in 8-byte units, every fragment (except possibly the last one) MUST carry a payload size that is an exact multiple of 8 bytes!</li>\n      </ul>",
-      "workedExample": "<strong>Complete Numerical Worked Example: IPv4 Fragmentation</strong><br>\n      An original unfragmented IPv4 datagram has:<br>\n      - Total Length = 4000 bytes (20 bytes header + 3980 bytes payload)<br>\n      - Identification = <code>0x4A21</code>, DF = 0, MF = 0, Fragment Offset = 0<br>\n      The datagram arrives at a router whose outgoing link has $\\text{MTU} = 1500\\text{ bytes}$.<br><br>\n      <strong>Step 1: Determine Max Payload per Fragment</strong><br>\n      Available bytes for payload = $\\text{MTU} - \\text{Header Size} = 1500 - 20 = 1480\\text{ bytes}$.<br>\n      Check divisibility by 8: $1480 / 8 = 185$ (Exact integer! Allowed).<br><br>\n      <strong>Step 2: Calculate Fragment Fields</strong><br>\n      <table class=\"wiki-table\">\n        <thead><tr><th>Fragment</th><th>Data Range</th><th>Payload Size</th><th>Total Length</th><th>ID</th><th>MF</th><th>Fragment Offset</th></tr></thead>\n        <tbody>\n          <tr><td><strong>Fragment 1</strong></td><td>Bytes 0 to 1479</td><td>1480 bytes</td><td>1500 B</td><td>0x4A21</td><td><strong>1</strong></td><td>$0 / 8 = \\mathbf{0}$</td></tr>\n          <tr><td><strong>Fragment 2</strong></td><td>Bytes 1480 to 2959</td><td>1480 bytes</td><td>1500 B</td><td>0x4A21</td><td><strong>1</strong></td><td>$1480 / 8 = \\mathbf{185}$</td></tr>\n          <tr><td><strong>Fragment 3</strong></td><td>Bytes 2960 to 3979</td><td>1020 bytes</td><td>1040 B</td><td>0x4A21</td><td><strong>0</strong> (Last!)</td><td>$2960 / 8 = \\mathbf{370}$</td></tr>\n        </tbody>\n      </table><br>\n      <em>Verification:</em><br>\n      - Total payload delivered = $1480 + 1480 + 1020 = 3980\\text{ bytes}$ (Matches original!).<br>\n      - Notice Fragment 3 has Total Length = $1020 + 20 = 1040$ bytes, which is $\\le 1500$ bytes MTU.<br>\n      - Fragment 3 offset = $370 \\times 8 = 2960$, perfectly marking the start of the final byte slice!",
-      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Strength</th><th>Vulnerability / Limitation</th></tr></thead>\n        <tbody>\n          <tr><td>Universal worldwide compatibility; supported by every IP device</td><td>32-bit address space (4.3 billion) completely exhausted</td></tr>\n          <tr><td>Flexible header options for network diagnostics</td><td>Header checksum must be recomputed at every hop, consuming CPU</td></tr>\n          <tr><td>Path MTU Discovery prevents fragmentation when DF=1</td><td>Loss of a single fragment causes retransmission of entire original packet</td></tr>\n        </tbody>\n      </table>",
-      "whereUsed": [
-        "Every Internet device: Operating systems, routers, smartphones, IoT sensors",
-        "Network Firewalls: Stateful inspection of Source/Dest IP, Protocol, and Flags",
-        "Packet Capture & Forensics: Wireshark dissection and tcpdump filtering"
-      ],
-      "commonMistakes": "Thinking Fragment Offset is measured in bytes. It is measured in 8-BYTE BLOCKS! To get the actual byte offset, you must multiply the Fragment Offset value by 8.",
-      "compareWith": {
-        "title": "IPv4 Header vs. IPv6 Header",
-        "note": "IPv4 has a variable header (20-60 bytes) with 14 fields and intermediate fragmentation. IPv6 has a streamlined fixed header (40 bytes) with only 8 fields, no checksum, and host-only fragmentation."
-      },
-      "practice": {
-        "question": "In an IPv4 datagram, the IHL field contains the decimal value 8. What is the total length of the IPv4 header in bytes?",
-        "choices": [
-          "8 bytes",
-          "16 bytes",
-          "32 bytes",
-          "64 bytes"
-        ],
-        "correctIndex": 2,
-        "explanation": "The IHL field represents the header length in 32-bit (4-byte) words. Header length = $8 \\times 4 = 32\\text{ bytes}$."
-      },
-      "references": [
-        {
-          "cite": "Tanenbaum & Wetherall, Computer Networks, 6th Ed., Ch. 5.6.1: The IPv4 Protocol",
-          "url": "https://www.pearson.com/"
-        },
-        {
-          "cite": "RFC 791: Internet Protocol Specification",
-          "url": "https://datatracker.ietf.org/doc/html/rfc791"
-        }
-      ]
-    },
-    "prevTopicId": "internetwork-routing",
-    "nextTopicId": "ip-addressing"
-  },
   "ipv6": {
     "id": "ipv6",
     "title": "IPv6 Architecture, 128-Bit Addressing & Transition",
@@ -1692,6 +1368,13 @@ const TOPICS_U3_EXT = {
     "nextTopicId": "transport-layer"
   }
 };
+
+// Backward-compatibility aliases for legacy topic IDs
+TOPICS_U3_EXT["shortest-path-algorithm"] = TOPICS_U3_EXT["dijkstra"];
+TOPICS_U3_EXT["distance-vector-routing"] = TOPICS_U3_EXT["distance-vector"];
+TOPICS_U3_EXT["ipv4-protocol"] = TOPICS_U3_EXT["ipv4"];
+TOPICS_U3_EXT["ipv6-protocol"] = TOPICS_U3_EXT["ipv6"];
+;
 
 // Merge with existing TOPICS_U3 if loaded
 if (typeof TOPICS_U3 !== 'undefined') {

@@ -1,8 +1,18 @@
-// Complete Curated Resource Database for Units II, III, IV, and V
+// Complete Curated Resource Database for Units I, II, III, IV, and V
 // Sourced from UMass Amherst (Kurose & Ross 8th Ed), IETF RFCs, IEEE, NIST, and University Repositories
-// All 40 resources from the reference syllabus document
+// Comprehensive curated academic learning resources
 
 const RESOURCE_DATA = [
+  {
+    id: 0,
+    title: "Chapter 1: Computer Networks and the Internet Video Lectures",
+    category: "UMass Kurose & Ross",
+    units: ["Unit I"],
+    url: "https://gaia.cs.umass.edu/kurose_ross/videos/1/",
+    type: "Video Hub",
+    status: "Verified",
+    description: "Official introductory lectures by Prof. Jim Kurose covering the network edge, network core, packet switching vs circuit switching, delay/loss metrics, protocol layering, and internet history."
+  },
   {
     id: 1,
     title: "Chapter 2: Application Layer Video Lectures",
@@ -392,6 +402,26 @@ const RESOURCE_DATA = [
     type: "Course Portal",
     status: "Verified",
     description: "Preview updates on modern QUIC, HTTP/3, Wi-Fi 6/7, 5G cellular architectures, and network automation."
+  },
+  {
+    id: 38,
+    title: "Chapter 1: Computer Networks Overview Slide Deck",
+    category: "UMass Kurose & Ross",
+    units: ["Unit I"],
+    url: "https://gaia.cs.umass.edu/kurose_ross/videos/1/1/1.1_video_ppt.pptx",
+    type: "Slide Deck (PPTX)",
+    status: "Verified",
+    description: "Introductory presentation covering access networks, physical media, network core packet switching, and protocol layering."
+  },
+  {
+    id: 39,
+    title: "IETF RFC 1122: Requirements for Internet Hosts — Communication Layers",
+    category: "IETF Standard",
+    units: ["Unit I", "Unit II", "Unit III", "Unit IV"],
+    url: "https://www.rfc-editor.org/rfc/rfc1122",
+    type: "RFC Standard",
+    status: "Verified",
+    description: "Foundational Internet Engineering Task Force standard defining the architectural requirements and layered protocol models of Internet communication."
   }
 ];
 

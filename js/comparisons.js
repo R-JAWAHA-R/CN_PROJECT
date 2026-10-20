@@ -355,6 +355,201 @@ const COMPARISONS_DATA = {
     ],
     commonConfusion: "Common Mistake: Thinking a switch and a router perform the same function. A switch forwards frames locally within one network using hardware MAC addresses. A router routes packets across different networks using software/hardware IP routing tables. In real-world enterprise architectures, you need both!",
     relatedTopics: ["network-devices", "dll-switching", "ethernet", "vlan", "mac-address"]
+  },
+
+  "circuit-switching-vs-packet-switching": {
+    id: "circuit-switching-vs-packet-switching",
+    title: "Circuit Switching vs Packet Switching",
+    subtitle: "Dedicated Physical Paths vs Statistical Multiplexing of Independent Datagrams",
+    shortAnswer: "Circuit switching reserves a dedicated end-to-end communication channel with guaranteed bandwidth before transmission begins, incurring call-setup delay but zero queuing latency. Packet switching divides data into discrete packets that share communication links dynamically via statistical multiplexing, maximizing link utilization but introducing variable queuing delay and packet loss.",
+    tableHeaders: ["Dimension", "Circuit Switching (Telephony / PSTN)", "Packet Switching (Internet / IP)"],
+    tableRows: [
+      ["Dedicated Path", "Yes: dedicated physical circuit reserved end-to-end for call duration", "No: transmission links dynamically shared by multiple traffic streams"],
+      ["Setup Phase", "Mandatory call setup handshake required before data transfer", "Connectionless: data packets transmitted immediately with destination IP"],
+      ["Resource Allocation", "Fixed pre-allocated bandwidth (TDM/FDM); idle slots completely wasted", "Dynamic statistical multiplexing; bandwidth consumed only when data exists"],
+      ["Delay Characteristics", "Fixed propagation and transmission delay; zero queuing delay after setup", "Variable delay: transmission, propagation, processing, and queuing delay"],
+      ["Congestion Behavior", "Blocked calls: new calls rejected if circuits full, existing calls unaffected", "Packet delay and buffer drops: traffic throttled or packets discarded"],
+      ["Routing & Addressing", "Path established at setup; individual data units carry no routing headers", "Store-and-forward: each packet carries destination IP header inspected by routers"],
+      ["Fault Tolerance", "Vulnerable: failure of any intermediate link or switch drops the entire call", "Highly robust: packets dynamically rerouted around failed links or routers"],
+      ["Best Suited For", "Traditional analog voice telephony, dedicated leased lines, real-time audio", "Modern Internet traffic, web browsing, video streaming, file transfers"]
+    ],
+    visualDiff: `
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0;">
+        <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 1.25rem;">
+          <h5 style="color: #b91c1c; font-weight: 800; margin-bottom: 0.5rem;">Circuit Switching: Dedicated Reservation</h5>
+          <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #1e293b; line-height: 1.8;">
+            Host A ──[Setup Request]──► Switch 1 ──► Switch 2 ──► Host B<br>
+            Host A ◄──[Circuit Confirmed]── Switch 1 ◄── Switch 2 ◄── Host B<br>
+            <span style="color: #b91c1c; font-weight: 700;">[════ Dedicated Fixed Bitstream Channel ════]</span><br>
+            Host A ──[Teardown Release]──► All Switches<br>
+            <span style="color: #64748b;">• Guaranteed QoS, but idle silence wastes 100% of reserved bandwidth</span>
+          </div>
+        </div>
+        <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 12px; padding: 1.25rem;">
+          <h5 style="color: #15803d; font-weight: 800; margin-bottom: 0.5rem;">Packet Switching: Statistical Multiplexing</h5>
+          <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #1e293b; line-height: 1.8;">
+            Host A ── [Pkt 1: 1500B] ──► Router 1 [Store & Forward] ──► Host B<br>
+            Host C ── [Pkt A: 800B]  ──► Router 1 [Queued in Buffer] ──► Host D<br>
+            Host A ── [Pkt 2: 1500B] ──► Router 1 ──► Router 2 ──► Host B<br>
+            <span style="color: #15803d; font-weight: 700;">✓ 3x to 5x more concurrent users supported on same physical link</span><br>
+            <span style="color: #64748b;">• Link utilized to 100% capacity; bursts handled by router packet queues</span>
+          </div>
+        </div>
+      </div>
+    `,
+    whenToUse: [
+      { protocol: "Choose Circuit Switching when:", points: ["Guaranteed constant bit-rate (CBR) and zero jitter are legally or technically required.", "Legacy telecommunications and dedicated synchronous TDM connections.", "Real-time communication where call blocking is preferred over unpredictable latency."] },
+      { protocol: "Choose Packet Switching when:", points: ["Handling bursty data traffic typical of web, database, email, and computer communication.", "Maximizing capacity and cost-efficiency of expensive long-haul communication links.", "High survivability and distributed automated fault recovery are essential."] }
+    ],
+    commonConfusion: "Common Exam Confusion: Believing that packet switching is always slower than circuit switching. While individual packets experience variable queuing delays at intermediate routers, packet switching supports far more concurrent users and utilizes links much more efficiently than reserving idle channels.",
+    relatedTopics: ["circuit-vs-packet-switching", "network-edge-core", "multiplexing", "network-delay-loss"]
+  },
+
+  "flow-control-vs-congestion-control": {
+    id: "flow-control-vs-congestion-control",
+    title: "Flow Control vs Congestion Control",
+    subtitle: "Protecting the Receiver Buffer vs Protecting the Network Subnet Core",
+    shortAnswer: "Flow control prevents a fast sender from overwhelming a slow receiver's local memory buffer (end-to-end between two endpoints). Congestion control prevents traffic from all senders across the Internet from overwhelming the intermediate routers and links of the network core (global stability).",
+    tableHeaders: ["Dimension", "Flow Control", "Congestion Control"],
+    tableRows: [
+      ["Primary Purpose", "Protects the receiver's application buffer from overflowing", "Protects the intermediate routers and network links from collapse"],
+      ["Scope & Boundaries", "End-to-end mechanism between two participating endpoints", "Global or subnet-wide mechanism affecting the shared transit path"],
+      ["Controlling Metric", "Receive Window (rwnd), explicitly advertised by receiver in header", "Congestion Window (cwnd), dynamically estimated by sender based on loss/RTT"],
+      ["Transmission Constraint", "Maximum allowed flight = min(cwnd, rwnd); limited by receiver capacity", "Maximum allowed flight = min(cwnd, rwnd); limited by network pipe capacity"],
+      ["Feedback Channel", "Explicit feedback: receiver advertises rwnd in TCP header 16-bit field", "Implicit or explicit: timeout, 3 duplicate ACKs, delay increase, or ECN bits"],
+      ["Operating Algorithms", "Sliding window, Zero Window Probing with persist timer", "Slow Start, Congestion Avoidance, Fast Retransmit, Fast Recovery (AIMD)"],
+      ["Failure Consequence", "Receiver buffer drops packets, leading to local socket stalls", "Congestion collapse: high packet drop rates, massive queuing delays, zero goodput"],
+      ["Layer Location", "Transport layer (TCP) and Data Link layer (IEEE 802.3x pause frames)", "Transport layer (TCP Reno, Cubic, BBR) and Network layer (RED, CoDel)"]
+    ],
+    visualDiff: `
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0;">
+        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 1.25rem;">
+          <h5 style="color: #1d4ed8; font-weight: 800; margin-bottom: 0.5rem;">Flow Control: Receiver Buffer Protection</h5>
+          <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #1e293b; line-height: 1.8;">
+            Sender ──── [Bytes 1..4000] ────► Receiver [Buffer: 80% Full]<br>
+            Sender ◄─── [ACK: rwnd = 1000] ── Receiver [Buffer: 95% Full]<br>
+            Sender ──── [Bytes 4001..5000] ──► Receiver [Buffer: 100% Full]<br>
+            Sender ◄─── [ACK: rwnd = 0] ──── Receiver [Zero Window!]<br>
+            Sender: Stalls transmission & starts Persist Timer (Zero-Window Probe)
+          </div>
+        </div>
+        <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 1.25rem;">
+          <h5 style="color: #b91c1c; font-weight: 800; margin-bottom: 0.5rem;">Congestion Control: Network Core Protection</h5>
+          <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #1e293b; line-height: 1.8;">
+            Sender: cwnd = 1 MSS ──► Slow Start (exponential doubling)<br>
+            Sender: cwnd = ssthresh ──► Congestion Avoidance (linear +1 MSS / RTT)<br>
+            Router Queue Overflow! ──► Packet Dropped<br>
+            Sender receives 3 Dup ACKs: ssthresh = cwnd / 2; cwnd = ssthresh + 3 MSS<br>
+            Sender times out: ssthresh = cwnd / 2; cwnd reset to 1 MSS!
+          </div>
+        </div>
+      </div>
+    `,
+    whenToUse: [
+      { protocol: "Flow Control operates when:", points: ["The receiving host is running a slow application process or high CPU load.", "The receive socket buffer is filling up faster than the application calls read().", "rwnd drops below cwnd, throttling sender to prevent local packet drops."] },
+      { protocol: "Congestion Control operates when:", points: ["Intermediate router buffers on the transit path exceed queue capacity.", "Multiple senders simultaneously burst traffic across a shared bottleneck link.", "Packet loss or queue delay spikes occur, signaling that cwnd must be reduced."] }
+    ],
+    commonConfusion: "Essential GATE Concept: The effective send window in TCP is ALWAYS $W = \\min(\\text{cwnd}, \\text{rwnd})$. Flow control dictates rwnd (receiver buffer limit); congestion control dictates cwnd (network bottleneck limit). Whichever is smaller bottlenecks transmission!",
+    relatedTopics: ["tcp-flow-control", "tcp-congestion-control", "tcp", "sliding-window"]
+  },
+
+  "symmetric-vs-asymmetric-cryptography": {
+    id: "symmetric-vs-asymmetric-cryptography",
+    title: "Symmetric vs Asymmetric Cryptography",
+    subtitle: "Shared Secret Keys vs Public-Private Key Pairs",
+    shortAnswer: "Symmetric encryption uses a single shared secret key for both encryption and decryption, offering gigabit-per-second hardware throughput but requiring a secure out-of-band key exchange. Asymmetric encryption uses mathematically coupled key pairs (a public key to encrypt and a private key to decrypt), solving the key exchange problem and enabling digital signatures at the cost of being 1,000x computationally slower.",
+    tableHeaders: ["Dimension", "Symmetric Cryptography (AES, ChaCha20)", "Asymmetric Cryptography (RSA, ECC)"],
+    tableRows: [
+      ["Key Architecture", "1 shared secret key used for both encryption and decryption", "2 mathematically linked keys: Public Key (shared) + Private Key (secret)"],
+      ["Key Distribution Problem", "Severe: how do two parties securely share the secret key over untrusted Internet?", "Completely solved: public key distributed freely to anyone in the world"],
+      ["Computational Speed", "Extremely fast: gigabits/sec using hardware instructions (AES-NI)", "Slow: 1,000x to 10,000x slower due to modular arithmetic and big integers"],
+      ["Key Length for Security", "128 bits (AES-128) or 256 bits (AES-256) offer unbreakable brute-force security", "2048 to 4096 bits (RSA) or 256 to 384 bits (Elliptic Curve Cryptography)"],
+      ["Digital Signatures & Non-Repudiation", "Cannot provide non-repudiation: both parties share the exact same key", "Native non-repudiation: only the owner of the private key can sign data"],
+      ["Key Scalability for N Users", "$N(N - 1) / 2$ secret keys required for pairwise communication among N users", "$2N$ keys required for N users (each user has 1 public key and 1 private key)"],
+      ["Mathematical Foundation", "Substitution-Permutation Networks (SPN), Feistel ciphers, bitwise XOR", "Prime factorization (RSA), Discrete Logarithm (Diffie-Hellman), Elliptic Curves (ECC)"],
+      ["Role in Modern Protocols (TLS 1.3)", "Encrypts all actual application payloads (HTTP data, files, video streams)", "Authenticates the server and securely negotiates the symmetric session key"]
+    ],
+    visualDiff: `
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0;">
+        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 1.25rem;">
+          <h5 style="color: #1d4ed8; font-weight: 800; margin-bottom: 0.5rem;">Symmetric: Shared Secret ($K$)</h5>
+          <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #1e293b; line-height: 1.8;">
+            Alice: Plaintext ──[Encrypt with K]──► Ciphertext<br>
+            Transmission over Public Internet: ░▒▓█▓▒░ (Secure)<br>
+            Bob: Ciphertext ──[Decrypt with K]──► Plaintext<br>
+            <span style="color: #15803d; font-weight: 700;">✓ Line-Rate Hardware Encryption (AES-GCM)</span><br>
+            <span style="color: #b91c1c;">✗ Critical Flaw: How did Alice & Bob share K initially?</span>
+          </div>
+        </div>
+        <div style="background: #fdf2f8; border: 1px solid #fbcfe8; border-radius: 12px; padding: 1.25rem;">
+          <h5 style="color: #be185d; font-weight: 800; margin-bottom: 0.5rem;">Asymmetric: Public/Private ($K_{pub}, K_{priv}$)</h5>
+          <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #1e293b; line-height: 1.8;">
+            Bob publishes $K_{pub}$ to the world.<br>
+            Alice: Plaintext ──[Encrypt with $K_{pub}^{Bob}$]──► Ciphertext<br>
+            Bob: Ciphertext ──[Decrypt with $K_{priv}^{Bob}$]──► Plaintext<br>
+            <span style="color: #15803d; font-weight: 700;">✓ Zero Pre-Shared Secret Required</span><br>
+            <span style="color: #64748b;">• Hybrid Cryptography in TLS: Use RSA/ECC to exchange K, then AES for data!</span>
+          </div>
+        </div>
+      </div>
+    `,
+    whenToUse: [
+      { protocol: "Choose Symmetric Cryptography when:", points: ["Encrypting bulk data, file systems, database storage, and active network connections.", "Operating on battery-constrained mobile or embedded IoT devices where CPU cycles are limited.", "High-throughput symmetric session ciphers (AES-256-GCM, ChaCha20-Poly1305)."] },
+      { protocol: "Choose Asymmetric Cryptography when:", points: ["Establishing trust between two entities who have never communicated before (TLS handshake).", "Generating digital signatures and certificates (X.509 PKI, RSA-PSS, ECDSA).", "Encrypting small session secrets and verifying message authenticity."] }
+    ],
+    commonConfusion: "Hybrid Encryption Reality: Real-world security protocols NEVER use pure asymmetric encryption for user data. Instead, TLS, SSH, and PGP use asymmetric encryption (RSA/ECC) solely to authenticate and exchange a fresh symmetric session key, and then switch 100% of payload encryption to fast symmetric ciphers (AES-GCM)!",
+    relatedTopics: ["rsa", "rsa-encryption", "public-key-cryptography", "https"]
+  },
+
+  "osi-vs-tcp-ip": {
+    id: "osi-vs-tcp-ip",
+    title: "OSI Reference Model vs TCP/IP Protocol Stack",
+    subtitle: "7-Layer Theoretical Blueprint vs 4-Layer Implementation Hourglass",
+    shortAnswer: "The OSI model is a 7-layer theoretical reference framework created by ISO with strict service, interface, and protocol boundaries. The TCP/IP model is a 4-layer pragmatic architecture that powers the actual global Internet, centered around the IP hourglass waist with application layer combining OSI presentation and session duties.",
+    tableHeaders: ["Dimension", "OSI 7-Layer Reference Model (ISO/IEC 7498)", "TCP/IP 4-Layer Protocol Suite (IETF RFC 1122)"],
+    tableRows: [
+      ["Number of Layers", "7 Layers: Application, Presentation, Session, Transport, Network, Data Link, Physical", "4 Layers: Application, Transport, Internet, Network Access (Link/Physical)"],
+      ["Development Approach", "Theoretical top-down model developed by committee before protocols were written", "Pragmatic bottom-up design implemented in software (BSD Unix) before standardization"],
+      ["Session & Presentation", "Separate explicit Layers 5 (Session) and 6 (Presentation)", "Combined directly into Application Layer (HTTP, TLS, DNS handle presentation)"],
+      ["Network Layer Paradigm", "Supports both Connection-Oriented (CONS / X.25) and Connectionless (CLNS)", "Strictly Connectionless at Internet Layer (IP); all routing based on datagrams"],
+      ["Architectural Philosophy", "Rigid separation of services, interfaces, and protocol implementations", "Hourglass model: IP is the narrow universal waist over which all protocols run"],
+      ["Transport Protocol Diversity", "Five classes (TP0 to TP4) designed for varying underlying network reliabilities", "Two primary protocols: TCP (reliable byte-stream) and UDP (unreliable datagrams)"],
+      ["Practical Adoption", "Failed commercially as a protocol stack; universal standard as teaching terminology", "100% dominant architecture of the global Internet and enterprise private networks"],
+      ["Protocol Independence", "Protocols fit into layers; model created before protocols were designed", "Protocols were implemented first; model was retrofitted to describe working reality"]
+    ],
+    visualDiff: `
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0;">
+        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 12px; padding: 1.25rem;">
+          <h5 style="color: #334155; font-weight: 800; margin-bottom: 0.5rem;">OSI 7-Layer Model</h5>
+          <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #1e293b; line-height: 1.8;">
+            Layer 7: Application (User interface, HTTP, FTP)<br>
+            Layer 6: Presentation (Encoding, Encryption, ASCII)<br>
+            Layer 5: Session (Dialog control, Checkpointing)<br>
+            Layer 4: Transport (End-to-end reliability, TP4)<br>
+            Layer 3: Network (Routing, Addressing, X.25)<br>
+            Layer 2: Data Link (Framing, Flow, Error control)<br>
+            Layer 1: Physical (Bits, Voltage, Pinouts)
+          </div>
+        </div>
+        <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 12px; padding: 1.25rem;">
+          <h5 style="color: #15803d; font-weight: 800; margin-bottom: 0.5rem;">TCP/IP 4-Layer Internet Suite</h5>
+          <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #1e293b; line-height: 1.8;">
+            Application Layer (HTTP, DNS, TLS, SSH, SMTP)<br>
+            <span style="color: #64748b;">├── Encompasses OSI L5, L6, and L7</span><br>
+            Transport Layer (TCP, UDP, QUIC)<br>
+            Internet Layer (IPv4, IPv6, ICMP, Routing Protocols)<br>
+            <span style="color: #15803d; font-weight: 700;">└── The Narrow Waist: Everything over IP, IP over everything</span><br>
+            Network Access / Link Layer (Ethernet, Wi-Fi, DOCSIS, Fiber)
+          </div>
+        </div>
+      </div>
+    `,
+    whenToUse: [
+      { protocol: "Use the OSI Model when:", points: ["Studying theoretical concepts, modular network separation, and device classification (L2 switch vs L3 router).", "Answering university exam questions regarding formal protocol boundaries.", "Analyzing architectural troubleshooting frameworks (bottom-up network debugging)."] },
+      { protocol: "Use the TCP/IP Model when:", points: ["Developing real-world network software, sockets programming, and protocol analyzers (Wireshark).", "Configuring production network interfaces, subnet routing, and firewall filtering rules.", "Understanding how the actual Internet protocols (IP, TCP, UDP, HTTP, DNS) interact."] }
+    ],
+    commonConfusion: "Exam Trap: Confusing OSI Layer 3 (Network) with TCP/IP Internet Layer. In OSI, Layer 3 was designed to support connection-oriented virtual circuits (like X.25). In TCP/IP, the Internet Layer is strictly connectionless: every IPv4/IPv6 packet is routed independently, and reliability is offloaded to end hosts in the Transport layer (End-to-End Principle)!",
+    relatedTopics: ["osi-model", "tcp-ip-model", "protocol-stack", "encapsulation"]
   }
 };
 

@@ -15,7 +15,7 @@ const KnowledgeGraphModule = {
     { id: "hamming-code", label: "Hamming Code", layer: "Link", x: 360, y: 180, color: "#059669" },
     { id: "ethernet", label: "Ethernet 802.3", layer: "Link", x: 500, y: 180, color: "#059669" },
     { id: "switch", label: "Switch & VLAN", layer: "Link", x: 630, y: 180, color: "#059669" },
-    { id: "gbn", label: "Go-Back-N", layer: "Link", x: 180, y: 250, color: "#059669" },
+    { id: "go-back-n", label: "Go-Back-N", layer: "Link", x: 180, y: 250, color: "#059669" },
     { id: "selective-repeat", label: "Selective Repeat", layer: "Link", x: 330, y: 250, color: "#059669" },
 
     // Network Layer (Unit III)
@@ -34,7 +34,7 @@ const KnowledgeGraphModule = {
     { id: "transport-layer", label: "Transport Layer", layer: "Transport", x: 160, y: 580, color: "#7c3aed" },
     { id: "tcp", label: "TCP RFC 9293", layer: "Transport", x: 310, y: 580, color: "#7c3aed" },
     { id: "udp", label: "UDP Datagram", layer: "Transport", x: 470, y: 580, color: "#7c3aed" },
-    { id: "tcp-handshake", label: "3-Way Handshake", layer: "Transport", x: 220, y: 660, color: "#7c3aed" },
+    { id: "tcp-three-way-handshake", label: "3-Way Handshake", layer: "Transport", x: 220, y: 660, color: "#7c3aed" },
     { id: "tcp-flow-control", label: "Flow Control (rwnd)", layer: "Transport", x: 390, y: 660, color: "#7c3aed" },
     { id: "tcp-congestion-control", label: "Congestion (AIMD)", layer: "Transport", x: 560, y: 660, color: "#7c3aed" },
 
@@ -52,12 +52,12 @@ const KnowledgeGraphModule = {
   graphEdges: [
     ["packet", "encapsulation"], ["protocol", "encapsulation"],
     ["encapsulation", "framing"], ["framing", "crc"], ["framing", "hamming-code"],
-    ["framing", "ethernet"], ["ethernet", "switch"], ["framing", "gbn"], ["gbn", "selective-repeat"],
+    ["framing", "ethernet"], ["ethernet", "switch"], ["framing", "go-back-n"], ["go-back-n", "selective-repeat"],
     ["packet", "network-layer"], ["network-layer", "forwarding"], ["network-layer", "routing"],
     ["routing", "dijkstra"], ["routing", "distance-vector"], ["dijkstra", "ospf"], ["distance-vector", "bgp"],
     ["forwarding", "ipv4"], ["forwarding", "ipv6"], ["ipv4", "nat"],
     ["network-layer", "transport-layer"], ["transport-layer", "tcp"], ["transport-layer", "udp"],
-    ["tcp", "tcp-handshake"], ["tcp", "tcp-flow-control"], ["tcp", "tcp-congestion-control"],
+    ["tcp", "tcp-three-way-handshake"], ["tcp", "tcp-flow-control"], ["tcp", "tcp-congestion-control"],
     ["udp", "dns"], ["tcp", "http"], ["http", "https"], ["https", "tls"], ["tls", "rsa"],
     ["tcp", "email-system"], ["network-layer", "firewall"], ["firewall", "ids"], ["ids", "rsa"]
   ],
