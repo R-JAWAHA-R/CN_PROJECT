@@ -1,5 +1,5 @@
 // topics_u2_syllabus.js - Master Academic Topic Content Repository for Unit 2
-// Cleaned: All ASCII symbol art removed. Integrated complete 36-page Topic 2 & 14-page Topic 3 content.
+// Cleaned: All ASCII symbol art removed. Integrated complete Topic 2, Topic 3, & Topic 4 content.
 var TOPICS_U2_SYLLABUS = {
   "u2-dll-intro": {
     "id": "u2-dll-intro",
@@ -1596,900 +1596,884 @@ var TOPICS_U2_SYLLABUS = {
     "title": "Introduction to Multiple Access Protocols",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "level": "Beginner",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "Forouzan Ch. 12 / Tanenbaum Ch. 4.2",
-    "oneLiner": "The spectrum of protocols used to coordinate transmissions over shared communication channels.",
-    "quickAnswer": "Multiple Access Protocols are rules that govern how multiple network nodes share a common transmission medium. They are divided into three broad categories: Random Access Protocols, Controlled Access Protocols, and Channelization Protocols.",
-    "whyItMatters": "Every local area network (Ethernet, Wi-Fi) and wireless cellular link relies on multiple access protocols to avoid channel chaos.",
+    "topicNumber": 4,
+    "subtopicNumber": 1,
+    "whyItMatters": "When multiple network nodes connect to a single shared physical channel, simultaneous uncoordinated transmissions destroy frames through collisions. Multiple access protocols establish the fundamental transmission coordination rules that allow stations to share communication media effectively.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "MAC Sublayer Architecture",
+        "meaning": "Position and role of Layer 2 medium access control"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Channel Allocation",
+        "meaning": "Static vs. dynamic partitioning of channel bandwidth"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define a multiple access protocol and explain why transmission coordination is required.",
+      "Categorize multiple access protocols into Forouzan's 3 primary families: Random Access, Controlled Access, and Channelization.",
+      "Understand the physical consequences of uncoordinated transmissions and packet collisions.",
+      "Trace the evolutionary path from uncoordinated transmission (ALOHA) to carrier sensing (CSMA) and collision handling (CSMA/CD & CSMA/CA)."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layer 2 (MAC Sublayer)",
+      "standard": "IEEE 802 Architecture / Forouzan Chapter 12",
+      "type": "Protocol Architectural Foundation",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-mac-sublayer-intro",
+        "channel-allocation"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "u2-random-access-protocols",
+        "u2-pure-aloha",
+        "u2-csma-cd",
+        "u2-csma-ca"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "u2-comparison-multiple-access"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Shared Ethernet, Wi-Fi LANs, satellite links, cellular uplink channels"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Multiple_Access.png",
+    "imageCaption": "Figure: Taxonomic Hierarchy of Multiple Access Protocols (Behrouz A. Forouzan, Chapter 12).",
     "sections": {
-      "overview": "<p>Multiple Access Protocols are divided into 3 primary categories: <strong>Random Access</strong> (ALOHA, CSMA, CSMA/CD, CSMA/CA), <strong>Controlled Access</strong> (Reservation, Polling, Token Passing), and <strong>Channelization</strong> (FDMA, TDMA, CDMA).</p>",
-      "eli10": "In simple words: The spectrum of protocols used to coordinate transmissions over shared communication channels.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
+      "overview": "\n      <p>A <strong>multiple access protocol</strong> is a formal set of rules and algorithms that coordinates how multiple computing devices or stations share a common communication channel.</p>\n      \n      <p>When several stations connect to the same transmission medium (such as a shared coaxial cable, a radio frequency band, or an optical fiber), they require an agreed-upon method to decide when each station can transmit data. Without this coordination, two or more stations will transmit simultaneously, resulting in a <strong>packet collision</strong> that destroys all transmitted data.</p>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">The Three Main Categories of Multiple Access Protocols</h3>\n      <p>According to <em>Behrouz A. Forouzan (Data Communications and Networking, 4th Edition, Chapter 12)</em>, all multiple-access protocols are grouped into three primary categories:</p>\n      \n      <div class=\"grid grid-cols-1 md:grid-cols-3 gap-4 my-4\">\n        <div class=\"p-4 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 shadow-sm\">\n          <div class=\"text-[10px] font-bold text-amber-800 dark:text-amber-300 uppercase tracking-wider mb-1\">Category 1</div>\n          <h4 class=\"font-extrabold text-sm text-gray-900 dark:text-white mb-1\">Random Access Protocols</h4>\n          <p class=\"text-xs text-gray-700 dark:text-gray-300 leading-relaxed\">\n            Contention-based methods where stations have equal access rights and compete for the medium. No station has priority; collisions can occur and are resolved via backoff.\n          </p>\n          <div class=\"mt-2 text-[10px] font-mono text-amber-700 dark:text-amber-300\">ALOHA, Slotted ALOHA, CSMA, CSMA/CD, CSMA/CA</div>\n        </div>\n\n        <div class=\"p-4 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 shadow-sm\">\n          <div class=\"text-[10px] font-bold text-blue-800 dark:text-blue-300 uppercase tracking-wider mb-1\">Category 2</div>\n          <h4 class=\"font-extrabold text-sm text-gray-900 dark:text-white mb-1\">Controlled Access Protocols</h4>\n          <p class=\"text-xs text-gray-700 dark:text-gray-300 leading-relaxed\">\n            Stations coordinate explicitly so that only one station holds the right to transmit at any instant, guaranteeing 100% collision-free operation.\n          </p>\n          <div class=\"mt-2 text-[10px] font-mono text-blue-700 dark:text-blue-300\">Reservation, Polling, Token Passing</div>\n        </div>\n\n        <div class=\"p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 shadow-sm\">\n          <div class=\"text-[10px] font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider mb-1\">Category 3</div>\n          <h4 class=\"font-extrabold text-sm text-gray-900 dark:text-white mb-1\">Channelization Protocols</h4>\n          <p class=\"text-xs text-gray-700 dark:text-gray-300 leading-relaxed\">\n            The available channel capacity is divided among stations across frequency, time slots, or orthogonal mathematical codes.\n          </p>\n          <div class=\"mt-2 text-[10px] font-mono text-emerald-700 dark:text-emerald-300\">FDMA, TDMA, CDMA, OFDMA</div>\n        </div>\n      </div>\n    ",
+      "eli10": "Imagine 10 people in a room who all want to talk through one megaphone: (1) Random access is like letting anyone speak whenever they want, but if two people shout together, they both stop, wait a few seconds, and try again. (2) Controlled access is passing a talking stick around in a circle. (3) Channelization is giving each person their own mini-megaphone on different radio pitches.",
+      "analogy": "Managing runway access at an international airport: without air traffic control rules (multiple access protocols), planes would attempt to land whenever they arrived, leading to disastrous runway collisions.",
+      "howItWorks": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Evolution of Random Access Protocols</h3>\n      <p>Random access protocols evolved through four major technological breakthroughs to solve channel collisions:</p>\n      <ol class=\"wiki-ordered-list\">\n        <li><strong>Pure ALOHA (1970):</strong> Stations transmit immediately whenever data is ready. Zero sensing, zero coordination. Vulnerable time is $2T_{fr}$; maximum throughput is only $18.4%$.</li>\n        <li><strong>Slotted ALOHA (1972):</strong> Introduced discrete time slots. Stations can only transmit at slot boundaries, cutting the vulnerable time in half to $1T_{fr}$ and doubling throughput to $36.8%$.</li>\n        <li><strong>Carrier Sense Multiple Access (CSMA):</strong> Introduced the principle of <em>'Listen before you transmit'</em>. Stations check whether the channel is busy before sending, drastically cutting collisions.</li>\n        <li><strong>CSMA with Collision Detection (CSMA/CD):</strong> Wired Ethernet enhancement. Stations monitor the cable while transmitting; if a collision occurs, transmission halts immediately, saving wasted channel time.</li>\n        <li><strong>CSMA with Collision Avoidance (CSMA/CA):</strong> Wireless LAN (Wi-Fi) standard. Uses interframe spaces (IFS), contention windows, and optional RTS/CTS handshakes to prevent collisions where collision detection is physically impossible.</li>\n      </ol>\n    ",
       "diagram": "",
+      "technicalDetails": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Comparison of the Three Access Classes</h3>\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Protocol Family</th>\n            <th>Collision Probability</th>\n            <th>Traffic Suitability</th>\n            <th>Central Coordination</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td><strong>Random Access</strong></td>\n            <td>Possible (Handled by backoff)</td>\n            <td>Bursty, intermittent data traffic</td>\n            <td>None (Distributed autonomous nodes)</td>\n          </tr>\n          <tr>\n            <td><strong>Controlled Access</strong></td>\n            <td>Zero (Collision-free)</td>\n            <td>High-load, continuous heavy traffic</td>\n            <td>Primary polling master or token holder</td>\n          </tr>\n          <tr>\n            <td><strong>Channelization</strong></td>\n            <td>Zero (Partitioned channels)</td>\n            <td>Predictable continuous streams (voice/video)</td>\n            <td>Static setup or base station scheduler</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Introduction to Multiple Access Protocols?<br><br><strong>Answer:</strong> Multiple Access Protocols are rules that govern how multiple network nodes share a common transmission medium. They are divided into three broad categories: Random Access Protocols, Controlled Access Protocols, and Channelization Protocols.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
+        "level1": "<strong>Question:</strong> What is the primary purpose of a multiple access protocol?<br><br><strong>Answer:</strong> To coordinate access among multiple competing stations sharing a common communication medium, preventing simultaneous transmissions from causing destructive signal collisions.",
+        "level2": "<strong>Problem:</strong> What are the three broad categories of multiple access protocols identified by Forouzan?<br><br><strong>Answer:</strong> 1. Random access protocols (e.g., ALOHA, CSMA). 2. Controlled access protocols (e.g., polling, token passing). 3. Channelization protocols (e.g., FDMA, TDMA, CDMA).",
+        "level3": "<strong>Analysis:</strong> Why are random access protocols preferred over channelization for local area computer networks?<br><br><strong>Answer:</strong> Computer traffic is bursty: stations generate traffic in unpredictable bursts and sit idle for long periods. Channelization statically reserves bandwidth that sits empty when nodes are idle. Random access allows any station to utilize the full channel bandwidth on demand without wasting capacity on idle nodes."
       },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Protocol Class</th>\n            <th>Primary Advantage</th>\n            <th>Primary Limitation</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td><strong>Random Access</strong></td>\n            <td>Simple, decentralized, full bandwidth on demand.</td>\n            <td>Collisions under heavy traffic reduce throughput.</td>\n          </tr>\n          <tr>\n            <td><strong>Controlled Access</strong></td>\n            <td>Deterministic, collision-free, fair sharing.</td>\n            <td>Polling overhead and latency at light loads.</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Ethernet local area networks (IEEE 802.3).",
+        "Wi-Fi wireless local area networks (IEEE 802.11).",
+        "Satellite ground station uplinks and cellular random access channels (RACH)."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Introduction to Multiple Access Protocols?",
+          "question": "Which category of multiple access protocols allows stations to transmit without any central controller, where stations compete for the medium and collisions are possible?",
           "options": [
-            "Multiple Access Protocols are rules that govern how multiple...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "Random access protocols",
+            "Controlled access protocols",
+            "Channelization protocols",
+            "Circuit switching protocols"
           ],
           "correct": 0,
-          "explanation": "The primary role is: Multiple Access Protocols are rules that govern how multiple network nodes share a common transmission medium. They are divided into three broad categories: Random Access Protocols, Controlled Access Protocols, and Channelization Protocols."
+          "explanation": "Random access protocols are decentralized, contention-based protocols where stations compete for channel access and collisions can occur."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
-          "url": ""
-        },
-        {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 12, Section 12.1.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Multiple_Access.png",
-      "imageCaption": "Figure: Multiple Access Protocol Taxonomy: Random Access, Controlled Access, and Channelization."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Multiple_Access.png",
-    "imageCaption": "Figure: Multiple Access Protocol Taxonomy: Random Access, Controlled Access, and Channelization."
+      ]
+    }
   },
   "u2-random-access-protocols": {
     "id": "u2-random-access-protocols",
     "title": "Random Access Protocols",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "Forouzan Ch. 12.1",
-    "oneLiner": "Contention-based access methods where stations compete for the channel without central coordination.",
-    "quickAnswer": "In Random Access (or contention) protocols, no station is superior to another, and no central controller exists. Any station with data can attempt to transmit. If two stations transmit simultaneously, a collision occurs, and both back off for random delays before retrying.",
-    "whyItMatters": "Random access provides decentralized, highly scalable communication that requires no master node or expensive pre-coordination.",
+    "topicNumber": 4,
+    "subtopicNumber": 2,
+    "whyItMatters": "Random access protocols form the operational basis of Ethernet and Wi-Fi. In these protocols, no station is superior to another; every node has equal transmission rights, creating an egalitarian contention-based network.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "u2-multiple-access-intro",
+        "meaning": "Introduction and 3 families of multiple access"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Contention",
+        "meaning": "Competition between nodes to capture the shared medium"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define random access protocols and explain why they are termed contention-based.",
+      "Enumerate the 6 core characteristics of random access communication.",
+      "Identify the 4 major protocol types: ALOHA, CSMA, CSMA/CD, and CSMA/CA.",
+      "Understand the trade-off between decentralized transmission freedom and collision probability."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layer 2 (MAC Sublayer)",
+      "standard": "IEEE 802.3 / IEEE 802.11 / RFC 895",
+      "type": "Contention-Based Access Architecture",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-multiple-access-intro"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "u2-pure-aloha",
+        "u2-slotted-aloha",
+        "u2-csma-1-persistent",
+        "u2-csma-cd"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "u2-multiple-access-intro",
+        "u2-comparison-multiple-access"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Local Area Networks (Ethernet/Wi-Fi), wireless sensor ad-hoc networks"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/35/Pure_ALOHA1.svg",
+    "imageCaption": "Figure: Random Access Contention: Stations Competing for the Shared Channel (Behrouz A. Forouzan).",
     "sections": {
-      "overview": "<p>In Random Access methods, stations contend for transmission time. The key challenges are detecting when a collision occurs and choosing a randomized backoff delay so stations do not repeatedly collide with one another.</p>",
-      "eli10": "In simple words: Contention-based access methods where stations compete for the channel without central coordination.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
+      "overview": "\n      <p>A <strong>random access protocol</strong> (also known as a <strong>contention-based protocol</strong>) is a multiple-access method in which every station connected to the shared medium has an equal opportunity to access and transmit data.</p>\n      \n      <p>According to <em>Behrouz A. Forouzan (Section 12.1)</em>, no single station has permanent or privileged control over the channel. There is no master station or central arbiter deciding who transmits next. Instead, each individual station autonomously decides whether and when to transmit by executing the mathematical rules of the protocol.</p>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">The Six Fundamental Characteristics of Random Access</h3>\n      <ol class=\"wiki-ordered-list\">\n        <li><strong>Equal Access Rights:</strong> Every station on the network has equal transmission rights and priority; no node is privileged over another.</li>\n        <li><strong>Zero Central Controller:</strong> No master computer, coordinator, or centralized clock arbiter is required to grant transmission tokens.</li>\n        <li><strong>On-Demand Transmission:</strong> Stations transmit when they have pending data from Layer 3, following the protocol's specific sensing or timing rules.</li>\n        <li><strong>Simultaneous Transmission Possibility:</strong> Because stations act independently, two or more stations may transmit at overlapping times.</li>\n        <li><strong>Vulnerability to Collisions:</strong> Overlapping transmissions create electrical or electromagnetic interference, causing packet collisions.</li>\n        <li><strong>Collision Recovery Techniques:</strong> Each protocol employs specific mechanisms (such as carrier sensing, collision detection, jam signals, or randomized backoff) to detect, avoid, or recover from collisions.</li>\n      </ol>\n    ",
+      "eli10": "Imagine an open playground with a soccer ball. Any kid can run up and kick the ball whenever they want. Nobody is the boss. But if two kids run up and kick the ball at the exact same moment, they bump into each other! They both take a step back, count to three, and try again.",
+      "analogy": "Unregulated conversation at a dinner party: anyone can speak when they have something to say, but if two people speak at the same time, they pause and let one person continue.",
+      "howItWorks": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">The Four Canonical Types of Random Access Protocols</h3>\n      <div class=\"grid grid-cols-1 sm:grid-cols-2 gap-4 my-3\">\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm\">\n          <div class=\"font-bold text-amber-600 dark:text-amber-400 text-xs mb-1\">1. ALOHA (Pure & Slotted)</div>\n          <p class=\"text-[11px] text-slate-600 dark:text-slate-300\">\n            Transmit without sensing the channel. Pure ALOHA transmits at any time; Slotted ALOHA restricts transmissions to discrete time slot boundaries.\n          </p>\n        </div>\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm\">\n          <div class=\"font-bold text-blue-600 dark:text-blue-400 text-xs mb-1\">2. CSMA (Carrier Sense Multiple Access)</div>\n          <p class=\"text-[11px] text-slate-600 dark:text-slate-300\">\n            'Listen before talk': stations sense the channel first. Includes 1-persistent, non-persistent, and p-persistent transmission strategies.\n          </p>\n        </div>\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm\">\n          <div class=\"font-bold text-emerald-600 dark:text-emerald-400 text-xs mb-1\">3. CSMA/CD (Collision Detection)</div>\n          <p class=\"text-[11px] text-slate-600 dark:text-slate-300\">\n            'Listen while talk': transmitting station detects collisions, aborts immediately, sends jam signal, and executes binary exponential backoff.\n          </p>\n        </div>\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm\">\n          <div class=\"font-bold text-purple-600 dark:text-purple-400 text-xs mb-1\">4. CSMA/CA (Collision Avoidance)</div>\n          <p class=\"text-[11px] text-slate-600 dark:text-slate-300\">\n            'Avoid collisions before talk': used in wireless networks using Interframe Spaces (IFS), Contention Windows, and acknowledgements.\n          </p>\n        </div>\n      </div>\n    ",
       "diagram": "",
+      "technicalDetails": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Throughput Comparison Curve</h3>\n      <p>As the normalized channel load $G$ (average frames generated per frame time) increases, throughput $S$ initially rises, reaches a theoretical peak, and then degrades due to collision saturation:</p>\n      <ul class=\"wiki-bullet-list\">\n        <li><strong>Pure ALOHA Peak:</strong> $S_{\\text{max}} = 18.4\\%$ at $G = 0.5$.</li>\n        <li><strong>Slotted ALOHA Peak:</strong> $S_{\\text{max}} = 36.8\\%$ at $G = 1.0$.</li>\n        <li><strong>1-Persistent CSMA Peak:</strong> $S_{\\text{max}} \\approx 53\\%$.</li>\n        <li><strong>Non-Persistent CSMA Peak:</strong> $S_{\\text{max}} \\approx 85\\%$ (under optimal load).</li>\n        <li><strong>CSMA/CD Peak:</strong> Approaches $90\\text{--}95\\%$ when $a = t_{\\text{prop}} / t_{\\text{tx}} \\ll 1$.</li>\n      </ul>\n    ",
       "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Random Access Protocols?<br><br><strong>Answer:</strong> In Random Access (or contention) protocols, no station is superior to another, and no central controller exists. Any station with data can attempt to transmit. If two stations transmit simultaneously, a collision occurs, and both back off for random delays before retrying.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
+        "level1": "<strong>Question:</strong> Why are random access protocols also called contention-based protocols?<br><br><strong>Answer:</strong> Because stations compete ('contend') with one another to access and use the shared transmission medium, with no station having predefined permission or master control.",
+        "level2": "<strong>Problem:</strong> What is the main cause of collisions in random access protocols?<br><br><strong>Answer:</strong> The decentralized nature of transmission: since stations decide independently when to transmit without central coordination, two or more stations frequently begin transmitting at overlapping times, creating destructive signal interference.",
+        "level3": "<strong>Analysis:</strong> Why does throughput drop toward zero in pure contention systems when traffic load becomes very heavy?<br><br><strong>Answer:</strong> Under heavy traffic, virtually every transmission collides with another station's frame. Collisions trigger retransmissions, which add even more traffic to an already congested channel, causing a vicious cycle where 100% of channel time is wasted on corrupted colliding signals."
       },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Advantages</th>\n            <th>Disadvantages</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Zero centralized single point of failure.</td>\n            <td>Collisions waste channel bandwidth and power.</td>\n          </tr>\n          <tr>\n            <td>Minimal latency under light network load.</td>\n            <td>Unpredictable delays under heavy network load.</td>\n          </tr>\n          <tr>\n            <td>Extremely simple station deployment (plug-and-play).</td>\n            <td>Throughput collapses without backoff control.</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Traditional half-duplex Ethernet (IEEE 802.3).",
+        "Modern Wi-Fi radio access (IEEE 802.11).",
+        "Cellular initial access channels (LTE/5G RACH)."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Random Access Protocols?",
+          "question": "In random access protocols, how is channel access coordinated?",
           "options": [
-            "In Random Access (or contention) protocols, no station is su...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "Stations compete for access according to protocol rules; no central controller is required",
+            "A central router polls each station in turn",
+            "Stations pass a physical electronic token in a circle",
+            "Each station is permanently assigned a unique frequency band"
           ],
           "correct": 0,
-          "explanation": "The primary role is: In Random Access (or contention) protocols, no station is superior to another, and no central controller exists. Any station with data can attempt to transmit. If two stations transmit simultaneously, a collision occurs, and both back off for random delays before retrying."
+          "explanation": "Random access protocols are decentralized; stations autonomously follow protocol rules to compete for channel access without a central controller."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
-          "url": ""
-        },
-        {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 12, Section 12.1.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/35/Pure_ALOHA1.svg",
-      "imageCaption": "Figure: Random Access Protocols: Unscheduled Station Transmissions with Contention Resolution."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/35/Pure_ALOHA1.svg",
-    "imageCaption": "Figure: Random Access Protocols: Unscheduled Station Transmissions with Contention Resolution."
+      ]
+    }
   },
   "u2-pure-aloha": {
     "id": "u2-pure-aloha",
     "title": "Pure ALOHA Protocol",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "Tanenbaum Ch. 4.2.1 / Forouzan Ch. 12.1",
-    "oneLiner": "The pioneering random access protocol developed at the University of Hawaii with maximum throughput of 18.4%.",
-    "quickAnswer": "Pure ALOHA allows stations to transmit whenever they have data. If two or more transmissions overlap even by a single bit, a collision occurs and frames are destroyed. The vulnerable period is 2 * T_fr, yielding a maximum throughput S = 1 / (2e) ≈ 18.4% at G = 0.5.",
-    "whyItMatters": "Developed in 1970 by Norman Abramson, ALOHA is the intellectual ancestor of Ethernet and all modern packet-radio networks.",
+    "topicNumber": 4,
+    "subtopicNumber": 3,
+    "whyItMatters": "Pure ALOHA was the pioneering random access protocol developed at the University of Hawaii in 1970. It proved that packet radio broadcasting was viable, establishing the mathematical foundations of modern contention protocols.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "u2-random-access-protocols",
+        "meaning": "Contention and collisions in random access"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Frame Transmission Time (Tfr)",
+        "meaning": "Time required to inject all bits of a frame onto the physical medium"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define Pure ALOHA and trace its 6-step operational workflow.",
+      "Derive the vulnerable time formula $\\text{Vulnerable Time} = 2T_{fr}$ with clear explanation.",
+      "Master the throughput equation $S = G e^{-2G}$ and prove that $S_{\\text{max}} = 1/(2e) \\approx 18.4\\%$ at $G = 0.5$.",
+      "Solve numerical problems calculating throughput and vulnerable durations."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layer 2 (MAC Sublayer)",
+      "standard": "University of Hawaii (1970) / Historical Milestone",
+      "type": "Continuous-Time Contention Protocol",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-multiple-access-intro",
+        "u2-random-access-protocols"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "u2-slotted-aloha",
+        "u2-csma-1-persistent"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "u2-slotted-aloha"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Pioneering inter-island packet radio, satellite random access channels, RFID tags"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/35/Pure_ALOHA1.svg",
+    "imageCaption": "Figure: Pure ALOHA Transmission Timeline showing Frame Collisions and Vulnerable Period of 2Tfr.",
     "sections": {
-      "overview": "<p>In <strong>Pure ALOHA</strong>, stations transmit frames at arbitrary moments. If no acknowledgement is received, the station assumes a collision occurred, waits a random backoff time, and retransmits.</p><div class=\"wiki-img-box my-4 text-center\"><img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Aloha_pure_slotted.svg/600px-Aloha_pure_slotted.svg.png\" alt=\"Pure and Slotted ALOHA throughput\" class=\"mx-auto rounded-lg shadow border border-gray-200 dark:border-gray-700 max-h-80 object-contain\" onerror=\"this.style.display='none'\"><p class=\"text-xs text-gray-500 mt-1 italic\">Figure: Throughput curves for Pure ALOHA (18.4%) vs Slotted ALOHA (36.8%).</p></div><p>Formula: $S = G e^{-2G}$. Maximum throughput occurs when offered load $G = 0.5$, giving $S = 0.5 e^{-1} \\approx 0.184$ (18.4%).</p>",
-      "eli10": "In simple words: The pioneering random access protocol developed at the University of Hawaii with maximum throughput of 18.4%.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
+      "overview": "\n      <p><strong>Pure ALOHA</strong> is the original, continuous-time random access protocol developed by Norman Abramson and colleagues at the University of Hawaii in 1970 to interconnect computer terminals across the Hawaiian islands via wireless radio broadcasts.</p>\n      \n      <p>The core philosophy of Pure ALOHA is absolute transmission freedom: <strong>a station transmits data whenever it has a frame ready to send</strong>. There are no fixed time slots, and stations do not check whether the communication channel is free before transmitting.</p>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Step-by-Step Working Principle</h3>\n      <ol class=\"wiki-ordered-list\">\n        <li>A station receives a network-layer packet and formats a frame.</li>\n        <li>The station immediately transmits the frame onto the shared channel.</li>\n        <li>If another station transmits during an overlapping time window, a collision occurs and all overlapping frames are corrupted.</li>\n        <li>The receiving station validates the frame checksum; if valid, it returns an Acknowledgement (ACK).</li>\n        <li>If the transmitting station does not receive an ACK within a designated timeout period, it assumes the frame was destroyed in a collision.</li>\n        <li>The sender waits for a randomized <strong>backoff period</strong> and retransmits the frame to prevent colliding again.</li>\n      </ol>\n    ",
+      "eli10": "Imagine you want to yell a secret across a playground. In Pure ALOHA, you just yell whenever you feel like it! If nobody else was yelling at the same time, your friend hears it. But if someone else started yelling even one second before or after you, both voices mix together and nobody understands anything.",
+      "analogy": "Mailing a postcard without checking if the post office truck is already full: you drop it in the box anytime. If it gets lost in a storm, you wait a random number of days and drop in another copy.",
+      "howItWorks": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Vulnerable Time in Pure ALOHA ($2T_{fr}$)</h3>\n      <p>The <strong>vulnerable time</strong> is the continuous time window during which any other station's transmission will collide with and destroy the frame under consideration.</p>\n      \n      <p>Let $T_{fr}$ be the frame transmission time (the duration required to transmit one full frame). Suppose Station A begins transmitting a frame at time $t$:</p>\n      <div class=\"p-4 bg-amber-50 dark:bg-amber-950/40 border-l-4 border-amber-500 rounded-r text-xs space-y-2\">\n        <p><strong>1. Collision with an earlier frame:</strong> If any other station began transmitting between $t - T_{fr}$ and $t$, the end of that earlier frame will collide with the beginning of Station A's frame.</p>\n        <p><strong>2. Collision with a later frame:</strong> If any other station begins transmitting between $t$ and $t + T_{fr}$, the beginning of that later frame will collide with the end of Station A's frame.</p>\n        <p class=\"font-bold text-amber-900 dark:text-amber-200 text-sm\">\n          $$\\text{Vulnerable Time} = (t + T_{fr}) - (t - T_{fr}) = 2 T_{fr}$$\n        </p>\n      </div>\n      <p class=\"text-xs text-gray-600 dark:text-gray-400 mt-2\">To transmit successfully in Pure ALOHA, the shared channel must remain completely free of any other transmissions for a total duration of <strong>two complete frame times</strong> ($2T_{fr}$).</p>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Throughput Mathematical Derivation</h3>\n      <p>Assuming frame generation follows a Poisson distribution with average arrival rate of $G$ frames per frame time (including retransmissions):</p>\n      <div class=\"p-3 my-2 bg-slate-100 dark:bg-slate-800 rounded font-mono text-xs text-center\">\n        $$S = G \\cdot P(\\text{zero frames generated during vulnerable interval } 2T_{fr}) = G \\cdot e^{-2G}$$\n      </div>\n      <p>To find the maximum throughput, we take the derivative with respect to $G$ and set it to zero:</p>\n      <div class=\"p-3 my-2 bg-slate-100 dark:bg-slate-800 rounded font-mono text-xs text-center\">\n        $$\\frac{dS}{dG} = e^{-2G} - 2G e^{-2G} = 0 \\implies 1 - 2G = 0 \\implies G = 0.5$$\n      </div>\n      <p>Substituting $G = 0.5$ into the throughput equation yields:</p>\n      <div class=\"p-3 my-2 bg-slate-100 dark:bg-slate-800 rounded font-mono text-xs text-center\">\n        $$S_{\\text{max}} = 0.5 \\cdot e^{-2(0.5)} = 0.5 \\cdot e^{-1} = \\frac{1}{2e} \\approx 0.1839 = 18.4\\%$$\n      </div>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 font-bold text-center\">The maximum theoretical channel efficiency of Pure ALOHA is exactly 18.4%!</p>\n    ",
       "diagram": "",
+      "technicalDetails": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Pure ALOHA Performance Parameters</h3>\n      <table class=\"wiki-table\">\n        <thead><tr><th>Parameter</th><th>Mathematical Expression</th><th>Numerical Value</th></tr></thead>\n        <tbody>\n          <tr><td>Vulnerable Time</td><td>$2 T_{fr}$</td><td>Twice the frame duration</td></tr>\n          <tr><td>Throughput Equation</td><td>$S = G e^{-2G}$</td><td>Nonlinear Poisson throughput</td></tr>\n          <tr><td>Optimal Offered Load ($G$)</td><td>$G = 0.5$</td><td>0.5 frames generated per frame time</td></tr>\n          <tr><td>Maximum Throughput ($S_{\\text{max}}$)</td><td>$S = 1 / (2e)$</td><td>18.4% channel capacity</td></tr>\n        </tbody>\n      </table>\n    ",
       "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Pure ALOHA Protocol?<br><br><strong>Answer:</strong> Pure ALOHA allows stations to transmit whenever they have data. If two or more transmissions overlap even by a single bit, a collision occurs and frames are destroyed. The vulnerable period is 2 * T_fr, yielding a maximum throughput S = 1 / (2e) ≈ 18.4% at G = 0.5.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
+        "level1": "<strong>Numerical Problem 1 (From PDF Section 12.2):</strong> Calculate the throughput of a Pure ALOHA system when the offered load is $G = 0.5$.<br><br><strong>Given:</strong> $G = 0.5$.<br><strong>Formula:</strong> $S = G e^{-2G}$.<br><strong>Calculation:</strong><br>$S = 0.5 \\cdot e^{-2(0.5)} = 0.5 \\cdot e^{-1} = 0.5 \\times 0.367879 = 0.1839$.<br><strong>Answer:</strong> 18.39% (or 18.4%) throughput.",
+        "level2": "<strong>Numerical Problem 3 (From PDF Section 12.4):</strong> A network transmits frames that require 2 milliseconds each ($T_{fr} = 2\\text{ ms}$). Find the vulnerable time for Pure ALOHA.<br><br><strong>Given:</strong> $T_{fr} = 2\\text{ ms}$.<br><strong>Formula:</strong> $\\text{Vulnerable Time} = 2 T_{fr}$.<br><strong>Calculation:</strong> $2 \\times 2\\text{ ms} = 4\\text{ ms}$.<br><strong>Answer:</strong> 4 milliseconds.",
+        "level3": "<strong>Analysis:</strong> Suppose a Pure ALOHA channel operates at 100 kbps with 1000-bit frames. If the network generates 25 frames per second, what is the throughput?<br><br><strong>Answer:</strong><br>Frame transmission time: $T_{fr} = \\frac{1000\\text{ bits}}{100,000\\text{ bps}} = 0.01\\text{ s}$.<br>Offered load: $G = 25 \\times 0.01 = 0.25$ frames per frame time.<br>Throughput: $S = G e^{-2G} = 0.25 \\cdot e^{-2(0.25)} = 0.25 \\cdot e^{-0.5} = 0.25 \\times 0.6065 = 0.1516 = 15.16\\%$.<br>Usable bit rate = $15.16\\% \\times 100\\text{ kbps} = 15.16\\text{ kbps}$. Over 84% of capacity is lost to collisions or idle time."
       },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Advantages</th>\n            <th>Disadvantages</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Extremely simple to understand and implement in hardware.</td>\n            <td>Abysmal channel efficiency: over 81.6% of bandwidth wasted.</td>\n          </tr>\n          <tr>\n            <td>Zero clock synchronization required between stations.</td>\n            <td>High probability of collisions even under moderate traffic.</td>\n          </tr>\n          <tr>\n            <td>Stations transmit immediately without waiting for slots.</td>\n            <td>Throughput collapses to near zero when $G > 1$.</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Original University of Hawaii packet radio network (ALOHANET).",
+        "Low-frequency RFID tag identification systems.",
+        "Emergency marine satellite transponders (EPIRB)."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Pure ALOHA Protocol?",
+          "question": "What is the vulnerable time of the Pure ALOHA protocol for a frame transmission time $T_{fr}$?",
           "options": [
-            "Pure ALOHA allows stations to transmit whenever they have da...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "$2 T_{fr}$",
+            "$T_{fr}$",
+            "$T_p$",
+            "$4 T_{fr}$"
           ],
           "correct": 0,
-          "explanation": "The primary role is: Pure ALOHA allows stations to transmit whenever they have data. If two or more transmissions overlap even by a single bit, a collision occurs and frames are destroyed. The vulnerable period is 2 * T_fr, yielding a maximum throughput S = 1 / (2e) ≈ 18.4% at G = 0.5."
+          "explanation": "In Pure ALOHA, a frame collides if any other frame begins transmission between $t - T_{fr}$ and $t + T_{fr}$, yielding a vulnerable time of $2T_{fr}$."
+        },
+        {
+          "question": "What is the maximum theoretical channel throughput of Pure ALOHA?",
+          "options": [
+            "18.4%",
+            "36.8%",
+            "50.0%",
+            "100.0%"
+          ],
+          "correct": 0,
+          "explanation": "The maximum throughput of Pure ALOHA is $S_{\\text{max}} = \\frac{1}{2e} \\approx 18.4\\%$, occurring at an offered load of $G = 0.5$."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
-          "url": ""
-        },
-        {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 12, Section 12.1.1 (Pure ALOHA).",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/35/Pure_ALOHA1.svg",
-      "imageCaption": "Figure: Pure ALOHA Frame Collisions and Maximum Theoretical Throughput of 18.4% (1/2e)."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/35/Pure_ALOHA1.svg",
-    "imageCaption": "Figure: Pure ALOHA Frame Collisions and Maximum Theoretical Throughput of 18.4% (1/2e)."
+      ]
+    }
   },
   "u2-slotted-aloha": {
     "id": "u2-slotted-aloha",
     "title": "Slotted ALOHA Protocol",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "Tanenbaum Ch. 4.2.2 / Forouzan Ch. 12.1",
-    "oneLiner": "Slotted time boundaries that halve the vulnerable period and double ALOHA throughput to 36.8%.",
-    "quickAnswer": "Slotted ALOHA divides time into discrete synchronized slots equal to the frame transmission time (T_fr). Stations can only begin transmission at the beginning of a slot boundary. This reduces the vulnerable period from 2 * T_fr to T_fr, doubling maximum throughput to S = 1 / e ≈ 36.8% at G = 1.0.",
-    "whyItMatters": "By introducing clock synchronization, Slotted ALOHA doubles channel utilization and forms the basis for modern cellular random access channels (RACH).",
+    "topicNumber": 4,
+    "subtopicNumber": 4,
+    "whyItMatters": "Slotted ALOHA introduced discrete time discretization to random access. By restricting frame transmissions strictly to slot boundaries, it cut the collision window in half and doubled maximum throughput from 18.4% to 36.8%.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "u2-pure-aloha",
+        "meaning": "Pure ALOHA operation and 2Tfr vulnerable time"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Time Discretization",
+        "meaning": "Dividing continuous time into synchronized discrete slots"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define Slotted ALOHA and explain how slot boundary synchronization works.",
+      "Explain why the vulnerable time is reduced to exactly $1 T_{fr}$.",
+      "Derive the throughput equation $S = G e^{-G}$ and prove that $S_{\\text{max}} = 1/e \\approx 36.8\\%$ at $G = 1.0$.",
+      "Compare Pure ALOHA and Slotted ALOHA across 6 technical dimensions."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layer 2 (MAC Sublayer)",
+      "standard": "Roberts (1972) / IEEE Satellite & Wireless Standards",
+      "type": "Synchronous Time-Slotted Contention Protocol",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-pure-aloha"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "u2-pure-aloha",
+        "u2-csma-p-persistent"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "u2-pure-aloha"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Satellite uplink reservation channels, cellular GSM RACH random access slots"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Slotted_ALOHA.svg",
+    "imageCaption": "Figure: Slotted ALOHA Synchronized Discrete Time Slots cutting Vulnerable Time to Tfr.",
     "sections": {
-      "overview": "<p>Roberts proposed <strong>Slotted ALOHA</strong> in 1972 to reduce collisions by forbidding transmissions in the middle of ongoing frames. A collision only occurs if two stations attempt to transmit in the exact same slot. Vulnerable time is $T_{fr}$, giving throughput $S = G e^{-G}$.</p>",
-      "eli10": "In simple words: Slotted time boundaries that halve the vulnerable period and double ALOHA throughput to 36.8%.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
+      "overview": "\n      <p><strong>Slotted ALOHA</strong> was invented in 1972 by Lawrence Roberts as an enhancement to Pure ALOHA to overcome its high collision probability and low channel efficiency.</p>\n      \n      <p>In Slotted ALOHA, continuous channel time is divided into <strong>discrete, equal-sized time slots</strong>, each having a duration exactly equal to the frame transmission time $T_{fr}$. A station is permitted to transmit <strong>only at the beginning of a time slot</strong>. If a station generates a frame in the middle of a slot, it must wait and buffer the frame until the next slot boundary.</p>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Step-by-Step Working Principle</h3>\n      <ol class=\"wiki-ordered-list\">\n        <li>Time on the communication channel is divided into synchronized time slots of duration $T_{fr}$.</li>\n        <li>All transmitting stations maintain clock synchronization (e.g., via periodic central clock beacons).</li>\n        <li>When a station has a frame ready, it buffers the frame and waits for the beginning of the next time slot.</li>\n        <li>At the exact slot boundary, the station transmits its complete frame during that slot.</li>\n        <li>If only one station transmits in a slot, the frame is delivered successfully.</li>\n        <li>If two or more stations transmit in the same slot, a collision occurs across the entire slot; all stations detect collision and wait a random number of slots before retrying.</li>\n      </ol>\n    ",
+      "eli10": "Imagine students submitting tests to a teacher. In Pure ALOHA, students walk up to the teacher's desk whenever they want, causing huge pile-ups. In Slotted ALOHA, a school bell rings every 5 minutes: students can only walk up when the bell rings! If two students stand up on the same bell, they collide, but nobody collides between the bells.",
+      "analogy": "A synchronized subway turnstile that only unlocks on the exact strike of the minute: passengers can only step through on the minute mark, preventing people from jamming the door halfway through.",
+      "howItWorks": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Vulnerable Time in Slotted ALOHA ($1T_{fr}$)</h3>\n      <p>Because frames are forced to transmit strictly at slot boundaries, partial frame overlaps are physically impossible:</p>\n      <div class=\"p-4 bg-emerald-50 dark:bg-emerald-950/40 border-l-4 border-emerald-500 rounded-r text-xs space-y-2\">\n        <p>A frame transmitted in Slot $k$ can only collide with other frames transmitted in that <strong>exact same slot</strong>.</p>\n        <p>Therefore, a collision occurs if and only if another station generates a frame during the immediately preceding slot interval of duration $T_{fr}$.</p>\n        <p class=\"font-bold text-emerald-900 dark:text-emerald-200 text-sm\">\n          $$\\text{Vulnerable Time} = T_{fr}$$\n        </p>\n      </div>\n      <p class=\"text-xs text-gray-600 dark:text-gray-400 mt-2\">Notice that the vulnerable time of Slotted ALOHA is exactly <strong>half</strong> that of Pure ALOHA ($T_{fr}$ vs. $2T_{fr}$).</p>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Throughput Mathematical Derivation</h3>\n      <p>With a vulnerable time of $T_{fr}$, the probability that zero other frames are transmitted in the same slot is $P(0) = e^{-G}$. Therefore, the throughput equation is:</p>\n      <div class=\"p-3 my-2 bg-slate-100 dark:bg-slate-800 rounded font-mono text-xs text-center\">\n        $$S = G \\cdot e^{-G}$$\n      </div>\n      <p>Taking the derivative and finding the maximum:</p>\n      <div class=\"p-3 my-2 bg-slate-100 dark:bg-slate-800 rounded font-mono text-xs text-center\">\n        $$\\frac{dS}{dG} = e^{-G} - G e^{-G} = 0 \\implies 1 - G = 0 \\implies G = 1.0$$\n      </div>\n      <p>Substituting $G = 1.0$ into the equation:</p>\n      <div class=\"p-3 my-2 bg-slate-100 dark:bg-slate-800 rounded font-mono text-xs text-center\">\n        $$S_{\\text{max}} = 1.0 \\cdot e^{-1} = \\frac{1}{e} \\approx 0.367879 = 36.8\\%$$\n      </div>\n      <div class=\"wiki-callout note mt-3\">\n        <div class=\"callout-header font-bold text-blue-800 dark:text-blue-300\">💡 Important University Exam Takeaway</div>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Slotted ALOHA achieves exactly <strong>twice</strong> the maximum theoretical throughput of Pure ALOHA ($36.8\\%$ vs. $18.4\\%$) by eliminating partial frame overlaps through slot synchronization!</p>\n      </div>\n    ",
       "diagram": "",
+      "technicalDetails": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Master Comparison: Pure ALOHA vs. Slotted ALOHA (PDF Section 6)</h3>\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Comparative Feature</th>\n            <th>Pure ALOHA</th>\n            <th>Slotted ALOHA</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td><strong>Transmission Timing</strong></td>\n            <td>Any continuous time instant</td>\n            <td>Strictly at the beginning of a time slot</td>\n          </tr>\n          <tr>\n            <td><strong>Clock Synchronization</strong></td>\n            <td>Not required (Asynchronous)</td>\n            <td>Strictly required across all nodes</td>\n          </tr>\n          <tr>\n            <td><strong>Vulnerable Time</strong></td>\n            <td>$2 T_{fr}$</td>\n            <td>$T_{fr}$ (Half of Pure ALOHA)</td>\n          </tr>\n          <tr>\n            <td><strong>Throughput Equation</strong></td>\n            <td>$S = G e^{-2G}$</td>\n            <td>$S = G e^{-G}$</td>\n          </tr>\n          <tr>\n            <td><strong>Optimal Load ($G$)</strong></td>\n            <td>$G = 0.5$</td>\n            <td>$G = 1.0$</td>\n          </tr>\n          <tr>\n            <td><strong>Maximum Throughput</strong></td>\n            <td>$18.4\\%$ ($\\frac{1}{2e}$)</td>\n            <td>$36.8\\%$ ($\\frac{1}{e}$) — <strong>Doubled!</strong></td>\n          </tr>\n          <tr>\n            <td><strong>Collision Overlap</strong></td>\n            <td>Partial or complete overlap</td>\n            <td>Complete slot overlap only</td>\n          </tr>\n          <tr>\n            <td><strong>Implementation Complexity</strong></td>\n            <td>Very simple</td>\n            <td>Moderate (Requires slot clock recovery)</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Slotted ALOHA Protocol?<br><br><strong>Answer:</strong> Slotted ALOHA divides time into discrete synchronized slots equal to the frame transmission time (T_fr). Stations can only begin transmission at the beginning of a slot boundary. This reduces the vulnerable period from 2 * T_fr to T_fr, doubling maximum throughput to S = 1 / e ≈ 36.8% at G = 1.0.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
+        "level1": "<strong>Numerical Problem 2 (From PDF Section 12.3):</strong> Calculate the throughput of Slotted ALOHA when the offered load is $G = 1.0$.<br><br><strong>Given:</strong> $G = 1.0$.<br><strong>Formula:</strong> $S = G e^{-G}$.<br><strong>Calculation:</strong><br>$S = 1.0 \\cdot e^{-1} = 0.367879 = 36.79\\%$.<br><strong>Answer:</strong> 36.79% (or 36.8%) throughput.",
+        "level2": "<strong>Numerical Problem 3b (From PDF Section 12.4):</strong> A network transmits frames requiring $2\\text{ ms}$. Compare the vulnerable times of Pure ALOHA and Slotted ALOHA.<br><br><strong>Given:</strong> $T_{fr} = 2\\text{ ms}$.<br>• Pure ALOHA: $2 T_{fr} = 2 \\times 2 = 4\\text{ ms}$.<br>• Slotted ALOHA: $T_{fr} = 2\\text{ ms}$.<br><strong>Answer:</strong> Pure = 4 ms; Slotted = 2 ms.",
+        "level3": "<strong>Analysis:</strong> A Slotted ALOHA channel has 200 slots per second. If the channel carries an average of 100 new frames per second and 50 retransmitted frames per second, what is the throughput?<br><br><strong>Answer:</strong><br>Total attempts per second: $100 + 50 = 150$ attempts/sec.<br>Offered load per slot: $G = \\frac{150}{200} = 0.75$.<br>Throughput: $S = G e^{-G} = 0.75 \\cdot e^{-0.75} = 0.75 \\times 0.47237 = 0.3543 = 35.43\\%$.<br>Successful frames delivered per second = $0.3543 \\times 200 = 70.86$ frames/sec."
       },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Advantages</th>\n            <th>Disadvantages</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Twice the maximum capacity of Pure ALOHA ($36.8\\%$ vs. $18.4\\%$).</td>\n            <td>Requires strict slot clock synchronization among all nodes.</td>\n          </tr>\n          <tr>\n            <td>Reduced collision window: vulnerable time cut by $50\\%$.</td>\n            <td>Collisions still occur when two nodes pick the same slot.</td>\n          </tr>\n          <tr>\n            <td>Eliminates partial frame corruptions.</td>\n            <td>Stations must wait for slot boundaries, introducing minor delay.</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Satellite reservation uplinks (DVB-RCS return channels).",
+        "Cellular GSM Random Access Channel (RACH) for phone call initiation.",
+        "Commercial packet radio telemetry."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Slotted ALOHA Protocol?",
+          "question": "Why does Slotted ALOHA achieve twice the maximum throughput of Pure ALOHA?",
           "options": [
-            "Slotted ALOHA divides time into discrete synchronized slots ...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "Because its vulnerable time is reduced from $2T_{fr}$ to $1T_{fr}$, eliminating partial frame collisions",
+            "Because it doubles the physical transmission speed of the wire",
+            "Because stations sense the channel before transmitting",
+            "Because it uses CRC error-correcting codes"
           ],
           "correct": 0,
-          "explanation": "The primary role is: Slotted ALOHA divides time into discrete synchronized slots equal to the frame transmission time (T_fr). Stations can only begin transmission at the beginning of a slot boundary. This reduces the vulnerable period from 2 * T_fr to T_fr, doubling maximum throughput to S = 1 / e ≈ 36.8% at G = 1.0."
+          "explanation": "By enforcing transmissions to start strictly at slot boundaries, partial frame overlaps are eliminated, cutting the vulnerable time from $2T_{fr}$ to $T_{fr}$ and doubling throughput to 36.8%."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
-          "url": ""
-        },
-        {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 12, Section 12.1.1 (Slotted ALOHA).",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Slotted_ALOHA.svg",
-      "imageCaption": "Figure: Slotted ALOHA Synchronized Discrete Slots and Maximum Theoretical Throughput of 36.8% (1/e)."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Slotted_ALOHA.svg",
-    "imageCaption": "Figure: Slotted ALOHA Synchronized Discrete Slots and Maximum Theoretical Throughput of 36.8% (1/e)."
+      ]
+    }
   },
   "u2-csma-1-persistent": {
     "id": "u2-csma-1-persistent",
     "title": "1-Persistent CSMA",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "Tanenbaum Ch. 4.2.3",
-    "oneLiner": "Listen before talk: if the channel is idle, transmit immediately with probability 1; if busy, wait until idle.",
-    "quickAnswer": "In 1-Persistent CSMA, a station senses the channel before transmitting. If the channel is busy, the station continuously listens until it detects the channel becoming idle, then transmits immediately with probability p = 1. If two stations are waiting for the channel to clear, both transmit simultaneously, causing a guaranteed collision.",
-    "whyItMatters": "1-Persistent CSMA is the foundation of classic IEEE 802.3 Ethernet MAC operation.",
+    "topicNumber": 4,
+    "subtopicNumber": 5,
+    "whyItMatters": "CSMA introduced the revolutionary principle of 'Listen before talk'. In 1-Persistent CSMA, a station transmits with probability 1 the instant an idle channel is detected, maximizing speed on lightly loaded networks.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "Carrier Sensing",
+        "meaning": "Listening to the medium to detect electrical or RF energy"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Propagation Delay (Tp)",
+        "meaning": "Time taken for a signal to physically travel between distant stations"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define Carrier Sense Multiple Access (CSMA) and explain its core principle: 'Listen before you transmit'.",
+      "Explain why collisions can still occur in CSMA due to finite signal propagation delay ($T_p$).",
+      "Trace the operational algorithm of 1-Persistent CSMA.",
+      "Evaluate the vulnerability of 1-Persistent CSMA to simultaneous transmission collisions when a busy channel clears."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layer 2 (MAC Sublayer)",
+      "standard": "IEEE 802.3 Foundation / Kleinrock & Tobagi (1975)",
+      "type": "Continuous Sensing Contention Protocol",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-random-access-protocols",
+        "u2-pure-aloha"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "u2-csma-non-persistent",
+        "u2-csma-p-persistent",
+        "u2-csma-cd"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "u2-csma-non-persistent",
+        "u2-csma-p-persistent"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Lightly loaded bus LANs, legacy Ethernet base access"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ab/1-persistent_CSMA%E2%81%84CD_collision.png",
+    "imageCaption": "Figure: 1-Persistent CSMA Channel Sensing and Immediate Transmission State (Behrouz A. Forouzan).",
     "sections": {
-      "overview": "<p>In <strong>1-Persistent Carrier Sense Multiple Access</strong>, a station monitors the channel. As soon as the wire becomes idle, it transmits immediately. While this eliminates idle channel waste, it causes high collision rates when multiple stations queue packets while a long frame is on the wire.</p>",
-      "eli10": "In simple words: Listen before talk: if the channel is idle, transmit immediately with probability 1; if busy, wait until idle.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
+      "overview": "\n      <p><strong>Carrier Sense Multiple Access (CSMA)</strong> is a family of contention protocols based on the fundamental principle of <strong>'Listen before you transmit'</strong>.</p>\n      \n      <p>In both Pure ALOHA and Slotted ALOHA, stations transmit blindly without checking the channel status. CSMA greatly reduces collisions by requiring every station to sense whether the medium is currently idle or busy before injecting a frame.</p>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Definition of 1-Persistent CSMA</h3>\n      <p>In <strong>1-Persistent CSMA</strong>, a station that has a frame ready to transmit continuously monitors the channel. The term <em>'1-persistent'</em> means that as soon as the station detects that the channel has become idle, it transmits immediately with a <strong>probability of 1 (100% certainty)</strong>.</p>\n      \n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Step-by-Step Working Principle</h3>\n      <ol class=\"wiki-ordered-list\">\n        <li>The station has a frame ready for transmission.</li>\n        <li>It senses the communication channel for carrier activity.</li>\n        <li><strong>If the channel is idle:</strong> The station transmits immediately (probability = 1).</li>\n        <li><strong>If the channel is busy:</strong> The station does not back off; it continues sensing the channel continuously.</li>\n        <li>The microsecond the active transmission ends and the channel becomes idle, the station transmits immediately.</li>\n      </ol>\n    ",
+      "eli10": "Imagine two polite people waiting to speak to a doctor. In 1-Persistent CSMA, both people stand right outside the doctor's door listening intently. The instant the doctor finishes saying goodbye to the current patient, both people burst through the door at the exact same fraction of a second and bump heads!",
+      "analogy": "Drivers waiting at a red traffic light who slam on the gas pedal the millisecond the light turns green: if two cars are side by side trying to merge into one lane, they crash immediately.",
+      "howItWorks": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Why Collisions Still Occur in CSMA: The Propagation Delay Factor ($T_p$)</h3>\n      <p>Even though CSMA stations listen before transmitting, collisions cannot be completely eliminated. The fundamental physical reason is <strong>finite signal propagation delay ($T_p$)</strong>:</p>\n      <div class=\"p-4 bg-amber-50 dark:bg-amber-950/40 border-l-4 border-amber-500 rounded-r text-xs space-y-2\">\n        <p>1. Suppose Station A and Station B are at opposite ends of a 1 km cable. Signals travel down copper at roughly $200,000\\text{ km/s}$, so one-way propagation delay $T_p = 5\\ \\mu\\text{s}$.</p>\n        <p>2. At time $t = 0$, Station A senses the channel, finds it idle, and begins transmitting.</p>\n        <p>3. At time $t = 3\\ \\mu\\text{s}$, Station A's electrical signal has only traveled 600 meters; it has not yet reached Station B.</p>\n        <p>4. At $t = 3\\ \\mu\\text{s}$, Station B has a frame to send. It senses the channel. Because Station A's signal has not yet arrived, Station B detects the channel as <strong>idle</strong>!</p>\n        <p>5. Station B begins transmitting. At $t = 4\\ \\mu\\text{s}$, the two signals collide in the middle of the cable!</p>\n      </div>\n      <p class=\"text-xs text-gray-600 dark:text-gray-400 mt-2\"><strong>Vulnerable Time in CSMA:</strong> The vulnerable time in CSMA is equal to the maximum one-way propagation delay: $\\text{Vulnerable Time} = T_p$. This is vastly shorter than Pure ALOHA's $2T_{fr}$, explaining CSMA's much higher efficiency.</p>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">The 1-Persistent Flaw Under Heavy Traffic</h3>\n      <p>If Station X is transmitting a long frame, other stations (e.g., Station Y and Station Z) may generate frames and start sensing. Both see the channel is busy. In 1-persistent CSMA, both Y and Z wait and continuously monitor. The moment Station X finishes, both Y and Z detect idle at the exact same instant, both transmit with probability 1, and <strong>a collision is guaranteed 100% of the time</strong>!</p>\n    ",
       "diagram": "",
+      "technicalDetails": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">1-Persistent Algorithm State Machine</h3>\n      <div class=\"p-3 bg-gray-900 text-gray-100 rounded font-mono text-xs\">\n        <p class=\"text-emerald-400\">// 1-Persistent CSMA Logic</p>\n        <p>while (channel == BUSY) {</p>\n        <p class=\"pl-4 text-slate-400\">// Keep sensing continuously (100% persistence)</p>\n        <p>}</p>\n        <p class=\"text-blue-400\">transmitFrame(); // Transmit with probability P = 1</p>\n      </div>\n    ",
       "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of 1-Persistent CSMA?<br><br><strong>Answer:</strong> In 1-Persistent CSMA, a station senses the channel before transmitting. If the channel is busy, the station continuously listens until it detects the channel becoming idle, then transmits immediately with probability p = 1. If two stations are waiting for the channel to clear, both transmit simultaneously, causing a guaranteed collision.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
+        "level1": "<strong>Question:</strong> What is the core rule of 1-persistent CSMA when a station senses that the channel is busy?<br><br><strong>Answer:</strong> The station continuously monitors and listens to the channel until it becomes idle, and then transmits immediately with probability 1.",
+        "level2": "<strong>Problem:</strong> Why does 1-persistent CSMA have a high collision probability under heavy traffic loads?<br><br><strong>Answer:</strong> While one station is transmitting, multiple waiting stations will generate data and start sensing. All of them wait for the transmission to finish. The instant the channel clears, all waiting stations transmit simultaneously with probability 1, causing an immediate collision.",
+        "level3": "<strong>Analysis:</strong> Why is the vulnerable period in CSMA equal to $T_p$ rather than $2T_{fr}$ as in ALOHA?<br><br><strong>Answer:</strong> Because stations listen before transmitting. Once Station A's signal has traveled across the medium to all stations (taking propagation time $T_p$), all other stations will detect the channel as busy and refrain from transmitting. Collisions can only occur during the first $T_p$ seconds before Station A's wavefront reaches distant nodes."
       },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Advantages</th>\n            <th>Disadvantages</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Minimal delay when traffic is light: transmits immediately on idle.</td>\n            <td>Guaranteed collisions when multiple stations wait for a busy channel to clear.</td>\n          </tr>\n          <tr>\n            <td>Zero deliberate idle time wasted after channel becomes free.</td>\n            <td>Collision rate climbs rapidly under moderate to heavy traffic.</td>\n          </tr>\n          <tr>\n            <td>Simple algorithm without complex probability generators.</td>\n            <td>Requires continuous carrier monitoring, consuming power.</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Traditional IEEE 802.3 Ethernet (which combines 1-persistent sensing with collision detection).",
+        "Low-latency industrial serial sensor buses."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of 1-Persistent CSMA?",
+          "question": "In 1-persistent CSMA, what does a station do when it detects that the channel has become idle?",
           "options": [
-            "In 1-Persistent CSMA, a station senses the channel before tr...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "Transmits immediately with probability 1",
+            "Waits for a random backoff time before transmitting",
+            "Transmits with probability p and defers with probability 1 - p",
+            "Sends an RTS request to the access point"
           ],
           "correct": 0,
-          "explanation": "The primary role is: In 1-Persistent CSMA, a station senses the channel before transmitting. If the channel is busy, the station continuously listens until it detects the channel becoming idle, then transmits immediately with probability p = 1. If two stations are waiting for the channel to clear, both transmit simultaneously, causing a guaranteed collision."
+          "explanation": "In 1-persistent CSMA, the station transmits immediately with probability 1 as soon as an idle channel is sensed."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
-          "url": ""
-        },
-        {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 12, Section 12.1.2 (CSMA).",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ab/1-persistent_CSMA%E2%81%84CD_collision.png",
-      "imageCaption": "Figure: 1-Persistent CSMA: Transmit Immediately with Probability 1 when Channel Becomes Idle."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ab/1-persistent_CSMA%E2%81%84CD_collision.png",
-    "imageCaption": "Figure: 1-Persistent CSMA: Transmit Immediately with Probability 1 when Channel Becomes Idle."
+      ]
+    }
   },
   "u2-csma-non-persistent": {
     "id": "u2-csma-non-persistent",
     "title": "Non-Persistent CSMA",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "Tanenbaum Ch. 4.2.3",
-    "oneLiner": "If the channel is busy, wait a random time before sensing again to reduce collision probability.",
-    "quickAnswer": "In Non-Persistent CSMA, a station senses the channel. If idle, it transmits immediately. If busy, the station does NOT continuously listen; instead, it waits a random period of time before sensing the channel again. This drastically reduces collisions at the cost of higher channel idle delay.",
-    "whyItMatters": "It demonstrates the classic networking trade-off between collision prevention and channel latency.",
+    "topicNumber": 4,
+    "subtopicNumber": 6,
+    "whyItMatters": "Non-Persistent CSMA eliminates the 1-persistent collision rush. By forcing a station to wait a random time if the channel is busy, multiple waiting stations scatter in time rather than colliding simultaneously.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "u2-csma-1-persistent",
+        "meaning": "1-Persistent CSMA and its simultaneous clearing collision flaw"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Random Backoff",
+        "meaning": "Drawing random wait durations from a uniform probability distribution"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define Non-Persistent CSMA and explain how it prevents collisions when a busy channel clears.",
+      "Trace the 5-step operational algorithm of Non-Persistent CSMA.",
+      "Evaluate the trade-off: reduced collision probability vs. increased waiting delay and idle channel intervals.",
+      "Compare Non-Persistent CSMA directly with 1-Persistent CSMA."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layer 2 (MAC Sublayer)",
+      "standard": "Kleinrock & Tobagi Random Access Model (1975)",
+      "type": "Randomized Delay Contention Protocol",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-csma-1-persistent"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "u2-csma-1-persistent",
+        "u2-csma-p-persistent"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "u2-csma-1-persistent",
+        "u2-csma-p-persistent"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "High-traffic wireless sensor channels, military tactical packet radios"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ab/1-persistent_CSMA%E2%81%84CD_collision.png",
+    "imageCaption": "Figure: Non-Persistent CSMA Random Delay and Re-sensing Decision Flow.",
     "sections": {
-      "overview": "<p>Non-Persistent CSMA reduces collisions by preventing multiple waiting stations from simultaneously bursting onto the wire the moment an ongoing transmission finishes. However, the channel often sits idle while waiting stations count down their backoff timers.</p>",
-      "eli10": "In simple words: If the channel is busy, wait a random time before sensing again to reduce collision probability.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
+      "overview": "\n      <p><strong>Non-Persistent CSMA</strong> is a carrier sense protocol designed to solve the primary vulnerability of 1-persistent CSMA: the guaranteed collision that occurs when multiple stations wait for a busy channel to clear.</p>\n      \n      <p>In Non-Persistent CSMA, a station is <em>not persistent</em> in its listening. If a station senses the channel and finds it <strong>busy</strong>, it does not stand by continuously waiting for the end of the transmission. Instead, it immediately halts sensing, <strong>waits for a random period of time</strong>, and then senses the channel again.</p>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Step-by-Step Working Principle</h3>\n      <ol class=\"wiki-ordered-list\">\n        <li>The station has a frame ready for transmission.</li>\n        <li>The station senses the communication channel.</li>\n        <li><strong>If the channel is idle:</strong> The station transmits its frame immediately.</li>\n        <li><strong>If the channel is busy:</strong> The station does NOT continue listening. It selects a random waiting time from a backoff distribution.</li>\n        <li>The station waits for the selected random duration.</li>\n        <li>After the timer expires, the station senses the channel again:\n          <ul class=\"list-disc pl-5 mt-1 space-y-0.5\">\n            <li>If idle: It transmits.</li>\n            <li>If still busy: It selects another random waiting time and repeats the process.</li>\n          </ul>\n        </li>\n      </ol>\n    ",
+      "eli10": "Imagine you want to use the bathroom, but the door is locked because someone is inside. In 1-persistent, you stand with your hand on the doorknob waiting to twist it the millisecond it unlocks. In non-persistent, you walk back to your desk, play a video game for 5 minutes, and then walk back to check if it's free. If someone else also wanted the bathroom, you won't bump into each other!",
+      "analogy": "Calling a busy phone line: instead of pressing redial every single second, you hang up, wait 10 minutes, and call back later.",
+      "howItWorks": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">How Non-Persistent CSMA Prevents Collisions</h3>\n      <p>Consider the scenario where Station A is transmitting, while Station B and Station C both generate frames:</p>\n      <ul class=\"wiki-bullet-list\">\n        <li>Both B and C sense the channel and find it busy.</li>\n        <li>Under 1-persistent CSMA, both would wait and collide the instant A finishes.</li>\n        <li>Under <strong>Non-Persistent CSMA</strong>, Station B generates a random wait of $12\\text{ ms}$, while Station C generates a random wait of $27\\text{ ms}$.</li>\n        <li>When Station A finishes, the channel clears. At $t = 12\\text{ ms}$, Station B wakes up, senses the idle channel, and transmits safely.</li>\n        <li>By the time Station C wakes up at $t = 27\\text{ ms}$, it senses that Station B is transmitting, backs off for another random interval, and avoids colliding!</li>\n      </ul>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">The Downside: Wasted Idle Time</h3>\n      <p>Because waiting stations are asleep during random backoffs, the channel may become completely idle after Station A finishes, sitting empty for milliseconds before Station B wakes up. This introduces <strong>higher average packet latency</strong> and wastes channel capacity when traffic is light.</p>\n    ",
       "diagram": "",
+      "technicalDetails": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Non-Persistent Algorithm Pseudo-Code</h3>\n      <div class=\"p-3 bg-gray-900 text-gray-100 rounded font-mono text-xs\">\n        <p class=\"text-emerald-400\">// Non-Persistent CSMA Algorithm</p>\n        <p>while (true) {</p>\n        <p class=\"pl-4\">if (channel == IDLE) {</p>\n        <p class=\"pl-8 text-blue-400\">transmitFrame();</p>\n        <p class=\"pl-8 text-blue-400\">break;</p>\n        <p class=\"pl-4\">} else {</p>\n        <p class=\"pl-8 text-amber-400\">R = randomBackoffTime();</p>\n        <p class=\"pl-8 text-amber-400\">sleep(R);</p>\n        <p class=\"pl-4\">}</p>\n        <p>}</p>\n      </div>\n    ",
       "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Non-Persistent CSMA?<br><br><strong>Answer:</strong> In Non-Persistent CSMA, a station senses the channel. If idle, it transmits immediately. If busy, the station does NOT continuously listen; instead, it waits a random period of time before sensing the channel again. This drastically reduces collisions at the cost of higher channel idle delay.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
+        "level1": "<strong>Question:</strong> What does a station do in Non-Persistent CSMA if it senses that the channel is busy?<br><br><strong>Answer:</strong> It stops sensing immediately, waits for a random period of time, and then senses the channel again.",
+        "level2": "<strong>Problem:</strong> What is the main advantage and main disadvantage of Non-Persistent CSMA compared to 1-Persistent CSMA?<br><br><strong>Answer:</strong><br>• <strong>Advantage:</strong> Drastically reduces collisions under heavy traffic because waiting stations scatter their re-sensing times randomly.<br>• <strong>Disadvantage:</strong> Introduces longer waiting times and may leave the channel idle even when stations have frames ready to send.",
+        "level3": "<strong>Analysis:</strong> Why does Non-Persistent CSMA achieve higher peak throughput than 1-Persistent CSMA at high offered loads?<br><br><strong>Answer:</strong> At high loads ($G > 1$), 1-Persistent CSMA suffers catastrophic throughput collapse due to repeated collisions between waiting stations. Non-Persistent CSMA acts as a natural traffic damper by forcing competing nodes into randomized sleep intervals, preventing collision avalanches and maintaining throughput up to 85%."
       },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Advantages</th>\n            <th>Disadvantages</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Dramatically reduces collision probability under heavy traffic.</td>\n            <td>Introduces additional waiting delay for packets.</td>\n          </tr>\n          <tr>\n            <td>Higher maximum channel throughput than 1-persistent CSMA.</td>\n            <td>Channel may sit empty/idle while waiting stations are in backoff sleep.</td>\n          </tr>\n          <tr>\n            <td>Nodes do not continuously drain energy sensing a busy medium.</td>\n            <td>Slower transmission start when traffic is light.</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Wireless telemetry networks with bursty transmissions.",
+        "Low-power sensor nodes (where continuous carrier sensing drains batteries).",
+        "Academic multiple access performance benchmarks."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Non-Persistent CSMA?",
+          "question": "In non-persistent CSMA, what happens if a station finds the channel busy?",
           "options": [
-            "In Non-Persistent CSMA, a station senses the channel. If idl...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "It waits for a random period of time before sensing the channel again",
+            "It continuously senses until the channel becomes idle",
+            "It aborts transmission permanently and drops the packet",
+            "It broadcasts a jamming signal"
           ],
           "correct": 0,
-          "explanation": "The primary role is: In Non-Persistent CSMA, a station senses the channel. If idle, it transmits immediately. If busy, the station does NOT continuously listen; instead, it waits a random period of time before sensing the channel again. This drastically reduces collisions at the cost of higher channel idle delay."
+          "explanation": "Non-persistent CSMA avoids immediate collisions by having stations back off for a random period before re-sensing the channel."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
-          "url": ""
-        },
-        {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 12, Section 12.1.2.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Carrier_Sense_Multiple_Access_with_Collision_Detection.png",
-      "imageCaption": "Figure: Non-Persistent CSMA: Wait a Random Backoff Interval upon Detecting a Busy Medium."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Carrier_Sense_Multiple_Access_with_Collision_Detection.png",
-    "imageCaption": "Figure: Non-Persistent CSMA: Wait a Random Backoff Interval upon Detecting a Busy Medium."
+      ]
+    }
   },
   "u2-csma-p-persistent": {
     "id": "u2-csma-p-persistent",
     "title": "p-Persistent CSMA",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "Tanenbaum Ch. 4.2.3 / Forouzan Ch. 12.1",
-    "oneLiner": "Slotted channel sensing where an idle channel transmits with probability p and defers with probability 1-p.",
-    "quickAnswer": "p-Persistent CSMA applies to slotted channels. When a station finds the channel idle, it transmits with probability p, and defers to the next time slot with probability 1-p. If that next slot is also idle, it repeats the process. If busy, it executes backoff. Tuned properly, p * N ≈ 1 ensures high throughput and low collision.",
-    "whyItMatters": "p-Persistent CSMA balances aggressive transmission with collision deterrence and influenced IEEE 802.11 Wi-Fi backoff design.",
+    "topicNumber": 4,
+    "subtopicNumber": 7,
+    "whyItMatters": "p-Persistent CSMA combines the rapid responsiveness of 1-persistent with the collision avoidance of non-persistent. By introducing a transmission probability p on slotted channels, it provides tunable performance optimization.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "u2-csma-1-persistent",
+        "meaning": "1-Persistent immediate transmission"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Time Slots",
+        "meaning": "Slot boundaries equal to maximum propagation delay Tp"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define p-Persistent CSMA and explain how it operates on time-slotted channels.",
+      "Walk through the probabilistic decision rule: transmit with probability $p$, defer with probability $1-p$.",
+      "Calculate transmission outcomes for specific values of $p$ (e.g., $p = 0.4$).",
+      "Master the 5-parameter comparative matrix contrasting 1-Persistent, Non-Persistent, and p-Persistent CSMA."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layer 2 (MAC Sublayer)",
+      "standard": "IEEE 802.11 Contention / Packet Radio Standards",
+      "type": "Probabilistic Slotted Contention Protocol",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-csma-1-persistent",
+        "u2-csma-non-persistent"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "u2-csma-cd",
+        "u2-csma-ca"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "u2-csma-1-persistent",
+        "u2-csma-non-persistent"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Wi-Fi contention backoff modeling, slotted packet radio systems"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ab/1-persistent_CSMA%E2%81%84CD_collision.png",
+    "imageCaption": "Figure: p-Persistent CSMA Slotted Channel Probability Decision Flow (Behrouz A. Forouzan).",
     "sections": {
-      "overview": "<p>In <strong>p-Persistent CSMA</strong>, the parameter $p$ controls transmission aggressiveness. If $p$ is too high, collisions multiply; if $p$ is too low, slots are wasted idling.</p>",
-      "eli10": "In simple words: Slotted channel sensing where an idle channel transmits with probability p and defers with probability 1-p.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
+      "overview": "\n      <p><strong>p-Persistent CSMA</strong> is a sophisticated probabilistic protocol designed for communication channels that are divided into <strong>discrete time slots</strong> (where slot duration is equal to or greater than the maximum one-way propagation delay, $\\text{Slot} \\ge T_p$).</p>\n      \n      <p>It combines the best characteristics of 1-persistent CSMA (low idle delay) and non-persistent CSMA (low collision probability). When the channel becomes idle, the station does not automatically transmit with certainty; instead, it flips a biased mathematical coin and <strong>transmits with probability $p$</strong>, while <strong>deferring with probability $1 - p$</strong> to the next time slot.</p>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Step-by-Step Working Principle</h3>\n      <ol class=\"wiki-ordered-list\">\n        <li>The station senses the communication channel.</li>\n        <li><strong>If the channel is busy:</strong> It continues to wait and monitor until the channel becomes idle.</li>\n        <li><strong>When the channel becomes idle:</strong> The station generates a random probability value $r \\in [0, 1]$:\n          <ul class=\"list-disc pl-5 mt-1 space-y-1\">\n            <li><strong>With probability $p$ ($r \\le p$):</strong> The station transmits its frame immediately in this slot.</li>\n            <li><strong>With probability $1 - p$ ($r > p$):</strong> The station defers and waits for the next time slot.</li>\n          </ul>\n        </li>\n        <li>At the beginning of the next time slot, the station senses the channel again:\n          <ul class=\"list-disc pl-5 mt-1 space-y-1\">\n            <li><strong>If still idle:</strong> It repeats the probabilistic decision (transmits with probability $p$, defers with $1-p$).</li>\n            <li><strong>If now busy (another station transmitted):</strong> It recognizes that another station captured the channel, treats it as a collision, and initiates random backoff.</li>\n          </ul>\n        </li>\n      </ol>\n    ",
+      "eli10": "Imagine you and a classmate want to ask a question. The teacher stops talking. In p-persistent with $p = 0.4$, you roll a 10-sided die: if you roll a 1, 2, 3, or 4 (40% chance), you speak up! If you roll 5 through 10 (60% chance), you stay quiet for one second to see if your classmate speaks. If your classmate speaks, you wait until they finish.",
+      "analogy": "Controlled merging onto a highway: instead of all waiting cars gunning their engines at once, each driver enters with a 40% probability, leaving 60% probability that they let another car merge first.",
+      "howItWorks": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Concrete Numerical Example ($p = 0.4$) (PDF Section 8.3)</h3>\n      <p>Suppose $N$ stations are waiting for a busy channel to clear, with $p = 0.4$:</p>\n      <ul class=\"wiki-bullet-list\">\n        <li><strong>Probability of immediate transmission in Slot 1:</strong> $p = 0.4$ (40%).</li>\n        <li><strong>Probability of deferring to Slot 2:</strong> $1 - p = 0.6$ (60%).</li>\n        <li>If 2 stations are waiting (Station A and Station B):\n          <ul class=\"list-disc pl-5 mt-1 space-y-0.5\">\n            <li>Probability both transmit and collide: $p \\times p = 0.4 \\times 0.4 = 0.16$ (only 16%!).</li>\n            <li>Probability Station A transmits and Station B defers: $0.4 \\times 0.6 = 0.24$ (24% clean success).</li>\n            <li>Probability Station B transmits and Station A defers: $0.6 \\times 0.4 = 0.24$ (24% clean success).</li>\n            <li>Probability both defer: $0.6 \\times 0.6 = 0.36$ (36% channel idle for one slot).</li>\n          </ul>\n        </li>\n      </ul>\n      <p class=\"text-xs text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Total success probability in Slot 1 is $24\\% + 24\\% = 48\\%$, with only 16% collision risk, compared to 100% collision in 1-persistent CSMA!</p>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Master Comparison of CSMA Persistence Methods (PDF Section 8.4)</h3>\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Feature</th>\n            <th>1-Persistent CSMA</th>\n            <th>Non-Persistent CSMA</th>\n            <th>p-Persistent CSMA</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td><strong>When channel is busy</strong></td>\n            <td>Keeps sensing continuously</td>\n            <td>Waits random backoff time</td>\n            <td>Waits until channel becomes idle</td>\n          </tr>\n          <tr>\n            <td><strong>When channel becomes idle</strong></td>\n            <td>Transmits immediately ($p=1$)</td>\n            <td>Transmits after sensing if timer expired</td>\n            <td>Transmits with probability $p$; defers with $1-p$</td>\n          </tr>\n          <tr>\n            <td><strong>Slot Synchronization</strong></td>\n            <td>Not required by basic method</td>\n            <td>Not required by basic method</td>\n            <td><strong>Required</strong> (slotted channel)</td>\n          </tr>\n          <tr>\n            <td><strong>Collision Possibility</strong></td>\n            <td>Relatively high</td>\n            <td>Reduced / Low</td>\n            <td>Tunable (depends on value of $p$)</td>\n          </tr>\n          <tr>\n            <td><strong>Average Waiting Time</strong></td>\n            <td>Usually very low</td>\n            <td>Can be high</td>\n            <td>Tunable (depends on value of $p$)</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "diagram": "",
+      "technicalDetails": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Mathematical Optimization of Parameter $p$</h3>\n      <p>To avoid collisions when $N$ stations are waiting to transmit, we want exactly one station to transmit in the slot. The expected number of transmitting stations is $N \\cdot p$. Therefore, optimal throughput occurs when:</p>\n      <div class=\"p-3 my-2 bg-slate-100 dark:bg-slate-800 rounded font-mono text-xs text-center\">\n        $$N \\cdot p \\le 1 \\implies p \\le \\frac{1}{N}$$\n      </div>\n      <p class=\"text-xs text-gray-600 dark:text-gray-400 mt-2\">If $N = 10$ stations are contending, $p$ should be set to $\\approx 0.1$. If $p$ is set too high, collisions multiply; if $p$ is set too low, the channel sits idle for many slots before anyone transmits.</p>\n    ",
       "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of p-Persistent CSMA?<br><br><strong>Answer:</strong> p-Persistent CSMA applies to slotted channels. When a station finds the channel idle, it transmits with probability p, and defers to the next time slot with probability 1-p. If that next slot is also idle, it repeats the process. If busy, it executes backoff. Tuned properly, p * N ≈ 1 ensures high throughput and low collision.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
+        "level1": "<strong>Question:</strong> How does p-persistent CSMA decide whether to transmit when the channel becomes idle?<br><br><strong>Answer:</strong> It transmits with probability $p$, and defers with probability $1 - p$ to the next time slot, repeating the test until it transmits or another station captures the channel.",
+        "level2": "<strong>Problem:</strong> In a p-persistent CSMA network with $p = 0.25$, what is the probability that a station defers transmission to the next time slot?<br><br><strong>Answer:</strong> Probability of deferring = $1 - p = 1 - 0.25 = 0.75 = 75\\%$.",
+        "level3": "<strong>Analysis:</strong> Why does p-persistent CSMA require slot synchronization?<br><br><strong>Answer:</strong> Because the deferral step delays transmission by a discrete time slot. If stations do not share synchronized slot boundaries of duration $\\ge T_p$, a station that defers could transmit halfway through another station's frame, causing partial collision and defeating the purpose of probabilistic deferral."
       },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Advantages</th>\n            <th>Disadvantages</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Balances immediate transmission speed with collision avoidance.</td>\n            <td>Requires strict time slot synchronization across stations.</td>\n          </tr>\n          <tr>\n            <td>Significantly reduces collisions compared with 1-persistent CSMA.</td>\n            <td>Performance is heavily sensitive to the chosen value of $p$.</td>\n          </tr>\n          <tr>\n            <td>Tunable: $p$ can be adjusted dynamically based on traffic load.</td>\n            <td>More complex to implement than 1-persistent or non-persistent.</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Wi-Fi IEEE 802.11 DCF contention window mechanisms.",
+        "Military packet radio networks.",
+        "Slotted CSMA in IEEE 802.15.4 (Zigbee) sensor networks."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of p-Persistent CSMA?",
+          "question": "In p-persistent CSMA, if the channel is idle and $p = 0.3$, what is the probability that the station defers to the next time slot?",
           "options": [
-            "p-Persistent CSMA applies to slotted channels. When a statio...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "0.7 or 70%",
+            "0.3 or 30%",
+            "1.0 or 100%",
+            "0.0 or 0%"
           ],
           "correct": 0,
-          "explanation": "The primary role is: p-Persistent CSMA applies to slotted channels. When a station finds the channel idle, it transmits with probability p, and defers to the next time slot with probability 1-p. If that next slot is also idle, it repeats the process. If busy, it executes backoff. Tuned properly, p * N ≈ 1 ensures high throughput and low collision."
+          "explanation": "The probability of deferring is $1 - p = 1 - 0.3 = 0.7$ (70%)."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
-          "url": ""
-        },
-        {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 12, Section 12.1.2.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Carrier_Sense_Multiple_Access_with_Collision_Detection.png",
-      "imageCaption": "Figure: p-Persistent CSMA in Slotted Channels: Transmit with Probability p or Defer to Next Slot."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Carrier_Sense_Multiple_Access_with_Collision_Detection.png",
-    "imageCaption": "Figure: p-Persistent CSMA in Slotted Channels: Transmit with Probability p or Defer to Next Slot."
+      ]
+    }
   },
   "u2-csma-cd": {
     "id": "u2-csma-cd",
     "title": "CSMA with Collision Detection (CSMA/CD)",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "IEEE 802.3 / Tanenbaum Ch. 4.2.4",
-    "oneLiner": "Listen while transmitting: abort transmission immediately upon detecting collision and send a jam signal.",
-    "quickAnswer": "CSMA/CD improves CSMA by having stations listen to the wire while transmitting. If the electrical signal voltage exceeds normal threshold (indicating collision), the station immediately aborts transmission, broadcasts a 48-bit jam signal to notify other stations, and executes binary exponential backoff.",
-    "whyItMatters": "CSMA/CD is the defining innovation of Robert Metcalfe's Ethernet (IEEE 802.3), saving massive bandwidth by stopping collided frames early.",
+    "topicNumber": 4,
+    "subtopicNumber": 8,
+    "whyItMatters": "CSMA/CD is the legendary protocol of classic wired Ethernet (IEEE 802.3). By listening while transmitting, a station detects collisions instantly, aborts transmission, and executes binary exponential backoff, preventing bandwidth waste.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "u2-csma-1-persistent",
+        "meaning": "1-Persistent CSMA carrier sensing"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Minimum Frame Size",
+        "meaning": "Why transmission time must be at least twice propagation time (Tfr >= 2Tp)"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define CSMA/CD and explain its operational philosophy: 'Listen while transmitting'.",
+      "Trace the 8-step operational workflow of CSMA/CD.",
+      "Explain the purpose and duration of the 48-bit Jamming Signal.",
+      "Master the Binary Exponential Backoff Algorithm: $0 \\le R \\le 2^K - 1$ and $T_B = R \\times T_{\\text{slot}}$."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layer 2 (MAC Sublayer)",
+      "standard": "IEEE 802.3 (Ethernet) / ISO 8802-3",
+      "type": "Collision-Detecting Contention Protocol",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-csma-1-persistent"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "u2-csma-ca",
+        "u2-comparison-multiple-access",
+        "ethernet"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "u2-csma-ca"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Traditional shared coaxial and hub-based Ethernet local area networks"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Carrier_Sense_Multiple_Access_with_Collision_Detection.png",
+    "imageCaption": "Figure: CSMA/CD Flowchart: Sense Channel, Detect Collision, Send Jam, and Binary Backoff.",
     "sections": {
-      "overview": "<p>In standard CSMA, when two stations collide, they continue transmitting their entire frames, wasting channel bandwidth. <strong>CSMA/CD</strong> halts transmission within microseconds of detecting a collision.</p><div class=\"wiki-img-box my-4 text-center\"><img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/CSMA_CD_flowchart.svg/500px-CSMA_CD_flowchart.svg.png\" alt=\"CSMA CD flowchart\" class=\"mx-auto rounded-lg shadow border border-gray-200 dark:border-gray-700 max-h-80 object-contain\" onerror=\"this.style.display='none'\"><p class=\"text-xs text-gray-500 mt-1 italic\">Figure: CSMA/CD operational flowchart.</p></div><p>Key Condition: Transmission time must be at least twice the propagation delay: $T_{trans} \\ge 2 \\times T_{prop}$, establishing Ethernet's 64-byte minimum frame size.</p>",
-      "eli10": "In simple words: Listen while transmitting: abort transmission immediately upon detecting collision and send a jam signal.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
+      "overview": "\n      <p><strong>Carrier Sense Multiple Access with Collision Detection (CSMA/CD)</strong> is an enhancement of CSMA that allows a station to <strong>detect a collision while it is actively transmitting</strong>.</p>\n      \n      <p>In basic CSMA, if two stations collide, they continue blindly transmitting their entire frames to the very end, wasting precious channel capacity on garbled data. CSMA/CD solves this by requiring transmitting stations to monitor the cable. If a collision is detected, the station <strong>aborts transmission immediately</strong>, drastically reducing channel waste.</p>\n      \n      <p>CSMA/CD is the foundational MAC protocol of classic half-duplex <strong>IEEE 802.3 Ethernet</strong>.</p>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">The 8-Step Operational Workflow (PDF Section 9.3)</h3>\n      <ol class=\"wiki-ordered-list\">\n        <li>The station senses the communication channel (Carrier Sense).</li>\n        <li>If the channel is idle, the station begins transmitting its frame.</li>\n        <li><strong>While transmitting, the station continuously monitors the medium</strong> for electrical collision waveforms (Collision Detection).</li>\n        <li>If no collision is detected throughout the transmission, the frame is delivered successfully.</li>\n        <li><strong>If a collision is detected:</strong> The station stops transmitting frame data immediately.</li>\n        <li>The station transmits a <strong>Jamming Signal</strong> (32 to 48 bits) to ensure all other stations on the cable detect the collision.</li>\n        <li>The station increments its collision counter $K$ and calculates a random wait using the <strong>Binary Exponential Backoff Algorithm</strong>.</li>\n        <li>After waiting for the backoff time, the station attempts retransmission from Step 1.</li>\n      </ol>\n    ",
+      "eli10": "Imagine you are talking on a phone. In CSMA/CD, you listen with your ears at the exact same time you are speaking with your mouth. If you hear the other person start talking over you, you don't keep reading your whole 5-page speech! You stop instantly, yell 'Wait!', and pause for a few seconds before trying again.",
+      "analogy": "Walking down a narrow hallway while looking ahead: if you see someone stepping into the hallway, you stop immediately rather than running full speed into them and falling down.",
+      "howItWorks": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">The Jamming Signal (PDF Section 9.4)</h3>\n      <p>When a station detects a collision, it does not simply go silent. It immediately transmits a <strong>Jamming Signal</strong> (typically 32 to 48 bits of alternating 1s and 0s). This guarantees that the electrical collision disturbance persists on the wire long enough for all other colliding and listening stations across the entire length of the cable to observe the collision and discard partial frames.</p>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">The Binary Exponential Backoff Algorithm (PDF Section 9.5)</h3>\n      <p>To prevent stations that just collided from retrying at the exact same instant, Ethernet uses the <strong>Binary Exponential Backoff Algorithm</strong>:</p>\n      <div class=\"p-4 bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900 rounded-xl text-xs space-y-2\">\n        <p>1. Let $K$ be the collision attempt counter for the current frame (initially $K = 0$).</p>\n        <p>2. Upon collision, increment $K = K + 1$. (After 10 collisions, $K$ is capped at 10; after 16 collisions, the frame is aborted and dropped).</p>\n        <p>3. Select a random integer $R$ from the uniform range:</p>\n        <div class=\"p-2 bg-white dark:bg-slate-900 rounded font-mono text-center text-sm font-bold text-blue-700 dark:text-blue-300\">\n          $$0 \\le R \\le 2^K - 1$$\n        </div>\n        <p>4. The backoff waiting time $T_B$ is calculated as:</p>\n        <div class=\"p-2 bg-white dark:bg-slate-900 rounded font-mono text-center text-sm font-bold text-blue-700 dark:text-blue-300\">\n          $$T_B = R \\times T_{\\text{slot}}$$\n        </div>\n        <p>Where $T_{\\text{slot}}$ is the standard Ethernet slot time ($512\\text{ bit times} = 51.2\\ \\mu\\text{s}$ in 10 Mbps Ethernet).</p>\n      </div>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">The Minimum Frame Size Requirement</h3>\n      <p>For a station to detect a collision, the frame transmission time $T_{fr}$ must be long enough that the sender is still transmitting when the collision signal returns from the most distant node on the cable:</p>\n      <div class=\"p-3 my-2 bg-slate-100 dark:bg-slate-800 rounded font-mono text-xs text-center\">\n        $$T_{fr} \\ge 2 \\cdot T_p \\implies L_{\\text{min}} = 2 \\cdot T_p \\cdot \\text{Bandwidth}$$\n      </div>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">This fundamental constraint is why standard Ethernet enforces a <strong>minimum frame size of 64 bytes (512 bits)</strong>.</p>\n    ",
       "diagram": "",
+      "technicalDetails": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Exponential Backoff Progression Table</h3>\n      <table class=\"wiki-table\">\n        <thead><tr><th>Collision Attempt ($K$)</th><th>Range of $R$ ($0 \\le R \\le 2^K - 1$)</th><th>Possible Backoff Multipliers</th></tr></thead>\n        <tbody>\n          <tr><td>1st collision ($K=1$)</td><td>$0 \\le R \\le 2^1 - 1 = 1$</td><td>$R \\in \\{0, 1\\}$</td></tr>\n          <tr><td>2nd collision ($K=2$)</td><td>$0 \\le R \\le 2^2 - 1 = 3$</td><td>$R \\in \\{0, 1, 2, 3\\}$</td></tr>\n          <tr><td>3rd collision ($K=3$)</td><td>$0 \\le R \\le 2^3 - 1 = 7$</td><td>$R \\in \\{0, 1, 2, 3, 4, 5, 6, 7\\}$</td></tr>\n          <tr><td>4th collision ($K=4$)</td><td>$0 \\le R \\le 2^4 - 1 = 15$</td><td>$R \\in \\{0, 1, \\dots, 15\\}$</td></tr>\n          <tr><td>10th collision ($K=10$)</td><td>$0 \\le R \\le 2^{10} - 1 = 1023$</td><td>$R \\in \\{0, 1, \\dots, 1023\\}$</td></tr>\n        </tbody>\n      </table>\n    ",
       "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of CSMA with Collision Detection (CSMA/CD)?<br><br><strong>Answer:</strong> CSMA/CD improves CSMA by having stations listen to the wire while transmitting. If the electrical signal voltage exceeds normal threshold (indicating collision), the station immediately aborts transmission, broadcasts a 48-bit jam signal to notify other stations, and executes binary exponential backoff.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
+        "level1": "<strong>Numerical Problem 4 (From PDF Section 12.5):</strong> A station experiences three collisions ($K = 3$). Find the possible random values of $R$ in the binary exponential backoff algorithm.<br><br><strong>Given:</strong> $K = 3$.<br><strong>Formula:</strong> $0 \\le R \\le 2^K - 1$.<br><strong>Calculation:</strong> $0 \\le R \\le 2^3 - 1 = 8 - 1 = 7$.<br><strong>Answer:</strong> $R$ can be any integer in $\\{0, 1, 2, 3, 4, 5, 6, 7\\}$.",
+        "level2": "<strong>Problem:</strong> On a 10 Mbps Ethernet link with a slot time of $51.2\\ \\mu\\text{s}$, a station suffers its second collision ($K=2$) and randomly chooses $R = 2$. Calculate its backoff waiting time $T_B$.<br><br><strong>Given:</strong> $R = 2$, $T_{\\text{slot}} = 51.2\\ \\mu\\text{s}$.<br><strong>Calculation:</strong> $T_B = R \\times T_{\\text{slot}} = 2 \\times 51.2\\ \\mu\\text{s} = 102.4\\ \\mu\\text{s}$.<br><strong>Answer:</strong> The station waits $102.4\\ \\mu\\text{s}$ before sensing the channel again.",
+        "level3": "<strong>Analysis:</strong> Why is CSMA/CD not used in modern full-duplex switched Gigabit Ethernet networks?<br><br><strong>Answer:</strong> In modern switched Ethernet, every station has a dedicated point-to-point link to a switch port with separate transmit (Tx) and receive (Rx) wire pairs. Because transmission and reception occur on physically isolated channels, collisions cannot occur. Collision detection circuitry and backoff algorithms are therefore disabled in full-duplex mode."
       },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Advantages</th>\n            <th>Disadvantages</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Detects collisions during transmission and aborts immediately.</td>\n            <td>Cannot be used over wireless media (transmitters blind local receivers).</td>\n          </tr>\n          <tr>\n            <td>Saves channel time by eliminating transmission of corrupted frames.</td>\n            <td>Requires a minimum frame size (64 bytes) to ensure collision detection.</td>\n          </tr>\n          <tr>\n            <td>Exponential backoff automatically adapts delay to network congestion.</td>\n            <td>Not needed in modern full-duplex switched Ethernet environments.</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Traditional shared Ethernet (10BASE5 thicknet, 10BASE2 thinnet, 10BASE-T with hubs).",
+        "CAN bus automotive vehicle communications (uses bitwise arbitration CSMA/CD).",
+        "Half-duplex legacy network equipment."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of CSMA with Collision Detection (CSMA/CD)?",
+          "question": "In CSMA/CD, what is the purpose of the jamming signal sent after a collision is detected?",
           "options": [
-            "CSMA/CD improves CSMA by having stations listen to the wire ...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "To ensure that all other transmitting and listening stations become aware that a collision occurred",
+            "To reset the master router",
+            "To assign IP addresses to new nodes",
+            "To acknowledge receipt of the preceding frame"
           ],
           "correct": 0,
-          "explanation": "The primary role is: CSMA/CD improves CSMA by having stations listen to the wire while transmitting. If the electrical signal voltage exceeds normal threshold (indicating collision), the station immediately aborts transmission, broadcasts a 48-bit jam signal to notify other stations, and executes binary exponential backoff."
+          "explanation": "The jamming signal ensures the collision voltage disturbance is sustained long enough for all stations across the network to detect it."
+        },
+        {
+          "question": "In Ethernet CSMA/CD, what algorithm is used to calculate the waiting time after a collision?",
+          "options": [
+            "Binary exponential backoff",
+            "Round-robin scheduling",
+            "Dijkstra shortest path",
+            "Leaky bucket rate shaping"
+          ],
+          "correct": 0,
+          "explanation": "Ethernet CSMA/CD employs the Binary Exponential Backoff algorithm ($0 \\le R \\le 2^K - 1$)."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 12, Section 12.1.3 (CSMA/CD).",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "IEEE Std 802.3-2022: Ethernet Standard for Information Technology.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Carrier_Sense_Multiple_Access_with_Collision_Detection.png",
-      "imageCaption": "Figure: CSMA/CD Operational Flowchart: Listen While Talking, Collision Abort, Jam Signal, and Exponential Backoff."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Carrier_Sense_Multiple_Access_with_Collision_Detection.png",
-    "imageCaption": "Figure: CSMA/CD Operational Flowchart: Listen While Talking, Collision Abort, Jam Signal, and Exponential Backoff."
+      ]
+    }
   },
   "u2-csma-ca": {
     "id": "u2-csma-ca",
     "title": "CSMA with Collision Avoidance (CSMA/CA)",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "IEEE 802.11 / Forouzan Ch. 12.1",
-    "oneLiner": "Carrier sense with IFS timers, exponential backoff, and RTS/CTS handshake for wireless media.",
-    "quickAnswer": "In wireless communication, stations cannot detect collisions while transmitting because their own signal swamps receiver circuitry. CSMA/CA avoids collisions proactively by sensing channel idle status for Interframe Spaces (DIFS/SIFS), running random backoff timers, and optionally exchanging RTS/CTS reservation frames.",
-    "whyItMatters": "CSMA/CA is the MAC protocol that powers all Wi-Fi networks (IEEE 802.11a/b/g/n/ac/ax/be).",
+    "topicNumber": 4,
+    "subtopicNumber": 9,
+    "whyItMatters": "In wireless radio networks, a station's transmitter overpowers its receiver, making collision detection impossible. CSMA/CA solves this by avoiding collisions before transmission using Interframe Spaces, Contention Windows, and ACKs.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "u2-csma-cd",
+        "meaning": "CSMA/CD and why wireless cannot detect collisions"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Wireless Radio Propagation",
+        "meaning": "Hidden terminal problem and RF path loss"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Explain why CSMA/CD cannot function on wireless networks, necessitating CSMA/CA.",
+      "Master the three core strategies of CSMA/CA: Interframe Space (IFS), Contention Window, and Acknowledgements.",
+      "Trace the complete 9-step operational workflow of CSMA/CA.",
+      "Compare CSMA/CD and CSMA/CA directly across 7 technical features."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layer 2 (MAC Sublayer)",
+      "standard": "IEEE 802.11 (Wi-Fi) / IEEE 802.15.4 (Zigbee)",
+      "type": "Collision-Avoidance Contention Protocol",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-csma-cd"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "u2-csma-cd",
+        "wifi-mac-sublayer",
+        "u2-comparison-multiple-access"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "u2-csma-cd"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "All Wi-Fi standards (802.11a/b/g/n/ac/ax/be), IoT wireless networks"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Csma_ca.svg",
+    "imageCaption": "Figure: CSMA/CA Operation Flowchart: IFS Wait, Contention Window Countdown, and ACK Handshake.",
     "sections": {
-      "overview": "<p>Because radios cannot transmit and listen on the exact same frequency simultaneously without burning their sensitive RF frontend, wireless networks use <strong>Collision Avoidance (CSMA/CA)</strong> rather than Collision Detection.</p>",
-      "eli10": "In simple words: Carrier sense with IFS timers, exponential backoff, and RTS/CTS handshake for wireless media.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
+      "overview": "\n      <p><strong>Carrier Sense Multiple Access with Collision Avoidance (CSMA/CA)</strong> is a random access protocol designed specifically for <strong>wireless networks</strong> that attempts to <strong>avoid collisions before transmitting data</strong>.</p>\n      \n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Why Is CSMA/CA Needed? (Why Wireless Cannot Use CSMA/CD)</h3>\n      <p>In wired Ethernet, transceivers can easily detect collisions by monitoring cable voltage. In wireless networks, collision detection is physically infeasible due to three fundamental obstacles:</p>\n      <ol class=\"wiki-ordered-list\">\n        <li><strong>Transceiver Dynamic Range Blindness:</strong> A wireless station's transmitter radiates tremendous RF power into its local antenna. This overwhelms its sensitive receiver circuitry. A station cannot listen to weak incoming signals while transmitting at high power.</li>\n        <li><strong>The Hidden Terminal Problem:</strong> Station A and Station C are out of radio range of each other, but both can reach Access Point B. Neither can hear the other transmitting, so carrier sensing fails.</li>\n        <li><strong>Severe Path Loss Attenuation:</strong> Radio signals attenuate rapidly with distance ($1/d^2$ to $1/d^4$), making distant collisions undetectable at the transmitter.</li>\n      </ol>\n      <p class=\"mt-2\">Therefore, wireless LANs must use <strong>collision avoidance</strong> techniques rather than collision detection.</p>\n    ",
+      "eli10": "Imagine you are walking into a dark room wearing noise-canceling headphones while shouting. You can't hear if anyone else is shouting! Because you can't hear while shouting (collision detection impossible), you have to be extra careful BEFORE you start: you pause, tap your friend's shoulder to reserve the room, and wait for them to give you a thumbs-up before speaking.",
+      "analogy": "Entering a busy highway from a blind driveway: since you cannot see around the corner while accelerating, you stop at the stop sign, wait for a quiet gap, and proceed cautiously.",
+      "howItWorks": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">The Three Main Strategies of CSMA/CA (Forouzan Section 10.4)</h3>\n      <div class=\"grid grid-cols-1 sm:grid-cols-3 gap-3 my-3\">\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm\">\n          <div class=\"font-bold text-blue-600 dark:text-blue-400 text-xs mb-1\">1. Interframe Space (IFS)</div>\n          <p class=\"text-[11px] text-slate-600 dark:text-slate-300\">\n            A mandatory quiet delay after the channel becomes idle before a station can begin contending. Gives high-priority traffic and ongoing handshakes time to complete.\n          </p>\n        </div>\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm\">\n          <div class=\"font-bold text-emerald-600 dark:text-emerald-400 text-xs mb-1\">2. Contention Window</div>\n          <p class=\"text-[11px] text-slate-600 dark:text-slate-300\">\n            The station selects a random backoff integer from a range (e.g., 0 to 15 slots) and counts down only while the channel remains idle. Prevents simultaneous starts.\n          </p>\n        </div>\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm\">\n          <div class=\"font-bold text-purple-600 dark:text-purple-400 text-xs mb-1\">3. Acknowledgements (ACK)</div>\n          <p class=\"text-[11px] text-slate-600 dark:text-slate-300\">\n            Because collisions cannot be detected during transmission, the receiver must return an explicit positive ACK. If no ACK arrives, the sender assumes collision and retransmits.\n          </p>\n        </div>\n      </div>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">The 9-Step Operational Workflow (PDF Section 10.3)</h3>\n      <ol class=\"wiki-ordered-list\">\n        <li>The station senses the wireless channel.</li>\n        <li>If the channel is busy, it waits until the ongoing transmission finishes.</li>\n        <li>When the channel becomes idle, the station waits for an <strong>Interframe Space (IFS)</strong> period.</li>\n        <li>If the channel remains idle throughout the IFS, it selects a random backoff slot number from its <strong>Contention Window</strong>.</li>\n        <li>The station counts down its backoff timer while the channel remains idle.</li>\n        <li>If another station transmits during the countdown, the channel becomes busy: <strong>the countdown is paused</strong>.</li>\n        <li>When the countdown timer reaches zero, the station transmits its complete frame.</li>\n        <li>The receiver verifies frame integrity and returns an <strong>Acknowledgement (ACK)</strong> after a short SIFS interval.</li>\n        <li>If the sender does not receive an ACK before timeout, it doubles its contention window and attempts retransmission.</li>\n      </ol>\n    ",
       "diagram": "",
+      "technicalDetails": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">CSMA/CD vs. CSMA/CA Comparison (PDF Section 11)</h3>\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Comparative Feature</th>\n            <th>CSMA/CD</th>\n            <th>CSMA/CA</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td><strong>Full Form</strong></td>\n            <td>Collision Detection</td>\n            <td>Collision Avoidance</td>\n          </tr>\n          <tr>\n            <td><strong>Main Purpose</strong></td>\n            <td>Detect collisions after they occur</td>\n            <td>Reduce the chance of collisions occurring</td>\n          </tr>\n          <tr>\n            <td><strong>Common Association</strong></td>\n            <td>Traditional wired Ethernet (IEEE 802.3)</td>\n            <td>Wireless LAN / Wi-Fi (IEEE 802.11)</td>\n          </tr>\n          <tr>\n            <td><strong>Collision Handling</strong></td>\n            <td>Detects collision, aborts frame immediately</td>\n            <td>Uses waiting, IFS, and backoff before transmission</td>\n          </tr>\n          <tr>\n            <td><strong>Acknowledgement Role</strong></td>\n            <td>Not the primary collision recovery mechanism</td>\n            <td><strong>Mandatory</strong> to confirm successful reception</td>\n          </tr>\n          <tr>\n            <td><strong>Backoff Execution</strong></td>\n            <td>Used <em>after</em> a collision is detected</td>\n            <td>Used <em>before</em> transmission attempts</td>\n          </tr>\n          <tr>\n            <td><strong>Jamming Signal</strong></td>\n            <td>Used after collision detection</td>\n            <td>Not used in basic CSMA/CA strategy</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of CSMA with Collision Avoidance (CSMA/CA)?<br><br><strong>Answer:</strong> In wireless communication, stations cannot detect collisions while transmitting because their own signal swamps receiver circuitry. CSMA/CA avoids collisions proactively by sensing channel idle status for Interframe Spaces (DIFS/SIFS), running random backoff timers, and optionally exchanging RTS/CTS reservation frames.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
+        "level1": "<strong>Question:</strong> State two physical reasons why collision detection (CD) is infeasible in wireless networks.<br><br><strong>Answer:</strong> 1. High transmit-to-receive power disparity: a wireless station's strong local transmitter overpowers and blinds its own receiver. 2. Hidden terminal problem: two stations can be out of range of each other, making carrier sensing and collision detection impossible.",
+        "level2": "<strong>Problem:</strong> What are the three main strategies used by CSMA/CA to avoid collisions?<br><br><strong>Answer:</strong> 1. Interframe Space (IFS). 2. Contention Window (random backoff countdown). 3. Acknowledgement (ACK) frames.",
+        "level3": "<strong>Analysis:</strong> Why does CSMA/CA pause the backoff countdown when the channel becomes busy, rather than resetting it?<br><br><strong>Answer:</strong> Pausing the backoff countdown preserves fairness. Stations that have already waited through part of their backoff keep their remaining time, giving them higher priority to transmit as soon as the channel clears again compared to newly arriving stations."
       },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Advantages</th>\n            <th>Disadvantages</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Avoids collisions proactively before transmission.</td>\n            <td>Introduces substantial IFS and backoff waiting latency.</td>\n          </tr>\n          <tr>\n            <td>Specifically tailored for wireless propagation characteristics.</td>\n            <td>Control frames (RTS, CTS, ACK) consume protocol bandwidth.</td>\n          </tr>\n          <tr>\n            <td>Guarantees delivery verification via explicit ACKs.</td>\n            <td>Collisions are minimized, but cannot be 100% eliminated.</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "All IEEE 802.11 Wi-Fi networks (Wi-Fi 4, 5, 6, 7).",
+        "IEEE 802.15.4 low-rate wireless personal area networks (Zigbee).",
+        "Wireless mesh sensor backbones."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of CSMA with Collision Avoidance (CSMA/CA)?",
+          "question": "When is the random backoff timer executed in CSMA/CA compared to CSMA/CD?",
           "options": [
-            "In wireless communication, stations cannot detect collisions...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "CSMA/CA executes backoff before transmission; CSMA/CD executes backoff after collision detection",
+            "CSMA/CA executes backoff only after a collision",
+            "CSMA/CD executes backoff before transmission",
+            "Both protocols execute backoff at midnight"
           ],
           "correct": 0,
-          "explanation": "The primary role is: In wireless communication, stations cannot detect collisions while transmitting because their own signal swamps receiver circuitry. CSMA/CA avoids collisions proactively by sensing channel idle status for Interframe Spaces (DIFS/SIFS), running random backoff timers, and optionally exchanging RTS/CTS reservation frames."
+          "explanation": "CSMA/CA proactively counts down a backoff timer before transmitting to avoid collisions, whereas CSMA/CD only executes backoff after a collision is detected."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 12, Section 12.1.4 (CSMA/CA).",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "IEEE Std 802.11-2020: Wireless LAN Medium Access Control and Physical Layer Specifications.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Csma_ca.svg",
-      "imageCaption": "Figure: CSMA/CA Collision Avoidance Timing: DIFS, Contention Window Slots, SIFS, and ACK."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Csma_ca.svg",
-    "imageCaption": "Figure: CSMA/CA Collision Avoidance Timing: DIFS, Contention Window Slots, SIFS, and ACK."
+      ]
+    }
   },
   "u2-comparison-multiple-access": {
     "id": "u2-comparison-multiple-access",
     "title": "Comparison of Multiple Access Protocols",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "Forouzan Ch. 12 / Tanenbaum Ch. 4",
-    "oneLiner": "Master comparative analysis of ALOHA, CSMA, CSMA/CD, and CSMA/CA protocols.",
-    "quickAnswer": "Pure ALOHA offers 18.4% throughput with zero carrier sensing. Slotted ALOHA doubles throughput to 36.8% via time slots. CSMA senses carrier before talking. CSMA/CD detects collisions while talking (wired Ethernet). CSMA/CA avoids collisions proactively via IFS and RTS/CTS (wireless Wi-Fi).",
-    "whyItMatters": "Comparing these protocols synthesizes the history and mechanics of local area network technology.",
+    "topicNumber": 4,
+    "subtopicNumber": 10,
+    "whyItMatters": "Contrasting Pure ALOHA, Slotted ALOHA, CSMA, CSMA/CD, and CSMA/CA across vulnerable intervals, sensing strategies, and efficiencies provides the unifying theoretical foundation for local area network engineering.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "u2-pure-aloha",
+        "meaning": "ALOHA systems"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "u2-csma-1-persistent",
+        "meaning": "Carrier sense variants"
+      },
+      {
+        "concept": "u2-csma-cd",
+        "meaning": "Collision detection and avoidance"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Master the master comparison table contrasting Pure ALOHA, Slotted ALOHA, CSMA, CSMA/CD, and CSMA/CA.",
+      "Compare vulnerable times: $2T_{fr}$ (Pure) vs. $T_{fr}$ (Slotted) vs. $T_p$ (CSMA).",
+      "Review the master terminology glossary from Section 14 of the PDF.",
+      "Synthesize the quick revision notes from Section 17 of the PDF."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layer 2 (MAC Sublayer Architecture)",
+      "standard": "IEEE 802 / Forouzan Chapter 12 Comparative Synthesis",
+      "type": "Master Comparative Protocol Analysis",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-pure-aloha",
+        "u2-slotted-aloha",
+        "u2-csma-cd",
+        "u2-csma-ca"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "u2-pure-aloha",
+        "u2-slotted-aloha",
+        "u2-csma-cd",
+        "u2-csma-ca"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "u2-pure-aloha",
+        "u2-csma-cd"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "University exam synthesis, GATE networking preparation, network architecture design"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Multiple_Access.png",
+    "imageCaption": "Figure: Master Architectural Comparison of Contention-Based Multiple Access Protocols.",
     "sections": {
-      "overview": "<table class=\"wiki-table\"><thead><tr><th>Protocol</th><th>Carrier Sense?</th><th>Collision Detection?</th><th>Vulnerable Period</th><th>Max Throughput</th><th>Primary Technology</th></tr></thead><tbody><tr><td><strong>Pure ALOHA</strong></td><td>No</td><td>No</td><td>2 * T_fr</td><td>18.4% (at G=0.5)</td><td>Early satellite networks</td></tr><tr><td><strong>Slotted ALOHA</strong></td><td>No</td><td>No</td><td>T_fr</td><td>36.8% (at G=1.0)</td><td>Cellular RACH</td></tr><tr><td><strong>1-Persistent CSMA</strong></td><td>Yes</td><td>No</td><td>T_prop</td><td>~50%</td><td>Early local bus networks</td></tr><tr><td><strong>CSMA/CD</strong></td><td>Yes</td><td>Yes</td><td>2 * T_prop</td><td>> 80–90%</td><td>Classic Ethernet (802.3)</td></tr><tr><td><strong>CSMA/CA</strong></td><td>Yes</td><td>No (Avoids)</td><td>RTS/CTS / SIFS</td><td>~60–75%</td><td>Wireless LANs (802.11)</td></tr></tbody></table>",
-      "eli10": "In simple words: Master comparative analysis of ALOHA, CSMA, CSMA/CD, and CSMA/CA protocols.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
+      "overview": "\n      <p>A comprehensive comparative synthesis of the five canonical random access protocols—<strong>Pure ALOHA</strong>, <strong>Slotted ALOHA</strong>, <strong>CSMA</strong>, <strong>CSMA/CD</strong>, and <strong>CSMA/CA</strong>—reveals the progressive technological enhancements designed to mitigate collisions and maximize channel throughput.</p>\n    ",
+      "eli10": "Think of an evolution of manners: (1) Pure ALOHA: Yell anytime. (2) Slotted ALOHA: Yell only on the minute. (3) CSMA: Listen before you speak. (4) CSMA/CD: Listen while you speak and stop if interrupted. (5) CSMA/CA: Wave your hand and get permission before speaking because you can't hear while talking.",
+      "analogy": "The historical progression from unpaved dirt trails (no rules, frequent crashes) to traffic signals, lane markers, radar collision warning, and automated obstacle avoidance.",
+      "howItWorks": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Master Overall Comparison Table (From PDF Section 13)</h3>\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Comparative Feature</th>\n            <th>Pure ALOHA</th>\n            <th>Slotted ALOHA</th>\n            <th>CSMA</th>\n            <th>CSMA/CD</th>\n            <th>CSMA/CA</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td><strong>Senses Channel First?</strong></td>\n            <td>No</td>\n            <td>No</td>\n            <td>Yes</td>\n            <td>Yes</td>\n            <td>Yes</td>\n          </tr>\n          <tr>\n            <td><strong>Time Synchronization</strong></td>\n            <td>No (Continuous)</td>\n            <td>Yes (Slot clock)</td>\n            <td>Depends on method (p-persistent)</td>\n            <td>Not required</td>\n            <td>Uses timing coordination (IFS)</td>\n          </tr>\n          <tr>\n            <td><strong>Vulnerable Time</strong></td>\n            <td>$2 T_{fr}$</td>\n            <td>$T_{fr}$</td>\n            <td>$T_p$ (Propagation delay)</td>\n            <td>$T_p$</td>\n            <td>Contention Window</td>\n          </tr>\n          <tr>\n            <td><strong>Collision Possibility</strong></td>\n            <td>Very High</td>\n            <td>High (Cut by 50%)</td>\n            <td>Reduced</td>\n            <td>Detected after occurrence</td>\n            <td>Reduced via avoidance</td>\n          </tr>\n          <tr>\n            <td><strong>Main Technique</strong></td>\n            <td>Immediate transmission</td>\n            <td>Slot-based transmission</td>\n            <td>Listen before transmit</td>\n            <td>Detect collision & jam</td>\n            <td>Avoid collision via IFS & backoff</td>\n          </tr>\n          <tr>\n            <td><strong>Typical Association</strong></td>\n            <td>Early shared packet radio</td>\n            <td>Satellite networks</td>\n            <td>Shared media</td>\n            <td>Traditional wired Ethernet</td>\n            <td>Wireless LAN (Wi-Fi)</td>\n          </tr>\n        </tbody>\n      </table>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-6 mb-2\">Master Terminology Glossary (From PDF Section 14)</h3>\n      <table class=\"wiki-table\">\n        <thead><tr><th>Term</th><th>Formal Definition</th></tr></thead>\n        <tbody>\n          <tr><td><strong>Multiple Access</strong></td><td>Sharing a communication channel among multiple stations.</td></tr>\n          <tr><td><strong>Random Access</strong></td><td>A method in which stations compete autonomously for channel access.</td></tr>\n          <tr><td><strong>Contention</strong></td><td>Competition between stations attempting to capture the shared medium.</td></tr>\n          <tr><td><strong>Collision</strong></td><td>Overlapping transmissions that interfere with and corrupt one another.</td></tr>\n          <tr><td><strong>Pure ALOHA</strong></td><td>ALOHA method allowing transmission at any continuous time instant.</td></tr>\n          <tr><td><strong>Slotted ALOHA</strong></td><td>ALOHA method allowing transmission only at discrete slot boundaries.</td></tr>\n          <tr><td><strong>Vulnerable Time</strong></td><td>The time duration during which another transmission will cause a collision.</td></tr>\n          <tr><td><strong>CSMA</strong></td><td>Carrier Sense Multiple Access: listen before you transmit.</td></tr>\n          <tr><td><strong>Persistence</strong></td><td>The rule determining when a station transmits after sensing the channel.</td></tr>\n          <tr><td><strong>CSMA/CD</strong></td><td>CSMA with collision detection: listen while transmitting.</td></tr>\n          <tr><td><strong>CSMA/CA</strong></td><td>CSMA with collision avoidance: avoid collisions before transmitting.</td></tr>\n          <tr><td><strong>Backoff</strong></td><td>Waiting for a randomized period before attempting transmission again.</td></tr>\n          <tr><td><strong>Jamming Signal</strong></td><td>Signal transmitted to alert all stations that a collision has occurred.</td></tr>\n          <tr><td><strong>Throughput</strong></td><td>The rate of successful useful data transmission across the channel.</td></tr>\n          <tr><td><strong>Propagation Delay</strong></td><td>Time taken for an electromagnetic signal to travel through the medium.</td></tr>\n        </tbody>\n      </table>\n    ",
       "diagram": "",
+      "technicalDetails": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Master Formula Summary (PDF Section 12.1)</h3>\n      <table class=\"wiki-table\">\n        <thead><tr><th>Protocol Metric</th><th>Mathematical Formula</th></tr></thead>\n        <tbody>\n          <tr><td>Pure ALOHA Throughput</td><td>$S = G e^{-2G}$ (Max $S = 1/(2e) \\approx 18.4\\%$ at $G = 0.5$)</td></tr>\n          <tr><td>Slotted ALOHA Throughput</td><td>$S = G e^{-G}$ (Max $S = 1/e \\approx 36.8\\%$ at $G = 1.0$)</td></tr>\n          <tr><td>Pure ALOHA Vulnerable Time</td><td>$2 T_{fr}$</td></tr>\n          <tr><td>Slotted ALOHA Vulnerable Time</td><td>$T_{fr}$</td></tr>\n          <tr><td>CSMA Vulnerable Time</td><td>$T_p$ (Maximum propagation delay)</td></tr>\n          <tr><td>CSMA/CD Backoff Waiting Time</td><td>$T_B = R \\times T_{\\text{slot}}, \\quad 0 \\le R \\le 2^K - 1$</td></tr>\n        </tbody>\n      </table>\n    ",
       "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Comparison of Multiple Access Protocols?<br><br><strong>Answer:</strong> Pure ALOHA offers 18.4% throughput with zero carrier sensing. Slotted ALOHA doubles throughput to 36.8% via time slots. CSMA senses carrier before talking. CSMA/CD detects collisions while talking (wired Ethernet). CSMA/CA avoids collisions proactively via IFS and RTS/CTS (wireless Wi-Fi).",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
+        "level1": "<strong>Question:</strong> Rank the vulnerable times of Pure ALOHA, Slotted ALOHA, and CSMA in order of decreasing duration.<br><br><strong>Answer:</strong><br>1. <strong>Pure ALOHA:</strong> $2 T_{fr}$ (Longest; most vulnerable).<br>2. <strong>Slotted ALOHA:</strong> $T_{fr}$ (Moderate; cut in half).<br>3. <strong>CSMA:</strong> $T_p$ (Shortest; propagation delay is typically thousands of times shorter than frame transmission time).",
+        "level2": "<strong>Problem:</strong> A network has a frame transmission time of $1\\text{ ms}$ and a one-way propagation delay of $5\\ \\mu\\text{s}$. Compare the vulnerable times of Pure ALOHA and CSMA.<br><br><strong>Answer:</strong><br>• Pure ALOHA vulnerable time = $2 T_{fr} = 2 \\times 1\\text{ ms} = 2000\\ \\mu\\text{s}$.<br>• CSMA vulnerable time = $T_p = 5\\ \\mu\\text{s}$.<br>CSMA's vulnerable window is <strong>400 times smaller</strong> than Pure ALOHA's!",
+        "level3": "<strong>Analysis:</strong> Why does CSMA/CA use backoff before transmission whereas CSMA/CD uses backoff only after a collision?<br><br><strong>Answer:</strong> In CSMA/CD (wired), collisions can be detected immediately and aborted with minimal waste, so stations can aggressively transmit as soon as the channel clears. In CSMA/CA (wireless), collisions cannot be detected during transmission; an undetected collision wastes the entire frame and round-trip ACK time. Therefore, CSMA/CA forces competing stations into random backoffs <em>before</em> transmitting to minimize collisions proactively."
       },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Protocol</th>\n            <th>Optimal Operating Environment</th>\n            <th>Performance Bottleneck</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td><strong>Pure ALOHA</strong></td>\n            <td>Very low traffic ($G < 0.1$), simple battery devices.</td>\n            <td>Max 18.4% throughput; high collision rate.</td>\n          </tr>\n          <tr>\n            <td><strong>Slotted ALOHA</strong></td>\n            <td>Synchronized satellite reservation channels.</td>\n            <td>Requires global clock synchronization.</td>\n          </tr>\n          <tr>\n            <td><strong>CSMA/CD</strong></td>\n            <td>Shared wired Ethernet links ($a = T_p/T_{fr} \\ll 1$).</td>\n            <td>Cannot function over wireless radio links.</td>\n          </tr>\n          <tr>\n            <td><strong>CSMA/CA</strong></td>\n            <td>Omnidirectional wireless radio networks (Wi-Fi).</td>\n            <td>Protocol overhead from IFS, backoff, and ACKs.</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Standard university computer networks curriculum and examinations.",
+        "GATE, UGC-NET, and professional CCNA/CCNP network engineering exams.",
+        "Protocol stack design for emerging IoT and satellite multi-access standards."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Comparison of Multiple Access Protocols?",
+          "question": "Which of the following multiple access protocols achieves the highest channel throughput under typical operating conditions?",
           "options": [
-            "Pure ALOHA offers 18.4% throughput with zero carrier sensing...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "CSMA/CD",
+            "Slotted ALOHA",
+            "Pure ALOHA",
+            "Unslotted ALOHA"
           ],
           "correct": 0,
-          "explanation": "The primary role is: Pure ALOHA offers 18.4% throughput with zero carrier sensing. Slotted ALOHA doubles throughput to 36.8% via time slots. CSMA senses carrier before talking. CSMA/CD detects collisions while talking (wired Ethernet). CSMA/CA avoids collisions proactively via IFS and RTS/CTS (wireless Wi-Fi)."
+          "explanation": "CSMA/CD detects collisions and aborts immediately, achieving over 85–90% throughput on links where propagation delay is small."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
-          "url": ""
-        },
-        {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 12.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Carrier_Sense_Multiple_Access_with_Collision_Detection.png",
-      "imageCaption": "Figure: Comprehensive Comparison: ALOHA vs. CSMA vs. CSMA/CD vs. CSMA/CA."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Carrier_Sense_Multiple_Access_with_Collision_Detection.png",
-    "imageCaption": "Figure: Comprehensive Comparison: ALOHA vs. CSMA vs. CSMA/CD vs. CSMA/CA."
+      ]
+    }
   },
   "u2-collision-free-intro": {
     "id": "u2-collision-free-intro",
@@ -6924,7 +6908,7 @@ var TOPICS_U2_SYLLABUS = {
       ]
     },
     "sections": {
-      "overview": "\n    <p>This section provides comprehensive worked numerical problems covering sequence number arithmetic, window sizing, propagation-to-transmission ratios ($a$), and channel utilization efficiencies across all Data Link Layer protocols, directly aligned with <strong>Forouzan Chapter 11</strong> and university examination patterns.</p>\n    \n    <div class=\"space-y-6 my-6\">\n      <!-- Problem 1 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 1: Sequence Number Calculation ($m = 3$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A protocol uses a 3-bit sequence number. Find the total number of sequence numbers and list them.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p><strong>Formula:</strong> $N = 2^m$</p>\n          <p>Given: $m = 3$ bits</p>\n          <p>Calculation: $N = 2^3 = 8$ sequence numbers.</p>\n          <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 8 sequence numbers. The valid range is {0, 1, 2, 3, 4, 5, 6, 7}.</p>\n        </div>\n      </div>\n\n      <!-- Problem 2 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 2: Go-Back-N Window Sizing ($m = 4$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A Go-Back-N ARQ protocol uses a 4-bit sequence number. Find the maximum sender window size and receiver window size.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>Given: $m = 4$ bits</p>\n          <p>Sender Window: $W_s = 2^m - 1 = 2^4 - 1 = 16 - 1 = 15$</p>\n          <p>Receiver Window: $W_r = 1$ (always 1 in Go-Back-N)</p>\n          <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: Sender Window = 15 frames, Receiver Window = 1 frame.</p>\n        </div>\n      </div>\n\n      <!-- Problem 3 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 3: Selective Repeat Window Sizing ($m = 4$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A Selective Repeat ARQ protocol uses a 4-bit sequence number. Find the maximum sender and receiver window sizes.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>Given: $m = 4$ bits</p>\n          <p>Sender Window: $W_s = 2^{m-1} = 2^{4-1} = 2^3 = 8$</p>\n          <p>Receiver Window: $W_r = 2^{m-1} = 2^{4-1} = 2^3 = 8$</p>\n          <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: Sender Window = 8 frames, Receiver Window = 8 frames.</p>\n        </div>\n      </div>\n\n      <!-- Problem 4 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 4: Window Comparison with $m = 3$</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> If $m = 3$ bits, compare the maximum sender and receiver window sizes for Go-Back-N ARQ and Selective Repeat ARQ.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>For Go-Back-N: $W_s = 2^3 - 1 = 7$, $W_r = 1$.</p>\n          <p>For Selective Repeat: $W_s = 2^{3-1} = 4$, $W_r = 2^{3-1} = 4$.</p>\n          <table class=\"wiki-table mt-2\">\n            <thead><tr><th>Protocol</th><th>Sender Window ($W_s$)</th><th>Receiver Window ($W_r$)</th></tr></thead>\n            <tbody>\n              <tr><td>Go-Back-N ARQ</td><td>7</td><td>1</td></tr>\n              <tr><td>Selective Repeat ARQ</td><td>4</td><td>4</td></tr>\n            </tbody>\n          </table>\n        </div>\n      </div>\n\n      <!-- Problem 5 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 5: Master ARQ Comparison ($m = 5$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A communication link uses a 5-bit sequence number ($m = 5$). Determine the sender and receiver window sizes across Stop-and-Wait ARQ, Go-Back-N ARQ, and Selective Repeat ARQ.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>Total sequence numbers available: $2^5 = 32$ (numbered 0 to 31).</p>\n          <p>• <strong>Stop-and-Wait ARQ:</strong> $W_s = 1$, $W_r = 1$.</p>\n          <p>• <strong>Go-Back-N ARQ:</strong> $W_s = 2^5 - 1 = 31$, $W_r = 1$.</p>\n          <p>• <strong>Selective Repeat ARQ:</strong> $W_s = 2^{5-1} = 16$, $W_r = 2^{5-1} = 16$.</p>\n        </div>\n      </div>\n    </div>\n  \n    <!-- Problem 6: Equal Bandwidth Allocation (FDMA) -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 6: Equal Bandwidth Allocation (FDMA)</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 3 PDF):</strong> A channel has a bandwidth of 120 MHz and is shared equally among six stations using static allocation. Find the bandwidth allocated to each station.</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Given:</strong> Total bandwidth $B_{\\text{total}} = 120\\text{ MHz}$, Number of stations $N = 6$.</p>\n        <p><strong>Formula:</strong> $B_{\\text{station}} = \\frac{B_{\\text{total}}}{N}$</p>\n        <p><strong>Calculation:</strong> $B_{\\text{station}} = \\frac{120}{6} = 20\\text{ MHz}$.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 20 MHz per station.</p>\n      </div>\n    </div>\n\n    <!-- Problem 7: Bandwidth Utilization & Waste -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 7: Bandwidth Utilization & Inactive Station Waste</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 3 PDF):</strong> A 100 MHz channel is divided equally among five stations using static allocation. Only three stations are actively using their allocated bandwidth. Find the allocated bandwidth that is currently unused.</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Step 1:</strong> Bandwidth per station = $\\frac{100\\text{ MHz}}{5} = 20\\text{ MHz}$.</p>\n        <p><strong>Step 2:</strong> Inactive stations = $5 - 3 = 2$ stations.</p>\n        <p><strong>Step 3:</strong> Unused allocated bandwidth = $2 \\times 20\\text{ MHz} = 40\\text{ MHz}$.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 40 MHz of allocated bandwidth sits completely unused.</p>\n      </div>\n    </div>\n\n    <!-- Problem 8: TDMA Slot Allocation -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 8: TDMA Time Slot Allocation</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 3 PDF):</strong> A TDMA system has 8 time slots in each frame. If 4 stations share the slots equally, how many slots does each station receive?</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Given:</strong> Total slots per frame = 8, Number of stations = 4.</p>\n        <p><strong>Calculation:</strong> $\\frac{8}{4} = 2$ slots per station.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 2 slots per station in each repeating frame.</p>\n      </div>\n    </div>\n  ",
+      "overview": "\n    <p>This section provides comprehensive worked numerical problems covering sequence number arithmetic, window sizing, propagation-to-transmission ratios ($a$), and channel utilization efficiencies across all Data Link Layer protocols, directly aligned with <strong>Forouzan Chapter 11</strong> and university examination patterns.</p>\n    \n    <div class=\"space-y-6 my-6\">\n      <!-- Problem 1 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 1: Sequence Number Calculation ($m = 3$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A protocol uses a 3-bit sequence number. Find the total number of sequence numbers and list them.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p><strong>Formula:</strong> $N = 2^m$</p>\n          <p>Given: $m = 3$ bits</p>\n          <p>Calculation: $N = 2^3 = 8$ sequence numbers.</p>\n          <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 8 sequence numbers. The valid range is {0, 1, 2, 3, 4, 5, 6, 7}.</p>\n        </div>\n      </div>\n\n      <!-- Problem 2 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 2: Go-Back-N Window Sizing ($m = 4$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A Go-Back-N ARQ protocol uses a 4-bit sequence number. Find the maximum sender window size and receiver window size.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>Given: $m = 4$ bits</p>\n          <p>Sender Window: $W_s = 2^m - 1 = 2^4 - 1 = 16 - 1 = 15$</p>\n          <p>Receiver Window: $W_r = 1$ (always 1 in Go-Back-N)</p>\n          <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: Sender Window = 15 frames, Receiver Window = 1 frame.</p>\n        </div>\n      </div>\n\n      <!-- Problem 3 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 3: Selective Repeat Window Sizing ($m = 4$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A Selective Repeat ARQ protocol uses a 4-bit sequence number. Find the maximum sender and receiver window sizes.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>Given: $m = 4$ bits</p>\n          <p>Sender Window: $W_s = 2^{m-1} = 2^{4-1} = 2^3 = 8$</p>\n          <p>Receiver Window: $W_r = 2^{m-1} = 2^{4-1} = 2^3 = 8$</p>\n          <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: Sender Window = 8 frames, Receiver Window = 8 frames.</p>\n        </div>\n      </div>\n\n      <!-- Problem 4 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 4: Window Comparison with $m = 3$</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> If $m = 3$ bits, compare the maximum sender and receiver window sizes for Go-Back-N ARQ and Selective Repeat ARQ.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>For Go-Back-N: $W_s = 2^3 - 1 = 7$, $W_r = 1$.</p>\n          <p>For Selective Repeat: $W_s = 2^{3-1} = 4$, $W_r = 2^{3-1} = 4$.</p>\n          <table class=\"wiki-table mt-2\">\n            <thead><tr><th>Protocol</th><th>Sender Window ($W_s$)</th><th>Receiver Window ($W_r$)</th></tr></thead>\n            <tbody>\n              <tr><td>Go-Back-N ARQ</td><td>7</td><td>1</td></tr>\n              <tr><td>Selective Repeat ARQ</td><td>4</td><td>4</td></tr>\n            </tbody>\n          </table>\n        </div>\n      </div>\n\n      <!-- Problem 5 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 5: Master ARQ Comparison ($m = 5$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A communication link uses a 5-bit sequence number ($m = 5$). Determine the sender and receiver window sizes across Stop-and-Wait ARQ, Go-Back-N ARQ, and Selective Repeat ARQ.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>Total sequence numbers available: $2^5 = 32$ (numbered 0 to 31).</p>\n          <p>• <strong>Stop-and-Wait ARQ:</strong> $W_s = 1$, $W_r = 1$.</p>\n          <p>• <strong>Go-Back-N ARQ:</strong> $W_s = 2^5 - 1 = 31$, $W_r = 1$.</p>\n          <p>• <strong>Selective Repeat ARQ:</strong> $W_s = 2^{5-1} = 16$, $W_r = 2^{5-1} = 16$.</p>\n        </div>\n      </div>\n    </div>\n  \n    <!-- Problem 6: Equal Bandwidth Allocation (FDMA) -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 6: Equal Bandwidth Allocation (FDMA)</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 3 PDF):</strong> A channel has a bandwidth of 120 MHz and is shared equally among six stations using static allocation. Find the bandwidth allocated to each station.</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Given:</strong> Total bandwidth $B_{\\text{total}} = 120\\text{ MHz}$, Number of stations $N = 6$.</p>\n        <p><strong>Formula:</strong> $B_{\\text{station}} = \\frac{B_{\\text{total}}}{N}$</p>\n        <p><strong>Calculation:</strong> $B_{\\text{station}} = \\frac{120}{6} = 20\\text{ MHz}$.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 20 MHz per station.</p>\n      </div>\n    </div>\n\n    <!-- Problem 7: Bandwidth Utilization & Waste -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 7: Bandwidth Utilization & Inactive Station Waste</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 3 PDF):</strong> A 100 MHz channel is divided equally among five stations using static allocation. Only three stations are actively using their allocated bandwidth. Find the allocated bandwidth that is currently unused.</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Step 1:</strong> Bandwidth per station = $\\frac{100\\text{ MHz}}{5} = 20\\text{ MHz}$.</p>\n        <p><strong>Step 2:</strong> Inactive stations = $5 - 3 = 2$ stations.</p>\n        <p><strong>Step 3:</strong> Unused allocated bandwidth = $2 \\times 20\\text{ MHz} = 40\\text{ MHz}$.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 40 MHz of allocated bandwidth sits completely unused.</p>\n      </div>\n    </div>\n\n    <!-- Problem 8: TDMA Slot Allocation -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 8: TDMA Time Slot Allocation</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 3 PDF):</strong> A TDMA system has 8 time slots in each frame. If 4 stations share the slots equally, how many slots does each station receive?</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Given:</strong> Total slots per frame = 8, Number of stations = 4.</p>\n        <p><strong>Calculation:</strong> $\\frac{8}{4} = 2$ slots per station.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 2 slots per station in each repeating frame.</p>\n      </div>\n    </div>\n  \n    <!-- Problem 9: Pure ALOHA Throughput Calculation -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 9: Pure ALOHA Throughput Calculation</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 4 PDF):</strong> Calculate the throughput of a Pure ALOHA system when the offered load is $G = 0.5$.</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Given:</strong> $G = 0.5$.</p>\n        <p><strong>Formula:</strong> $S = G e^{-2G}$</p>\n        <p><strong>Calculation:</strong> $S = 0.5 \\cdot e^{-2(0.5)} = 0.5 \\cdot e^{-1} = 0.5 \\times 0.367879 = 0.1839$.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 18.39% (or 18.4%) throughput.</p>\n      </div>\n    </div>\n\n    <!-- Problem 10: Slotted ALOHA Throughput Calculation -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 10: Slotted ALOHA Throughput Calculation</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 4 PDF):</strong> Calculate the throughput of Slotted ALOHA when the offered load is $G = 1.0$.</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Given:</strong> $G = 1.0$.</p>\n        <p><strong>Formula:</strong> $S = G e^{-G}$</p>\n        <p><strong>Calculation:</strong> $S = 1.0 \\cdot e^{-1} = 0.367879 = 36.79\\%$.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 36.79% (or 36.8%) throughput.</p>\n      </div>\n    </div>\n\n    <!-- Problem 11: Vulnerable Time Comparison -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 11: ALOHA Vulnerable Time Comparison</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 4 PDF):</strong> A network uses frames that require 2 milliseconds to transmit ($T_{fr} = 2\\text{ ms}$). Find the vulnerable time for Pure ALOHA and Slotted ALOHA.</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>For Pure ALOHA:</strong> $\\text{Vulnerable Time} = 2 T_{fr} = 2 \\times 2\\text{ ms} = 4\\text{ ms}$.</p>\n        <p><strong>For Slotted ALOHA:</strong> $\\text{Vulnerable Time} = T_{fr} = 2\\text{ ms}$.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: Pure ALOHA = 4 ms; Slotted ALOHA = 2 ms.</p>\n      </div>\n    </div>\n\n    <!-- Problem 12: Binary Exponential Backoff -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 12: Binary Exponential Backoff Range</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 4 PDF):</strong> A station experiences three collisions ($K = 3$). Find the possible random values of $R$ in the binary exponential backoff algorithm.</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Given:</strong> $K = 3$.</p>\n        <p><strong>Formula:</strong> $0 \\le R \\le 2^K - 1 = 2^3 - 1 = 8 - 1 = 7$.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: $R \\in \\{0, 1, 2, 3, 4, 5, 6, 7\\}$.</p>\n      </div>\n    </div>\n  ",
       "eli10": "In simple words: Step-by-step solved numerical problems on CSMA/CD minimum frame size, sliding window utilization, and ALOHA throughput.",
       "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
       "diagram": "",
@@ -7104,7 +7088,7 @@ var TOPICS_U2_SYLLABUS = {
       ]
     },
     "sections": {
-      "overview": "\n    <p>Comprehensive repository of 15 university exam short-answer questions with concise model answers covering Data Link Layer protocols, flow control, and error recovery.</p>\n    <div class=\"space-y-4 my-6\">\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q1. What is a Data Link Layer protocol?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A set of formal rules governing how data frames are transmitted, verified, and managed between two directly connected stations across a physical medium.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q2. What is a noiseless channel?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An idealized theoretical communication channel in which frames are never damaged, corrupted, lost, or duplicated during transit.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q3. What is a noisy channel?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A realistic physical communication channel subject to thermal noise, attenuation, and interference where frames and ACKs can be corrupted, lost, or delayed.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q4. What is the Simplest Protocol?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An elementary unidirectional protocol for noiseless channels that provides neither flow control nor error control, assuming the receiver has infinite processing capacity.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q5. What is the Stop-and-Wait Protocol?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A noiseless channel protocol where the sender transmits one frame and halts until an explicit acknowledgement (ACK) arrives, preventing receiver buffer overflow.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q6. What does ARQ stand for and what is its purpose?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Automatic Repeat reQuest. It is an error-control mechanism that uses acknowledgements, sequence numbers, and retransmission timers to automatically resend lost or corrupted frames.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q7. What is an Acknowledgement (ACK)?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A control frame dispatched by the receiver informing the sender that a data frame was received correctly or indicating the sequence number of the next frame expected.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q8. What is a Negative Acknowledgement (NAK)?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A control frame sent by the receiver explicitly requesting the immediate retransmission of a specific missing or damaged frame without waiting for timer timeout.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q9. Why are sequence numbers necessary in Stop-and-Wait ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">To enable the receiver to recognize and safely discard duplicate frames resulting from lost or delayed acknowledgements.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q10. What is pipelining in data communication?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The technique of transmitting multiple data frames before waiting for an acknowledgement, keeping the transmission channel full and maximizing throughput.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q11. What is the sender window size in Go-Back-N ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">$W_s = 2^m - 1$, where $m$ is the number of bits in the sequence number field.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q12. What is the receiver window size in Go-Back-N ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">$W_r = 1$. The receiver only ever accepts the single next-expected in-order frame.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q13. What is the window size in Selective Repeat ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">$W_s = W_r = 2^{m-1}$ (half of the total sequence number space).</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q14. What is a Cumulative Acknowledgement?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An ACK containing number $n$ that simultaneously confirms successful receipt of all frames up to sequence number $n-1$.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q15. What is Piggybacking?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The technique of attaching acknowledgement numbers into the header of outgoing reverse data frames, conserving bandwidth and eliminating separate ACK frames.</p>\n      </div>\n    </div>\n  \n    <!-- Topic 3 Short Questions -->\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q16. What is the MAC sublayer?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The lower sublayer of the Data Link Layer in the IEEE 802 architecture responsible for controlling and coordinating device access to a shared transmission medium.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q17. State any four functions of the MAC sublayer.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">1. Physical addressing (MAC addresses). 2. Medium access control. 3. Frame handling and delimiting. 4. Collision handling and backoff recovery.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q18. What is the channel allocation problem?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The problem of deciding how limited communication channel resources or frequency bandwidth should be shared efficiently among multiple competing devices.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q19. Why is channel allocation necessary?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Because the channel has limited bandwidth, stations generate unpredictable bursty traffic, and simultaneous uncoordinated transmissions result in destructive packet collisions.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q20. Define static channel allocation.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A method where available channel resources (frequency or time) are divided and assigned to stations in advance, remaining reserved regardless of whether a station transmits.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q21. Define dynamic channel allocation.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A method where communication channel resources are assigned on demand according to the real-time transmission requirements of active stations.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q22. What is FDMA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Frequency Division Multiple Access: a channelization technique where the total bandwidth is divided into separate frequency bands assigned to stations for simultaneous transmission.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q23. What is TDMA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Time Division Multiple Access: a channelization technique where the entire bandwidth is shared in the time domain, with time divided into repeating frames and assigned time slots.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q24. Differentiate between LLC and MAC.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">LLC is the upper sublayer providing flow and error control independent of physical media; MAC is the lower sublayer controlling hardware access to the shared medium and handling physical addressing.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q25. State two advantages of dynamic allocation.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">1. Drastically higher bandwidth utilization for bursty traffic. 2. Active stations can utilize the full channel capacity while zero bandwidth is wasted on inactive stations.</p>\n    </div>\n  ",
+      "overview": "\n    <p>Comprehensive repository of 15 university exam short-answer questions with concise model answers covering Data Link Layer protocols, flow control, and error recovery.</p>\n    <div class=\"space-y-4 my-6\">\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q1. What is a Data Link Layer protocol?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A set of formal rules governing how data frames are transmitted, verified, and managed between two directly connected stations across a physical medium.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q2. What is a noiseless channel?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An idealized theoretical communication channel in which frames are never damaged, corrupted, lost, or duplicated during transit.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q3. What is a noisy channel?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A realistic physical communication channel subject to thermal noise, attenuation, and interference where frames and ACKs can be corrupted, lost, or delayed.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q4. What is the Simplest Protocol?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An elementary unidirectional protocol for noiseless channels that provides neither flow control nor error control, assuming the receiver has infinite processing capacity.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q5. What is the Stop-and-Wait Protocol?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A noiseless channel protocol where the sender transmits one frame and halts until an explicit acknowledgement (ACK) arrives, preventing receiver buffer overflow.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q6. What does ARQ stand for and what is its purpose?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Automatic Repeat reQuest. It is an error-control mechanism that uses acknowledgements, sequence numbers, and retransmission timers to automatically resend lost or corrupted frames.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q7. What is an Acknowledgement (ACK)?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A control frame dispatched by the receiver informing the sender that a data frame was received correctly or indicating the sequence number of the next frame expected.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q8. What is a Negative Acknowledgement (NAK)?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A control frame sent by the receiver explicitly requesting the immediate retransmission of a specific missing or damaged frame without waiting for timer timeout.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q9. Why are sequence numbers necessary in Stop-and-Wait ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">To enable the receiver to recognize and safely discard duplicate frames resulting from lost or delayed acknowledgements.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q10. What is pipelining in data communication?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The technique of transmitting multiple data frames before waiting for an acknowledgement, keeping the transmission channel full and maximizing throughput.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q11. What is the sender window size in Go-Back-N ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">$W_s = 2^m - 1$, where $m$ is the number of bits in the sequence number field.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q12. What is the receiver window size in Go-Back-N ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">$W_r = 1$. The receiver only ever accepts the single next-expected in-order frame.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q13. What is the window size in Selective Repeat ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">$W_s = W_r = 2^{m-1}$ (half of the total sequence number space).</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q14. What is a Cumulative Acknowledgement?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An ACK containing number $n$ that simultaneously confirms successful receipt of all frames up to sequence number $n-1$.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q15. What is Piggybacking?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The technique of attaching acknowledgement numbers into the header of outgoing reverse data frames, conserving bandwidth and eliminating separate ACK frames.</p>\n      </div>\n    </div>\n  \n    <!-- Topic 3 Short Questions -->\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q16. What is the MAC sublayer?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The lower sublayer of the Data Link Layer in the IEEE 802 architecture responsible for controlling and coordinating device access to a shared transmission medium.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q17. State any four functions of the MAC sublayer.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">1. Physical addressing (MAC addresses). 2. Medium access control. 3. Frame handling and delimiting. 4. Collision handling and backoff recovery.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q18. What is the channel allocation problem?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The problem of deciding how limited communication channel resources or frequency bandwidth should be shared efficiently among multiple competing devices.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q19. Why is channel allocation necessary?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Because the channel has limited bandwidth, stations generate unpredictable bursty traffic, and simultaneous uncoordinated transmissions result in destructive packet collisions.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q20. Define static channel allocation.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A method where available channel resources (frequency or time) are divided and assigned to stations in advance, remaining reserved regardless of whether a station transmits.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q21. Define dynamic channel allocation.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A method where communication channel resources are assigned on demand according to the real-time transmission requirements of active stations.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q22. What is FDMA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Frequency Division Multiple Access: a channelization technique where the total bandwidth is divided into separate frequency bands assigned to stations for simultaneous transmission.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q23. What is TDMA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Time Division Multiple Access: a channelization technique where the entire bandwidth is shared in the time domain, with time divided into repeating frames and assigned time slots.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q24. Differentiate between LLC and MAC.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">LLC is the upper sublayer providing flow and error control independent of physical media; MAC is the lower sublayer controlling hardware access to the shared medium and handling physical addressing.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q25. State two advantages of dynamic allocation.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">1. Drastically higher bandwidth utilization for bursty traffic. 2. Active stations can utilize the full channel capacity while zero bandwidth is wasted on inactive stations.</p>\n    </div>\n  \n    <!-- Topic 4 Short Questions -->\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q26. Define multiple access protocol.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A set of protocol rules allowing multiple independent stations to share a common communication medium without collisions destroying data.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q27. What is random access?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A multiple-access method in which all stations have equal access rights and compete (contend) for the shared channel without a central controller.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q28. Define Pure ALOHA.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A random access protocol where stations transmit frames whenever data is ready, without prior sensing or time slot boundaries.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q29. What is Slotted ALOHA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An improved version of Pure ALOHA where channel time is divided into discrete slots and stations may transmit only at the beginning of a time slot.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q30. Define vulnerable time.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The continuous time duration during which another station's transmission will collide with and destroy the frame under consideration.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q31. What is CSMA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Carrier Sense Multiple Access: a protocol based on 'listen before you transmit', sensing carrier activity before sending a frame.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q32. List the three persistence methods of CSMA.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">1. 1-Persistent CSMA. 2. Non-Persistent CSMA. 3. p-Persistent CSMA.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q33. What is 1-persistent CSMA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A method where a station continuously senses a busy channel and transmits immediately with probability 1 as soon as the channel becomes idle.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q34. What is nonpersistent CSMA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A method where a station finding the channel busy halts sensing, waits for a random period of time, and senses again later.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q35. What is p-persistent CSMA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A slotted method where an idle channel triggers transmission with probability $p$ and deferral to the next time slot with probability $1-p$.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q36. Define CSMA/CD.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Carrier Sense Multiple Access with Collision Detection: a protocol where a station monitors the medium while transmitting, stopping immediately upon collision.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q37. What is a jamming signal?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A 32–48 bit pattern sent immediately upon collision detection to guarantee all other stations on the cable observe the collision.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q38. What is binary exponential backoff?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An algorithm that selects a random wait time $R \\in [0, 2^K - 1]$ after collision $K$, exponentially widening the delay range to prevent repeated collisions.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q39. Define CSMA/CA.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Carrier Sense Multiple Access with Collision Avoidance: a wireless protocol that avoids collisions before transmission using IFS, contention windows, and ACKs.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q40. List the three strategies used by CSMA/CA.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">1. Interframe Space (IFS). 2. Contention Window (random backoff). 3. Acknowledgements (ACK).</p>\n    </div>\n  ",
       "eli10": "In simple words: The 12 short-answer questions straight from syllabus PDF Section 10 with concise model answers.",
       "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
       "diagram": "",
@@ -7194,7 +7178,7 @@ var TOPICS_U2_SYLLABUS = {
       ]
     },
     "sections": {
-      "overview": "<p>Structured long-form answers for the 8 core examination essay questions specified in PDF Section 10.</p>\n    <!-- Topic 3 Long Exam Questions -->\n    <div class=\"space-y-4 mt-6 border-t border-gray-200 dark:border-gray-700 pt-6\">\n      <h3 class=\"text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider\">Topic 3 – MAC Sublayer Long-Answer University Questions</h3>\n      \n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q1. Explain the MAC sublayer and its functions in detail.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The Medium Access Control (MAC) sublayer is the lower portion of the Data Link Layer in the IEEE 802 architecture. It sits directly above the Physical Layer and abstracts medium-specific transmission rules. Its core functions include: (1) Physical Addressing using 48-bit MAC addresses, (2) Medium Access Control to arbitrate transmission access, (3) Frame Delimiting and Formatting, (4) Collision Handling (detection, jam signaling, and exponential backoff), (5) Transmission Coordination across multi-station broadcast channels, and (6) Access Management enforcing priority and fairness.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q2. Explain the channel allocation problem and its primary objectives.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The channel allocation problem addresses how a shared broadcast medium with limited bandwidth is partitioned among multiple competing stations. Because computers generate bursty, asymmetric traffic and may attempt simultaneous transmissions, uncoordinated access causes signal collisions. The primary objectives are: High efficiency, Fairness, Low delay, Collision reduction, Maximum throughput, and Elimination of idle resource waste.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q3. Describe static channel allocation with suitable examples.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Static channel allocation divides available resources in advance into fixed portions assigned to stations. For example, if a 100 MHz channel is shared by 5 stations (A, B, C, D, E), each station receives 20 MHz. The fatal drawback is resource waste: if Station A is inactive, its 20 MHz sits empty, while active stations cannot exceed their 20 MHz slice.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q4. Explain FDMA and TDMA with comparative diagrams and principles.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          FDMA divides the frequency domain into non-overlapping bands with guard bands; stations transmit simultaneously and continuously on different carrier frequencies. TDMA divides the time domain into repeating frames and slots; all stations share the entire frequency band but transmit sequentially one station per time slot, requiring microsecond clock synchronization and guard times.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q5. Explain dynamic channel allocation with an illustrative example.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Dynamic channel allocation assigns resources on demand based on real-time traffic. Consider 5 computers where A, C, and E have data while B and D are idle. Instead of reserving 20% for B and D, dynamic allocation grants the full channel capacity to A, C, and E. Resources are released immediately when transmissions finish.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q6. Compare static and dynamic channel allocation across key technical parameters.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Static allocation features predetermined assignment, advance setup, lower flexibility, wasted idle resources, and suitability for predictable voice traffic. Dynamic allocation features demand-based assignment, runtime access, high flexibility, reusable idle capacity, and optimal efficiency for bursty computer data traffic.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q7. Explain the relationship between LLC, MAC, and the Physical Layer.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The Network Layer passes IP datagrams to the LLC sublayer. LLC encapsulates packets into LLC PDUs, identifies the network protocol via SAPs, and manages flow/error control. LLC passes the data to the MAC sublayer, which appends 48-bit MAC addresses and FCS trailers and executes medium access arbitration. Finally, MAC streams frames down to the Physical Layer transceiver for signal modulation onto the wire or radio medium.\n        </p>\n      </div>\n    </div>\n  ",
+      "overview": "<p>Structured long-form answers for the 8 core examination essay questions specified in PDF Section 10.</p>\n    <!-- Topic 3 Long Exam Questions -->\n    <div class=\"space-y-4 mt-6 border-t border-gray-200 dark:border-gray-700 pt-6\">\n      <h3 class=\"text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider\">Topic 3 – MAC Sublayer Long-Answer University Questions</h3>\n      \n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q1. Explain the MAC sublayer and its functions in detail.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The Medium Access Control (MAC) sublayer is the lower portion of the Data Link Layer in the IEEE 802 architecture. It sits directly above the Physical Layer and abstracts medium-specific transmission rules. Its core functions include: (1) Physical Addressing using 48-bit MAC addresses, (2) Medium Access Control to arbitrate transmission access, (3) Frame Delimiting and Formatting, (4) Collision Handling (detection, jam signaling, and exponential backoff), (5) Transmission Coordination across multi-station broadcast channels, and (6) Access Management enforcing priority and fairness.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q2. Explain the channel allocation problem and its primary objectives.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The channel allocation problem addresses how a shared broadcast medium with limited bandwidth is partitioned among multiple competing stations. Because computers generate bursty, asymmetric traffic and may attempt simultaneous transmissions, uncoordinated access causes signal collisions. The primary objectives are: High efficiency, Fairness, Low delay, Collision reduction, Maximum throughput, and Elimination of idle resource waste.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q3. Describe static channel allocation with suitable examples.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Static channel allocation divides available resources in advance into fixed portions assigned to stations. For example, if a 100 MHz channel is shared by 5 stations (A, B, C, D, E), each station receives 20 MHz. The fatal drawback is resource waste: if Station A is inactive, its 20 MHz sits empty, while active stations cannot exceed their 20 MHz slice.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q4. Explain FDMA and TDMA with comparative diagrams and principles.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          FDMA divides the frequency domain into non-overlapping bands with guard bands; stations transmit simultaneously and continuously on different carrier frequencies. TDMA divides the time domain into repeating frames and slots; all stations share the entire frequency band but transmit sequentially one station per time slot, requiring microsecond clock synchronization and guard times.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q5. Explain dynamic channel allocation with an illustrative example.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Dynamic channel allocation assigns resources on demand based on real-time traffic. Consider 5 computers where A, C, and E have data while B and D are idle. Instead of reserving 20% for B and D, dynamic allocation grants the full channel capacity to A, C, and E. Resources are released immediately when transmissions finish.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q6. Compare static and dynamic channel allocation across key technical parameters.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Static allocation features predetermined assignment, advance setup, lower flexibility, wasted idle resources, and suitability for predictable voice traffic. Dynamic allocation features demand-based assignment, runtime access, high flexibility, reusable idle capacity, and optimal efficiency for bursty computer data traffic.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q7. Explain the relationship between LLC, MAC, and the Physical Layer.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The Network Layer passes IP datagrams to the LLC sublayer. LLC encapsulates packets into LLC PDUs, identifies the network protocol via SAPs, and manages flow/error control. LLC passes the data to the MAC sublayer, which appends 48-bit MAC addresses and FCS trailers and executes medium access arbitration. Finally, MAC streams frames down to the Physical Layer transceiver for signal modulation onto the wire or radio medium.\n        </p>\n      </div>\n    </div>\n  \n    <!-- Topic 4 Long Exam Questions -->\n    <div class=\"space-y-4 mt-6 border-t border-gray-200 dark:border-gray-700 pt-6\">\n      <h3 class=\"text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider\">Topic 4 – Multiple Access Protocols Long-Answer University Questions</h3>\n      \n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q8. Explain the working principle of Pure ALOHA with a diagram and derive its vulnerable time.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Pure ALOHA allows stations to transmit whenever data is ready. A frame sent at time $t$ collides if another station starts between $t - T_{fr}$ and $t + T_{fr}$. Thus, the vulnerable time is $2T_{fr}$. The throughput equation is $S = G e^{-2G}$. Differentiating with respect to $G$ yields maximum throughput $S_{\\text{max}} = 1/(2e) \\approx 18.4\\%$ at $G = 0.5$.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q9. Explain Slotted ALOHA and derive its throughput formula.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Slotted ALOHA synchronizes time into discrete slots of duration $T_{fr}$. Stations can only transmit at slot boundaries. Collisions can only occur if two or more stations choose the exact same slot, reducing vulnerable time to $T_{fr}$. The throughput equation is $S = G e^{-G}$. Maximizing gives $S_{\\text{max}} = 1/e \\approx 36.8\\%$ at $G = 1.0$, exactly doubling Pure ALOHA's capacity.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q10. Compare 1-persistent, nonpersistent, and p-persistent CSMA.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          1-Persistent senses continuously and transmits immediately with $P=1$ upon idle; has low delay at light traffic but 100% collision risk when multiple stations wait for a busy channel to clear. Non-Persistent waits a random time upon sensing a busy channel, greatly reducing collisions under heavy load but increasing delay and idle time. p-Persistent uses a slotted channel and transmits with probability $p$, offering tunable optimization between delay and collision risk.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q11. Explain CSMA/CD with an operational flowchart and detail the Binary Exponential Backoff algorithm.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          In CSMA/CD, a station senses the channel, begins transmitting, and monitors for collisions. Upon collision detection, it stops immediately, transmits a 48-bit jam signal, increments collision count $K$, and picks a random delay $R \\in [0, 2^K - 1]$. The backoff time is $T_B = R \\times T_{\\text{slot}}$. This prevents recurring collisions and adapts to network congestion.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q12. Explain CSMA/CA and its three strategies: IFS, Contention Window, and Acknowledgements.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Because wireless nodes cannot listen while transmitting, CSMA/CA avoids collisions prior to transmission. (1) IFS: Mandatory delay after channel idle to prioritize traffic. (2) Contention Window: Random backoff countdown that pauses if the channel becomes busy. (3) Acknowledgements: Receiver sends positive ACK upon successful CRC verification; missing ACK triggers retransmission.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q13. Differentiate between CSMA/CD and CSMA/CA across all architectural features.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          CSMA/CD detects collisions during transmission, is used in wired Ethernet, transmits jam signals, and executes backoff after collision. CSMA/CA avoids collisions before transmission, is used in wireless Wi-Fi, requires mandatory ACKs, and executes backoff before transmission during an IFS-controlled contention window.\n        </p>\n      </div>\n    </div>\n  ",
       "eli10": "In simple words: The 8 major essay questions from PDF Section 10 with structured headings and diagrams.",
       "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
       "diagram": "",
@@ -7609,6 +7593,171 @@ var TOPICS_U2_SYLLABUS = {
           ],
           "correct": 2,
           "explanation": "CDMA (Code Division Multiple Access), along with FDMA and TDMA, is a channelization method that partitions the medium."
+        },
+        {
+          "question": "Which protocol allows a station to transmit whenever it has data without checking the channel?",
+          "options": [
+            "CSMA",
+            "Pure ALOHA",
+            "CSMA/CD",
+            "TDMA"
+          ],
+          "correct": 1,
+          "explanation": "Pure ALOHA allows stations to transmit immediately whenever frames are ready, without carrier sensing or time slot boundaries."
+        },
+        {
+          "question": "What is the vulnerable time of Pure ALOHA for a frame duration Tfr?",
+          "options": [
+            "Tfr",
+            "2Tfr",
+            "Tp",
+            "4Tfr"
+          ],
+          "correct": 1,
+          "explanation": "In Pure ALOHA, a frame collides if any other frame begins transmission between t - Tfr and t + Tfr, yielding a vulnerable time of 2Tfr."
+        },
+        {
+          "question": "What is the maximum theoretical throughput of Pure ALOHA?",
+          "options": [
+            "18.4%",
+            "36.8%",
+            "50%",
+            "90%"
+          ],
+          "correct": 0,
+          "explanation": "Pure ALOHA achieves a maximum throughput of S_max = 1/(2e) approx 18.4% at an offered load of G = 0.5."
+        },
+        {
+          "question": "When can a station transmit in Slotted ALOHA?",
+          "options": [
+            "At any instant",
+            "Only at the beginning of a time slot",
+            "Only after a collision",
+            "Only when a router permits"
+          ],
+          "correct": 1,
+          "explanation": "In Slotted ALOHA, stations must synchronize and are permitted to transmit only at the beginning of discrete time slots."
+        },
+        {
+          "question": "What is the maximum throughput of Slotted ALOHA?",
+          "options": [
+            "18.4%",
+            "25%",
+            "36.8%",
+            "90%"
+          ],
+          "correct": 2,
+          "explanation": "Slotted ALOHA doubles Pure ALOHA's capacity, reaching S_max = 1/e approx 36.8% at an offered load of G = 1.0."
+        },
+        {
+          "question": "What is the basic foundational principle of CSMA?",
+          "options": [
+            "Transmit without checking",
+            "Listen before transmitting",
+            "Transmit only through a token",
+            "Divide the channel by code"
+          ],
+          "correct": 1,
+          "explanation": "CSMA (Carrier Sense Multiple Access) requires stations to sense the carrier ('listen before transmitting') to verify the channel is idle."
+        },
+        {
+          "question": "Which CSMA persistence method transmits immediately with probability 1 when the channel becomes idle?",
+          "options": [
+            "Nonpersistent",
+            "1-persistent",
+            "p-persistent only",
+            "Slotted ALOHA"
+          ],
+          "correct": 1,
+          "explanation": "1-Persistent CSMA continuously listens to a busy channel and transmits immediately with probability 1 as soon as it clears."
+        },
+        {
+          "question": "Which CSMA persistence method waits a random time if the channel is found busy?",
+          "options": [
+            "1-persistent",
+            "Nonpersistent",
+            "Pure ALOHA",
+            "CSMA/CD"
+          ],
+          "correct": 1,
+          "explanation": "Non-persistent CSMA stops sensing if the channel is busy, waits for a random period, and checks the channel again later."
+        },
+        {
+          "question": "What does CD stand for in CSMA/CD?",
+          "options": [
+            "Channel Division",
+            "Collision Detection",
+            "Code Distribution",
+            "Carrier Delay"
+          ],
+          "correct": 1,
+          "explanation": "CD stands for Collision Detection, enabling a station to detect collisions while actively transmitting."
+        },
+        {
+          "question": "What is the purpose of a jamming signal in CSMA/CD?",
+          "options": [
+            "Assign an IP address",
+            "Indicate to all stations that a collision has occurred",
+            "Synchronize time slots",
+            "Acknowledge every frame"
+          ],
+          "correct": 1,
+          "explanation": "A jamming signal is broadcast immediately after collision detection to ensure all stations detect the collision and discard partial frames."
+        },
+        {
+          "question": "Which algorithm is used for calculating backoff delay in traditional Ethernet CSMA/CD?",
+          "options": [
+            "Round Robin",
+            "Binary exponential backoff",
+            "Shortest path",
+            "Stop-and-Wait"
+          ],
+          "correct": 1,
+          "explanation": "Ethernet CSMA/CD uses the Binary Exponential Backoff algorithm (0 <= R <= 2^K - 1) to determine retransmission delay."
+        },
+        {
+          "question": "What does CA stand for in CSMA/CA?",
+          "options": [
+            "Collision Avoidance",
+            "Channel Assignment",
+            "Code Allocation",
+            "Carrier Access"
+          ],
+          "correct": 0,
+          "explanation": "CA stands for Collision Avoidance, which seeks to prevent collisions prior to transmission."
+        },
+        {
+          "question": "Which of the following is a core strategy used by CSMA/CA?",
+          "options": [
+            "Jamming signal",
+            "Interframe space (IFS)",
+            "Frequency hopping only",
+            "Token circulation"
+          ],
+          "correct": 1,
+          "explanation": "CSMA/CA uses Interframe Space (IFS), Contention Windows, and Acknowledgements to avoid collisions."
+        },
+        {
+          "question": "Which multiple access protocol is commonly associated with IEEE 802.11 Wi-Fi?",
+          "options": [
+            "CSMA/CD",
+            "CSMA/CA",
+            "Pure ALOHA only",
+            "Token passing only"
+          ],
+          "correct": 1,
+          "explanation": "IEEE 802.11 Wi-Fi utilizes CSMA/CA because wireless transceivers cannot reliably detect collisions while transmitting."
+        },
+        {
+          "question": "Why can CSMA still experience collisions despite sensing the channel before transmitting?",
+          "options": [
+            "It does not use frames",
+            "Finite signal propagation delay across the medium",
+            "It uses IP addresses",
+            "It has no physical layer"
+          ],
+          "correct": 1,
+          "explanation": "Because signals take finite time (propagation delay Tp) to travel down the medium, distant stations may sense the channel as idle before a wavefront arrives."
         }
       ],
       "references": [
