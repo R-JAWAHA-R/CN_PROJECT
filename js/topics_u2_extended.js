@@ -46,6 +46,10 @@ const TOPICS_U2_EXT = {
       compareWith: ["network-layer"],
       primaryUses: ["Ethernet links, Wi-Fi associations, Point-to-Point serial links, cellular radio links"]
     },
+    image: {
+      url: "https://upload.wikimedia.org/wikipedia/commons/8/8d/OSI_Model_v1.svg",
+      caption: "Figure: Data Link Layer Design Issues & Frame Encapsulation across Intermediate Network Nodes."
+    },
     sections: {
       overview: "",
       interactiveLabKey: "stuffing",

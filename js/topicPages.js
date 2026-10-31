@@ -206,6 +206,18 @@ var TopicPageEngine = {
       return;
     }
 
+    // Defensive normalization to prevent crashes if any property is missing or formatted differently
+    topic.infobox = topic.infobox || {
+      layer: topic.layer || "Layer 2 (Data Link Layer)",
+      standard: topic.standard || "IEEE Standard",
+      type: "Protocol / Standard",
+      prerequisites: [],
+      relatedConcepts: [],
+      compareWith: [],
+      primaryUses: []
+    };
+    topic.sections = topic.sections || {};
+
     const prevTopic = topic.prevTopicId ? TOPIC_REPOSITORY[topic.prevTopicId] : null;
     const nextTopic = topic.nextTopicId ? TOPIC_REPOSITORY[topic.nextTopicId] : null;
     const isCompleted = typeof completedTopics !== 'undefined' && Array.isArray(completedTopics) && completedTopics.includes(topicId);
@@ -231,15 +243,20 @@ var TopicPageEngine = {
     }).join(", ");
 
     const primaryUsesList = (topic.infobox.primaryUses || []).map(u => `<li>${u}</li>`).join("");
-    const whereUsedList = (topic.sections.whereUsed || []).map(u => `<li>✨ ${u}</li>`).join("");
+    
+    const whereUsedList = Array.isArray(topic.sections.whereUsed)
+      ? topic.sections.whereUsed.map(u => `<li>✨ ${u}</li>`).join("")
+      : (topic.sections.whereUsed ? `<li>✨ ${topic.sections.whereUsed}</li>` : "");
 
-    const referencesList = (topic.sections.references || []).map((ref, idx) => `
-      <li class="ref-item">
-        <span class="ref-num">[${idx + 1}]</span>
-        <span class="ref-text">${ref.cite}</span>
-        ${ref.url ? `<a href="${ref.url}" target="_blank" class="ref-link">Source ↗</a>` : ''}
-      </li>
-    `).join("");
+    const referencesList = Array.isArray(topic.sections.references)
+      ? topic.sections.references.map((ref, idx) => `
+        <li class="ref-item">
+          <span class="ref-num">[${idx + 1}]</span>
+          <span class="ref-text">${ref.cite || ref}</span>
+          ${ref.url ? `<a href="${ref.url}" target="_blank" class="ref-link">Source ↗</a>` : ''}
+        </li>
+      `).join("")
+      : (topic.sections.references ? `<li class="ref-item"><span class="ref-text">${topic.sections.references}</span></li>` : "");
 
     // Build interactive simulation embed if available
     let labEmbedHtml = "";
@@ -290,40 +307,53 @@ var TopicPageEngine = {
       `;
     }
 
-    // Build Worked Examples: either 3-Level Progressive or Single
+    // Build Worked Examples: Array, 3-Level Progressive, or Single
     let workedExamplesHtml = "";
     if (topic.sections.workedExamples) {
       const we = topic.sections.workedExamples;
-      workedExamplesHtml = `
-        <div class="progressive-examples-wrapper">
-          <div class="flex space-x-2 mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
-            <button id="tab-btn-lvl1-${topic.id}" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-blue-600 text-white shadow-sm transition-all" onclick="TopicPageEngine.switchExampleLevel('${topic.id}', 'lvl1')">
-              Level 1: Beginner (Understand)
-            </button>
-            <button id="tab-btn-lvl2-${topic.id}" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 transition-all" onclick="TopicPageEngine.switchExampleLevel('${topic.id}', 'lvl2')">
-              Level 2: Intermediate (Apply)
-            </button>
-            <button id="tab-btn-lvl3-${topic.id}" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 transition-all" onclick="TopicPageEngine.switchExampleLevel('${topic.id}', 'lvl3')">
-              Level 3: Advanced (Analyze)
-            </button>
+      if (Array.isArray(we)) {
+        workedExamplesHtml = we.map((ex, idx) => `
+          <div class="worked-example-box blue mb-4 p-4 rounded-xl border border-blue-200 dark:border-blue-900 bg-white dark:bg-gray-800 shadow-sm">
+            <div class="example-title font-bold text-sm text-blue-700 dark:text-blue-400 mb-2 flex items-center justify-between">
+              <span>${ex.title || `Worked Example ${idx + 1}`}</span>
+              ${ex.difficulty ? `<span class="text-[10px] px-2 py-0.5 rounded font-mono font-bold bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-blue-300">${ex.difficulty}</span>` : ''}
+            </div>
+            ${ex.problem ? `<div class="p-3 bg-blue-50/60 dark:bg-blue-950/30 rounded-lg text-xs mb-3 text-slate-800 dark:text-slate-200"><strong>Problem:</strong> ${ex.problem}</div>` : ''}
+            <div class="text-xs leading-relaxed text-slate-700 dark:text-slate-300">${ex.solution || ex.content || ''}</div>
           </div>
-          
-          <div id="tab-content-lvl1-${topic.id}" class="worked-example-box blue">
-            <div class="example-title">🌱 Level 1: Conceptual Understanding</div>
-            <div class="text-xs leading-relaxed">${we.level1}</div>
-          </div>
+        `).join("");
+      } else if (we.level1) {
+        workedExamplesHtml = `
+          <div class="progressive-examples-wrapper">
+            <div class="flex space-x-2 mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
+              <button id="tab-btn-lvl1-${topic.id}" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-blue-600 text-white shadow-sm transition-all" onclick="TopicPageEngine.switchExampleLevel('${topic.id}', 'lvl1')">
+                Level 1: Beginner (Understand)
+              </button>
+              <button id="tab-btn-lvl2-${topic.id}" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 transition-all" onclick="TopicPageEngine.switchExampleLevel('${topic.id}', 'lvl2')">
+                Level 2: Intermediate (Apply)
+              </button>
+              <button id="tab-btn-lvl3-${topic.id}" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 transition-all" onclick="TopicPageEngine.switchExampleLevel('${topic.id}', 'lvl3')">
+                Level 3: Advanced (Analyze)
+              </button>
+            </div>
+            
+            <div id="tab-content-lvl1-${topic.id}" class="worked-example-box blue">
+              <div class="example-title">🌱 Level 1: Conceptual Understanding</div>
+              <div class="text-xs leading-relaxed">${we.level1}</div>
+            </div>
 
-          <div id="tab-content-lvl2-${topic.id}" class="worked-example-box green hidden">
-            <div class="example-title">⚙️ Level 2: Numerical Calculation & Step-by-Step Working</div>
-            <div class="text-xs leading-relaxed">${we.level2}</div>
-          </div>
+            <div id="tab-content-lvl2-${topic.id}" class="worked-example-box green hidden">
+              <div class="example-title">⚙️ Level 2: Numerical Calculation & Step-by-Step Working</div>
+              <div class="text-xs leading-relaxed">${we.level2 || ''}</div>
+            </div>
 
-          <div id="tab-content-lvl3-${topic.id}" class="worked-example-box purple hidden">
-            <div class="example-title">🔬 Level 3: Protocol Analysis & Failure Recovery</div>
-            <div class="text-xs leading-relaxed">${we.level3}</div>
+            <div id="tab-content-lvl3-${topic.id}" class="worked-example-box purple hidden">
+              <div class="example-title">🔬 Level 3: Protocol Analysis & Failure Recovery</div>
+              <div class="text-xs leading-relaxed">${we.level3 || ''}</div>
+            </div>
           </div>
-        </div>
-      `;
+        `;
+      }
     } else if (topic.sections.workedExample) {
       workedExamplesHtml = `
         <div class="worked-example-box blue">
@@ -554,34 +584,39 @@ var TopicPageEngine = {
             <section class="wiki-section" id="sec-diagram">
               <h2 class="wiki-section-heading">3. Architecture Diagram & Visual Schematic</h2>
               <div class="wiki-section-body space-y-4">
-                ${(topic.sections?.imageUrl || topic.imageUrl) ? `
+                ${(() => {
+                  const resolvedImgUrl = topic.imageUrl || topic.image?.url || topic.sections?.imageUrl || topic.sections?.image?.url;
+                  const resolvedImgCaption = topic.imageCaption || topic.image?.caption || topic.sections?.imageCaption || topic.sections?.image?.caption;
+                  if (!resolvedImgUrl) return '';
+                  return `
                   <div class="wiki-img-container mb-4 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-sm p-4 flex flex-col items-center transition-all hover:shadow-md">
                     <div class="w-full flex items-center justify-between pb-2 mb-2 border-b border-gray-100 dark:border-gray-800 text-[10px] text-gray-500 font-mono">
                       <span class="flex items-center gap-1 text-blue-600 dark:text-blue-400 font-bold uppercase tracking-wider">
                         <i class="fa-solid fa-network-wired"></i> Architecture Illustration
                       </span>
-                      <a href="${topic.sections?.imageUrl || topic.imageUrl}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-500 flex items-center gap-1 transition-colors" title="Open full resolution in new tab">
+                      <a href="${resolvedImgUrl}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-500 flex items-center gap-1 transition-colors" title="Open full resolution in new tab">
                         <span>Full Res</span>
                         <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
                       </a>
                     </div>
                     <div class="relative w-full flex items-center justify-center p-3 bg-slate-50/70 dark:bg-slate-950/50 rounded-lg overflow-hidden group">
-                      <img src="${topic.sections?.imageUrl || topic.imageUrl}" 
+                      <img src="${resolvedImgUrl}" 
                            alt="${topic.title} Architecture Diagram" 
                            loading="lazy" 
                            referrerpolicy="no-referrer"
                            class="max-w-full h-auto max-h-[460px] object-contain rounded cursor-pointer transition-transform duration-300 group-hover:scale-[1.01]"
-                           onclick="window.open('${topic.sections?.imageUrl || topic.imageUrl}', '_blank')"
+                           onclick="window.open('${resolvedImgUrl}', '_blank')"
                            onerror="this.onerror=null; this.closest('.wiki-img-container').classList.add('hidden');" />
                     </div>
-                    ${(topic.sections?.imageCaption || topic.imageCaption) ? `
+                    ${resolvedImgCaption ? `
                       <p class="text-xs text-gray-600 dark:text-gray-300 text-center mt-3 font-medium flex items-center justify-center gap-1.5 px-3">
                         <i class="fa-solid fa-circle-info text-blue-500 text-[11px] shrink-0"></i>
-                        <span>${topic.sections?.imageCaption || topic.imageCaption}</span>
+                        <span>${resolvedImgCaption}</span>
                       </p>
                     ` : ''}
                   </div>
-                ` : ''}
+                  `;
+                })()}
 
                 <!-- Clean Modern Architecture Diagram (Replaces ASCII/symbols art) -->
                 ${(typeof CleanDiagramEngine !== 'undefined' ? CleanDiagramEngine.getDiagramHtml(topic) : (typeof window !== 'undefined' && window.CleanDiagramEngine ? window.CleanDiagramEngine.getDiagramHtml(topic) : ''))}
@@ -1979,7 +2014,7 @@ Receiver detects transmission corruption and discards the damaged frame.
     const tpEl = document.getElementById('topic-sw-tp');
     const tfEl = document.getElementById('topic-sw-tf');
     const badge = document.getElementById('topic-sw-utilization-badge');
-    if (!badge || !wEl || !tpEl || !tfEl) return;
+    if (!badge || !protoEl || !wEl || !tpEl || !tfEl) return;
 
     const W = parseInt(wEl.value) || 1;
     const Tp = parseFloat(tpEl.value) || 9;
@@ -2010,10 +2045,12 @@ Receiver detects transmission corruption and discards the damaged frame.
   },
 
   runSWSingleClean: function() {
-    const proto = document.getElementById('topic-sw-proto').value;
+    const protoEl = document.getElementById('topic-sw-proto');
     const box = document.getElementById('topic-arq-timeline');
-    const wVal = parseInt(document.getElementById('topic-sw-winsize').value) || 1;
-    if (!box) return;
+    const wEl = document.getElementById('topic-sw-winsize');
+    if (!protoEl || !box) return;
+    const proto = protoEl.value;
+    const wVal = wEl ? parseInt(wEl.value) || 1 : 1;
 
     if (proto === 'stop-and-wait') {
       box.innerHTML = `

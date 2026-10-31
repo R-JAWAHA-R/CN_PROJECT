@@ -3819,9 +3819,55 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"space-y-2 text-xs\">\n          <p><strong>Summary:</strong> The physical properties of wireless transmission eliminate wires at the cost of non-deterministic channel quality, requiring link adaptation and collision avoidance.</p>\n        </div>\n      ",
-      "whereUsed": "RF engineering, indoor Wi-Fi planning, cellular site surveys, and wireless link budgeting.",
-      "references": "Forouzan, Data Communications and Networking (5th Ed.), Section 14.1; Rappaport, Wireless Communications: Principles and Practice."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 1 (Physical) & Layer 2 (MAC)",
+      "standard": "Forouzan Chapter 14 / Rappaport",
+      "type": "Physical & Radio Frequency Characteristics",
+      "prerequisites": [
+        "wireless-lan-protocols"
+      ],
+      "relatedConcepts": [
+        "u2-wireless-lan-architecture",
+        "u2-wireless-multiple-access"
+      ],
+      "compareWith": [
+        "transmission-media"
+      ],
+      "primaryUses": [
+        "Indoor RF planning, Wi-Fi coverage site surveys, link budgeting"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Electromagnetic Wave Propagation",
+        "meaning": "Radio frequency transmission, wavelength, and frequency relationships"
+      },
+      {
+        "concept": "Transmission Media",
+        "meaning": "Unguided atmospheric media vs. guided copper/fiber cables"
+      }
+    ],
+    "learningObjectives": [
+      "Master the 7 core physical and electromagnetic characteristics of wireless communication links.",
+      "Calculate free-space path loss (FSPL) and understand inverse-square signal attenuation.",
+      "Analyze how multipath propagation causes fading, inter-symbol interference, and phase distortion."
+    ]
   },
   "u2-wireless-lan-architecture": {
     "id": "u2-wireless-lan-architecture",
@@ -3847,9 +3893,56 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Key Advantage:</strong> ESS decouples physical RF coverage from network size, permitting arbitrary geographic scaling.</p>\n        </div>\n      ",
-      "whereUsed": "Enterprise campus networking, multi-AP home mesh systems, hospital wireless networks, and airport Wi-Fi.",
-      "references": "Forouzan Ch. 14, Section 14.2; Tanenbaum Ch. 4, Section 4.4."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (Data Link Layer Architecture)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Hierarchical Wireless Architecture",
+      "prerequisites": [
+        "wireless-lan-protocols",
+        "u2-wireless-characteristics"
+      ],
+      "relatedConcepts": [
+        "wifi-mac-sublayer",
+        "u2-ieee-802-11-architecture"
+      ],
+      "compareWith": [
+        "u2-ethernet-architecture"
+      ],
+      "primaryUses": [
+        "Enterprise Wi-Fi roaming, campus wide-area coverage, hospital medical wireless networks"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Network Topologies",
+        "meaning": "Star, mesh, and infrastructure network layouts"
+      },
+      {
+        "concept": "Bridging and Switching",
+        "meaning": "Connecting network segments at Layer 2"
+      }
+    ],
+    "learningObjectives": [
+      "Distinguish between Basic Service Set (BSS) Ad Hoc mode (IBSS) and Infrastructure mode.",
+      "Explain the role and architecture of an Access Point (AP) and the Distribution System (DS).",
+      "Differentiate the 3 levels of station mobility: No-Transition, BSS-Transition (Roaming), and ESS-Transition."
+    ]
   },
   "u2-hidden-terminal-problem": {
     "id": "u2-hidden-terminal-problem",
@@ -3875,9 +3968,57 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Trade-off:</strong> RTS/CTS eliminates hidden collisions for large frames but adds small control overhead for short frames.</p>\n        </div>\n      ",
-      "whereUsed": "Large meeting rooms, outdoor directional Wi-Fi links, dense classroom auditoriums, and wireless mesh topologies.",
-      "references": "Forouzan, Data Communications and Networking, Chapter 14, Section 14.3; Tanenbaum, Section 4.4.2."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (MAC Sublayer Contention)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Medium Access Contention Dilemma",
+      "prerequisites": [
+        "wireless-lan-protocols",
+        "u2-wireless-lan-architecture"
+      ],
+      "relatedConcepts": [
+        "u2-exposed-terminal-problem",
+        "u2-rts-cts-mechanism",
+        "u2-network-allocation-vector"
+      ],
+      "compareWith": [
+        "u2-exposed-terminal-problem"
+      ],
+      "primaryUses": [
+        "High-density classrooms, auditoriums, large meeting spaces, outdoor directional links"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Carrier Sensing",
+        "meaning": "Clear Channel Assessment (CCA) energy detection"
+      },
+      {
+        "concept": "RF Coverage Cells",
+        "meaning": "Transmission radius and reception sensitivity thresholds"
+      }
+    ],
+    "learningObjectives": [
+      "Understand the root cause of the Hidden Station Problem in asymmetrical wireless topologies.",
+      "Trace how simultaneous transmissions from out-of-range stations collide at the central Access Point.",
+      "Master the 4-way RTS/CTS virtual carrier sensing solution and Network Allocation Vector (NAV) timers."
+    ]
   },
   "u2-exposed-terminal-problem": {
     "id": "u2-exposed-terminal-problem",
@@ -3903,9 +4044,55 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Summary:</strong> Exposed stations underutilize the spectrum; resolved in modern networks via BSS coloring and beamforming.</p>\n        </div>\n      ",
-      "whereUsed": "Dense apartment complexes, high-density auditoriums, and wireless mesh backhauls.",
-      "references": "Forouzan Ch. 14, Section 14.3; Tanenbaum Ch. 4, Section 4.4.2."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (MAC Sublayer Contention)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Medium Access Inefficiency Dilemma",
+      "prerequisites": [
+        "u2-hidden-terminal-problem"
+      ],
+      "relatedConcepts": [
+        "u2-hidden-terminal-problem",
+        "u2-wireless-multiple-access"
+      ],
+      "compareWith": [
+        "u2-hidden-terminal-problem"
+      ],
+      "primaryUses": [
+        "High-density apartment complexes, enterprise wireless mesh, Wi-Fi 6 spatial reuse"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Physical Carrier Sensing",
+        "meaning": "Energy detection on antenna interfaces"
+      },
+      {
+        "concept": "Hidden Terminal Problem",
+        "meaning": "Collisions caused by under-sensing"
+      }
+    ],
+    "learningObjectives": [
+      "Define the Exposed Station Problem and explain why it causes over-sensing and unnecessary deferrals.",
+      "Calculate the spatial capacity and throughput loss resulting from exposed station starvation.",
+      "Explain why standard RTS/CTS does not inherently solve exposed terminals and how Wi-Fi 6 BSS Coloring mitigates it."
+    ]
   },
   "u2-wireless-multiple-access": {
     "id": "u2-wireless-multiple-access",
@@ -3931,9 +4118,57 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Summary:</strong> CSMA/CA incurs ACK and backoff overhead but provides robust communication over unguided RF channels.</p>\n        </div>\n      ",
-      "whereUsed": "All Wi-Fi standards (802.11a/b/g/n/ac/ax), Zigbee (IEEE 802.15.4), and underwater acoustic networks.",
-      "references": "Forouzan Ch. 14, Section 14.3; Tanenbaum Ch. 4, Section 4.4.2."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (MAC Sublayer Access Control)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Multiple Access Protocol Theory",
+      "prerequisites": [
+        "u2-ethernet-csma-cd-operation",
+        "u2-wireless-characteristics"
+      ],
+      "relatedConcepts": [
+        "u2-ieee-802-11-csma-ca",
+        "u2-rts-cts-mechanism"
+      ],
+      "compareWith": [
+        "u2-ethernet-csma-cd-operation",
+        "u2-comparison-multiple-access"
+      ],
+      "primaryUses": [
+        "Wireless channel arbitration, Wi-Fi firmware drivers, wireless protocol design"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "CSMA/CD Operation",
+        "meaning": "Wired Ethernet collision detection and jamming signals"
+      },
+      {
+        "concept": "Radio Transceiver Front-End",
+        "meaning": "Transmit power, receive sensitivity, and antenna dynamic range"
+      }
+    ],
+    "learningObjectives": [
+      "Prove the 3 fundamental reasons why CSMA/CD is physically impossible in wireless LANs.",
+      "Explain how transceiver blindness (100 dB difference) prevents listening during transmission.",
+      "Contrast CSMA/CD and CSMA/CA across collision handling, layer 2 ACKs, and channel utilization."
+    ]
   },
   "u2-wireless-lan-access-methods": {
     "id": "u2-wireless-lan-access-methods",
@@ -3959,9 +4194,56 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Summary:</strong> DCF provides robust distributed fairness; PCF guarantees bounded latency at the cost of AP complexity.</p>\n        </div>\n      ",
-      "whereUsed": "Voice over Wi-Fi (VoWLAN), industrial IoT wireless control loops, and modern 802.11e/ax QoS queues.",
-      "references": "Forouzan Ch. 14, Section 14.3; Tanenbaum Ch. 4, Section 4.4.2."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (MAC Coordination Functions)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Medium Access Coordination Methods",
+      "prerequisites": [
+        "u2-wireless-multiple-access"
+      ],
+      "relatedConcepts": [
+        "u2-ieee-802-11-dcf",
+        "u2-ieee-802-11-pcf",
+        "u2-dcf-vs-pcf"
+      ],
+      "compareWith": [
+        "u2-dcf-vs-pcf"
+      ],
+      "primaryUses": [
+        "Voice over Wi-Fi (VoWLAN), real-time streaming, enterprise multimedia QoS"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Multiple Access Coordination",
+        "meaning": "Contention vs. polling channel arbitration"
+      },
+      {
+        "concept": "Interframe Spaces",
+        "meaning": "Preemptive priority timing intervals"
+      }
+    ],
+    "learningObjectives": [
+      "Compare Distributed Coordination Function (DCF) and Point Coordination Function (PCF).",
+      "Analyze the IEEE 802.11 Superframe architecture (Contention-Free Period CFP + Contention Period CP).",
+      "Explain how PIFS gives the Point Coordinator priority access over standard DCF stations."
+    ]
   },
   "u2-wireless-communication-challenges": {
     "id": "u2-wireless-communication-challenges",
@@ -3987,9 +4269,57 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Summary:</strong> Wireless communication trade-offs require robust protocol engineering to achieve reliable local networking.</p>\n        </div>\n      ",
-      "whereUsed": "Curriculum synthesis, exam preparation, GATE review, and wireless network architecture design.",
-      "references": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14 (Sections 14.1 to 14.4)."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 & Layer 1 (Wireless Engineering)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Curriculum Synthesis & Trade-off Evaluation",
+      "prerequisites": [
+        "wireless-lan-protocols",
+        "u2-wireless-lan-architecture",
+        "u2-wireless-multiple-access"
+      ],
+      "relatedConcepts": [
+        "wifi-mac-sublayer",
+        "u2-ieee-802-11-frame-formats"
+      ],
+      "compareWith": [
+        "u2-ethernet-advantages-limitations"
+      ],
+      "primaryUses": [
+        "University exam preparation, GATE review, enterprise Wi-Fi system evaluation"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Wireless LAN Fundamentals",
+        "meaning": "BSS, ESS, CSMA/CA, and RF characteristics"
+      },
+      {
+        "concept": "Network Security Basics",
+        "meaning": "Encryption, authentication, and wireless perimeters"
+      }
+    ],
+    "learningObjectives": [
+      "Synthesize the major advantages, disadvantages, and engineering trade-offs of Wireless LANs.",
+      "Master the 14 essential technical terms in IEEE 802.11 wireless networking.",
+      "Review high-yield exam takeaways, formulas, and structured answers for university assessments."
+    ]
   },
   "u2-ieee-802-11-architecture": {
     "id": "u2-ieee-802-11-architecture",
@@ -4015,9 +4345,56 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Key Insight:</strong> DCF guarantees robustness and decentralization; PCF guarantees bounded latency for time-sensitive traffic.</p>\n        </div>\n      ",
-      "whereUsed": "Enterprise Wi-Fi deployments, cellular-offload gateways, and 802.11e/WMM QoS systems.",
-      "references": "Forouzan Ch. 14, Section 14.2; Tanenbaum Ch. 4, Section 4.4."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (MAC Architecture)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Protocol Stack Architecture",
+      "prerequisites": [
+        "wifi-mac-sublayer"
+      ],
+      "relatedConcepts": [
+        "u2-ieee-802-11-dcf",
+        "u2-ieee-802-11-pcf",
+        "u2-dcf-vs-pcf"
+      ],
+      "compareWith": [
+        "u2-ethernet-architecture"
+      ],
+      "primaryUses": [
+        "Wi-Fi system architecture design, multimedia streaming scheduling, QoS queues"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "MAC Sublayer Roles",
+        "meaning": "Coordination functions and channel access arbitration"
+      },
+      {
+        "concept": "LLC Sublayer (802.2)",
+        "meaning": "Multiplexing network protocols above the MAC layer"
+      }
+    ],
+    "learningObjectives": [
+      "Analyze the dual-coordination architecture of the 802.11 MAC sublayer (DCF and PCF).",
+      "Explain the interaction between the Logical Link Control (LLC) sublayer and the Physical Layer.",
+      "Understand how PIFS allows PCF to seize priority channel access over standard DCF."
+    ]
   },
   "u2-ieee-802-11-dcf": {
     "id": "u2-ieee-802-11-dcf",
@@ -4043,9 +4420,58 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Advantages:</strong> Completely autonomous, highly resilient, and zero single-point-of-failure.</p>\n        </div>\n      ",
-      "whereUsed": "Standard Wi-Fi communications in home, enterprise, and public hotspot networks.",
-      "references": "Forouzan, Data Communications and Networking, Chapter 14, Section 14.3; IEEE 802.11-2020 Standard."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (MAC Contention Access)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Distributed Contention Access Protocol",
+      "prerequisites": [
+        "wifi-mac-sublayer",
+        "u2-ieee-802-11-architecture"
+      ],
+      "relatedConcepts": [
+        "u2-ieee-802-11-csma-ca",
+        "u2-ieee-802-11-ifs",
+        "u2-dcf-vs-pcf"
+      ],
+      "compareWith": [
+        "u2-ieee-802-11-pcf",
+        "u2-dcf-vs-pcf"
+      ],
+      "primaryUses": [
+        "Standard asynchronous data delivery in Wi-Fi (HTTP, email, file downloads)"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "CSMA/CA Principles",
+        "meaning": "Carrier sensing and collision avoidance mechanics"
+      },
+      {
+        "concept": "Contention Windows",
+        "meaning": "Random backoff slot intervals and timer freezing"
+      }
+    ],
+    "learningObjectives": [
+      "Master the 7-step working mechanism of the Distributed Coordination Function (DCF).",
+      "Explain the operation of the Contention Window, backoff countdown, and counter freezing.",
+      "Analyze the exponential backoff window expansion upon frame collision or missing ACK."
+    ]
   },
   "u2-ieee-802-11-pcf": {
     "id": "u2-ieee-802-11-pcf",
@@ -4071,9 +4497,57 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800 text-xs\">\n            <h4 class=\"font-bold text-emerald-800 dark:text-emerald-300 mb-1\">Advantages</h4>\n            <ul class=\"space-y-1 text-slate-700 dark:text-slate-300\">\n              <li>&bull; Completely eliminates collisions during CFP.</li>\n              <li>&bull; Predictable latency for real-time VoIP.</li>\n              <li>&bull; Centralized bandwidth management.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/30 rounded-lg border border-rose-200 dark:border-rose-800 text-xs\">\n            <h4 class=\"font-bold text-rose-800 dark:text-rose-300 mb-1\">Limitations</h4>\n            <ul class=\"space-y-1 text-slate-700 dark:text-slate-300\">\n              <li>&bull; High polling overhead for idle stations.</li>\n              <li>&bull; Requires complex AP coordinator software.</li>\n              <li>&bull; Not supported in Ad Hoc networks.</li>\n            </ul>\n          </div>\n        </div>\n      ",
-      "whereUsed": "Legacy time-sensitive wireless services, specialized industrial automation, and academic MAC scheduling research.",
-      "references": "Forouzan, Data Communications and Networking, Chapter 14, Section 14.3; IEEE 802.11 Standards."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (MAC Contention-Free Access)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Centralized Polling Access Protocol",
+      "prerequisites": [
+        "u2-ieee-802-11-architecture",
+        "u2-ieee-802-11-dcf"
+      ],
+      "relatedConcepts": [
+        "u2-ieee-802-11-ifs",
+        "u2-dcf-vs-pcf"
+      ],
+      "compareWith": [
+        "u2-ieee-802-11-dcf",
+        "u2-dcf-vs-pcf"
+      ],
+      "primaryUses": [
+        "Time-sensitive voice and video polling, specialized industrial Wi-Fi automation"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Access Point Roles",
+        "meaning": "Point Coordinator centralized scheduling in Infrastructure mode"
+      },
+      {
+        "concept": "Interframe Spaces",
+        "meaning": "Preemptive priority timing via PIFS"
+      }
+    ],
+    "learningObjectives": [
+      "Explain the centralized polling operation of the Point Coordination Function (PCF).",
+      "Analyze the IEEE 802.11 Superframe structure (Beacon, CFP, and CP periods).",
+      "Evaluate the advantages, limitations, and reasons why PCF was superseded by 802.11e EDCA."
+    ]
   },
   "u2-ieee-802-11-csma-ca": {
     "id": "u2-ieee-802-11-csma-ca",
@@ -4099,9 +4573,57 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Summary:</strong> CSMA/CA achieves robust distributed channel sharing across noisy, unguided RF spectrum.</p>\n        </div>\n      ",
-      "whereUsed": "IEEE 802.11 Wi-Fi, IEEE 802.15.4 Zigbee, and wireless sensor networking protocols.",
-      "references": "Forouzan Ch. 14, Section 14.3; Tanenbaum Ch. 4, Section 4.4."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (MAC Access Control)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Carrier Sense Multiple Access Protocol",
+      "prerequisites": [
+        "wifi-mac-sublayer",
+        "u2-ieee-802-11-dcf"
+      ],
+      "relatedConcepts": [
+        "u2-rts-cts-mechanism",
+        "u2-network-allocation-vector"
+      ],
+      "compareWith": [
+        "u2-ethernet-csma-cd-operation",
+        "u2-comparison-multiple-access"
+      ],
+      "primaryUses": [
+        "Wi-Fi channel contention, Zigbee radio links, wireless IoT sensor networks"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Physical Carrier Sensing",
+        "meaning": "Clear Channel Assessment energy measurement"
+      },
+      {
+        "concept": "Virtual Carrier Sensing",
+        "meaning": "Network Allocation Vector (NAV) reservation"
+      }
+    ],
+    "learningObjectives": [
+      "Master the 6 cooperating components of CSMA/CA in wireless networking.",
+      "Calculate collision probability during simultaneous random backoff slot selection.",
+      "Compare CSMA/CA and CSMA/CD across operational timing, backoff trigger, and recovery."
+    ]
   },
   "u2-ieee-802-11-ifs": {
     "id": "u2-ieee-802-11-ifs",
@@ -4127,9 +4649,56 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Summary:</strong> Interframe spacing allows deterministic prioritisation of control traffic without extra protocol messages.</p>\n        </div>\n      ",
-      "whereUsed": "MAC timing synchronization, frame exchange priority enforcement, and 802.11e QoS differentiation.",
-      "references": "Forouzan Ch. 14, Section 14.3; RFC 8325 (Mapping Diffserv to IEEE 802.11)."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (MAC Timing & Priority)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Interframe Timing Hierarchy",
+      "prerequisites": [
+        "wifi-mac-sublayer",
+        "u2-ieee-802-11-csma-ca"
+      ],
+      "relatedConcepts": [
+        "u2-ieee-802-11-dcf",
+        "u2-ieee-802-11-pcf"
+      ],
+      "compareWith": [
+        "u2-ethernet-csma-cd-operation"
+      ],
+      "primaryUses": [
+        "MAC timing engines, wireless frame prioritization, Wi-Fi chip hardware clocks"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Slot Time",
+        "meaning": "Basic time slice determined by physical layer propagation and RF switching"
+      },
+      {
+        "concept": "Priority Scheduling",
+        "meaning": "Using shorter time delays to achieve preemptive access"
+      }
+    ],
+    "learningObjectives": [
+      "Define all four IEEE 802.11 Interframe Spaces: SIFS, PIFS, DIFS, and EIFS.",
+      "Calculate PIFS and DIFS using standard formulas from SIFS and Slot Time.",
+      "Explain why SIFS is the shortest interval and how it preserves atomic frame exchanges."
+    ]
   },
   "u2-rts-cts-mechanism": {
     "id": "u2-rts-cts-mechanism",
@@ -4155,9 +4724,56 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Summary:</strong> RTS/CTS provides insurance against costly collisions for large packets in dense wireless cells.</p>\n        </div>\n      ",
-      "whereUsed": "High-density enterprise auditoriums, outdoor long-range Wi-Fi, and environments with heavy hidden node interference.",
-      "references": "Forouzan Ch. 14, Section 14.3; Tanenbaum Ch. 4, Section 4.4."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (MAC Virtual Sensing Handshake)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "4-Way Virtual Carrier Sensing Handshake",
+      "prerequisites": [
+        "u2-hidden-terminal-problem",
+        "u2-ieee-802-11-csma-ca"
+      ],
+      "relatedConcepts": [
+        "u2-network-allocation-vector",
+        "u2-ieee-802-11-frame-formats"
+      ],
+      "compareWith": [
+        "u2-hidden-terminal-problem"
+      ],
+      "primaryUses": [
+        "Dense enterprise auditoriums, large data file transfers, outdoor Wi-Fi backhauls"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Hidden Station Problem",
+        "meaning": "Collisions occurring at the receiver from hidden nodes"
+      },
+      {
+        "concept": "Control Frames",
+        "meaning": "Short MAC frames used for channel coordination"
+      }
+    ],
+    "learningObjectives": [
+      "Trace the complete 4-way RTS/CTS frame exchange: RTS &rarr; SIFS &rarr; CTS &rarr; SIFS &rarr; DATA &rarr; SIFS &rarr; ACK.",
+      "Calculate the total exchange duration and Duration field reservation value.",
+      "Explain the trade-offs of the RTS Threshold parameter for small vs. large frames."
+    ]
   },
   "u2-network-allocation-vector": {
     "id": "u2-network-allocation-vector",
@@ -4183,9 +4799,55 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Summary:</strong> Dual carrier sensing (Physical CCA + Virtual NAV) ensures robust medium arbitration in asymmetrical RF topologies.</p>\n        </div>\n      ",
-      "whereUsed": "All IEEE 802.11 compliant devices, Wi-Fi drivers, and wireless network simulation models.",
-      "references": "Forouzan, Data Communications and Networking, Chapter 14, Section 14.3; IEEE 802.11 Standards."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (MAC Virtual Carrier Sensing)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Virtual Carrier Sensing Timer",
+      "prerequisites": [
+        "u2-rts-cts-mechanism"
+      ],
+      "relatedConcepts": [
+        "u2-ieee-802-11-csma-ca",
+        "u2-hidden-terminal-problem"
+      ],
+      "compareWith": [
+        "u2-hidden-terminal-problem"
+      ],
+      "primaryUses": [
+        "Wi-Fi MAC state machines, collision prevention, hidden terminal protection"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "RTS/CTS Duration Field",
+        "meaning": "Time value written into MAC control frames"
+      },
+      {
+        "concept": "Physical vs. Virtual Sensing",
+        "meaning": "RF energy measurement vs. contract reservation"
+      }
+    ],
+    "learningObjectives": [
+      "Define the Network Allocation Vector (NAV) and explain its virtual carrier-sensing role.",
+      "Explain the mathematical rules for updating the NAV countdown timer upon overhearing frames.",
+      "Contrast physical carrier sensing (CCA) with virtual carrier sensing (NAV) in a comparison table."
+    ]
   },
   "u2-ieee-802-11-frame-formats": {
     "id": "u2-ieee-802-11-frame-formats",
@@ -4211,9 +4873,56 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Summary:</strong> Flexible 4-address format enables complex mesh bridging and multi-BSS campus roaming.</p>\n        </div>\n      ",
-      "whereUsed": "Packet analysis in Wireshark, IEEE 802.11 wireless drivers, and bridge router forwarding tables.",
-      "references": "Forouzan, Data Communications and Networking, Chapter 14, Section 14.3; Cisco 802.11 Frame Guide."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (MAC Frame Structure & Addressing)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Data Link Frame Specification",
+      "prerequisites": [
+        "wifi-mac-sublayer",
+        "u2-ethernet-frame-format"
+      ],
+      "relatedConcepts": [
+        "u2-ieee-802-11-architecture",
+        "u2-rts-cts-mechanism"
+      ],
+      "compareWith": [
+        "u2-ethernet-frame-format"
+      ],
+      "primaryUses": [
+        "Wireshark 802.11 packet capture analysis, wireless router firmware, bridge routing"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "MAC Frame Structure",
+        "meaning": "Headers, addressing, payloads, and CRC checksums"
+      },
+      {
+        "concept": "Distribution System Routing",
+        "meaning": "Bridging frames between wireless stations and wired LANs"
+      }
+    ],
+    "learningObjectives": [
+      "Identify and explain all 9 fields of the general IEEE 802.11 MAC frame.",
+      "Detail the 11 subfields within the 16-bit Frame Control field.",
+      "Master the interpretation of the 4 address fields based on the To DS and From DS bits."
+    ]
   },
   "u2-dcf-vs-pcf": {
     "id": "u2-dcf-vs-pcf",
@@ -4239,9 +4948,56 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Summary:</strong> DCF provides robust fairness; PCF guarantees bounded latency for time-sensitive traffic.</p>\n        </div>\n      ",
-      "whereUsed": "Curriculum synthesis, university exams, GATE preparation, and Wi-Fi architecture evaluation.",
-      "references": "Forouzan, Data Communications and Networking (4th/5th Ed.), Chapter 14, Section 14.3."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (MAC Coordination Comparison)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Comparative Architectural Analysis",
+      "prerequisites": [
+        "u2-ieee-802-11-dcf",
+        "u2-ieee-802-11-pcf"
+      ],
+      "relatedConcepts": [
+        "u2-ieee-802-11-architecture",
+        "u2-wireless-lan-access-methods"
+      ],
+      "compareWith": [
+        "u2-wireless-lan-access-methods"
+      ],
+      "primaryUses": [
+        "Academic examinations, GATE preparation, Wi-Fi QoS architecture evaluation"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Distributed Coordination Function",
+        "meaning": "Contention CSMA/CA access"
+      },
+      {
+        "concept": "Point Coordination Function",
+        "meaning": "Centralized contention-free polling access"
+      }
+    ],
+    "learningObjectives": [
+      "Compare DCF and PCF across 12 comprehensive architectural and performance parameters.",
+      "Analyze why DCF is mandatory and works in Ad Hoc, while PCF is optional and requires an AP.",
+      "Understand the modern evolution of DCF and PCF into 802.11e EDCA and Wi-Fi 6 OFDMA."
+    ]
   },
   "u2-bridges-overview": {
     "id": "u2-bridges-overview",
@@ -8068,9 +8824,58 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800 text-xs\">\n            <h4 class=\"font-bold text-emerald-800 dark:text-emerald-300 mb-1\">Advantages of Wireless LANs</h4>\n            <ul class=\"space-y-1 text-slate-700 dark:text-slate-300\">\n              <li>&bull; <strong>Mobility:</strong> Users roam freely without breaking active TCP/IP sessions.</li>\n              <li>&bull; <strong>Rapid Deployment:</strong> New stations connect instantly without pulling cables.</li>\n              <li>&bull; <strong>Scalability:</strong> Additional clients require zero physical rewiring.</li>\n              <li>&bull; <strong>Reduced Infrastructure Cost:</strong> Eliminates recurring cable maintenance and renovation disruption.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/30 rounded-lg border border-rose-200 dark:border-rose-800 text-xs\">\n            <h4 class=\"font-bold text-rose-800 dark:text-rose-300 mb-1\">Limitations of Wireless LANs</h4>\n            <ul class=\"space-y-1 text-slate-700 dark:text-slate-300\">\n              <li>&bull; <strong>Shared Channel Capacity:</strong> Bandwidth diminishes as client count increases.</li>\n              <li>&bull; <strong>Susceptible to Interference:</strong> 2.4 GHz band crowded by Bluetooth and microwaves.</li>\n              <li>&bull; <strong>Higher Latency & Jitter:</strong> Contention and retransmissions introduce non-deterministic delays.</li>\n              <li>&bull; <strong>Security Perimeter:</strong> RF boundary cannot be physically cordoned off.</li>\n            </ul>\n          </div>\n        </div>\n      ",
-      "whereUsed": "Campus Wi-Fi networks, enterprise agile offices, smart warehouses, home automation, and public hotspots.",
-      "references": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14; Andrew S. Tanenbaum, Computer Networks (5th Ed.), Chapter 4."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (Data Link Layer / MAC Sublayer)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Wireless Local Area Network Standard",
+      "prerequisites": [
+        "u2-dll-intro",
+        "u2-mac-sublayer-intro"
+      ],
+      "relatedConcepts": [
+        "u2-wireless-characteristics",
+        "u2-wireless-lan-architecture",
+        "wifi-mac-sublayer"
+      ],
+      "compareWith": [
+        "ethernet",
+        "u2-comparison-multiple-access"
+      ],
+      "primaryUses": [
+        "Campus Wi-Fi, enterprise agile workplaces, home broadband, public hotspots"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Data Link Layer Fundamentals",
+        "meaning": "Framing, physical addressing, and error detection principles"
+      },
+      {
+        "concept": "MAC Sublayer Architecture",
+        "meaning": "Position of IEEE 802 Media Access Control above the Physical Layer"
+      }
+    ],
+    "learningObjectives": [
+      "Define Wireless Local Area Networks (WLAN) and understand the scope of the IEEE 802.11 standard.",
+      "Analyze the fundamental differences between Wired Ethernet (802.3) and Wireless LAN (802.11).",
+      "Trace the end-to-end packet transmission workflow across the 802.11 MAC and Physical layers."
+    ]
   },
   "wifi-mac-sublayer": {
     "id": "wifi-mac-sublayer",
@@ -8096,9 +8901,57 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800 text-xs\">\n            <h4 class=\"font-bold text-emerald-800 dark:text-emerald-300 mb-1\">Advantages</h4>\n            <ul class=\"space-y-1 text-slate-700 dark:text-slate-300\">\n              <li>&bull; Coordinates multi-station shared access without physical cables.</li>\n              <li>&bull; Mitigates collisions via CSMA/CA and backoff.</li>\n              <li>&bull; Enhances reliability with positive link-layer ACKs.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/30 rounded-lg border border-rose-200 dark:border-rose-800 text-xs\">\n            <h4 class=\"font-bold text-rose-800 dark:text-rose-300 mb-1\">Limitations</h4>\n            <ul class=\"space-y-1 text-slate-700 dark:text-slate-300\">\n              <li>&bull; Substantial MAC control frame overhead (RTS, CTS, ACK).</li>\n              <li>&bull; Hidden and exposed station performance penalties.</li>\n              <li>&bull; Non-deterministic latency under heavy contention.</li>\n            </ul>\n          </div>\n        </div>\n      ",
-      "whereUsed": "All Wi-Fi certified client devices, routers, access points, and wireless interface cards.",
-      "references": "Forouzan, Data Communications and Networking (4th/5th Ed.), Chapter 14, Section 14.2."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (MAC Sublayer)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "MAC Sublayer Architecture",
+      "prerequisites": [
+        "wireless-lan-protocols",
+        "u2-mac-sublayer-intro"
+      ],
+      "relatedConcepts": [
+        "u2-ieee-802-11-architecture",
+        "u2-ieee-802-11-frame-formats"
+      ],
+      "compareWith": [
+        "ethernet",
+        "u2-ethernet-mac-protocol"
+      ],
+      "primaryUses": [
+        "Wireless network interface cards, Access Point controller firmware, Wi-Fi drivers"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Data Link Layer Architecture",
+        "meaning": "Division of Layer 2 into LLC and MAC sublayers"
+      },
+      {
+        "concept": "Wireless LAN Fundamentals",
+        "meaning": "Radio frequencies, BSS, and Access Point coordination"
+      }
+    ],
+    "learningObjectives": [
+      "Define the IEEE 802.11 MAC Sublayer and understand its position within the OSI model.",
+      "Detail the 8 primary responsibilities of the wireless MAC sublayer.",
+      "Compare Ethernet MAC (802.3) and Wireless MAC (802.11) across framing, addressing, and collision handling."
+    ]
   },
   "dll-switching": {
     "id": "dll-switching",
