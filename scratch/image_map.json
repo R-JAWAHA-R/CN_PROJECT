@@ -1,0 +1,450 @@
+{
+  "u2-dll-intro": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/OSI_Model_v1.svg",
+    "caption": "Figure: Data Link Layer (OSI Layer 2) Position & Node-to-Node Delivery in the OSI Reference Model."
+  },
+  "u2-dll-osi-position": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/OSI_Model_v1.svg",
+    "caption": "Figure: Position of Data Link Layer between Physical (L1) and Network (L3) Layers."
+  },
+  "u2-dll-functions": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/OSI_Model_v1.svg",
+    "caption": "Figure: 5 Core Functions of Data Link Layer: Framing, Physical Addressing, Flow Control, Error Control, and MAC."
+  },
+  "dll-design-issues": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/OSI_Model_v1.svg",
+    "caption": "Figure: Data Link Layer Design Issues & Frame Encapsulation across Intermediate Network Nodes."
+  },
+  "u2-dll-services": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/OSI_Model_v1.svg",
+    "caption": "Figure: Services Provided to the Network Layer: Unacknowledged Connectionless, Acknowledged Connectionless, and Connection-Oriented."
+  },
+  "framing": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/55/Bit_stuffing.png",
+    "caption": "Figure: Framing Boundary Delineation & Bit Stuffing with 01111110 Flag Delimiters."
+  },
+  "byte-stuffing": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/55/Bit_stuffing.png",
+    "caption": "Figure: Byte Stuffing (Character-Oriented) vs. Bit Stuffing (Bit-Oriented) Delimiting."
+  },
+  "bit-stuffing": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/55/Bit_stuffing.png",
+    "caption": "Figure: Bit Stuffing Rule: Zero-bit inserted after every 5 consecutive 1s in payload."
+  },
+  "flow-control": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/76/Stop_and_wait_arq.png",
+    "caption": "Figure: Flow Control Mechanism: Preventing Fast Sender from Overwhelming Slow Receiver."
+  },
+  "u2-error-control": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/02/CRC8-gen.gif",
+    "caption": "Figure: Error Control via Cyclic Redundancy Check (CRC) Polynomial Division & ARQ Retransmission."
+  },
+  "u2-dll-protocols-intro": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/76/Stop_and_wait_arq.png",
+    "caption": "Figure: Data Link Layer Flow & Error Control Protocol Classification."
+  },
+  "u2-protocol-classification": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/76/Stop_and_wait_arq.png",
+    "caption": "Figure: Classification of Protocols: Noiseless Channels (Simplest, Stop-and-Wait) vs. Noisy Channels (ARQ)."
+  },
+  "simplex-protocol": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/76/Stop_and_wait_arq.png",
+    "caption": "Figure: Simplest Unidirectional Noiseless Protocol (Infinite Buffer Assumption)."
+  },
+  "stop-and-wait-noiseless": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/76/Stop_and_wait_arq.png",
+    "caption": "Figure: Stop-and-Wait Protocol on Noiseless Channel: 1-Bit Buffer Flow Control."
+  },
+  "stop-and-wait": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/76/Stop_and_wait_arq.png",
+    "caption": "Figure: Stop-and-Wait ARQ on Noisy Channels: Timer, Retransmission, and Alternating 0/1 ACKs."
+  },
+  "go-back-n": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/54/Selective_repeat_transmit_window_example.png",
+    "caption": "Figure: Go-Back-N ARQ: Sliding Window of Size 2^m - 1 with Cumulative Acknowledgment."
+  },
+  "selective-repeat": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/df/Selective_repeat_space-time_diagram.png",
+    "caption": "Figure: Selective Repeat ARQ: Independent Retransmission Timeline with Receiver Buffer Slots."
+  },
+  "sliding-window": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/54/Selective_repeat_transmit_window_example.png",
+    "caption": "Figure: General Sliding Window Protocol Architecture: Send Window, Receive Window, and Buffer Slots."
+  },
+  "comparison-noiseless-noisy": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/76/Stop_and_wait_arq.png",
+    "caption": "Figure: Performance Comparison: Ideal Noiseless Channels vs. Realistic Noisy Channels with Error Recovery."
+  },
+  "comparison-arq-protocols": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/df/Selective_repeat_space-time_diagram.png",
+    "caption": "Figure: Comparison of ARQ Protocols: Stop-and-Wait ARQ vs. Go-Back-N ARQ vs. Selective Repeat ARQ."
+  },
+  "u2-mac-sublayer-intro": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Multiple_Access.png",
+    "caption": "Figure: IEEE 802 LAN Model: Division of Data Link Layer into LLC (802.2) and MAC (802.3/802.11) Sublayers."
+  },
+  "u2-need-for-mac-sublayer": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Multiple_Access.png",
+    "caption": "Figure: Shared Broadcast Medium Arbitration: Why Broadcast Channels Require Medium Access Control."
+  },
+  "u2-mac-functions-responsibilities": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Multiple_Access.png",
+    "caption": "Figure: Functions of MAC Sublayer: Frame Delimitation, Addressing, Contention Resolution, and Error Detection."
+  },
+  "channel-allocation": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Multiple_Access.png",
+    "caption": "Figure: The Channel Allocation Problem in Broadcast Multi-Access Networks."
+  },
+  "u2-fdma": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/79/FDMA.PNG",
+    "caption": "Figure: Frequency Division Multiple Access (FDMA): Dedicated Frequency Bands with Guard Bands."
+  },
+  "u2-tdma": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Tdma.PNG",
+    "caption": "Figure: Time Division Multiple Access (TDMA): Time Slots Partitioned within a Repetitive Frame."
+  },
+  "u2-dynamic-channel-allocation": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Multiple_Access.png",
+    "caption": "Figure: Dynamic Channel Allocation in Contention-Based Networks with Bursty Traffic."
+  },
+  "u2-static-vs-dynamic-channel-allocation": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/79/FDMA.PNG",
+    "caption": "Figure: Static (FDMA/TDMA) vs. Dynamic Channel Allocation Efficiency and Delay Analysis."
+  },
+  "u2-multiple-access-intro": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Multiple_Access.png",
+    "caption": "Figure: Multiple Access Protocol Taxonomy: Random Access, Controlled Access, and Channelization."
+  },
+  "u2-random-access-protocols": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/35/Pure_ALOHA1.svg",
+    "caption": "Figure: Random Access Protocols: Unscheduled Station Transmissions with Contention Resolution."
+  },
+  "aloha": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/35/Pure_ALOHA1.svg",
+    "caption": "Figure: ALOHA System Timeline & Vulnerable Periods: Pure ALOHA (2Tfr) vs. Slotted ALOHA (Tfr)."
+  },
+  "u2-pure-aloha": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/35/Pure_ALOHA1.svg",
+    "caption": "Figure: Pure ALOHA Frame Collisions and Maximum Theoretical Throughput of 18.4% (1/2e)."
+  },
+  "u2-slotted-aloha": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Slotted_ALOHA.svg",
+    "caption": "Figure: Slotted ALOHA Synchronized Discrete Slots and Maximum Theoretical Throughput of 36.8% (1/e)."
+  },
+  "csma-protocols": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Carrier_Sense_Multiple_Access_with_Collision_Detection.png",
+    "caption": "Figure: Carrier Sense Multiple Access (CSMA) Principles: Listen Before Talk."
+  },
+  "u2-csma-1-persistent": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/ab/1-persistent_CSMA%E2%81%84CD_collision.png",
+    "caption": "Figure: 1-Persistent CSMA: Transmit Immediately with Probability 1 when Channel Becomes Idle."
+  },
+  "u2-csma-non-persistent": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Carrier_Sense_Multiple_Access_with_Collision_Detection.png",
+    "caption": "Figure: Non-Persistent CSMA: Wait a Random Backoff Interval upon Detecting a Busy Medium."
+  },
+  "u2-csma-p-persistent": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Carrier_Sense_Multiple_Access_with_Collision_Detection.png",
+    "caption": "Figure: p-Persistent CSMA in Slotted Channels: Transmit with Probability p or Defer to Next Slot."
+  },
+  "u2-csma-cd": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Carrier_Sense_Multiple_Access_with_Collision_Detection.png",
+    "caption": "Figure: CSMA/CD Operational Flowchart: Listen While Talking, Collision Abort, Jam Signal, and Exponential Backoff."
+  },
+  "u2-csma-ca": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Csma_ca.svg",
+    "caption": "Figure: CSMA/CA Collision Avoidance Timing: DIFS, Contention Window Slots, SIFS, and ACK."
+  },
+  "u2-comparison-multiple-access": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Carrier_Sense_Multiple_Access_with_Collision_Detection.png",
+    "caption": "Figure: Comprehensive Comparison: ALOHA vs. CSMA vs. CSMA/CD vs. CSMA/CA."
+  },
+  "collision-free-protocols": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Token_ring.svg",
+    "caption": "Figure: Collision-Free MAC Protocols: Deterministic Channel Reservation without Collisions."
+  },
+  "u2-bitmap-protocol": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Token_ring.svg",
+    "caption": "Figure: Bit-Map Protocol (Basic Reservation): N Contention Slots for N Stations before Transmission."
+  },
+  "u2-binary-countdown-protocol": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Token_ring.svg",
+    "caption": "Figure: Binary Countdown Protocol: Bitwise Boolean OR Arbitration by Station Binary Priority Address."
+  },
+  "u2-token-passing-protocol": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Token_ring.svg",
+    "caption": "Figure: Token Passing Protocol: Circulating Control Token in Ring and Bus Topologies."
+  },
+  "u2-collision-free-principles": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Token_ring.svg",
+    "caption": "Figure: Working Principles and High-Load Channel Efficiency of Collision-Free Protocols."
+  },
+  "u2-comparison-collision-free": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Token_ring.svg",
+    "caption": "Figure: Comparison of Collision-Free Protocols: Bit-Map vs. Binary Countdown vs. Token Passing."
+  },
+  "ethernet": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Ethernet_Type_II_Frame_format.svg",
+    "caption": "Figure: Ethernet IEEE 802.3 Architecture, 10BASE-T/100BASE-TX Topology, and CSMA/CD Medium Access."
+  },
+  "u2-ethernet-architecture": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Ethernet_Type_II_Frame_format.svg",
+    "caption": "Figure: Standard Ethernet Architecture: Physical Layer (PHY), Media Access Control (MAC), and LLC Sublayers."
+  },
+  "mac-address": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/42/Ethernet_frame.svg",
+    "caption": "Figure: 48-bit Ethernet MAC Address Structure: 24-bit OUI (IEEE Assigned) + 24-bit NIC Serial Identifier."
+  },
+  "u2-ethernet-mac-addressing": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/42/Ethernet_frame.svg",
+    "caption": "Figure: 48-Bit MAC Addressing Scheme: Unicast, Multicast (I/G bit = 1), and Broadcast (FF:FF:FF:FF:FF:FF)."
+  },
+  "u2-ethernet-frame-format": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/42/Ethernet_frame.svg",
+    "caption": "Figure: IEEE 802.3 Ethernet Frame Format: Preamble (7B), SFD (1B), Dst MAC (6B), Src MAC (6B), EtherType (2B), Data (46-1500B), FCS (4B)."
+  },
+  "u2-ethernet-mac-protocol": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Ethernet_Type_II_Frame_format.svg",
+    "caption": "Figure: Ethernet MAC Protocol: Half-Duplex CSMA/CD vs. Full-Duplex Switched Operation."
+  },
+  "u2-csma-cd-operation": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Carrier_Sense_Multiple_Access_with_Collision_Detection.png",
+    "caption": "Figure: Ethernet CSMA/CD Operation: Slot Time (51.2 µs), Minimum Frame Size (64 Bytes), and Collisions."
+  },
+  "u2-binary-exponential-backoff": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Carrier_Sense_Multiple_Access_with_Collision_Detection.png",
+    "caption": "Figure: Truncated Binary Exponential Backoff Algorithm: Waiting r * 51.2 µs with r chosen uniformly from [0, 2^k - 1]."
+  },
+  "u2-ethernet-evolution": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Ethernet_Type_II_Frame_format.svg",
+    "caption": "Figure: Ethernet Evolution: Standard Ethernet (10 Mbps) -> Fast Ethernet (100 Mbps) -> Gigabit Ethernet (1 Gbps) -> 10GE."
+  },
+  "u2-ethernet-advantages-limitations": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Ethernet_Type_II_Frame_format.svg",
+    "caption": "Figure: Engineering Trade-Offs, High-Load Scalability, and Industry Dominance of Ethernet."
+  },
+  "wireless-lan-protocols": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Wifi_hidden_station_problem.svg",
+    "caption": "Figure: Wireless LAN Architecture and Shared RF Contention Dynamics."
+  },
+  "u2-wireless-lan-intro": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Wifi_hidden_station_problem.svg",
+    "caption": "Figure: Wireless Local Area Networks: Untethered Access via Radio Frequency Transceivers."
+  },
+  "u2-wireless-communication-characteristics": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Wifi_hidden_station_problem.svg",
+    "caption": "Figure: Characteristics of Wireless Communication: Path Loss, Multipath Fading, Interference, and Dynamic SNR."
+  },
+  "u2-wireless-lan-architecture": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Wifi_hidden_station_problem.svg",
+    "caption": "Figure: Wireless LAN Architectural Components: Basic Service Set (BSS), Access Points (AP), and Extended Service Set (ESS)."
+  },
+  "u2-hidden-terminal-problem": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Wifi_hidden_station_problem.svg",
+    "caption": "Figure: The Hidden Terminal Problem: Stations A and C cannot hear each other and collide simultaneously at Access Point B."
+  },
+  "u2-exposed-terminal-problem": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/9/97/Exposed_terminal_problem.svg",
+    "caption": "Figure: The Exposed Terminal Problem: Station C is falsely prevented from transmitting to D because B is transmitting to A."
+  },
+  "u2-wireless-multiple-access": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Csma_ca.svg",
+    "caption": "Figure: Multiple Access Challenges in Wireless Channels: Why CSMA/CD Fails and CSMA/CA is Required."
+  },
+  "u2-wireless-lan-access-methods": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Csma_ca.svg",
+    "caption": "Figure: Wireless LAN Access Methods: DCF Contention Access vs. PCF Polling Contention-Free Access."
+  },
+  "u2-wireless-communication-challenges": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/9/97/Exposed_terminal_problem.svg",
+    "caption": "Figure: Technical Challenges: Hidden/Exposed Nodes, Near-Far Problem, and Channel Multipath Fading."
+  },
+  "wifi-mac-sublayer": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/802.11_MAC_Frame.svg",
+    "caption": "Figure: IEEE 802.11 MAC Sublayer: CSMA/CA, Interframe Spaces, Virtual Carrier Sensing, and Frame Architecture."
+  },
+  "u2-ieee-802-11-intro": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/802.11_MAC_Frame.svg",
+    "caption": "Figure: Introduction to IEEE 802.11 Wireless Standard Family (Wi-Fi 4/5/6/7)."
+  },
+  "u2-ieee-802-11-architecture": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/802.11_MAC_Frame.svg",
+    "caption": "Figure: IEEE 802.11 Architecture: Ad-hoc (IBSS) Mode vs. Infrastructure (BSS/ESS) Mode with Distribution System."
+  },
+  "u2-ieee-802-11-dcf": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Csma_ca.svg",
+    "caption": "Figure: Distributed Coordination Function (DCF): Asynchronous Best-Effort CSMA/CA Access."
+  },
+  "u2-ieee-802-11-pcf": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Csma_ca.svg",
+    "caption": "Figure: Point Coordination Function (PCF): Centralized Polling Mechanism for Real-Time Traffic."
+  },
+  "u2-ieee-802-11-csma-ca": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Csma_ca.svg",
+    "caption": "Figure: CSMA/CA Protocol in IEEE 802.11: Physical Carrier Sense + Virtual Carrier Sense."
+  },
+  "u2-ieee-802-11-ifs": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Csma_ca.svg",
+    "caption": "Figure: Interframe Spaces Hierarchy: SIFS (Highest Priority) < PIFS < DIFS < EIFS."
+  },
+  "u2-rts-cts-mechanism": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/bb/RTS_CTS_FRTS_Schema.png",
+    "caption": "Figure: RTS/CTS 4-Way Handshake: Reserving Channel & Solving the Hidden Terminal Problem."
+  },
+  "u2-network-allocation-vector": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/bb/RTS_CTS_FRTS_Schema.png",
+    "caption": "Figure: Network Allocation Vector (NAV): Virtual Carrier Sensing Countdown Timer in Station Hardware."
+  },
+  "u2-ieee-802-11-frame-formats": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/802.11_MAC_Frame.svg",
+    "caption": "Figure: IEEE 802.11 MAC Frame Structure: Frame Control, Duration/ID, 4 MAC Addresses, Sequence Control, FCS."
+  },
+  "u2-dcf-vs-pcf": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Csma_ca.svg",
+    "caption": "Figure: Comparison of DCF (Distributed Contention) vs. PCF (Centralized Polling)."
+  },
+  "dll-switching": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
+    "caption": "Figure: Data Link Layer Switching: Multi-Port Dedicated Bandwidth without Collisions."
+  },
+  "u2-bridges-overview": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
+    "caption": "Figure: Network Bridges: Interconnecting Multiple LAN Segments at Layer 2."
+  },
+  "u2-transparent-bridges": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
+    "caption": "Figure: Transparent Bridges (IEEE 802.1D): Plug-and-Play Operation Invisible to End Stations."
+  },
+  "u2-learning-bridges": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
+    "caption": "Figure: Self-Learning Bridges: Dynamic MAC Forwarding Database (FDB) Construction from Source Addresses."
+  },
+  "u2-bridge-learning-process": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
+    "caption": "Figure: Step-by-Step Learning Process: Inspect Source MAC, Update Hash Table, Set Aging Timer."
+  },
+  "u2-forwarding-and-filtering": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
+    "caption": "Figure: Forwarding and Filtering Rules: Filter if on Same Port; Forward if on Different Port."
+  },
+  "u2-bridge-flooding": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
+    "caption": "Figure: Bridge Flooding: Replicating Unicast Frames with Unknown Destination MACs to All Other Ports."
+  },
+  "u2-spanning-tree-protocol": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Spanning_tree_protocol_at_work_1.svg",
+    "caption": "Figure: IEEE 802.1D Spanning Tree Protocol (STP): Breaking Physical Loops and Preventing Broadcast Storms."
+  },
+  "u2-bridges-vs-switches": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
+    "caption": "Figure: Bridges (Software-Based, Few Ports) vs. Modern Switches (Hardware ASIC-Based, Many Ports)."
+  },
+  "vlan": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
+    "caption": "Figure: Virtual LANs (IEEE 802.1Q): Logical Network Segmentation within Physical Switches."
+  },
+  "network-devices": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Ethernet-broadcast-collision_%28hub%29.svg",
+    "caption": "Figure: Networking Devices Across OSI Layers: Repeaters/Hubs (L1), Bridges/Switches (L2), Routers (L3), Gateways (L7)."
+  },
+  "u2-networking-device-repeaters": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Ethernet-broadcast-collision_%28hub%29.svg",
+    "caption": "Figure: Physical Layer Repeater (L1): Analog Signal Amplification, Regeneration, and Retiming."
+  },
+  "u2-networking-device-hubs": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Ethernet-broadcast-collision_%28hub%29.svg",
+    "caption": "Figure: Multiport Hub (L1): Electrical Signal Repeating: Single Collision Domain, Single Broadcast Domain."
+  },
+  "u2-networking-device-bridges": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
+    "caption": "Figure: Layer 2 Bridge: Separating Collision Domains while Maintaining a Single Broadcast Domain."
+  },
+  "u2-networking-device-switches": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
+    "caption": "Figure: Multiport Layer 2 Switch: Dedicated Collision Domain per Port with Full-Duplex Microsegmentation."
+  },
+  "u2-networking-device-routers": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Router_on_a_stick.png",
+    "caption": "Figure: Layer 3 Router: Logical IP Addressing, Path Determination, and Broadcast Domain Separation."
+  },
+  "u2-networking-device-gateways": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Router_on_a_stick.png",
+    "caption": "Figure: Protocol Gateway: Multi-Layer Translation between Incompatible Application and Transport Protocols."
+  },
+  "u2-device-working-principles": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Ethernet-broadcast-collision_%28hub%29.svg",
+    "caption": "Figure: Comparative Working Principles of Hubs, Switches, and Routers."
+  },
+  "u2-comparison-networking-devices": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
+    "caption": "Figure: Comparison of Networking Devices: Operating Layer, Forwarding Decision, and Filtering Capabilities."
+  },
+  "u2-device-osi-layers": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/OSI_Model_v1.svg",
+    "caption": "Figure: OSI Model Layers at Which Networking Devices Operate (L1 Repeater/Hub, L2 Switch/Bridge, L3 Router, L7 Gateway)."
+  },
+  "arp": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/42/Ethernet_frame.svg",
+    "caption": "Figure: Address Resolution Protocol (ARP): Resolving 32-bit IP Addresses to 48-bit MAC Hardware Addresses."
+  },
+  "u2-definitions-terminology": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/OSI_Model_v1.svg",
+    "caption": "Figure: Comprehensive Terminology Mindmap for Unit 2 Data Link Layer."
+  },
+  "u2-important-diagrams": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/42/Ethernet_frame.svg",
+    "caption": "Figure: Master Gallery of Core Architecture Diagrams: Framing, ARQ, MAC Sublayer, CSMA, Ethernet, Wi-Fi, and Switching."
+  },
+  "u2-comparison-tables": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
+    "caption": "Figure: Master Comparison Visual Guide: Bridges vs Switches, DCF vs PCF, FDMA vs TDMA, Pure vs Slotted ALOHA."
+  },
+  "u2-numerical-problems": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Carrier_Sense_Multiple_Access_with_Collision_Detection.png",
+    "caption": "Figure: Mathematical & Formula Architecture: Throughput, Efficiency, Slot Time, and Vulnerable Period Calculations."
+  },
+  "u2-protocol-examples": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/df/Selective_repeat_space-time_diagram.png",
+    "caption": "Figure: Step-by-Step Protocol Sequence Traces and Frame Transmission Exchanges."
+  },
+  "u2-short-answer-questions": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/OSI_Model_v1.svg",
+    "caption": "Figure: Rapid Review Guide for Data Link Layer Exam Definitions and Concepts."
+  },
+  "u2-long-answer-questions": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Ethernet_Type_II_Frame_format.svg",
+    "caption": "Figure: Comprehensive Exam Solutions Guide for 10-Mark and 15-Mark University Questions."
+  },
+  "u2-important-exam-questions": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Spanning_tree_protocol_at_work_1.svg",
+    "caption": "Figure: High-Frequency University Exam Problem Sets and Analysis."
+  },
+  "u2-mcqs": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/802.11_MAC_Frame.svg",
+    "caption": "Figure: Practice Assessment Question Pool with Conceptual Verifications."
+  },
+  "u2-practice-test": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/OSI_Model_v1.svg",
+    "caption": "Figure: Timed Diagnostic Mastery Assessment for Unit 2 Data Link Layer."
+  },
+  "error-detection": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/02/CRC8-gen.gif",
+    "caption": "Figure: Error Detection Techniques: Parity Check, Checksum, and Cyclic Redundancy Check (CRC)."
+  },
+  "parity": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Hamming%287%2C4%29.svg",
+    "caption": "Figure: Simple Parity & Two-Dimensional Parity Check Architecture."
+  },
+  "checksum": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/02/CRC8-gen.gif",
+    "caption": "Figure: Internet Checksum 16-bit 1's Complement Addition Architecture."
+  },
+  "hamming-code": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Hamming%287%2C4%29.svg",
+    "caption": "Figure: Hamming(7,4) Single Error Correction, Double Error Detection (SECDED) Venn Diagram."
+  },
+  "crc": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/02/CRC8-gen.gif",
+    "caption": "Figure: Cyclic Redundancy Check (CRC) Polynomial Division Hardware Architecture with Linear Feedback Shift Registers."
+  }
+}

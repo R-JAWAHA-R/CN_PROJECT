@@ -309,9 +309,9 @@ const App = {
             <div>
               <div class="flex items-center justify-between mb-2">
                 <span class="px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-[10px] font-bold">Unit II</span>
-                <span class="text-[11px] text-gray-500">27 Articles</span>
+                <span class="text-[11px] text-gray-500">11 Topics • 83 Lessons</span>
               </div>
-              <h4 class="font-bold text-sm text-gray-900 dark:text-white group-hover:text-gfg-green transition-colors">Data Link Layer &amp; MAC</h4>
+              <h4 class="font-bold text-sm text-gray-900 dark:text-white group-hover:text-gfg-green transition-colors">Unit 2 – Data Link Layer</h4>
               <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">Framing, byte/bit stuffing, CRC polynomial division, Hamming codes, ARQ protocols, Ethernet and CSMA/CD.</p>
             </div>
             <div class="pt-3 border-t border-gray-100 dark:border-gray-800 mt-3 flex items-center justify-between text-xs text-gfg-green font-semibold">
@@ -458,28 +458,22 @@ const App = {
         <div class="study-card">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
             <h3 style="color: #0284c7; font-size: 1.25rem; font-weight: 800; margin: 0;">
-              Unit II: Data Link, ARQ & Ethernet
+              Unit 2 – Data Link Layer
             </h3>
-            <span class="badge" style="background: #e0f2fe; color: #0284c7; font-weight: 700; padding: 4px 10px; border-radius: 9999px;">17 Pages</span>
+            <span class="badge" style="background: #e0f2fe; color: #0284c7; font-weight: 700; padding: 4px 10px; border-radius: 9999px;">11 Topics</span>
           </div>
           <div style="display: flex; flex-direction: column; gap: 0.45rem;">
-            <button class="topic-nav-btn" onclick="App.loadTopic('framing')">1. Framing & Boundaries ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('byte-stuffing')">2. Byte Stuffing (ESC 0x7D) ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('bit-stuffing')">3. HDLC Bit Stuffing ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('error-detection')">4. Error Detection vs Correction ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('parity')">5. Parity Checks (1D & 2D) ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('checksum')">6. Internet Checksum ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('crc')">7. CRC Mathematics & Interactive Lab ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('hamming-code')">8. Hamming (7,4) Code & Lab ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('flow-control')">9. Flow Control & Channel Utilization ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('stop-and-wait')">10. Stop-and-Wait ARQ & Lab ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('sliding-window')">11. Sliding Window Pipelining ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('go-back-n')">12. Go-Back-N (GBN) ARQ & Lab ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('selective-repeat')">13. Selective Repeat ARQ & Lab ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('ethernet')">14. IEEE 802.3 Ethernet & CSMA/CD ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('mac-address')">15. MAC Addressing (EUI-48) ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('arp')">16. Address Resolution Protocol (ARP) ➔</button>
-            <button class="topic-nav-btn" onclick="App.loadTopic('vlan')">17. Virtual LANs (IEEE 802.1Q) ➔</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('u2-dll-intro')">Topic 1 – Data Link Layer Fundamentals →</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('u2-dll-protocols-intro')">Topic 2 – Data Link Layer Protocols →</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('u2-mac-sublayer-intro')">Topic 3 – Medium Access Control (MAC) Sublayer →</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('u2-multiple-access-intro')">Topic 4 – Multiple Access Protocols →</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('u2-collision-free-intro')">Topic 5 – Collision-Free Protocols →</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('ethernet')">Topic 6 – Ethernet MAC Sublayer Protocol →</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('wireless-lan-protocols')">Topic 7 – Wireless LAN Protocols →</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('wifi-mac-sublayer')">Topic 8 – IEEE 802.11 MAC Sublayer Protocol →</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('dll-switching')">Topic 9 – Data Link Layer Switching →</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('network-devices')">Topic 10 – Networking Devices →</button>
+            <button class="topic-nav-btn" onclick="App.loadTopic('u2-definitions-terminology')">Topic 11 – Revision and Assessment →</button>
           </div>
         </div>
 

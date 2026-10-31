@@ -1,0 +1,975 @@
+// =============================================================================
+// Clean Diagram Engine: Modern Visual Architecture & Protocol Schematics
+// Replaces obsolete ASCII/symbol art with clean, responsive, interactive diagrams
+// Strictly aligned with Master Syllabus, Kurose & Ross, Forouzan, and Tanenbaum
+// =============================================================================
+
+const CleanDiagramEngine = {
+  getDiagramHtml: function(topic) {
+    if (!topic) return '';
+    const id = topic.id || '';
+
+    // 1. Framing & Bit Stuffing
+    if (id === 'framing' || id === 'byte-stuffing' || id === 'bit-stuffing') {
+      return this.renderFramingDiagram();
+    }
+
+    // 2. Stop-and-Wait & Simplest Protocols
+    if (id === 'flow-control' || id === 'simplex-protocol' || id === 'stop-and-wait-noiseless' || id === 'stop-and-wait' || id === 'u2-dll-protocols-intro' || id === 'u2-protocol-classification' || id === 'comparison-noiseless-noisy') {
+      return this.renderStopAndWaitDiagram();
+    }
+
+    // 3. Sliding Window & ARQ (Go-Back-N, Selective Repeat)
+    if (id === 'sliding-window' || id === 'go-back-n' || id === 'selective-repeat' || id === 'comparison-arq-protocols' || id === 'u2-protocol-examples') {
+      return this.renderSlidingWindowDiagram();
+    }
+
+    // 4. Channel Allocation (FDMA & TDMA)
+    if (id === 'channel-allocation' || id === 'u2-mac-sublayer-intro' || id === 'u2-need-for-mac-sublayer' || id === 'u2-mac-functions-responsibilities' || id === 'u2-fdma' || id === 'u2-tdma' || id === 'u2-dynamic-channel-allocation' || id === 'u2-static-vs-dynamic-channel-allocation') {
+      return this.renderChannelAllocationDiagram();
+    }
+
+    // 5. ALOHA Protocols
+    if (id === 'aloha' || id === 'u2-pure-aloha' || id === 'u2-slotted-aloha' || id === 'u2-random-access-protocols' || id === 'u2-multiple-access-intro') {
+      return this.renderAlohaDiagram();
+    }
+
+    // 6. CSMA, CSMA/CD, CSMA/CA
+    if (id === 'csma-protocols' || id === 'u2-csma-1-persistent' || id === 'u2-csma-non-persistent' || id === 'u2-csma-p-persistent' || id === 'u2-csma-cd' || id === 'u2-csma-ca' || id === 'u2-csma-cd-operation' || id === 'u2-binary-exponential-backoff' || id === 'u2-comparison-multiple-access') {
+      return this.renderCsmaDiagram();
+    }
+
+    // 7. Collision-Free Protocols
+    if (id === 'collision-free-protocols' || id === 'u2-bitmap-protocol' || id === 'u2-binary-countdown-protocol' || id === 'u2-token-passing-protocol' || id === 'u2-collision-free-principles' || id === 'u2-comparison-collision-free') {
+      return this.renderCollisionFreeDiagram();
+    }
+
+    // 8. Ethernet Architecture & Frame Format
+    if (id === 'ethernet' || id === 'mac-address' || id === 'u2-ethernet-architecture' || id === 'u2-ethernet-mac-addressing' || id === 'u2-ethernet-frame-format' || id === 'u2-ethernet-mac-protocol' || id === 'u2-ethernet-evolution' || id === 'u2-ethernet-advantages-limitations' || id === 'arp') {
+      return this.renderEthernetFrameDiagram();
+    }
+
+    // 9. Wireless LANs: Hidden & Exposed Terminals
+    if (id === 'wireless-lan-protocols' || id === 'u2-wireless-lan-intro' || id === 'u2-wireless-communication-characteristics' || id === 'u2-wireless-lan-architecture' || id === 'u2-hidden-terminal-problem' || id === 'u2-exposed-terminal-problem' || id === 'u2-wireless-multiple-access' || id === 'u2-wireless-lan-access-methods' || id === 'u2-wireless-communication-challenges') {
+      return this.renderWirelessHiddenExposedDiagram();
+    }
+
+    // 10. IEEE 802.11 MAC & RTS/CTS
+    if (id === 'wifi-mac-sublayer' || id === 'u2-ieee-802-11-intro' || id === 'u2-ieee-802-11-architecture' || id === 'u2-ieee-802-11-dcf' || id === 'u2-ieee-802-11-pcf' || id === 'u2-ieee-802-11-csma-ca' || id === 'u2-ieee-802-11-ifs' || id === 'u2-rts-cts-mechanism' || id === 'u2-network-allocation-vector' || id === 'u2-ieee-802-11-frame-formats' || id === 'u2-dcf-vs-pcf') {
+      return this.renderWifiRtsCtsDiagram();
+    }
+
+    // 11. Data Link Layer Switching & Spanning Tree (STP)
+    if (id === 'dll-switching' || id === 'u2-bridges-overview' || id === 'u2-transparent-bridges' || id === 'u2-learning-bridges' || id === 'u2-bridge-learning-process' || id === 'u2-forwarding-and-filtering' || id === 'u2-bridge-flooding' || id === 'u2-spanning-tree-protocol' || id === 'u2-bridges-vs-switches' || id === 'vlan') {
+      return this.renderSwitchingStpDiagram();
+    }
+
+    // 12. Networking Devices & Collision Domains
+    if (id === 'network-devices' || id === 'u2-networking-device-repeaters' || id === 'u2-networking-device-hubs' || id === 'u2-networking-device-bridges' || id === 'u2-networking-device-switches' || id === 'u2-networking-device-routers' || id === 'u2-networking-device-gateways' || id === 'u2-device-working-principles' || id === 'u2-comparison-networking-devices' || id === 'u2-device-osi-layers') {
+      return this.renderNetworkingDevicesDiagram();
+    }
+
+    // 13. Error Detection & Correction (CRC & Hamming)
+    if (id === 'error-detection' || id === 'parity' || id === 'checksum' || id === 'hamming-code' || id === 'crc' || id === 'u2-error-control') {
+      return this.renderErrorControlDiagram();
+    }
+
+    // Default: Clean Layer Encapsulation Flow
+    return this.renderNodeToNodeDiagram(topic);
+  },
+
+  // 1. Node-to-Node Delivery & Encapsulation Flow
+  renderNodeToNodeDiagram: function(topic) {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-gfg-green animate-pulse"></span>
+            <h4 class="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200">
+              Data Link Layer: Node-to-Node Frame Delivery
+            </h4>
+          </div>
+          <span class="text-[10px] font-mono bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 px-2 py-0.5 rounded font-bold">
+            OSI Reference Model (L2)
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-3 items-center">
+          <!-- Sender Column -->
+          <div class="md:col-span-2 space-y-2.5 bg-white dark:bg-slate-800/80 p-3.5 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-700 dark:text-slate-200 pb-1 border-b border-slate-100 dark:border-slate-700">
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-desktop text-blue-500"></i> Sender Station (A)</span>
+              <span class="text-[10px] text-slate-400 font-mono">Source Node</span>
+            </div>
+            <div class="p-2 rounded bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 text-[11px]">
+              <div class="flex justify-between font-semibold text-blue-800 dark:text-blue-300">
+                <span>Layer 3: Network Layer</span>
+                <span class="font-mono text-[10px]">Packet</span>
+              </div>
+              <div class="mt-1 bg-white dark:bg-slate-900 px-2 py-1 rounded text-center text-slate-600 dark:text-slate-300 font-mono text-[10px] border border-blue-100 dark:border-blue-900">
+                [ IP Datagram Header + Payload ]
+              </div>
+            </div>
+            <div class="text-center text-slate-400 text-xs flex items-center justify-center gap-1.5 py-0.5">
+              <i class="fa-solid fa-arrow-down text-blue-500"></i>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Prepend Header + Append FCS Trailer</span>
+            </div>
+            <div class="p-2 rounded bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-800 text-[11px]">
+              <div class="flex justify-between font-semibold text-emerald-800 dark:text-emerald-300">
+                <span>Layer 2: Data Link Layer</span>
+                <span class="font-mono text-[10px] font-bold text-gfg-green">Frame</span>
+              </div>
+              <div class="mt-1 flex items-stretch gap-1 font-mono text-[9px] text-center">
+                <span class="bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 px-1.5 py-1 rounded border border-amber-300 dark:border-amber-700 shrink-0 font-bold">Header</span>
+                <span class="bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 px-2 py-1 rounded border border-emerald-200 dark:border-emerald-800 grow truncate font-semibold">IP Packet</span>
+                <span class="bg-purple-100 dark:bg-purple-950 text-purple-800 dark:text-purple-300 px-1.5 py-1 rounded border border-purple-300 dark:border-purple-700 shrink-0 font-bold">Trailer (FCS)</span>
+              </div>
+            </div>
+            <div class="text-center text-slate-400 text-xs flex items-center justify-center gap-1.5 py-0.5">
+              <i class="fa-solid fa-arrow-down text-emerald-500"></i>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Digital-to-Signal Modulation</span>
+            </div>
+            <div class="p-2 rounded bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 text-[11px]">
+              <div class="flex justify-between font-semibold text-amber-800 dark:text-amber-300">
+                <span>Layer 1: Physical Layer</span>
+                <span class="font-mono text-[10px]">Bitstream</span>
+              </div>
+              <div class="mt-1 bg-white dark:bg-slate-900 px-2 py-1 rounded text-center text-amber-700 dark:text-amber-300 font-mono text-[10px] tracking-widest border border-amber-100 dark:border-amber-900">
+                0 1 1 0 1 0 0 1 1 1 0 0 ...
+              </div>
+            </div>
+          </div>
+
+          <!-- Channel Column -->
+          <div class="flex flex-col items-center justify-center p-2 text-center my-2 md:my-0">
+            <div class="w-full flex items-center justify-center gap-1 text-slate-400 mb-1">
+              <span class="h-0.5 w-6 bg-slate-300 dark:bg-slate-700"></span>
+              <i class="fa-solid fa-wave-square text-gfg-green text-sm"></i>
+              <span class="h-0.5 w-6 bg-slate-300 dark:bg-slate-700"></span>
+            </div>
+            <span class="text-[10px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-tight">Physical Link</span>
+            <span class="text-[9px] text-slate-400 font-sans">Copper / Fiber / Wireless</span>
+            <div class="mt-2 text-gfg-green text-xs font-bold flex items-center gap-1 bg-emerald-100 dark:bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-300 dark:border-emerald-800 shadow-xs">
+              <span>Transmitting</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </div>
+          </div>
+
+          <!-- Receiver Column -->
+          <div class="md:col-span-2 space-y-2.5 bg-white dark:bg-slate-800/80 p-3.5 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-700 dark:text-slate-200 pb-1 border-b border-slate-100 dark:border-slate-700">
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-server text-purple-500"></i> Receiver Station (B)</span>
+              <span class="text-[10px] text-slate-400 font-mono">Destination Node</span>
+            </div>
+            <div class="p-2 rounded bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 text-[11px]">
+              <div class="flex justify-between font-semibold text-blue-800 dark:text-blue-300">
+                <span>Layer 3: Network Layer</span>
+                <span class="font-mono text-[10px]">Delivered</span>
+              </div>
+              <div class="mt-1 bg-white dark:bg-slate-900 px-2 py-1 rounded text-center text-slate-600 dark:text-slate-300 font-mono text-[10px] border border-blue-100 dark:border-blue-900">
+                [ Clean IP Datagram Passed Up ]
+              </div>
+            </div>
+            <div class="text-center text-slate-400 text-xs flex items-center justify-center gap-1.5 py-0.5">
+              <i class="fa-solid fa-arrow-up text-blue-500"></i>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Strip Header + Validate CRC Trailer</span>
+            </div>
+            <div class="p-2 rounded bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-800 text-[11px]">
+              <div class="flex justify-between font-semibold text-emerald-800 dark:text-emerald-300">
+                <span>Layer 2: Data Link Layer</span>
+                <span class="font-mono text-[10px] text-emerald-600 font-bold">CRC Valid ✓</span>
+              </div>
+              <div class="mt-1 flex items-stretch gap-1 font-mono text-[9px] text-center">
+                <span class="bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 px-1.5 py-1 rounded border border-amber-300 dark:border-amber-700 shrink-0 font-bold">Header</span>
+                <span class="bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 px-2 py-1 rounded border border-emerald-200 dark:border-emerald-800 grow truncate font-semibold">IP Packet</span>
+                <span class="bg-purple-100 dark:bg-purple-950 text-purple-800 dark:text-purple-300 px-1.5 py-1 rounded border border-purple-300 dark:border-purple-700 shrink-0 font-bold">FCS ✓</span>
+              </div>
+            </div>
+            <div class="text-center text-slate-400 text-xs flex items-center justify-center gap-1.5 py-0.5">
+              <i class="fa-solid fa-arrow-up text-emerald-500"></i>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Clock Synchronization & Preamble Lock</span>
+            </div>
+            <div class="p-2 rounded bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 text-[11px]">
+              <div class="flex justify-between font-semibold text-amber-800 dark:text-amber-300">
+                <span>Layer 1: Physical Layer</span>
+                <span class="font-mono text-[10px]">Signal In</span>
+              </div>
+              <div class="mt-1 bg-white dark:bg-slate-900 px-2 py-1 rounded text-center text-amber-700 dark:text-amber-300 font-mono text-[10px] tracking-widest border border-amber-100 dark:border-amber-900">
+                0 1 1 0 1 0 0 1 1 1 0 0 ...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 2. Framing & Bit Stuffing
+  renderFramingDiagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse"></span>
+            <h4 class="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200">
+              HDLC & PPP Frame Delimiting: Bit Stuffing Protocol Architecture
+            </h4>
+          </div>
+          <span class="text-[10px] font-mono bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 px-2 py-0.5 rounded font-bold">
+            Flag: 01111110 (0x7E)
+          </span>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Frame Structure Banner -->
+          <div>
+            <span class="text-[11px] font-bold text-slate-700 dark:text-slate-300 block mb-1.5">Standard Synchronous Frame Structure:</span>
+            <div class="grid grid-cols-6 gap-1 text-center font-mono text-xs">
+              <div class="bg-amber-500 text-white p-2.5 rounded-l-lg font-bold shadow-xs">
+                <span class="block text-[9px] uppercase tracking-wider opacity-80">Start Flag</span>
+                <span class="text-[11px]">01111110</span>
+                <span class="block text-[8px] opacity-75">1 Byte</span>
+              </div>
+              <div class="bg-blue-600 text-white p-2.5 font-bold shadow-xs">
+                <span class="block text-[9px] uppercase tracking-wider opacity-80">Address</span>
+                <span class="text-[11px]">Dst / Src</span>
+                <span class="block text-[8px] opacity-75">1-6 Bytes</span>
+              </div>
+              <div class="bg-indigo-600 text-white p-2.5 font-bold shadow-xs">
+                <span class="block text-[9px] uppercase tracking-wider opacity-80">Control</span>
+                <span class="text-[11px]">Frame Type</span>
+                <span class="block text-[8px] opacity-75">1-2 Bytes</span>
+              </div>
+              <div class="bg-emerald-600 text-white p-2.5 font-bold shadow-xs col-span-2">
+                <span class="block text-[9px] uppercase tracking-wider opacity-80">Payload (Variable Length)</span>
+                <span class="text-[11px]">Network Layer IP Packet</span>
+                <span class="block text-[8px] opacity-75">Bit-Stuffed / Escaped</span>
+              </div>
+              <div class="bg-amber-500 text-white p-2.5 rounded-r-lg font-bold shadow-xs">
+                <span class="block text-[9px] uppercase tracking-wider opacity-80">End Flag</span>
+                <span class="text-[11px]">01111110</span>
+                <span class="block text-[8px] opacity-75">1 Byte</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bit Stuffing Rule Comparison -->
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 text-xs">
+            <span class="font-bold text-slate-800 dark:text-slate-200 block mb-2 flex items-center gap-1.5">
+              <i class="fa-solid fa-wand-magic-sparkles text-blue-500"></i>
+              Bit-Stuffing Rule: Zero Insertion After Five Consecutive 1s
+            </span>
+            <div class="space-y-2 font-mono text-[11px]">
+              <div class="flex items-center gap-2 p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800">
+                <span class="w-24 text-[10px] text-slate-400 uppercase font-sans font-bold">1. Original Data:</span>
+                <span class="tracking-widest text-slate-700 dark:text-slate-300">0 1 1 0 1 1 1 1 1 <span class="bg-red-200 dark:bg-red-900 text-red-800 dark:text-red-200 px-1 rounded font-bold">1</span> 0 1 1 1 1 1 <span class="bg-red-200 dark:bg-red-900 text-red-800 dark:text-red-200 px-1 rounded font-bold">1</span> 0</span>
+              </div>
+              <div class="flex items-center gap-2 p-2 bg-emerald-50 dark:bg-emerald-950/50 rounded border border-emerald-200 dark:border-emerald-800">
+                <span class="w-24 text-[10px] text-emerald-600 uppercase font-sans font-bold">2. Transmitted:</span>
+                <span class="tracking-widest text-emerald-800 dark:text-emerald-200 font-bold">0 1 1 0 1 1 1 1 1 <span class="bg-emerald-300 dark:bg-emerald-700 text-black dark:text-white px-1.5 py-0.5 rounded shadow-xs">0</span> 1 0 1 1 1 1 1 <span class="bg-emerald-300 dark:bg-emerald-700 text-black dark:text-white px-1.5 py-0.5 rounded shadow-xs">0</span> 1 0</span>
+              </div>
+              <div class="flex items-center gap-2 p-2 bg-blue-50 dark:bg-blue-950/50 rounded border border-blue-200 dark:border-blue-800">
+                <span class="w-24 text-[10px] text-blue-600 uppercase font-sans font-bold">3. Receiver Strips:</span>
+                <span class="tracking-widest text-blue-800 dark:text-blue-200">0 1 1 0 1 1 1 1 1 1 0 1 1 1 1 1 1 0 <span class="text-[10px] font-sans font-normal text-slate-500">(Exactly restored!)</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 3. Stop-and-Wait ARQ
+  renderStopAndWaitDiagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-gfg-green animate-pulse"></span>
+            <h4 class="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200">
+              Stop-and-Wait ARQ Protocol: Normal vs. Timeout Recovery Timeline
+            </h4>
+          </div>
+          <span class="text-[10px] font-mono bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 px-2 py-0.5 rounded font-bold">
+            Window Size = 1
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Normal Case -->
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5 mb-3">
+              <i class="fa-solid fa-circle-check"></i> Case 1: Normal Error-Free Exchange
+            </span>
+            <div class="space-y-3 font-mono text-[11px]">
+              <div class="flex items-center justify-between p-2 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                <span class="font-bold text-blue-600">Sender: Tx Frame 0</span>
+                <i class="fa-solid fa-arrow-right text-emerald-500"></i>
+                <span class="text-slate-600 dark:text-slate-400">Receiver receives Frame 0</span>
+              </div>
+              <div class="flex items-center justify-between p-2 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                <span class="text-slate-600 dark:text-slate-400">Sender receives ACK 1</span>
+                <i class="fa-solid fa-arrow-left text-blue-500"></i>
+                <span class="font-bold text-emerald-600">Receiver: Tx ACK 1</span>
+              </div>
+              <div class="flex items-center justify-between p-2 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                <span class="font-bold text-blue-600">Sender: Tx Frame 1</span>
+                <i class="fa-solid fa-arrow-right text-emerald-500"></i>
+                <span class="text-slate-600 dark:text-slate-400">Receiver receives Frame 1</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lost Frame Case -->
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+            <span class="text-xs font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1.5 mb-3">
+              <i class="fa-solid fa-triangle-exclamation"></i> Case 2: Lost Frame & Timeout Retransmission
+            </span>
+            <div class="space-y-3 font-mono text-[11px]">
+              <div class="flex items-center justify-between p-2 rounded bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800">
+                <span class="font-bold text-blue-600">Sender: Tx Frame 0</span>
+                <span class="text-red-500 font-bold"><i class="fa-solid fa-xmark"></i> [Lost in Channel]</span>
+                <span class="text-slate-400 italic">No Reception</span>
+              </div>
+              <div class="p-2 rounded bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 text-center text-amber-700 dark:text-amber-300 font-sans text-xs">
+                <i class="fa-solid fa-stopwatch"></i> <strong>Timer Expires!</strong> Sender detects timeout.
+              </div>
+              <div class="flex items-center justify-between p-2 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                <span class="font-bold text-amber-600">Sender: Retransmit Frame 0</span>
+                <i class="fa-solid fa-arrow-right text-emerald-500"></i>
+                <span class="font-bold text-emerald-600">Receiver: Tx ACK 1</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 4. Sliding Window Protocols (Go-Back-N & Selective Repeat)
+  renderSlidingWindowDiagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse"></span>
+            <h4 class="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200">
+              Sliding Window Protocols: Go-Back-N vs. Selective Repeat
+            </h4>
+          </div>
+          <span class="text-[10px] font-mono bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 px-2 py-0.5 rounded font-bold">
+            Pipelined ARQ
+          </span>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Window Slots Visualizer -->
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+            <span class="text-[11px] font-bold text-slate-700 dark:text-slate-300 block mb-2">Sender Sliding Window State (Sequence Numbers 0 to 7):</span>
+            <div class="flex items-center gap-1.5 font-mono text-center text-xs">
+              <span class="bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-400 p-2 rounded w-12 opacity-60">0<br><span class="text-[8px]">Acked</span></span>
+              <span class="bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-400 p-2 rounded w-12 opacity-60">1<br><span class="text-[8px]">Acked</span></span>
+              <div class="border-2 border-dashed border-blue-500 rounded-lg p-1 flex gap-1.5 bg-blue-50/50 dark:bg-blue-950/30">
+                <span class="bg-emerald-500 text-white p-2 rounded w-12 font-bold shadow-xs">2<br><span class="text-[8px]">Sent</span></span>
+                <span class="bg-emerald-500 text-white p-2 rounded w-12 font-bold shadow-xs">3<br><span class="text-[8px]">Sent</span></span>
+                <span class="bg-blue-500 text-white p-2 rounded w-12 font-bold shadow-xs">4<br><span class="text-[8px]">Usable</span></span>
+                <span class="bg-blue-500 text-white p-2 rounded w-12 font-bold shadow-xs">5<br><span class="text-[8px]">Usable</span></span>
+              </div>
+              <span class="bg-slate-100 dark:bg-slate-900 text-slate-400 p-2 rounded w-12 border border-slate-200 dark:border-slate-800">6<br><span class="text-[8px]">Waiting</span></span>
+              <span class="bg-slate-100 dark:bg-slate-900 text-slate-400 p-2 rounded w-12 border border-slate-200 dark:border-slate-800">7<br><span class="text-[8px]">Waiting</span></span>
+            </div>
+            <div class="flex justify-between items-center text-[10px] text-slate-500 mt-2">
+              <span>← Window slides right when cumulative/individual ACK arrives</span>
+              <span class="font-bold text-blue-600 dark:text-blue-400">Current Window Size: W = 4</span>
+            </div>
+          </div>
+
+          <!-- GBN vs SR Comparison Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+            <div class="p-3.5 rounded-lg bg-white dark:bg-slate-800 border-l-4 border-amber-500 border border-slate-200 dark:border-slate-700">
+              <span class="font-bold text-amber-600 dark:text-amber-400 block mb-1">Go-Back-N (GBN) Rules</span>
+              <ul class="space-y-1 text-slate-600 dark:text-slate-300 font-sans text-[11px]">
+                <li>• <strong>Send Window:</strong> Maximum size = <code>2^m - 1</code></li>
+                <li>• <strong>Receive Window:</strong> Fixed size = <code>1</code> (Discards out-of-order frames)</li>
+                <li>• <strong>Retransmission:</strong> Retransmits frame <code>N</code> and ALL subsequent frames</li>
+              </ul>
+            </div>
+            <div class="p-3.5 rounded-lg bg-white dark:bg-slate-800 border-l-4 border-emerald-500 border border-slate-200 dark:border-slate-700">
+              <span class="font-bold text-emerald-600 dark:text-emerald-400 block mb-1">Selective Repeat (SR) Rules</span>
+              <ul class="space-y-1 text-slate-600 dark:text-slate-300 font-sans text-[11px]">
+                <li>• <strong>Send Window:</strong> Maximum size = <code>2^(m - 1)</code></li>
+                <li>• <strong>Receive Window:</strong> Size = <code>2^(m - 1)</code> (Buffers out-of-order frames)</li>
+                <li>• <strong>Retransmission:</strong> Retransmits ONLY the damaged or lost frame</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 5. Channel Allocation (FDMA & TDMA)
+  renderChannelAllocationDiagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <h4 class="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200">
+              Static Channel Allocation: FDMA vs. TDMA Architecture
+            </h4>
+          </div>
+          <span class="text-[10px] font-mono bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 px-2 py-0.5 rounded font-bold">
+            No Contention
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- FDMA Box -->
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-bold text-xs text-blue-600 dark:text-blue-400">FDMA (Frequency Division)</span>
+              <span class="text-[10px] text-slate-400 font-mono">Dedicated Frequencies</span>
+            </div>
+            <div class="space-y-1 font-mono text-center text-xs">
+              <div class="p-2 rounded bg-blue-500 text-white font-bold">Channel 1: Frequency f1 (User 1)</div>
+              <div class="p-0.5 text-[8px] bg-slate-200 dark:bg-slate-700 text-slate-500 font-sans">Guard Band (Prevents Crosstalk)</div>
+              <div class="p-2 rounded bg-indigo-500 text-white font-bold">Channel 2: Frequency f2 (User 2)</div>
+              <div class="p-0.5 text-[8px] bg-slate-200 dark:bg-slate-700 text-slate-500 font-sans">Guard Band</div>
+              <div class="p-2 rounded bg-purple-500 text-white font-bold">Channel 3: Frequency f3 (User 3)</div>
+            </div>
+            <p class="text-[10px] text-slate-500 mt-2">Continuous transmission on non-overlapping frequency bands.</p>
+          </div>
+
+          <!-- TDMA Box -->
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-bold text-xs text-emerald-600 dark:text-emerald-400">TDMA (Time Division)</span>
+              <span class="text-[10px] text-slate-400 font-mono">Full Bandwidth Sharing</span>
+            </div>
+            <div class="grid grid-cols-3 gap-1 font-mono text-center text-xs">
+              <div class="p-3 rounded bg-emerald-500 text-white font-bold">Slot 1<br><span class="text-[9px]">User 1</span></div>
+              <div class="p-3 rounded bg-teal-500 text-white font-bold">Slot 2<br><span class="text-[9px]">User 2</span></div>
+              <div class="p-3 rounded bg-cyan-600 text-white font-bold">Slot 3<br><span class="text-[9px]">User 3</span></div>
+            </div>
+            <div class="text-center font-mono text-[10px] text-slate-400 mt-1">Repeating TDMA Frame Period T</div>
+            <p class="text-[10px] text-slate-500 mt-2">Each station transmits at full channel speed during its assigned time slot.</p>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 6. ALOHA Protocols
+  renderAlohaDiagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
+            <h4 class="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200">
+              ALOHA Systems: Vulnerable Intervals & Collisions
+            </h4>
+          </div>
+          <span class="text-[10px] font-mono bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 px-2 py-0.5 rounded font-bold">
+            Random Access
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-bold text-red-600 dark:text-red-400">Pure ALOHA (Unslotted)</span>
+              <span class="font-mono text-[10px] font-bold text-slate-500">Max S = 18.4%</span>
+            </div>
+            <div class="p-3 bg-red-50 dark:bg-red-950/40 rounded-lg border border-red-200 dark:border-red-800 mb-2 font-mono text-[11px]">
+              <div class="text-red-700 dark:text-red-300 font-bold mb-1">Vulnerable Time: 2 × Tfr</div>
+              <div class="text-slate-600 dark:text-slate-300 text-[10px] font-sans">
+                A frame transmitted at time t collides if any other station transmits between (t - Tfr) and (t + Tfr).
+              </div>
+            </div>
+            <p class="text-[11px] text-slate-500">Transmits whenever data is ready without clock synchronization.</p>
+          </div>
+
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-bold text-emerald-600 dark:text-emerald-400">Slotted ALOHA (Discrete Clock)</span>
+              <span class="font-mono text-[10px] font-bold text-emerald-600">Max S = 36.8%</span>
+            </div>
+            <div class="p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-lg border border-emerald-200 dark:border-emerald-800 mb-2 font-mono text-[11px]">
+              <div class="text-emerald-700 dark:text-emerald-300 font-bold mb-1">Vulnerable Time: 1 × Tfr</div>
+              <div class="text-slate-600 dark:text-slate-300 text-[10px] font-sans">
+                Transmissions are forced to start strictly at discrete slot boundaries, cutting collision window in half!
+              </div>
+            </div>
+            <p class="text-[11px] text-slate-500">Requires global clock synchronization across all transmitting nodes.</p>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 7. CSMA, CSMA/CD, CSMA/CA
+  renderCsmaDiagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse"></span>
+            <h4 class="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200">
+              Carrier Sense Multiple Access (CSMA) Architecture & Decision Flow
+            </h4>
+          </div>
+          <span class="text-[10px] font-mono bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 px-2 py-0.5 rounded font-bold">
+            Listen Before Talk
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center text-xs">
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+            <span class="font-bold text-blue-600 dark:text-blue-400 block mb-1">1-Persistent CSMA</span>
+            <p class="text-[10px] text-slate-500 mb-2">If idle: transmit immediately with probability 1. If busy: keep sensing continuously until idle.</p>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 rounded">High Collision Risk on Busy Medium</span>
+          </div>
+
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+            <span class="font-bold text-purple-600 dark:text-purple-400 block mb-1">Non-Persistent CSMA</span>
+            <p class="text-[10px] text-slate-500 mb-2">If idle: transmit. If busy: wait a random backoff time and re-sense later.</p>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 rounded">Reduces Collisions, Adds Latency</span>
+          </div>
+
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+            <span class="font-bold text-emerald-600 dark:text-emerald-400 block mb-1">p-Persistent CSMA</span>
+            <p class="text-[10px] text-slate-500 mb-2">If idle: transmit with probability p, or wait until next slot with probability (1 - p).</p>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 rounded">Balanced Slotted Trade-off</span>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 8. Collision-Free Protocols
+  renderCollisionFreeDiagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <h4 class="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200">
+              Collision-Free MAC: Token Passing & Reservation Protocols
+            </h4>
+          </div>
+          <span class="text-[10px] font-mono bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 px-2 py-0.5 rounded font-bold">
+            Zero Collisions
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <!-- Token Ring -->
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+            <span class="font-bold text-emerald-600 dark:text-emerald-400 block mb-2 flex items-center gap-1.5">
+              <i class="fa-solid fa-arrows-spin text-emerald-500"></i> Token Passing Protocol (IEEE 802.5)
+            </span>
+            <div class="p-3 bg-slate-50 dark:bg-slate-900 rounded-lg text-center font-mono text-[11px] mb-2 border border-slate-200 dark:border-slate-800">
+              [ Station 1 ] ──▶ [ Station 2 ] ──▶ [ Station 3 ] ──▶ [ Station 4 ] ──▶ (Cycle)
+            </div>
+            <p class="text-[11px] text-slate-500 leading-relaxed">
+              A special 3-byte token circulates the ring. A station must seize the free token to transmit data, eliminating contention.
+            </p>
+          </div>
+
+          <!-- Bit-Map Protocol -->
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+            <span class="font-bold text-blue-600 dark:text-blue-400 block mb-2 flex items-center gap-1.5">
+              <i class="fa-solid fa-table-cells text-blue-500"></i> Bit-Map Reservation Protocol
+            </span>
+            <div class="flex items-center gap-1 font-mono text-center text-xs mb-2">
+              <span class="p-1.5 bg-blue-500 text-white rounded font-bold grow">Slot 0: 1</span>
+              <span class="p-1.5 bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400 rounded grow">Slot 1: 0</span>
+              <span class="p-1.5 bg-blue-500 text-white rounded font-bold grow">Slot 2: 1</span>
+              <span class="p-1.5 bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400 rounded grow">Slot 3: 0</span>
+            </div>
+            <p class="text-[11px] text-slate-500 leading-relaxed">
+              Contention period consists of N reservation bits. Stations transmit in ascending numerical order after reservation.
+            </p>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 9. Ethernet Frame & IEEE 802.3
+  renderEthernetFrameDiagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse"></span>
+            <h4 class="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200">
+              IEEE 802.3 Ethernet Frame Format & MAC Addressing Architecture
+            </h4>
+          </div>
+          <span class="text-[10px] font-mono bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 px-2 py-0.5 rounded font-bold">
+            64 to 1518 Bytes
+          </span>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Frame Segment Layout -->
+          <div class="grid grid-cols-7 gap-1 font-mono text-center text-xs">
+            <div class="p-2 rounded-l-lg bg-slate-600 text-white shadow-xs">
+              <span class="block text-[8px] uppercase tracking-wider opacity-75">Preamble</span>
+              <span class="text-[11px] font-bold">7 Bytes</span>
+              <span class="block text-[8px] opacity-75">101010...</span>
+            </div>
+            <div class="p-2 bg-amber-600 text-white shadow-xs">
+              <span class="block text-[8px] uppercase tracking-wider opacity-75">SFD</span>
+              <span class="text-[11px] font-bold">1 Byte</span>
+              <span class="block text-[8px] opacity-75">10101011</span>
+            </div>
+            <div class="p-2 bg-blue-600 text-white shadow-xs">
+              <span class="block text-[8px] uppercase tracking-wider opacity-75">Dst MAC</span>
+              <span class="text-[11px] font-bold">6 Bytes</span>
+              <span class="block text-[8px] opacity-75">48 Bits</span>
+            </div>
+            <div class="p-2 bg-indigo-600 text-white shadow-xs">
+              <span class="block text-[8px] uppercase tracking-wider opacity-75">Src MAC</span>
+              <span class="text-[11px] font-bold">6 Bytes</span>
+              <span class="block text-[8px] opacity-75">48 Bits</span>
+            </div>
+            <div class="p-2 bg-purple-600 text-white shadow-xs">
+              <span class="block text-[8px] uppercase tracking-wider opacity-75">Type / Len</span>
+              <span class="text-[11px] font-bold">2 Bytes</span>
+              <span class="block text-[8px] opacity-75">0x0800=IPv4</span>
+            </div>
+            <div class="p-2 bg-emerald-600 text-white shadow-xs">
+              <span class="block text-[8px] uppercase tracking-wider opacity-75">Data Payload</span>
+              <span class="text-[11px] font-bold">46–1500B</span>
+              <span class="block text-[8px] opacity-75">MTU=1500</span>
+            </div>
+            <div class="p-2 rounded-r-lg bg-red-600 text-white shadow-xs">
+              <span class="block text-[8px] uppercase tracking-wider opacity-75">CRC FCS</span>
+              <span class="text-[11px] font-bold">4 Bytes</span>
+              <span class="block text-[8px] opacity-75">CRC-32</span>
+            </div>
+          </div>
+
+          <!-- MAC Address Breakdown -->
+          <div class="bg-white dark:bg-slate-800 p-3.5 rounded-lg border border-slate-200 dark:border-slate-700 text-xs">
+            <span class="font-bold text-slate-800 dark:text-slate-200 block mb-1.5">48-Bit (6-Byte) Physical MAC Address Structure:</span>
+            <div class="flex items-center gap-1 font-mono text-center text-xs">
+              <div class="bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 p-2 rounded-l border border-blue-200 dark:border-blue-800 grow">
+                <span class="font-bold">Organizationally Unique Identifier (OUI)</span>
+                <span class="block text-[10px] text-slate-500 font-sans">First 24 Bits (Assigned by IEEE to Hardware Vendor)</span>
+              </div>
+              <div class="bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 p-2 rounded-r border border-emerald-200 dark:border-emerald-800 grow">
+                <span class="font-bold">Network Interface Controller (NIC) Serial</span>
+                <span class="block text-[10px] text-slate-500 font-sans">Last 24 Bits (Assigned by Manufacturer to Adapter)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 10. Wireless LAN: Hidden & Exposed Terminals
+  renderWirelessHiddenExposedDiagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
+            <h4 class="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200">
+              Wireless LAN Contention: Hidden & Exposed Terminal Scenarios
+            </h4>
+          </div>
+          <span class="text-[10px] font-mono bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 px-2 py-0.5 rounded font-bold">
+            RF Asymmetry
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <!-- Hidden Terminal -->
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+            <span class="font-bold text-red-600 dark:text-red-400 block mb-2 flex items-center gap-1.5">
+              <i class="fa-solid fa-eye-slash text-red-500"></i> Hidden Terminal Problem
+            </span>
+            <div class="p-3 bg-red-50 dark:bg-red-950/40 rounded-lg border border-red-200 dark:border-red-800 text-center font-mono text-xs mb-2">
+              <span class="font-bold text-blue-600">[ Station A ]</span> ──▶ 
+              <span class="font-bold text-red-600 bg-red-100 dark:bg-red-900 px-2 py-1 rounded">💥 Collision at B</span> 
+              ◀── <span class="font-bold text-purple-600">[ Station C ]</span>
+            </div>
+            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed font-sans">
+              Station A and C are out of each other's radio range. Both sense channel idle and transmit to B simultaneously, corrupting B's reception.
+            </p>
+          </div>
+
+          <!-- Exposed Terminal -->
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+            <span class="font-bold text-amber-600 dark:text-amber-400 block mb-2 flex items-center gap-1.5">
+              <i class="fa-solid fa-volume-xmark text-amber-500"></i> Exposed Terminal Problem
+            </span>
+            <div class="p-3 bg-amber-50 dark:bg-amber-950/40 rounded-lg border border-amber-200 dark:border-amber-800 text-center font-mono text-xs mb-2">
+              [ A ] ◀── <span class="font-bold text-blue-600">[ B ]</span> · · (hears B) · · <span class="font-bold text-amber-600">[ C ]</span> ──(prevented)──▶ [ D ]
+            </div>
+            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed font-sans">
+              Station C wants to transmit to D. It overhears B transmitting to A and falsely concludes the medium is busy, wasting channel capacity!
+            </p>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 11. IEEE 802.11 Wi-Fi & RTS/CTS Handshake
+  renderWifiRtsCtsDiagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse"></span>
+            <h4 class="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200">
+              IEEE 802.11 CSMA/CA: 4-Way RTS/CTS Handshake & NAV Reservation
+            </h4>
+          </div>
+          <span class="text-[10px] font-mono bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 px-2 py-0.5 rounded font-bold">
+            Virtual Carrier Sensing
+          </span>
+        </div>
+
+        <div class="space-y-3 font-mono text-xs">
+          <div class="flex items-center justify-between p-2.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+            <span class="font-bold text-blue-600">1. Sender (A)</span>
+            <span class="flex items-center gap-2 text-blue-600 font-bold">
+              <span>Sends Request-to-Send (RTS)</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </span>
+            <span class="text-slate-500">Receiver (AP)</span>
+          </div>
+
+          <div class="flex items-center justify-between p-2.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+            <span class="text-slate-500">Sender (A)</span>
+            <span class="flex items-center gap-2 text-emerald-600 font-bold">
+              <i class="fa-solid fa-arrow-left"></i>
+              <span>Receiver returns Clear-to-Send (CTS)</span>
+            </span>
+            <span class="font-bold text-emerald-600">Receiver (AP)</span>
+          </div>
+
+          <div class="p-2 bg-amber-50 dark:bg-amber-950/40 rounded-lg border border-amber-200 dark:border-amber-800 text-center font-sans text-[11px] text-amber-800 dark:text-amber-200">
+            <i class="fa-solid fa-clock"></i> <strong>Network Allocation Vector (NAV) Active:</strong> All neighbor stations set NAV countdown and remain silent!
+          </div>
+
+          <div class="flex items-center justify-between p-2.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+            <span class="font-bold text-blue-600">3. Sender (A)</span>
+            <span class="flex items-center gap-2 text-purple-600 font-bold">
+              <span>Transmits Data Frame</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </span>
+            <span class="text-slate-500">Receiver (AP)</span>
+          </div>
+
+          <div class="flex items-center justify-between p-2.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+            <span class="text-slate-500">Sender (A)</span>
+            <span class="flex items-center gap-2 text-emerald-600 font-bold">
+              <i class="fa-solid fa-arrow-left"></i>
+              <span>Receiver transmits ACK after SIFS</span>
+            </span>
+            <span class="font-bold text-emerald-600">Receiver (AP)</span>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 12. Data Link Layer Switching & Spanning Tree Protocol (STP)
+  renderSwitchingStpDiagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse"></span>
+            <h4 class="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200">
+              Layer 2 Switching: MAC Address Learning & Spanning Tree (STP)
+            </h4>
+          </div>
+          <span class="text-[10px] font-mono bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 px-2 py-0.5 rounded font-bold">
+            IEEE 802.1D
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <!-- MAC Table -->
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+            <span class="font-bold text-slate-800 dark:text-slate-200 block mb-2 flex items-center gap-1.5">
+              <i class="fa-solid fa-table-list text-blue-500"></i> Switch Self-Learning Forwarding Database
+            </span>
+            <div class="space-y-1 font-mono text-[11px]">
+              <div class="flex justify-between p-1.5 bg-slate-100 dark:bg-slate-900 font-bold text-slate-500 rounded">
+                <span>Switch Port</span>
+                <span>Learned MAC Address</span>
+                <span>Aging Timer</span>
+              </div>
+              <div class="flex justify-between p-1.5 rounded bg-blue-50 dark:bg-blue-950/40 text-blue-800 dark:text-blue-300">
+                <span class="font-bold">Port 1</span>
+                <span>00:1A:2B:3C:4D:01</span>
+                <span>298s</span>
+              </div>
+              <div class="flex justify-between p-1.5 rounded bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300">
+                <span class="font-bold">Port 2</span>
+                <span>00:1A:2B:3C:4D:02</span>
+                <span>300s</span>
+              </div>
+              <div class="flex justify-between p-1.5 rounded bg-purple-50 dark:bg-purple-950/40 text-purple-800 dark:text-purple-300">
+                <span class="font-bold">Port 3</span>
+                <span>00:1A:2B:3C:4D:03</span>
+                <span>240s</span>
+              </div>
+            </div>
+            <p class="text-[10px] text-slate-500 mt-2">Filter if destination is on ingress port; forward if known; flood if unknown.</p>
+          </div>
+
+          <!-- STP Logic -->
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+            <span class="font-bold text-slate-800 dark:text-slate-200 block mb-2 flex items-center gap-1.5">
+              <i class="fa-solid fa-diagram-project text-emerald-500"></i> Spanning Tree Loop Prevention
+            </span>
+            <div class="space-y-2 font-mono text-[11px]">
+              <div class="p-2 rounded bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300">
+                <span class="font-bold">Root Bridge:</span> Lowest Bridge ID (Priority + MAC)
+              </div>
+              <div class="p-2 rounded bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-300">
+                <span class="font-bold">Root Ports:</span> Lowest cost path to Root Bridge (Forwarding)
+              </div>
+              <div class="p-2 rounded bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300">
+                <span class="font-bold">Blocking Ports:</span> Redundant loops disabled to prevent broadcast storms!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 13. Networking Devices & Collision Domains
+  renderNetworkingDevicesDiagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-gfg-green animate-pulse"></span>
+            <h4 class="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200">
+              Networking Devices Hierarchy: OSI Operating Layers & Domain Boundaries
+            </h4>
+          </div>
+          <span class="text-[10px] font-mono bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 px-2 py-0.5 rounded font-bold">
+            Hardware Comparison
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+          <!-- Hub -->
+          <div class="p-3.5 rounded-xl bg-white dark:bg-slate-800 border-t-4 border-red-500 border border-slate-200 dark:border-slate-700">
+            <span class="font-bold text-red-600 dark:text-red-400 block mb-1">Hub (Layer 1)</span>
+            <p class="text-[11px] text-slate-500 mb-2">Repeats electrical bits blindly to all ports.</p>
+            <div class="space-y-1 font-mono text-[10px]">
+              <span class="block bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 p-1 rounded">1 Collision Domain</span>
+              <span class="block bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 p-1 rounded">1 Broadcast Domain</span>
+            </div>
+          </div>
+
+          <!-- Switch -->
+          <div class="p-3.5 rounded-xl bg-white dark:bg-slate-800 border-t-4 border-blue-500 border border-slate-200 dark:border-slate-700">
+            <span class="font-bold text-blue-600 dark:text-blue-400 block mb-1">Switch (Layer 2)</span>
+            <p class="text-[11px] text-slate-500 mb-2">Forwards frames using hardware MAC address table.</p>
+            <div class="space-y-1 font-mono text-[10px]">
+              <span class="block bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 p-1 rounded">Dedicated Collision Domain/Port</span>
+              <span class="block bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 p-1 rounded">1 Broadcast Domain</span>
+            </div>
+          </div>
+
+          <!-- Router -->
+          <div class="p-3.5 rounded-xl bg-white dark:bg-slate-800 border-t-4 border-emerald-500 border border-slate-200 dark:border-slate-700">
+            <span class="font-bold text-emerald-600 dark:text-emerald-400 block mb-1">Router (Layer 3)</span>
+            <p class="text-[11px] text-slate-500 mb-2">Routes IP packets across heterogeneous subnets.</p>
+            <div class="space-y-1 font-mono text-[10px]">
+              <span class="block bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 p-1 rounded">Dedicated Collision Domain/Port</span>
+              <span class="block bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 p-1 rounded">Separates Broadcast Domains!</span>
+            </div>
+          </div>
+
+          <!-- Gateway -->
+          <div class="p-3.5 rounded-xl bg-white dark:bg-slate-800 border-t-4 border-purple-500 border border-slate-200 dark:border-slate-700">
+            <span class="font-bold text-purple-600 dark:text-purple-400 block mb-1">Gateway (L4–L7)</span>
+            <p class="text-[11px] text-slate-500 mb-2">Converts between incompatible protocol suites.</p>
+            <div class="space-y-1 font-mono text-[10px]">
+              <span class="block bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 p-1 rounded">Full Protocol Translation</span>
+              <span class="block bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 p-1 rounded">Application/Transport Proxy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 14. Error Control & CRC
+  renderErrorControlDiagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-purple-500 animate-pulse"></span>
+            <h4 class="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200">
+              Error Detection & Correction: CRC Modulo-2 Division & Hamming Code
+            </h4>
+          </div>
+          <span class="text-[10px] font-mono bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 px-2 py-0.5 rounded font-bold">
+            Data Link Integrity
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <!-- CRC -->
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+            <span class="font-bold text-blue-600 dark:text-blue-400 block mb-2 flex items-center gap-1.5">
+              <i class="fa-solid fa-calculator text-blue-500"></i> Cyclic Redundancy Check (CRC)
+            </span>
+            <div class="p-2.5 bg-slate-50 dark:bg-slate-900 rounded font-mono text-[11px] space-y-1 border border-slate-200 dark:border-slate-800 mb-2">
+              <div><strong>Data Bits:</strong> <code>1 0 0 1 0 0</code></div>
+              <div><strong>Generator G(x):</strong> <code>1 1 0 1</code> (Degree r = 3)</div>
+              <div><strong>Appended Data:</strong> <code>1 0 0 1 0 0 0 0 0</code> (r zeroes added)</div>
+              <div class="text-emerald-600 dark:text-emerald-400 font-bold"><strong>FCS Remainder:</strong> <code>0 0 1</code> (Modulo-2 XOR)</div>
+            </div>
+            <p class="text-[10px] text-slate-500">Transmitted Frame = [Data Bits] + [FCS Remainder]. Receiver divides by G(x); remainder 0 confirms error-free frame.</p>
+          </div>
+
+          <!-- Hamming Code -->
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+            <span class="font-bold text-purple-600 dark:text-purple-400 block mb-2 flex items-center gap-1.5">
+              <i class="fa-solid fa-shield-halved text-purple-500"></i> Hamming(7,4) Code SECDED
+            </span>
+            <div class="grid grid-cols-7 gap-1 font-mono text-center text-xs mb-2">
+              <div class="p-1.5 bg-purple-500 text-white rounded font-bold">p1<br><span class="text-[8px]">Pos 1</span></div>
+              <div class="p-1.5 bg-purple-500 text-white rounded font-bold">p2<br><span class="text-[8px]">Pos 2</span></div>
+              <div class="p-1.5 bg-blue-500 text-white rounded font-bold">d1<br><span class="text-[8px]">Pos 3</span></div>
+              <div class="p-1.5 bg-purple-500 text-white rounded font-bold">p4<br><span class="text-[8px]">Pos 4</span></div>
+              <div class="p-1.5 bg-blue-500 text-white rounded font-bold">d2<br><span class="text-[8px]">Pos 5</span></div>
+              <div class="p-1.5 bg-blue-500 text-white rounded font-bold">d3<br><span class="text-[8px]">Pos 6</span></div>
+              <div class="p-1.5 bg-blue-500 text-white rounded font-bold">d4<br><span class="text-[8px]">Pos 7</span></div>
+            </div>
+            <p class="text-[10px] text-slate-500">Parity bits placed at powers of 2 (1, 2, 4, 8). Syndrome calculated by receiver identifies exact bit position of error for auto-correction!</p>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+};
+
+if (typeof window !== 'undefined') {
+  window.CleanDiagramEngine = CleanDiagramEngine;
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = CleanDiagramEngine;
+}

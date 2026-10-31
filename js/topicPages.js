@@ -6,6 +6,7 @@ var TOPIC_REPOSITORY = Object.assign(
   typeof TOPICS_U1 !== 'undefined' ? TOPICS_U1 : (typeof window !== 'undefined' && window.TOPICS_U1 ? window.TOPICS_U1 : {}),
   typeof TOPICS_U2 !== 'undefined' ? TOPICS_U2 : (typeof window !== 'undefined' && window.TOPICS_U2 ? window.TOPICS_U2 : {}),
   typeof TOPICS_U2_EXT !== 'undefined' ? TOPICS_U2_EXT : (typeof window !== 'undefined' && window.TOPICS_U2_EXT ? window.TOPICS_U2_EXT : {}),
+  typeof TOPICS_U2_SYLLABUS !== 'undefined' ? TOPICS_U2_SYLLABUS : (typeof window !== 'undefined' && window.TOPICS_U2_SYLLABUS ? window.TOPICS_U2_SYLLABUS : {}),
   typeof TOPICS_U3 !== 'undefined' ? TOPICS_U3 : (typeof window !== 'undefined' && window.TOPICS_U3 ? window.TOPICS_U3 : {}),
   typeof TOPICS_U3_EXT !== 'undefined' ? TOPICS_U3_EXT : (typeof window !== 'undefined' && window.TOPICS_U3_EXT ? window.TOPICS_U3_EXT : {}),
   typeof TOPICS_U4 !== 'undefined' ? TOPICS_U4 : (typeof window !== 'undefined' && window.TOPICS_U4 ? window.TOPICS_U4 : {}),
@@ -17,33 +18,137 @@ if (typeof global !== 'undefined') global.TOPIC_REPOSITORY = TOPIC_REPOSITORY;
 
 // Master Pedagogical Hierarchy Mapping from Syllabus PDF
 const TOPIC_CHAPTER_MAP = {
-  "dll-design-issues": { chapNum: 1, chapTitle: "Topic 1: Design Issues of DLL" },
-  "framing": { chapNum: 2, chapTitle: "Topic 2: Framing in DLL" },
-  "byte-stuffing": { chapNum: 2, chapTitle: "Topic 2: Framing in DLL" },
-  "bit-stuffing": { chapNum: 2, chapTitle: "Topic 2: Framing in DLL" },
-  "error-detection": { chapNum: 3, chapTitle: "Topic 3: Error Detection & Correction" },
-  "parity": { chapNum: 3, chapTitle: "Topic 3: Error Detection & Correction" },
-  "checksum": { chapNum: 3, chapTitle: "Topic 3: Error Detection & Correction" },
-  "hamming-code": { chapNum: 4, chapTitle: "Topic 4: Hamming Code (SECDED)" },
-  "crc": { chapNum: 5, chapTitle: "Topic 5: Cyclic Redundancy Check (CRC)" },
-  "flow-control": { chapNum: 6, chapTitle: "Topic 6: Sliding Window Protocols" },
-  "simplex-protocol": { chapNum: 6, chapTitle: "Topic 6: Sliding Window Protocols" },
-  "stop-and-wait": { chapNum: 6, chapTitle: "Topic 6: Sliding Window Protocols" },
-  "sliding-window": { chapNum: 6, chapTitle: "Topic 6: Sliding Window Protocols" },
-  "go-back-n": { chapNum: 6, chapTitle: "Topic 6: Sliding Window Protocols" },
-  "selective-repeat": { chapNum: 6, chapTitle: "Topic 6: Sliding Window Protocols" },
-  "channel-allocation": { chapNum: 7, chapTitle: "Topic 7: MAC & Channel Allocation" },
-  "aloha": { chapNum: 8, chapTitle: "Topic 8: Multiple Access Protocols" },
-  "csma-protocols": { chapNum: 8, chapTitle: "Topic 8: Multiple Access Protocols" },
-  "collision-free-protocols": { chapNum: 8, chapTitle: "Topic 8: Multiple Access Protocols" },
-  "ethernet": { chapNum: 9, chapTitle: "Topic 9: Ethernet MAC Sublayer" },
-  "mac-address": { chapNum: 9, chapTitle: "Topic 9: Ethernet MAC Sublayer" },
-  "wireless-lan-protocols": { chapNum: 10, chapTitle: "Topic 10: IEEE 802.11 (Wi-Fi)" },
-  "wifi-mac-sublayer": { chapNum: 10, chapTitle: "Topic 10: IEEE 802.11 (Wi-Fi)" },
-  "dll-switching": { chapNum: 11, chapTitle: "Topic 11: DLL Switching & Bridges" },
-  "vlan": { chapNum: 11, chapTitle: "Topic 11: DLL Switching & Bridges" },
-  "network-devices": { chapNum: 12, chapTitle: "Topic 12: Connecting Devices & ARP" },
-  "arp": { chapNum: 12, chapTitle: "Topic 12: Connecting Devices & ARP" },
+  // Topic 1 – Data Link Layer Fundamentals
+  "u2-dll-intro": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
+  "u2-dll-osi-position": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
+  "u2-dll-functions": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
+  "dll-design-issues": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
+  "u2-dll-services": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
+  "framing": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
+  "byte-stuffing": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
+  "bit-stuffing": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
+  "flow-control": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
+  "u2-error-control": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
+  "error-detection": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
+  "parity": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
+  "checksum": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
+  "hamming-code": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
+  "crc": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
+
+  // Topic 2 – Data Link Layer Protocols
+  "u2-dll-protocols-intro": { chapNum: 2, chapTitle: "Topic 2 – Data Link Layer Protocols" },
+  "u2-protocol-classification": { chapNum: 2, chapTitle: "Topic 2 – Data Link Layer Protocols" },
+  "simplex-protocol": { chapNum: 2, chapTitle: "Topic 2 – Data Link Layer Protocols" },
+  "stop-and-wait-noiseless": { chapNum: 2, chapTitle: "Topic 2 – Data Link Layer Protocols" },
+  "stop-and-wait": { chapNum: 2, chapTitle: "Topic 2 – Data Link Layer Protocols" },
+  "sliding-window": { chapNum: 2, chapTitle: "Topic 2 – Data Link Layer Protocols" },
+  "go-back-n": { chapNum: 2, chapTitle: "Topic 2 – Data Link Layer Protocols" },
+  "selective-repeat": { chapNum: 2, chapTitle: "Topic 2 – Data Link Layer Protocols" },
+  "comparison-noiseless-noisy": { chapNum: 2, chapTitle: "Topic 2 – Data Link Layer Protocols" },
+  "comparison-arq-protocols": { chapNum: 2, chapTitle: "Topic 2 – Data Link Layer Protocols" },
+
+  // Topic 3 – Medium Access Control (MAC) Sublayer
+  "u2-mac-sublayer-intro": { chapNum: 3, chapTitle: "Topic 3 – Medium Access Control (MAC) Sublayer" },
+  "u2-need-for-mac-sublayer": { chapNum: 3, chapTitle: "Topic 3 – Medium Access Control (MAC) Sublayer" },
+  "u2-mac-functions-responsibilities": { chapNum: 3, chapTitle: "Topic 3 – Medium Access Control (MAC) Sublayer" },
+  "channel-allocation": { chapNum: 3, chapTitle: "Topic 3 – Medium Access Control (MAC) Sublayer" },
+  "u2-fdma": { chapNum: 3, chapTitle: "Topic 3 – Medium Access Control (MAC) Sublayer" },
+  "u2-tdma": { chapNum: 3, chapTitle: "Topic 3 – Medium Access Control (MAC) Sublayer" },
+  "u2-dynamic-channel-allocation": { chapNum: 3, chapTitle: "Topic 3 – Medium Access Control (MAC) Sublayer" },
+  "u2-static-vs-dynamic-channel-allocation": { chapNum: 3, chapTitle: "Topic 3 – Medium Access Control (MAC) Sublayer" },
+
+  // Topic 4 – Multiple Access Protocols
+  "u2-multiple-access-intro": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
+  "u2-random-access-protocols": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
+  "aloha": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
+  "u2-pure-aloha": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
+  "u2-slotted-aloha": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
+  "csma-protocols": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
+  "u2-csma-1-persistent": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
+  "u2-csma-non-persistent": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
+  "u2-csma-p-persistent": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
+  "u2-csma-cd": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
+  "u2-csma-ca": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
+  "u2-comparison-multiple-access": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
+
+  // Topic 5 – Collision-Free Protocols
+  "u2-collision-free-intro": { chapNum: 5, chapTitle: "Topic 5 – Collision-Free Protocols" },
+  "collision-free-protocols": { chapNum: 5, chapTitle: "Topic 5 – Collision-Free Protocols" },
+  "u2-bit-map-protocol": { chapNum: 5, chapTitle: "Topic 5 – Collision-Free Protocols" },
+  "u2-binary-countdown-protocol": { chapNum: 5, chapTitle: "Topic 5 – Collision-Free Protocols" },
+  "u2-token-passing-protocol": { chapNum: 5, chapTitle: "Topic 5 – Collision-Free Protocols" },
+  "u2-collision-free-working-principles": { chapNum: 5, chapTitle: "Topic 5 – Collision-Free Protocols" },
+  "u2-comparison-collision-free": { chapNum: 5, chapTitle: "Topic 5 – Collision-Free Protocols" },
+
+  // Topic 6 – Ethernet MAC Sublayer Protocol
+  "ethernet": { chapNum: 6, chapTitle: "Topic 6 – Ethernet MAC Sublayer Protocol" },
+  "u2-ethernet-architecture": { chapNum: 6, chapTitle: "Topic 6 – Ethernet MAC Sublayer Protocol" },
+  "mac-address": { chapNum: 6, chapTitle: "Topic 6 – Ethernet MAC Sublayer Protocol" },
+  "u2-ethernet-frame-format": { chapNum: 6, chapTitle: "Topic 6 – Ethernet MAC Sublayer Protocol" },
+  "u2-ethernet-mac-protocol": { chapNum: 6, chapTitle: "Topic 6 – Ethernet MAC Sublayer Protocol" },
+  "u2-ethernet-csma-cd-operation": { chapNum: 6, chapTitle: "Topic 6 – Ethernet MAC Sublayer Protocol" },
+  "u2-binary-exponential-backoff": { chapNum: 6, chapTitle: "Topic 6 – Ethernet MAC Sublayer Protocol" },
+  "u2-ethernet-types-evolution": { chapNum: 6, chapTitle: "Topic 6 – Ethernet MAC Sublayer Protocol" },
+  "u2-ethernet-advantages-limitations": { chapNum: 6, chapTitle: "Topic 6 – Ethernet MAC Sublayer Protocol" },
+
+  // Topic 7 – Wireless LAN Protocols
+  "wireless-lan-protocols": { chapNum: 7, chapTitle: "Topic 7 – Wireless LAN Protocols" },
+  "u2-wireless-characteristics": { chapNum: 7, chapTitle: "Topic 7 – Wireless LAN Protocols" },
+  "u2-wireless-lan-architecture": { chapNum: 7, chapTitle: "Topic 7 – Wireless LAN Protocols" },
+  "u2-hidden-terminal-problem": { chapNum: 7, chapTitle: "Topic 7 – Wireless LAN Protocols" },
+  "u2-exposed-terminal-problem": { chapNum: 7, chapTitle: "Topic 7 – Wireless LAN Protocols" },
+  "u2-wireless-multiple-access": { chapNum: 7, chapTitle: "Topic 7 – Wireless LAN Protocols" },
+  "u2-wireless-lan-access-methods": { chapNum: 7, chapTitle: "Topic 7 – Wireless LAN Protocols" },
+  "u2-wireless-communication-challenges": { chapNum: 7, chapTitle: "Topic 7 – Wireless LAN Protocols" },
+
+  // Topic 8 – IEEE 802.11 MAC Sublayer Protocol
+  "wifi-mac-sublayer": { chapNum: 8, chapTitle: "Topic 8 – IEEE 802.11 MAC Sublayer Protocol" },
+  "u2-ieee-802-11-architecture": { chapNum: 8, chapTitle: "Topic 8 – IEEE 802.11 MAC Sublayer Protocol" },
+  "u2-ieee-802-11-dcf": { chapNum: 8, chapTitle: "Topic 8 – IEEE 802.11 MAC Sublayer Protocol" },
+  "u2-ieee-802-11-pcf": { chapNum: 8, chapTitle: "Topic 8 – IEEE 802.11 MAC Sublayer Protocol" },
+  "u2-ieee-802-11-csma-ca": { chapNum: 8, chapTitle: "Topic 8 – IEEE 802.11 MAC Sublayer Protocol" },
+  "u2-ieee-802-11-ifs": { chapNum: 8, chapTitle: "Topic 8 – IEEE 802.11 MAC Sublayer Protocol" },
+  "u2-rts-cts-mechanism": { chapNum: 8, chapTitle: "Topic 8 – IEEE 802.11 MAC Sublayer Protocol" },
+  "u2-network-allocation-vector": { chapNum: 8, chapTitle: "Topic 8 – IEEE 802.11 MAC Sublayer Protocol" },
+  "u2-ieee-802-11-frame-formats": { chapNum: 8, chapTitle: "Topic 8 – IEEE 802.11 MAC Sublayer Protocol" },
+  "u2-dcf-vs-pcf": { chapNum: 8, chapTitle: "Topic 8 – IEEE 802.11 MAC Sublayer Protocol" },
+
+  // Topic 9 – Data Link Layer Switching
+  "dll-switching": { chapNum: 9, chapTitle: "Topic 9 – Data Link Layer Switching" },
+  "u2-bridges-overview": { chapNum: 9, chapTitle: "Topic 9 – Data Link Layer Switching" },
+  "u2-transparent-bridges": { chapNum: 9, chapTitle: "Topic 9 – Data Link Layer Switching" },
+  "u2-learning-bridges": { chapNum: 9, chapTitle: "Topic 9 – Data Link Layer Switching" },
+  "u2-bridge-learning-process": { chapNum: 9, chapTitle: "Topic 9 – Data Link Layer Switching" },
+  "u2-forwarding-and-filtering": { chapNum: 9, chapTitle: "Topic 9 – Data Link Layer Switching" },
+  "u2-bridge-flooding": { chapNum: 9, chapTitle: "Topic 9 – Data Link Layer Switching" },
+  "u2-spanning-tree-protocol": { chapNum: 9, chapTitle: "Topic 9 – Data Link Layer Switching" },
+  "u2-bridges-vs-switches": { chapNum: 9, chapTitle: "Topic 9 – Data Link Layer Switching" },
+  "vlan": { chapNum: 9, chapTitle: "Topic 9 – Data Link Layer Switching" },
+
+  // Topic 10 – Networking Devices
+  "network-devices": { chapNum: 10, chapTitle: "Topic 10 – Networking Devices" },
+  "u2-networking-device-repeaters": { chapNum: 10, chapTitle: "Topic 10 – Networking Devices" },
+  "u2-networking-device-hubs": { chapNum: 10, chapTitle: "Topic 10 – Networking Devices" },
+  "u2-networking-device-bridges": { chapNum: 10, chapTitle: "Topic 10 – Networking Devices" },
+  "u2-networking-device-switches": { chapNum: 10, chapTitle: "Topic 10 – Networking Devices" },
+  "u2-networking-device-routers": { chapNum: 10, chapTitle: "Topic 10 – Networking Devices" },
+  "u2-networking-device-gateways": { chapNum: 10, chapTitle: "Topic 10 – Networking Devices" },
+  "u2-device-working-principles": { chapNum: 10, chapTitle: "Topic 10 – Networking Devices" },
+  "u2-comparison-networking-devices": { chapNum: 10, chapTitle: "Topic 10 – Networking Devices" },
+  "u2-device-osi-layers": { chapNum: 10, chapTitle: "Topic 10 – Networking Devices" },
+  "arp": { chapNum: 10, chapTitle: "Topic 10 – Networking Devices" },
+
+  // Topic 11 – Revision and Assessment
+  "u2-definitions-terminology": { chapNum: 11, chapTitle: "Topic 11 – Revision and Assessment" },
+  "u2-important-diagrams": { chapNum: 11, chapTitle: "Topic 11 – Revision and Assessment" },
+  "u2-comparison-tables": { chapNum: 11, chapTitle: "Topic 11 – Revision and Assessment" },
+  "u2-numerical-problems": { chapNum: 11, chapTitle: "Topic 11 – Revision and Assessment" },
+  "u2-protocol-examples": { chapNum: 11, chapTitle: "Topic 11 – Revision and Assessment" },
+  "u2-short-answer-questions": { chapNum: 11, chapTitle: "Topic 11 – Revision and Assessment" },
+  "u2-long-answer-questions": { chapNum: 11, chapTitle: "Topic 11 – Revision and Assessment" },
+  "u2-important-exam-questions": { chapNum: 11, chapTitle: "Topic 11 – Revision and Assessment" },
+  "u2-mcqs": { chapNum: 11, chapTitle: "Topic 11 – Revision and Assessment" },
+  "u2-practice-test": { chapNum: 11, chapTitle: "Topic 11 – Revision and Assessment" },
 
   // Unit 3: Master Pedagogical Hierarchy Mapping from Syllabus PDF
   // Chapter 1: Topic 1: Network Layer Design Issues & Routing Fundamentals
@@ -447,11 +552,39 @@ var TopicPageEngine = {
 
             <!-- SECTION 3: ARCHITECTURE DIAGRAM -->
             <section class="wiki-section" id="sec-diagram">
-              <h2 class="wiki-section-heading">3. Architecture Diagram</h2>
-              <div class="wiki-section-body">
-                <div class="wiki-diagram-shell">
-                  <pre class="wiki-ascii-diagram">${(topic.sections.diagram || '').trim()}</pre>
-                </div>
+              <h2 class="wiki-section-heading">3. Architecture Diagram & Visual Schematic</h2>
+              <div class="wiki-section-body space-y-4">
+                ${(topic.sections?.imageUrl || topic.imageUrl) ? `
+                  <div class="wiki-img-container mb-4 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-sm p-4 flex flex-col items-center transition-all hover:shadow-md">
+                    <div class="w-full flex items-center justify-between pb-2 mb-2 border-b border-gray-100 dark:border-gray-800 text-[10px] text-gray-500 font-mono">
+                      <span class="flex items-center gap-1 text-blue-600 dark:text-blue-400 font-bold uppercase tracking-wider">
+                        <i class="fa-solid fa-network-wired"></i> Architecture Illustration
+                      </span>
+                      <a href="${topic.sections?.imageUrl || topic.imageUrl}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-500 flex items-center gap-1 transition-colors" title="Open full resolution in new tab">
+                        <span>Full Res</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                      </a>
+                    </div>
+                    <div class="relative w-full flex items-center justify-center p-3 bg-slate-50/70 dark:bg-slate-950/50 rounded-lg overflow-hidden group">
+                      <img src="${topic.sections?.imageUrl || topic.imageUrl}" 
+                           alt="${topic.title} Architecture Diagram" 
+                           loading="lazy" 
+                           referrerpolicy="no-referrer"
+                           class="max-w-full h-auto max-h-[460px] object-contain rounded cursor-pointer transition-transform duration-300 group-hover:scale-[1.01]"
+                           onclick="window.open('${topic.sections?.imageUrl || topic.imageUrl}', '_blank')"
+                           onerror="this.onerror=null; this.closest('.wiki-img-container').classList.add('hidden');" />
+                    </div>
+                    ${(topic.sections?.imageCaption || topic.imageCaption) ? `
+                      <p class="text-xs text-gray-600 dark:text-gray-300 text-center mt-3 font-medium flex items-center justify-center gap-1.5 px-3">
+                        <i class="fa-solid fa-circle-info text-blue-500 text-[11px] shrink-0"></i>
+                        <span>${topic.sections?.imageCaption || topic.imageCaption}</span>
+                      </p>
+                    ` : ''}
+                  </div>
+                ` : ''}
+
+                <!-- Clean Modern Architecture Diagram (Replaces ASCII/symbols art) -->
+                ${(typeof CleanDiagramEngine !== 'undefined' ? CleanDiagramEngine.getDiagramHtml(topic) : (typeof window !== 'undefined' && window.CleanDiagramEngine ? window.CleanDiagramEngine.getDiagramHtml(topic) : ''))}
               </div>
             </section>
 
