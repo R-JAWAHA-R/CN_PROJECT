@@ -1,4 +1,5 @@
 // topics_u2_syllabus.js - Master Academic Topic Content Repository for Unit 2
+// Cleaned: All ASCII symbol art removed. Integrated complete 36-page Topic 2 & 14-page Topic 3 content.
 var TOPICS_U2_SYLLABUS = {
   "u2-dll-intro": {
     "id": "u2-dll-intro",
@@ -945,630 +946,650 @@ var TOPICS_U2_SYLLABUS = {
     "title": "Introduction to MAC Sublayer",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "level": "Beginner",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "IEEE 802.3 / Tanenbaum Ch. 4",
-    "oneLiner": "The lower sublayer of OSI Layer 2 responsible for managing access to shared multi-station transmission media.",
-    "quickAnswer": "The Medium Access Control (MAC) sublayer is the lower portion of the Data Link Layer in IEEE 802 LAN architecture. It directly interfaces with the physical layer, provides physical addressing, and arbitrates access when multiple computers share a single transmission channel.",
-    "whyItMatters": "Whenever a communication medium is shared (like Wi-Fi airwaves or classic coaxial cables), two simultaneous transmissions collide. The MAC sublayer prevents or resolves these collisions.",
+    "topicNumber": 3,
+    "subtopicNumber": 1,
+    "whyItMatters": "On point-to-point links, only two devices communicate and collisions are impossible. On shared multi-access media (like Wi-Fi or classical Ethernet), uncoordinated transmissions collide and destroy data. The MAC sublayer provides the essential rules that coordinate access to the shared medium.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "OSI Layer 2 (Data Link Layer)",
+        "meaning": "Node-to-node frame delivery between adjacent network stations"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Shared Transmission Medium",
+        "meaning": "A common physical wire, coaxial bus, fiber, or radio channel shared by multiple nodes"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define the Medium Access Control (MAC) sublayer and its operational scope.",
+      "Explain the IEEE 802 architecture model dividing the Data Link Layer into LLC and MAC sublayers.",
+      "Understand the distinction between point-to-point links and broadcast multi-access channels.",
+      "Identify how the MAC sublayer coordinates competing station transmissions to prevent collisions."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layer 2 (Lower Sublayer - IEEE 802)",
+      "standard": "IEEE 802 Architecture / IEEE 802.3, 802.11, 802.15",
+      "type": "Sublayer Architectural Foundation",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-dll-intro",
+        "framing"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "u2-need-for-mac-sublayer",
+        "u2-mac-functions-responsibilities",
+        "channel-allocation"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "u2-mac-functions-responsibilities"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Ethernet local area networks, Wi-Fi wireless networks, cellular uplink channels"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8d/OSI_Model_v1.svg",
+    "imageCaption": "Figure: Position of the Medium Access Control (MAC) Sublayer in the IEEE 802 & OSI Reference Models.",
     "sections": {
-      "overview": "<p>In IEEE 802 LAN architectures, the Data Link Layer is partitioned into the <strong>Logical Link Control (LLC)</strong> sublayer above, and the <strong>Medium Access Control (MAC)</strong> sublayer below. The MAC sublayer determines which device has permission to transmit across a shared broadcast medium.</p>",
-      "eli10": "In simple words: The lower sublayer of OSI Layer 2 responsible for managing access to shared multi-station transmission media.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
+      "overview": "\n      <p>The <strong>Medium Access Control (MAC) sublayer</strong> is the lower sublayer of the Data Link Layer in the IEEE 802 local area network architecture. It controls how multiple network devices share, coordinate, and access a common physical transmission medium, such as a coaxial cable, twisted-pair hub, or wireless radio channel.</p>\n      \n      <p>When several stations are connected to the same communication channel, they require formal protocol rules to decide:</p>\n      <ul class=\"wiki-bullet-list\">\n        <li><strong>Which device</strong> is permitted to transmit at any given time.</li>\n        <li><strong>When</strong> a device can safely transmit without causing interference.</li>\n        <li><strong>How to resolve</strong> competing simultaneous transmission attempts to prevent or recover from packet collisions.</li>\n      </ul>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">The IEEE 802 Sublayer Division</h3>\n      <p>In standard point-to-point links (like HDLC or PPP), there is only one sender and one receiver, so medium access is trivial. However, for local area networks where many computers share one medium, the <strong>IEEE 802 committee</strong> divided OSI Layer 2 into two distinct sublayers:</p>\n      \n      <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 my-4\">\n        <div class=\"p-4 rounded-xl bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-900\">\n          <div class=\"text-xs font-bold text-blue-800 dark:text-blue-300 uppercase tracking-wider mb-1\">Upper Sublayer</div>\n          <h4 class=\"font-extrabold text-sm text-gray-900 dark:text-white mb-2\">Logical Link Control (LLC - IEEE 802.2)</h4>\n          <p class=\"text-xs text-gray-700 dark:text-gray-300 leading-relaxed\">\n            Responsible for traditional data-link control functions that are independent of the physical medium: flow control, error control, framing, and multiplexing multiple network-layer protocols via Service Access Points (SAP).\n          </p>\n        </div>\n\n        <div class=\"p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-900\">\n          <div class=\"text-xs font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider mb-1\">Lower Sublayer</div>\n          <h4 class=\"font-extrabold text-sm text-gray-900 dark:text-white mb-2\">Medium Access Control (MAC)</h4>\n          <p class=\"text-xs text-gray-700 dark:text-gray-300 leading-relaxed\">\n            Responsible for managing access to the shared physical transmission medium, frame delimiter generation, 48-bit physical addressing (MAC addresses), error detection (CRC/FCS), and collision avoidance/detection.\n          </p>\n        </div>\n      </div>\n    ",
+      "eli10": "Imagine a classroom where 30 students all share one blackboard. If everyone runs up to write at the exact same second, chalk will break and nobody can read anything! The MAC sublayer is the teacher standing by the blackboard who calls students up one by one or establishes a turn-taking rule so everyone gets to write without bumping into each other.",
+      "analogy": "A shared multi-party phone conference call: without conversational etiquette, if three people speak at once, all voices garble into noise. Etiquette rules (pausing, listening before speaking, yielding) act as the MAC sublayer of human conversation.",
+      "howItWorks": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">How the MAC Sublayer Coordinates Media Sharing</h3>\n      <p>The MAC sublayer sits directly on top of the Physical Layer and abstracts hardware signaling away from the Logical Link Control sublayer:</p>\n      <ol class=\"wiki-ordered-list\">\n        <li><strong>Media Sensing:</strong> The station's MAC sublayer constantly monitors the physical carrier signal to determine whether the medium is currently idle or busy.</li>\n        <li><strong>Access Arbitration:</strong> Based on the specific MAC protocol in use (e.g., CSMA/CD in Ethernet, CSMA/CA in Wi-Fi, or Token Passing in Token Ring), the MAC sublayer determines whether the station is permitted to transmit.</li>\n        <li><strong>Encapsulation:</strong> When permitted, the MAC sublayer prepends a 48-bit destination MAC address, source MAC address, preamble, and appends a 32-bit CRC Frame Check Sequence (FCS).</li>\n        <li><strong>Signal Injection:</strong> The MAC sublayer passes the serialized frame down to the Physical Layer transceiver for conversion into voltage pulses, light flashes, or radio waves.</li>\n        <li><strong>Collision Management:</strong> If another station's signal collides with the transmission, the MAC sublayer aborts transmission immediately, transmits a jam signal, and calculates a backoff delay.</li>\n      </ol>\n    ",
       "diagram": "",
+      "technicalDetails": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">IEEE 802 Protocol Family Relationship</h3>\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Layer</th>\n            <th>Protocol Standard</th>\n            <th>Primary Responsibility</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td><strong>Layer 3</strong></td>\n            <td>IP / IPv6 / ICMP</td>\n            <td>End-to-end logical packet routing across internetworks.</td>\n          </tr>\n          <tr>\n            <td><strong>Layer 2 (Upper)</strong></td>\n            <td>IEEE 802.2 (LLC)</td>\n            <td>Flow control, error control, multiplexing Network Layer protocols.</td>\n          </tr>\n          <tr class=\"bg-emerald-50 dark:bg-emerald-900/30 font-bold\">\n            <td><strong>Layer 2 (Lower)</strong></td>\n            <td>IEEE 802.3 (Ethernet) / 802.11 (Wi-Fi) / 802.15 (Bluetooth) MAC</td>\n            <td>Arbitrating medium access, 48-bit physical addressing, framing, CRC error detection.</td>\n          </tr>\n          <tr>\n            <td><strong>Layer 1</strong></td>\n            <td>Physical (1000BASE-T, 802.11ax RF, Optical)</td>\n            <td>Raw signal transmission, modulation, clock synchronization.</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Introduction to MAC Sublayer?<br><br><strong>Answer:</strong> The Medium Access Control (MAC) sublayer is the lower portion of the Data Link Layer in IEEE 802 LAN architecture. It directly interfaces with the physical layer, provides physical addressing, and arbitrates access when multiple computers share a single transmission channel.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
+        "level1": "<strong>Question:</strong> What are the two sublayers of the Data Link Layer according to the IEEE 802 standard, and what is the primary role of each?<br><br><strong>Answer:</strong> The two sublayers are:<br>1. <strong>Logical Link Control (LLC):</strong> Handles flow control, error control, and network layer protocol identification.<br>2. <strong>Medium Access Control (MAC):</strong> Manages access to the shared physical transmission medium and handles physical hardware addressing.",
+        "level2": "<strong>Problem:</strong> Why is the MAC sublayer absent in point-to-point leased line protocols such as PPP (Point-to-Point Protocol)?<br><br><strong>Answer:</strong> On a dedicated point-to-point link, there are exactly two communicating nodes connected directly by a dedicated wire or fiber. Because no other station shares the medium, packet collisions are physically impossible. Medium access contention does not exist, so a separate MAC sublayer is completely unnecessary.",
+        "level3": "<strong>Analysis:</strong> Explain how the separation of LLC and MAC sublayers provides modularity in network interface card (NIC) design.<br><br><strong>Answer:</strong> By separating LLC and MAC, the upper LLC sublayer remains completely identical regardless of whether the physical medium is copper Ethernet, fiber optics, or wireless Wi-Fi. Only the MAC sublayer needs to change its access algorithm (e.g., CSMA/CD for wired vs. CSMA/CA for wireless), enabling upper network protocols (IP) to operate over any physical link without modification."
       },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Feature</th>\n            <th>With MAC Sublayer</th>\n            <th>Without MAC Sublayer (Raw Medium)</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td><strong>Collision Control</strong></td>\n            <td>Controlled access; collisions minimized or handled cleanly.</td>\n            <td>Chaotic overlap; massive signal interference and packet loss.</td>\n          </tr>\n          <tr>\n            <td><strong>Scalability</strong></td>\n            <td>Enables dozens or hundreds of devices to share one wire/radio channel.</td>\n            <td>Restricted strictly to isolated two-node point-to-point links.</td>\n          </tr>\n          <tr>\n            <td><strong>Addressing</strong></td>\n            <td>Standard 48-bit MAC addresses uniquely identify local devices.</td>\n            <td>No hardware device identification on shared broadcast mediums.</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Ethernet Network Interface Cards (NICs) adhering to IEEE 802.3.",
+        "Wi-Fi chipsets (802.11ax/be) coordinating wireless radio channel contention.",
+        "DOCSIS cable modems arbitrating coaxial cable upstream transmissions to the ISP."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Introduction to MAC Sublayer?",
+          "question": "According to the IEEE 802 architecture model, which sublayer of the Data Link Layer is responsible for controlling access to the shared transmission medium?",
           "options": [
-            "The Medium Access Control (MAC) sublayer is the lower portio...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "Medium Access Control (MAC) sublayer",
+            "Logical Link Control (LLC) sublayer",
+            "Network Layer",
+            "Physical Layer"
           ],
           "correct": 0,
-          "explanation": "The primary role is: The Medium Access Control (MAC) sublayer is the lower portion of the Data Link Layer in IEEE 802 LAN architecture. It directly interfaces with the physical layer, provides physical addressing, and arbitrates access when multiple computers share a single transmission channel."
+          "explanation": "The MAC sublayer is the lower sublayer of Layer 2 responsible for arbitrating and controlling access to shared communication media."
+        },
+        {
+          "question": "Which function is handled by the Logical Link Control (LLC) sublayer rather than the MAC sublayer?",
+          "options": [
+            "Flow control and error control",
+            "CSMA/CD collision detection",
+            "Physical MAC addressing",
+            "Generating frame preambles"
+          ],
+          "correct": 0,
+          "explanation": "LLC handles flow control, error control, and network protocol identification, while MAC handles physical access and addressing."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 12 (Multiple Access), Section 12.1.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "IEEE Std 802-2014: IEEE Standard for Local and Metropolitan Area Networks: Overview and Architecture.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Multiple_Access.png",
-      "imageCaption": "Figure: IEEE 802 LAN Model: Division of Data Link Layer into LLC (802.2) and MAC (802.3/802.11) Sublayers."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Multiple_Access.png",
-    "imageCaption": "Figure: IEEE 802 LAN Model: Division of Data Link Layer into LLC (802.2) and MAC (802.3/802.11) Sublayers."
+      ]
+    }
   },
   "u2-need-for-mac-sublayer": {
     "id": "u2-need-for-mac-sublayer",
     "title": "Need for MAC Sublayer",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "level": "Beginner",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "Tanenbaum Ch. 4.1",
-    "oneLiner": "Why multiaccess broadcast links require coordinated medium access arbitration to avoid destructive collisions.",
-    "quickAnswer": "In point-to-point links with only two dedicated endpoints, no contention exists. However, in broadcast networks where multiple stations share a single wire or radio channel, simultaneous transmissions interfere and garble signals. The MAC sublayer is needed to coordinate channel access.",
-    "whyItMatters": "Without a MAC sublayer, shared channels like Ethernet and Wi-Fi would suffer constant packet collisions, rendering data transmission completely impossible.",
+    "topicNumber": 3,
+    "subtopicNumber": 2,
+    "whyItMatters": "Without medium access control, multiple transmitting stations on a shared medium produce simultaneous overlapping signals that interfere destructively, rendering all transmitted data completely undecodable.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "u2-mac-sublayer-intro",
+        "meaning": "Definition of MAC sublayer and IEEE 802 sublayer division"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Signal Collisions",
+        "meaning": "Destructive electrical/radio interference caused by simultaneous transmissions"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Analyze why shared transmission media require explicit access control rules.",
+      "Walk through the classic 5-computer collision scenario on a shared bus cable.",
+      "Explain what a collision is physically and why corrupted frames must be discarded.",
+      "Identify how MAC procedures coordinate access to maximize useful throughput."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layer 2 (MAC Sublayer)",
+      "standard": "IEEE 802.3 / IEEE 802.11",
+      "type": "Contention & Collision Rationale",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-mac-sublayer-intro"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "channel-allocation",
+        "u2-mac-functions-responsibilities",
+        "csma-protocols"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "u2-mac-sublayer-intro"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Preventing data corruption on shared coaxial, twisted-pair hub, and wireless radio networks"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Ethernet-broadcast-collision_%28hub%29.svg",
+    "imageCaption": "Figure: Destructive Signal Collision on a Shared Multi-Drop Cable when Two Stations Transmit Simultaneously.",
     "sections": {
-      "overview": "<p>When multiple computers are attached to a shared broadcast channel, any station transmitting at the same time as another causes electromagnetic signals to overlap, garbling the data in a <strong>collision</strong>. The MAC sublayer implements arbitration protocols to prevent or recover from these collisions.</p>",
-      "eli10": "In simple words: Why multiaccess broadcast links require coordinated medium access arbitration to avoid destructive collisions.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
+      "overview": "\n      <p>The primary reason the <strong>MAC sublayer is strictly required</strong> is the existence of <strong>shared broadcast communication media</strong>.</p>\n      \n      <p>In local area networks (LANs), running a dedicated physical wire between every single pair of computers is prohibitively expensive and topologically impractical. Instead, multiple computers connect to a <strong>single shared transmission cable</strong> or broadcast across a common <strong>radio frequency band</strong>.</p>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">The 5-Computer Collision Scenario</h3>\n      <p>Imagine five computers (Computer 1, 2, 3, 4, and 5) all tapped into the same shared coaxial cable or Wi-Fi channel:</p>\n      <ul class=\"wiki-bullet-list\">\n        <li>If Computer 1 and Computer 3 decide to transmit frames at the exact same instant, both inject electrical voltages or electromagnetic radio waves into the common medium.</li>\n        <li>As the two electrical signals propagate down the wire, they superimpose upon one another according to the laws of wave interference.</li>\n        <li>The resulting voltage waveform exceeds legal signal thresholds and distorts the bit representations. This destructive overlap is called a <strong>collision</strong>.</li>\n        <li>Every station on the wire receives unintelligible noise. The CRC checks fail, and both frames are completely destroyed and discarded.</li>\n      </ul>\n\n      <p class=\"mt-3\">The MAC sublayer is needed to provide <strong>traffic coordination rules</strong> that govern which station may transmit, when it may transmit, and how to detect or avoid simultaneous conflicting transmissions.</p>\n    ",
+      "eli10": "Imagine five kids sharing one walkie-talkie channel. If Kid A and Kid C both hold down their talk buttons and shout at the same time, all the other kids only hear loud screeching noise! They need a rule: 'Listen first to see if anyone is speaking, and if you both start speaking together, stop, wait a few seconds, and try again.' That rule is the MAC sublayer.",
+      "analogy": "A single-lane bridge on a country road: if two cars enter the bridge from opposite sides at full speed, they will crash in the middle. The bridge needs traffic lights, a stop sign, or yield rules (the MAC sublayer) to ensure only one car crosses at a time.",
+      "howItWorks": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Why Uncontrolled Access Collapses Network Performance</h3>\n      <p>If computers transmit whenever they generate data without medium access coordination (pure uncoordinated access):</p>\n      <ol class=\"wiki-ordered-list\">\n        <li><strong>Low Traffic:</strong> When traffic is light, collisions are rare and frames arrive intact.</li>\n        <li><strong>Moderate Traffic:</strong> As more stations become active, the probability of transmission overlap increases exponentially.</li>\n        <li><strong>Heavy Traffic (Congestion Collapse):</strong> When many stations generate frames, virtually every transmission collides with another. Channel utilization plummets toward 0%, and the shared link becomes completely unusable despite maximum physical activity!</li>\n      </ol>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">How the MAC Sublayer Solves This Problem</h3>\n      <p>The MAC sublayer introduces four tiers of coordination mechanisms:</p>\n      <ul class=\"wiki-bullet-list\">\n        <li><strong>Carrier Sensing:</strong> Requires a station to 'listen before talking' to ensure the medium is idle.</li>\n        <li><strong>Collision Detection (CSMA/CD):</strong> Requires transmitting stations to monitor the cable during transmission. If a voltage spike indicates a collision, transmission halts immediately, saving bandwidth.</li>\n        <li><strong>Randomized Backoff:</strong> When a collision occurs, contending stations do not retry immediately; they wait for randomized time periods (Binary Exponential Backoff) to prevent repeating the collision.</li>\n        <li><strong>Collision Avoidance (CSMA/CA):</strong> Uses reservation handshakes (RTS/CTS) and interframe spaces in wireless channels where collision detection is physically impossible.</li>\n      </ul>\n    ",
       "diagram": "",
+      "technicalDetails": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Physical Characteristics of a Cable Collision</h3>\n      <div class=\"p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 text-xs space-y-2\">\n        <p><strong>1. Signal Superposition:</strong> When Station A transmits at $+V$ volts and Station B transmits simultaneously at $+V$ volts, the voltages add linearly at the collision point to produce $approx +2V$ volts.</p>\n        <p><strong>2. Threshold Detection:</strong> In legacy 10BASE5 / 10BASE2 Ethernet, the transceiver's collision detection circuitry detects when the average DC voltage on the coaxial cable exceeds $-1.5\\text{ V}$ (active signal is typically $-1.0\\text{ V}$ to $-0.2\\text{ V}$).</p>\n        <p><strong>3. Jam Signal:</strong> The detecting station immediately broadcasts a 32-bit to 48-bit <em>Jam Signal</em> to ensure all other stations on the bus observe the collision and discard their partial frames.</p>\n      </div>\n    ",
       "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Need for MAC Sublayer?<br><br><strong>Answer:</strong> In point-to-point links with only two dedicated endpoints, no contention exists. However, in broadcast networks where multiple stations share a single wire or radio channel, simultaneous transmissions interfere and garble signals. The MAC sublayer is needed to coordinate channel access.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
+        "level1": "<strong>Question:</strong> What is a packet collision in a computer network, and why does it occur?<br><br><strong>Answer:</strong> A collision occurs when two or more stations connected to a shared communication medium transmit frames at the same time. The signals physically overlap on the medium, interfering destructively with each other and corrupting the data in both frames.",
+        "level2": "<strong>Problem:</strong> Explain why a shared Ethernet network with a multiport hub requires a MAC sublayer protocol, whereas a network with a modern Ethernet switch does not suffer from collisions.<br><br><strong>Answer:</strong> A hub is a simple Layer 1 device that electrically connects all incoming wires into one single shared collision domain; if two stations transmit to the hub simultaneously, their electrical signals collide on the shared bus. A modern switch is a Layer 2 device that buffers frames in memory and creates dedicated point-to-point micro-segments on each port, eliminating collisions entirely in full-duplex mode.",
+        "level3": "<strong>Analysis:</strong> If $N$ stations share a broadcast cable and each station transmits with probability $p$ in a given time slot, what is the probability of a successful transmission without collisions?<br><br><strong>Answer:</strong> A transmission is successful if exactly one station transmits and all other $N-1$ stations remain silent. The probability is $P(\\text{success}) = N \\cdot p \\cdot (1 - p)^{N-1}$. Without MAC coordination, as $N$ grows large, $P(\\text{success})$ drops dramatically unless $p$ is scaled down dynamically (such as through exponential backoff)."
       },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Scenario</th>\n            <th>Collision Behavior</th>\n            <th>Resulting Network Health</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td><strong>Uncontrolled Transmission</strong></td>\n            <td>Stations transmit blindly; frequent overlapping.</td>\n            <td>Catastrophic throughput collapse under moderate load.</td>\n          </tr>\n          <tr>\n            <td><strong>MAC Sublayer Coordination</strong></td>\n            <td>Stations sense channel, back off randomly, or use scheduled turns.</td>\n            <td>Bounded contention, equitable fairness, and high sustainable throughput.</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Shared coaxial Ethernet installations (10BASE5 / 10BASE2).",
+        "Ethernet networks operating with legacy multiport repeating hubs.",
+        "All IEEE 802.11 Wi-Fi networks sharing unlicensed 2.4 GHz, 5 GHz, and 6 GHz spectrum."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Need for MAC Sublayer?",
+          "question": "What happens when two stations transmit at the same time on a shared communication cable?",
           "options": [
-            "In point-to-point links with only two dedicated endpoints, n...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "Their signals interfere destructively, causing a collision that corrupts both frames",
+            "The cable automatically speeds up to deliver both frames in parallel",
+            "The second frame is safely buffered inside the physical copper wire",
+            "One frame is automatically converted into an acknowledgement"
           ],
           "correct": 0,
-          "explanation": "The primary role is: In point-to-point links with only two dedicated endpoints, no contention exists. However, in broadcast networks where multiple stations share a single wire or radio channel, simultaneous transmissions interfere and garble signals. The MAC sublayer is needed to coordinate channel access."
+          "explanation": "Simultaneous transmissions produce overlapping electrical signals (a collision) that corrupt the bits of all transmitted frames."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
-          "url": ""
-        },
-        {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 12, Section 12.1.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Multiple_Access.png",
-      "imageCaption": "Figure: Shared Broadcast Medium Arbitration: Why Broadcast Channels Require Medium Access Control."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Multiple_Access.png",
-    "imageCaption": "Figure: Shared Broadcast Medium Arbitration: Why Broadcast Channels Require Medium Access Control."
+      ]
+    }
   },
   "u2-mac-functions-responsibilities": {
     "id": "u2-mac-functions-responsibilities",
     "title": "Functions and Responsibilities of MAC Sublayer",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "IEEE 802 / Tanenbaum Ch. 4",
-    "oneLiner": "Media arbitration, physical MAC addressing, frame delimiting, and error detection at the hardware layer.",
-    "quickAnswer": "The MAC sublayer handles: (1) Medium access arbitration (ALOHA, CSMA/CD, CSMA/CA, token passing), (2) Physical MAC addressing (source & destination 48-bit addresses), (3) Frame assembly & disassembly (preamble, SFD, FCS), and (4) Frame check sequence error detection.",
-    "whyItMatters": "The MAC sublayer represents the bridge where software protocols meet physical transceiver silicon.",
+    "topicNumber": 3,
+    "subtopicNumber": 3,
+    "whyItMatters": "The MAC sublayer bridges high-level network packets with raw physical transmission. Its six core functions—ranging from 48-bit hardware addressing to collision recovery—form the technical bedrock of all LAN and WLAN standards.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "u2-need-for-mac-sublayer",
+        "meaning": "Why shared media require collision coordination"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "MAC Address Format",
+        "meaning": "48-bit globally unique hardware identifier (EUI-48)"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Enumerate and explain the 6 main operational functions of the MAC sublayer.",
+      "Master the 5-point comparison between the Logical Link Control (LLC) and MAC sublayers.",
+      "Understand the structure and purpose of physical MAC addressing.",
+      "Detail how the MAC sublayer handles frame preparation, error checking, and collision recovery."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layer 2 (MAC Sublayer)",
+      "standard": "IEEE 802.1 / IEEE 802.3 / IEEE 802.11",
+      "type": "Sublayer Functional Specification",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-mac-sublayer-intro",
+        "u2-need-for-mac-sublayer"
       ],
       "relatedConcepts": [
-        "framing",
+        "channel-allocation",
         "mac-address",
-        "error-detection"
+        "framing"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "u2-mac-sublayer-intro"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "LAN frame parsing, physical device identification, access scheduling"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/13/Ethernet_Type_II_Frame_format.svg",
+    "imageCaption": "Figure: Ethernet MAC Frame Structure showing Destination & Source MAC Addresses and FCS Trailer.",
     "sections": {
-      "overview": "<p>The MAC sublayer is responsible for physical frame encapsulation, appending 48-bit hardware MAC addresses, computing CRC-32 checksums, and executing channel allocation algorithms that dictate when the hardware transceiver is permitted to transmit.</p>",
-      "eli10": "In simple words: Media arbitration, physical MAC addressing, frame delimiting, and error detection at the hardware layer.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
+      "overview": "\n      <p>The <strong>Medium Access Control (MAC) sublayer</strong> is entrusted with six fundamental operational responsibilities that ensure reliable, orderly, and collision-free communication over shared physical media.</p>\n      \n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">The Six Core Functions of the MAC Sublayer</h3>\n      <ol class=\"wiki-ordered-list\">\n        <li><strong>Physical Hardware Addressing:</strong> Assigns and checks 48-bit globally unique physical addresses (MAC addresses, e.g., <code>00:1A:2B:3C:4D:5E</code>) burned into each device's Network Interface Card (NIC) to identify source and destination stations on the local network.</li>\n        <li><strong>Medium Access Control:</strong> Governs channel access protocol rules to determine exactly when a device is permitted to transmit its data onto the shared medium.</li>\n        <li><strong>Frame Handling & Delimiting:</strong> Constructs outgoing frames by attaching preambles, start frame delimiters, address headers, and FCS trailers, and disassembles incoming bitstreams back into frames.</li>\n        <li><strong>Collision Handling & Recovery:</strong> Executes channel access algorithms (such as CSMA/CD or CSMA/CA) to detect collisions, transmit jam signals, and schedule randomized backoff retransmissions.</li>\n        <li><strong>Transmission Coordination:</strong> Coordinates multiple competing devices sharing the same channel to maintain fair access opportunities and prevent channel starvation.</li>\n        <li><strong>Access Management:</strong> Enforces access priorities, quality-of-service parameters, and adherence to physical medium standards.</li>\n      </ol>\n    ",
+      "eli10": "Think of the MAC sublayer as a mailroom clerk who: (1) stamps the recipient's exact room number on the envelope, (2) puts the letter into an official envelope with a wax seal, (3) checks through the door to see if the hallway is clear, (4) jumps back if someone else walks through at the same time, and (5) makes sure everyone takes turns using the mail chute.",
+      "analogy": "Like a traffic roundabout controller: assigning license plate identification to vehicles, enforcing right-of-way rules before entering the circle, and managing vehicle merges safely.",
+      "howItWorks": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">LLC Sublayer vs. MAC Sublayer: Comprehensive Comparison</h3>\n      <p>According to <em>Behrouz A. Forouzan</em> and the <em>IEEE 802 model</em>, the two sublayers of the Data Link Layer divide responsibilities as follows:</p>\n      \n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Comparative Feature</th>\n            <th>LLC Sublayer (Logical Link Control)</th>\n            <th>MAC Sublayer (Medium Access Control)</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td><strong>Full Form</strong></td>\n            <td>Logical Link Control</td>\n            <td>Medium Access Control</td>\n          </tr>\n          <tr>\n            <td><strong>Position in DLL</strong></td>\n            <td>Upper sublayer (interfaces with Network Layer)</td>\n            <td>Lower sublayer (interfaces directly with Physical Layer)</td>\n          </tr>\n          <tr>\n            <td><strong>Main Responsibility</strong></td>\n            <td>Data-link control functions independent of physical media</td>\n            <td>Arbitrating and controlling access to the shared medium</td>\n          </tr>\n          <tr>\n            <td><strong>Core Concerns</strong></td>\n            <td>Flow control, error control, packet sequencing</td>\n            <td>Transmission access, collision handling, framing</td>\n          </tr>\n          <tr>\n            <td><strong>Addressing Used</strong></td>\n            <td>Identifies network-layer protocol (SAP / EtherType)</td>\n            <td>Uses 48-bit physical MAC addresses (EUI-48)</td>\n          </tr>\n          <tr>\n            <td><strong>Governing Standard</strong></td>\n            <td>IEEE 802.2 standard</td>\n            <td>IEEE 802.3 (Ethernet), 802.11 (Wi-Fi), 802.15 (Bluetooth)</td>\n          </tr>\n        </tbody>\n      </table>\n      \n      <div class=\"wiki-callout note mt-4\">\n        <div class=\"callout-header font-bold text-blue-800 dark:text-blue-300\">💡 Important IEEE 802 Architectural Takeaway</div>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">LLC and MAC together form the complete Data Link Layer. LLC provides a uniform, standardized software interface to Layer 3, while MAC provides the media-specific hardware drivers that adapt to different cables and wireless frequencies.</p>\n      </div>\n    ",
       "diagram": "",
+      "technicalDetails": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">MAC Physical Addressing Details</h3>\n      <p>A standard MAC address consists of 48 bits (6 octets), usually written in hexadecimal format (e.g., <code>00:1B:44:11:3A:B7</code>):</p>\n      <ul class=\"wiki-bullet-list\">\n        <li><strong>Organizationally Unique Identifier (OUI):</strong> The first 24 bits (3 octets) identify the hardware manufacturer (assigned by IEEE, e.g., Cisco, Intel, Apple).</li>\n        <li><strong>Network Interface Controller Specific:</strong> The last 24 bits (3 octets) are assigned uniquely by the vendor to that specific network chip.</li>\n        <li><strong>Unicast vs. Multicast Bit:</strong> The least significant bit of the first octet determines if the address is Unicast (0) or Multicast (1). Broadcast is all 1s (<code>FF:FF:FF:FF:FF:FF</code>).</li>\n      </ul>\n    ",
       "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Functions and Responsibilities of MAC Sublayer?<br><br><strong>Answer:</strong> The MAC sublayer handles: (1) Medium access arbitration (ALOHA, CSMA/CD, CSMA/CA, token passing), (2) Physical MAC addressing (source & destination 48-bit addresses), (3) Frame assembly & disassembly (preamble, SFD, FCS), and (4) Frame check sequence error detection.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
+        "level1": "<strong>Question:</strong> State four primary functions performed by the MAC sublayer.<br><br><strong>Answer:</strong> 1. Physical addressing (MAC addresses). 2. Medium access control (deciding when a node can transmit). 3. Frame handling and delimiting (preamble, headers, FCS). 4. Collision detection and recovery.",
+        "level2": "<strong>Problem:</strong> Contrast how addressing is handled in the LLC sublayer versus the MAC sublayer.<br><br><strong>Answer:</strong> The LLC sublayer uses <strong>Service Access Points (SAPs)</strong> or EtherType fields to identify which Layer 3 protocol (e.g., IPv4, IPv6, ARP) generated the payload. The MAC sublayer uses <strong>48-bit physical MAC addresses</strong> to identify the hardware sender and recipient stations on the local physical link.",
+        "level3": "<strong>Analysis:</strong> Why did the IEEE 802 committee choose to split the Data Link Layer into two sublayers rather than keeping it as a single unified layer like in the original OSI 7-layer model?<br><br><strong>Answer:</strong> In the original OSI model, Layer 2 was conceived primarily for point-to-point connections. When local area networks emerged with diverse media (coaxial bus, star twisted-pair, token ring, wireless), having a single layer required rewriting flow and error control for every physical variant. Splitting Layer 2 into LLC (media-independent) and MAC (media-specific) allowed one unified LLC to run seamlessly over many interchangeable MAC implementations."
       },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Sublayer Component</th>\n            <th>Primary Benefit</th>\n            <th>Hardware Dependency</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td><strong>LLC (Upper)</strong></td>\n            <td>Hardware-agnostic; presents uniform interface to IP layer.</td>\n            <td>Purely software / firmware based.</td>\n          </tr>\n          <tr>\n            <td><strong>MAC (Lower)</strong></td>\n            <td>Tightly optimized for specific physical media characteristics.</td>\n            <td>Implemented directly on NIC hardware and ASIC controllers.</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Ethernet controllers implementing IEEE 802.3 MAC framing.",
+        "Wireless Network Interface Controllers (WNICs) managing IEEE 802.11 MAC states.",
+        "Embedded microcontrollers with integrated Ethernet MAC blocks."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Functions and Responsibilities of MAC Sublayer?",
+          "question": "Which of the following is NOT a primary responsibility of the MAC sublayer?",
           "options": [
-            "The MAC sublayer handles: (1) Medium access arbitration (ALO...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "Routing packets across multiple autonomous internetworks",
+            "Physical addressing using 48-bit MAC addresses",
+            "Controlling when a device can transmit on a shared medium",
+            "Handling collisions and backoff timing"
           ],
           "correct": 0,
-          "explanation": "The primary role is: The MAC sublayer handles: (1) Medium access arbitration (ALOHA, CSMA/CD, CSMA/CA, token passing), (2) Physical MAC addressing (source & destination 48-bit addresses), (3) Frame assembly & disassembly (preamble, SFD, FCS), and (4) Frame check sequence error detection."
+          "explanation": "Routing packets across multiple internetworks is the responsibility of the Network Layer (Layer 3), not the MAC sublayer."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 12.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "IEEE 802 Overview and Architecture Specification.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Multiple_Access.png",
-      "imageCaption": "Figure: Functions of MAC Sublayer: Frame Delimitation, Addressing, Contention Resolution, and Error Detection."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Multiple_Access.png",
-    "imageCaption": "Figure: Functions of MAC Sublayer: Frame Delimitation, Addressing, Contention Resolution, and Error Detection."
+      ]
+    }
   },
   "u2-fdma": {
     "id": "u2-fdma",
     "title": "Frequency Division Multiple Access (FDMA)",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "Forouzan Ch. 12 / Kurose & Ross Ch. 5",
-    "oneLiner": "Static channel allocation dividing the total frequency band into dedicated, non-overlapping frequency sub-bands.",
-    "quickAnswer": "FDMA is a channelization technique where the available transmission frequency band is divided into distinct frequency channels. Each station is allocated a dedicated frequency band for the entire duration of transmission, separated by guard bands to prevent crosstalk.",
-    "whyItMatters": "FDMA is foundational in radio broadcasting, 1G analog cellular networks, satellite uplinks/downlinks, and cable TV networks.",
+    "topicNumber": 3,
+    "subtopicNumber": 5,
+    "whyItMatters": "FDMA is the foundational frequency-based static channelization technique. By subdividing total spectrum into distinct non-overlapping frequency bands, it allows stations to transmit continuously without mutual interference.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "channel-allocation",
+        "meaning": "Static channel allocation concept"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Frequency Spectrum",
+        "meaning": "Electromagnetic carrier frequencies and bandwidth in Hertz"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define Frequency Division Multiple Access (FDMA) and explain its working principle.",
+      "Solve bandwidth allocation numerical problems using $B_{\\text{station}} = B_{\\text{total}} / N$.",
+      "Calculate unused allocated bandwidth when stations are inactive.",
+      "Explain the role and overhead of guard bands in preventing adjacent channel interference."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layer 2 (Channelization MAC) / Layer 1 (Physical)",
+      "standard": "ITU-R / 1G Cellular (AMPS) / Satellite Transponders",
+      "type": "Frequency Channelization Protocol",
       "prerequisites": [
-        "u2-dll-intro"
+        "channel-allocation"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "u2-tdma",
+        "u2-static-vs-dynamic-channel-allocation"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "u2-tdma"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Traditional AM/FM radio broadcasting, cable TV frequency multiplexing, 1G analog cellular"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/79/FDMA.PNG",
+    "imageCaption": "Figure: Frequency Division Multiple Access (FDMA) Spectral Allocation showing Guard Bands.",
     "sections": {
-      "overview": "<p>In <strong>Frequency Division Multiple Access (FDMA)</strong>, the total available frequency bandwidth is split into $N$ distinct frequency channels. Each communicating pair is assigned an exclusive channel, completely eliminating transmission collisions.</p>",
-      "eli10": "In simple words: Static channel allocation dividing the total frequency band into dedicated, non-overlapping frequency sub-bands.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
+      "overview": "\n      <p>In <strong>Frequency Division Multiple Access (FDMA)</strong>, the total available frequency bandwidth of the communication channel is divided into separate, non-overlapping frequency bands. Each communicating station is assigned a specific frequency band for its exclusive use.</p>\n      \n      <p>According to <em>Behrouz A. Forouzan (Chapter 12, Section 12.3.1)</em>, FDMA is a channelization technique where all stations can transmit <strong>simultaneously</strong> and <strong>continuously</strong> because each station transmits on a completely different carrier frequency.</p>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Step-by-Step Working Principle</h3>\n      <ol class=\"wiki-ordered-list\">\n        <li>The total available frequency range (bandwidth $B_{\\text{total}}$) is identified.</li>\n        <li>The bandwidth is sliced into distinct frequency bands (channels).</li>\n        <li>Each station is assigned its dedicated frequency band in advance.</li>\n        <li>Stations transmit signals using bandpass filters centered on their assigned carrier frequencies.</li>\n        <li>Multiple stations transmit simultaneously without time coordination.</li>\n        <li>Unused frequency allocations remain idle even when other active stations need more bandwidth.</li>\n      </ol>\n    ",
+      "eli10": "Imagine a multi-lane highway where each car is assigned its own permanent lane. Car A can only drive in Lane 1, Car B in Lane 2, and Car C in Lane 3. They can all drive at the exact same time without crashing because they never cross into each other's lanes!",
+      "analogy": "Commercial radio broadcasting: Station A broadcasts on 91.1 MHz, Station B on 93.5 MHz, and Station C on 98.3 MHz. You can tune your radio to any station without them interfering with each other.",
+      "howItWorks": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Numerical Example: 100 MHz Shared by 5 Stations</h3>\n      <p>Suppose a communication channel has a total bandwidth of 100 MHz and five stations (A, B, C, D, E) share it equally:</p>\n      <div class=\"p-3 my-2 bg-slate-100 dark:bg-slate-800 rounded font-mono text-xs text-center\">\n        $$B_{\\text{station}} = \\frac{B_{\\text{total}}}{N} = \\frac{100\\text{ MHz}}{5} = 20\\text{ MHz per station}$$\n      </div>\n      <table class=\"wiki-table\">\n        <thead><tr><th>Station</th><th>Assigned Frequency Band</th><th>Allocated Bandwidth</th></tr></thead>\n        <tbody>\n          <tr><td><strong>Station A</strong></td><td>0 MHz – 20 MHz</td><td>20 MHz</td></tr>\n          <tr><td><strong>Station B</strong></td><td>20 MHz – 40 MHz</td><td>20 MHz</td></tr>\n          <tr><td><strong>Station C</strong></td><td>40 MHz – 60 MHz</td><td>20 MHz</td></tr>\n          <tr><td><strong>Station D</strong></td><td>60 MHz – 80 MHz</td><td>20 MHz</td></tr>\n          <tr><td><strong>Station E</strong></td><td>80 MHz – 100 MHz</td><td>20 MHz</td></tr>\n        </tbody>\n      </table>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2\"><strong>The Static Inefficiency:</strong> Even if Station A has zero data to transmit, its 20 MHz frequency band remains completely idle. Station C, which might have huge video files waiting, cannot use Station A's empty 20 MHz!</p>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">The Necessity of Guard Bands</h3>\n      <p>In physical hardware, analog bandpass filters cannot have infinitely sharp vertical cutoffs. To prevent signals from bleeding into neighboring channels (adjacent-channel cross-talk), narrow unused frequency gaps called <strong>Guard Bands</strong> must be inserted between adjacent bands, introducing unavoidable spectral overhead.</p>\n    ",
       "diagram": "",
+      "technicalDetails": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">FDMA Mathematical Allocation Formulas</h3>\n      <div class=\"p-3 my-2 bg-slate-100 dark:bg-slate-800 rounded font-mono text-xs text-center\">\n        $$B_{\\text{station}} = \\frac{B_{\\text{total}} - (N - 1) \\cdot B_{\\text{guard}}}{N}$$\n      </div>\n      <p class=\"text-xs text-gray-600 dark:text-gray-400 mt-2\">When guard bands are neglected, the formula simplifies to the standard textbook relation: $B_{\\text{station}} = \\frac{B_{\\text{total}}}{N}$.</p>\n    ",
       "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Frequency Division Multiple Access (FDMA)?<br><br><strong>Answer:</strong> FDMA is a channelization technique where the available transmission frequency band is divided into distinct frequency channels. Each station is allocated a dedicated frequency band for the entire duration of transmission, separated by guard bands to prevent crosstalk.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
+        "level1": "<strong>Problem 1 (From PDF Section 8):</strong> A channel has a bandwidth of 120 MHz and is shared equally among six stations using static allocation. Find the bandwidth allocated to each station.<br><br><strong>Given:</strong> $B_{\\text{total}} = 120\\text{ MHz}$, $N = 6$ stations.<br><strong>Formula:</strong> $B_{\\text{station}} = \\frac{B_{\\text{total}}}{N}$<br><strong>Calculation:</strong> $B_{\\text{station}} = \\frac{120}{6} = 20\\text{ MHz}$.<br><strong>Answer:</strong> 20 MHz per station.",
+        "level2": "<strong>Problem 2 (From PDF Section 8):</strong> A 100 MHz channel is divided equally among five stations using static allocation. Only three stations are actively using their allocated bandwidth. Find the allocated bandwidth that is currently unused.<br><br><strong>Step 1:</strong> Bandwidth per station = $\\frac{100}{5} = 20\\text{ MHz}$.<br><strong>Step 2:</strong> Inactive stations = $5 - 3 = 2$ stations.<br><strong>Step 3:</strong> Unused allocated bandwidth = $2 \\times 20\\text{ MHz} = 40\\text{ MHz}$.<br><strong>Answer:</strong> 40 MHz of bandwidth is completely wasted.",
+        "level3": "<strong>Analysis:</strong> Why does FDMA require analog bandpass filters and RF tuning circuits at each station?<br><br><strong>Answer:</strong> Because all stations transmit simultaneously onto the same physical medium, a receiver must use an analog bandpass filter tuned specifically to the carrier frequency of the desired station to block all other concurrent station frequencies, preventing adjacent-channel interference."
       },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Advantages</th>\n            <th>Disadvantages</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td><strong>Simplicity:</strong> Simple resource allocation; no complex coordination software needed.</td>\n            <td><strong>Bandwidth Waste:</strong> Unused frequency bands cannot be shared or reallocated dynamically.</td>\n          </tr>\n          <tr>\n            <td><strong>Simultaneous Transmission:</strong> Stations transmit continuously without time-slot synchronization.</td>\n            <td><strong>Guard Band Overhead:</strong> Guard bands consume spectral capacity without carrying data.</td>\n          </tr>\n          <tr>\n            <td><strong>Zero Collisions:</strong> Different frequencies physically cannot collide.</td>\n            <td><strong>Hardware Cost:</strong> Requires dedicated analog RF filters and frequency synthesizers.</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Traditional AM and FM radio broadcasting stations.",
+        "Analog cable television systems (frequency channel frequency multiplexing).",
+        "First-generation (1G) cellular networks (AMPS standard)."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Frequency Division Multiple Access (FDMA)?",
+          "question": "Which multiple access technique divides the communication channel into separate frequency bands?",
           "options": [
-            "FDMA is a channelization technique where the available trans...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "FDMA (Frequency Division Multiple Access)",
+            "TDMA (Time Division Multiple Access)",
+            "CSMA/CD",
+            "Pure ALOHA"
           ],
           "correct": 0,
-          "explanation": "The primary role is: FDMA is a channelization technique where the available transmission frequency band is divided into distinct frequency channels. Each station is allocated a dedicated frequency band for the entire duration of transmission, separated by guard bands to prevent crosstalk."
+          "explanation": "FDMA divides the total channel bandwidth into dedicated frequency bands assigned to each station."
+        },
+        {
+          "question": "What is the purpose of guard bands in FDMA?",
+          "options": [
+            "To prevent interference between adjacent frequency channels",
+            "To synchronize clocks between transmitting stations",
+            "To carry error-checking checksums",
+            "To boost the physical signal voltage"
+          ],
+          "correct": 0,
+          "explanation": "Guard bands are narrow unused frequency intervals placed between adjacent channels to prevent cross-talk and interference."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
-          "url": ""
-        },
-        {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 12, Section 12.3.1 (FDMA).",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/79/FDMA.PNG",
-      "imageCaption": "Figure: Frequency Division Multiple Access (FDMA): Dedicated Frequency Bands with Guard Bands."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/79/FDMA.PNG",
-    "imageCaption": "Figure: Frequency Division Multiple Access (FDMA): Dedicated Frequency Bands with Guard Bands."
+      ]
+    }
   },
   "u2-tdma": {
     "id": "u2-tdma",
     "title": "Time Division Multiple Access (TDMA)",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "Forouzan Ch. 12 / Tanenbaum Ch. 4",
-    "oneLiner": "Static channel allocation where stations share the entire frequency band by taking turns in dedicated time slots.",
-    "quickAnswer": "TDMA divides transmission time into discrete recurring frames, each composed of a fixed number of synchronized time slots. Each station is assigned an exclusive slot in every frame, transmitting at the full channel data rate during its slot.",
-    "whyItMatters": "TDMA powered 2G GSM cellular telephony worldwide and remains essential in satellite communication and military tactical data links.",
+    "topicNumber": 3,
+    "subtopicNumber": 6,
+    "whyItMatters": "TDMA divides the time domain into recurring frames and slots. By allowing stations to transmit sequentially on the entire bandwidth, it eliminates the need for expensive analog RF filters while guaranteeing predictable access.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "u2-fdma",
+        "meaning": "FDMA frequency division and static allocation"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Clock Synchronization",
+        "meaning": "Microsecond timing coordination across distributed nodes"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define Time Division Multiple Access (TDMA) and explain how repeating frames and time slots work.",
+      "Solve TDMA slot allocation numerical problems.",
+      "Compare the hardware implementation of TDMA vs. FDMA.",
+      "Identify why timing synchronization and guard times are critical in TDMA systems."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layer 2 (Channelization MAC)",
+      "standard": "ITU-T / 2G Cellular (GSM) / IEEE 802.16 (WiMAX)",
+      "type": "Time-Slot Channelization Protocol",
       "prerequisites": [
-        "u2-dll-intro"
+        "channel-allocation",
+        "u2-fdma"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "u2-fdma",
+        "u2-static-vs-dynamic-channel-allocation"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "u2-fdma"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "2G GSM digital cellular telephony, satellite TDMA uplink terminals"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/29/Tdma.PNG",
+    "imageCaption": "Figure: Time Division Multiple Access (TDMA) Frame Structure showing Repeating Slots.",
     "sections": {
-      "overview": "<p>In <strong>Time Division Multiple Access (TDMA)</strong>, all stations share the entire transmission frequency spectrum, but access is divided temporally into repeating round-robin time slots. Guard times between slots prevent clock drift interference.</p>",
-      "eli10": "In simple words: Static channel allocation where stations share the entire frequency band by taking turns in dedicated time slots.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
+      "overview": "\n      <p>In <strong>Time Division Multiple Access (TDMA)</strong>, the entire bandwidth of the communication channel is shared by all stations, but access is divided in the <strong>time domain</strong> into recurring time slots.</p>\n      \n      <p>According to <em>Forouzan (Section 12.3.2)</em>, time is divided into repeating <strong>frames</strong>, and each frame is subdivided into a fixed number of <strong>time slots</strong>. Each station is assigned one or more specific time slots in which it is permitted to transmit using the <strong>full bandwidth</strong> of the channel.</p>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Step-by-Step Working Principle</h3>\n      <ol class=\"wiki-ordered-list\">\n        <li>Time on the communication channel is divided into continuous repeating cycles called <strong>frames</strong>.</li>\n        <li>Each frame contains a predetermined number of distinct <strong>time slots</strong>.</li>\n        <li>Each station receives an assigned time slot in which it is authorized to transmit.</li>\n        <li>During its allocated time slot, a station transmits at full channel data rate.</li>\n        <li>When its time slot ends, the station halts transmission and waits for its turn in the next recurring frame.</li>\n      </ol>\n    ",
+      "eli10": "Imagine 4 students sharing one microphone. Instead of 4 different microphones, they share one microphone by taking turns: Student 1 speaks for 10 seconds, then Student 2 speaks for 10 seconds, then Student 3, then Student 4. Then the cycle repeats from Student 1 again!",
+      "analogy": "A circular turnstile or revolving door: only one person can step through a compartment at a time, but the door keeps spinning so everyone gets a turn in regular order.",
+      "howItWorks": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">TDMA Frame Example (4 Stations)</h3>\n      <p>Suppose four stations (Station A, B, C, and D) share a single channel using a repeating 4-slot frame structure:</p>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 text-xs font-mono space-y-1\">\n        <p class=\"font-bold text-blue-600 dark:text-blue-400\">Frame 1: [ Slot 1: Station A ] [ Slot 2: Station B ] [ Slot 3: Station C ] [ Slot 4: Station D ]</p>\n        <p class=\"font-bold text-emerald-600 dark:text-emerald-400\">Frame 2: [ Slot 1: Station A ] [ Slot 2: Station B ] [ Slot 3: Station C ] [ Slot 4: Station D ]</p>\n        <p class=\"font-bold text-purple-600 dark:text-purple-400\">Frame 3: [ Slot 1: Station A ] [ Slot 2: Station B ] [ Slot 3: Station C ] [ Slot 4: Station D ]</p>\n      </div>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2\">During Slot 1, only Station A can transmit. Stations B, C, and D must remain silent. Even if Station B has urgent data, it must wait until Slot 2 begins.</p>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">The Critical Need for Timing Synchronization & Guard Times</h3>\n      <p>Because stations are located at different physical distances from the receiver, their signals take different propagation times ($t_{\\text{prop}} = d/v$) to arrive. If clocks drift by even a few microseconds, a transmission from Station A may bleed into Station B's slot, causing a collision! To prevent this:</p>\n      <ul class=\"wiki-bullet-list\">\n        <li>Stations maintain precise network clock synchronization (via GPS or base station beacon broadcasts).</li>\n        <li>Small buffer intervals called <strong>Guard Times</strong> are inserted between consecutive time slots.</li>\n      </ul>\n    ",
       "diagram": "",
+      "technicalDetails": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">TDMA Slot Calculation Formulas</h3>\n      <div class=\"p-3 my-2 bg-slate-100 dark:bg-slate-800 rounded font-mono text-xs text-center\">\n        $$\\text{Slots per station} = \\frac{\\text{Total time slots in frame}}{\\text{Number of stations sharing frame}}$$\n      </div>\n    ",
       "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Time Division Multiple Access (TDMA)?<br><br><strong>Answer:</strong> TDMA divides transmission time into discrete recurring frames, each composed of a fixed number of synchronized time slots. Each station is assigned an exclusive slot in every frame, transmitting at the full channel data rate during its slot.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
+        "level1": "<strong>Problem 3 (From PDF Section 8):</strong> A TDMA system has 8 time slots in each frame. If 4 stations share the slots equally, how many slots does each station receive?<br><br><strong>Given:</strong> Total time slots = 8, Number of stations = 4.<br><strong>Calculation:</strong> $\\frac{8}{4} = 2$ slots per station.<br><strong>Answer:</strong> Each station receives 2 slots per frame.",
+        "level2": "<strong>Problem:</strong> In a GSM digital cellular system, each RF carrier has a bandwidth of 200 kHz and uses a TDMA frame with 8 time slots. If each slot lasts 577 $\\mu$s, calculate the duration of one complete TDMA frame.<br><br><strong>Answer:</strong> Frame duration $T_{\\text{frame}} = 8 \\times 577\\ \\mu\\text{s} = 4.616\\text{ ms}$. Every active mobile phone transmits a burst of data once every 4.616 ms.",
+        "level3": "<strong>Analysis:</strong> Contrast the hardware complexity of TDMA versus FDMA.<br><br><strong>Answer:</strong> FDMA requires expensive, bulky analog bandpass filters and dedicated RF tuning circuits for every frequency channel. TDMA operates on a single carrier frequency and processes digital bitstreams in time, allowing cheap digital DSP hardware to handle multiplexing. However, TDMA demands complex microsecond timing synchronization that FDMA does not require."
       },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Advantages</th>\n            <th>Disadvantages</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td><strong>Full Bandwidth Access:</strong> Each station uses the entire channel bandwidth during its assigned slot.</td>\n            <td><strong>Idle Slot Waste:</strong> If a station has no data, its time slot sits empty and cannot be used by other stations.</td>\n          </tr>\n          <tr>\n            <td><strong>Predictable Latency:</strong> Guarantees a deterministic transmission window in every frame.</td>\n            <td><strong>Strict Synchronization:</strong> Requires precise clock synchronization across all distributed stations.</td>\n          </tr>\n          <tr>\n            <td><strong>Zero Collisions:</strong> No packet collisions occur within assigned time slots.</td>\n            <td><strong>Waiting Delay:</strong> A station must wait for its slot to arrive before it can transmit.</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "2G GSM (Global System for Mobile Communications) cellular standard (8 slots per carrier).",
+        "Satellite TDMA ground stations communicating with orbital transponders.",
+        "Tactical military radio systems (Link 16 network)."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Time Division Multiple Access (TDMA)?",
+          "question": "Which multiple access technique divides channel access into repeating frames and time slots?",
           "options": [
-            "TDMA divides transmission time into discrete recurring frame...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "TDMA (Time Division Multiple Access)",
+            "FDMA (Frequency Division Multiple Access)",
+            "CDMA (Code Division Multiple Access)",
+            "CSMA/CA"
           ],
           "correct": 0,
-          "explanation": "The primary role is: TDMA divides transmission time into discrete recurring frames, each composed of a fixed number of synchronized time slots. Each station is assigned an exclusive slot in every frame, transmitting at the full channel data rate during its slot."
+          "explanation": "TDMA divides time into recurring frames, with each frame partitioned into time slots assigned to stations."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
-          "url": ""
-        },
-        {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 12, Section 12.3.2 (TDMA).",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/29/Tdma.PNG",
-      "imageCaption": "Figure: Time Division Multiple Access (TDMA): Time Slots Partitioned within a Repetitive Frame."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/29/Tdma.PNG",
-    "imageCaption": "Figure: Time Division Multiple Access (TDMA): Time Slots Partitioned within a Repetitive Frame."
+      ]
+    }
   },
   "u2-dynamic-channel-allocation": {
     "id": "u2-dynamic-channel-allocation",
     "title": "Dynamic Channel Allocation",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "Tanenbaum Ch. 4.1",
-    "oneLiner": "On-demand channel allocation algorithms where bandwidth is granted dynamically based on active station traffic.",
-    "quickAnswer": "Dynamic Channel Allocation allocates channel capacity on demand as stations generate traffic. Unlike static allocation where idle channels waste bandwidth, dynamic allocation maximizes efficiency for bursty computer traffic through random access (CSMA) or reservation schemes.",
-    "whyItMatters": "Computer data traffic is inherently bursty (peak-to-average ratio 100:1). Dynamic channel allocation is the foundation of modern Ethernet, Wi-Fi, and the Internet.",
+    "topicNumber": 3,
+    "subtopicNumber": 7,
+    "whyItMatters": "Computer networks generate bursty, asymmetric traffic. Dynamic Channel Allocation assigns bandwidth on demand as packets arrive, allowing active stations to utilize the full channel capacity while avoiding idle waste.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "channel-allocation",
+        "meaning": "Channel allocation problem and static limitations"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Bursty Traffic",
+        "meaning": "Unpredictable bursts of data separated by long idle periods"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define Dynamic Channel Allocation and explain its 5-step working principle.",
+      "Walk through the realistic 5-computer asymmetric traffic scenario from the PDF.",
+      "Enumerate the 5 characteristics, 5 advantages, and 5 disadvantages of dynamic allocation.",
+      "Master the three broad categories in Forouzan Chapter 12: Random Access, Controlled Access, and Channelization."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layer 2 (MAC Sublayer)",
+      "standard": "IEEE 802.3 / IEEE 802.11 / ALOHA / DOCSIS",
+      "type": "Demand-Based Allocation Architecture",
       "prerequisites": [
-        "u2-dll-intro"
+        "channel-allocation",
+        "u2-fdma",
+        "u2-tdma"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "u2-static-vs-dynamic-channel-allocation",
+        "u2-multiple-access-intro"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "u2-static-vs-dynamic-channel-allocation"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Ethernet CSMA/CD, Wi-Fi CSMA/CA, cellular 4G/5G dynamic packet scheduling"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/35/Pure_ALOHA1.svg",
+    "imageCaption": "Figure: Dynamic Channel Allocation via Contention-Based Random Access (Behrouz A. Forouzan).",
     "sections": {
-      "overview": "<p>Because computer network traffic consists of short bursts separated by long idle periods, pre-allocating static slots wastes over 90% of channel capacity. Dynamic channel allocation grants transmission rights dynamically as packets arrive.</p>",
-      "eli10": "In simple words: On-demand channel allocation algorithms where bandwidth is granted dynamically based on active station traffic.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
+      "overview": "\n      <p><strong>Dynamic Channel Allocation</strong> is a method in which communication channel resources are assigned dynamically according to the <strong>current transmission requirements</strong> of the stations.</p>\n      \n      <p>Instead of permanently reserving a fixed frequency band or time slot for every station in advance, the network makes resources available on demand when they are actually needed. Once a station finishes transmitting, the channel immediately becomes available for other stations to use.</p>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">5-Step Working Principle</h3>\n      <ol class=\"wiki-ordered-list\">\n        <li>Stations generate data packets that need to be transmitted.</li>\n        <li>A station requests access or competes for access to the channel, depending on the protocol.</li>\n        <li>The access-control mechanism determines whether and when the station is permitted to transmit.</li>\n        <li>The station uses the channel to transmit its data at high speed.</li>\n        <li>Immediately after transmission completes, the channel resources are released and become available to other stations.</li>\n      </ol>\n    ",
+      "eli10": "Imagine a restaurant with 10 tables. Under static allocation, 10 specific families own a table forever, even if they only eat there once a year! Under dynamic allocation, anyone can walk in, sit down at an empty table to eat, and when they leave, the next hungry customer gets the table immediately.",
+      "analogy": "Public library computers: instead of assigning one computer permanently to each citizen in the city, computers are used on demand. When a user finishes, the next waiting person logs in.",
+      "howItWorks": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">The 5-Computer Traffic Asymmetry Example (From PDF Section 5.3)</h3>\n      <p>Suppose five computers (A, B, C, D, E) share a 100 Mbps communication link:</p>\n      <ul class=\"wiki-bullet-list\">\n        <li><strong>Computer A:</strong> Has a moderate file to transmit.</li>\n        <li><strong>Computer B:</strong> Has zero data (user is reading an email).</li>\n        <li><strong>Computer C:</strong> Has a huge video file to transmit.</li>\n        <li><strong>Computer D:</strong> Is completely inactive (powered off).</li>\n        <li><strong>Computer E:</strong> Has a small text document to transmit.</li>\n      </ul>\n      <p class=\"mt-2\"><strong>Static vs. Dynamic Outcome:</strong> Under static allocation, Computers B and D would hold 40 Mbps of bandwidth completely idle while Computer C chokes on its 20 Mbps slice. Under <strong>dynamic allocation</strong>, Computers A, C, and E share the entire 100 Mbps on demand, maximizing throughput and completing transmissions dramatically faster!</p>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">The Three Broad Categories in Forouzan Chapter 12</h3>\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Multiple Access Category</th>\n            <th>Basic Operational Principle</th>\n            <th>Representative Protocols</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td><strong>1. Random Access (Contention)</strong></td>\n            <td>Stations compete for access; no station is superior. Collisions are possible and handled by backoff algorithms.</td>\n            <td>Pure ALOHA, Slotted ALOHA, CSMA, CSMA/CD (Ethernet), CSMA/CA (Wi-Fi).</td>\n          </tr>\n          <tr>\n            <td><strong>2. Controlled Access (Collision-Free)</strong></td>\n            <td>Stations coordinate explicitly to determine who can transmit; zero collisions occur.</td>\n            <td>Reservation protocols, Centralized Polling, Token Passing (Token Ring).</td>\n          </tr>\n          <tr>\n            <td><strong>3. Channelization</strong></td>\n            <td>Channel capacity is divided by frequency, time, or orthogonal mathematical codes.</td>\n            <td>FDMA (Frequency), TDMA (Time), CDMA (Orthogonal Codes).</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "diagram": "",
+      "technicalDetails": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Characteristics, Advantages & Disadvantages Summary</h3>\n      <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4\">\n        <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 rounded-lg text-xs space-y-1\">\n          <h4 class=\"font-bold text-emerald-900 dark:text-emerald-300\">5 Key Advantages</h4>\n          <p>1. Superior resource utilization when traffic is irregular/bursty.</p>\n          <p>2. Active stations can make use of all available shared resources.</p>\n          <p>3. Zero capacity is wasted on inactive or silent stations.</p>\n          <p>4. Gracefully adapts to changing real-time network traffic loads.</p>\n          <p>5. Drastically improves aggregate network throughput.</p>\n        </div>\n        <div class=\"p-3 bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-800 rounded-lg text-xs space-y-1\">\n          <h4 class=\"font-bold text-rose-900 dark:text-rose-300\">5 Key Disadvantages</h4>\n          <p>1. Access-control mechanisms and algorithms are more complex.</p>\n          <p>2. Stations may experience variable waiting times and jitter.</p>\n          <p>3. Contention-based systems may suffer from packet collisions.</p>\n          <p>4. Performance may decrease when many stations compete simultaneously.</p>\n          <p>5. Scheduling, polling, and token passing introduce control overhead.</p>\n        </div>\n      </div>\n    ",
       "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Dynamic Channel Allocation?<br><br><strong>Answer:</strong> Dynamic Channel Allocation allocates channel capacity on demand as stations generate traffic. Unlike static allocation where idle channels waste bandwidth, dynamic allocation maximizes efficiency for bursty computer traffic through random access (CSMA) or reservation schemes.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
+        "level1": "<strong>Question:</strong> What are the three broad categories of multiple-access protocols explained in Forouzan Chapter 12?<br><br><strong>Answer:</strong> 1. <strong>Random Access</strong> (stations compete; collisions possible, e.g. ALOHA, CSMA). 2. <strong>Controlled Access</strong> (stations coordinate; collision-free, e.g. polling, token passing). 3. <strong>Channelization</strong> (dividing by frequency, time, or code, e.g. FDMA, TDMA, CDMA).",
+        "level2": "<strong>Problem:</strong> Explain how dynamic allocation handles an inactive computer compared to static allocation.<br><br><strong>Answer:</strong> In static allocation, the inactive computer is permanently allocated a slice of bandwidth that sits empty and wasted. In dynamic allocation, the inactive computer consumes zero channel resources, allowing all active computers to utilize the entire channel capacity.",
+        "level3": "<strong>Analysis:</strong> Why does random access dynamic allocation suffer from performance degradation under heavy traffic loads?<br><br><strong>Answer:</strong> In random access systems (like ALOHA or CSMA), as traffic load increases, the number of stations attempting simultaneous transmission surges. This causes the collision rate to skyrocket. Stations spend most of their time aborting, transmitting jam signals, and backing off, leading to throughput collapse."
       },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Traffic Type</th>\n            <th>Static Allocation Performance</th>\n            <th>Dynamic Allocation Performance</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td><strong>Continuous Voice Streams</strong></td>\n            <td>Optimal (dedicated latency, zero overhead).</td>\n            <td>Suboptimal (packet jitter and contention overhead).</td>\n          </tr>\n          <tr>\n            <td><strong>Bursty Web & File Traffic</strong></td>\n            <td>Terrible (massive bandwidth waste on idle nodes).</td>\n            <td>Optimal (full channel speed granted on demand).</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Ethernet networks using CSMA/CD random access.",
+        "Wi-Fi wireless LANs using CSMA/CA with exponential backoff.",
+        "4G LTE and 5G New Radio dynamic packet scheduling (OFDMA)."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Dynamic Channel Allocation?",
+          "question": "Dynamic channel allocation assigns resources mainly according to:",
           "options": [
-            "Dynamic Channel Allocation allocates channel capacity on dem...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "Current transmission demand",
+            "Cable length",
+            "MAC address alphabetical order",
+            "Computer brand name"
           ],
           "correct": 0,
-          "explanation": "The primary role is: Dynamic Channel Allocation allocates channel capacity on demand as stations generate traffic. Unlike static allocation where idle channels waste bandwidth, dynamic allocation maximizes efficiency for bursty computer traffic through random access (CSMA) or reservation schemes."
+          "explanation": "Dynamic channel allocation allocates resources on demand according to the real-time transmission needs of active stations."
+        },
+        {
+          "question": "Which of the following is an example of a controlled access protocol?",
+          "options": [
+            "Polling",
+            "FDMA",
+            "Pure ALOHA",
+            "1-Persistent CSMA"
+          ],
+          "correct": 0,
+          "explanation": "Polling is a controlled access method where a primary station coordinates secondary stations, eliminating collisions."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
-          "url": ""
-        },
-        {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 12 (Multiple Access).",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Multiple_Access.png",
-      "imageCaption": "Figure: Dynamic Channel Allocation in Contention-Based Networks with Bursty Traffic."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Multiple_Access.png",
-    "imageCaption": "Figure: Dynamic Channel Allocation in Contention-Based Networks with Bursty Traffic."
+      ]
+    }
   },
   "u2-static-vs-dynamic-channel-allocation": {
     "id": "u2-static-vs-dynamic-channel-allocation",
     "title": "Static vs Dynamic Channel Allocation",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "Tanenbaum Ch. 4.1 / Forouzan Ch. 12",
-    "oneLiner": "Detailed comparison between static FDM/TDM allocation and dynamic on-demand contention mechanisms.",
-    "quickAnswer": "Static allocation (FDM/TDM) assigns fixed channels to stations regardless of activity, providing guaranteed throughput and zero collisions, but suffers severe delay and wasted bandwidth under bursty loads. Dynamic allocation shares the channel on demand, offering high efficiency for bursty traffic.",
-    "whyItMatters": "Tanenbaum's classic queueing delay formula proves that dividing bandwidth into N subchannels multiplies queueing delay by N under bursty traffic: T_static = N * T_dynamic.",
+    "topicNumber": 3,
+    "subtopicNumber": 8,
+    "whyItMatters": "Comparing static and dynamic channel allocation across all technical dimensions synthesizes the fundamental design choices in computer communications, revealing why modern computer networks rely almost exclusively on dynamic allocation.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "u2-fdma",
+        "meaning": "Static allocation mechanisms (FDMA/TDMA)"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "u2-dynamic-channel-allocation",
+        "meaning": "Dynamic demand-based access and categories"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Master the 8-feature comparative matrix contrasting Static and Dynamic Channel Allocation.",
+      "Understand the classroom computer real-world analogy from Section 6.2 of the PDF.",
+      "Review the master terminology glossary for the MAC sublayer.",
+      "Formulate engineering arguments for selecting between static and dynamic allocation."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layer 2 (MAC Sublayer Architecture)",
+      "standard": "IEEE 802 / Communication Theory Synthesis",
+      "type": "Master Comparative Analysis",
       "prerequisites": [
-        "u2-dll-intro"
+        "channel-allocation",
+        "u2-fdma",
+        "u2-dynamic-channel-allocation"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "channel-allocation",
+        "u2-fdma",
+        "u2-tdma",
+        "u2-dynamic-channel-allocation"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "channel-allocation",
+        "u2-dynamic-channel-allocation"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Curriculum synthesis, network architecture evaluation, university exam mastery"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/79/FDMA.PNG",
+    "imageCaption": "Figure: Comparative Allocation Models: Fixed Frequency Slices vs Dynamic On-Demand Statistical Multiplexing.",
     "sections": {
-      "overview": "<table class=\"wiki-table\"><thead><tr><th>Feature</th><th>Static Allocation (FDM / TDM)</th><th>Dynamic Allocation (Contention / Reservation)</th></tr></thead><tbody><tr><td><strong>Bandwidth Assignment</strong></td><td>Fixed, permanent slices</td><td>On-demand, dynamic</td></tr><tr><td><strong>Suitability</strong></td><td>Continuous, predictable traffic (voice, video)</td><td>Bursty, intermittent traffic (web, email)</td></tr><tr><td><strong>Channel Utilization under Bursty Load</strong></td><td>Very low (idle slots wasted)</td><td>High (active stations utilize full channel)</td></tr><tr><td><strong>Collision Risk</strong></td><td>Zero (interference impossible)</td><td>Possible in random access; resolved by MAC</td></tr><tr><td><strong>Queueing Delay for N stations</strong></td><td>N times higher (T = 1 / (C/N - lambda))</td><td>Low at average load</td></tr></tbody></table>",
-      "eli10": "In simple words: Detailed comparison between static FDM/TDM allocation and dynamic on-demand contention mechanisms.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
+      "overview": "\n      <p>The choice between <strong>Static Channel Allocation</strong> and <strong>Dynamic Channel Allocation</strong> represents the most fundamental architectural fork in Medium Access Control design.</p>\n      \n      <p>According to <em>Behrouz A. Forouzan (Chapter 12)</em>, the core distinction lies in <strong>how and when resources are assigned</strong>:</p>\n      <ul class=\"wiki-bullet-list\">\n        <li><strong>Static Allocation:</strong> Resources are divided and assigned beforehand (in advance) and generally remain permanently reserved regardless of station activity.</li>\n        <li><strong>Dynamic Allocation:</strong> Resources are assigned or accessed dynamically according to real-time current requirements, releasing capacity as soon as transmissions complete.</li>\n      </ul>\n    ",
+      "eli10": "Imagine a classroom with 5 students and only 1 computer: Under static allocation, each student is assigned a strict 20-minute slot every day, even if they don't have homework! Under dynamic allocation, students use the computer when they actually have homework, and step away so others can use it. The dynamic way is much smarter!",
+      "analogy": "Reserved parking spaces vs. open public parking: a company with 100 employees and 50 parking spots can either permanently assign spots to 50 executives (half sit empty when executives travel), or allow all 100 employees to park on demand as they arrive.",
+      "howItWorks": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Master 8-Feature Comparative Table (From PDF Section 6)</h3>\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Comparative Feature</th>\n            <th>Static Channel Allocation</th>\n            <th>Dynamic Channel Allocation</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td><strong>1. Resource Assignment</strong></td>\n            <td>Fixed or predetermined in advance</td>\n            <td>Assigned on demand as data arrives</td>\n          </tr>\n          <tr>\n            <td><strong>2. Allocation Time</strong></td>\n            <td>Usually during system setup / configuration</td>\n            <td>Dynamically at runtime when required</td>\n          </tr>\n          <tr>\n            <td><strong>3. System Flexibility</strong></td>\n            <td>Lower (cannot reassign idle slices)</td>\n            <td>Higher (readily adapts to traffic fluctuations)</td>\n          </tr>\n          <tr>\n            <td><strong>4. Idle Resource Usage</strong></td>\n            <td>Wasted (unused bandwidth remains empty)</td>\n            <td>Reused immediately by other active stations</td>\n          </tr>\n          <tr>\n            <td><strong>5. Traffic Suitability</strong></td>\n            <td>Optimal for continuous, predictable traffic (voice)</td>\n            <td>Optimal for bursty, unpredictable data (web, files)</td>\n          </tr>\n          <tr>\n            <td><strong>6. Protocol Complexity</strong></td>\n            <td>Often simpler (hardware-based partitioning)</td>\n            <td>May require complex contention or scheduling logic</td>\n          </tr>\n          <tr>\n            <td><strong>7. Waiting Time / Delay</strong></td>\n            <td>Deterministic; depends on assigned slot/band</td>\n            <td>Variable; depends on access mechanism and load</td>\n          </tr>\n          <tr>\n            <td><strong>8. Typical Examples</strong></td>\n            <td>Fixed FDMA, TDMA, broadcast radio</td>\n            <td>Demand-based CSMA/CD, Wi-Fi CSMA/CA, Polling, Token</td>\n          </tr>\n        </tbody>\n      </table>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-6 mb-2\">Master Terminology Glossary (From PDF Section 7)</h3>\n      <table class=\"wiki-table\">\n        <thead><tr><th>Term</th><th>Formal Definition & Meaning</th></tr></thead>\n        <tbody>\n          <tr><td><strong>MAC</strong></td><td>Medium Access Control: lower sublayer of Data Link Layer controlling medium access.</td></tr>\n          <tr><td><strong>LLC</strong></td><td>Logical Link Control: upper sublayer of Data Link Layer providing flow and error control.</td></tr>\n          <tr><td><strong>Channel</strong></td><td>The physical communication path used to transfer data between stations.</td></tr>\n          <tr><td><strong>Bandwidth</strong></td><td>The frequency range or maximum bit carrying capacity of a communication channel.</td></tr>\n          <tr><td><strong>Shared Medium</strong></td><td>A single transmission path (wire or radio) used simultaneously by multiple stations.</td></tr>\n          <tr><td><strong>Station</strong></td><td>An independent computing device connected to a communication network.</td></tr>\n          <tr><td><strong>Collision</strong></td><td>Destructive signal interference caused by two or more simultaneous transmissions.</td></tr>\n          <tr><td><strong>FDMA</strong></td><td>Frequency Division Multiple Access: dividing the channel by frequency bands.</td></tr>\n          <tr><td><strong>TDMA</strong></td><td>Time Division Multiple Access: dividing channel access into repeating time slots.</td></tr>\n          <tr><td><strong>Static Allocation</strong></td><td>Assigning communication resources to stations in advance.</td></tr>\n          <tr><td><strong>Dynamic Allocation</strong></td><td>Assigning communication resources to stations on demand.</td></tr>\n        </tbody>\n      </table>\n    ",
       "diagram": "",
+      "technicalDetails": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Quick Revision Summary (From PDF Section 11)</h3>\n      <ul class=\"wiki-bullet-list\">\n        <li>The Data Link Layer is divided into <strong>LLC</strong> and <strong>MAC</strong> sublayers in the IEEE 802 architecture.</li>\n        <li>LLC handles data-link control, while MAC handles access to the shared medium.</li>\n        <li>Channel allocation determines how communication resources are shared among stations.</li>\n        <li>Static allocation assigns resources in advance; dynamic allocation assigns access according to demand.</li>\n        <li><strong>FDMA</strong> divides the channel by frequency: $B_{\\text{station}} = \\frac{B_{\\text{total}}}{N}$.</li>\n        <li><strong>TDMA</strong> divides channel access by time slots: $\\text{Slots/station} = \\frac{\\text{Total slots}}{N}$.</li>\n        <li><strong>CDMA</strong> allows stations to share a channel simultaneously using orthogonal codes.</li>\n        <li>Random access (ALOHA, CSMA) and controlled access (polling, tokens) are the primary dynamic paradigms.</li>\n      </ul>\n    ",
       "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Static vs Dynamic Channel Allocation?<br><br><strong>Answer:</strong> Static allocation (FDM/TDM) assigns fixed channels to stations regardless of activity, providing guaranteed throughput and zero collisions, but suffers severe delay and wasted bandwidth under bursty loads. Dynamic allocation shares the channel on demand, offering high efficiency for bursty traffic.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
+        "level1": "<strong>Question:</strong> State the main difference between static and dynamic channel allocation in one sentence.<br><br><strong>Answer:</strong> The main difference is that static allocation assigns a fixed portion of resources to stations in advance regardless of whether they transmit, whereas dynamic allocation assigns resources on demand based on current transmission requirements.",
+        "level2": "<strong>Problem:</strong> Explain why dynamic channel allocation can achieve higher aggregate channel utilization than static channel allocation.<br><br><strong>Answer:</strong> In dynamic allocation, when stations are inactive, they consume zero bandwidth. The entire capacity of the communication channel is dynamically allocated to whichever stations currently have data to send. In static allocation, bandwidth allocated to idle stations sits empty and cannot be utilized by anyone else.",
+        "level3": "<strong>Analysis:</strong> Why might a telecommunications carrier still choose static allocation (FDMA/TDMA) for traditional cellular voice calls despite its lower efficiency for data?<br><br><strong>Answer:</strong> Voice calls require guaranteed, deterministic delay (low jitter) and cannot tolerate packet drops or variable contention delays. Static allocation reserves a dedicated circuit for the duration of the call, guaranteeing perfect quality of service without collision overhead."
       },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Dimension</th>\n            <th>Static Allocation</th>\n            <th>Dynamic Allocation</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td><strong>Bursty Traffic Efficiency</strong></td>\n            <td>Extremely low (wastes bandwidth on idle stations).</td>\n            <td>Extremely high (active stations utilize full bandwidth).</td>\n          </tr>\n          <tr>\n            <td><strong>Latency Guarantee</strong></td>\n            <td>Deterministic, constant, bounded latency.</td>\n            <td>Variable latency; increases under heavy network contention.</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Comparative analysis is heavily featured in university exams, GATE, and networking certifications.",
+        "Fundamental architectural trade-off in cellular protocol stack engineering (circuit-switched 2G vs packet-switched 4G/5G).",
+        "Network operating system bandwidth management algorithms."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Static vs Dynamic Channel Allocation?",
+          "question": "What may happen to an unused fixed allocation in static channel allocation?",
           "options": [
-            "Static allocation (FDM/TDM) assigns fixed channels to statio...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "It remains idle and is wasted",
+            "It is automatically doubled by the router",
+            "It is automatically assigned to the fastest computer",
+            "It converts into an IP address"
           ],
           "correct": 0,
-          "explanation": "The primary role is: Static allocation (FDM/TDM) assigns fixed channels to stations regardless of activity, providing guaranteed throughput and zero collisions, but suffers severe delay and wasted bandwidth under bursty loads. Dynamic allocation shares the channel on demand, offering high efficiency for bursty traffic."
+          "explanation": "In static allocation, resources are predetermined; if an allocated station has no data to transmit, its allocation sits idle and is wasted."
+        },
+        {
+          "question": "Which multiple access method allows multiple stations to share a channel simultaneously by using different orthogonal codes?",
+          "options": [
+            "CDMA (Code Division Multiple Access)",
+            "FDMA",
+            "TDMA",
+            "Token Passing"
+          ],
+          "correct": 0,
+          "explanation": "CDMA assigns unique orthogonal mathematical codes to stations, allowing them to transmit simultaneously over the entire frequency band."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 12.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "Andrew S. Tanenbaum, Computer Networks, 5th Edition, Chapter 4.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/79/FDMA.PNG",
-      "imageCaption": "Figure: Static (FDMA/TDMA) vs. Dynamic Channel Allocation Efficiency and Delay Analysis."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/79/FDMA.PNG",
-    "imageCaption": "Figure: Static (FDMA/TDMA) vs. Dynamic Channel Allocation Efficiency and Delay Analysis."
+      ]
+    }
   },
   "u2-multiple-access-intro": {
     "id": "u2-multiple-access-intro",
@@ -6903,7 +6924,7 @@ var TOPICS_U2_SYLLABUS = {
       ]
     },
     "sections": {
-      "overview": "\n    <p>This section provides comprehensive worked numerical problems covering sequence number arithmetic, window sizing, propagation-to-transmission ratios ($a$), and channel utilization efficiencies across all Data Link Layer protocols, directly aligned with <strong>Forouzan Chapter 11</strong> and university examination patterns.</p>\n    \n    <div class=\"space-y-6 my-6\">\n      <!-- Problem 1 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 1: Sequence Number Calculation ($m = 3$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A protocol uses a 3-bit sequence number. Find the total number of sequence numbers and list them.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p><strong>Formula:</strong> $N = 2^m$</p>\n          <p>Given: $m = 3$ bits</p>\n          <p>Calculation: $N = 2^3 = 8$ sequence numbers.</p>\n          <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 8 sequence numbers. The valid range is {0, 1, 2, 3, 4, 5, 6, 7}.</p>\n        </div>\n      </div>\n\n      <!-- Problem 2 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 2: Go-Back-N Window Sizing ($m = 4$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A Go-Back-N ARQ protocol uses a 4-bit sequence number. Find the maximum sender window size and receiver window size.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>Given: $m = 4$ bits</p>\n          <p>Sender Window: $W_s = 2^m - 1 = 2^4 - 1 = 16 - 1 = 15$</p>\n          <p>Receiver Window: $W_r = 1$ (always 1 in Go-Back-N)</p>\n          <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: Sender Window = 15 frames, Receiver Window = 1 frame.</p>\n        </div>\n      </div>\n\n      <!-- Problem 3 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 3: Selective Repeat Window Sizing ($m = 4$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A Selective Repeat ARQ protocol uses a 4-bit sequence number. Find the maximum sender and receiver window sizes.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>Given: $m = 4$ bits</p>\n          <p>Sender Window: $W_s = 2^{m-1} = 2^{4-1} = 2^3 = 8$</p>\n          <p>Receiver Window: $W_r = 2^{m-1} = 2^{4-1} = 2^3 = 8$</p>\n          <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: Sender Window = 8 frames, Receiver Window = 8 frames.</p>\n        </div>\n      </div>\n\n      <!-- Problem 4 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 4: Window Comparison with $m = 3$</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> If $m = 3$ bits, compare the maximum sender and receiver window sizes for Go-Back-N ARQ and Selective Repeat ARQ.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>For Go-Back-N: $W_s = 2^3 - 1 = 7$, $W_r = 1$.</p>\n          <p>For Selective Repeat: $W_s = 2^{3-1} = 4$, $W_r = 2^{3-1} = 4$.</p>\n          <table class=\"wiki-table mt-2\">\n            <thead><tr><th>Protocol</th><th>Sender Window ($W_s$)</th><th>Receiver Window ($W_r$)</th></tr></thead>\n            <tbody>\n              <tr><td>Go-Back-N ARQ</td><td>7</td><td>1</td></tr>\n              <tr><td>Selective Repeat ARQ</td><td>4</td><td>4</td></tr>\n            </tbody>\n          </table>\n        </div>\n      </div>\n\n      <!-- Problem 5 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 5: Master ARQ Comparison ($m = 5$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A communication link uses a 5-bit sequence number ($m = 5$). Determine the sender and receiver window sizes across Stop-and-Wait ARQ, Go-Back-N ARQ, and Selective Repeat ARQ.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>Total sequence numbers available: $2^5 = 32$ (numbered 0 to 31).</p>\n          <p>• <strong>Stop-and-Wait ARQ:</strong> $W_s = 1$, $W_r = 1$.</p>\n          <p>• <strong>Go-Back-N ARQ:</strong> $W_s = 2^5 - 1 = 31$, $W_r = 1$.</p>\n          <p>• <strong>Selective Repeat ARQ:</strong> $W_s = 2^{5-1} = 16$, $W_r = 2^{5-1} = 16$.</p>\n        </div>\n      </div>\n    </div>\n  ",
+      "overview": "\n    <p>This section provides comprehensive worked numerical problems covering sequence number arithmetic, window sizing, propagation-to-transmission ratios ($a$), and channel utilization efficiencies across all Data Link Layer protocols, directly aligned with <strong>Forouzan Chapter 11</strong> and university examination patterns.</p>\n    \n    <div class=\"space-y-6 my-6\">\n      <!-- Problem 1 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 1: Sequence Number Calculation ($m = 3$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A protocol uses a 3-bit sequence number. Find the total number of sequence numbers and list them.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p><strong>Formula:</strong> $N = 2^m$</p>\n          <p>Given: $m = 3$ bits</p>\n          <p>Calculation: $N = 2^3 = 8$ sequence numbers.</p>\n          <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 8 sequence numbers. The valid range is {0, 1, 2, 3, 4, 5, 6, 7}.</p>\n        </div>\n      </div>\n\n      <!-- Problem 2 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 2: Go-Back-N Window Sizing ($m = 4$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A Go-Back-N ARQ protocol uses a 4-bit sequence number. Find the maximum sender window size and receiver window size.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>Given: $m = 4$ bits</p>\n          <p>Sender Window: $W_s = 2^m - 1 = 2^4 - 1 = 16 - 1 = 15$</p>\n          <p>Receiver Window: $W_r = 1$ (always 1 in Go-Back-N)</p>\n          <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: Sender Window = 15 frames, Receiver Window = 1 frame.</p>\n        </div>\n      </div>\n\n      <!-- Problem 3 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 3: Selective Repeat Window Sizing ($m = 4$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A Selective Repeat ARQ protocol uses a 4-bit sequence number. Find the maximum sender and receiver window sizes.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>Given: $m = 4$ bits</p>\n          <p>Sender Window: $W_s = 2^{m-1} = 2^{4-1} = 2^3 = 8$</p>\n          <p>Receiver Window: $W_r = 2^{m-1} = 2^{4-1} = 2^3 = 8$</p>\n          <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: Sender Window = 8 frames, Receiver Window = 8 frames.</p>\n        </div>\n      </div>\n\n      <!-- Problem 4 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 4: Window Comparison with $m = 3$</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> If $m = 3$ bits, compare the maximum sender and receiver window sizes for Go-Back-N ARQ and Selective Repeat ARQ.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>For Go-Back-N: $W_s = 2^3 - 1 = 7$, $W_r = 1$.</p>\n          <p>For Selective Repeat: $W_s = 2^{3-1} = 4$, $W_r = 2^{3-1} = 4$.</p>\n          <table class=\"wiki-table mt-2\">\n            <thead><tr><th>Protocol</th><th>Sender Window ($W_s$)</th><th>Receiver Window ($W_r$)</th></tr></thead>\n            <tbody>\n              <tr><td>Go-Back-N ARQ</td><td>7</td><td>1</td></tr>\n              <tr><td>Selective Repeat ARQ</td><td>4</td><td>4</td></tr>\n            </tbody>\n          </table>\n        </div>\n      </div>\n\n      <!-- Problem 5 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 5: Master ARQ Comparison ($m = 5$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A communication link uses a 5-bit sequence number ($m = 5$). Determine the sender and receiver window sizes across Stop-and-Wait ARQ, Go-Back-N ARQ, and Selective Repeat ARQ.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>Total sequence numbers available: $2^5 = 32$ (numbered 0 to 31).</p>\n          <p>• <strong>Stop-and-Wait ARQ:</strong> $W_s = 1$, $W_r = 1$.</p>\n          <p>• <strong>Go-Back-N ARQ:</strong> $W_s = 2^5 - 1 = 31$, $W_r = 1$.</p>\n          <p>• <strong>Selective Repeat ARQ:</strong> $W_s = 2^{5-1} = 16$, $W_r = 2^{5-1} = 16$.</p>\n        </div>\n      </div>\n    </div>\n  \n    <!-- Problem 6: Equal Bandwidth Allocation (FDMA) -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 6: Equal Bandwidth Allocation (FDMA)</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 3 PDF):</strong> A channel has a bandwidth of 120 MHz and is shared equally among six stations using static allocation. Find the bandwidth allocated to each station.</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Given:</strong> Total bandwidth $B_{\\text{total}} = 120\\text{ MHz}$, Number of stations $N = 6$.</p>\n        <p><strong>Formula:</strong> $B_{\\text{station}} = \\frac{B_{\\text{total}}}{N}$</p>\n        <p><strong>Calculation:</strong> $B_{\\text{station}} = \\frac{120}{6} = 20\\text{ MHz}$.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 20 MHz per station.</p>\n      </div>\n    </div>\n\n    <!-- Problem 7: Bandwidth Utilization & Waste -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 7: Bandwidth Utilization & Inactive Station Waste</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 3 PDF):</strong> A 100 MHz channel is divided equally among five stations using static allocation. Only three stations are actively using their allocated bandwidth. Find the allocated bandwidth that is currently unused.</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Step 1:</strong> Bandwidth per station = $\\frac{100\\text{ MHz}}{5} = 20\\text{ MHz}$.</p>\n        <p><strong>Step 2:</strong> Inactive stations = $5 - 3 = 2$ stations.</p>\n        <p><strong>Step 3:</strong> Unused allocated bandwidth = $2 \\times 20\\text{ MHz} = 40\\text{ MHz}$.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 40 MHz of allocated bandwidth sits completely unused.</p>\n      </div>\n    </div>\n\n    <!-- Problem 8: TDMA Slot Allocation -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 8: TDMA Time Slot Allocation</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 3 PDF):</strong> A TDMA system has 8 time slots in each frame. If 4 stations share the slots equally, how many slots does each station receive?</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Given:</strong> Total slots per frame = 8, Number of stations = 4.</p>\n        <p><strong>Calculation:</strong> $\\frac{8}{4} = 2$ slots per station.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 2 slots per station in each repeating frame.</p>\n      </div>\n    </div>\n  ",
       "eli10": "In simple words: Step-by-step solved numerical problems on CSMA/CD minimum frame size, sliding window utilization, and ALOHA throughput.",
       "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
       "diagram": "",
@@ -7083,7 +7104,7 @@ var TOPICS_U2_SYLLABUS = {
       ]
     },
     "sections": {
-      "overview": "\n    <p>Comprehensive repository of 15 university exam short-answer questions with concise model answers covering Data Link Layer protocols, flow control, and error recovery.</p>\n    <div class=\"space-y-4 my-6\">\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q1. What is a Data Link Layer protocol?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A set of formal rules governing how data frames are transmitted, verified, and managed between two directly connected stations across a physical medium.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q2. What is a noiseless channel?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An idealized theoretical communication channel in which frames are never damaged, corrupted, lost, or duplicated during transit.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q3. What is a noisy channel?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A realistic physical communication channel subject to thermal noise, attenuation, and interference where frames and ACKs can be corrupted, lost, or delayed.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q4. What is the Simplest Protocol?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An elementary unidirectional protocol for noiseless channels that provides neither flow control nor error control, assuming the receiver has infinite processing capacity.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q5. What is the Stop-and-Wait Protocol?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A noiseless channel protocol where the sender transmits one frame and halts until an explicit acknowledgement (ACK) arrives, preventing receiver buffer overflow.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q6. What does ARQ stand for and what is its purpose?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Automatic Repeat reQuest. It is an error-control mechanism that uses acknowledgements, sequence numbers, and retransmission timers to automatically resend lost or corrupted frames.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q7. What is an Acknowledgement (ACK)?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A control frame dispatched by the receiver informing the sender that a data frame was received correctly or indicating the sequence number of the next frame expected.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q8. What is a Negative Acknowledgement (NAK)?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A control frame sent by the receiver explicitly requesting the immediate retransmission of a specific missing or damaged frame without waiting for timer timeout.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q9. Why are sequence numbers necessary in Stop-and-Wait ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">To enable the receiver to recognize and safely discard duplicate frames resulting from lost or delayed acknowledgements.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q10. What is pipelining in data communication?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The technique of transmitting multiple data frames before waiting for an acknowledgement, keeping the transmission channel full and maximizing throughput.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q11. What is the sender window size in Go-Back-N ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">$W_s = 2^m - 1$, where $m$ is the number of bits in the sequence number field.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q12. What is the receiver window size in Go-Back-N ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">$W_r = 1$. The receiver only ever accepts the single next-expected in-order frame.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q13. What is the window size in Selective Repeat ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">$W_s = W_r = 2^{m-1}$ (half of the total sequence number space).</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q14. What is a Cumulative Acknowledgement?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An ACK containing number $n$ that simultaneously confirms successful receipt of all frames up to sequence number $n-1$.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q15. What is Piggybacking?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The technique of attaching acknowledgement numbers into the header of outgoing reverse data frames, conserving bandwidth and eliminating separate ACK frames.</p>\n      </div>\n    </div>\n  ",
+      "overview": "\n    <p>Comprehensive repository of 15 university exam short-answer questions with concise model answers covering Data Link Layer protocols, flow control, and error recovery.</p>\n    <div class=\"space-y-4 my-6\">\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q1. What is a Data Link Layer protocol?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A set of formal rules governing how data frames are transmitted, verified, and managed between two directly connected stations across a physical medium.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q2. What is a noiseless channel?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An idealized theoretical communication channel in which frames are never damaged, corrupted, lost, or duplicated during transit.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q3. What is a noisy channel?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A realistic physical communication channel subject to thermal noise, attenuation, and interference where frames and ACKs can be corrupted, lost, or delayed.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q4. What is the Simplest Protocol?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An elementary unidirectional protocol for noiseless channels that provides neither flow control nor error control, assuming the receiver has infinite processing capacity.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q5. What is the Stop-and-Wait Protocol?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A noiseless channel protocol where the sender transmits one frame and halts until an explicit acknowledgement (ACK) arrives, preventing receiver buffer overflow.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q6. What does ARQ stand for and what is its purpose?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Automatic Repeat reQuest. It is an error-control mechanism that uses acknowledgements, sequence numbers, and retransmission timers to automatically resend lost or corrupted frames.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q7. What is an Acknowledgement (ACK)?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A control frame dispatched by the receiver informing the sender that a data frame was received correctly or indicating the sequence number of the next frame expected.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q8. What is a Negative Acknowledgement (NAK)?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A control frame sent by the receiver explicitly requesting the immediate retransmission of a specific missing or damaged frame without waiting for timer timeout.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q9. Why are sequence numbers necessary in Stop-and-Wait ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">To enable the receiver to recognize and safely discard duplicate frames resulting from lost or delayed acknowledgements.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q10. What is pipelining in data communication?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The technique of transmitting multiple data frames before waiting for an acknowledgement, keeping the transmission channel full and maximizing throughput.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q11. What is the sender window size in Go-Back-N ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">$W_s = 2^m - 1$, where $m$ is the number of bits in the sequence number field.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q12. What is the receiver window size in Go-Back-N ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">$W_r = 1$. The receiver only ever accepts the single next-expected in-order frame.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q13. What is the window size in Selective Repeat ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">$W_s = W_r = 2^{m-1}$ (half of the total sequence number space).</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q14. What is a Cumulative Acknowledgement?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An ACK containing number $n$ that simultaneously confirms successful receipt of all frames up to sequence number $n-1$.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q15. What is Piggybacking?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The technique of attaching acknowledgement numbers into the header of outgoing reverse data frames, conserving bandwidth and eliminating separate ACK frames.</p>\n      </div>\n    </div>\n  \n    <!-- Topic 3 Short Questions -->\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q16. What is the MAC sublayer?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The lower sublayer of the Data Link Layer in the IEEE 802 architecture responsible for controlling and coordinating device access to a shared transmission medium.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q17. State any four functions of the MAC sublayer.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">1. Physical addressing (MAC addresses). 2. Medium access control. 3. Frame handling and delimiting. 4. Collision handling and backoff recovery.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q18. What is the channel allocation problem?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The problem of deciding how limited communication channel resources or frequency bandwidth should be shared efficiently among multiple competing devices.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q19. Why is channel allocation necessary?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Because the channel has limited bandwidth, stations generate unpredictable bursty traffic, and simultaneous uncoordinated transmissions result in destructive packet collisions.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q20. Define static channel allocation.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A method where available channel resources (frequency or time) are divided and assigned to stations in advance, remaining reserved regardless of whether a station transmits.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q21. Define dynamic channel allocation.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A method where communication channel resources are assigned on demand according to the real-time transmission requirements of active stations.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q22. What is FDMA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Frequency Division Multiple Access: a channelization technique where the total bandwidth is divided into separate frequency bands assigned to stations for simultaneous transmission.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q23. What is TDMA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Time Division Multiple Access: a channelization technique where the entire bandwidth is shared in the time domain, with time divided into repeating frames and assigned time slots.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q24. Differentiate between LLC and MAC.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">LLC is the upper sublayer providing flow and error control independent of physical media; MAC is the lower sublayer controlling hardware access to the shared medium and handling physical addressing.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q25. State two advantages of dynamic allocation.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">1. Drastically higher bandwidth utilization for bursty traffic. 2. Active stations can utilize the full channel capacity while zero bandwidth is wasted on inactive stations.</p>\n    </div>\n  ",
       "eli10": "In simple words: The 12 short-answer questions straight from syllabus PDF Section 10 with concise model answers.",
       "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
       "diagram": "",
@@ -7173,7 +7194,7 @@ var TOPICS_U2_SYLLABUS = {
       ]
     },
     "sections": {
-      "overview": "<p>Structured long-form answers for the 8 core examination essay questions specified in PDF Section 10.</p>",
+      "overview": "<p>Structured long-form answers for the 8 core examination essay questions specified in PDF Section 10.</p>\n    <!-- Topic 3 Long Exam Questions -->\n    <div class=\"space-y-4 mt-6 border-t border-gray-200 dark:border-gray-700 pt-6\">\n      <h3 class=\"text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider\">Topic 3 – MAC Sublayer Long-Answer University Questions</h3>\n      \n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q1. Explain the MAC sublayer and its functions in detail.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The Medium Access Control (MAC) sublayer is the lower portion of the Data Link Layer in the IEEE 802 architecture. It sits directly above the Physical Layer and abstracts medium-specific transmission rules. Its core functions include: (1) Physical Addressing using 48-bit MAC addresses, (2) Medium Access Control to arbitrate transmission access, (3) Frame Delimiting and Formatting, (4) Collision Handling (detection, jam signaling, and exponential backoff), (5) Transmission Coordination across multi-station broadcast channels, and (6) Access Management enforcing priority and fairness.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q2. Explain the channel allocation problem and its primary objectives.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The channel allocation problem addresses how a shared broadcast medium with limited bandwidth is partitioned among multiple competing stations. Because computers generate bursty, asymmetric traffic and may attempt simultaneous transmissions, uncoordinated access causes signal collisions. The primary objectives are: High efficiency, Fairness, Low delay, Collision reduction, Maximum throughput, and Elimination of idle resource waste.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q3. Describe static channel allocation with suitable examples.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Static channel allocation divides available resources in advance into fixed portions assigned to stations. For example, if a 100 MHz channel is shared by 5 stations (A, B, C, D, E), each station receives 20 MHz. The fatal drawback is resource waste: if Station A is inactive, its 20 MHz sits empty, while active stations cannot exceed their 20 MHz slice.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q4. Explain FDMA and TDMA with comparative diagrams and principles.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          FDMA divides the frequency domain into non-overlapping bands with guard bands; stations transmit simultaneously and continuously on different carrier frequencies. TDMA divides the time domain into repeating frames and slots; all stations share the entire frequency band but transmit sequentially one station per time slot, requiring microsecond clock synchronization and guard times.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q5. Explain dynamic channel allocation with an illustrative example.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Dynamic channel allocation assigns resources on demand based on real-time traffic. Consider 5 computers where A, C, and E have data while B and D are idle. Instead of reserving 20% for B and D, dynamic allocation grants the full channel capacity to A, C, and E. Resources are released immediately when transmissions finish.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q6. Compare static and dynamic channel allocation across key technical parameters.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Static allocation features predetermined assignment, advance setup, lower flexibility, wasted idle resources, and suitability for predictable voice traffic. Dynamic allocation features demand-based assignment, runtime access, high flexibility, reusable idle capacity, and optimal efficiency for bursty computer data traffic.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q7. Explain the relationship between LLC, MAC, and the Physical Layer.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The Network Layer passes IP datagrams to the LLC sublayer. LLC encapsulates packets into LLC PDUs, identifies the network protocol via SAPs, and manages flow/error control. LLC passes the data to the MAC sublayer, which appends 48-bit MAC addresses and FCS trailers and executes medium access arbitration. Finally, MAC streams frames down to the Physical Layer transceiver for signal modulation onto the wire or radio medium.\n        </p>\n      </div>\n    </div>\n  ",
       "eli10": "In simple words: The 8 major essay questions from PDF Section 10 with structured headings and diagrams.",
       "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
       "diagram": "",
@@ -7478,6 +7499,116 @@ var TOPICS_U2_SYLLABUS = {
           ],
           "correct": 0,
           "explanation": "Cumulative ACK $n$ acknowledges all frames up to $n-1$. Therefore, ACK 4 confirms that Frames 0, 1, 2, and 3 have been accepted and the receiver expects Frame 4."
+        },
+        {
+          "question": "Which is the lower sublayer of the Data Link Layer in the IEEE 802 model?",
+          "options": [
+            "LLC",
+            "MAC",
+            "Network",
+            "Transport"
+          ],
+          "correct": 1,
+          "explanation": "In the IEEE 802 model, the Data Link Layer is divided into the upper Logical Link Control (LLC) sublayer and the lower Medium Access Control (MAC) sublayer."
+        },
+        {
+          "question": "What is the main responsibility of the MAC sublayer?",
+          "options": [
+            "Routing packets across networks",
+            "Controlling access to the shared medium",
+            "Encrypting user data",
+            "Assigning IP addresses"
+          ],
+          "correct": 1,
+          "explanation": "The MAC sublayer is primarily responsible for coordinating and controlling device access to a shared physical transmission medium."
+        },
+        {
+          "question": "Which sublayer is mainly responsible for flow and error control in the IEEE 802 architecture?",
+          "options": [
+            "MAC",
+            "Physical",
+            "LLC",
+            "Network"
+          ],
+          "correct": 2,
+          "explanation": "The Logical Link Control (LLC) sublayer provides flow control, error control, and network layer protocol identification."
+        },
+        {
+          "question": "In static channel allocation, resources are generally assigned:",
+          "options": [
+            "Only after a collision",
+            "In advance",
+            "Randomly every second",
+            "Only to routers"
+          ],
+          "correct": 1,
+          "explanation": "Static channel allocation partitions and assigns resources (frequencies or time slots) to stations in advance."
+        },
+        {
+          "question": "Which multiple access technique divides a communication channel into separate frequency bands?",
+          "options": [
+            "TDMA",
+            "FDMA",
+            "CSMA/CD",
+            "ALOHA"
+          ],
+          "correct": 1,
+          "explanation": "FDMA (Frequency Division Multiple Access) divides the available channel bandwidth into distinct frequency bands."
+        },
+        {
+          "question": "Which multiple access technique divides channel access into time slots within repeating frames?",
+          "options": [
+            "FDMA",
+            "CDMA",
+            "TDMA",
+            "CSMA"
+          ],
+          "correct": 2,
+          "explanation": "TDMA (Time Division Multiple Access) divides channel access in the time domain into recurring frames and time slots."
+        },
+        {
+          "question": "Dynamic channel allocation assigns resources mainly according to:",
+          "options": [
+            "Device brand names",
+            "Current transmission demand",
+            "MAC address length",
+            "Cable colour"
+          ],
+          "correct": 1,
+          "explanation": "Dynamic channel allocation allocates transmission capacity on demand based on real-time station requirements."
+        },
+        {
+          "question": "What may happen to an unused fixed allocation in static channel allocation?",
+          "options": [
+            "It may remain idle and wasted",
+            "It doubles automatically",
+            "It becomes an IP address",
+            "It creates a router"
+          ],
+          "correct": 0,
+          "explanation": "In static allocation, if a station has no data to send, its allocated frequency band or time slot sits idle and cannot be used by others."
+        },
+        {
+          "question": "Which of the following is an example of a controlled access protocol?",
+          "options": [
+            "Polling",
+            "FDMA",
+            "Pure ALOHA",
+            "CSMA"
+          ],
+          "correct": 0,
+          "explanation": "Polling is a controlled access method where stations coordinate with a primary controller, guaranteeing collision-free access."
+        },
+        {
+          "question": "Which of the following is classified as a channelization method?",
+          "options": [
+            "Token passing",
+            "Polling",
+            "CDMA",
+            "CSMA/CD"
+          ],
+          "correct": 2,
+          "explanation": "CDMA (Code Division Multiple Access), along with FDMA and TDMA, is a channelization method that partitions the medium."
         }
       ],
       "references": [
@@ -7945,82 +8076,88 @@ var TOPICS_U2_SYLLABUS = {
   },
   "channel-allocation": {
     "id": "channel-allocation",
-    "title": "Medium Access Control (MAC) & Channel Allocation",
+    "title": "Channel Allocation Problem",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
     "topicNumber": 3,
-    "subtopicNumber": 0,
-    "whyItMatters": "When multiple communicating nodes share a single transmission broadcast medium, uncoordinated transmissions cause packet collisions. Channel allocation techniques provide systematic access arbitration.",
+    "subtopicNumber": 4,
+    "whyItMatters": "Channel allocation is the fundamental problem of how to divide limited communication resources (bandwidth and time) among multiple competing network stations to maximize throughput and minimize delay.",
     "prerequisitesList": [
       {
-        "concept": "Data Link Layer Framing",
-        "meaning": "Bit packaging and frame delimiting"
+        "concept": "u2-need-for-mac-sublayer",
+        "meaning": "Collisions and shared medium access"
       },
       {
-        "concept": "Broadcast Mediums",
-        "meaning": "Shared wireless radio or multi-point coaxial cables"
+        "concept": "Bandwidth & Channel Capacity",
+        "meaning": "Frequency range and maximum bit carrying capability"
       }
     ],
     "learningObjectives": [
-      "Understand the channel allocation problem on broadcast links.",
-      "Compare static allocation (FDMA/TDMA/CDMA) with dynamic multiple access protocols.",
-      "Master the 5 key assumptions in multi-access systems."
+      "Define the channel allocation problem formally.",
+      "Identify the 5 core reasons why channel allocation is necessary in computer networks.",
+      "Master the 6 primary engineering objectives of channel allocation.",
+      "Differentiate between Static Channel Allocation and Dynamic Channel Allocation."
     ],
     "infobox": {
       "layer": "Layer 2 (MAC Sublayer)",
-      "standard": "IEEE 802 Local Area Networks",
-      "type": "Sublayer Architecture Hub",
+      "standard": "Communication Theory & IEEE 802 Standards",
+      "type": "Resource Allocation Theory",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-mac-sublayer-intro",
+        "u2-need-for-mac-sublayer"
       ],
       "relatedConcepts": [
-        "u2-mac-sublayer-intro",
         "u2-fdma",
-        "u2-tdma"
+        "u2-tdma",
+        "u2-dynamic-channel-allocation"
       ],
       "compareWith": [
         "u2-static-vs-dynamic-channel-allocation"
       ],
       "primaryUses": [
-        "Shared Ethernet, Wi-Fi radio arbitration, cellular frequency division"
+        "Spectrum licensing, cellular multi-access design, Wi-Fi channel planning"
       ]
     },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/79/FDMA.PNG",
-    "imageCaption": "Figure: Medium Access Control & Frequency Division Channel Allocation (Behrouz A. Forouzan).",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Multiple_Access.png",
+    "imageCaption": "Figure: Channel Allocation Taxonomy: Static Channelization vs Dynamic Random and Controlled Access.",
     "sections": {
-      "overview": "\n      <p>The <strong>Medium Access Control (MAC) Sublayer</strong> is the lower sublayer of the OSI Data Link Layer that arbitrates access to a shared broadcast transmission medium.</p>\n      <p>When multiple stations attempt to transmit simultaneously over a common wire or radio channel, their electrical or electromagnetic signals interfere with each other, corrupting all transmitted data in what is known as a <strong>packet collision</strong>. MAC protocols and channel allocation strategies provide deterministic rules to prevent or resolve collisions.</p>\n    ",
-      "eli10": "Imagine 10 people in a dark room who all want to speak. If everyone talks at once, it's just noisy gibberish! Channel allocation is deciding either: give each person their own microphone pitch (FDMA), take 1-minute turns speaking (TDMA), or raise hands and back off if two people speak at the same time (CSMA).",
-      "analogy": "Traffic lights and roundabouts at a busy multi-lane highway intersection managing which lane of cars is permitted to move.",
-      "howItWorks": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Static vs. Dynamic Channel Allocation</h3>\n      <ul class=\"wiki-bullet-list\">\n        <li><strong>Static Channel Allocation:</strong> Divides total bandwidth permanently into dedicated channels (FDMA) or recurring time slots (TDMA). Excellent for continuous, predictable voice calls, but highly wasteful for bursty computer traffic.</li>\n        <li><strong>Dynamic Channel Allocation:</strong> Allocates the channel on demand as packets arrive using random access (ALOHA, CSMA/CD, CSMA/CA) or collision-free tokens.</li>\n      </ul>\n    ",
+      "overview": "\n      <p>The <strong>channel allocation problem</strong> refers to the challenge of deciding how a common communication channel or limited frequency bandwidth should be shared and distributed among multiple communicating devices.</p>\n      \n      <p>When several stations connect to a common communication medium, the network architecture must establish formal rules to distribute the available transmission capacity. The overarching objective is to allow stations to communicate efficiently while reducing interference, collisions, and unnecessary waiting time.</p>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Why Is Channel Allocation Required? (5 Key Network Conditions)</h3>\n      <p>Consider a network with ten computers connected to one shared communication channel:</p>\n      <ul class=\"wiki-bullet-list\">\n        <li><strong>Universal Transmission Need:</strong> Every computer on the network may need to transmit data at any point.</li>\n        <li><strong>Strict Bandwidth Limits:</strong> The physical channel has a finite, bounded bandwidth (e.g., 100 MHz or 1 Gbps) that cannot satisfy unlimited simultaneous demand.</li>\n        <li><strong>Simultaneous Competing Attempts:</strong> Two or more computers frequently attempt to transmit at the exact same instant, creating collisions.</li>\n        <li><strong>Traffic Asymmetry:</strong> Some computers generate massive files (video streams, database transfers), while others send tiny occasional packets (DNS lookups, sensor pings).</li>\n        <li><strong>Bursty Inactivity:</strong> Most computers remain completely idle for long stretches of time and generate traffic in sudden, unpredictable bursts.</li>\n      </ul>\n      <p class=\"mt-2\">Without an intelligent allocation method, the shared channel will swing between complete congestion collapse during busy moments and wasteful idle capacity during quiet intervals.</p>\n    ",
+      "eli10": "Imagine 10 kids at an amusement park who all want to ride on one single swing. If all 10 kids try to jump on the swing at once, they crash and nobody swings. The channel allocation problem is deciding: do you divide the day into 10 equal turns (even if half the kids fall asleep), or do you let kids line up and take the swing only when they are awake and ready to play?",
+      "analogy": "City water pipes: how the municipal water department distributes the finite flow capacity of a main water pipe among residential homes, factories, and fire hydrants fairly without water pressure collapsing.",
+      "howItWorks": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">The Six Primary Objectives of Channel Allocation</h3>\n      <ol class=\"wiki-ordered-list\">\n        <li><strong>High Efficiency:</strong> Utilize the available physical bandwidth effectively without wasting capacity on idle overhead.</li>\n        <li><strong>Fairness:</strong> Provide every station an equitable, reasonable opportunity to access the medium; prevent aggressive stations from starving others.</li>\n        <li><strong>Low Delay:</strong> Minimize the latency and waiting time experienced by a station between generating a frame and transmitting it.</li>\n        <li><strong>Collision Reduction:</strong> Eliminate or drastically reduce simultaneous conflicting transmissions that destroy data.</li>\n        <li><strong>Maximum Throughput:</strong> Maximize the aggregate volume of useful payload data successfully delivered across the link per unit time.</li>\n        <li><strong>Resource Utilization:</strong> Prevent channel capacity from sitting idle when active stations have pending data to transmit.</li>\n      </ol>\n\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Two Fundamental Paradigms of Channel Allocation</h3>\n      <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4\">\n        <div class=\"p-3 rounded-lg bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 text-xs\">\n          <h4 class=\"font-bold text-blue-900 dark:text-blue-300 text-sm mb-1\">1. Static Channel Allocation</h4>\n          <p class=\"text-gray-700 dark:text-gray-300\">\n            Resources are divided into fixed portions and assigned to stations in advance (predetermined). Each station receives a dedicated frequency band (FDMA) or recurring time slot (TDMA), whether it is actively transmitting or completely idle.\n          </p>\n        </div>\n        <div class=\"p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-xs\">\n          <h4 class=\"font-bold text-emerald-900 dark:text-emerald-300 text-sm mb-1\">2. Dynamic Channel Allocation</h4>\n          <p class=\"text-gray-700 dark:text-gray-300\">\n            Resources are allocated on demand according to current transmission requirements. The channel is not reserved in advance; instead, active stations request, contend for, or are scheduled access when they have data to send.\n          </p>\n        </div>\n      </div>\n    ",
       "diagram": "",
-      "technicalDetails": "\n      <p>Under static allocation, if $N$ users share a channel of bandwidth $B$, each receives $\\frac{B}{N}$. If only 1 user is transmitting, $(N-1)/N$ of the channel capacity is wasted. Dynamic random access dynamically grants the full bandwidth $B$ on demand.</p>\n    ",
+      "technicalDetails": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Mathematical Formulation of Allocation Trade-Offs</h3>\n      <p>Let $C$ be the total channel capacity in bits per second, and let $N$ be the number of stations. If traffic arrives at each station according to a Poisson process with average rate $\\lambda$ frames/sec, with mean frame length $1/\\mu$ bits:</p>\n      <div class=\"p-3 my-2 bg-slate-100 dark:bg-slate-800 rounded font-mono text-xs text-center\">\n        $$\\text{Under Static FDMA: } T_{\\text{static}} = \\frac{1}{\\mu (C/N) - \\lambda} = \\frac{N}{\\mu C - N\\lambda}$$\n        $$\\text{Under Dynamic Multiplexing: } T_{\\text{dynamic}} = \\frac{1}{\\mu C - N\\lambda}$$\n      </div>\n      <p class=\"text-xs text-gray-600 dark:text-gray-400 mt-2\">Notice that the average delay in static channel allocation is exactly $N$ times higher than in dynamic allocation ($T_{\\text{static}} = N \\cdot T_{\\text{dynamic}}$)! This proves mathematically why static allocation causes severe delay for bursty network traffic.</p>\n    ",
       "workedExamples": {
-        "level1": "<strong>Question:</strong> Why is static channel allocation inefficient for bursty computer data traffic?<br><br><strong>Answer:</strong> Computer traffic is bursty, meaning a node sends packets in brief bursts and remains idle for long periods. In static allocation, each station's pre-assigned frequency slot remains completely idle when that station has nothing to send, while active stations cannot exceed their fractional bandwidth share.",
-        "level2": "<strong>Problem:</strong> Calculate the delay under static TDM vs. dynamic statistical multiplexing for $N=10$ bursty nodes.<br><br><strong>Answer:</strong> With static TDM, average queuing delay increases by a factor of $N=10$ because a packet must wait for its dedicated time slot even if all other 9 time slots are empty. Dynamic allocation serves packets immediately across all available capacity.",
-        "level3": "<strong>Analysis:</strong> State the 5 classic assumptions in dynamic channel allocation modeling.<br><br><strong>Answer:</strong> 1. Station Model (independent stations generating Poisson traffic). 2. Single Channel (one shared broadcast link). 3. Collision Assumption (overlapping frames are corrupted). 4. Time Model (continuous time or slotted). 5. Carrier Sensing (stations can or cannot sense channel activity before transmitting)."
+        "level1": "<strong>Question:</strong> State the channel allocation problem in one concise sentence.<br><br><strong>Answer:</strong> The channel allocation problem refers to deciding how a shared communication medium of limited bandwidth should be divided and allocated among multiple communicating stations.",
+        "level2": "<strong>Problem:</strong> List four primary engineering objectives that any channel allocation scheme attempts to optimize.<br><br><strong>Answer:</strong> 1. High throughput (maximizing useful data delivered). 2. Low transmission delay (minimizing waiting time). 3. Fairness (equitable channel access for all stations). 4. High resource utilization (avoiding idle wasted bandwidth).",
+        "level3": "<strong>Analysis:</strong> Why does bursty computer traffic make static channel allocation highly inefficient?<br><br><strong>Answer:</strong> Computer traffic is bursty: a station may generate millions of bits during a web page load or file transfer, and then sit idle for minutes while the user reads. In static allocation, each station receives a fixed slice of bandwidth. When an active station needs high speed, it is throttled to its small fraction, while the slices assigned to idle stations sit completely empty and wasted."
       },
-      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Approach</th><th>Advantages</th><th>Limitations</th></tr></thead>\n        <tbody>\n          <tr><td>Static Allocation</td><td>Zero collisions, guaranteed bounded latency.</td><td>Inflexible, low throughput with bursty data.</td></tr>\n          <tr><td>Dynamic Allocation</td><td>High throughput, bandwidth allocated on demand.</td><td>Collision overhead at high traffic loads.</td></tr>\n        </tbody>\n      </table>\n    ",
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Objective</th>\n            <th>Static Allocation Achievement</th>\n            <th>Dynamic Allocation Achievement</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td><strong>Collision Prevention</strong></td>\n            <td>100% collision-free by design.</td>\n            <td>Depends on protocol (zero in token/polling; possible in CSMA).</td>\n          </tr>\n          <tr>\n            <td><strong>Bursty Resource Efficiency</strong></td>\n            <td>Poor: idle station slices cannot be used by others.</td>\n            <td>Excellent: full channel bandwidth available to active nodes.</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Cellular radio networks (FDD/TDD)",
-        "Cable modem DOCSIS systems",
-        "Ethernet and Wi-Fi networks"
+        "Radio frequency spectrum allocation by government telecommunications bodies (FCC / ITU).",
+        "Local Area Network multiple access protocol design (IEEE 802 standards).",
+        "Satellite transponder bandwidth leasing and channelization."
       ],
       "quiz": [
         {
-          "question": "Which sublayer of the Data Link Layer is responsible for arbitrating access to shared transmission media?",
+          "question": "What is the primary trade-off of Static Channel Allocation when applied to bursty computer traffic?",
           "options": [
-            "Medium Access Control (MAC) sublayer",
-            "Logical Link Control (LLC) sublayer",
-            "Network sublayer",
-            "Physical sublayer"
+            "It wastes bandwidth because allocated resources remain idle when stations are not transmitting",
+            "It causes excessive packet collisions at high loads",
+            "It requires stations to maintain random backoff timers",
+            "It cannot support physical MAC addressing"
           ],
           "correct": 0,
-          "explanation": "The MAC sublayer coordinates station access to shared broadcast transmission media."
+          "explanation": "Static allocation assigns fixed resources in advance; if a station has no data to send, its allocated bandwidth sits idle and cannot be utilized by other active stations."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Ed., Chapter 12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 12.",
+          "url": ""
+        },
+        {
+          "cite": "Andrew S. Tanenbaum, Computer Networks, 5th Edition, Chapter 4 (The Medium Access Control Sublayer).",
           "url": ""
         }
       ]
