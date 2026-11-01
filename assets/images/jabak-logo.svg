@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 56" width="240" height="56" fill="none">
+  <defs>
+    <linearGradient id="logo-bg-grad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="50%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <linearGradient id="logo-j-grad" x1="12" y1="10" x2="36" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e0f2fe"/>
+    </linearGradient>
+    <linearGradient id="brand-text-grad" x1="0" y1="0" x2="120" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="50%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    <filter id="logo-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- ICON EMBLEM -->
+  <g transform="translate(4, 4)">
+    <rect x="0" y="0" width="48" height="48" rx="13" fill="url(#logo-bg-grad)"/>
+    <rect x="0" y="0" width="48" height="48" rx="13" stroke="rgba(255,255,255,0.3)" stroke-width="1.2"/>
+
+    <!-- Subtle mesh circuit lines -->
+    <path d="M8 16 L18 16 L23 11" stroke="rgba(255,255,255,0.35)" stroke-width="1.2" stroke-linecap="round"/>
+    <circle cx="8" cy="16" r="1.5" fill="#ffffff" opacity="0.9"/>
+    <circle cx="23" cy="11" r="1.5" fill="#ffffff" opacity="0.9"/>
+
+    <path d="M40 34 L30 34 L25 39" stroke="rgba(255,255,255,0.35)" stroke-width="1.2" stroke-linecap="round"/>
+    <circle cx="40" cy="34" r="1.5" fill="#ffffff" opacity="0.9"/>
+    <circle cx="25" cy="39" r="1.5" fill="#ffffff" opacity="0.9"/>
+
+    <!-- Connected Stylized J -->
+    <path d="M16 14 L34 14" stroke="url(#logo-j-grad)" stroke-width="4.5" stroke-linecap="round" filter="url(#logo-glow)"/>
+    <path d="M30 14 L30 30 C30 35.5 26 38.5 20.5 38.5 C15.5 38.5 12.5 34.5 12.5 30" 
+          stroke="url(#logo-j-grad)" stroke-width="4.5" stroke-linecap="round" fill="none" filter="url(#logo-glow)"/>
+
+    <!-- Nodes -->
+    <circle cx="16" cy="14" r="2.8" fill="#38bdf8" stroke="#ffffff" stroke-width="1.2"/>
+    <circle cx="30" cy="14" r="2.8" fill="#34d399" stroke="#ffffff" stroke-width="1.2"/>
+    <circle cx="30" cy="25" r="2" fill="#ffffff"/>
+    <circle cx="12.5" cy="30" r="2.8" fill="#38bdf8" stroke="#ffffff" stroke-width="1.2"/>
+  </g>
+
+  <!-- BRAND TYPOGRAPHY: JABAK -->
+  <g transform="translate(62, 0)">
+    <!-- Main Brand Name with High-Contrast Gradient -->
+    <text x="0" y="32" 
+          font-family="system-ui, -apple-system, 'Inter', 'Segoe UI', Roboto, sans-serif" 
+          font-size="28" 
+          font-weight="900" 
+          letter-spacing="1.5"
+          fill="url(#brand-text-grad)">
+      JABAK
+    </text>
+
+    <!-- Glowing accent nodes -->
+    <circle cx="115" cy="17" r="3.5" fill="#10b981"/>
+    <circle cx="115" cy="17" r="1.8" fill="#38bdf8"/>
+
+    <!-- Subtitle / Tagline -->
+    <text x="1" y="47" 
+          font-family="system-ui, -apple-system, 'Inter', 'Segoe UI', Roboto, sans-serif" 
+          font-size="9.5" 
+          font-weight="700" 
+          letter-spacing="2.5"
+          fill="#64748b">
+      COMPUTER NETWORKS
+    </text>
+  </g>
+</svg>

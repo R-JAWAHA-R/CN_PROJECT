@@ -64,7 +64,12 @@ const App = {
     });
 
     const mainContainer = document.getElementById('main-content') || document.getElementById('main-content-container');
-    if (mainContainer) mainContainer.scrollTop = 0;
+    if (mainContainer) {
+      mainContainer.scrollTop = 0;
+      mainContainer.classList.remove('animate-fade');
+      void mainContainer.offsetWidth;
+      mainContainer.classList.add('animate-fade');
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     if (typeof trackTopicViewed === 'function') {
@@ -116,7 +121,12 @@ const App = {
     });
 
     const mainContainer = document.getElementById('main-content') || document.getElementById('main-content-container');
-    if (mainContainer) mainContainer.scrollTop = 0;
+    if (mainContainer) {
+      mainContainer.scrollTop = 0;
+      mainContainer.classList.remove('animate-fade');
+      void mainContainer.offsetWidth;
+      mainContainer.classList.add('animate-fade');
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     if (typeof updateTopicMetaCard === 'function') {
@@ -191,16 +201,16 @@ const App = {
     const pct = Math.round((completed / totalCount) * 100);
 
     container.innerHTML = `
-      <!-- GeeksforGeeks Welcome Hero Banner -->
+      <!-- Jabak Welcome Hero Banner -->
       <div class="p-6 md:p-8 rounded-xl bg-gradient-to-r from-green-50 via-white to-emerald-50 dark:from-gfg-darkcard dark:via-gray-900 dark:to-gfg-darkcard border border-green-200 dark:border-gray-800 shadow-sm mb-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div class="space-y-2 max-w-2xl">
             <div class="inline-flex items-center space-x-2 px-2.5 py-1 rounded-full bg-gfg-light dark:bg-gray-800 text-gfg-green border border-gfg-green/30 text-[11px] font-bold uppercase tracking-wider">
-              <span>GFG Portal</span>
+              <span>Jabak Portal</span>
               <span>•</span>
               <span>Semester V Academic Syllabus</span>
             </div>
-            <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Computer Networks Encyclopedia</h2>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">JABAK Computer Networks Encyclopedia</h2>
             <p class="text-xs md:text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
               University-grade study portal and interactive practice suite covering all 5 curricular units, 90 comprehensive encyclopedic articles, interactive protocol laboratories, and GATE exam test sets.
             </p>

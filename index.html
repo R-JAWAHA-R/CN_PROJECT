@@ -4,9 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JABAK | GeeksforGeeks Portal</title>
+    <title>JABAK | Computer Networks Learning Portal</title>
     <meta name="description"
-        content="Computer Networks Encyclopedia and GATE/Interview Practice Portal covering Networking Fundamentals, Data Link Layer, Network Layer, Transport Layer, Application Protocols, and Security.">
+        content="Learn Computer Networks with JABAK. University-grade study portal and interactive practice suite covering Networking Fundamentals, Data Link Layer, Network Layer, Transport Layer, Application Protocols, and Security.">
+    <meta name="author" content="JABAK">
+    <meta name="robots" content="index, follow">
+
+    <!-- Favicon & Brand Icons -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/jabak-icon.svg">
+    <link rel="apple-touch-icon" href="assets/images/jabak-icon.svg">
 
     <!-- Tailwind CSS with custom GFG theme -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -55,33 +61,25 @@
 
 
 
-    <!-- Basic SEO -->
-    <title>JABAK | Computer Networks Learning Portal</title>
-
-    <meta name="description"
-        content="Learn Computer Networks with JABAK. Explore networking concepts, protocols, 90 syllabus topics, interactive networking tools, MCQs and interview preparation.">
-
-    <meta name="author" content="JABAK">
-
-    <meta name="robots" content="index, follow">
-
     <!-- Canonical URL -->
     <link rel="canonical" href="https://r-jawaha-r.github.io/CN_PROJECT/">
 
     <!-- Open Graph: Social Media Preview -->
     <meta property="og:title" content="JABAK | Computer Networks Learning Portal">
-
     <meta property="og:description"
         content="Explore Computer Networks concepts, protocols, learning resources and interactive tools with JABAK.">
-
     <meta property="og:url" content="https://r-jawaha-r.github.io/CN_PROJECT/">
-
     <meta property="og:type" content="website">
 
-
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
         }
 
         code,
@@ -101,11 +99,20 @@
 
         ::-webkit-scrollbar-thumb {
             background: #cbd5e1;
-            border-radius: 3px;
+            border-radius: 4px;
+            transition: background 0.2s ease;
         }
 
         .dark ::-webkit-scrollbar-thumb {
             background: #475569;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
         }
 
         .gfg-shadow {
@@ -115,7 +122,7 @@
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(4px);
+                transform: translateY(6px);
             }
 
             to {
@@ -125,7 +132,18 @@
         }
 
         .animate-fade {
-            animation: fadeIn 0.2s ease-out forwards;
+            animation: fadeIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Smooth hardware accelerated scrolling and transitions */
+        #main-content, #syllabus-nav, #right-sidebar {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Smooth transitions for links, buttons, and badges */
+        .sidebar-link, .topic-nav-btn, button, input {
+            transition: all 0.15s ease-out;
         }
     </style>
 </head>
@@ -143,16 +161,14 @@
                 title="Toggle Syllabus Sidebar (Ctrl+B)">
                 <i class="fa-solid fa-bars text-xl"></i>
             </button>
-            <div class="flex items-center space-x-3 cursor-pointer select-none" onclick="App.loadView('home')">
-                <div
-                    class="bg-gfg-green text-white font-bold px-3 py-1.5 rounded text-lg tracking-wider flex items-center space-x-1 shadow-sm">
-                    <span>GFG</span>
-                    <span class="text-[10px] bg-black/20 px-1 py-0.5 rounded font-mono">NETS</span>
-                </div>
+            <div class="flex items-center space-x-3 cursor-pointer select-none group" onclick="App.loadView('home')">
+                <img src="assets/images/jabak-icon.svg" alt="Jabak Logo" class="w-10 h-10 shadow-sm rounded-xl transition-transform duration-200 group-hover:scale-105 shrink-0">
                 <div class="hidden sm:block">
-                    <h1 class="font-bold text-sm tracking-tight text-gray-900 dark:text-white leading-tight">Computer
-                        Networks</h1>
-                    <p class="text-[10px] text-gray-500 dark:text-gray-400">Encyclopedia &amp; Practice Portal</p>
+                    <div class="flex items-center space-x-1.5">
+                        <span class="font-black text-xl tracking-tight text-gray-900 dark:text-white leading-none">JABAK</span>
+                        <span class="text-[9px] bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-extrabold px-1.5 py-0.5 rounded tracking-wider shadow-sm">NETS</span>
+                    </div>
+                    <p class="text-[10px] text-gray-500 dark:text-gray-400 font-medium tracking-tight">Computer Networks Portal</p>
                 </div>
             </div>
         </div>
@@ -201,8 +217,8 @@
                 title="Toggle Right Panel (TOC & Tools)">
                 <i class="fa-solid fa-table-columns text-sm"></i>
             </button>
-            <div class="w-8 h-8 rounded-full bg-gfg-green/10 border border-gfg-green text-gfg-green font-bold flex items-center justify-center text-xs shadow-sm cursor-pointer"
-                onclick="App.loadView('home')" title="Computer Science Student Profile">CS</div>
+            <div class="w-8 h-8 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-500/40 text-emerald-600 dark:text-emerald-400 font-extrabold flex items-center justify-center text-xs shadow-sm cursor-pointer hover:scale-105 transition-transform"
+                onclick="App.loadView('home')" title="Jabak Networks Academy">J</div>
         </div>
     </header>
 
@@ -211,7 +227,7 @@
 
         <!-- Mobile Sidebar Overlay Backdrop -->
         <div id="sidebar-overlay" onclick="toggleLeftSidebar(false)"
-            class="fixed inset-0 top-16 bg-black/50 z-30 hidden lg:hidden"></div>
+            class="fixed inset-0 top-16 bg-black/50 backdrop-blur-sm z-30 hidden opacity-0 transition-opacity duration-200 lg:hidden"></div>
 
         <!-- Floating Re-open Left Sidebar Button (when collapsed) -->
         <button id="reopen-left-sidebar-btn" onclick="toggleLeftSidebar(true)"
@@ -1899,13 +1915,15 @@
         function highlightSyllabusTopic(topicId) {
             activeTopicId = topicId;
 
-            // Ensure all ancestor folders (chapters and nested subfolders) are expanded
+            // Check if any ancestor folder was collapsed and needs opening
+            let ancestorExpanded = false;
             syllabusModules.forEach(mod => {
                 if (mod.chapters) {
                     function expandAncestors(node) {
                         if (isNodeAncestorOf(node, topicId)) {
                             if (collapsedChapters[node.id]) {
                                 collapsedChapters[node.id] = false;
+                                ancestorExpanded = true;
                             }
                             if (node.items) {
                                 node.items.forEach(child => expandAncestors(child));
@@ -1915,9 +1933,19 @@
                     mod.chapters.forEach(chap => expandAncestors(chap));
                 }
             });
-            localStorage.setItem('gfg_collapsed_chapters', JSON.stringify(collapsedChapters));
-            renderSidebar(document.getElementById('sidebar-filter')?.value || '');
 
+            const nav = document.getElementById('syllabus-nav');
+            const existingBtn = document.getElementById('sidebar-topic-' + topicId);
+
+            // Only perform a full DOM rebuild if an ancestor folder was collapsed or the button isn't in DOM
+            if (!existingBtn || ancestorExpanded) {
+                localStorage.setItem('gfg_collapsed_chapters', JSON.stringify(collapsedChapters));
+                const prevScroll = nav ? nav.scrollTop : 0;
+                renderSidebar(document.getElementById('sidebar-filter')?.value || '');
+                if (nav) nav.scrollTop = prevScroll;
+            }
+
+            // Update active button classes smoothly without full DOM destruction
             document.querySelectorAll('#syllabus-nav button').forEach(b => {
                 b.classList.remove('bg-gfg-green', 'text-white', 'font-bold', 'shadow-sm');
                 b.classList.add('text-gray-700', 'dark:text-gray-300');
@@ -2071,7 +2099,17 @@
             }
         }
 
-        searchInput.addEventListener('input', (e) => handleGlobalSearch(e.target.value));
+        // Smooth input debounce helper to ensure 60fps responsiveness during typing
+        function debounce(func, wait = 120) {
+            let timeout;
+            return function(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+
+        const debouncedGlobalSearch = debounce(handleGlobalSearch, 120);
+        searchInput.addEventListener('input', (e) => debouncedGlobalSearch(e.target.value));
 
         document.addEventListener('click', (e) => {
             if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
@@ -2079,14 +2117,15 @@
             }
         });
 
-        // SIDEBAR FILTER LISTENER
+        // SIDEBAR FILTER LISTENER (Debounced DOM update with instantaneous icon toggle)
         const sidebarFilterInput = document.getElementById('sidebar-filter');
+        const debouncedSidebarFilter = debounce((val) => renderSidebar(val), 120);
         if (sidebarFilterInput) {
             sidebarFilterInput.addEventListener('input', (e) => {
                 const val = e.target.value;
                 const clearBtn = document.getElementById('sidebar-filter-clear');
                 if (clearBtn) clearBtn.classList.toggle('hidden', !val);
-                renderSidebar(val);
+                debouncedSidebarFilter(val);
             });
             sidebarFilterInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
@@ -2572,11 +2611,23 @@
                 if (shouldOpen) {
                     sidebar.classList.remove('-translate-x-full');
                     sidebar.classList.add('mobile-open', 'translate-x-0');
-                    if (overlay) overlay.classList.remove('hidden');
+                    if (overlay) {
+                        overlay.classList.remove('hidden');
+                        requestAnimationFrame(() => {
+                            overlay.classList.remove('opacity-0');
+                            overlay.classList.add('opacity-100');
+                        });
+                    }
                 } else {
                     sidebar.classList.add('-translate-x-full');
                     sidebar.classList.remove('mobile-open', 'translate-x-0');
-                    if (overlay) overlay.classList.add('hidden');
+                    if (overlay) {
+                        overlay.classList.remove('opacity-100');
+                        overlay.classList.add('opacity-0');
+                        setTimeout(() => {
+                            if (overlay.classList.contains('opacity-0')) overlay.classList.add('hidden');
+                        }, 200);
+                    }
                 }
             }
         }
