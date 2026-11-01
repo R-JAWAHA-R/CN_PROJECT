@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.3"/></filter>
+  </defs>
+  <rect width="850" height="420" rx="16" fill="url(#bg)"/>
+  <text x="425" y="42" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Ethernet in the OSI Protocol Stack (IEEE 802 Architecture)</text>
+  <text x="425" y="66" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Separation of Logical Link Control (LLC 802.2) and Media Access Control (MAC 802.3)</text>
+
+  <!-- Left: OSI Reference Layers -->
+  <g transform="translate(60, 95)">
+    <rect x="0" y="0" width="180" height="55" rx="8" fill="#3b82f6" filter="url(#shadow)"/>
+    <text x="90" y="32" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">Layer 3: Network</text>
+    <text x="90" y="48" font-family="system-ui, sans-serif" font-size="10" fill="#bfdbfe" text-anchor="middle">IP, ICMP, ARP</text>
+
+    <rect x="0" y="70" width="180" height="125" rx="8" fill="#0284c7" stroke="#38bdf8" stroke-width="2" filter="url(#shadow)"/>
+    <text x="90" y="105" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#fff" text-anchor="middle">Layer 2: Data Link</text>
+    <text x="90" y="125" font-family="system-ui, sans-serif" font-size="11" fill="#bae6fd" text-anchor="middle">Subdivided by IEEE 802</text>
+    <text x="90" y="150" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#fff" text-anchor="middle">• LLC (IEEE 802.2)</text>
+    <text x="90" y="170" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#fff" text-anchor="middle">• MAC (IEEE 802.3)</text>
+
+    <rect x="0" y="210" width="180" height="65" rx="8" fill="#6366f1" filter="url(#shadow)"/>
+    <text x="90" y="240" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">Layer 1: Physical</text>
+    <text x="90" y="258" font-family="system-ui, sans-serif" font-size="10" fill="#c7d2fe" text-anchor="middle">Transceiver, Cable, Signals</text>
+  </g>
+
+  <!-- Connective Arrows -->
+  <path d="M 255 160 L 310 160" stroke="#38bdf8" stroke-width="3" stroke-dasharray="4 4" marker-end="url(#arrow)"/>
+
+  <!-- Right: IEEE 802 Sublayer Breakdown -->
+  <g transform="translate(320, 95)">
+    <!-- LLC Sublayer Card -->
+    <rect x="0" y="0" width="460" height="75" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="15" y="12" width="110" height="24" rx="4" fill="#0369a1"/>
+    <text x="70" y="28" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">IEEE 802.2 LLC</text>
+    <text x="140" y="30" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#f8fafc">Logical Link Control (Media Independent)</text>
+    <text x="140" y="52" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Multiplexing protocols (SAP/SNAP), Flow &amp; Error control, interface to Network Layer</text>
+
+    <!-- MAC Sublayer Card -->
+    <rect x="0" y="90" width="460" height="95" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="15" y="105" width="110" height="24" rx="4" fill="#047857"/>
+    <text x="70" y="121" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">IEEE 802.3 MAC</text>
+    <text x="140" y="123" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#34d399">Media Access Control (Medium Specific)</text>
+    <text x="140" y="145" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• CSMA/CD Protocol &amp; Contention Resolution (BEB algorithm)</text>
+    <text x="140" y="165" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• 48-bit MAC Addressing &amp; Frame Assembly / Disassembly with CRC-32</text>
+
+    <!-- Physical Layer (PHY) Card -->
+    <rect x="0" y="200" width="460" height="75" rx="10" fill="#1e293b" stroke="#818cf8" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="15" y="215" width="110" height="24" rx="4" fill="#4338ca"/>
+    <text x="70" y="231" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">IEEE 802.3 PHY</text>
+    <text x="140" y="233" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#c7d2fe">Physical Layer Specifications</text>
+    <text x="140" y="255" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Manchester / 4B/5B / 8B/10B Encoding, Cat5e/Cat6/Fiber, 10M/100M/1G/10G PMD</text>
+  </g>
+</svg>

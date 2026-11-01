@@ -445,6 +445,10 @@
                 </div>
                 <div id="facts-card-body" class="space-y-1.5">
                     <div class="flex justify-between py-1 border-b border-gray-100 dark:border-gray-700">
+                        <span class="text-gray-500">Parent Topic:</span>
+                        <span id="meta-topic" class="font-semibold text-blue-600 dark:text-blue-400 truncate max-w-[140px] text-right" title="">-</span>
+                    </div>
+                    <div class="flex justify-between py-1 border-b border-gray-100 dark:border-gray-700">
                         <span class="text-gray-500">Stack Layer:</span>
                         <span id="meta-layer" class="font-semibold text-gray-800 dark:text-gray-200">Layer 3</span>
                     </div>
@@ -1982,6 +1986,13 @@
 
             if (topic) {
                 card.classList.remove('hidden');
+                const chap = (typeof TOPIC_CHAPTER_MAP !== 'undefined' && TOPIC_CHAPTER_MAP[topicId]) ? TOPIC_CHAPTER_MAP[topicId] : null;
+                const parentTitle = chap ? chap.chapTitle : (topic.parentTopic || topic.topicTitle || 'General');
+                const topicEl = document.getElementById('meta-topic');
+                if (topicEl) {
+                    topicEl.textContent = parentTitle;
+                    topicEl.title = parentTitle;
+                }
                 document.getElementById('meta-layer').textContent = (topic.infobox && topic.infobox.layer) ? topic.infobox.layer.split('(')[0] : 'General';
                 document.getElementById('meta-standard').textContent = topic.standard || 'IEEE / IETF';
                 document.getElementById('meta-difficulty').textContent = topic.difficulty || 'Core';

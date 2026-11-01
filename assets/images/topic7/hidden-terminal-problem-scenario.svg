@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="420" rx="16" fill="url(#bg)"/>
+  <text x="425" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">The Hidden Terminal Problem in Wireless Networks</text>
+  <text x="425" y="64" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Stations A and C are out of each other's radio range; both transmit to B simultaneously → Collision at B</text>
+
+  <!-- Radio Ranges Circles -->
+  <!-- Range of A -->
+  <circle cx="230" cy="180" r="170" fill="#0284c7" fill-opacity="0.15" stroke="#38bdf8" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="120" y="90" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#38bdf8">Transmission Range of A</text>
+
+  <!-- Range of C -->
+  <circle cx="620" cy="180" r="170" fill="#a855f7" fill-opacity="0.15" stroke="#c084fc" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="610" y="90" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#c084fc">Transmission Range of C</text>
+
+  <!-- Nodes A, B, C -->
+  <!-- Node A -->
+  <g transform="translate(230, 180)">
+    <circle cx="0" cy="0" r="28" fill="#0369a1" stroke="#38bdf8" stroke-width="2.5"/>
+    <text x="0" y="5" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#fff" text-anchor="middle">STA A</text>
+  </g>
+
+  <!-- Node B (Receiver in the middle) -->
+  <g transform="translate(425, 180)">
+    <circle cx="0" cy="0" r="32" fill="#7f1d1d" stroke="#ef4444" stroke-width="3"/>
+    <text x="0" y="5" font-family="system-ui, sans-serif" font-size="15" font-weight="900" fill="#fff" text-anchor="middle">STA B</text>
+    <text x="0" y="48" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#ef4444" text-anchor="middle">💥 Collision!</text>
+  </g>
+
+  <!-- Node C -->
+  <g transform="translate(620, 180)">
+    <circle cx="0" cy="0" r="28" fill="#6b21a8" stroke="#c084fc" stroke-width="2.5"/>
+    <text x="0" y="5" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#fff" text-anchor="middle">STA C</text>
+  </g>
+
+  <!-- Transmit arrows toward B -->
+  <line x1="265" y1="180" x2="385" y2="180" stroke="#38bdf8" stroke-width="3" stroke-dasharray="4 2"/>
+  <text x="325" y="165" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">A sends to B →</text>
+
+  <line x1="585" y1="180" x2="465" y2="180" stroke="#c084fc" stroke-width="3" stroke-dasharray="4 2"/>
+  <text x="525" y="165" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#c084fc" text-anchor="middle">← C sends to B</text>
+
+  <!-- Explanation Bottom Card -->
+  <g transform="translate(75, 290)">
+    <rect width="700" height="105" rx="10" fill="#1e293b" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="20" y="26" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#fca5a5">Why CSMA/CD Fails Here:</text>
+    <text x="20" y="48" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">1. Station A senses the medium: it hears nothing from C because C is outside A's transmission range.</text>
+    <text x="20" y="68" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">2. Station C senses the medium: it hears nothing from A. Both deduce the channel is idle and transmit to B.</text>
+    <text x="20" y="88" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#34d399">✅ Solution: Virtual Carrier Sensing using RTS/CTS (Request-to-Send / Clear-to-Send) in IEEE 802.11.</text>
+  </g>
+</svg>

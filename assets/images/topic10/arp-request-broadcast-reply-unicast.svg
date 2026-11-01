@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="400" rx="16" fill="url(#bg)"/>
+  <text x="425" y="38" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Address Resolution Protocol (ARP): IP-to-MAC Binding</text>
+  <text x="425" y="62" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">ARP Request is Broadcast to All Stations | ARP Reply is Unicast Directly to Requester</text>
+
+  <!-- Left: Step 1 (ARP Request) -->
+  <g transform="translate(50, 95)">
+    <rect width="360" height="260" rx="12" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="180" y="30" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#38bdf8" text-anchor="middle">1. ARP Request (BROADCAST)</text>
+    
+    <text x="20" y="60" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">"Who has IP 192.168.1.5? Tell 192.168.1.1"</text>
+    
+    <rect x="20" y="75" width="320" height="55" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="35" y="95" font-family="monospace" font-size="11" fill="#fff">Dest MAC: <tspan fill="#ef4444">FF:FF:FF:FF:FF:FF (Broadcast)</tspan></text>
+    <text x="35" y="115" font-family="monospace" font-size="11" fill="#fff">Target MAC: <tspan fill="#94a3b8">00:00:00:00:00:00 (Unknown)</tspan></text>
+
+    <!-- Visual Station Fan-out -->
+    <text x="180" y="165" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fbbf24" text-anchor="middle">Switch Floods to ALL Local Ports</text>
+    <text x="180" y="190" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">• Station .2: Ignored (IP does not match)</text>
+    <text x="180" y="210" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">• Station .3: Ignored (IP does not match)</text>
+    <text x="180" y="230" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#34d399" text-anchor="middle">• Station .5: Matches! Prepares Reply</text>
+  </g>
+
+  <!-- Right: Step 2 (ARP Reply) -->
+  <g transform="translate(440, 95)">
+    <rect width="360" height="260" rx="12" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+    <text x="180" y="30" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#34d399" text-anchor="middle">2. ARP Reply (UNICAST)</text>
+
+    <text x="20" y="60" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">"192.168.1.5 is at 00:1A:2B:3C:4D:05"</text>
+
+    <rect x="20" y="75" width="320" height="55" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="35" y="95" font-family="monospace" font-size="11" fill="#fff">Dest MAC: <tspan fill="#38bdf8">00:1A:2B:3C:4D:01 (STA 1 Unicast)</tspan></text>
+    <text x="35" y="115" font-family="monospace" font-size="11" fill="#fff">Sender MAC: <tspan fill="#34d399">00:1A:2B:3C:4D:05 (Resolved!)</tspan></text>
+
+    <!-- Visual Resolution -->
+    <text x="180" y="165" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#34d399" text-anchor="middle">Switch Forwards Directly to Host 1</text>
+    <text x="180" y="190" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">• No other stations receive or process the reply.</text>
+    <text x="180" y="215" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">• Host 1 updates its ARP Cache table.</text>
+    <text x="180" y="238" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#38bdf8" text-anchor="middle">ARP Entry cached for ~20 minutes</text>
+  </g>
+</svg>

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="420" rx="16" fill="url(#bg)"/>
+  <text x="425" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Evolution of Ethernet Standards (10 Mbps to 100 Gbps+)</text>
+  <text x="425" y="64" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Data Rate, Media Types, Collision Handling, and IEEE Standardization Milestones</text>
+
+  <!-- 4 Evolution Columns -->
+  <!-- 1. Standard Ethernet -->
+  <g transform="translate(40, 95)">
+    <rect width="180" height="290" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <rect width="180" height="38" rx="10" fill="#0284c7"/>
+    <text x="90" y="25" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#fff" text-anchor="middle">Standard Ethernet</text>
+    <text x="90" y="62" font-family="monospace" font-size="16" font-weight="800" fill="#38bdf8" text-anchor="middle">10 Mbps</text>
+    <text x="90" y="80" font-family="system-ui, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">IEEE 802.3 (1983)</text>
+    <line x1="20" y1="95" x2="160" y2="95" stroke="#334155" stroke-width="1"/>
+    <text x="20" y="120" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• 10BASE5 (Thicknet)</text>
+    <text x="20" y="145" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• 10BASE2 (Thinnet)</text>
+    <text x="20" y="170" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• 10BASE-T (Cat3 UTP)</text>
+    <text x="20" y="200" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fbbf24">• Half-Duplex Bus</text>
+    <text x="20" y="225" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Manchester Coding</text>
+    <text x="20" y="250" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Slot: 512 bit-times</text>
+  </g>
+
+  <!-- 2. Fast Ethernet -->
+  <g transform="translate(235, 95)">
+    <rect width="180" height="290" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+    <rect width="180" height="38" rx="10" fill="#047857"/>
+    <text x="90" y="25" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#fff" text-anchor="middle">Fast Ethernet</text>
+    <text x="90" y="62" font-family="monospace" font-size="16" font-weight="800" fill="#34d399" text-anchor="middle">100 Mbps</text>
+    <text x="90" y="80" font-family="system-ui, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">IEEE 802.3u (1995)</text>
+    <line x1="20" y1="95" x2="160" y2="95" stroke="#334155" stroke-width="1"/>
+    <text x="20" y="120" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• 100BASE-TX (Cat5)</text>
+    <text x="20" y="145" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• 100BASE-FX (Fiber)</text>
+    <text x="20" y="170" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• 100BASE-T4 (Cat3)</text>
+    <text x="20" y="200" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#34d399">• Auto-Negotiation</text>
+    <text x="20" y="225" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• 4B/5B + MLT-3</text>
+    <text x="20" y="250" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Max collision dia: 200m</text>
+  </g>
+
+  <!-- 3. Gigabit Ethernet -->
+  <g transform="translate(430, 95)">
+    <rect width="180" height="290" rx="10" fill="#1e293b" stroke="#6366f1" stroke-width="1.5"/>
+    <rect width="180" height="38" rx="10" fill="#4338ca"/>
+    <text x="90" y="25" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#fff" text-anchor="middle">Gigabit Ethernet</text>
+    <text x="90" y="62" font-family="monospace" font-size="16" font-weight="800" fill="#818cf8" text-anchor="middle">1000 Mbps (1G)</text>
+    <text x="90" y="80" font-family="system-ui, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">IEEE 802.3z / 802.3ab</text>
+    <line x1="20" y1="95" x2="160" y2="95" stroke="#334155" stroke-width="1"/>
+    <text x="20" y="120" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• 1000BASE-T (Cat5e)</text>
+    <text x="20" y="145" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• 1000BASE-SX (MMF)</text>
+    <text x="20" y="170" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• 1000BASE-LX (SMF)</text>
+    <text x="20" y="200" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#818cf8">• Full-Duplex Standard</text>
+    <text x="20" y="225" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• 8B/10B / PAM-5</text>
+    <text x="20" y="250" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Carrier Extension</text>
+  </g>
+
+  <!-- 4. 10G & Beyond -->
+  <g transform="translate(625, 95)">
+    <rect width="180" height="290" rx="10" fill="#1e293b" stroke="#ec4899" stroke-width="1.5"/>
+    <rect width="180" height="38" rx="10" fill="#be185d"/>
+    <text x="90" y="25" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#fff" text-anchor="middle">10G &amp; Terabit</text>
+    <text x="90" y="62" font-family="monospace" font-size="16" font-weight="800" fill="#f472b6" text-anchor="middle">10G - 800 Gbps</text>
+    <text x="90" y="80" font-family="system-ui, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">IEEE 802.3ae / 802.3ck</text>
+    <line x1="20" y1="95" x2="160" y2="95" stroke="#334155" stroke-width="1"/>
+    <text x="20" y="120" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• 10GBASE-T (Cat6a)</text>
+    <text x="20" y="145" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• 10GBASE-SR/LR</text>
+    <text x="20" y="170" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• 40G / 100G / 400G</text>
+    <text x="20" y="200" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#f472b6">• NO CSMA/CD</text>
+    <text x="20" y="225" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Pure Full-Duplex</text>
+    <text x="20" y="250" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Datacenter &amp; Core</text>
+  </g>
+</svg>

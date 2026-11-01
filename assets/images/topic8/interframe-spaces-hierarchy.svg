@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="400" rx="16" fill="url(#bg)"/>
+  <text x="425" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Priority Hierarchy of 802.11 Interframe Spaces (IFS)</text>
+  <text x="425" y="64" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Shorter Silence Duration = Higher Medium Access Priority (SIFS &lt; PIFS &lt; DIFS &lt; EIFS)</text>
+
+  <!-- Bars Diagram -->
+  <g transform="translate(100, 100)">
+    <!-- SIFS -->
+    <text x="0" y="32" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#a855f7">SIFS (10 µs)</text>
+    <rect x="150" y="12" width="100" height="30" rx="6" fill="#a855f7"/>
+    <text x="270" y="32" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">Highest Priority: ACK, CTS, Data Fragment burst</text>
+
+    <!-- PIFS -->
+    <text x="0" y="82" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#10b981">PIFS (30 µs)</text>
+    <rect x="150" y="62" width="180" height="30" rx="6" fill="#10b981"/>
+    <text x="350" y="82" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">Medium Priority: PCF Access Point polling, Beacon</text>
+
+    <!-- DIFS -->
+    <text x="0" y="132" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#38bdf8">DIFS (50 µs)</text>
+    <rect x="150" y="112" width="260" height="30" rx="6" fill="#0284c7"/>
+    <text x="430" y="132" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">Standard Priority: DCF best-effort station contention</text>
+
+    <!-- EIFS -->
+    <text x="0" y="182" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#ef4444">EIFS (&gt;300 µs)</text>
+    <rect x="150" y="162" width="480" height="30" rx="6" fill="#991b1b"/>
+    <text x="160" y="182" font-family="system-ui, sans-serif" font-size="12" fill="#fff">Extended IFS: After receiving corrupted or unreadable frame</text>
+  </g>
+
+  <!-- Formula Callout -->
+  <g transform="translate(60, 310)">
+    <rect width="730" height="60" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <text x="365" y="26" font-family="monospace" font-size="13" font-weight="700" fill="#38bdf8" text-anchor="middle">PIFS = SIFS + 1 Slot Time | DIFS = SIFS + 2 × Slot Time</text>
+    <text x="365" y="48" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">Because SIFS &lt; PIFS &lt; DIFS, an ACK will NEVER collide with an AP poll or a contending DCF station!</text>
+  </g>
+</svg>

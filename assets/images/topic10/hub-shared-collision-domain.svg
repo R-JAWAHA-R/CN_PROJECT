@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 380" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="380" rx="16" fill="url(#bg)"/>
+  <text x="425" y="38" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Hub: Multi-Port Repeater with Shared Collision Domain</text>
+  <text x="425" y="62" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">All Ports Electrically Tied: Ingress Bits on One Port are Blindly Repeated to All Other Ports</text>
+
+  <!-- Center: Hub -->
+  <g transform="translate(365, 115)">
+    <rect width="120" height="80" rx="8" fill="#78350f" stroke="#f59e0b" stroke-width="2"/>
+    <text x="60" y="35" font-family="system-ui, sans-serif" font-size="16" font-weight="900" fill="#fff" text-anchor="middle">HUB</text>
+    <text x="60" y="55" font-family="system-ui, sans-serif" font-size="10" fill="#fde68a" text-anchor="middle">Multiport L1</text>
+    <text x="60" y="70" font-family="system-ui, sans-serif" font-size="9" fill="#fde68a" text-anchor="middle">Repeater</text>
+  </g>
+
+  <!-- 4 Stations around Hub -->
+  <!-- Station A (Sending) -->
+  <g transform="translate(100, 125)">
+    <rect width="110" height="60" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="55" y="35" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#fff" text-anchor="middle">Host A</text>
+    <text x="55" y="50" font-family="system-ui, sans-serif" font-size="9" fill="#38bdf8" text-anchor="middle">Transmitting</text>
+  </g>
+  <line x1="210" y1="155" x2="365" y2="155" stroke="#38bdf8" stroke-width="3"/>
+  <text x="285" y="145" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#38bdf8">Bit Stream →</text>
+
+  <!-- Station B (Receives) -->
+  <g transform="translate(640, 125)">
+    <rect width="110" height="60" rx="6" fill="#1e293b" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="55" y="35" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#fff" text-anchor="middle">Host B</text>
+    <text x="55" y="50" font-family="system-ui, sans-serif" font-size="9" fill="#ef4444" text-anchor="middle">Forced Listener</text>
+  </g>
+  <line x1="485" y1="155" x2="640" y2="155" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="3 2"/>
+
+  <!-- Station C (Top) -->
+  <g transform="translate(370, 10)">
+    <rect width="110" height="50" rx="6" fill="#1e293b" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="55" y="30" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#fff" text-anchor="middle">Host C</text>
+  </g>
+  <line x1="425" y1="60" x2="425" y2="115" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="3 2"/>
+
+  <!-- Station D (Bottom) -->
+  <g transform="translate(370, 240)">
+    <rect width="110" height="50" rx="6" fill="#1e293b" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="55" y="30" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#fff" text-anchor="middle">Host D</text>
+  </g>
+  <line x1="425" y1="195" x2="425" y2="240" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="3 2"/>
+
+  <!-- Summary Box -->
+  <g transform="translate(80, 310)">
+    <rect width="690" height="50" rx="8" fill="#450a0a" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="345" y="30" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fca5a5" text-anchor="middle">
+      ⚠️ Inefficient: Only ONE device can transmit at a time. Half-duplex only; simultaneous send causes collision.
+    </text>
+  </g>
+</svg>

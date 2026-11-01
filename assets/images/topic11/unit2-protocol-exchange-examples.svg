@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 400" width="100%" height="100%">
+  <defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient></defs>
+  <rect width="850" height="400" rx="16" fill="url(#bg)"/>
+  <text x="425" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Step-by-Step Protocol Execution &amp; Recovery Traces</text>
+  <text x="425" y="64" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Normal Flow, Lost Frame Recovery, Lost ACK Handling &amp; Timer Timeouts</text>
+  <g transform="translate(60, 95)">
+    <rect width="730" height="260" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="365" y="50" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#38bdf8" text-anchor="middle">Interactive Protocol State Progression</text>
+    <text x="365" y="90" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1" text-anchor="middle">• Stop-and-Wait ARQ: Sequence bit 0 and 1 toggling prevents duplicate delivery</text>
+    <text x="365" y="125" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1" text-anchor="middle">• Go-Back-N ARQ: Frame 2 lost → Frames 3, 4, 5 discarded at receiver; retransmitted upon timer expiry</text>
+    <text x="365" y="160" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1" text-anchor="middle">• Selective Repeat ARQ: Individual NAK / selective ACK; only lost frame 2 retransmitted</text>
+    <text x="365" y="195" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1" text-anchor="middle">• RTS/CTS Exchange: 802.11 virtual carrier sense completely suppresses hidden collisions</text>
+  </g>
+</svg>

@@ -18,179 +18,1069 @@ if (typeof global !== 'undefined') global.TOPIC_REPOSITORY = TOPIC_REPOSITORY;
 
 // Master Pedagogical Hierarchy Mapping from Syllabus PDF
 const TOPIC_CHAPTER_MAP = {
-  // Topic 1 – Data Link Layer Fundamentals
-  "u2-dll-intro": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
-  "u2-dll-osi-position": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
-  "u2-dll-functions": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
-  "dll-design-issues": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
-  "u2-dll-services": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
-  "framing": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
-  "byte-stuffing": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
-  "bit-stuffing": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
-  "flow-control": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
-  "u2-error-control": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
-  "error-detection": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
-  "parity": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
-  "checksum": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
-  "hamming-code": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
-  "crc": { chapNum: 1, chapTitle: "Topic 1 – Data Link Layer Fundamentals" },
-
-  // Topic 2 – Data Link Layer Protocols
-  "u2-dll-protocols-intro": { chapNum: 2, chapTitle: "Topic 2 – Data Link Layer Protocols" },
-  "u2-protocol-classification": { chapNum: 2, chapTitle: "Topic 2 – Data Link Layer Protocols" },
-  "simplex-protocol": { chapNum: 2, chapTitle: "Topic 2 – Data Link Layer Protocols" },
-  "stop-and-wait-noiseless": { chapNum: 2, chapTitle: "Topic 2 – Data Link Layer Protocols" },
-  "stop-and-wait": { chapNum: 2, chapTitle: "Topic 2 – Data Link Layer Protocols" },
-  "sliding-window": { chapNum: 2, chapTitle: "Topic 2 – Data Link Layer Protocols" },
-  "go-back-n": { chapNum: 2, chapTitle: "Topic 2 – Data Link Layer Protocols" },
-  "selective-repeat": { chapNum: 2, chapTitle: "Topic 2 – Data Link Layer Protocols" },
-  "comparison-noiseless-noisy": { chapNum: 2, chapTitle: "Topic 2 – Data Link Layer Protocols" },
-  "comparison-arq-protocols": { chapNum: 2, chapTitle: "Topic 2 – Data Link Layer Protocols" },
-
-  // Topic 3 – Medium Access Control (MAC) Sublayer
-  "u2-mac-sublayer-intro": { chapNum: 3, chapTitle: "Topic 3 – Medium Access Control (MAC) Sublayer" },
-  "u2-need-for-mac-sublayer": { chapNum: 3, chapTitle: "Topic 3 – Medium Access Control (MAC) Sublayer" },
-  "u2-mac-functions-responsibilities": { chapNum: 3, chapTitle: "Topic 3 – Medium Access Control (MAC) Sublayer" },
-  "channel-allocation": { chapNum: 3, chapTitle: "Topic 3 – Medium Access Control (MAC) Sublayer" },
-  "u2-fdma": { chapNum: 3, chapTitle: "Topic 3 – Medium Access Control (MAC) Sublayer" },
-  "u2-tdma": { chapNum: 3, chapTitle: "Topic 3 – Medium Access Control (MAC) Sublayer" },
-  "u2-dynamic-channel-allocation": { chapNum: 3, chapTitle: "Topic 3 – Medium Access Control (MAC) Sublayer" },
-  "u2-static-vs-dynamic-channel-allocation": { chapNum: 3, chapTitle: "Topic 3 – Medium Access Control (MAC) Sublayer" },
-
-  // Topic 4 – Multiple Access Protocols
-  "u2-multiple-access-intro": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
-  "u2-random-access-protocols": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
-  "aloha": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
-  "u2-pure-aloha": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
-  "u2-slotted-aloha": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
-  "csma-protocols": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
-  "u2-csma-1-persistent": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
-  "u2-csma-non-persistent": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
-  "u2-csma-p-persistent": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
-  "u2-csma-cd": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
-  "u2-csma-ca": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
-  "u2-comparison-multiple-access": { chapNum: 4, chapTitle: "Topic 4 – Multiple Access Protocols" },
-
-  // Topic 5 – Collision-Free Protocols
-  "u2-collision-free-intro": { chapNum: 5, chapTitle: "Topic 5 – Collision-Free Protocols" },
-  "collision-free-protocols": { chapNum: 5, chapTitle: "Topic 5 – Collision-Free Protocols" },
-  "u2-bit-map-protocol": { chapNum: 5, chapTitle: "Topic 5 – Collision-Free Protocols" },
-  "u2-binary-countdown-protocol": { chapNum: 5, chapTitle: "Topic 5 – Collision-Free Protocols" },
-  "u2-token-passing-protocol": { chapNum: 5, chapTitle: "Topic 5 – Collision-Free Protocols" },
-  "u2-collision-free-working-principles": { chapNum: 5, chapTitle: "Topic 5 – Collision-Free Protocols" },
-  "u2-comparison-collision-free": { chapNum: 5, chapTitle: "Topic 5 – Collision-Free Protocols" },
-
-  // Topic 6 – Ethernet MAC Sublayer Protocol
-  "ethernet": { chapNum: 6, chapTitle: "Topic 6 – Ethernet MAC Sublayer Protocol" },
-  "u2-ethernet-architecture": { chapNum: 6, chapTitle: "Topic 6 – Ethernet MAC Sublayer Protocol" },
-  "mac-address": { chapNum: 6, chapTitle: "Topic 6 – Ethernet MAC Sublayer Protocol" },
-  "u2-ethernet-frame-format": { chapNum: 6, chapTitle: "Topic 6 – Ethernet MAC Sublayer Protocol" },
-  "u2-ethernet-mac-protocol": { chapNum: 6, chapTitle: "Topic 6 – Ethernet MAC Sublayer Protocol" },
-  "u2-ethernet-csma-cd-operation": { chapNum: 6, chapTitle: "Topic 6 – Ethernet MAC Sublayer Protocol" },
-  "u2-binary-exponential-backoff": { chapNum: 6, chapTitle: "Topic 6 – Ethernet MAC Sublayer Protocol" },
-  "u2-ethernet-types-evolution": { chapNum: 6, chapTitle: "Topic 6 – Ethernet MAC Sublayer Protocol" },
-  "u2-ethernet-advantages-limitations": { chapNum: 6, chapTitle: "Topic 6 – Ethernet MAC Sublayer Protocol" },
-
-  // Topic 7 – Wireless LAN Protocols
-  "wireless-lan-protocols": { chapNum: 7, chapTitle: "Topic 7 – Wireless LAN Protocols" },
-  "u2-wireless-characteristics": { chapNum: 7, chapTitle: "Topic 7 – Wireless LAN Protocols" },
-  "u2-wireless-lan-architecture": { chapNum: 7, chapTitle: "Topic 7 – Wireless LAN Protocols" },
-  "u2-hidden-terminal-problem": { chapNum: 7, chapTitle: "Topic 7 – Wireless LAN Protocols" },
-  "u2-exposed-terminal-problem": { chapNum: 7, chapTitle: "Topic 7 – Wireless LAN Protocols" },
-  "u2-wireless-multiple-access": { chapNum: 7, chapTitle: "Topic 7 – Wireless LAN Protocols" },
-  "u2-wireless-lan-access-methods": { chapNum: 7, chapTitle: "Topic 7 – Wireless LAN Protocols" },
-  "u2-wireless-communication-challenges": { chapNum: 7, chapTitle: "Topic 7 – Wireless LAN Protocols" },
-
-  // Topic 8 – IEEE 802.11 MAC Sublayer Protocol
-  "wifi-mac-sublayer": { chapNum: 8, chapTitle: "Topic 8 – IEEE 802.11 MAC Sublayer Protocol" },
-  "u2-ieee-802-11-architecture": { chapNum: 8, chapTitle: "Topic 8 – IEEE 802.11 MAC Sublayer Protocol" },
-  "u2-ieee-802-11-dcf": { chapNum: 8, chapTitle: "Topic 8 – IEEE 802.11 MAC Sublayer Protocol" },
-  "u2-ieee-802-11-pcf": { chapNum: 8, chapTitle: "Topic 8 – IEEE 802.11 MAC Sublayer Protocol" },
-  "u2-ieee-802-11-csma-ca": { chapNum: 8, chapTitle: "Topic 8 – IEEE 802.11 MAC Sublayer Protocol" },
-  "u2-ieee-802-11-ifs": { chapNum: 8, chapTitle: "Topic 8 – IEEE 802.11 MAC Sublayer Protocol" },
-  "u2-rts-cts-mechanism": { chapNum: 8, chapTitle: "Topic 8 – IEEE 802.11 MAC Sublayer Protocol" },
-  "u2-network-allocation-vector": { chapNum: 8, chapTitle: "Topic 8 – IEEE 802.11 MAC Sublayer Protocol" },
-  "u2-ieee-802-11-frame-formats": { chapNum: 8, chapTitle: "Topic 8 – IEEE 802.11 MAC Sublayer Protocol" },
-  "u2-dcf-vs-pcf": { chapNum: 8, chapTitle: "Topic 8 – IEEE 802.11 MAC Sublayer Protocol" },
-
-  // Topic 9 – Data Link Layer Switching
-  "dll-switching": { chapNum: 9, chapTitle: "Topic 9 – Data Link Layer Switching" },
-  "u2-bridges-overview": { chapNum: 9, chapTitle: "Topic 9 – Data Link Layer Switching" },
-  "u2-transparent-bridges": { chapNum: 9, chapTitle: "Topic 9 – Data Link Layer Switching" },
-  "u2-learning-bridges": { chapNum: 9, chapTitle: "Topic 9 – Data Link Layer Switching" },
-  "u2-bridge-learning-process": { chapNum: 9, chapTitle: "Topic 9 – Data Link Layer Switching" },
-  "u2-forwarding-and-filtering": { chapNum: 9, chapTitle: "Topic 9 – Data Link Layer Switching" },
-  "u2-bridge-flooding": { chapNum: 9, chapTitle: "Topic 9 – Data Link Layer Switching" },
-  "u2-spanning-tree-protocol": { chapNum: 9, chapTitle: "Topic 9 – Data Link Layer Switching" },
-  "u2-bridges-vs-switches": { chapNum: 9, chapTitle: "Topic 9 – Data Link Layer Switching" },
-  "vlan": { chapNum: 9, chapTitle: "Topic 9 – Data Link Layer Switching" },
-
-  // Topic 10 – Networking Devices
-  "network-devices": { chapNum: 10, chapTitle: "Topic 10 – Networking Devices" },
-  "u2-networking-device-repeaters": { chapNum: 10, chapTitle: "Topic 10 – Networking Devices" },
-  "u2-networking-device-hubs": { chapNum: 10, chapTitle: "Topic 10 – Networking Devices" },
-  "u2-networking-device-bridges": { chapNum: 10, chapTitle: "Topic 10 – Networking Devices" },
-  "u2-networking-device-switches": { chapNum: 10, chapTitle: "Topic 10 – Networking Devices" },
-  "u2-networking-device-routers": { chapNum: 10, chapTitle: "Topic 10 – Networking Devices" },
-  "u2-networking-device-gateways": { chapNum: 10, chapTitle: "Topic 10 – Networking Devices" },
-  "u2-device-working-principles": { chapNum: 10, chapTitle: "Topic 10 – Networking Devices" },
-  "u2-comparison-networking-devices": { chapNum: 10, chapTitle: "Topic 10 – Networking Devices" },
-  "u2-device-osi-layers": { chapNum: 10, chapTitle: "Topic 10 – Networking Devices" },
-  "arp": { chapNum: 10, chapTitle: "Topic 10 – Networking Devices" },
-
-  // Topic 11 – Revision and Assessment
-  "u2-definitions-terminology": { chapNum: 11, chapTitle: "Topic 11 – Revision and Assessment" },
-  "u2-important-diagrams": { chapNum: 11, chapTitle: "Topic 11 – Revision and Assessment" },
-  "u2-comparison-tables": { chapNum: 11, chapTitle: "Topic 11 – Revision and Assessment" },
-  "u2-numerical-problems": { chapNum: 11, chapTitle: "Topic 11 – Revision and Assessment" },
-  "u2-protocol-examples": { chapNum: 11, chapTitle: "Topic 11 – Revision and Assessment" },
-  "u2-short-answer-questions": { chapNum: 11, chapTitle: "Topic 11 – Revision and Assessment" },
-  "u2-long-answer-questions": { chapNum: 11, chapTitle: "Topic 11 – Revision and Assessment" },
-  "u2-important-exam-questions": { chapNum: 11, chapTitle: "Topic 11 – Revision and Assessment" },
-  "u2-mcqs": { chapNum: 11, chapTitle: "Topic 11 – Revision and Assessment" },
-  "u2-practice-test": { chapNum: 11, chapTitle: "Topic 11 – Revision and Assessment" },
-
-  // Unit 3: Master Pedagogical Hierarchy Mapping from Syllabus PDF
-  // Chapter 1: Topic 1: Network Layer Design Issues & Routing Fundamentals
-  "routing-design-issues": { chapNum: 1, chapTitle: "Topic 1: Network Layer Design Issues & Routing Fundamentals" },
-  "network-layer": { chapNum: 1, chapTitle: "Topic 1: Network Layer Design Issues & Routing Fundamentals" },
-  "forwarding": { chapNum: 1, chapTitle: "Topic 1: Network Layer Design Issues & Routing Fundamentals" },
-  "routing": { chapNum: 1, chapTitle: "Topic 1: Network Layer Design Issues & Routing Fundamentals" },
-  "optimality-principle": { chapNum: 1, chapTitle: "Topic 1: Network Layer Design Issues & Routing Fundamentals" },
-
-  // Chapter 2: Topic 2: Routing Algorithms
-  "shortest-path-algorithm": { chapNum: 2, chapTitle: "Topic 2: Routing Algorithms" },
-  "dijkstra": { chapNum: 2, chapTitle: "Topic 2: Routing Algorithms" },
-  "flooding": { chapNum: 2, chapTitle: "Topic 2: Routing Algorithms" },
-  "distance-vector-routing": { chapNum: 2, chapTitle: "Topic 2: Routing Algorithms" },
-  "distance-vector": { chapNum: 2, chapTitle: "Topic 2: Routing Algorithms" },
-  "link-state-routing": { chapNum: 2, chapTitle: "Topic 2: Routing Algorithms" },
-
-  // Chapter 3: Topic 3: Congestion Control in Computer Networks
-  "congestion-control": { chapNum: 3, chapTitle: "Topic 3: Congestion Control in Computer Networks" },
-  "traffic-aware-routing": { chapNum: 3, chapTitle: "Topic 3: Congestion Control in Computer Networks" },
-  "admission-control": { chapNum: 3, chapTitle: "Topic 3: Congestion Control in Computer Networks" },
-  "traffic-throttling": { chapNum: 3, chapTitle: "Topic 3: Congestion Control in Computer Networks" },
-  "load-shedding": { chapNum: 3, chapTitle: "Topic 3: Congestion Control in Computer Networks" },
-
-  // Chapter 4: Topic 4: Internetworking and IP Routing
-  "internetworking": { chapNum: 4, chapTitle: "Topic 4: Internetworking and IP Routing" },
-  "tunneling": { chapNum: 4, chapTitle: "Topic 4: Internetworking and IP Routing" },
-  "internetwork-routing": { chapNum: 4, chapTitle: "Topic 4: Internetworking and IP Routing" },
-
-  // Chapter 5: Topic 5: IP Addressing — IPv4 and IPv6
-  "ipv4-protocol": { chapNum: 5, chapTitle: "Topic 5: IP Addressing — IPv4 and IPv6" },
-  "ipv4": { chapNum: 5, chapTitle: "Topic 5: IP Addressing — IPv4 and IPv6" },
-  "ip-addressing": { chapNum: 5, chapTitle: "Topic 5: IP Addressing — IPv4 and IPv6" },
-  "nat": { chapNum: 5, chapTitle: "Topic 5: IP Addressing — IPv4 and IPv6" },
-  "ipv6-protocol": { chapNum: 5, chapTitle: "Topic 5: IP Addressing — IPv4 and IPv6" },
-  "ipv6": { chapNum: 5, chapTitle: "Topic 5: IP Addressing — IPv4 and IPv6" },
-
-  // Chapter 6: Routing Protocols & Internet Architecture
-  "ospf": { chapNum: 6, chapTitle: "Topic 6: Routing Protocols & Architecture" },
-  "bgp": { chapNum: 6, chapTitle: "Topic 6: Routing Protocols & Architecture" },
-  "sdn": { chapNum: 6, chapTitle: "Topic 6: Routing Protocols & Architecture" }
+  "computer-network": {
+    "chapNum": 1,
+    "chapTitle": "1. Network Architecture, Edge/Core & Devices",
+    "unitId": "unit1",
+    "unit": "Unit 1: Basics of Computer Networks & Physical Layer"
+  },
+  "network-edge-core": {
+    "chapNum": 1,
+    "chapTitle": "1. Network Architecture, Edge/Core & Devices",
+    "unitId": "unit1",
+    "unit": "Unit 1: Basics of Computer Networks & Physical Layer"
+  },
+  "hosts-routers-switches": {
+    "chapNum": 1,
+    "chapTitle": "1. Network Architecture, Edge/Core & Devices",
+    "unitId": "unit1",
+    "unit": "Unit 1: Basics of Computer Networks & Physical Layer"
+  },
+  "protocol": {
+    "chapNum": 1,
+    "chapTitle": "1. Network Architecture, Edge/Core & Devices",
+    "unitId": "unit1",
+    "unit": "Unit 1: Basics of Computer Networks & Physical Layer"
+  },
+  "osi-model": {
+    "chapNum": 2,
+    "chapTitle": "2. Reference Models & Encapsulation",
+    "unitId": "unit1",
+    "unit": "Unit 1: Basics of Computer Networks & Physical Layer"
+  },
+  "tcp-ip-model": {
+    "chapNum": 2,
+    "chapTitle": "2. Reference Models & Encapsulation",
+    "unitId": "unit1",
+    "unit": "Unit 1: Basics of Computer Networks & Physical Layer"
+  },
+  "protocol-stack": {
+    "chapNum": 2,
+    "chapTitle": "2. Reference Models & Encapsulation",
+    "unitId": "unit1",
+    "unit": "Unit 1: Basics of Computer Networks & Physical Layer"
+  },
+  "encapsulation": {
+    "chapNum": 2,
+    "chapTitle": "2. Reference Models & Encapsulation",
+    "unitId": "unit1",
+    "unit": "Unit 1: Basics of Computer Networks & Physical Layer"
+  },
+  "network-topologies": {
+    "chapNum": 3,
+    "chapTitle": "3. Topologies, Switching & Physical Transmission",
+    "unitId": "unit1",
+    "unit": "Unit 1: Basics of Computer Networks & Physical Layer"
+  },
+  "circuit-vs-packet-switching": {
+    "chapNum": 3,
+    "chapTitle": "3. Topologies, Switching & Physical Transmission",
+    "unitId": "unit1",
+    "unit": "Unit 1: Basics of Computer Networks & Physical Layer"
+  },
+  "transmission-media": {
+    "chapNum": 3,
+    "chapTitle": "3. Topologies, Switching & Physical Transmission",
+    "unitId": "unit1",
+    "unit": "Unit 1: Basics of Computer Networks & Physical Layer"
+  },
+  "network-delay-loss": {
+    "chapNum": 3,
+    "chapTitle": "3. Topologies, Switching & Physical Transmission",
+    "unitId": "unit1",
+    "unit": "Unit 1: Basics of Computer Networks & Physical Layer"
+  },
+  "multiplexing": {
+    "chapNum": 3,
+    "chapTitle": "3. Topologies, Switching & Physical Transmission",
+    "unitId": "unit1",
+    "unit": "Unit 1: Basics of Computer Networks & Physical Layer"
+  },
+  "analog-digital-signals": {
+    "chapNum": 3,
+    "chapTitle": "3. Topologies, Switching & Physical Transmission",
+    "unitId": "unit1",
+    "unit": "Unit 1: Basics of Computer Networks & Physical Layer"
+  },
+  "u2-dll-intro": {
+    "chapNum": 1,
+    "chapTitle": "TOPIC 1 – DATA LINK LAYER FUNDAMENTALS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-dll-osi-position": {
+    "chapNum": 1,
+    "chapTitle": "TOPIC 1 – DATA LINK LAYER FUNDAMENTALS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-dll-functions": {
+    "chapNum": 1,
+    "chapTitle": "TOPIC 1 – DATA LINK LAYER FUNDAMENTALS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "dll-design-issues": {
+    "chapNum": 1,
+    "chapTitle": "TOPIC 1 – DATA LINK LAYER FUNDAMENTALS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-dll-services": {
+    "chapNum": 1,
+    "chapTitle": "TOPIC 1 – DATA LINK LAYER FUNDAMENTALS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "framing": {
+    "chapNum": 1,
+    "chapTitle": "TOPIC 1 – DATA LINK LAYER FUNDAMENTALS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "flow-control": {
+    "chapNum": 1,
+    "chapTitle": "TOPIC 1 – DATA LINK LAYER FUNDAMENTALS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-error-control": {
+    "chapNum": 1,
+    "chapTitle": "TOPIC 1 – DATA LINK LAYER FUNDAMENTALS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-dll-protocols-intro": {
+    "chapNum": 2,
+    "chapTitle": "TOPIC 2 – DATA LINK LAYER PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-protocol-classification": {
+    "chapNum": 2,
+    "chapTitle": "TOPIC 2 – DATA LINK LAYER PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "simplex-protocol": {
+    "chapNum": 2,
+    "chapTitle": "TOPIC 2 – DATA LINK LAYER PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "stop-and-wait-noiseless": {
+    "chapNum": 2,
+    "chapTitle": "TOPIC 2 – DATA LINK LAYER PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "stop-and-wait": {
+    "chapNum": 2,
+    "chapTitle": "TOPIC 2 – DATA LINK LAYER PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "go-back-n": {
+    "chapNum": 2,
+    "chapTitle": "TOPIC 2 – DATA LINK LAYER PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "selective-repeat": {
+    "chapNum": 2,
+    "chapTitle": "TOPIC 2 – DATA LINK LAYER PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "comparison-noiseless-noisy": {
+    "chapNum": 2,
+    "chapTitle": "TOPIC 2 – DATA LINK LAYER PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "comparison-arq-protocols": {
+    "chapNum": 2,
+    "chapTitle": "TOPIC 2 – DATA LINK LAYER PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-mac-sublayer-intro": {
+    "chapNum": 3,
+    "chapTitle": "TOPIC 3 – MEDIUM ACCESS CONTROL (MAC) SUBLAYER",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-need-for-mac-sublayer": {
+    "chapNum": 3,
+    "chapTitle": "TOPIC 3 – MEDIUM ACCESS CONTROL (MAC) SUBLAYER",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-mac-functions-responsibilities": {
+    "chapNum": 3,
+    "chapTitle": "TOPIC 3 – MEDIUM ACCESS CONTROL (MAC) SUBLAYER",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "channel-allocation": {
+    "chapNum": 3,
+    "chapTitle": "TOPIC 3 – MEDIUM ACCESS CONTROL (MAC) SUBLAYER",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-fdma": {
+    "chapNum": 3,
+    "chapTitle": "TOPIC 3 – MEDIUM ACCESS CONTROL (MAC) SUBLAYER",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-tdma": {
+    "chapNum": 3,
+    "chapTitle": "TOPIC 3 – MEDIUM ACCESS CONTROL (MAC) SUBLAYER",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-dynamic-channel-allocation": {
+    "chapNum": 3,
+    "chapTitle": "TOPIC 3 – MEDIUM ACCESS CONTROL (MAC) SUBLAYER",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-static-vs-dynamic-channel-allocation": {
+    "chapNum": 3,
+    "chapTitle": "TOPIC 3 – MEDIUM ACCESS CONTROL (MAC) SUBLAYER",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-multiple-access-intro": {
+    "chapNum": 4,
+    "chapTitle": "TOPIC 4 – MULTIPLE ACCESS PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-random-access-protocols": {
+    "chapNum": 4,
+    "chapTitle": "TOPIC 4 – MULTIPLE ACCESS PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-pure-aloha": {
+    "chapNum": 4,
+    "chapTitle": "TOPIC 4 – MULTIPLE ACCESS PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-slotted-aloha": {
+    "chapNum": 4,
+    "chapTitle": "TOPIC 4 – MULTIPLE ACCESS PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-csma-1-persistent": {
+    "chapNum": 4,
+    "chapTitle": "TOPIC 4 – MULTIPLE ACCESS PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-csma-non-persistent": {
+    "chapNum": 4,
+    "chapTitle": "TOPIC 4 – MULTIPLE ACCESS PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-csma-p-persistent": {
+    "chapNum": 4,
+    "chapTitle": "TOPIC 4 – MULTIPLE ACCESS PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-csma-cd": {
+    "chapNum": 4,
+    "chapTitle": "TOPIC 4 – MULTIPLE ACCESS PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-csma-ca": {
+    "chapNum": 4,
+    "chapTitle": "TOPIC 4 – MULTIPLE ACCESS PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-comparison-multiple-access": {
+    "chapNum": 4,
+    "chapTitle": "TOPIC 4 – MULTIPLE ACCESS PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-collision-free-intro": {
+    "chapNum": 5,
+    "chapTitle": "TOPIC 5 – COLLISION-FREE PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-bit-map-protocol": {
+    "chapNum": 5,
+    "chapTitle": "TOPIC 5 – COLLISION-FREE PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-binary-countdown-protocol": {
+    "chapNum": 5,
+    "chapTitle": "TOPIC 5 – COLLISION-FREE PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-token-passing-protocol": {
+    "chapNum": 5,
+    "chapTitle": "TOPIC 5 – COLLISION-FREE PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-collision-free-working-principles": {
+    "chapNum": 5,
+    "chapTitle": "TOPIC 5 – COLLISION-FREE PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-comparison-collision-free": {
+    "chapNum": 5,
+    "chapTitle": "TOPIC 5 – COLLISION-FREE PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "ethernet": {
+    "chapNum": 6,
+    "chapTitle": "TOPIC 6 – ETHERNET MAC SUBLAYER PROTOCOL",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-ethernet-architecture": {
+    "chapNum": 6,
+    "chapTitle": "TOPIC 6 – ETHERNET MAC SUBLAYER PROTOCOL",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "mac-address": {
+    "chapNum": 6,
+    "chapTitle": "TOPIC 6 – ETHERNET MAC SUBLAYER PROTOCOL",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-ethernet-frame-format": {
+    "chapNum": 6,
+    "chapTitle": "TOPIC 6 – ETHERNET MAC SUBLAYER PROTOCOL",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-ethernet-mac-protocol": {
+    "chapNum": 6,
+    "chapTitle": "TOPIC 6 – ETHERNET MAC SUBLAYER PROTOCOL",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-ethernet-csma-cd-operation": {
+    "chapNum": 6,
+    "chapTitle": "TOPIC 6 – ETHERNET MAC SUBLAYER PROTOCOL",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-binary-exponential-backoff": {
+    "chapNum": 6,
+    "chapTitle": "TOPIC 6 – ETHERNET MAC SUBLAYER PROTOCOL",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-ethernet-types-evolution": {
+    "chapNum": 6,
+    "chapTitle": "TOPIC 6 – ETHERNET MAC SUBLAYER PROTOCOL",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-ethernet-advantages-limitations": {
+    "chapNum": 6,
+    "chapTitle": "TOPIC 6 – ETHERNET MAC SUBLAYER PROTOCOL",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "wireless-lan-protocols": {
+    "chapNum": 7,
+    "chapTitle": "TOPIC 7 – WIRELESS LAN PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-wireless-characteristics": {
+    "chapNum": 7,
+    "chapTitle": "TOPIC 7 – WIRELESS LAN PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-wireless-lan-architecture": {
+    "chapNum": 7,
+    "chapTitle": "TOPIC 7 – WIRELESS LAN PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-hidden-terminal-problem": {
+    "chapNum": 7,
+    "chapTitle": "TOPIC 7 – WIRELESS LAN PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-exposed-terminal-problem": {
+    "chapNum": 7,
+    "chapTitle": "TOPIC 7 – WIRELESS LAN PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-wireless-multiple-access": {
+    "chapNum": 7,
+    "chapTitle": "TOPIC 7 – WIRELESS LAN PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-wireless-lan-access-methods": {
+    "chapNum": 7,
+    "chapTitle": "TOPIC 7 – WIRELESS LAN PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-wireless-communication-challenges": {
+    "chapNum": 7,
+    "chapTitle": "TOPIC 7 – WIRELESS LAN PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "wifi-mac-sublayer": {
+    "chapNum": 8,
+    "chapTitle": "TOPIC 8 – IEEE 802.11 MAC SUBLAYER PROTOCOL",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-ieee-802-11-architecture": {
+    "chapNum": 8,
+    "chapTitle": "TOPIC 8 – IEEE 802.11 MAC SUBLAYER PROTOCOL",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-ieee-802-11-dcf": {
+    "chapNum": 8,
+    "chapTitle": "TOPIC 8 – IEEE 802.11 MAC SUBLAYER PROTOCOL",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-ieee-802-11-pcf": {
+    "chapNum": 8,
+    "chapTitle": "TOPIC 8 – IEEE 802.11 MAC SUBLAYER PROTOCOL",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-ieee-802-11-csma-ca": {
+    "chapNum": 8,
+    "chapTitle": "TOPIC 8 – IEEE 802.11 MAC SUBLAYER PROTOCOL",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-ieee-802-11-ifs": {
+    "chapNum": 8,
+    "chapTitle": "TOPIC 8 – IEEE 802.11 MAC SUBLAYER PROTOCOL",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-rts-cts-mechanism": {
+    "chapNum": 8,
+    "chapTitle": "TOPIC 8 – IEEE 802.11 MAC SUBLAYER PROTOCOL",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-network-allocation-vector": {
+    "chapNum": 8,
+    "chapTitle": "TOPIC 8 – IEEE 802.11 MAC SUBLAYER PROTOCOL",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-ieee-802-11-frame-formats": {
+    "chapNum": 8,
+    "chapTitle": "TOPIC 8 – IEEE 802.11 MAC SUBLAYER PROTOCOL",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-dcf-vs-pcf": {
+    "chapNum": 8,
+    "chapTitle": "TOPIC 8 – IEEE 802.11 MAC SUBLAYER PROTOCOL",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "dll-switching": {
+    "chapNum": 9,
+    "chapTitle": "TOPIC 9 – DATA LINK LAYER SWITCHING",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-bridges-overview": {
+    "chapNum": 9,
+    "chapTitle": "TOPIC 9 – DATA LINK LAYER SWITCHING",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-transparent-bridges": {
+    "chapNum": 9,
+    "chapTitle": "TOPIC 9 – DATA LINK LAYER SWITCHING",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-learning-bridges": {
+    "chapNum": 9,
+    "chapTitle": "TOPIC 9 – DATA LINK LAYER SWITCHING",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-bridge-learning-process": {
+    "chapNum": 9,
+    "chapTitle": "TOPIC 9 – DATA LINK LAYER SWITCHING",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-forwarding-and-filtering": {
+    "chapNum": 9,
+    "chapTitle": "TOPIC 9 – DATA LINK LAYER SWITCHING",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-bridge-flooding": {
+    "chapNum": 9,
+    "chapTitle": "TOPIC 9 – DATA LINK LAYER SWITCHING",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-spanning-tree-protocol": {
+    "chapNum": 9,
+    "chapTitle": "TOPIC 9 – DATA LINK LAYER SWITCHING",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-bridges-vs-switches": {
+    "chapNum": 9,
+    "chapTitle": "TOPIC 9 – DATA LINK LAYER SWITCHING",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "network-devices": {
+    "chapNum": 10,
+    "chapTitle": "TOPIC 10 – NETWORKING DEVICES",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-networking-device-repeaters": {
+    "chapNum": 10,
+    "chapTitle": "TOPIC 10 – NETWORKING DEVICES",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-networking-device-hubs": {
+    "chapNum": 10,
+    "chapTitle": "TOPIC 10 – NETWORKING DEVICES",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-networking-device-bridges": {
+    "chapNum": 10,
+    "chapTitle": "TOPIC 10 – NETWORKING DEVICES",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-networking-device-switches": {
+    "chapNum": 10,
+    "chapTitle": "TOPIC 10 – NETWORKING DEVICES",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-networking-device-routers": {
+    "chapNum": 10,
+    "chapTitle": "TOPIC 10 – NETWORKING DEVICES",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-networking-device-gateways": {
+    "chapNum": 10,
+    "chapTitle": "TOPIC 10 – NETWORKING DEVICES",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-device-working-principles": {
+    "chapNum": 10,
+    "chapTitle": "TOPIC 10 – NETWORKING DEVICES",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-comparison-networking-devices": {
+    "chapNum": 10,
+    "chapTitle": "TOPIC 10 – NETWORKING DEVICES",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-device-osi-layers": {
+    "chapNum": 10,
+    "chapTitle": "TOPIC 10 – NETWORKING DEVICES",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-definitions-terminology": {
+    "chapNum": 11,
+    "chapTitle": "TOPIC 11 – REVISION AND ASSESSMENT",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-important-diagrams": {
+    "chapNum": 11,
+    "chapTitle": "TOPIC 11 – REVISION AND ASSESSMENT",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-comparison-tables": {
+    "chapNum": 11,
+    "chapTitle": "TOPIC 11 – REVISION AND ASSESSMENT",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-numerical-problems": {
+    "chapNum": 11,
+    "chapTitle": "TOPIC 11 – REVISION AND ASSESSMENT",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-protocol-examples": {
+    "chapNum": 11,
+    "chapTitle": "TOPIC 11 – REVISION AND ASSESSMENT",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-short-answer-questions": {
+    "chapNum": 11,
+    "chapTitle": "TOPIC 11 – REVISION AND ASSESSMENT",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-long-answer-questions": {
+    "chapNum": 11,
+    "chapTitle": "TOPIC 11 – REVISION AND ASSESSMENT",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-important-exam-questions": {
+    "chapNum": 11,
+    "chapTitle": "TOPIC 11 – REVISION AND ASSESSMENT",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-mcqs": {
+    "chapNum": 11,
+    "chapTitle": "TOPIC 11 – REVISION AND ASSESSMENT",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "u2-practice-test": {
+    "chapNum": 11,
+    "chapTitle": "TOPIC 11 – REVISION AND ASSESSMENT",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "routing-design-issues": {
+    "chapNum": 1,
+    "chapTitle": "1. Network Layer Design Issues & Routing Fundamentals",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "network-layer": {
+    "chapNum": 1,
+    "chapTitle": "1. Network Layer Design Issues & Routing Fundamentals",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "forwarding": {
+    "chapNum": 1,
+    "chapTitle": "1. Network Layer Design Issues & Routing Fundamentals",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "routing": {
+    "chapNum": 1,
+    "chapTitle": "1. Network Layer Design Issues & Routing Fundamentals",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "optimality-principle": {
+    "chapNum": 1,
+    "chapTitle": "1. Network Layer Design Issues & Routing Fundamentals",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "dijkstra": {
+    "chapNum": 2,
+    "chapTitle": "2. Routing Algorithms (Dijkstra, Flooding, DV, Link-State)",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "flooding": {
+    "chapNum": 2,
+    "chapTitle": "2. Routing Algorithms (Dijkstra, Flooding, DV, Link-State)",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "distance-vector": {
+    "chapNum": 2,
+    "chapTitle": "2. Routing Algorithms (Dijkstra, Flooding, DV, Link-State)",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "link-state-routing": {
+    "chapNum": 2,
+    "chapTitle": "2. Routing Algorithms (Dijkstra, Flooding, DV, Link-State)",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "congestion-control": {
+    "chapNum": 3,
+    "chapTitle": "3. Congestion Control in Computer Networks",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "traffic-aware-routing": {
+    "chapNum": 3,
+    "chapTitle": "3. Congestion Control in Computer Networks",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "admission-control": {
+    "chapNum": 3,
+    "chapTitle": "3. Congestion Control in Computer Networks",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "traffic-throttling": {
+    "chapNum": 3,
+    "chapTitle": "3. Congestion Control in Computer Networks",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "load-shedding": {
+    "chapNum": 3,
+    "chapTitle": "3. Congestion Control in Computer Networks",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "internetworking": {
+    "chapNum": 4,
+    "chapTitle": "4. Internetworking and IP Routing",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "tunneling": {
+    "chapNum": 4,
+    "chapTitle": "4. Internetworking and IP Routing",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "internetwork-routing": {
+    "chapNum": 4,
+    "chapTitle": "4. Internetworking and IP Routing",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "ipv4": {
+    "chapNum": 5,
+    "chapTitle": "5. IP Addressing — IPv4 and IPv6",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "ip-addressing": {
+    "chapNum": 5,
+    "chapTitle": "5. IP Addressing — IPv4 and IPv6",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "nat": {
+    "chapNum": 5,
+    "chapTitle": "5. IP Addressing — IPv4 and IPv6",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "ipv6": {
+    "chapNum": 5,
+    "chapTitle": "5. IP Addressing — IPv4 and IPv6",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "ospf": {
+    "chapNum": 6,
+    "chapTitle": "6. Routing Protocols & Internet Architecture (OSPF, BGP, SDN)",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "bgp": {
+    "chapNum": 6,
+    "chapTitle": "6. Routing Protocols & Internet Architecture (OSPF, BGP, SDN)",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "sdn": {
+    "chapNum": 6,
+    "chapTitle": "6. Routing Protocols & Internet Architecture (OSPF, BGP, SDN)",
+    "unitId": "unit3",
+    "unit": "Unit 3: Network Layer"
+  },
+  "transport-layer": {
+    "chapNum": 1,
+    "chapTitle": "Topic 1: Transport Protocols (UDP & TCP)",
+    "unitId": "unit4",
+    "unit": "Unit 4: Transport Layer"
+  },
+  "tcp": {
+    "chapNum": 1,
+    "chapTitle": "Topic 1: Transport Protocols (UDP & TCP)",
+    "unitId": "unit4",
+    "unit": "Unit 4: Transport Layer"
+  },
+  "udp": {
+    "chapNum": 1,
+    "chapTitle": "Topic 1: Transport Protocols (UDP & TCP)",
+    "unitId": "unit4",
+    "unit": "Unit 4: Transport Layer"
+  },
+  "udp-header": {
+    "chapNum": 1,
+    "chapTitle": "Topic 1: Transport Protocols (UDP & TCP)",
+    "unitId": "unit4",
+    "unit": "Unit 4: Transport Layer"
+  },
+  "tcp-three-way-handshake": {
+    "chapNum": 1,
+    "chapTitle": "Topic 1: Transport Protocols (UDP & TCP)",
+    "unitId": "unit4",
+    "unit": "Unit 4: Transport Layer"
+  },
+  "tcp-header": {
+    "chapNum": 2,
+    "chapTitle": "Topic 2: Connection Management & Flow Control",
+    "unitId": "unit4",
+    "unit": "Unit 4: Transport Layer"
+  },
+  "sequence-number": {
+    "chapNum": 2,
+    "chapTitle": "Topic 2: Connection Management & Flow Control",
+    "unitId": "unit4",
+    "unit": "Unit 4: Transport Layer"
+  },
+  "acknowledgement": {
+    "chapNum": 2,
+    "chapTitle": "Topic 2: Connection Management & Flow Control",
+    "unitId": "unit4",
+    "unit": "Unit 4: Transport Layer"
+  },
+  "tcp-flow-control": {
+    "chapNum": 2,
+    "chapTitle": "Topic 2: Connection Management & Flow Control",
+    "unitId": "unit4",
+    "unit": "Unit 4: Transport Layer"
+  },
+  "tcp-congestion-control": {
+    "chapNum": 2,
+    "chapTitle": "Topic 2: Connection Management & Flow Control",
+    "unitId": "unit4",
+    "unit": "Unit 4: Transport Layer"
+  },
+  "application-layer": {
+    "chapNum": 1,
+    "chapTitle": "Topic 1: DNS & Web Protocols",
+    "unitId": "unit5",
+    "unit": "Unit 5: Application Layer"
+  },
+  "dns": {
+    "chapNum": 1,
+    "chapTitle": "Topic 1: DNS & Web Protocols",
+    "unitId": "unit5",
+    "unit": "Unit 5: Application Layer"
+  },
+  "dns-records": {
+    "chapNum": 1,
+    "chapTitle": "Topic 1: DNS & Web Protocols",
+    "unitId": "unit5",
+    "unit": "Unit 5: Application Layer"
+  },
+  "http": {
+    "chapNum": 1,
+    "chapTitle": "Topic 1: DNS & Web Protocols",
+    "unitId": "unit5",
+    "unit": "Unit 5: Application Layer"
+  },
+  "https": {
+    "chapNum": 1,
+    "chapTitle": "Topic 1: DNS & Web Protocols",
+    "unitId": "unit5",
+    "unit": "Unit 5: Application Layer"
+  },
+  "email-system": {
+    "chapNum": 2,
+    "chapTitle": "Topic 2: Electronic Mail Protocols",
+    "unitId": "unit5",
+    "unit": "Unit 5: Application Layer"
+  },
+  "smtp": {
+    "chapNum": 2,
+    "chapTitle": "Topic 2: Electronic Mail Protocols",
+    "unitId": "unit5",
+    "unit": "Unit 5: Application Layer"
+  },
+  "pop3": {
+    "chapNum": 2,
+    "chapTitle": "Topic 2: Electronic Mail Protocols",
+    "unitId": "unit5",
+    "unit": "Unit 5: Application Layer"
+  },
+  "imap": {
+    "chapNum": 2,
+    "chapTitle": "Topic 2: Electronic Mail Protocols",
+    "unitId": "unit5",
+    "unit": "Unit 5: Application Layer"
+  },
+  "firewall": {
+    "chapNum": 3,
+    "chapTitle": "Topic 3: Network Security & Cryptography",
+    "unitId": "unit5",
+    "unit": "Unit 5: Application Layer"
+  },
+  "ids": {
+    "chapNum": 3,
+    "chapTitle": "Topic 3: Network Security & Cryptography",
+    "unitId": "unit5",
+    "unit": "Unit 5: Application Layer"
+  },
+  "ips": {
+    "chapNum": 3,
+    "chapTitle": "Topic 3: Network Security & Cryptography",
+    "unitId": "unit5",
+    "unit": "Unit 5: Application Layer"
+  },
+  "public-key-cryptography": {
+    "chapNum": 3,
+    "chapTitle": "Topic 3: Network Security & Cryptography",
+    "unitId": "unit5",
+    "unit": "Unit 5: Application Layer"
+  },
+  "rsa": {
+    "chapNum": 3,
+    "chapTitle": "Topic 3: Network Security & Cryptography",
+    "unitId": "unit5",
+    "unit": "Unit 5: Application Layer"
+  },
+  "rsa-encryption": {
+    "chapNum": 3,
+    "chapTitle": "Topic 3: Network Security & Cryptography",
+    "unitId": "unit5",
+    "unit": "Unit 5: Application Layer"
+  },
+  "rsa-digital-signature": {
+    "chapNum": 3,
+    "chapTitle": "Topic 3: Network Security & Cryptography",
+    "unitId": "unit5",
+    "unit": "Unit 5: Application Layer"
+  },
+  "rsa-padding": {
+    "chapNum": 3,
+    "chapTitle": "Topic 3: Network Security & Cryptography",
+    "unitId": "unit5",
+    "unit": "Unit 5: Application Layer"
+  },
+  "byte-stuffing": {
+    "chapNum": 1,
+    "chapTitle": "TOPIC 1 – DATA LINK LAYER FUNDAMENTALS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "bit-stuffing": {
+    "chapNum": 1,
+    "chapTitle": "TOPIC 1 – DATA LINK LAYER FUNDAMENTALS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "error-detection": {
+    "chapNum": 1,
+    "chapTitle": "TOPIC 1 – DATA LINK LAYER FUNDAMENTALS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "parity": {
+    "chapNum": 1,
+    "chapTitle": "TOPIC 1 – DATA LINK LAYER FUNDAMENTALS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "checksum": {
+    "chapNum": 1,
+    "chapTitle": "TOPIC 1 – DATA LINK LAYER FUNDAMENTALS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "hamming-code": {
+    "chapNum": 1,
+    "chapTitle": "TOPIC 1 – DATA LINK LAYER FUNDAMENTALS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "crc": {
+    "chapNum": 1,
+    "chapTitle": "TOPIC 1 – DATA LINK LAYER FUNDAMENTALS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "sliding-window": {
+    "chapNum": 2,
+    "chapTitle": "TOPIC 2 – DATA LINK LAYER PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "aloha": {
+    "chapNum": 4,
+    "chapTitle": "TOPIC 4 – MULTIPLE ACCESS PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "csma-protocols": {
+    "chapNum": 4,
+    "chapTitle": "TOPIC 4 – MULTIPLE ACCESS PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "collision-free-protocols": {
+    "chapNum": 5,
+    "chapTitle": "TOPIC 5 – COLLISION-FREE PROTOCOLS",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "vlan": {
+    "chapNum": 9,
+    "chapTitle": "TOPIC 9 – DATA LINK LAYER SWITCHING",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  },
+  "arp": {
+    "chapNum": 10,
+    "chapTitle": "TOPIC 10 – NETWORKING DEVICES",
+    "unitId": "unit2",
+    "unit": "Unit 2 – Data Link Layer"
+  }
 };
+
+// Enrich TOPIC_REPOSITORY with Parent Topic information
+for (const [id, t] of Object.entries(TOPIC_REPOSITORY)) {
+  const mapEntry = TOPIC_CHAPTER_MAP[id];
+  if (mapEntry) {
+    t.parentTopic = mapEntry.chapTitle;
+    t.topicTitle = mapEntry.chapTitle;
+    t.topicNumber = mapEntry.chapNum;
+    if (!t.unitId && mapEntry.unitId) t.unitId = mapEntry.unitId;
+    if (!t.unit && mapEntry.unit) t.unit = mapEntry.unit;
+  }
+}
 
 var TopicPageEngine = {
   renderTopicPage: function(topicId, container) {
@@ -216,7 +1106,14 @@ var TopicPageEngine = {
       compareWith: [],
       primaryUses: []
     };
+    
     topic.sections = topic.sections || {};
+
+    // Resolve Parent Topic metadata
+    const chapInfo = (typeof TOPIC_CHAPTER_MAP !== 'undefined' && TOPIC_CHAPTER_MAP[topic.id]) ? TOPIC_CHAPTER_MAP[topic.id] : null;
+    const parentTopicTitle = (chapInfo && chapInfo.chapTitle) ? chapInfo.chapTitle : (topic.parentTopic || topic.topicTitle || '');
+    const parentTopicNum = chapInfo ? chapInfo.chapNum : (topic.topicNumber || '');
+
 
     const prevTopic = topic.prevTopicId ? TOPIC_REPOSITORY[topic.prevTopicId] : null;
     const nextTopic = topic.nextTopicId ? TOPIC_REPOSITORY[topic.nextTopicId] : null;
@@ -449,9 +1346,9 @@ var TopicPageEngine = {
           <a onclick="App.loadView('home')">Home</a>
           <span class="bc-sep">/</span>
           <a onclick="App.loadView('${topic.unitId}')">${topic.unit}</a>
-          ${TOPIC_CHAPTER_MAP[topic.id] ? `
+          ${parentTopicTitle ? `
             <span class="bc-sep">/</span>
-            <span class="cursor-pointer text-blue-600 dark:text-blue-400 font-semibold hover:underline" onclick="App.loadView('${topic.unitId}')">${TOPIC_CHAPTER_MAP[topic.id].chapTitle}</span>
+            <span class="cursor-pointer text-blue-600 dark:text-blue-400 font-semibold hover:underline" onclick="App.loadView('${topic.unitId}')">${parentTopicTitle}</span>
           ` : ''}
           <span class="bc-sep">/</span>
           <span class="bc-current">${topic.title}</span>
@@ -461,12 +1358,24 @@ var TopicPageEngine = {
         <header class="wiki-article-header">
           <div class="wiki-header-meta">
             <span class="wiki-badge-unit">${topic.unit}</span>
+            ${parentTopicTitle ? `
+              <span class="wiki-badge-topic font-bold bg-blue-100 text-blue-800 dark:bg-blue-900/60 dark:text-blue-300 px-2.5 py-0.5 rounded text-xs inline-flex items-center gap-1.5 shadow-sm">
+                <i class="fa-solid fa-folder-open text-blue-500"></i> ${parentTopicTitle}
+              </span>
+            ` : ''}
             <span class="wiki-badge-level">${topic.level}</span>
             <span class="badge-difficulty ${(topic.difficulty || 'Core').toLowerCase()}">${topic.difficulty || 'Core'}</span>
             <span class="wiki-read-time">⏱️ ${topic.readingTime}</span>
             ${topic.standard ? `<span class="wiki-badge-standard">📜 ${topic.standard}</span>` : ''}
           </div>
 
+          ${parentTopicTitle ? `
+            <div class="wiki-parent-topic-context-bar flex items-center gap-2 mt-2 mb-1">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 bg-blue-50/80 dark:bg-blue-950/40 px-2.5 py-1 rounded border border-blue-200 dark:border-blue-900 flex items-center gap-1.5 shadow-sm">
+                <i class="fa-solid fa-layer-group text-blue-500"></i> Part of: ${parentTopicTitle}
+              </span>
+            </div>
+          ` : ''}
           <h1 class="wiki-article-title">${topic.title}</h1>
           <p class="wiki-article-tagline">${topic.oneLiner}</p>
 
@@ -772,11 +1681,18 @@ var TopicPageEngine = {
           <aside class="wiki-infobox-column">
             <div class="wiki-infobox">
               <div class="infobox-header">
+                ${parentTopicTitle ? `<div class="infobox-parent-topic text-[11px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wide mb-1 flex items-center justify-center gap-1.5"><i class="fa-solid fa-folder text-blue-500"></i> ${parentTopicTitle}</div>` : ''}
                 <h3>${topic.title}</h3>
                 <div class="infobox-sub">${topic.unit.split(':')[0]}</div>
               </div>
               <table class="infobox-table">
                 <tbody>
+                  ${parentTopicTitle ? `
+                    <tr>
+                      <th>Parent Topic</th>
+                      <td><strong class="text-blue-700 dark:text-blue-300">${parentTopicTitle}</strong></td>
+                    </tr>
+                  ` : ''}
                   <tr>
                     <th>OSI / Stack Layer</th>
                     <td>${topic.infobox.layer}</td>

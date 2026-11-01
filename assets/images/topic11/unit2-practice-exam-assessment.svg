@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 400" width="100%" height="100%">
+  <defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient></defs>
+  <rect width="850" height="400" rx="16" fill="url(#bg)"/>
+  <text x="425" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Unit 2: Complete Practice Exam &amp; Self-Assessment</text>
+  <text x="425" y="64" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Full-Length Academic Test Covering All 11 Unit 2 Topics with Grading Rubric</text>
+  <g transform="translate(60, 95)">
+    <rect width="730" height="260" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+    <text x="365" y="45" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#34d399" text-anchor="middle">Unit 2 Exam Simulation Blueprint</text>
+    <text x="365" y="80" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1" text-anchor="middle">Part A: 10 Short-Answer Questions (20 Marks)</text>
+    <text x="365" y="115" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1" text-anchor="middle">Part B: 5 Long-Answer Analytical Questions with Internal Choice (65 Marks)</text>
+    <text x="365" y="150" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1" text-anchor="middle">Part C: 1 Practical Design &amp; Numerical Scenario Question (15 Marks)</text>
+    <text x="365" y="195" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#6ee7b7" text-anchor="middle">Total: 100 Marks | Duration: 3 Hours</text>
+  </g>
+</svg>

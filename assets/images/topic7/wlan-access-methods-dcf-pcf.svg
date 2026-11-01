@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="400" rx="16" fill="url(#bg)"/>
+  <text x="425" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">WLAN MAC Access Modes: DCF vs. PCF</text>
+  <text x="425" y="64" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Distributed Contention-Based Access vs. Centralized Contention-Free Polling</text>
+
+  <!-- Left Card: DCF -->
+  <g transform="translate(50, 95)">
+    <rect width="350" height="270" rx="12" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="175" y="32" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#38bdf8" text-anchor="middle">Distributed Coordination Function (DCF)</text>
+    <rect x="110" y="45" width="130" height="22" rx="4" fill="#0369a1"/>
+    <text x="175" y="60" font-family="system-ui, sans-serif" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">MANDATORY IN 802.11</text>
+
+    <text x="20" y="95" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Contention-Based Multiple Access:</text>
+    <text x="20" y="112" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Every station contends independently using CSMA/CA.</text>
+
+    <text x="20" y="140" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Best-Effort Asynchronous Traffic:</text>
+    <text x="20" y="157" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Ideal for Web, Email, and general IP file transfer.</text>
+
+    <text x="20" y="185" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Decentralized &amp; Ad-Hoc Capable:</text>
+    <text x="20" y="202" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Runs in both Infrastructure BSS and IBSS peer networks.</text>
+
+    <text x="20" y="230" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Timing: DIFS + Exponential Backoff:</text>
+    <text x="20" y="247" font-family="system-ui, sans-serif" font-size="11" fill="#38bdf8">Stations defer during DIFS and draw slot from CW.</text>
+  </g>
+
+  <!-- Right Card: PCF -->
+  <g transform="translate(440, 95)">
+    <rect width="360" height="270" rx="12" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+    <text x="180" y="32" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#34d399" text-anchor="middle">Point Coordination Function (PCF)</text>
+    <rect x="115" y="45" width="130" height="22" rx="4" fill="#047857"/>
+    <text x="180" y="60" font-family="system-ui, sans-serif" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">OPTIONAL IN 802.11</text>
+
+    <text x="20" y="95" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Contention-Free Centralized Polling:</text>
+    <text x="20" y="112" font-family="system-ui, sans-serif" font-size="11" fill="#a7f3d0">The AP acts as Point Coordinator, polling nodes sequentially.</text>
+
+    <text x="20" y="140" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Time-Bounded Real-Time Traffic:</text>
+    <text x="20" y="157" font-family="system-ui, sans-serif" font-size="11" fill="#a7f3d0">Designed for VoIP and video streaming requiring guaranteed latency.</text>
+
+    <text x="20" y="185" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Requires Infrastructure AP:</text>
+    <text x="20" y="202" font-family="system-ui, sans-serif" font-size="11" fill="#a7f3d0">Cannot operate in peer-to-peer ad-hoc topologies.</text>
+
+    <text x="20" y="230" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Priority Timing: PIFS &lt; DIFS:</text>
+    <text x="20" y="247" font-family="system-ui, sans-serif" font-size="11" fill="#34d399">AP seizes the channel before any DCF station can transmit.</text>
+  </g>
+</svg>

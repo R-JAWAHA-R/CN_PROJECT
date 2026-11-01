@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="420" rx="16" fill="url(#bg)"/>
+  <text x="425" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Worst-Case Collision Window &amp; Minimum Frame Size</text>
+  <text x="425" y="64" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Round-Trip Propagation Time (2τ): Why Transmission Time must satisfy T_fr ≥ 2 × τ</text>
+
+  <!-- Stations A and B Timeline -->
+  <g transform="translate(100, 100)">
+    <!-- Station A vertical timeline -->
+    <line x1="100" y1="0" x2="100" y2="240" stroke="#38bdf8" stroke-width="3"/>
+    <rect x="50" y="-30" width="100" height="30" rx="6" fill="#0284c7"/>
+    <text x="100" y="-10" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#fff" text-anchor="middle">Station A</text>
+
+    <!-- Station B vertical timeline -->
+    <line x1="550" y1="0" x2="550" y2="240" stroke="#38bdf8" stroke-width="3"/>
+    <rect x="500" y="-30" width="100" height="30" rx="6" fill="#0284c7"/>
+    <text x="550" y="-10" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#fff" text-anchor="middle">Station B</text>
+
+    <!-- t = 0: A begins transmitting -->
+    <circle cx="100" cy="20" r="6" fill="#10b981"/>
+    <text x="30" y="25" font-family="monospace" font-size="12" font-weight="700" fill="#34d399">t = 0</text>
+    <text x="115" y="25" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">A starts sending frame</text>
+
+    <!-- Signal propagates from A to B -->
+    <line x1="100" y1="20" x2="550" y2="120" stroke="#34d399" stroke-width="2.5" stroke-dasharray="4 4"/>
+
+    <!-- t = τ - ε: B senses idle and transmits -->
+    <circle cx="550" cy="115" r="6" fill="#f59e0b"/>
+    <text x="565" y="118" font-family="monospace" font-size="12" font-weight="700" fill="#fbbf24">t = τ - ε</text>
+    <text x="565" y="135" font-family="system-ui, sans-serif" font-size="10" fill="#fde68a">B senses idle &amp; transmits</text>
+
+    <!-- Collision occurs near B -->
+    <circle cx="530" cy="120" r="14" fill="#ef4444" opacity="0.6"/>
+    <circle cx="530" cy="120" r="8" fill="#ef4444"/>
+    <text x="500" y="105" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fca5a5" text-anchor="middle">💥 COLLISION</text>
+
+    <!-- Jamming & back-propagation to A -->
+    <line x1="530" y1="120" x2="100" y2="220" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="4 4"/>
+    <circle cx="100" cy="220" r="6" fill="#ef4444"/>
+    <text x="25" y="225" font-family="monospace" font-size="12" font-weight="700" fill="#f87171">t = 2τ</text>
+    <text x="115" y="225" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fca5a5">A detects collision (2τ elapsed)</text>
+  </g>
+
+  <!-- Formula Callout Box -->
+  <g transform="translate(80, 350)">
+    <rect width="690" height="50" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="345" y="32" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#38bdf8" text-anchor="middle">
+      Fundamental Law: Frame Size L ≥ 2 × τ × Bandwidth (B) → For 10 Mbps over 2500 m, Min Frame = 64 Bytes (512 bits)
+    </text>
+  </g>
+</svg>

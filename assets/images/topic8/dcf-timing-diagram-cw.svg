@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 380" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="380" rx="16" fill="url(#bg)"/>
+  <text x="425" y="38" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">IEEE 802.11 DCF Timing &amp; Contention Window Slots</text>
+  <text x="425" y="62" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">DIFS Interframe Space, Random Backoff Decrement, Frame Transmission &amp; SIFS / ACK</text>
+
+  <!-- Timeline Bar -->
+  <g transform="translate(50, 110)">
+    <!-- Busy Medium -->
+    <rect x="0" y="40" width="150" height="50" rx="4" fill="#64748b"/>
+    <text x="75" y="70" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#fff" text-anchor="middle">Medium Busy</text>
+
+    <!-- DIFS Interval -->
+    <rect x="155" y="40" width="80" height="50" rx="4" fill="#0284c7" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="195" y="65" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">DIFS</text>
+    <text x="195" y="80" font-family="monospace" font-size="9" fill="#bae6fd" text-anchor="middle">50 µs</text>
+
+    <!-- Contention Window (Backoff Slots) -->
+    <rect x="240" y="40" width="170" height="50" rx="4" fill="#1e293b" stroke="#eab308" stroke-width="2"/>
+    <text x="325" y="62" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fbbf24" text-anchor="middle">Contention Window</text>
+    <text x="325" y="80" font-family="system-ui, sans-serif" font-size="9" fill="#fde68a" text-anchor="middle">Random Backoff Slots (Slot = 20 µs)</text>
+
+    <!-- Transmit Frame (DATA) -->
+    <rect x="415" y="30" width="220" height="70" rx="6" fill="#047857" stroke="#10b981" stroke-width="2"/>
+    <text x="525" y="65" font-family="system-ui, sans-serif" font-size="14" font-weight="900" fill="#fff" text-anchor="middle">DATA FRAME TX</text>
+    <text x="525" y="85" font-family="system-ui, sans-serif" font-size="11" fill="#a7f3d0" text-anchor="middle">Transmitted by Winning Station</text>
+
+    <!-- SIFS -->
+    <rect x="640" y="40" width="45" height="50" rx="4" fill="#a855f7" stroke="#c084fc" stroke-width="1.5"/>
+    <text x="662" y="65" font-family="system-ui, sans-serif" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">SIFS</text>
+    <text x="662" y="80" font-family="monospace" font-size="8" fill="#e9d5ff" text-anchor="middle">10µs</text>
+
+    <!-- ACK Frame -->
+    <rect x="690" y="40" width="60" height="50" rx="4" fill="#059669" stroke="#34d399" stroke-width="1.5"/>
+    <text x="720" y="70" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#fff" text-anchor="middle">ACK</text>
+  </g>
+
+  <!-- Explanatory Legend -->
+  <g transform="translate(60, 260)">
+    <rect width="730" height="85" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <text x="20" y="25" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• <strong fill="#38bdf8">DIFS (DCF Interframe Space):</strong> Minimum silence time a station must observe after channel becomes idle.</text>
+    <text x="20" y="50" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• <strong fill="#fbbf24">Contention Window (CW):</strong> Station picks random slots R ∈ [0, CW]. Slot timer decrements while idle; freezes when busy.</text>
+    <text x="20" y="75" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• <strong fill="#c084fc">SIFS (Short IFS):</strong> Shortest pause reserved for high-priority ACK response; prevents other stations from interrupting.</text>
+  </g>
+</svg>

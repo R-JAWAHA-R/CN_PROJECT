@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="420" rx="16" fill="url(#bg)"/>
+  <text x="425" y="38" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Complete Network Topology with All Networking Devices</text>
+  <text x="425" y="62" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Hubs, Switches, Routers, and Gateways Working in Concert from Edge to Core to WAN</text>
+
+  <!-- Complete Network Path from Left to Right -->
+  <!-- 1. Hub Workgroup (Legacy Edge) -->
+  <g transform="translate(40, 140)">
+    <rect width="130" height="120" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="65" y="25" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fbbf24" text-anchor="middle">Legacy Workgroup</text>
+    
+    <rect x="25" y="35" width="80" height="30" rx="4" fill="#78350f"/>
+    <text x="65" y="55" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">HUB (L1)</text>
+
+    <circle cx="35" cy="95" r="14" fill="#334155"/>
+    <text x="35" y="99" font-family="system-ui, sans-serif" font-size="9" fill="#fff" text-anchor="middle">PC1</text>
+    <circle cx="95" cy="95" r="14" fill="#334155"/>
+    <text x="95" y="99" font-family="system-ui, sans-serif" font-size="9" fill="#fff" text-anchor="middle">PC2</text>
+  </g>
+
+  <!-- 2. Departmental Switch (L2) -->
+  <g transform="translate(230, 140)">
+    <rect width="150" height="120" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+    <text x="75" y="25" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#34d399" text-anchor="middle">Department Switch</text>
+
+    <rect x="25" y="35" width="100" height="35" rx="6" fill="#065f46"/>
+    <text x="75" y="58" font-family="system-ui, sans-serif" font-size="12" font-weight="900" fill="#fff" text-anchor="middle">SWITCH (L2)</text>
+
+    <circle cx="45" cy="95" r="14" fill="#334155"/>
+    <text x="45" y="99" font-family="system-ui, sans-serif" font-size="9" fill="#fff" text-anchor="middle">PC3</text>
+    <circle cx="105" cy="95" r="14" fill="#334155"/>
+    <text x="105" y="99" font-family="system-ui, sans-serif" font-size="9" fill="#fff" text-anchor="middle">Server</text>
+  </g>
+
+  <!-- Line Hub to Switch -->
+  <line x1="170" y1="200" x2="230" y2="200" stroke="#f59e0b" stroke-width="2.5"/>
+
+  <!-- 3. Enterprise Router (L3) -->
+  <g transform="translate(440, 140)">
+    <rect width="140" height="120" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="70" y="25" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#60a5fa" text-anchor="middle">Subnet Gateway</text>
+
+    <circle cx="70" cy="70" r="30" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+    <text x="70" y="75" font-family="system-ui, sans-serif" font-size="11" font-weight="900" fill="#fff" text-anchor="middle">ROUTER</text>
+    <text x="70" y="110" font-family="system-ui, sans-serif" font-size="9" fill="#93c5fd" text-anchor="middle">Layer 3 IP Routing</text>
+  </g>
+
+  <!-- Line Switch to Router -->
+  <line x1="380" y1="200" x2="440" y2="200" stroke="#10b981" stroke-width="2.5"/>
+
+  <!-- 4. Application Gateway & WAN -->
+  <g transform="translate(640, 140)">
+    <rect width="160" height="120" rx="8" fill="#1e293b" stroke="#a855f7" stroke-width="1.5"/>
+    <text x="80" y="25" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#c084fc" text-anchor="middle">WAN / Cloud Gateway</text>
+
+    <rect x="25" y="40" width="110" height="35" rx="6" fill="#581c87"/>
+    <text x="80" y="62" font-family="system-ui, sans-serif" font-size="12" font-weight="900" fill="#fff" text-anchor="middle">GATEWAY (L7)</text>
+    <text x="80" y="100" font-family="system-ui, sans-serif" font-size="10" fill="#e9d5ff" text-anchor="middle">To Cloud / PSTN 🌐</text>
+  </g>
+
+  <!-- Line Router to Gateway -->
+  <line x1="580" y1="200" x2="640" y2="200" stroke="#3b82f6" stroke-width="2.5"/>
+
+  <!-- Bottom Explanatory Banner -->
+  <g transform="translate(40, 310)">
+    <rect width="760" height="65" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <text x="380" y="25" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">
+      <strong fill="#fbbf24">Hub:</strong> Shared electrical bus → <strong fill="#34d399">Switch:</strong> L2 MAC micro-segmentation →
+      <strong fill="#60a5fa">Router:</strong> L3 IP subnet separation → <strong fill="#c084fc">Gateway:</strong> Cross-protocol transformation.
+    </text>
+    <text x="380" y="48" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">
+      Modern networks replace Hubs entirely with Switches, retaining Routers for inter-subnet security and Gateways for external services.
+    </text>
+  </g>
+</svg>

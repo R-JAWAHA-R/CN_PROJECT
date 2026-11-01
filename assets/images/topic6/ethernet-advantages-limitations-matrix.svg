@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="400" rx="16" fill="url(#bg)"/>
+  <text x="425" y="42" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Ethernet: Strengths, Weaknesses &amp; Architectural Tradeoffs</text>
+  <text x="425" y="66" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Analyzing Why Ethernet Became the Dominant LAN Standard Worldwide</text>
+
+  <!-- Left: Advantages -->
+  <g transform="translate(50, 95)">
+    <rect width="360" height="270" rx="12" fill="#064e3b" stroke="#10b981" stroke-width="2"/>
+    <text x="180" y="32" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#34d399" text-anchor="middle">✅ Key Advantages &amp; Strengths</text>
+    
+    <text x="25" y="65" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Cost-Effectiveness &amp; Ubiquity:</text>
+    <text x="25" y="82" font-family="system-ui, sans-serif" font-size="11" fill="#a7f3d0">Mass production made NICs, switches, and cabling inexpensive.</text>
+
+    <text x="25" y="115" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• High Scalability &amp; Speed Progression:</text>
+    <text x="25" y="132" font-family="system-ui, sans-serif" font-size="11" fill="#a7f3d0">Seamless leap from 10 Mbps to 800 Gbps using identical frame format.</text>
+
+    <text x="25" y="165" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Backward Compatibility:</text>
+    <text x="25" y="182" font-family="system-ui, sans-serif" font-size="11" fill="#a7f3d0">Auto-negotiation allows devices of different generations to interoperate.</text>
+
+    <text x="25" y="215" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Switched Zero-Collision Architecture:</text>
+    <text x="25" y="232" font-family="system-ui, sans-serif" font-size="11" fill="#a7f3d0">Full-duplex switching eliminates distance limits imposed by CSMA/CD.</text>
+  </g>
+
+  <!-- Right: Limitations -->
+  <g transform="translate(440, 95)">
+    <rect width="360" height="270" rx="12" fill="#450a0a" stroke="#ef4444" stroke-width="2"/>
+    <text x="180" y="32" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#fca5a5" text-anchor="middle">⚠️ Limitations &amp; Design Challenges</text>
+
+    <text x="25" y="65" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Non-Deterministic (In Classic Mode):</text>
+    <text x="25" y="82" font-family="system-ui, sans-serif" font-size="11" fill="#fecaca">Contention causes random backoff delays; unsuitable for hard real-time.</text>
+
+    <text x="25" y="115" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Distance Limits for CSMA/CD:</text>
+    <text x="25" y="132" font-family="system-ui, sans-serif" font-size="11" fill="#fecaca">As speed increases by 10x, collision diameter decreases proportionally.</text>
+
+    <text x="25" y="165" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Broadcast Storm Vulnerability:</text>
+    <text x="25" y="182" font-family="system-ui, sans-serif" font-size="11" fill="#fecaca">Switches flood broadcast frames to all ports without Layer 3 routers or VLANs.</text>
+
+    <text x="25" y="215" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Inherent Lack of Native Security:</text>
+    <text x="25" y="232" font-family="system-ui, sans-serif" font-size="11" fill="#fecaca">L2 lacks built-in authentication, leaving LANs prone to ARP spoofing.</text>
+  </g>
+</svg>

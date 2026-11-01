@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 380" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="380" rx="16" fill="url(#bg)"/>
+  <text x="425" y="38" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Repeater: Signal Regeneration vs. Simple Amplification</text>
+  <text x="425" y="62" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Layer 1 Device Cleans Noise and Restores Crisp Digital Waveforms Bit-by-Bit</text>
+
+  <!-- Left: Weak & Distorted Signal -->
+  <g transform="translate(50, 110)">
+    <rect width="260" height="150" rx="10" fill="#1e293b" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="130" y="26" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#fca5a5" text-anchor="middle">Attenuated &amp; Noisy Input</text>
+
+    <!-- Distorted analog-like square wave -->
+    <path d="M 25 100 Q 40 60 55 70 Q 70 85 85 65 Q 100 115 115 110 Q 130 115 145 95 Q 160 55 175 75 Q 190 90 205 60 Q 220 120 235 110" stroke="#ef4444" stroke-width="3" fill="none"/>
+    <text x="130" y="138" font-family="system-ui, sans-serif" font-size="10" fill="#fca5a5" text-anchor="middle">Degraded amplitude with cable noise</text>
+  </g>
+
+  <!-- Center: Repeater -->
+  <g transform="translate(365, 130)">
+    <rect width="120" height="110" rx="10" fill="#78350f" stroke="#f59e0b" stroke-width="2"/>
+    <text x="60" y="35" font-family="system-ui, sans-serif" font-size="14" font-weight="900" fill="#fff" text-anchor="middle">REPEATER</text>
+    <text x="60" y="55" font-family="system-ui, sans-serif" font-size="10" fill="#fde68a" text-anchor="middle">Threshold Detector</text>
+    <text x="60" y="70" font-family="system-ui, sans-serif" font-size="10" fill="#fde68a" text-anchor="middle">+ Clock Generator</text>
+    <text x="60" y="95" font-family="monospace" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">10101100</text>
+  </g>
+
+  <!-- Connectors -->
+  <line x1="310" y1="185" x2="365" y2="185" stroke="#ef4444" stroke-width="3"/>
+  <line x1="485" y1="185" x2="540" y2="185" stroke="#10b981" stroke-width="3"/>
+
+  <!-- Right: Regenerated Clean Signal -->
+  <g transform="translate(540, 110)">
+    <rect width="260" height="150" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+    <text x="130" y="26" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#34d399" text-anchor="middle">Clean Regenerated Output</text>
+
+    <!-- Perfect crisp digital wave -->
+    <path d="M 25 115 L 55 115 L 55 65 L 115 65 L 115 115 L 175 115 L 175 65 L 235 65" stroke="#34d399" stroke-width="3" fill="none"/>
+    <text x="130" y="138" font-family="system-ui, sans-serif" font-size="10" fill="#a7f3d0" text-anchor="middle">Full 5V logic swing with zero noise</text>
+  </g>
+
+  <!-- Explanatory Footer -->
+  <g transform="translate(50, 290)">
+    <rect width="750" height="65" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <text x="375" y="25" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">
+      <strong fill="#f59e0b">Amplifier vs. Repeater:</strong> An analog amplifier boosts both signal AND noise, worsening SNR downstream.
+    </text>
+    <text x="375" y="48" font-family="system-ui, sans-serif" font-size="11" fill="#38bdf8" text-anchor="middle">
+      A digital Repeater decodes bits based on voltage threshold, discarding noise entirely and re-clocking new bits.
+    </text>
+  </g>
+</svg>

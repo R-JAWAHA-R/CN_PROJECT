@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="400" rx="16" fill="url(#bg)"/>
+  <text x="425" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Wireless Channel Characteristics &amp; Impairments</text>
+  <text x="425" y="64" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Signal Attenuation, Multipath Propagation, Dynamic Interference &amp; High Bit-Error-Rate (BER)</text>
+
+  <!-- 4 Cards -->
+  <g transform="translate(40, 95)">
+    <!-- Card 1: Attenuation -->
+    <rect x="0" y="0" width="180" height="270" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="90" y="32" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#38bdf8" text-anchor="middle">Path Loss &amp; Fading</text>
+    <text x="90" y="55" font-family="monospace" font-size="13" font-weight="700" fill="#fbbf24" text-anchor="middle">P_r ∝ 1 / d^2</text>
+    <line x1="20" y1="70" x2="160" y2="70" stroke="#334155" stroke-width="1"/>
+    <text x="15" y="95" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Free-space decay</text>
+    <text x="15" y="115" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Inverse square law</text>
+    <text x="15" y="140" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Indoor exponent:</text>
+    <text x="25" y="158" font-family="monospace" font-size="11" fill="#38bdf8">d^3 to d^4 (walls)</text>
+    <text x="15" y="185" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Dynamic rate fallback</text>
+    <text x="15" y="205" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• SNR degrades with</text>
+    <text x="25" y="223" font-family="system-ui, sans-serif" font-size="11" fill="#38bdf8">distance from AP</text>
+  </g>
+
+  <g transform="translate(235, 95)">
+    <!-- Card 2: Multipath -->
+    <rect x="0" y="0" width="180" height="270" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+    <text x="90" y="32" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#34d399" text-anchor="middle">Multipath Fading</text>
+    <text x="90" y="55" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#a7f3d0" text-anchor="middle">Reflect, Refract, Scatter</text>
+    <line x1="20" y1="70" x2="160" y2="70" stroke="#334155" stroke-width="1"/>
+    <text x="15" y="95" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Multiple ray paths</text>
+    <text x="15" y="115" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Constructive &amp;</text>
+    <text x="25" y="133" font-family="system-ui, sans-serif" font-size="11" fill="#ef4444">destructive interference</text>
+    <text x="15" y="160" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Rayleigh / Rician fading</text>
+    <text x="15" y="185" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Inter-Symbol Interf. (ISI)</text>
+    <text x="15" y="210" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Solved by OFDM &amp;</text>
+    <text x="25" y="228" font-family="system-ui, sans-serif" font-size="11" fill="#34d399">cyclic prefixes</text>
+  </g>
+
+  <g transform="translate(430, 95)">
+    <!-- Card 3: Interference -->
+    <rect x="0" y="0" width="180" height="270" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="90" y="32" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#fbbf24" text-anchor="middle">Shared Spectrum</text>
+    <text x="90" y="55" font-family="monospace" font-size="12" font-weight="700" fill="#fde68a" text-anchor="middle">2.4 GHz &amp; 5 GHz ISM</text>
+    <line x1="20" y1="70" x2="160" y2="70" stroke="#334155" stroke-width="1"/>
+    <text x="15" y="95" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Unlicensed spectrum</text>
+    <text x="15" y="115" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Competing Bluetooth,</text>
+    <text x="25" y="133" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">Microwaves, cordless</text>
+    <text x="15" y="160" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Co-channel interference</text>
+    <text x="15" y="185" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Adjacent channel bleed</text>
+    <text x="15" y="210" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Only 3 non-overlap</text>
+    <text x="25" y="228" font-family="system-ui, sans-serif" font-size="11" fill="#fbbf24">channels (1, 6, 11 in 2.4G)</text>
+  </g>
+
+  <g transform="translate(625, 95)">
+    <!-- Card 4: Error Rate -->
+    <rect x="0" y="0" width="180" height="270" rx="10" fill="#1e293b" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="90" y="32" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#f87171" text-anchor="middle">High BER &amp; ACKs</text>
+    <text x="90" y="55" font-family="monospace" font-size="12" font-weight="700" fill="#fca5a5" text-anchor="middle">BER ≈ 10^-5 vs 10^-12</text>
+    <line x1="20" y1="70" x2="160" y2="70" stroke="#334155" stroke-width="1"/>
+    <text x="15" y="95" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• 10,000x error rate</text>
+    <text x="25" y="113" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">compared to fiber</text>
+    <text x="15" y="140" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Mandatory Layer-2</text>
+    <text x="25" y="158" font-family="system-ui, sans-serif" font-size="11" fill="#f87171">stop-and-wait ACKs</text>
+    <text x="15" y="185" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Rapid retransmissions</text>
+    <text x="15" y="210" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Heavy protocol overhead</text>
+    <text x="25" y="228" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">vs. wired Ethernet</text>
+  </g>
+</svg>

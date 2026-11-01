@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="420" rx="16" fill="url(#bg)"/>
+  <text x="425" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Truncated Binary Exponential Backoff (BEB)</text>
+  <text x="425" y="64" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Contention Window Expansion: Range R ∈ [0, 2^k - 1] where k = min(n, 10)</text>
+
+  <!-- Table of Backoff Rounds -->
+  <g transform="translate(60, 95)">
+    <!-- Header -->
+    <rect x="0" y="0" width="730" height="35" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <text x="80" y="22" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#38bdf8" text-anchor="middle">Collision # (n)</text>
+    <text x="230" y="22" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#38bdf8" text-anchor="middle">Exponent k = min(n,10)</text>
+    <text x="420" y="22" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#38bdf8" text-anchor="middle">Slot Range [0, 2^k - 1]</text>
+    <text x="610" y="22" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#38bdf8" text-anchor="middle">Max Delay (at 10 Mbps)</text>
+
+    <!-- Row 1 -->
+    <rect x="0" y="40" width="730" height="32" rx="4" fill="#0f172a"/>
+    <text x="80" y="61" font-family="monospace" font-size="12" fill="#fff" text-anchor="middle">1st collision</text>
+    <text x="230" y="61" font-family="monospace" font-size="12" fill="#fff" text-anchor="middle">k = 1</text>
+    <text x="420" y="61" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#34d399" text-anchor="middle">{0, 1} (2 choices)</text>
+    <text x="610" y="61" font-family="monospace" font-size="11" fill="#cbd5e1" text-anchor="middle">1 × 51.2 µs = 51.2 µs</text>
+
+    <!-- Row 2 -->
+    <rect x="0" y="75" width="730" height="32" rx="4" fill="#1e293b"/>
+    <text x="80" y="96" font-family="monospace" font-size="12" fill="#fff" text-anchor="middle">2nd collision</text>
+    <text x="230" y="96" font-family="monospace" font-size="12" fill="#fff" text-anchor="middle">k = 2</text>
+    <text x="420" y="96" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#34d399" text-anchor="middle">{0, 1, 2, 3} (4 choices)</text>
+    <text x="610" y="96" font-family="monospace" font-size="11" fill="#cbd5e1" text-anchor="middle">3 × 51.2 µs = 153.6 µs</text>
+
+    <!-- Row 3 -->
+    <rect x="0" y="110" width="730" height="32" rx="4" fill="#0f172a"/>
+    <text x="80" y="131" font-family="monospace" font-size="12" fill="#fff" text-anchor="middle">3rd collision</text>
+    <text x="230" y="131" font-family="monospace" font-size="12" fill="#fff" text-anchor="middle">k = 3</text>
+    <text x="420" y="131" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#34d399" text-anchor="middle">{0, 1, ..., 7} (8 choices)</text>
+    <text x="610" y="131" font-family="monospace" font-size="11" fill="#cbd5e1" text-anchor="middle">7 × 51.2 µs = 358.4 µs</text>
+
+    <!-- Row 10 (Truncation Point) -->
+    <rect x="0" y="145" width="730" height="32" rx="4" fill="#1e293b"/>
+    <text x="80" y="166" font-family="monospace" font-size="12" fill="#fbbf24" text-anchor="middle">10th collision</text>
+    <text x="230" y="166" font-family="monospace" font-size="12" fill="#fbbf24" text-anchor="middle">k = 10 (Cap)</text>
+    <text x="420" y="166" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fbbf24" text-anchor="middle">{0, 1, ..., 1023} (1024 choices)</text>
+    <text x="610" y="166" font-family="monospace" font-size="11" fill="#fde68a" text-anchor="middle">1023 × 51.2 µs ≈ 52.4 ms</text>
+
+    <!-- Row 16 (Abort) -->
+    <rect x="0" y="180" width="730" height="32" rx="4" fill="#450a0a"/>
+    <text x="80" y="201" font-family="monospace" font-size="12" font-weight="800" fill="#f87171" text-anchor="middle">16th collision</text>
+    <text x="230" y="201" font-family="monospace" font-size="12" font-weight="800" fill="#f87171" text-anchor="middle">Exceeded Max</text>
+    <text x="420" y="201" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#f87171" text-anchor="middle">ABORT TRANSMISSION</text>
+    <text x="610" y="201" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fca5a5" text-anchor="middle">Report Network Failure</text>
+  </g>
+
+  <!-- Algorithm Highlights -->
+  <g transform="translate(60, 325)">
+    <rect width="730" height="70" rx="8" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+    <text x="20" y="25" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• <strong fill="#38bdf8">Slot Time:</strong> 512 bit-times (51.2 µs for 10 Mbps, 5.12 µs for 100 Mbps, 4096 bit-times for 1000 Mbps with carrier extension).</text>
+    <text x="20" y="48" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• <strong fill="#34d399">Self-Stabilization:</strong> Under heavy contention, backoff doubles exponentially, dispersing stations and preventing channel lockup.</text>
+  </g>
+</svg>

@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="900" height="420" rx="16" fill="url(#bg)"/>
+  <text x="450" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Detailed IEEE 802.11 MAC Frame Format (4-Address Structure)</text>
+  <text x="450" y="64" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Frame Control, Duration/ID, 4 MAC Addresses, Sequence Control &amp; Payload Structure</text>
+
+  <!-- Frame Fields Bar -->
+  <g transform="translate(30, 95)">
+    <!-- FC -->
+    <rect x="0" y="0" width="70" height="65" rx="6" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+    <text x="35" y="28" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">Frame Ctrl</text>
+    <text x="35" y="48" font-family="monospace" font-size="11" fill="#93c5fd" text-anchor="middle">2 Bytes</text>
+
+    <!-- Duration -->
+    <rect x="75" y="0" width="70" height="65" rx="6" fill="#065f46" stroke="#10b981" stroke-width="2"/>
+    <text x="110" y="28" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">Duration</text>
+    <text x="110" y="48" font-family="monospace" font-size="11" fill="#6ee7b7" text-anchor="middle">2 Bytes</text>
+
+    <!-- Address 1 -->
+    <rect x="150" y="0" width="80" height="65" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="190" y="28" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#38bdf8" text-anchor="middle">Address 1</text>
+    <text x="190" y="48" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="middle">6B (Receiver)</text>
+
+    <!-- Address 2 -->
+    <rect x="235" y="0" width="80" height="65" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="275" y="28" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#38bdf8" text-anchor="middle">Address 2</text>
+    <text x="275" y="48" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="middle">6B (Transmitter)</text>
+
+    <!-- Address 3 -->
+    <rect x="320" y="0" width="80" height="65" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="360" y="28" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#38bdf8" text-anchor="middle">Address 3</text>
+    <text x="360" y="48" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="middle">6B (Filter)</text>
+
+    <!-- Seq Control -->
+    <rect x="405" y="0" width="65" height="65" rx="6" fill="#854d0e" stroke="#eab308" stroke-width="2"/>
+    <text x="437" y="28" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">Seq Ctrl</text>
+    <text x="437" y="48" font-family="monospace" font-size="11" fill="#fde68a" text-anchor="middle">2 Bytes</text>
+
+    <!-- Address 4 -->
+    <rect x="475" y="0" width="80" height="65" rx="6" fill="#1e293b" stroke="#a855f7" stroke-width="1.5"/>
+    <text x="515" y="28" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#c084fc" text-anchor="middle">Address 4</text>
+    <text x="515" y="48" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="middle">6B (WDS mesh)</text>
+
+    <!-- Frame Body -->
+    <rect x="560" y="0" width="215" height="65" rx="6" fill="#047857" stroke="#34d399" stroke-width="2.5"/>
+    <text x="667" y="28" font-family="system-ui, sans-serif" font-size="13" font-weight="900" fill="#fff" text-anchor="middle">Frame Body (Payload)</text>
+    <text x="667" y="48" font-family="system-ui, sans-serif" font-size="11" fill="#a7f3d0" text-anchor="middle">0 to 2312 Bytes</text>
+
+    <!-- FCS -->
+    <rect x="780" y="0" width="60" height="65" rx="6" fill="#991b1b" stroke="#ef4444" stroke-width="2"/>
+    <text x="810" y="28" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">FCS</text>
+    <text x="810" y="48" font-family="monospace" font-size="11" fill="#fca5a5" text-anchor="middle">4 Bytes</text>
+  </g>
+
+  <!-- 4-Address Meaning Matrix -->
+  <g transform="translate(30, 185)">
+    <rect width="840" height="195" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <text x="20" y="28" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#f8fafc">Interpretation of the 4 Address Fields (Governed by To DS &amp; From DS Bits in Frame Control):</text>
+
+    <!-- Table Header -->
+    <text x="20" y="58" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#38bdf8">To DS</text>
+    <text x="80" y="58" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#38bdf8">From DS</text>
+    <text x="160" y="58" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#38bdf8">Address 1 (RA)</text>
+    <text x="300" y="58" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#38bdf8">Address 2 (TA)</text>
+    <text x="440" y="58" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#38bdf8">Address 3 (DA/SA)</text>
+    <text x="600" y="58" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#38bdf8">Address 4</text>
+    <text x="710" y="58" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#38bdf8">Typical Scenario</text>
+
+    <!-- Row 1: IBSS -->
+    <text x="25" y="85" font-family="monospace" font-size="11" fill="#fff">0</text>
+    <text x="85" y="85" font-family="monospace" font-size="11" fill="#fff">0</text>
+    <text x="160" y="85" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">DA (Destination)</text>
+    <text x="300" y="85" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">SA (Source)</text>
+    <text x="440" y="85" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">BSSID</text>
+    <text x="600" y="85" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">N/A</text>
+    <text x="710" y="85" font-family="system-ui, sans-serif" font-size="11" fill="#34d399">Ad-hoc IBSS packet</text>
+
+    <!-- Row 2: To AP -->
+    <text x="25" y="112" font-family="monospace" font-size="11" fill="#fff">1</text>
+    <text x="85" y="112" font-family="monospace" font-size="11" fill="#fff">0</text>
+    <text x="160" y="112" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">BSSID (AP)</text>
+    <text x="300" y="112" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">SA (Source STA)</text>
+    <text x="440" y="112" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">DA (Final Dest)</text>
+    <text x="600" y="112" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">N/A</text>
+    <text x="710" y="112" font-family="system-ui, sans-serif" font-size="11" fill="#60a5fa">Station sending to AP</text>
+
+    <!-- Row 3: From AP -->
+    <text x="25" y="139" font-family="monospace" font-size="11" fill="#fff">0</text>
+    <text x="85" y="139" font-family="monospace" font-size="11" fill="#fff">1</text>
+    <text x="160" y="139" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">DA (Dest STA)</text>
+    <text x="300" y="139" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">BSSID (AP)</text>
+    <text x="440" y="139" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">SA (Original Src)</text>
+    <text x="600" y="139" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">N/A</text>
+    <text x="710" y="139" font-family="system-ui, sans-serif" font-size="11" fill="#a78bfa">AP sending to Station</text>
+
+    <!-- Row 4: WDS Bridge -->
+    <text x="25" y="166" font-family="monospace" font-size="11" fill="#fbbf24">1</text>
+    <text x="85" y="166" font-family="monospace" font-size="11" fill="#fbbf24">1</text>
+    <text x="160" y="166" font-family="system-ui, sans-serif" font-size="11" fill="#fef08a">RA (Recv AP)</text>
+    <text x="300" y="166" font-family="system-ui, sans-serif" font-size="11" fill="#fef08a">TA (Trans AP)</text>
+    <text x="440" y="166" font-family="system-ui, sans-serif" font-size="11" fill="#fef08a">DA (Final Dest)</text>
+    <text x="600" y="166" font-family="system-ui, sans-serif" font-size="11" fill="#fef08a">SA (Orig Src)</text>
+    <text x="710" y="166" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fbbf24">AP-to-AP Bridge (WDS)</text>
+  </g>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 400" width="100%" height="100%">
+  <defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient></defs>
+  <rect width="850" height="400" rx="16" fill="url(#bg)"/>
+  <text x="425" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Unit 2: Master Architectural Diagrams Compendium</text>
+  <text x="425" y="64" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Framing, Sliding Window, MAC Contention, Ethernet, Wireless LAN, and L2 Switching</text>
+  <g transform="translate(60, 95)">
+    <rect width="730" height="260" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="365" y="45" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#60a5fa" text-anchor="middle">Visual Overview of Data Link Layer Architecture</text>
+    <text x="365" y="80" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1" text-anchor="middle">1. Framing: Byte Stuffing (ESC) &amp; Bit Stuffing (01111110 with zero insertion after five 1s)</text>
+    <text x="365" y="115" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1" text-anchor="middle">2. Flow &amp; Error: Stop-and-Wait, Go-Back-N (W_s ≤ 2^m - 1), Selective Repeat (W_s ≤ 2^(m-1))</text>
+    <text x="365" y="150" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1" text-anchor="middle">3. MAC Contention: Pure ALOHA (18.4%), Slotted ALOHA (36.8%), 1-P / Non-P / p-P CSMA</text>
+    <text x="365" y="185" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1" text-anchor="middle">4. LAN Standards: Ethernet 802.3 CSMA/CD, Wi-Fi 802.11 CSMA/CA, Spanning Tree Protocol (STP)</text>
+    <text x="365" y="225" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#34d399" text-anchor="middle">✅ All Unit 2 Core Topics Mastered and Fully Illustrated</text>
+  </g>
+</svg>

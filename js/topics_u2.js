@@ -1,8 +1,5 @@
-// Unit II Topics Database: Data Link Layer & Reliable Transfer
-// Enhanced & Aligned with Tanenbaum & Wetherall (6th Ed.), Forouzan (6th Ed.), and Kurose & Ross
-// Complete 17-Point Structural Article Architecture with 3-Level Progressive Examples & Multi-Question Quizzes
-
-const TOPICS_U2 = {
+// Unit 2: Data Link Layer Topics
+var TOPICS_U2 = {
   "framing": {
     "id": "framing",
     "title": "Framing in the Data Link Layer",
@@ -68,8 +65,8 @@ const TOPICS_U2 = {
         "Ethernet LANs, Point-to-Point Protocol (PPP), HDLC serial links, Wi-Fi 802.11"
       ]
     },
-    "imageUrl": "assets/images/topic1/framing-techniques.svg",
-    "imageCaption": "Figure 1.11: Four Classical Framing Techniques: Character Count, Byte Stuffing, Bit Stuffing, and Coding Violations.",
+    "imageUrl": "assets/images/topic1/bit-stuffing-mechanism.svg",
+    "imageCaption": "Figure: Framing Boundary Delineation & Bit Stuffing with 01111110 Flag Delimiters.",
     "sections": {
       "overview": "the Data Link Layer function in which a continuous sequence of bits received from the Physical Layer is organized into protocol-defined <strong>frames</strong>. The protocol establishes exact rules allowing the receiver to recognize frame boundaries, interpret header metadata, and safely extract the payload for delivery to the Network Layer.",
       "eli10": "Imagine receiving a letter written as one unbroken string with no spaces or punctuation: <code>HELLOWORLDHOWAREYOUGOODMORNING</code>. You wouldn't know where one thought begins and another ends. Framing adds the \"spaces\", \"capital letters\", and \"periods\" to computer communication so devices know where each individual message starts and finishes.",
@@ -181,9 +178,7 @@ const TOPICS_U2 = {
       "imageCaption": "Figure: Framing Boundary Delineation & Bit Stuffing with 01111110 Flag Delimiters."
     },
     "prevTopicId": "dll-design-issues",
-    "nextTopicId": "byte-stuffing",
-    "imageUrl": "assets/images/topic1/bit-stuffing-mechanism.svg",
-    "imageCaption": "Figure: Framing Boundary Delineation & Bit Stuffing with 01111110 Flag Delimiters."
+    "nextTopicId": "byte-stuffing"
   },
   "byte-stuffing": {
     "id": "byte-stuffing",
@@ -1118,7 +1113,7 @@ const TOPICS_U2 = {
       ]
     },
     "imageUrl": "assets/images/topic1/flow-control-models.svg",
-    "imageCaption": "Figure 1.13: Data Link Flow Control: Stop-and-Wait vs Sliding Window pipelined protocol.",
+    "imageCaption": "Figure: Flow Control Mechanism: Preventing Fast Sender from Overwhelming Slow Receiver.",
     "sections": {
       "overview": "the set of mechanisms that regulates the amount or rate of unacknowledged data a sender may transmit, matching transmission speed to the receiving station's memory and processing capacity.",
       "eli10": "Imagine pouring water from a big bucket into a tiny drinking glass. If you pour as fast as you can, water spills all over the table. You must slow down and pour only as fast as the glass can take it. Flow control is the valve on the bucket!",
@@ -1173,9 +1168,7 @@ const TOPICS_U2 = {
       "imageCaption": "Figure: Flow Control Mechanism: Preventing Fast Sender from Overwhelming Slow Receiver."
     },
     "prevTopicId": "crc",
-    "nextTopicId": "simplex-protocol",
-    "imageUrl": "assets/images/topic1/flow-control-models.svg",
-    "imageCaption": "Figure: Flow Control Mechanism: Preventing Fast Sender from Overwhelming Slow Receiver."
+    "nextTopicId": "simplex-protocol"
   },
   "stop-and-wait": {
     "id": "stop-and-wait",
@@ -1229,8 +1222,8 @@ const TOPICS_U2 = {
         "TFTP, simple embedded RF links, legacy serial modems"
       ]
     },
-    "imageUrl": "assets/images/topic2/stop-and-wait-arq-fsm.svg",
-    "imageCaption": "Figure 2.9: Stop-and-Wait ARQ state transitions: normal flow, lost frame timeout, and lost ACK duplicate filtering.",
+    "imageUrl": "assets/images/topic1/flow-control-models.svg",
+    "imageCaption": "Figure: Stop-and-Wait ARQ on Noisy Channels: Timer, Retransmission, and Alternating 0/1 ACKs.",
     "sections": {
       "overview": "a fundamental Automatic Repeat reQuest (ARQ) protocol in which the sender transmits a single frame and waits for an acknowledgment from the receiver before dispatching the subsequent frame.",
       "eli10": "Imagine playing catch with someone, but you are only allowed to throw the second ball after they shout: \"I caught ball #1!\" If you wait too long and don't hear them shout, you assume the ball landed in the bushes and throw a backup ball.",
@@ -1285,9 +1278,7 @@ const TOPICS_U2 = {
       "imageCaption": "Figure: Stop-and-Wait ARQ on Noisy Channels: Timer, Retransmission, and Alternating 0/1 ACKs."
     },
     "prevTopicId": "simplex-protocol",
-    "nextTopicId": "sliding-window",
-    "imageUrl": "assets/images/topic1/flow-control-models.svg",
-    "imageCaption": "Figure: Stop-and-Wait ARQ on Noisy Channels: Timer, Retransmission, and Alternating 0/1 ACKs."
+    "nextTopicId": "sliding-window"
   },
   "sliding-window": {
     "id": "sliding-window",
@@ -1443,8 +1434,8 @@ const TOPICS_U2 = {
         "HDLC, legacy satellite links, basic reliable transport"
       ]
     },
-    "imageUrl": "assets/images/topic2/go-back-n-sliding-window.svg",
-    "imageCaption": "Figure 2.11: Go-Back-N ARQ sliding window buffer (S_w = 2^m - 1, R_w = 1) and cumulative ACK mechanics.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/54/Selective_repeat_transmit_window_example.png",
+    "imageCaption": "Figure: Go-Back-N ARQ: Sliding Window of Size 2^m - 1 with Cumulative Acknowledgment.",
     "sections": {
       "overview": "a sliding window ARQ protocol in which the sender may transmit multiple frames up to window size $N$, but the receiver accepts strictly the single next expected frame in sequential order, discarding any out-of-order arrivals.",
       "eli10": "Imagine you are baking a cake following steps 1, 2, 3, 4, and 5. If step 2 is dropped and you only get step 3 and 4, you refuse to read steps 3 and 4! You throw them away and yell: \"Give me step 2!\" When step 2 finally arrives, the chef must re-read steps 2, 3, 4, and 5 all over again!",
@@ -1499,9 +1490,7 @@ const TOPICS_U2 = {
       "imageCaption": "Figure: Go-Back-N ARQ: Sliding Window of Size 2^m - 1 with Cumulative Acknowledgment."
     },
     "prevTopicId": "sliding-window",
-    "nextTopicId": "selective-repeat",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/54/Selective_repeat_transmit_window_example.png",
-    "imageCaption": "Figure: Go-Back-N ARQ: Sliding Window of Size 2^m - 1 with Cumulative Acknowledgment."
+    "nextTopicId": "selective-repeat"
   },
   "selective-repeat": {
     "id": "selective-repeat",
@@ -1550,8 +1539,8 @@ const TOPICS_U2 = {
         "TCP Selective Acknowledgment (SACK), Wi-Fi Block ACK, satellite links"
       ]
     },
-    "imageUrl": "assets/images/topic2/selective-repeat-windows.svg",
-    "imageCaption": "Figure 2.13: Selective Repeat ARQ symmetric sliding windows (S_w = R_w = 2^(m-1)) with independent buffering.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/d/df/Selective_repeat_space-time_diagram.png",
+    "imageCaption": "Figure: Selective Repeat ARQ: Independent Retransmission Timeline with Receiver Buffer Slots.",
     "sections": {
       "overview": "an advanced sliding window ARQ protocol in which the receiver accepts and buffers correctly received frames even when preceding frames are missing, allowing the sender to retransmit only the specific frames that were lost or corrupted.",
       "eli10": "Imagine receiving pages 1, 3, and 4 of a story. Instead of throwing pages 3 and 4 in the trash like Go-Back-N, you put them neatly on your desk and just say: \"Hey, page 2 was missing, please re-send only page 2!\" When page 2 arrives, you read 1, 2, 3, and 4 in order!",
@@ -1610,9 +1599,7 @@ const TOPICS_U2 = {
       "imageCaption": "Figure: Selective Repeat ARQ: Independent Retransmission Timeline with Receiver Buffer Slots."
     },
     "prevTopicId": "go-back-n",
-    "nextTopicId": "channel-allocation",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/d/df/Selective_repeat_space-time_diagram.png",
-    "imageCaption": "Figure: Selective Repeat ARQ: Independent Retransmission Timeline with Receiver Buffer Slots."
+    "nextTopicId": "channel-allocation"
   },
   "ethernet": {
     "id": "ethernet",
@@ -1750,7 +1737,7 @@ const TOPICS_U2 = {
     },
     "prevTopicId": "collision-free-protocols",
     "nextTopicId": "mac-address",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/13/Ethernet_Type_II_Frame_format.svg",
+    "imageUrl": "assets/images/topic6/ethernet-architecture-overview.svg",
     "imageCaption": "Figure: Ethernet IEEE 802.3 Architecture, 10BASE-T/100BASE-TX Topology, and CSMA/CD Medium Access."
   },
   "mac-address": {
@@ -1869,7 +1856,7 @@ const TOPICS_U2 = {
     },
     "prevTopicId": "ethernet",
     "nextTopicId": "wireless-lan-protocols",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/42/Ethernet_frame.svg",
+    "imageUrl": "assets/images/topic6/mac-address-format-structure.svg",
     "imageCaption": "Figure: 48-bit Ethernet MAC Address Structure: 24-bit OUI (IEEE Assigned) + 24-bit NIC Serial Identifier."
   },
   "arp": {
@@ -1979,7 +1966,7 @@ const TOPICS_U2 = {
     },
     "prevTopicId": "network-devices",
     "nextTopicId": "vlan",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/42/Ethernet_frame.svg",
+    "imageUrl": "assets/images/topic10/arp-request-broadcast-reply-unicast.svg",
     "imageCaption": "Figure: Address Resolution Protocol (ARP): Resolving 32-bit IP Addresses to 48-bit MAC Hardware Addresses."
   },
   "vlan": {
@@ -2087,14 +2074,12 @@ const TOPICS_U2 = {
     },
     "prevTopicId": "arp",
     "nextTopicId": "network-layer",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
+    "imageUrl": "assets/images/topic9/vlan-802-1q-tagging-trunking.svg",
     "imageCaption": "Figure: Virtual LANs (IEEE 802.1Q): Logical Network Segmentation within Physical Switches."
   }
 };
-
-if (typeof window !== 'undefined') {
-  window.TOPICS_U2 = TOPICS_U2;
+if (typeof window !== "undefined") window.TOPICS_U2 = TOPICS_U2;
+if (typeof global !== "undefined") global.TOPICS_U2 = TOPICS_U2;
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = TOPICS_U2;
 }
-
-if (typeof global !== 'undefined') global.TOPICS_U2 = TOPICS_U2;
-if (typeof module !== 'undefined' && module.exports) module.exports = TOPICS_U2;

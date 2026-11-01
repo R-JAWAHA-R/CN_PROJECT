@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 380" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="380" rx="16" fill="url(#bg)"/>
+  <text x="425" y="38" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Transparent Bridge: Zero-Configuration (Plug-and-Play)</text>
+  <text x="425" y="62" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Three Core Operational Pillars Defined in IEEE 802.1D</text>
+
+  <!-- 3 Pillars -->
+  <g transform="translate(50, 95)">
+    <!-- 1: Learning -->
+    <rect x="0" y="0" width="230" height="250" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <rect width="230" height="40" rx="10" fill="#0284c7"/>
+    <text x="115" y="25" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#fff" text-anchor="middle">1. Backward Learning</text>
+    
+    <text x="15" y="65" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#38bdf8">• Inspects Source MAC:</text>
+    <text x="15" y="85" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">Learns the arrival port of incoming frames automatically.</text>
+
+    <text x="15" y="115" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#38bdf8">• Populates MAC Table:</text>
+    <text x="15" y="135" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">Stores (MAC, Port, Timestamp) tuples in CAM memory.</text>
+
+    <text x="15" y="165" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#38bdf8">• Dynamic Aging Timer:</text>
+    <text x="15" y="185" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">Stale entries purge after ~300s to handle station movement.</text>
+  </g>
+
+  <g transform="translate(310, 95)">
+    <!-- 2: Forwarding & Filtering -->
+    <rect x="0" y="0" width="230" height="250" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+    <rect width="230" height="40" rx="10" fill="#047857"/>
+    <text x="115" y="25" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#fff" text-anchor="middle">2. Filtering / Forwarding</text>
+
+    <text x="15" y="65" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#34d399">• Inspects Dest MAC:</text>
+    <text x="15" y="85" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">Looks up destination port in its learned MAC table.</text>
+
+    <text x="15" y="115" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#34d399">• Same Port = Discard:</text>
+    <text x="15" y="135" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">Filters out local traffic; keeps segments isolated.</text>
+
+    <text x="15" y="165" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#34d399">• Different Port = Forward:</text>
+    <text x="15" y="185" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">Selectively transmits frame out the designated port only.</text>
+  </g>
+
+  <g transform="translate(570, 95)">
+    <!-- 3: Flooding -->
+    <rect x="0" y="0" width="230" height="250" rx="10" fill="#1e293b" stroke="#eab308" stroke-width="1.5"/>
+    <rect width="230" height="40" rx="10" fill="#a16207"/>
+    <text x="115" y="25" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#fff" text-anchor="middle">3. Flooding Fallback</text>
+
+    <text x="15" y="65" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fbbf24">• Unknown Unicast:</text>
+    <text x="15" y="85" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">If Dest MAC is not in table, frame is forwarded to ALL other ports.</text>
+
+    <text x="15" y="120" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fbbf24">• Broadcast Frames:</text>
+    <text x="15" y="140" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">FF:FF:FF:FF:FF:FF is always flooded to every active port.</text>
+
+    <text x="15" y="175" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fbbf24">• Loop Hazard:</text>
+    <text x="15" y="195" font-family="system-ui, sans-serif" font-size="11" fill="#ef4444">STP required to stop infinite circulating broadcast storms.</text>
+  </g>
+</svg>

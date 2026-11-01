@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="400" rx="16" fill="url(#bg)"/>
+  <text x="425" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Transparent Bridge Connecting Two LAN Segments</text>
+  <text x="425" y="64" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Layer 2 Interconnection: Filtering Local Traffic and Forwarding Inter-Segment Frames</text>
+
+  <!-- Segment 1 (Left) -->
+  <g transform="translate(60, 110)">
+    <rect width="280" height="200" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="140" y="28" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#38bdf8" text-anchor="middle">LAN Segment 1 (Subnet A)</text>
+
+    <!-- Bus Line -->
+    <line x1="30" y1="80" x2="250" y2="80" stroke="#38bdf8" stroke-width="3"/>
+
+    <!-- Station A1 -->
+    <rect x="50" y="115" width="55" height="45" rx="6" fill="#334155" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="77" y="142" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">STA A1</text>
+    <line x1="77" y1="80" x2="77" y2="115" stroke="#38bdf8" stroke-width="2"/>
+
+    <!-- Station A2 -->
+    <rect x="175" y="115" width="55" height="45" rx="6" fill="#334155" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="202" y="142" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">STA A2</text>
+    <line x1="202" y1="80" x2="202" y2="115" stroke="#38bdf8" stroke-width="2"/>
+
+    <text x="140" y="185" font-family="system-ui, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">A1 → A2 traffic is FILTERED</text>
+  </g>
+
+  <!-- Center: Transparent Bridge -->
+  <g transform="translate(370, 130)">
+    <rect width="110" height="120" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2.5"/>
+    <text x="55" y="32" font-family="system-ui, sans-serif" font-size="13" font-weight="900" fill="#fff" text-anchor="middle">BRIDGE</text>
+    <text x="55" y="52" font-family="system-ui, sans-serif" font-size="10" fill="#93c5fd" text-anchor="middle">Filtering Engine</text>
+    <line x1="15" y1="65" x2="95" y2="65" stroke="#60a5fa" stroke-width="1"/>
+    <text x="25" y="85" font-family="monospace" font-size="11" fill="#fff">Port 1</text>
+    <text x="65" y="85" font-family="monospace" font-size="11" fill="#fff">Port 2</text>
+  </g>
+
+  <!-- Connecting Lines -->
+  <line x1="310" y1="190" x2="370" y2="190" stroke="#60a5fa" stroke-width="3"/>
+  <line x1="480" y1="190" x2="540" y2="190" stroke="#60a5fa" stroke-width="3"/>
+
+  <!-- Segment 2 (Right) -->
+  <g transform="translate(510, 110)">
+    <rect width="280" height="200" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+    <text x="140" y="28" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#34d399" text-anchor="middle">LAN Segment 2 (Subnet B)</text>
+
+    <!-- Bus Line -->
+    <line x1="30" y1="80" x2="250" y2="80" stroke="#10b981" stroke-width="3"/>
+
+    <!-- Station B1 -->
+    <rect x="50" y="115" width="55" height="45" rx="6" fill="#334155" stroke="#10b981" stroke-width="1.5"/>
+    <text x="77" y="142" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">STA B1</text>
+    <line x1="77" y1="80" x2="77" y2="115" stroke="#10b981" stroke-width="2"/>
+
+    <!-- Station B2 -->
+    <rect x="175" y="115" width="55" height="45" rx="6" fill="#334155" stroke="#10b981" stroke-width="1.5"/>
+    <text x="202" y="142" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">STA B2</text>
+    <line x1="202" y1="80" x2="202" y2="115" stroke="#10b981" stroke-width="2"/>
+
+    <text x="140" y="185" font-family="system-ui, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">A1 → B1 traffic is FORWARDED</text>
+  </g>
+
+  <!-- Bottom Banner -->
+  <g transform="translate(60, 330)">
+    <rect width="730" height="45" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <text x="365" y="28" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1" text-anchor="middle">
+      <tspan fill="#60a5fa" font-weight="700">Transparency:</tspan> Stations A1, A2, B1, B2 have no awareness that a bridge exists; addresses used are standard physical MACs.
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="400" rx="16" fill="url(#bg)"/>
+  <text x="425" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Architectural Comparison: Bridges vs. Layer 2 Switches</text>
+  <text x="425" y="64" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Software-Driven 2-Port Forwarding vs. High-Density Hardware ASIC Switching</text>
+
+  <g transform="translate(50, 95)">
+    <!-- Bridge Card -->
+    <rect width="360" height="275" rx="12" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="180" y="32" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#38bdf8" text-anchor="middle">Traditional Bridge</text>
+
+    <text x="20" y="65" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Implementation: <tspan fill="#38bdf8">Software-Based (General CPU)</tspan></text>
+    <text x="20" y="90" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Port Density: <tspan fill="#cbd5e1">2 to 4 Ports (Low Density)</tspan></text>
+    <text x="20" y="115" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Forwarding Mode: <tspan fill="#cbd5e1">Store-and-Forward Only</tspan></text>
+    <text x="20" y="140" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Switching Throughput: <tspan fill="#fbbf24">Packets/sec limited by CPU bus</tspan></text>
+    <text x="20" y="165" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Collision Domains: <tspan fill="#cbd5e1">2 to 4 Segments</tspan></text>
+    <text x="20" y="190" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Media Interconnection: <tspan fill="#38bdf8">Can bridge diverse media (Token Ring &amp; Ethernet)</tspan></text>
+    <text x="20" y="215" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Modern Role: <tspan fill="#ef4444">Legacy / Software Emulation (Linux br0)</tspan></text>
+    <text x="20" y="245" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Processes frames in central OS kernel memory.</text>
+  </g>
+
+  <g transform="translate(440, 95)">
+    <!-- Switch Card -->
+    <rect width="360" height="275" rx="12" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+    <text x="180" y="32" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#34d399" text-anchor="middle">Multiport L2 Switch</text>
+
+    <text x="20" y="65" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Implementation: <tspan fill="#34d399">Hardware ASIC / TCAM Silicon</tspan></text>
+    <text x="20" y="90" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Port Density: <tspan fill="#34d399">24, 48, 96+ Ports (High Density)</tspan></text>
+    <text x="20" y="115" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Forwarding Mode: <tspan fill="#34d399">Cut-Through, Fragment-Free &amp; Store-Forward</tspan></text>
+    <text x="20" y="140" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Switching Throughput: <tspan fill="#34d399">Wire-Speed (Terabits/sec crossbar)</tspan></text>
+    <text x="20" y="165" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Collision Domains: <tspan fill="#34d399">Isolated per port (Microsegmentation)</tspan></text>
+    <text x="20" y="190" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Media Interconnection: <tspan fill="#cbd5e1">Homogeneous Ethernet (Copper / Fiber)</tspan></text>
+    <text x="20" y="215" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Modern Role: <tspan fill="#34d399">Universal Enterprise &amp; Datacenter Core</tspan></text>
+    <text x="20" y="245" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Dedicated hardware switching matrix per line card.</text>
+  </g>
+</svg>

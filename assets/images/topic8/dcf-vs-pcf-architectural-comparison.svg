@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="400" rx="16" fill="url(#bg)"/>
+  <text x="425" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Architectural Comparison: DCF vs. PCF</text>
+  <text x="425" y="64" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Contention-Based CSMA/CA Best-Effort vs. Centrally Polled Contention-Free Time-Bounded QoS</text>
+
+  <!-- Side-by-Side Comparison -->
+  <g transform="translate(50, 95)">
+    <rect width="360" height="275" rx="12" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="180" y="32" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#38bdf8" text-anchor="middle">DCF (Distributed Coordination)</text>
+
+    <text x="20" y="65" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Access Scheme: <tspan fill="#38bdf8">Random CSMA/CA</tspan></text>
+    <text x="20" y="90" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Medium Sense Timing: <tspan fill="#38bdf8">DIFS (50 µs)</tspan></text>
+    <text x="20" y="115" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Contention: <tspan fill="#fbbf24">Exponential Backoff (CW)</tspan></text>
+    <text x="20" y="140" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Hardware: <tspan fill="#cbd5e1">Ad-Hoc (IBSS) &amp; Infrastructure</tspan></text>
+    <text x="20" y="165" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• QoS Guarantee: <tspan fill="#ef4444">None (Best-Effort)</tspan></text>
+    <text x="20" y="190" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Target Traffic: <tspan fill="#cbd5e1">Web, File Transfers, Emails</tspan></text>
+    <text x="20" y="215" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Implementation: <tspan fill="#34d399">Universal (Mandatory)</tspan></text>
+    <text x="20" y="245" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Stations independently compete for transmission rights.</text>
+  </g>
+
+  <g transform="translate(440, 95)">
+    <rect width="360" height="275" rx="12" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+    <text x="180" y="32" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#34d399" text-anchor="middle">PCF (Point Coordination)</text>
+
+    <text x="20" y="65" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Access Scheme: <tspan fill="#34d399">Centralized Round-Robin</tspan></text>
+    <text x="20" y="90" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Medium Sense Timing: <tspan fill="#34d399">PIFS (30 µs - Priority)</tspan></text>
+    <text x="20" y="115" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Contention: <tspan fill="#34d399">Zero (NAV Locks Out DCF)</tspan></text>
+    <text x="20" y="140" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Hardware: <tspan fill="#cbd5e1">Infrastructure AP Only</tspan></text>
+    <text x="20" y="165" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• QoS Guarantee: <tspan fill="#34d399">Bounded Latency &amp; Jitter</tspan></text>
+    <text x="20" y="190" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Target Traffic: <tspan fill="#cbd5e1">VoIP, Real-Time Video, Audio</tspan></text>
+    <text x="20" y="215" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Implementation: <tspan fill="#fbbf24">Rare / Replaced by 802.11e EDCA</tspan></text>
+    <text x="20" y="245" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Access Point commands polling order during superframe.</text>
+  </g>
+</svg>

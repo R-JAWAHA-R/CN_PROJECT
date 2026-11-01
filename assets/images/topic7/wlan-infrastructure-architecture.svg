@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.3"/></filter>
+  </defs>
+  <rect width="850" height="420" rx="16" fill="url(#bg)"/>
+  <text x="425" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Wireless LAN (WLAN) Architecture Components</text>
+  <text x="425" y="64" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Basic Service Set (BSS), Extended Service Set (ESS), Access Points (AP) &amp; Distribution System (DS)</text>
+
+  <!-- Distribution System (DS) Backbone -->
+  <g transform="translate(100, 95)">
+    <rect width="650" height="30" rx="6" fill="#3b82f6" filter="url(#shadow)"/>
+    <text x="325" y="20" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#fff" text-anchor="middle">DISTRIBUTION SYSTEM (DS) BACKBONE (Ethernet 802.3 / Fiber Switch)</text>
+  </g>
+
+  <!-- BSS 1 -->
+  <g transform="translate(80, 145)">
+    <!-- RF Coverage Circle -->
+    <ellipse cx="170" cy="120" rx="150" ry="105" fill="#0284c7" fill-opacity="0.15" stroke="#38bdf8" stroke-width="2" stroke-dasharray="6 4"/>
+    <text x="170" y="240" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#38bdf8" text-anchor="middle">Basic Service Set 1 (BSS 1)</text>
+
+    <!-- AP 1 -->
+    <line x1="170" y1="-20" x2="170" y2="40" stroke="#38bdf8" stroke-width="3"/>
+    <rect x="120" y="40" width="100" height="45" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <text x="170" y="65" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#fff" text-anchor="middle">📡 AP 1</text>
+    <text x="170" y="78" font-family="system-ui, sans-serif" font-size="9" fill="#94a3b8" text-anchor="middle">Access Point</text>
+
+    <!-- Wireless Links & Stations -->
+    <circle cx="80" cy="140" r="18" fill="#334155" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="80" y="145" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#fff" text-anchor="middle">STA 1</text>
+    <line x1="150" y1="85" x2="95" y2="130" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3 3"/>
+
+    <circle cx="260" cy="140" r="18" fill="#334155" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="260" y="145" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#fff" text-anchor="middle">STA 2</text>
+    <line x1="190" y1="85" x2="245" y2="130" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3 3"/>
+  </g>
+
+  <!-- BSS 2 -->
+  <g transform="translate(450, 145)">
+    <!-- RF Coverage Circle -->
+    <ellipse cx="170" cy="120" rx="150" ry="105" fill="#059669" fill-opacity="0.15" stroke="#10b981" stroke-width="2" stroke-dasharray="6 4"/>
+    <text x="170" y="240" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#34d399" text-anchor="middle">Basic Service Set 2 (BSS 2)</text>
+
+    <!-- AP 2 -->
+    <line x1="170" y1="-20" x2="170" y2="40" stroke="#10b981" stroke-width="3"/>
+    <rect x="120" y="40" width="100" height="45" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+    <text x="170" y="65" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#fff" text-anchor="middle">📡 AP 2</text>
+    <text x="170" y="78" font-family="system-ui, sans-serif" font-size="9" fill="#94a3b8" text-anchor="middle">Access Point</text>
+
+    <!-- Wireless Links & Stations -->
+    <circle cx="80" cy="140" r="18" fill="#334155" stroke="#10b981" stroke-width="1.5"/>
+    <text x="80" y="145" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#fff" text-anchor="middle">STA 3</text>
+    <line x1="150" y1="85" x2="95" y2="130" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3 3"/>
+
+    <circle cx="260" cy="140" r="18" fill="#334155" stroke="#10b981" stroke-width="1.5"/>
+    <text x="260" y="145" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#fff" text-anchor="middle">STA 4</text>
+    <line x1="190" y1="85" x2="245" y2="130" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3 3"/>
+  </g>
+
+  <!-- Overarching ESS Bracket -->
+  <g transform="translate(60, 395)">
+    <text x="365" y="0" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#fbbf24" text-anchor="middle">
+      ← EXTENDED SERVICE SET (ESS): Seamless Layer-2 Roaming Across Interconnected BSS Cells →
+    </text>
+  </g>
+</svg>

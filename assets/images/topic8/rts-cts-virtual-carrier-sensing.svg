@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="420" rx="16" fill="url(#bg)"/>
+  <text x="425" y="38" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">RTS / CTS Handshake &amp; Virtual Carrier Sensing</text>
+  <text x="425" y="62" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Eliminating Hidden Terminals by Reserving Channel Time via the NAV Timer</text>
+
+  <!-- Timeline Exchange -->
+  <g transform="translate(80, 95)">
+    <!-- Station A (Sender) -->
+    <text x="50" y="25" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#38bdf8">Sender (A)</text>
+    <rect x="130" y="10" width="70" height="30" rx="4" fill="#0284c7"/>
+    <text x="165" y="30" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">RTS</text>
+
+    <!-- Transmit Data -->
+    <rect x="290" y="10" width="230" height="30" rx="4" fill="#047857"/>
+    <text x="405" y="30" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">DATA FRAME TRANSMISSION</text>
+
+    <!-- Receiver (B) -->
+    <text x="50" y="85" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#10b981">Receiver (B)</text>
+    <rect x="215" y="70" width="60" height="30" rx="4" fill="#059669"/>
+    <text x="245" y="90" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">CTS</text>
+
+    <!-- Receive ACK -->
+    <rect x="535" y="70" width="60" height="30" rx="4" fill="#059669"/>
+    <text x="565" y="90" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">ACK</text>
+
+    <!-- SIFS Gaps -->
+    <line x1="200" y1="25" x2="215" y2="70" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="2 2"/>
+    <line x1="275" y1="85" x2="290" y2="25" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="2 2"/>
+    <line x1="520" y1="25" x2="535" y2="70" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="2 2"/>
+
+    <!-- Hidden Node C (hears CTS) -->
+    <text x="50" y="150" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ef4444">Hidden STA (C)</text>
+    <rect x="215" y="135" width="380" height="30" rx="6" fill="#7f1d1d" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="405" y="155" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fca5a5" text-anchor="middle">NAV (Network Allocation Vector): Defer Transmission (Channel Busy)</text>
+  </g>
+
+  <!-- Technical Insights -->
+  <g transform="translate(60, 290)">
+    <rect width="730" height="100" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <text x="20" y="26" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#38bdf8">1. RTS Frame (20 Bytes):</text>
+    <text x="190" y="26" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">Sender requests airtime and specifies the Duration required for CTS + DATA + ACK.</text>
+
+    <text x="20" y="50" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#34d399">2. CTS Frame (14 Bytes):</text>
+    <text x="190" y="50" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">Receiver confirms readiness; all stations hearing CTS (like C) update NAV to remain silent.</text>
+
+    <text x="20" y="74" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fbbf24">3. RTS Threshold:</text>
+    <text x="190" y="74" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">RTS/CTS is only used for frames exceeding the RTS Threshold (e.g. 2347 bytes) to avoid overhead on small packets.</text>
+  </g>
+</svg>

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="420" rx="16" fill="url(#bg)"/>
+  <text x="425" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">The Exposed Terminal Problem in Wireless Networks</text>
+  <text x="425" y="64" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">B is transmitting to A; C wants to transmit to D. C hears B and unnecessarily defers, wasting bandwidth</text>
+
+  <!-- Radio Ranges -->
+  <!-- Range of B -->
+  <circle cx="340" cy="170" r="160" fill="#0284c7" fill-opacity="0.12" stroke="#38bdf8" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="250" y="85" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#38bdf8">Range of B (covers A and C)</text>
+
+  <!-- Range of C -->
+  <circle cx="510" cy="170" r="160" fill="#a855f7" fill-opacity="0.12" stroke="#c084fc" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="590" y="85" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#c084fc">Range of C (covers B and D)</text>
+
+  <!-- Nodes A, B, C, D in a horizontal row -->
+  <!-- Node A -->
+  <circle cx="150" cy="170" r="25" fill="#334155" stroke="#94a3b8" stroke-width="2"/>
+  <text x="150" y="175" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#fff" text-anchor="middle">STA A</text>
+
+  <!-- Node B (Transmitting to A) -->
+  <circle cx="340" cy="170" r="28" fill="#0369a1" stroke="#38bdf8" stroke-width="2.5"/>
+  <text x="340" y="175" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#fff" text-anchor="middle">STA B</text>
+
+  <!-- Transmit B to A -->
+  <line x1="305" y1="170" x2="185" y2="170" stroke="#38bdf8" stroke-width="3"/>
+  <text x="245" y="155" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">← B sends to A</text>
+
+  <!-- Node C (Wants to transmit to D) -->
+  <circle cx="510" cy="170" r="28" fill="#6b21a8" stroke="#c084fc" stroke-width="2.5"/>
+  <text x="510" y="175" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#fff" text-anchor="middle">STA C</text>
+
+  <!-- Desired transmission C to D -->
+  <line x1="545" y1="170" x2="665" y2="170" stroke="#10b981" stroke-width="3" stroke-dasharray="4 3"/>
+  <text x="605" y="155" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#34d399" text-anchor="middle">C wants to send to D →</text>
+
+  <!-- Node D -->
+  <circle cx="700" cy="170" r="25" fill="#334155" stroke="#94a3b8" stroke-width="2"/>
+  <text x="700" y="175" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#fff" text-anchor="middle">STA D</text>
+
+  <!-- Bottom Evaluation Card -->
+  <g transform="translate(75, 280)">
+    <rect width="700" height="115" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="20" y="26" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#fbbf24">Inappropriate Deferral (Bandwidth Wastage):</text>
+    <text x="20" y="48" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• C senses medium before sending to D: C hears B transmitting, so C believes the channel is busy.</text>
+    <text x="20" y="68" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• BUT C's transmission would only reach D (and B). D is far from B, so D would receive C's signal cleanly!</text>
+    <text x="20" y="88" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Furthermore, A is outside C's transmission range, so C would not interfere with A receiving from B!</text>
+    <text x="20" y="106" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#38bdf8">Result: Unnecessary backoff reduces network capacity. RTS/CTS resolves this because C hears CTS from D.</text>
+  </g>
+</svg>

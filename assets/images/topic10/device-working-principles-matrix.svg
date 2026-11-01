@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="420" rx="16" fill="url(#bg)"/>
+  <text x="425" y="38" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Comprehensive Networking Devices Comparison Matrix</text>
+  <text x="425" y="62" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Layer, PDU, Addressing, Forwarding Decision, and Collision/Broadcast Domain Summary</text>
+
+  <!-- Comparison Table -->
+  <g transform="translate(40, 85)">
+    <!-- Header -->
+    <rect x="0" y="0" width="770" height="35" rx="6" fill="#1e3a8a" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="60" y="22" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">Device</text>
+    <text x="140" y="22" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">OSI Layer</text>
+    <text x="230" y="22" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">PDU</text>
+    <text x="350" y="22" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">Decision Mechanism</text>
+    <text x="500" y="22" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">Collision Domain</text>
+    <text x="660" y="22" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">Broadcast Domain</text>
+
+    <!-- Row 1: Repeater / Hub -->
+    <rect x="0" y="40" width="770" height="45" rx="4" fill="#1e293b"/>
+    <text x="60" y="67" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#f59e0b" text-anchor="middle">Repeater / Hub</text>
+    <text x="140" y="67" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">Layer 1 (PHY)</text>
+    <text x="230" y="67" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">Bits</text>
+    <text x="350" y="67" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">None (Re-clock &amp; Repeat)</text>
+    <text x="500" y="67" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#ef4444" text-anchor="middle">1 Shared Domain</text>
+    <text x="660" y="67" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">1 Shared Domain</text>
+
+    <!-- Row 2: Bridge -->
+    <rect x="0" y="90" width="770" height="45" rx="4" fill="#0f172a"/>
+    <text x="60" y="117" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#38bdf8" text-anchor="middle">Bridge</text>
+    <text x="140" y="117" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">Layer 2 (DLL)</text>
+    <text x="230" y="117" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">Frames</text>
+    <text x="350" y="117" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">Destination MAC Table (Software)</text>
+    <text x="500" y="117" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#34d399" text-anchor="middle">2–4 Domains (Per port)</text>
+    <text x="660" y="117" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">1 Shared Domain</text>
+
+    <!-- Row 3: Switch -->
+    <rect x="0" y="140" width="770" height="45" rx="4" fill="#1e293b"/>
+    <text x="60" y="167" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#10b981" text-anchor="middle">L2 Switch</text>
+    <text x="140" y="167" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">Layer 2 (DLL)</text>
+    <text x="230" y="167" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">Frames</text>
+    <text x="350" y="167" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">ASIC Hardware CAM Lookup</text>
+    <text x="500" y="167" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#34d399" text-anchor="middle">1 per port (Microseg)</text>
+    <text x="660" y="167" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">1 Shared (per VLAN)</text>
+
+    <!-- Row 4: Router -->
+    <rect x="0" y="190" width="770" height="45" rx="4" fill="#0f172a"/>
+    <text x="60" y="217" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#60a5fa" text-anchor="middle">Router</text>
+    <text x="140" y="217" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">Layer 3 (Net)</text>
+    <text x="230" y="217" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">Packets</text>
+    <text x="350" y="217" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">IP Routing Table (FIB / LPM)</text>
+    <text x="500" y="217" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#34d399" text-anchor="middle">1 per port</text>
+    <text x="660" y="217" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#34d399" text-anchor="middle">1 per interface (Breaks it)</text>
+
+    <!-- Row 5: Gateway -->
+    <rect x="0" y="240" width="770" height="45" rx="4" fill="#1e293b"/>
+    <text x="60" y="267" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#c084fc" text-anchor="middle">Gateway</text>
+    <text x="140" y="267" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">Layer 4–7</text>
+    <text x="230" y="267" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">Messages</text>
+    <text x="350" y="267" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">Application Translation Rules</text>
+    <text x="500" y="267" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#34d399" text-anchor="middle">Isolated</text>
+    <text x="660" y="267" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#34d399" text-anchor="middle">Completely Isolated</text>
+  </g>
+</svg>

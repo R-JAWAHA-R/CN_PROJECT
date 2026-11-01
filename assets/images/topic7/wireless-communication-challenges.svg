@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="400" rx="16" fill="url(#bg)"/>
+  <text x="425" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Key Engineering Challenges in Wireless Communications</text>
+  <text x="425" y="64" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Physical, MAC-Layer, Mobility &amp; Cryptographic Constraints of the RF Medium</text>
+
+  <!-- 4 Grid Boxes -->
+  <g transform="translate(60, 95)">
+    <!-- Box 1 -->
+    <rect x="0" y="0" width="340" height="120" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="20" y="30" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#38bdf8">1. High Bit-Error Rate &amp; Retransmissions</text>
+    <text x="20" y="55" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Unpredictable noise bursts, Doppler shift, dynamic fading</text>
+    <text x="20" y="75" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Strict frame size caps &amp; packet fragmentation</text>
+    <text x="20" y="95" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">• Requires Forward Error Correction (FEC) &amp; Stop-and-Wait ACKs</text>
+
+    <!-- Box 2 -->
+    <rect x="380" y="0" width="340" height="120" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+    <text x="400" y="30" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#34d399">2. Mobility &amp; Dynamic Topology</text>
+    <text x="400" y="55" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Mobile stations cross AP coverage boundaries</text>
+    <text x="400" y="75" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Fast BSS Transition / Roaming (IEEE 802.11r)</text>
+    <text x="400" y="95" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">• Dynamic re-association &amp; 802.1X key handshakes</text>
+
+    <!-- Box 3 -->
+    <rect x="0" y="145" width="340" height="120" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="20" y="175" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#fbbf24">3. Eavesdropping &amp; Open Broadcast Medium</text>
+    <text x="20" y="200" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Anyone with an antenna within range can sniff packets</text>
+    <text x="20" y="220" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Evolution from broken WEP → WPA2 (AES-CCMP) → WPA3 (SAE)</text>
+    <text x="20" y="240" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">• Mutual station-AP authentication via 4-Way Handshake</text>
+
+    <!-- Box 4 -->
+    <rect x="380" y="145" width="340" height="120" rx="10" fill="#1e293b" stroke="#ec4899" stroke-width="1.5"/>
+    <text x="400" y="175" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#f472b6">4. Power Consumption in Mobile Clients</text>
+    <text x="400" y="200" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• RF radios consume heavy battery when continuously active</text>
+    <text x="400" y="220" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• IEEE 802.11 Power Save Mode (PSM) &amp; DTIM Beacons</text>
+    <text x="400" y="240" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">• Target Wake Time (TWT) in Wi-Fi 6 (802.11ax) for IoT battery life</text>
+  </g>
+</svg>

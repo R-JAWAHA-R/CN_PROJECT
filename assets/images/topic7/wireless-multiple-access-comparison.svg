@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="400" rx="16" fill="url(#bg)"/>
+  <text x="425" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Why CSMA/CD Fails in Wireless (The Need for CSMA/CA)</text>
+  <text x="425" y="64" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Fundamental Physical Differences Between Guided Copper and Wireless RF Mediums</text>
+
+  <!-- Left: Wired CSMA/CD -->
+  <g transform="translate(50, 95)">
+    <rect width="350" height="270" rx="12" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="175" y="32" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#38bdf8" text-anchor="middle">Wired Ethernet (CSMA/CD)</text>
+    
+    <text x="20" y="65" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Low Dynamic Signal Range:</text>
+    <text x="20" y="82" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Signal voltage drops minimally over twisted pair or coax (&lt; 3 dB).</text>
+
+    <text x="20" y="115" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Simultaneous TX &amp; RX (Full Listen):</text>
+    <text x="20" y="132" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Transmitter can easily detect abnormal voltage spike indicating a collision.</text>
+
+    <text x="20" y="165" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Fast Abort &amp; Recovery:</text>
+    <text x="20" y="182" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Stations abort immediately upon collision, saving bandwidth.</text>
+
+    <text x="20" y="215" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• No Hidden Terminals:</text>
+    <text x="20" y="232" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Every station is electrically connected to the same shared medium.</text>
+  </g>
+
+  <!-- Right: Wireless CSMA/CA -->
+  <g transform="translate(440, 95)">
+    <rect width="360" height="270" rx="12" fill="#1e293b" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="180" y="32" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#f87171" text-anchor="middle">Wireless LAN (CSMA/CA Required)</text>
+
+    <text x="20" y="65" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Extreme Dynamic Range (&gt; 50 to 90 dB):</text>
+    <text x="20" y="82" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">Transmitted power drowns out incoming weak signals (self-interference).</text>
+
+    <text x="20" y="115" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Cannot Hear While Talking (Half-Duplex):</text>
+    <text x="20" y="132" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">Transmitter cannot detect collisions occurring at the remote receiver!</text>
+
+    <text x="20" y="165" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Avoidance (CA) Rather Than Detection (CD):</text>
+    <text x="20" y="182" font-family="system-ui, sans-serif" font-size="11" fill="#34d399">Interframe Spaces (IFS) + Random Backoff + RTS/CTS + Positive ACKs.</text>
+
+    <text x="20" y="215" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">• Severe Hidden / Exposed Terminals:</text>
+    <text x="20" y="232" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">Spatial separation creates localized interference domains.</text>
+  </g>
+</svg>

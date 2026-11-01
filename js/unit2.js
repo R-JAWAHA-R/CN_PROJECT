@@ -563,6 +563,7 @@ const Unit2Module = {
                         <span class="text-[10px] font-bold text-blue-600 dark:text-blue-400 flex items-center gap-1">
                           <i class="fa-solid fa-file-lines"></i> Lesson
                         </span>
+                        <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300">${topic.shortTitle.split(' – ')[0]}</span>
                         ${item.time ? `<span class="text-[10px] text-gray-400">${item.time}</span>` : ''}
                       </div>
                       <div class="font-bold text-xs text-gray-900 dark:text-white mb-1">${item.title}</div>

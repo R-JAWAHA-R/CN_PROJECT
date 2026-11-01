@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="850" height="400" rx="16" fill="url(#bg)"/>
+  <text x="425" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Bridge Forwarding Table (MAC / CAM Table)</text>
+  <text x="425" y="64" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Dynamic Binding of Physical MAC Addresses to Switch Ports with Aging Timers</text>
+
+  <!-- Table Container -->
+  <g transform="translate(100, 95)">
+    <!-- Header -->
+    <rect x="0" y="0" width="650" height="38" rx="6" fill="#1e3a8a" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="120" y="24" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#fff" text-anchor="middle">Station MAC Address</text>
+    <text x="325" y="24" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#fff" text-anchor="middle">Egress Port</text>
+    <text x="525" y="24" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#fff" text-anchor="middle">Aging Timer (TTL)</text>
+
+    <!-- Row 1 -->
+    <rect x="0" y="45" width="650" height="35" rx="4" fill="#1e293b"/>
+    <text x="120" y="67" font-family="monospace" font-size="12" fill="#38bdf8" text-anchor="middle">00:1A:2B:3C:4D:01 (STA A)</text>
+    <text x="325" y="67" font-family="monospace" font-size="12" font-weight="700" fill="#34d399" text-anchor="middle">Port 1</text>
+    <text x="525" y="67" font-family="monospace" font-size="11" fill="#cbd5e1" text-anchor="middle">285 s (Active)</text>
+
+    <!-- Row 2 -->
+    <rect x="0" y="85" width="650" height="35" rx="4" fill="#0f172a"/>
+    <text x="120" y="107" font-family="monospace" font-size="12" fill="#38bdf8" text-anchor="middle">00:1A:2B:3C:4D:02 (STA B)</text>
+    <text x="325" y="107" font-family="monospace" font-size="12" font-weight="700" fill="#34d399" text-anchor="middle">Port 1</text>
+    <text x="525" y="107" font-family="monospace" font-size="11" fill="#cbd5e1" text-anchor="middle">140 s (Active)</text>
+
+    <!-- Row 3 -->
+    <rect x="0" y="125" width="650" height="35" rx="4" fill="#1e293b"/>
+    <text x="120" y="147" font-family="monospace" font-size="12" fill="#38bdf8" text-anchor="middle">00:1A:2B:3C:4D:03 (STA C)</text>
+    <text x="325" y="147" font-family="monospace" font-size="12" font-weight="700" fill="#34d399" text-anchor="middle">Port 2</text>
+    <text x="525" y="147" font-family="monospace" font-size="11" fill="#cbd5e1" text-anchor="middle">298 s (Refreshed)</text>
+
+    <!-- Row 4 -->
+    <rect x="0" y="165" width="650" height="35" rx="4" fill="#0f172a"/>
+    <text x="120" y="187" font-family="monospace" font-size="12" fill="#38bdf8" text-anchor="middle">00:1A:2B:3C:4D:04 (STA D)</text>
+    <text x="325" y="187" font-family="monospace" font-size="12" font-weight="700" fill="#34d399" text-anchor="middle">Port 2</text>
+    <text x="525" y="187" font-family="monospace" font-size="11" fill="#ef4444" text-anchor="middle">12 s (Expiring Soon)</text>
+  </g>
+
+  <!-- Note Footer -->
+  <g transform="translate(100, 315)">
+    <rect width="650" height="55" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <text x="325" y="24" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#38bdf8" text-anchor="middle">
+      Self-Refreshing Rule: Every time a frame arrives from a known MAC, its Aging Timer resets to 300 seconds.
+    </text>
+    <text x="325" y="44" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">
+      If a station moves to a new switch port, its new frame updates the port binding immediately.
+    </text>
+  </g>
+</svg>

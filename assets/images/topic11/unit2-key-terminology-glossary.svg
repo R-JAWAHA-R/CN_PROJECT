@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 400" width="100%" height="100%">
+  <defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient></defs>
+  <rect width="850" height="400" rx="16" fill="url(#bg)"/>
+  <text x="425" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" text-anchor="middle">Unit 2: Essential Terminology &amp; Key Definitions</text>
+  <text x="425" y="64" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Comprehensive Glossary of Data Link Layer Technical Concepts</text>
+  <g transform="translate(60, 95)">
+    <rect width="730" height="260" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="365" y="45" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#38bdf8" text-anchor="middle">Data Link Layer Glossary</text>
+    <text x="365" y="80" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1" text-anchor="middle">Framing • Bit Stuffing • Byte Stuffing • Flow Control • Piggybacking • Pipelining</text>
+    <text x="365" y="115" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1" text-anchor="middle">ARQ • CRC • Hamming Distance • MAC Sublayer • ALOHA • CSMA/CD • CSMA/CA</text>
+    <text x="365" y="150" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1" text-anchor="middle">1-Persistent • Binary Exponential Backoff • BSS • ESS • SIFS • DIFS • RTS/CTS • NAV</text>
+    <text x="365" y="185" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1" text-anchor="middle">Transparent Bridge • CAM Table • Spanning Tree Protocol • Micro-segmentation • VLAN</text>
+  </g>
+</svg>
