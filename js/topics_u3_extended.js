@@ -1686,128 +1686,157 @@ const TOPICS_U3_EXT = {
   "distance-vector": {
     "id": "distance-vector",
     "title": "Distance Vector Routing",
-    "unit": "Unit 3 – Network Layer",
+    "unit": "Unit 3: Network Layer",
     "unitId": "unit3",
-    "level": "Level 1 — Core Topic",
-    "category": "network",
-    "difficulty": "Advanced",
-    "readingTime": "20 min read",
-    "standard": "RFC 1058 (RIP) / Bellman-Ford 1957 / Tanenbaum Ch 5.2.4",
-    "oneLiner": "Distributed Bellman-Ford routing where each node periodically shares its known distance vector with immediate physical neighbors.",
-    "quickAnswer": "Distance Vector Routing is a distributed, dynamic routing algorithm based on the Bellman-Ford equation. Each router maintains a table (vector) of its best-known distance to every destination in the network and the outgoing line to use. Periodically, routers exchange this vector with their immediate physical neighbors and update their tables using: D_x(y) = min_v { c(x,v) + D_v(y) }.",
-    "whyItMatters": "Distance Vector was the original routing algorithm of ARPANET and powers the Routing Information Protocol (RIP). It introduced distributed computing to computer networks, allowing routers to dynamically converge on shortest paths without requiring any single router to know the entire global network topology.",
+    "level": "Undergraduate / GATE CSE",
+    "category": "Dynamic Routing Protocols",
+    "difficulty": "Intermediate",
+    "readingTime": "30 min",
+    "standard": "Bellman-Ford / RFC 1058 (RIP) / RFC 2453 (RIPv2) / Master PDF Notes",
+    "oneLiner": "A dynamic routing approach where routers periodically exchange distance vectors with direct neighbors, calculating shortest paths using the Bellman-Ford equation.",
+    "quickAnswer": "Distance Vector Routing is a dynamic routing method in which each router maintains information about the distance (cost) to reach different destination networks and the vector (direction or next-hop router) to use. Routers periodically share their routing tables exclusively with directly connected physical neighbors. Using the Bellman-Ford shortest path equation $D_x(y) = \\min_v \\{ c(x,v) + D_v(y) \\}$, a router updates its table whenever a neighbor advertises a lower-cost path. Characterized by the philosophy 'tell your neighbors about what you know,' it is simple to configure and has low memory overhead, but suffers from slow convergence and susceptibility to routing loops.",
+    "whyItMatters": "Distance Vector routing represents the foundational dynamic routing concept in computer networking. It powers the Routing Information Protocol (RIP) and Cisco's EIGRP, and forms the historical basis for understanding decentralized, distributed shortest-path computation across networks.",
     "infobox": {
+      "algorithmBasis": "Bellman-Ford Algorithm (Distributed Iterative)",
+      "informationExchanged": "Full/partial routing table (Destinations & Costs)",
+      "exchangeTarget": "Directly connected neighbors only",
+      "updateTiming": "Periodic (e.g. RIP every 30s) and Triggered",
+      "commonProtocols": [
+        "RIPv1 (RFC 1058)",
+        "RIPv2 (RFC 2453)",
+        "IGRP",
+        "EIGRP"
+      ],
+      "maxHopLimitRIP": "15 Hops (16 = Infinity / Unreachable)",
       "prerequisites": [
+        "internetwork-routing",
         "optimality-principle"
       ],
       "relatedConcepts": [
-        "count-to-infinity",
         "link-state-routing",
-        "routing-table-updates",
-        "comparison-dv-ls"
+        "count-to-infinity",
+        "routing-table-updates"
       ],
       "compareWith": [
+        "comparison-dv-ls",
         "distance-vector-vs-link-state"
-      ],
-      "primaryUses": [
-        "Routing Information Protocol (RIPv1 and RIPv2, RFC 2453)",
-        "Interior Gateway Routing Protocol (Cisco IGRP and EIGRP DUAL)",
-        "Small to medium enterprise campus networks (under 15 hops)",
-        "Fundamental routing theory in university curricula and GATE exams"
-      ],
-      "standardRfc": "RFC 1058 (RIPv1), RFC 2453 (RIPv2)"
+      ]
     },
-    "learningObjectives": [
-      "Explain the distributed philosophy of Distance Vector: 'Routing by rumor'",
-      "Master the Bellman-Ford equation: D_x(y) = min_v { c(x,v) + D_v(y) }",
-      "Trace routing table calculations upon receiving a neighbor's vector",
-      "Explain the structure of a Distance Vector table: Destination, Cost, Next Hop",
-      "Understand the periodic update mechanism (e.g. 30-second broadcast timers)",
-      "Identify the scalability limits of Distance Vector (slow convergence and metric capping)"
-    ],
     "prerequisitesList": [
       {
-        "concept": "The Optimality Principle",
-        "meaning": "Understanding shortest path trees and subpath optimality"
+        "concept": "Internetwork Routing Basics",
+        "meaning": "Understanding routing tables, next-hop forwarding, and metrics."
+      },
+      {
+        "concept": "Bellman's Optimality Principle",
+        "meaning": "Understanding why optimal subpaths compose globally optimal paths."
       }
     ],
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2e/Distance_vector_routing.svg",
-    "imageCaption": "Figure 3.12: Distributed Distance Vector Routing: Periodic Neighbor Distance Vector Exchanges.",
+    "learningObjectives": [
+      "Define dynamic routing and explain why it is essential in large, changing networks.",
+      "Explain the exact meaning of Distance (cost) and Vector (direction/next-hop).",
+      "Trace the 6-step operational lifecycle of Distance Vector routing from table initialization to convergence.",
+      "Work through the 3-router A-B-C distance vector exchange from the syllabus PDF.",
+      "Apply the Bellman-Ford equation to compute minimum-cost paths across multiple competing neighbors.",
+      "State the key characteristics of the Routing Information Protocol (RIP), including its 15-hop limit and periodic timers.",
+      "Evaluate the advantages and disadvantages of Distance Vector routing."
+    ],
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Distance_Vector_Routing.svg/800px-Distance_Vector_Routing.svg.png",
+    "imageCaption": "Figure 1: Distance Vector exchange where routers share routing vectors exclusively with direct neighbors.",
     "sections": {
-      "overview": "\n        <p class=\"mb-3\">\n          <strong>Distance Vector Routing</strong> (historically known as the distributed <em>Bellman-Ford algorithm</em> or the <em>Ford-Fulkerson algorithm</em>) is a dynamic routing algorithm in which each router maintains a routing table giving the best-known distance to each destination and the communication line to use to get there.\n        </p>\n        <p class=\"mb-3\">\n          Under Distance Vector, routers operate on the philosophy often termed <strong>\"Routing by Rumor\"</strong>:\n          <em>\"Each router tells its direct physical neighbors about its perspective of the entire network.\"</em> A router does not possess a complete topological map of the network; it only knows the cost to reach destinations through its immediate neighbors.\n        </p>\n      ",
-      "howItWorks": "\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">1. The Bellman-Ford Equation</h3>\n        <p class=\"mb-3 text-xs\">\n          The mathematical engine of Distance Vector routing is the <strong>Bellman-Ford equation</strong>. Let (D_x(y)) be the cost of the least-cost path from node (x) to node (y). Then:\n        </p>\n        <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-lg text-center font-mono text-xs font-bold text-emerald-800 dark:text-emerald-300 mb-3\">\n          D<sub>x</sub>(y) = min<sub>v ∈ neighbors(x)</sub> { c(x, v) + D<sub>v</sub>(y) }\n        </div>\n        <p class=\"text-xs mb-3\">\n          Where (c(x, v)) is the direct link cost from node (x) to neighbor (v), and (D_v(y)) is the neighbor (v)'s reported distance to destination (y). The minimum is taken over all direct neighbors of (x).\n        </p>\n\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">2. Routing Table Structure</h3>\n        <p class=\"text-xs mb-2\">Every router maintains a routing table containing triplets:</p>\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700 font-mono text-xs mb-4\">\n          [ Destination Network | Cost (Metric / Hops) | Next Hop Interface / Router ]\n        </div>\n\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">3. The Update Cycle</h3>\n        <ol class=\"list-decimal pl-5 space-y-1.5 text-xs mb-4\">\n          <li><strong>Periodic Timer Expiry:</strong> Every 30 seconds (in RIP), router (x) transmits a copy of its distance vector ({D_x}) to all direct physical neighbors.</li>\n          <li><strong>Neighbor Processing:</strong> When neighbor (v) receives this vector, it adds the cost of the link (c(v, x)) to each entry in the vector.</li>\n          <li><strong>Table Replacement:</strong> If the newly calculated cost to any destination is lower than the router's current table entry, or if the update comes from the existing next-hop router, the router updates its table and records (x) as the next hop.</li>\n        </ol>\n      ",
-      "technicalDetails": "\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">4. Distance Vector Convergence Characteristics</h3>\n        <p class=\"text-xs mb-3\">\n          Distance Vector routing works well in small topologies, but suffers from two distinct convergence traits:\n        </p>\n        <div class=\"space-y-2 text-xs mb-4\">\n          <div class=\"p-2.5 bg-emerald-50 dark:bg-emerald-950/30 rounded border border-emerald-200 dark:border-emerald-800\">\n            <strong>\"Good News Spreads Fast\":</strong> When a new router or low-cost link appears, this positive information propagates across the network in (O(D)) exchange cycles (where (D) is the network diameter).\n          </div>\n          <div class=\"p-2.5 bg-rose-50 dark:bg-rose-950/30 rounded border border-rose-200 dark:border-rose-800\">\n            <strong>\"Bad News Travels Slow\":</strong> When a router fails or a link breaks, the lack of global topological knowledge causes adjacent routers to create mutual routing loops, leading to the infamous <strong>Count-to-Infinity problem</strong>.\n          </div>\n        </div>\n      ",
+      "overview": "\n        <h3 class=\"wiki-subtitle\">1. Introduction to Dynamic Routing</h3>\n        <p class=\"wiki-paragraph\">\n          <strong>Dynamic routing</strong> is a routing method in which routers automatically learn routes, exchange routing information with other routers, and update their routing tables dynamically whenever network conditions change. Instead of requiring a network administrator to manually program thousands of static routes, routers use <strong>dynamic routing protocols</strong> to discover available paths autonomously.\n        </p>\n\n        <div class=\"wiki-callout note mb-6\">\n          <div class=\"callout-header\"><i class=\"fa-solid fa-network-wired text-emerald-600 mr-2\"></i> Linear Network Example (From Section 1.1 of the Syllabus PDF)</div>\n          <p class=\"text-xs text-gray-600 dark:text-gray-300\">\n            Consider a network containing four interconnected routers:\n          </p>\n          <div class=\"p-2.5 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 font-mono text-center text-xs my-2 font-bold text-emerald-600 dark:text-emerald-400\">\n            R1 &rarr; R2 &rarr; R3 &rarr; R4\n          </div>\n          <p class=\"text-xs text-gray-600 dark:text-gray-300\">\n            If the link between R2 and R3 fails, static routing would require an administrator to manually log into R1 and R2 to redirect packets. Dynamic routing protocols, however, detect the failure automatically, exchange routing updates, and re-converge onto an alternate available path within seconds.\n          </p>\n        </div>\n\n        <h3 class=\"wiki-subtitle\">2. Why Is Dynamic Routing Needed?</h3>\n        <p class=\"wiki-paragraph\">\n          Section 1.2 of the syllabus PDF highlights the six fundamental reasons why dynamic routing is essential:\n        </p>\n        <div class=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-4 text-xs\">\n          <div class=\"p-3 bg-gray-50 dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">1. High Router Density</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">Enterprise networks contain hundreds or thousands of routers where manual configuration is impossible.</p>\n          </div>\n          <div class=\"p-3 bg-gray-50 dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">2. Connection Failures</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">Physical cables are severed, equipment loses power, and fiber links suffer attenuation unexpectedly.</p>\n          </div>\n          <div class=\"p-3 bg-gray-50 dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">3. Dynamic Network Growth</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">New subnets, departments, and branch routers are added without rebuilding the existing network core.</p>\n          </div>\n          <div class=\"p-3 bg-gray-50 dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">4. Traffic Fluctuations</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">Allows traffic to shift dynamically to under-utilized links when primary circuits become saturated.</p>\n          </div>\n          <div class=\"p-3 bg-gray-50 dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">5. Reduced Human Error</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">Eliminates manual typos and configuration inconsistencies that cause black holes and routing loops.</p>\n          </div>\n          <div class=\"p-3 bg-gray-50 dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">6. Autonomous Topology Adaptation</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">Routers continuously listen for neighbor keepalives and automatically recalculate paths upon state changes.</p>\n          </div>\n        </div>\n\n        <h3 class=\"wiki-subtitle\">3. Meaning of \"Distance\" and \"Vector\"</h3>\n        <p class=\"wiki-paragraph\">\n          From Section 2.2 of the syllabus PDF notes:\n        </p>\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-3 text-xs my-3\">\n          <div class=\"p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-blue-600 dark:text-blue-400 block mb-1\">Distance (The Cost)</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">\n              The numerical metric required to reach the destination network. Examples:\n            </p>\n            <ul class=\"list-disc pl-4 mt-1 text-slate-500\">\n              <li>Distance to Network A = 1 hop</li>\n              <li>Distance to Network B = 3 hops</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">Vector (The Direction)</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">\n              The direction or next-hop router through which the destination can be reached. Example:\n            </p>\n            <ul class=\"list-disc pl-4 mt-1 text-slate-500\">\n              <li>Destination = Network B | Distance = 3 hops | <strong>Next Hop = Router R2</strong></li>\n            </ul>\n          </div>\n        </div>\n        <p class=\"wiki-paragraph\">\n          <strong>Key Philosophy:</strong> A distance vector tells a router both the <em>cost</em> and the <em>direction</em> to reach a destination. Each router informs its neighbors about what it knows and how far away those destinations are (\"routing by rumor\").\n        </p>\n      ",
+      "howItWorks": "\n        <h3 class=\"wiki-subtitle\">1. How Distance Vector Routing Works (6-Step Lifecycle)</h3>\n        <p class=\"wiki-paragraph\">\n          Section 2.3 of the syllabus PDF details the six phases of the Distance Vector algorithm:\n        </p>\n        <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 my-4 text-xs space-y-2\">\n          <div><strong class=\"text-emerald-600 dark:text-emerald-400\">Step 1: Initial Routing Table Creation:</strong> Upon booting, each router knows only its directly connected interfaces (cost = 0 or direct link cost). All other destinations in the universe are set to infinity ($infty$).</div>\n          <div><strong class=\"text-emerald-600 dark:text-emerald-400\">Step 2: Exchange Routing Information:</strong> Each router sends a copy of its current distance vector to its directly connected neighbors.</div>\n          <div><strong class=\"text-emerald-600 dark:text-emerald-400\">Step 3: Receive Neighbor Updates:</strong> A router receives distance vectors advertised by its neighbors.</div>\n          <div><strong class=\"text-emerald-600 dark:text-emerald-400\">Step 4: Calculate New Route Costs:</strong> The router adds the link cost to the neighbor to each advertised distance.</div>\n          <div><strong class=\"text-emerald-600 dark:text-emerald-400\">Step 5: Update Routing Table:</strong> If the newly calculated cost to a destination is lower than the existing cost in its table, the router updates its table with the new lower cost and sets the next-hop to that neighbor.</div>\n          <div><strong class=\"text-emerald-600 dark:text-emerald-400\">Step 6: Iterate Until Convergence:</strong> Routers continue exchanging updates periodically until no further table changes occur. At this point, the network has <strong>converged</strong>.</div>\n        </div>\n\n        <h3 class=\"wiki-subtitle\">2. Worked Example from Section 2.4 of the Syllabus PDF</h3>\n        <p class=\"wiki-paragraph\">\n          Consider three routers: <strong>Router A</strong>, <strong>Router B</strong>, and <strong>Router C</strong>.\n        </p>\n        <div class=\"p-3 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 font-mono text-center text-xs my-2 text-emerald-600 dark:text-emerald-400 font-bold\">\n          [ Router A ] &mdash;(cost 2)&rarr; [ Router B ] &mdash;(cost 3)&rarr; [ Router C ]\n        </div>\n        <p class=\"wiki-paragraph\">\n          Router A is directly connected to B with cost 2. Router B is connected to C with cost 3. Router A is <em>not directly connected</em> to Router C. We want Router A to learn the route to Router C.\n        </p>\n\n        <div class=\"grid grid-cols-1 md:grid-cols-3 gap-2 text-xs font-mono my-3\">\n          <div class=\"p-2.5 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n            <div class=\"font-bold text-slate-800 dark:text-slate-100 mb-1\">Initial Router A:</div>\n            <div>Dest A: Cost 0 (Direct)</div>\n            <div>Dest B: Cost 2 (Direct)</div>\n            <div>Dest C: Cost &infin; (Unknown)</div>\n          </div>\n          <div class=\"p-2.5 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n            <div class=\"font-bold text-slate-800 dark:text-slate-100 mb-1\">Initial Router B:</div>\n            <div>Dest A: Cost 2 (Direct)</div>\n            <div>Dest B: Cost 0 (Direct)</div>\n            <div>Dest C: Cost 3 (Direct)</div>\n          </div>\n          <div class=\"p-2.5 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n            <div class=\"font-bold text-slate-800 dark:text-slate-100 mb-1\">Initial Router C:</div>\n            <div>Dest A: Cost &infin; (Unknown)</div>\n            <div>Dest B: Cost 3 (Direct)</div>\n            <div>Dest C: Cost 0 (Direct)</div>\n          </div>\n        </div>\n\n        <div class=\"p-4 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200 dark:border-emerald-800 text-xs my-3\">\n          <strong class=\"text-emerald-800 dark:text-emerald-300 font-bold block mb-1\">Step 1: Router B Shares Its Distance Vector with Router A</strong>\n          <p class=\"text-slate-700 dark:text-slate-300 mb-2\">\n            Router A receives Router B's vector, which advertises that B can reach C with cost 3. Router A calculates the cost to C through B:\n          </p>\n          <div class=\"p-2 bg-white dark:bg-gray-800 rounded border border-emerald-300 dark:border-emerald-700 font-mono font-bold text-center text-emerald-800 dark:text-emerald-300 mb-2\">\n            Cost(A &rarr; C) = Cost(A &rarr; B) + Cost(B &rarr; C) = 2 + 3 = 5\n          </div>\n          <strong class=\"text-emerald-800 dark:text-emerald-300 font-bold block mb-1\">Step 2: Router A Updates Its Routing Table</strong>\n          <div class=\"overflow-x-auto\">\n            <table class=\"wiki-table w-full text-xs font-mono\">\n              <thead>\n                <tr class=\"bg-emerald-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200\">\n                  <th>Destination</th>\n                  <th>Next Hop</th>\n                  <th>Cost</th>\n                  <th>Status</th>\n                </tr>\n              </thead>\n              <tbody>\n                <tr><td>A</td><td>Direct</td><td>0</td><td>Directly connected</td></tr>\n                <tr><td>B</td><td>B</td><td>2</td><td>Directly connected</td></tr>\n                <tr class=\"font-bold text-emerald-700 dark:text-emerald-300\"><td>C</td><td>B</td><td>5</td><td>Route Learned via B! 🏆</td></tr>\n              </tbody>\n            </table>\n          </div>\n          <p class=\"text-slate-600 dark:text-slate-400 mt-2 text-[11px]\">\n            Selected Path: <code>A &rarr; B &rarr; C</code> with Total Cost = 5.\n          </p>\n        </div>\n      ",
+      "technicalDetails": "\n        <h3 class=\"wiki-subtitle\">1. The Bellman-Ford Equation (PDF Section 2.5)</h3>\n        <p class=\"wiki-paragraph\">\n          Distance Vector routing is mathematically based on the <strong>Bellman-Ford shortest-path algorithm</strong>:\n        </p>\n        <div class=\"p-3 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 font-mono text-center text-xs my-3 font-bold text-emerald-600 dark:text-emerald-400\">\n          D_x(y) = min_v { c(x, v) + D_v(y) }\n        </div>\n        <p class=\"wiki-paragraph\">\n          Where:\n        </p>\n        <ul class=\"list-disc pl-5 space-y-1 text-xs text-gray-600 dark:text-gray-300 my-2\">\n          <li>$D_x(y)$: Minimum known cost from router $x$ to destination $y$.</li>\n          <li>$v$: A directly connected neighbor of router $x$.</li>\n          <li>$c(x, v)$: Direct physical link cost between router $x$ and neighbor $v$.</li>\n          <li>$D_v(y)$: Neighbor $v$'s advertised cost to destination $y$.</li>\n          <li>$min_v$: Choose the neighbor that yields the minimum total sum.</li>\n        </ul>\n\n        <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 text-xs my-3\">\n          <div class=\"font-bold text-slate-800 dark:text-slate-100 mb-2\">\n            Numerical Example from Section 2.5 of the Syllabus PDF\n          </div>\n          <p class=\"text-slate-600 dark:text-slate-300 mb-2\">\n            Router A has two neighboring routers: <strong>B</strong> and <strong>C</strong>.\n          </p>\n          <div class=\"grid grid-cols-2 gap-2 font-mono text-[11px] mb-3\">\n            <div class=\"p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800\">\n              Link Costs from A:<br/>\n              • A to B = 2<br/>\n              • A to C = 4\n            </div>\n            <div class=\"p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800\">\n              Advertised Costs to Destination D:<br/>\n              • B to D = 5<br/>\n              • C to D = 1\n            </div>\n          </div>\n          <div class=\"space-y-1.5 font-mono text-[11px]\">\n            <div>• Cost through Neighbor B: $c(A, B) + D_B(D) = 2 + 5 = 7$</div>\n            <div>• Cost through Neighbor C: $c(A, C) + D_C(D) = 4 + 1 = 5$</div>\n            <div class=\"font-bold text-emerald-600 dark:text-emerald-400 pt-1\">\n              • Minimum: $min(7, 5) = 5$\n            </div>\n          </div>\n          <div class=\"mt-2 p-2 bg-emerald-50 dark:bg-emerald-950/40 rounded border border-emerald-300 dark:border-emerald-700 text-emerald-800 dark:text-emerald-300 font-bold\">\n            🏆 The best route is $A \rightarrow C \rightarrow D$ with Total Cost = 5! Next-hop = Router C.\n          </div>\n        </div>\n\n        <h3 class=\"wiki-subtitle\">2. Distance Vector Protocol – RIP (PDF Section 2.7)</h3>\n        <p class=\"wiki-paragraph\">\n          The classic implementation of Distance Vector routing is the <strong>Routing Information Protocol (RIP)</strong>:\n        </p>\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-3 text-xs my-3\">\n          <div class=\"p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">Key Specifications</span>\n            <ul class=\"list-disc pl-4 space-y-1 text-slate-600 dark:text-slate-300\">\n              <li><strong>Metric:</strong> Strictly hop count (1 to 15).</li>\n              <li><strong>Periodic Timer:</strong> Broadcasts full routing table every 30 seconds.</li>\n              <li><strong>Maximum Usable Hops:</strong> 15 hops.</li>\n              <li><strong>Metric 16 = Infinity:</strong> A metric of 16 represents an unreachable network.</li>\n              <li><strong>RIPv2 Support:</strong> RFC 2453 adds subnet masks (CIDR/VLSM) and multicast updates (224.0.0.9).</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-blue-600 dark:text-blue-400 block mb-1\">Hop Count Interpretations</span>\n            <ul class=\"space-y-1 text-slate-600 dark:text-slate-300 font-mono text-[11px]\">\n              <li>• 1 hop &rarr; Directly adjacent network (Reachable)</li>\n              <li>• 5 hops &rarr; Moderately sized path (Reachable)</li>\n              <li>• 15 hops &rarr; Maximum allowable reachable distance</li>\n              <li>• 16 hops &rarr; <strong class=\"text-rose-600\">UNREACHABLE (Infinite Metric)</strong></li>\n            </ul>\n            <p class=\"text-[10px] text-slate-500 mt-2\">\n              <em>Note: The 15-hop limit is a RIP-specific constraint to prevent count-to-infinity, not a universal rule of all DV protocols (e.g. EIGRP supports up to 255 hops).</em>\n            </p>\n          </div>\n        </div>\n      ",
       "workedExamples": {
-        "level1": "\n          <strong>Updating Distance Vector with Bellman-Ford:</strong><br/>\n          Router A has direct links to neighbors B (cost 1) and C (cost 4).<br/>\n          Router A receives distance vectors from B and C:<br/>\n          • From B: D_B(Dest X) = 3<br/>\n          • From C: D_C(Dest X) = 1<br/>\n          <br/>\n          Router A evaluates:<br/>\n          • Path via B: (c(A, B) + D_B(X) = 1 + 3 = mathbf{4})<br/>\n          • Path via C: (c(A, C) + D_C(X) = 4 + 1 = mathbf{5})<br/>\n          Minimum cost is 4 via B. Router A sets <code>Cost to X = 4, Next Hop = B</code>!\n        ",
-        "level2": "\n          <strong>Full Routing Table Update Trace:</strong><br/>\n          Router J has direct neighbors A, I, H, K with link costs: (c(J,A)=8, c(J,I)=10, c(J,H)=12, c(J,K)=6).<br/>\n          All neighbors report their distance to destination <code>D</code>:<br/>\n          • A reports: 12 ➔ Total via A = (8 + 12 = 20)<br/>\n          • I reports: 20 ➔ Total via I = (10 + 20 = 30)<br/>\n          • H reports: 7 ➔ Total via H = (12 + 7 = mathbf{19})<br/>\n          • K reports: 15 ➔ Total via K = (6 + 15 = 21)<br/>\n          Router J picks the minimum: Cost = 19, Next Hop = H.\n        ",
-        "level3": "\n          <strong>RIP Hop Count Metric Ceiling:</strong><br/>\n          In the Routing Information Protocol (RFC 1058), the metric is strictly hop count.<br/>\n          To bound the convergence time of the count-to-infinity loop, the maximum allowable metric is set to <strong>15 hops</strong>.<br/>\n          A metric of <strong>16 is defined as Infinity</strong> (Unreachable). Consequently, RIP cannot be deployed on any network with a diameter greater than 15 hops!\n        "
+        "level1": "\n          <strong>Problem Statement:</strong><br/>\n          Router R receives distance vectors from its neighbors N1 and N2 regarding destination network 10.0.0.0/8:<br/>\n          • N1 advertises distance 4. Link cost R &ndash; N1 is 3.<br/>\n          • N2 advertises distance 2. Link cost R &ndash; N2 is 6.<br/>\n          Which path will Router R select, and what will be the entry in its routing table?<br/><br/>\n          <strong>Calculation:</strong><br/>\n          Applying the Bellman-Ford equation:<br/>\n          • Path via N1: $c(R, N1) + D_{N1}(10.0.0.0) = 3 + 4 = 7$<br/>\n          • Path via N2: $c(R, N2) + D_{N2}(10.0.0.0) = 6 + 2 = 8$<br/>\n          $$\\min(7, 8) = 7\\text{ via N1}$$<br/>\n          <strong>Routing Table Entry:</strong><br/>\n          Destination = <code>10.0.0.0/8</code> | Next Hop = <code>N1</code> | Metric = <code>7</code>.\n        ",
+        "level2": "\n          <strong>Full Convergence Iteration on a 4-Router Ring:</strong><br/>\n          Consider routers A, B, C, D in a ring: $A-B=1, B-C=2, C-D=1, D-A=4$.<br/>\n          Show how Router A updates its distance to D across two update rounds.<br/><br/>\n          <strong>Round 1 (Initial knowledge):</strong><br/>\n          • Direct link $A-D$ has cost 4.<br/>\n          • Router B does not yet know how to reach D ($D_B(D) = \\infty$).<br/>\n          • Router A's initial table: Dest D = 4 (via Direct link).<br/><br/>\n          <strong>Round 2 (After B learns from C):</strong><br/>\n          • Router C is directly connected to D with cost 1.<br/>\n          • Router B learns of D from C: $D_B(D) = c(B,C) + D_C(D) = 2 + 1 = 3$.<br/>\n          • Router B advertises its new vector ($D_B(D) = 3$) to Router A.<br/>\n          • Router A calculates cost to D via B: $c(A,B) + D_B(D) = 1 + 3 = 4$.<br/>\n          • Since cost 4 via B equals direct cost 4, Router A retains its current route or enables equal-cost multi-path (ECMP).\n        ",
+        "level3": "\n          <strong>Why Distance Vector Protocols Suffer from Routing by Rumor:</strong><br/>\n          Router A learns about destination network X through Router B. Router B learned about X from Router C. Router C's physical link to X is severed.<br/>\n          Explain why Router A cannot independently detect that link C-X failed, and what packet capture evidence reveals.<br/><br/>\n          <strong>Analysis:</strong><br/>\n          Unlike Link State protocols where routers inspect the full topology map, a Distance Vector router has <em>zero visibility</em> beyond its immediate neighbors. Router A only knows that B advertised metric 3; it has no record that B's path traverses C, nor does it know that link C-X exists.<br/>\n          When link C-X goes down, Router A continues forwarding packets toward B until B sends an update. If B's update is delayed or dropped, packets loop between A and B, triggering the classic Count-to-Infinity problem.\n        "
       },
-      "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 text-xs\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800\">\n            <h4 class=\"font-bold text-emerald-800 dark:text-emerald-300 mb-2\">Advantages of Distance Vector</h4>\n            <ul class=\"space-y-1 list-disc pl-4 text-slate-700 dark:text-slate-300\">\n              <li>Low computational footprint: simple Bellman-Ford calculations require minimal CPU and RAM.</li>\n              <li>Minimal memory: routers store only destination vectors, not the entire graph topology.</li>\n              <li>Simple implementation: easy to configure and maintain in small enterprise networks.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/30 rounded-lg border border-rose-200 dark:border-rose-800\">\n            <h4 class=\"font-bold text-rose-800 dark:text-rose-300 mb-2\">Disadvantages</h4>\n            <ul class=\"space-y-1 list-disc pl-4 text-slate-700 dark:text-slate-300\">\n              <li>Slow convergence after link failures.</li>\n              <li>Susceptible to Count-to-Infinity routing loops.</li>\n              <li>Periodic broadcasting consumes bandwidth even when network topology is stable.</li>\n              <li>Network diameter strictly capped at 15 hops in RIP.</li>\n            </ul>\n          </div>\n        </div>\n      ",
+      "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 text-xs my-3\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200 dark:border-emerald-800\">\n            <span class=\"font-bold text-emerald-800 dark:text-emerald-300 text-sm block mb-1\">Advantages (PDF Section 2.8)</span>\n            <ul class=\"list-disc pl-4 space-y-1 text-slate-700 dark:text-slate-300\">\n              <li><strong>Simple Configuration:</strong> Extremely straightforward to deploy and troubleshoot on small networks.</li>\n              <li><strong>Minimal Hardware Requirements:</strong> Low CPU and memory footprint; stores only single-entry vectors per destination.</li>\n              <li><strong>Neighbor-Only Communication:</strong> Routers never need to flood packets across the entire autonomous system.</li>\n              <li><strong>Automatic Route Discovery:</strong> Seamlessly learns new destination subnets as neighbors advertise them.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/40 rounded-xl border border-rose-200 dark:border-rose-800\">\n            <span class=\"font-bold text-rose-800 dark:text-rose-300 text-sm block mb-1\">Disadvantages (PDF Section 2.9)</span>\n            <ul class=\"list-disc pl-4 space-y-1 text-slate-700 dark:text-slate-300\">\n              <li><strong>Slow Convergence:</strong> Route changes must ripple hop-by-hop through every intermediate router.</li>\n              <li><strong>Susceptible to Routing Loops:</strong> Transient inconsistencies readily cause circular forwarding loops.</li>\n              <li><strong>Count-to-Infinity Problem:</strong> Metric steadily climbs to infinity when destinations fail.</li>\n              <li><strong>Bandwidth Overhead:</strong> Periodic broadcasts (every 30s) waste link capacity even on static networks.</li>\n              <li><strong>Lack of Global Topology Visibility:</strong> Routers make decisions blind to the overall network graph.</li>\n            </ul>\n          </div>\n        </div>\n      ",
       "whereUsed": [
-        "Routing Information Protocol (RIPv1 and RIPv2)",
-        "Cisco Enhanced Interior Gateway Routing Protocol (EIGRP)",
-        "Small private office branch networks and legacy telecom switches"
+        "Small Office & Branch Networks: Using RIPv2 where router hardware resources are constrained and topologies are simple.",
+        "Legacy Telecom Systems: Deploying Bellman-Ford variants over low-bandwidth serial lines.",
+        "Interior Gateway Protocols (IGRP/EIGRP): Utilizing advanced distance vector concepts with diffusion update algorithms (DUAL)."
       ],
-      "commonMistakes": "\n        <ul class=\"space-y-2 text-xs\">\n          <li><strong>Believing Distance Vector routers know the whole topology:</strong> Distance Vector routers know ONLY what their immediate physical neighbors report. They have no concept of graph layout.</li>\n          <li><strong>Confusing the 30-second timer with event-driven updates:</strong> Standard RIP sends periodic updates every 30 seconds regardless of whether any link has changed.</li>\n        </ul>\n      ",
-      "compareWith": "distance-vector-vs-link-state",
+      "commonMistakes": [
+        "Confusing Hop Count with Metric: Hop count is just one specific metric used by RIP; other distance vector protocols use composite metrics (bandwidth, delay).",
+        "Believing Distance Vector Routers Store the Full Network Graph: DV routers store ONLY destination costs and next hops; they have no concept of the topology beyond their neighbors.",
+        "Assuming Periodic Updates Carry Only Changes: Classic Distance Vector (RIP) transmits its entire routing table every 30 seconds regardless of whether any change occurred."
+      ],
+      "compareWith": [
+        {
+          "target": "comparison-dv-ls",
+          "title": "Distance Vector vs. Link State",
+          "description": "Decentralized Bellman-Ford vs global synchronized Dijkstra SPF."
+        },
+        {
+          "target": "routing-table-updates",
+          "title": "Periodic vs. Triggered Updates",
+          "description": "Timer-driven broadcasting vs event-driven flash notifications."
+        }
+      ],
       "quiz": [
         {
-          "question": "Which mathematical equation serves as the foundation for Distance Vector routing?",
+          "question": "What does the word Vector represent in Distance Vector Routing?",
           "options": [
-            "Dijkstra SPF formula",
-            "Bellman-Ford equation",
-            "Shannon Channel Capacity formula",
-            "Nyquist Bit Rate formula"
+            "The physical cable length in meters",
+            "The direction or next-hop router through which the destination is reached",
+            "The number of computers on the network",
+            "The encryption key"
           ],
-          "answer": 1,
-          "explanation": "Distance Vector algorithms are distributed implementations of the Bellman-Ford shortest path equation."
+          "correct": 1,
+          "explanation": "In Distance Vector routing, Distance represents the cost to the destination, while Vector represents the direction (the next-hop router)."
         },
         {
-          "question": "What information does a Distance Vector router periodically transmit to its neighbors?",
+          "question": "Which mathematical equation forms the algorithmic basis of Distance Vector routing?",
           "options": [
-            "The entire physical topology of the network",
-            "A vector of its best-known distances to all network destinations",
-            "Its ARP cache",
-            "The raw packet payload history"
+            "Dijkstra's Shortest Path Equation",
+            "Bellman-Ford Equation: D_x(y) = min_v { c(x,v) + D_v(y) }",
+            "Shannon's Capacity Theorem",
+            "Nyquist Bit Rate Formula"
           ],
-          "answer": 1,
-          "explanation": "In Distance Vector, each router periodically transmits its distance vector (table of distances to all destinations) to its immediate physical neighbors."
+          "correct": 1,
+          "explanation": "Distance Vector routing is based on the Bellman-Ford equation, which iteratively finds shortest paths through neighbor cost relaxation."
         },
         {
-          "question": "In the RIP protocol, what hop count value represents 'Infinity' (unreachable)?",
+          "question": "In the Routing Information Protocol (RIP), what metric value represents an unreachable destination (infinity)?",
           "options": [
-            "10",
-            "15",
+            "255",
+            "100",
             "16",
-            "255"
+            "0"
           ],
-          "answer": 2,
-          "explanation": "RIP caps the network metric at 15 hops; a metric of 16 is defined as infinity (unreachable) to bound count-to-infinity loops."
+          "correct": 2,
+          "explanation": "RIP defines 16 hops as infinity (unreachable), restricting the maximum operational diameter of a RIP network to 15 hops."
         },
         {
-          "question": "Why is Distance Vector characterized as 'Routing by Rumor'?",
+          "question": "In the 3-router A-B-C example from the syllabus PDF, with Cost(A-B)=2 and Cost(B-C)=3, what is the cost of the path learned by A to reach C?",
           "options": [
-            "Because routers invent false destinations",
-            "Because routers rely solely on what their direct neighbors tell them without verifying the complete global topology",
-            "Because it only works over wireless radio channels",
-            "Because routing tables are stored in unencrypted plain text"
+            "6",
+            "5",
+            "3",
+            "1"
           ],
-          "answer": 1,
-          "explanation": "Routers have no independent global map of the network; they must trust the path metrics reported by their immediate neighbors."
+          "correct": 1,
+          "explanation": "Router A calculates: Cost(A->C) = Cost(A->B) + Cost(B->C) = 2 + 3 = 5."
         }
       ],
       "references": [
         {
-          "cite": "RFC 1058: Routing Information Protocol",
+          "cite": "RFC 1058: Routing Information Protocol (RIPv1), Internet Engineering Task Force (IETF).",
           "url": "https://datatracker.ietf.org/doc/html/rfc1058"
         },
         {
-          "cite": "RFC 2453: RIP Version 2",
+          "cite": "RFC 2453: RIP Version 2 (STD 56), IETF.",
           "url": "https://datatracker.ietf.org/doc/html/rfc2453"
         },
         {
-          "cite": "A.S. Tanenbaum & D.J. Wetherall, Computer Networks, 6th Ed., Ch. 5.2.4",
-          "url": ""
+          "cite": "The Network DNA: Enhanced Interior Gateway Routing Protocol (EIGRP) Architecture.",
+          "url": "https://thenetworkdna.com"
+        },
+        {
+          "cite": "A.S. Tanenbaum & D.J. Wetherall, 'Computer Networks', 6th Edition, Chapter 5: Distance Vector Routing.",
+          "url": "https://www.pearson.com"
         }
       ]
     },
@@ -1817,21 +1846,30 @@ const TOPICS_U3_EXT = {
   "link-state-routing": {
     "id": "link-state-routing",
     "title": "Link State Routing",
-    "unit": "Unit 3 – Network Layer",
+    "unit": "Unit 3: Network Layer",
     "unitId": "unit3",
-    "level": "Level 1 — Core Topic",
-    "category": "network",
-    "difficulty": "Advanced",
-    "readingTime": "25 min read",
-    "standard": "RFC 2328 (OSPF) / ISO/IEC 10589 (IS-IS) / Tanenbaum Ch 5.2.5",
-    "oneLiner": "Modern routing algorithm where each router discovers neighbors, measures costs, floods Link State Packets (LSP), and computes Dijkstra SPF locally.",
-    "quickAnswer": "Link State Routing is a dynamic routing algorithm in which every router discovers its direct neighbors, measures link costs, builds a Link State Packet (LSP), reliably floods it to all routers in the area, and independently runs Dijkstra's Shortest Path algorithm on the resulting synchronized topology map. It completely avoids the count-to-infinity problem and powers OSPF and IS-IS.",
-    "whyItMatters": "Due to the severe scaling and count-to-infinity issues of Distance Vector, ARPANET replaced Distance Vector with Link State routing in 1979. Today, Link State is the dominant interior routing technology powering global Internet service providers, financial exchanges, and cloud data center networks.",
+    "level": "Undergraduate / GATE CSE",
+    "category": "Dynamic Routing Protocols",
+    "difficulty": "Intermediate",
+    "readingTime": "35 min",
+    "standard": "Dijkstra SPF / RFC 2328 (OSPFv2) / ISO 10589 (IS-IS) / Master PDF Notes",
+    "oneLiner": "A dynamic routing approach where routers flood local link states to construct an identical topology database, independently executing Dijkstra's algorithm to compute shortest paths.",
+    "quickAnswer": "Link State Routing is a dynamic routing method in which every router discovers its directly connected neighbors, measures the cost of its local links, packages this status into Link State Advertisements (LSAs), and floods them to all other routers in the routing area. Every router builds an identical Link State Database (LSDB) representing the complete network map. Each router then independently executes Dijkstra's Shortest Path First (SPF) algorithm with itself as the root to compute the shortest-path tree and populate its routing table. Characterized by the philosophy 'tell the world about your neighbors,' it converges rapidly, eliminates routing loops, and scales to massive enterprise networks (as seen in OSPF).",
+    "whyItMatters": "Link State Routing is the dominant interior routing paradigm of the modern Internet. Every enterprise campus, data center fabric, and tier-1 service provider relies on Link State protocols (OSPF and IS-IS) to route trillions of packets daily with sub-second convergence.",
     "infobox": {
+      "algorithmBasis": "Dijkstra's Shortest Path First (SPF)",
+      "informationExchanged": "Local link states, neighbor IDs, and interface costs",
+      "exchangeTarget": "Flooded to all routers in the area",
+      "topologyView": "Full complete network map in Link State Database (LSDB)",
+      "commonProtocols": [
+        "OSPFv2 (RFC 2328)",
+        "OSPFv3 (RFC 5340)",
+        "IS-IS (ISO 10589)"
+      ],
+      "hierarchicalDesign": "Two-Tier Hierarchy (Backbone Area 0 + Non-backbone areas)",
       "prerequisites": [
-        "dijkstra",
-        "optimality-principle",
-        "distance-vector"
+        "distance-vector",
+        "dijkstra"
       ],
       "relatedConcepts": [
         "routing-table-updates",
@@ -1839,107 +1877,124 @@ const TOPICS_U3_EXT = {
         "count-to-infinity"
       ],
       "compareWith": [
-        "distance-vector-vs-link-state"
-      ],
-      "primaryUses": [
-        "Open Shortest Path First (OSPFv2 and OSPFv3) in enterprise networks",
-        "Intermediate System to Intermediate System (IS-IS) in tier-1 telecom backbones",
-        "Fast-reroute and Traffic Engineering (TE) in modern MPLS networks",
-        "High-performance campus backbones requiring sub-second convergence"
-      ],
-      "standardRfc": "RFC 2328 (OSPFv2), ISO/IEC 10589 (IS-IS)"
+        "comparison-dv-ls",
+        "ospf-vs-rip"
+      ]
     },
-    "learningObjectives": [
-      "Describe the 5 sequential phases of the Link State routing algorithm",
-      "Explain neighbor discovery and hello packets",
-      "Understand how link costs/delays are measured using ECHO packets",
-      "Analyze the contents of a Link State Packet (LSP)",
-      "Explain reliable LSP flooding with sequence numbers and age fields",
-      "Explain how local Dijkstra execution guarantees loop-free sink tree convergence"
-    ],
     "prerequisitesList": [
       {
-        "concept": "Dijkstra's Algorithm",
-        "meaning": "Understanding single-source shortest path calculation on weighted graphs"
+        "concept": "Dijkstra's Shortest Path Algorithm",
+        "meaning": "Understanding how SPF calculates shortest paths from a single source on a weighted graph."
       },
       {
-        "concept": "Flooding",
-        "meaning": "Understanding reliable packet broadcast and duplicate damping"
+        "concept": "Flooding Concepts",
+        "meaning": "Understanding how packets are reliably flooded across all links with sequence number tracking."
       }
     ],
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/14/Link_state_routing.svg",
-    "imageCaption": "Figure 3.13: Link State Routing: LSP Reliable Flooding and Local Shortest Path Tree Computation.",
+    "learningObjectives": [
+      "Define Link State Routing and explain its core philosophy: 'tell the world about your neighbors.'",
+      "Trace the 5 fundamental steps of Link State routing: neighbor discovery, link cost measurement, LSA creation, reliable flooding, and Dijkstra calculation.",
+      "Work through the complete 5-router network example from the syllabus PDF comparing alternate paths.",
+      "Explain the six key components of Link State routing: Neighbor Discovery, LSA, Flooding, LSDB, Dijkstra, and Routing Table.",
+      "Analyze the Open Shortest Path First (OSPF) protocol architecture and its hierarchical area structure.",
+      "Evaluate the advantages (fast convergence, loop freedom) and disadvantages (memory/CPU overhead) of Link State routing."
+    ],
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/OSPF_Areas.svg/800px-OSPF_Areas.svg.png",
+    "imageCaption": "Figure 2: Hierarchical OSPF Link State routing with central Backbone Area 0 and standard areas.",
     "sections": {
-      "overview": "\n        <p class=\"mb-3\">\n          <strong>Link State Routing</strong> is the modern routing technology that replaced Distance Vector in high-performance computer networks. Unlike Distance Vector's 'routing by rumor', Link State routing operates on the principle:\n          <em>\"Each router tells the entire world about its immediate neighbors.\"</em>\n        </p>\n        <p class=\"mb-3\">\n          Every router in the network acquires an identical, complete map of the entire network topology (stored in the <strong>Link State Database - LSDB</strong>). Each router then independently executes Dijkstra's Shortest Path algorithm on this local database to calculate the optimal loop-free path to every destination.\n        </p>\n      ",
-      "howItWorks": "\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">The 5 Sequential Steps of Link State Routing</h3>\n        <p class=\"mb-3 text-xs\">Every router running a link-state protocol executes the following five phases:</p>\n\n        <div class=\"space-y-3 text-xs mb-4\">\n          <div class=\"p-3 bg-white dark:bg-slate-800 rounded-lg border-l-4 border-emerald-500 shadow-sm\">\n            <h4 class=\"font-bold text-emerald-700 dark:text-emerald-300\">1. Discover Its Neighbors and Learn Their Network Addresses</h4>\n            <p class=\"text-slate-600 dark:text-slate-300 mt-1\">\n              When a router boots, it sends a specialized <strong>HELLO packet</strong> on each point-to-point interface. The router at the other end responds with its identity. On shared multi-access links (e.g. Ethernet), a Designated Router (DR) election takes place to reduce adjacency counts.\n            </p>\n          </div>\n\n          <div class=\"p-3 bg-white dark:bg-slate-800 rounded-lg border-l-4 border-blue-500 shadow-sm\">\n            <h4 class=\"font-bold text-blue-700 dark:text-blue-300\">2. Measure the Delay or Cost to Each of Its Neighbors</h4>\n            <p class=\"text-slate-600 dark:text-slate-300 mt-1\">\n              The router sends an <strong>ECHO packet</strong> to each neighbor, which must be returned immediately. Dividing the round-trip time by 2 gives a precise measurement of the link delay. Alternatively, modern OSPF sets cost inversely proportional to link bandwidth ((\text{Cost} = \frac{100\text{ Mbps}}{\text{Bandwidth}})).\n            </p>\n          </div>\n\n          <div class=\"p-3 bg-white dark:bg-slate-800 rounded-lg border-l-4 border-amber-500 shadow-sm\">\n            <h4 class=\"font-bold text-amber-700 dark:text-amber-300\">3. Construct a Link State Packet (LSP) Stating Its Knowledge</h4>\n            <p class=\"text-slate-600 dark:text-slate-300 mt-1\">\n              The router builds an LSP containing: (1) Identity of the sender, (2) A sequence number, (3) An Age field, and (4) A list of immediate neighbors with their measured costs.\n            </p>\n          </div>\n\n          <div class=\"p-3 bg-white dark:bg-slate-800 rounded-lg border-l-4 border-purple-500 shadow-sm\">\n            <h4 class=\"font-bold text-purple-700 dark:text-purple-300\">4. Send the LSP to All Other Routers (Reliable Flooding)</h4>\n            <p class=\"text-slate-600 dark:text-slate-300 mt-1\">\n              The LSP is flooded reliably to all routers across the network. Sequence numbers protect against duplicate or stale packets. The Age field is decremented by 1 every second; when it reaches 0, the LSP is purged.\n            </p>\n          </div>\n\n          <div class=\"p-3 bg-white dark:bg-slate-800 rounded-lg border-l-4 border-teal-500 shadow-sm\">\n            <h4 class=\"font-bold text-teal-700 dark:text-teal-300\">5. Compute the Shortest Path to Every Other Router Locally</h4>\n            <p class=\"text-slate-600 dark:text-slate-300 mt-1\">\n              Once a router has collected LSPs from all routers, its Link State Database (LSDB) forms a complete graph of the entire network. The router runs <strong>Dijkstra's SPF algorithm</strong> with itself as the source node, constructing its shortest path sink tree and installing the next hops into the hardware forwarding table.\n            </p>\n          </div>\n        </div>\n      ",
-      "technicalDetails": "\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">Structure of a Link State Packet (LSP)</h3>\n        <table class=\"wiki-table w-full text-xs font-mono mb-4\">\n          <thead>\n            <tr class=\"bg-gray-100 dark:bg-gray-800\">\n              <th>Field Name</th>\n              <th>Typical Size</th>\n              <th>Description</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr><td class=\"font-bold font-sans\">Sender Router ID</td><td>32 bits</td><td>Unique IP / identifier of the originating router (e.g. 10.0.0.1).</td></tr>\n            <tr><td class=\"font-bold font-sans\">Sequence Number</td><td>32 bits</td><td>Monotonically increasing counter to detect new vs old LSPs.</td></tr>\n            <tr><td class=\"font-bold font-sans\">Age</td><td>16 bits</td><td>Countdown timer (decremented every second) to purge obsolete records.</td></tr>\n            <tr><td class=\"font-bold font-sans\">Neighbor List & Costs</td><td>Variable</td><td>Array of tuples: ({(Neighbor_1, Cost_1), (Neighbor_2, Cost_2), dots}).</td></tr>\n          </tbody>\n        </table>\n      ",
+      "overview": "\n        <h3 class=\"wiki-subtitle\">1. What Is Link State Routing?</h3>\n        <p class=\"wiki-paragraph\">\n          From Section 4.1 of the syllabus PDF notes:\n        </p>\n        <p class=\"wiki-paragraph\">\n          <strong>Link State Routing</strong> is a dynamic routing method in which routers discover information about their directly connected links and distribute (flood) this information to all other routers in the routing area. Each router uses the collected network topology information to build a complete, identical map of the network and calculate its shortest paths.\n        </p>\n        <div class=\"wiki-callout note mb-6\">\n          <div class=\"callout-header\"><i class=\"fa-solid fa-map-location-dot text-emerald-600 mr-2\"></i> The Core Philosophical Distinction</div>\n          <p class=\"text-xs text-gray-600 dark:text-gray-300\">\n            • <strong>Distance Vector:</strong> <em>\"Tells its immediate neighbors about the whole world (as it currently believes).\"</em> (Routing by rumor).<br/>\n            • <strong>Link State:</strong> <em>\"Tells the whole world about its immediate neighbors.\"</em> (First-hand verified facts).\n          </p>\n        </div>\n\n        <h3 class=\"wiki-subtitle\">2. Six Important Components of Link State Routing</h3>\n        <p class=\"wiki-paragraph\">\n          Section 4.3 of the syllabus PDF highlights the six foundational building blocks:\n        </p>\n        <div class=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-4 text-xs\">\n          <div class=\"p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">1. Neighbor Discovery</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">Periodically sending HELLO packets on all interfaces to identify live, directly attached neighbors.</p>\n          </div>\n          <div class=\"p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-blue-600 dark:text-blue-400 block mb-1\">2. LSA (Link State Advertisement)</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">A structured data packet created by a router describing its active links, interface IPs, and link costs.</p>\n          </div>\n          <div class=\"p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-purple-600 dark:text-purple-400 block mb-1\">3. Reliable Flooding</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">Controlled dissemination ensuring every router in the area receives every other router's LSA without looping.</p>\n          </div>\n          <div class=\"p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-amber-600 dark:text-amber-400 block mb-1\">4. LSDB (Link State Database)</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">The synchronized repository of all LSAs in the area, providing an identical global map of the topology.</p>\n          </div>\n          <div class=\"p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-rose-600 dark:text-rose-400 block mb-1\">5. Dijkstra's Algorithm</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">The Shortest Path First algorithm executed locally on the LSDB to calculate the optimal path tree.</p>\n          </div>\n          <div class=\"p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-teal-600 dark:text-teal-400 block mb-1\">6. Routing Table (FIB)</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">Stores the resulting optimal next hops and outgoing interfaces for wire-speed packet forwarding.</p>\n          </div>\n        </div>\n      ",
+      "howItWorks": "\n        <h3 class=\"wiki-subtitle\">1. The Five Steps of Link State Routing</h3>\n        <p class=\"wiki-paragraph\">\n          From Section 4.2 of the syllabus PDF notes:\n        </p>\n        <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 my-4 text-xs space-y-2.5\">\n          <div><strong class=\"text-emerald-600 dark:text-emerald-400\">Step 1: Discover Neighboring Routers:</strong> A router sends HELLO packets on all active links. Neighboring routers respond with their IDs, establishing bidirectional adjacency.</div>\n          <div><strong class=\"text-emerald-600 dark:text-emerald-400\">Step 2: Measure Link Costs:</strong> The router determines the metric for each link (e.g. inversely proportional to bandwidth in OSPF, or measured round-trip ECHO delay).</div>\n          <div><strong class=\"text-emerald-600 dark:text-emerald-400\">Step 3: Create Link State Advertisements (LSAs):</strong> The router packages its ID, sequence number, age, list of neighbors, and link metrics into an LSA packet.</div>\n          <div><strong class=\"text-emerald-600 dark:text-emerald-400\">Step 4: Flood Link-State Information:</strong> The router reliably floods the LSA to all routers in the area. Each router populates its Link State Database (LSDB). All routers converge to 100% identical LSDBs!</div>\n          <div><strong class=\"text-emerald-600 dark:text-emerald-400\">Step 5: Calculate Shortest Paths Locally:</strong> Each router executes Dijkstra's SPF algorithm independently using itself as the root to construct its shortest path tree and populate its routing table.</div>\n        </div>\n\n        <h3 class=\"wiki-subtitle\">2. Worked Example from Section 4.4 of the Syllabus PDF</h3>\n        <p class=\"wiki-paragraph\">\n          Consider the 5-router network ($A, B, C, D, E$) with the following direct neighbors and link costs:\n        </p>\n\n        <div class=\"wiki-table-wrapper my-4\">\n          <table class=\"wiki-table w-full text-xs font-mono\">\n            <thead>\n              <tr class=\"bg-emerald-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200\">\n                <th>Router</th>\n                <th>Direct Neighbors</th>\n                <th>Link Costs</th>\n                <th>Generated LSA Content</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr><td class=\"font-bold\">A</td><td>B, C</td><td>B = 2, C = 4</td><td>[Router A | Links: (B, cost 2), (C, cost 4)]</td></tr>\n              <tr><td class=\"font-bold\">B</td><td>A, C, D</td><td>A = 2, C = 1, D = 5</td><td>[Router B | Links: (A, cost 2), (C, cost 1), (D, cost 5)]</td></tr>\n              <tr><td class=\"font-bold\">C</td><td>A, B, D</td><td>A = 4, B = 1, D = 2</td><td>[Router C | Links: (A, cost 4), (B, cost 1), (D, cost 2)]</td></tr>\n              <tr><td class=\"font-bold\">D</td><td>B, C, E</td><td>B = 5, C = 2, E = 3</td><td>[Router D | Links: (B, cost 5), (C, cost 2), (E, cost 3)]</td></tr>\n              <tr><td class=\"font-bold\">E</td><td>D</td><td>D = 3</td><td>[Router E | Links: (D, cost 3)]</td></tr>\n            </tbody>\n          </table>\n        </div>\n\n        <div class=\"p-4 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200 dark:border-emerald-800 text-xs my-3\">\n          <strong class=\"text-emerald-800 dark:text-emerald-300 font-bold block mb-1\">Dijkstra Route Calculation at Router A for Destination D:</strong>\n          <p class=\"text-slate-700 dark:text-slate-300 mb-2\">\n            Router A inspects its complete LSDB and evaluates competing paths to reach Router D:\n          </p>\n          <div class=\"space-y-1.5 font-mono text-[11px] mb-2\">\n            <div>• Path 1 via B &amp; C: $A \rightarrow B \rightarrow C \rightarrow D$ &bull; Cost: $2 + 1 + 2 = 5$</div>\n            <div>• Path 2 direct via C: $A \rightarrow C \rightarrow D$ &bull; Cost: $4 + 2 = 6$</div>\n            <div>• Path 3 direct via B: $A \rightarrow B \rightarrow D$ &bull; Cost: $2 + 5 = 7$</div>\n          </div>\n          <div class=\"p-2.5 bg-white dark:bg-gray-800 rounded border border-emerald-300 dark:border-emerald-700 text-emerald-800 dark:text-emerald-300 font-bold\">\n            🏆 Winner Selected: Route $A \rightarrow B \rightarrow C \rightarrow D$ with Total Cost = 5! Next-hop = Router B.\n          </div>\n        </div>\n      ",
+      "technicalDetails": "\n        <h3 class=\"wiki-subtitle\">1. Link State Protocol – OSPF (PDF Section 4.5)</h3>\n        <p class=\"wiki-paragraph\">\n          The primary Link State protocol in computer networking is <strong>Open Shortest Path First (OSPF)</strong>:\n        </p>\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-3 text-xs my-3\">\n          <div class=\"p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">Key Features</span>\n            <ul class=\"list-disc pl-4 space-y-1 text-slate-600 dark:text-slate-300\">\n              <li><strong>Open Standard:</strong> Non-proprietary IETF standard (RFC 2328).</li>\n              <li><strong>Hierarchical Areas:</strong> Divides large autonomous systems into areas; Area 0 is the mandatory <em>Backbone Area</em>.</li>\n              <li><strong>Classless Routing:</strong> Fully supports CIDR and Variable Length Subnet Masking (VLSM).</li>\n              <li><strong>Cost Metric:</strong> $\text{Cost} = \frac{\text{Reference Bandwidth}}{\text{Interface Bandwidth}}$ (default 100 Mbps reference).</li>\n              <li><strong>Event-Driven Updates:</strong> Floods LSAs immediately when a link changes, ensuring sub-second convergence.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-blue-600 dark:text-blue-400 block mb-1\">Hierarchical Area Benefits</span>\n            <p class=\"text-slate-600 dark:text-slate-300 leading-relaxed mb-1\">\n              By confining LSAs inside regional areas, OSPF prevents router LSDBs from exploding in size:\n            </p>\n            <ul class=\"list-disc pl-4 space-y-1 text-slate-500\">\n              <li>Routers inside an area maintain full topology for that area only.</li>\n              <li>Area Border Routers (ABRs) summarize routes into Area 0.</li>\n              <li>Link flapping in Area 2 does not trigger Dijkstra recomputation in Area 1!</li>\n            </ul>\n          </div>\n        </div>\n\n        <h3 class=\"wiki-subtitle\">2. Advantages &amp; Disadvantages (PDF Section 4.6 &amp; 4.7)</h3>\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 text-xs my-3\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200 dark:border-emerald-800\">\n            <span class=\"font-bold text-emerald-800 dark:text-emerald-300 text-sm block mb-1\">Key Advantages</span>\n            <ul class=\"list-disc pl-4 space-y-1 text-slate-700 dark:text-slate-300\">\n              <li><strong>Fast Convergence:</strong> Event-driven LSA flooding allows networks to re-converge in milliseconds.</li>\n              <li><strong>Complete Topology Map:</strong> Each router has first-hand verified information about the entire network.</li>\n              <li><strong>Immune to Count-to-Infinity:</strong> Because all routers possess the full graph, classic two-node distance vector loops cannot form.</li>\n              <li><strong>Hierarchical Scalability:</strong> OSPF areas support tens of thousands of subnets without CPU overload.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/40 rounded-xl border border-rose-200 dark:border-rose-800\">\n            <span class=\"font-bold text-rose-800 dark:text-rose-300 text-sm block mb-1\">Disadvantages &amp; Overhead</span>\n            <ul class=\"list-disc pl-4 space-y-1 text-slate-700 dark:text-slate-300\">\n              <li><strong>High Memory Consumption:</strong> Storing the full LSDB requires substantial RAM on every router.</li>\n              <li><strong>High CPU Processing:</strong> Running Dijkstra SPF is computationally intensive ($O(V^2)$ / $O(E log V)$).</li>\n              <li><strong>Complex Configuration:</strong> Designing multi-area OSPF networks and tuning timers requires skilled network engineering.</li>\n              <li><strong>Flooding Overhead:</strong> LSA flooding momentarily spikes traffic across all links during topology changes.</li>\n            </ul>\n          </div>\n        </div>\n      ",
       "workedExamples": {
-        "level1": "\n          <strong>LSP Assembly at Router B:</strong><br/>\n          Router B has three active interfaces:<br/>\n          • Interface 1 connected to Router A with cost 2<br/>\n          • Interface 2 connected to Router C with cost 4<br/>\n          • Interface 3 connected to Router D with cost 7<br/>\n          Router B builds its LSP:<br/>\n          <code>[Sender: B | Seq: 1001 | Age: 3600 | Neighbors: (A, 2), (C, 4), (D, 7)]</code><br/>\n          This LSP is flooded across the network so every router learns B's exact connectivity.\n        ",
-        "level2": "\n          <strong>Sequence Number Wraparound Handling:</strong><br/>\n          If a 32-bit sequence number wraps around, a stale LSP with a high sequence number could block newer updates.<br/>\n          OSPF solves this using <strong>Lollipop-shaped Sequence Numbering</strong>:<br/>\n          • Starts with negative sequence number <code>0x80000001</code>.<br/>\n          • Increments through zero up to <code>0x7FFFFFFF</code>.<br/>\n          • If a router reboots, its sequence number starts at <code>0x80000001</code>. If peers already have a higher sequence number, they send an update telling the rebooted router to advance its sequence number!\n        ",
-        "level3": "\n          <strong>OSPF Area Hierarchical Scaling:</strong><br/>\n          In a network with 10,000 routers, flooding LSPs everywhere would exhaust memory.<br/>\n          Link-state protocols divide the network into <strong>Areas</strong> (with Area 0 being the Backbone).<br/>\n          • Full detailed LSPs are flooded strictly within each local area.<br/>\n          • Area Border Routers (ABRs) summarize subnet reachability into compact summary LSAs injected into Area 0, scaling to hundreds of thousands of nodes.\n        "
+        "level1": "\n          <strong>Constructing a Local Link State Database:</strong><br/>\n          Router R boots up with 3 active interfaces:<br/>\n          • Eth0: Connected to Router A, Cost = 10<br/>\n          • Eth1: Connected to Router B, Cost = 20<br/>\n          • Eth2: Connected to Subnet 192.168.10.0/24, Cost = 1<br/>\n          What does Router R's generated Type 1 Router LSA look like?<br/><br/>\n          <strong>Generated LSA Content:</strong><br/>\n          • Advertising Router ID: <code>10.1.1.1</code> (Router R's loopback IP)<br/>\n          • Sequence Number: <code>0x80000001</code><br/>\n          • Number of Links: 3<br/>\n          &nbsp;&nbsp;1. Link ID = <code>10.1.1.2</code> (Router A) | Type = Point-to-Point | Metric = 10<br/>\n          &nbsp;&nbsp;2. Link ID = <code>10.1.1.3</code> (Router B) | Type = Point-to-Point | Metric = 20<br/>\n          &nbsp;&nbsp;3. Link ID = <code>192.168.10.0</code> | Type = Stub Network (/24) | Metric = 1<br/>\n          This LSA is flooded to A and B, which forward it to all other routers in the OSPF area.\n        ",
+        "level2": "\n          <strong>Event-Driven Convergence Trace:</strong><br/>\n          In the 5-router network from Section 4.4, link $B-C$ (cost 1) is severed.<br/>\n          Trace the exact sequence of events until the network converges on new routes.<br/><br/>\n          <strong>Sequence of Events:</strong><br/>\n          1. <strong>Detection:</strong> Routers B and C detect carrier loss on link $B-C$ within milliseconds.<br/>\n          2. <strong>LSA Generation:</strong> Router B immediately generates a new LSA (incrementing Seq #) omitting link to C. Router C generates a new LSA omitting link to B.<br/>\n          3. <strong>Flooding:</strong> B floods its LSA to A and D; C floods its LSA to A and D.<br/>\n          4. <strong>LSDB Update:</strong> All routers update their topology databases with the new LSAs.<br/>\n          5. <strong>Dijkstra Recalculation:</strong> Router A runs Dijkstra locally. Path to D via B-C is gone. Router A compares:<br/>\n          &nbsp;&nbsp;• Path via C: $A \rightarrow C \rightarrow D$ &bull; Cost: $4 + 2 = 6$<br/>\n          &nbsp;&nbsp;• Path via B: $A \rightarrow B \rightarrow D$ &bull; Cost: $2 + 5 = 7$<br/>\n          Router A selects $A \rightarrow C \rightarrow D$ (cost 6) and updates its FIB with <strong>Next-Hop = Router C</strong>. Total convergence time: under 200ms.\n        ",
+        "level3": "\n          <strong>Hierarchical Area Isolation in OSPF:</strong><br/>\n          An enterprise has Area 0 (Backbone) and Area 1 (Branch Offices). A faulty fiber link in Area 1 is flapping (going up and down every 3 seconds).<br/>\n          Explain how OSPF's hierarchical architecture prevents this flapping from crashing routers in Area 0 and Area 2.<br/><br/>\n          <strong>Analysis:</strong><br/>\n          • Type 1 and Type 2 LSAs (which describe internal link states) are <strong>strictly bounded inside Area 1</strong> and are NEVER flooded across the Area Border Router (ABR).<br/>\n          • The ABR summarizes Area 1 subnets into Type 3 Summary LSAs advertised into Area 0.<br/>\n          • As long as at least one alternate link inside Area 1 remains up, the ABR's summarized prefix remains reachable.<br/>\n          • Consequently, routers in Area 0 and Area 2 do not receive the flapping LSAs and do NOT recompute Dijkstra's algorithm, shielding the core network from instability.\n        "
       },
-      "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 text-xs\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800\">\n            <h4 class=\"font-bold text-emerald-800 dark:text-emerald-300 mb-2\">Advantages of Link State Routing</h4>\n            <ul class=\"space-y-1 list-disc pl-4 text-slate-700 dark:text-slate-300\">\n              <li><strong>Zero Count-to-Infinity:</strong> Because every router has a complete topology map, routing loops cannot form during steady state.</li>\n              <li><strong>Fast Convergence:</strong> Link changes trigger immediate flooding of small LSPs; recalculation takes milliseconds.</li>\n              <li><strong>Bandwidth Efficient:</strong> LSPs are flooded only when an event occurs, not every 30 seconds.</li>\n              <li><strong>Support for Equal-Cost Multi-Path (ECMP):</strong> Spreads traffic across multiple paths.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/30 rounded-lg border border-rose-200 dark:border-rose-800\">\n            <h4 class=\"font-bold text-rose-800 dark:text-rose-300 mb-2\">Resource Demands</h4>\n            <ul class=\"space-y-1 list-disc pl-4 text-slate-700 dark:text-slate-300\">\n              <li>Higher memory consumption: requires storing the complete Link State Database.</li>\n              <li>Substantial CPU processing: running Dijkstra SPF requires significant processor cycles.</li>\n              <li>Complex configuration and hierarchical area design.</li>\n            </ul>\n          </div>\n        </div>\n      ",
+      "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 text-xs my-3\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200 dark:border-emerald-800\">\n            <span class=\"font-bold text-emerald-800 dark:text-emerald-300 text-sm block mb-1\">Key Strengths</span>\n            <ul class=\"list-disc pl-4 space-y-1 text-slate-700 dark:text-slate-300\">\n              <li>Sub-second convergence after network topology changes.</li>\n              <li>Immune to classic Distance Vector count-to-infinity loops.</li>\n              <li>Hierarchical area design scales to large enterprise backbones.</li>\n              <li>Bandwidth-based cost metrics select highest-throughput paths.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/40 rounded-xl border border-rose-200 dark:border-rose-800\">\n            <span class=\"font-bold text-rose-800 dark:text-rose-300 text-sm block mb-1\">Operational Costs</span>\n            <ul class=\"list-disc pl-4 space-y-1 text-slate-700 dark:text-slate-300\">\n              <li>Requires more RAM on every router to store the complete LSDB.</li>\n              <li>Higher CPU utilization running Dijkstra Shortest Path First calculations.</li>\n              <li>Flooding traffic creates momentary bandwidth spikes during topology shifts.</li>\n            </ul>\n          </div>\n        </div>\n      ",
       "whereUsed": [
-        "Open Shortest Path First (OSPF) across modern corporate campuses and data centers",
-        "Intermediate System to Intermediate System (IS-IS) across global tier-1 telecom backbones",
-        "Software-Defined Network (SDN) central controller topology mapping"
+        "Enterprise Campus Networks: OSPF is the worldwide de facto standard for corporate LAN/WAN routing.",
+        "Tier-1 Telecommunication Service Providers: IS-IS is widely deployed in carrier backbones due to its raw scalability and protocol neutrality.",
+        "Cloud Service Provider Data Centers: Using OSPF/IS-IS as the underlay routing protocol for leaf-spine fabrics."
       ],
-      "commonMistakes": "\n        <ul class=\"space-y-2 text-xs\">\n          <li><strong>Confusing the LSP with the routing table:</strong> The LSP contains raw neighbor-cost measurements, NOT a routing table. The routing table is computed only AFTER running Dijkstra on the aggregated LSPs.</li>\n          <li><strong>Thinking LSPs are sent on timers like RIP:</strong> Link State protocols do NOT send full table dumps periodically. They flood small LSPs only upon link state events or long refresh intervals (e.g. 30 minutes in OSPF).</li>\n        </ul>\n      ",
-      "compareWith": "distance-vector-vs-link-state",
+      "commonMistakes": [
+        "Confusing LSA Flooding with Routing Table Exchanges: OSPF routers flood link states (raw topology map); they DO NOT exchange routing tables.",
+        "Thinking Every Router Computes Paths for Other Routers: Each router runs Dijkstra independently with ITSELF as the root.",
+        "Forgetting Area 0 in Multi-Area OSPF: In OSPF, all peripheral areas MUST connect directly (or via a virtual link) to Backbone Area 0."
+      ],
+      "compareWith": [
+        {
+          "target": "comparison-dv-ls",
+          "title": "Link State vs. Distance Vector",
+          "description": "Global topology SPF vs decentralized neighbor-to-neighbor vector exchange."
+        },
+        {
+          "target": "routing-table-updates",
+          "title": "Link State Updates vs. Distance Vector Updates",
+          "description": "Event-driven reliable LSA flooding vs periodic table broadcasting."
+        }
+      ],
       "quiz": [
         {
-          "question": "What is the correct sequence of the 5 phases in Link State Routing?",
+          "question": "What is Link State Routing based on?",
           "options": [
-            "Flood LSPs ➔ Discover neighbors ➔ Measure delay ➔ Build LSP ➔ Run Dijkstra",
-            "Discover neighbors ➔ Measure delay/cost ➔ Build LSP ➔ Flood LSP ➔ Run Dijkstra locally",
-            "Run Dijkstra ➔ Build LSP ➔ Send HELLO ➔ Discover neighbors ➔ Count to infinity",
-            "Exchange distance vectors ➔ Update routing table ➔ Sleep 30 seconds"
+            "Routers sharing information about local links and topology to build an identical database",
+            "Sharing user passwords across computers",
+            "Sending data files to all workstations",
+            "Exchanging routing tables only with adjacent neighbors"
           ],
-          "answer": 1,
-          "explanation": "The 5 steps are: (1) Discover neighbors, (2) Measure delay/cost, (3) Build LSP, (4) Flood LSP reliably, (5) Compute Dijkstra SPF locally."
+          "correct": 0,
+          "explanation": "In Link State routing, routers distribute information about their local links and costs so every router builds an identical Link State Database (LSDB)."
         },
         {
-          "question": "What packet is initially sent on each interface when a link-state router boots up to discover adjacent neighbors?",
+          "question": "What does LSDB stand for in Link State Routing?",
           "options": [
-            "ECHO packet",
-            "HELLO packet",
-            "LSP packet",
-            "RIP Response"
+            "Local Server Data Backup",
+            "Link State Database",
+            "Longest Subnet Destination Block",
+            "Linear System Data Buffer"
           ],
-          "answer": 1,
-          "explanation": "A link-state router sends a HELLO packet on each point-to-point interface to discover the identities of its direct physical neighbors."
+          "correct": 1,
+          "explanation": "LSDB stands for Link State Database, the collection of all LSAs received by a router representing the complete network map."
         },
         {
-          "question": "Why does Link State routing completely avoid the Count-to-Infinity problem?",
+          "question": "Which shortest path algorithm is executed by routers running OSPF on their LSDB?",
           "options": [
-            "Because hop count is capped at 15",
-            "Because routers physically communicate via satellite",
-            "Because each router possesses a complete, synchronized map of the entire network topology and computes shortest paths independently",
-            "Because link costs are always zero"
+            "Bellman-Ford Algorithm",
+            "Dijkstra's Shortest Path First (SPF) Algorithm",
+            "Flooding as the path calculator",
+            "Binary Search"
           ],
-          "answer": 2,
-          "explanation": "Each router has complete global topology knowledge via the LSDB and computes its own sink tree, eliminating the mutual dependencies that cause count-to-infinity."
+          "correct": 1,
+          "explanation": "OSPF routers run Dijkstra's Shortest Path First algorithm locally on their synchronized LSDB to calculate least-cost paths."
         },
         {
-          "question": "What field inside an LSP ensures that obsolete records are eventually purged from all routers' databases?",
+          "question": "In the 5-router example from Section 4.4, why did Router A choose path A -> B -> C -> D over A -> C -> D?",
           "options": [
-            "Sequence Number",
-            "Age",
-            "Checksum",
-            "Router ID"
+            "Because A -> B -> C -> D had fewer router hops",
+            "Because A -> B -> C -> D had a lower total cost (5) compared to A -> C -> D (6)",
+            "Because Router B is faster than Router C",
+            "Because path A -> C -> D was blocked by a firewall"
           ],
-          "answer": 1,
-          "explanation": "The Age field is decremented every second; when it reaches zero, the corresponding LSP is removed from the Link State Database."
+          "correct": 1,
+          "explanation": "Cost of A->B->C->D = 2 + 1 + 2 = 5, which is lower than Cost of A->C->D = 4 + 2 = 6. Link State routing selects the minimum total cost path."
         }
       ],
       "references": [
         {
-          "cite": "RFC 2328: OSPF Version 2",
+          "cite": "RFC 2328: OSPF Version 2, Internet Engineering Task Force (IETF).",
           "url": "https://datatracker.ietf.org/doc/html/rfc2328"
         },
         {
-          "cite": "A.S. Tanenbaum & D.J. Wetherall, Computer Networks, 6th Ed., Ch. 5.2.5",
-          "url": ""
+          "cite": "ISO/IEC 10589:2002: Intermediate System to Intermediate System (IS-IS) Routing Protocol.",
+          "url": "https://www.iso.org"
+        },
+        {
+          "cite": "Cisco Press: CCNA 200-301 Official Cert Guide: Understanding OSPF Operations.",
+          "url": "https://www.ciscopress.com"
+        },
+        {
+          "cite": "SlideServe: Overview of Dynamic Routing Protocols (ID: 3291911).",
+          "url": "https://slideserve.com"
         }
       ]
     },
@@ -1949,17 +2004,28 @@ const TOPICS_U3_EXT = {
   "routing-table-updates": {
     "id": "routing-table-updates",
     "title": "Routing Table Updates",
-    "unit": "Unit 3 – Network Layer",
+    "unit": "Unit 3: Network Layer",
     "unitId": "unit3",
-    "level": "Level 1 — Core Topic",
-    "category": "network",
-    "difficulty": "Core",
-    "readingTime": "15 min read",
-    "standard": "RFC 1058 / RFC 2453 / Tanenbaum Ch 5.2 / Kurose & Ross Ch 5",
-    "oneLiner": "Mechanisms, timers, and event triggers controlling how routing tables propagate and converge across network routers.",
-    "quickAnswer": "Routing table updates are the protocol messages exchanged between routers to maintain accurate path reachability. Updates occur in two primary modes: Periodic (Timer-Driven) updates, where tables are broadcast at fixed time intervals (e.g., every 30 seconds in RIP), and Triggered (Flash/Event-Driven) updates, where routers immediately broadcast routing changes the instant a link failure or topology change occurs.",
-    "whyItMatters": "The efficiency and speed of routing table updates determine network convergence time. Fast updates allow routers to reroute traffic around severed fiber lines in milliseconds, whereas sluggish or uncoordinated updates cause black holes, packet drops, and temporary routing loops.",
+    "level": "Undergraduate / GATE CSE",
+    "category": "Routing Convergence & Protocol Timers",
+    "difficulty": "Intermediate",
+    "readingTime": "25 min",
+    "standard": "RFC 2453 / RFC 2328 / Master PDF Notes",
+    "oneLiner": "The mechanisms, triggers, and update types by which routers synchronize and refresh their forwarding tables upon topological events.",
+    "quickAnswer": "Routing table updates are the processes by which routers exchange new reachability data and adjust their Forwarding Information Bases (FIB) when network conditions change. Updates are triggered by five primary events: a new router is added, a link connection fails, a link cost changes, a new destination network becomes available, or a neighboring router fails. Updates are classified into Periodic Updates (sent at regular timer intervals) vs. Triggered / Flash Updates (sent immediately upon significant state changes), and Full Updates (sending the complete routing table) vs. Partial Updates (sending only changed prefixes). Distance Vector updates propagate slowly hop-by-hop, while Link State updates flood immediately across the entire routing area.",
+    "whyItMatters": "Understanding routing table updates is essential for network engineers tuning convergence times and debugging routing loops. Rapid triggered updates prevent transient black holes, while well-calibrated timers prevent update storms from crashing core routers.",
     "infobox": {
+      "updateTypes": [
+        "Periodic Updates (Timer-driven)",
+        "Triggered / Flash Updates (Event-driven)"
+      ],
+      "scopeTypes": [
+        "Full Updates (Complete Table)",
+        "Partial Updates (Incremental delta)"
+      ],
+      "dvPropagation": "Neighbor-to-neighbor hop-by-hop (Gradual ripple)",
+      "lsPropagation": "Flooded to all routers in the area (Immediate synchronization)",
+      "convergenceGoal": "Consistent, loop-free routing state across all routers",
       "prerequisites": [
         "distance-vector",
         "link-state-routing"
@@ -1969,102 +2035,114 @@ const TOPICS_U3_EXT = {
         "comparison-dv-ls"
       ],
       "compareWith": [
-        "periodic-vs-triggered-updates"
-      ],
-      "primaryUses": [
-        "Network convergence speed optimization in campus and WAN routers",
-        "Route timer tuning (Periodic, Invalid, Holddown, Flush timers)",
-        "Triggered flash updates for rapid link failure mitigation",
-        "Minimizing routing protocol bandwidth overhead on low-speed serial links"
-      ],
-      "standardRfc": "RFC 2453 (RIPv2 Timers & Triggered Updates)"
+        "periodic-vs-triggered-updates",
+        "dv-vs-ls-updates"
+      ]
     },
-    "learningObjectives": [
-      "Distinguish between Periodic (Timer-Driven) and Triggered (Flash) routing table updates",
-      "Explain the 4 critical routing protocol timers in distance vector protocols",
-      "Describe how triggered updates accelerate loop avoidance and convergence",
-      "Understand Route Flapping and how update suppression timers prevent CPU exhaustion",
-      "Explain how Link State protocols use event-driven incremental updates"
-    ],
     "prerequisitesList": [
       {
-        "concept": "Distance Vector & Link State",
-        "meaning": "Understanding fundamental routing update exchange mechanisms"
+        "concept": "Distance Vector & Link State Routing",
+        "meaning": "Understanding how Bellman-Ford and Dijkstra compute paths."
+      },
+      {
+        "concept": "Routing Table Structure",
+        "meaning": "Destination prefix, metric, next-hop, and outgoing interface."
       }
     ],
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Bellman-ford.svg",
-    "imageCaption": "Figure 3.14: Routing Table Updates: Periodic Timers vs. Triggered Event-Driven Flash Updates.",
+    "learningObjectives": [
+      "Identify the 5 primary network events that trigger routing table updates.",
+      "Compare Distance Vector routing updates (gradual neighbor ripple) with Link State updates (area-wide LSA flooding).",
+      "Differentiate between Periodic Updates and Triggered (Flash) Updates.",
+      "Distinguish between Full Updates and Partial (Incremental) Updates.",
+      "Analyze the Master Comparison Table of Routing Table Updates from the syllabus PDF.",
+      "Define network convergence and explain why Link State protocols converge faster than Distance Vector protocols."
+    ],
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Routing_table_concept.svg/800px-Routing_table_concept.svg.png",
+    "imageCaption": "Figure 3: Routing table update propagation and FIB lookup pipeline.",
     "sections": {
-      "overview": "\n        <p class=\"mb-3\">\n          A <strong>Routing Table</strong> is a data table stored in a router that lists paths to particular network destinations, along with the distance metrics and outgoing interface associated with each path. Because network topologies change constantly as cables are severed, routers reboot, or traffic swells, routers must continuously exchange <strong>routing table updates</strong> to maintain consistent forwarding state.\n        </p>\n        <p class=\"mb-3\">\n          How and when these updates are transmitted distinguishes legacy protocols from modern routing engines. Updates fall into two foundational categories: <strong>Periodic Updates</strong> (governed strictly by repeating timers) and <strong>Triggered Updates</strong> (instantly launched in response to network state changes).\n        </p>\n      ",
-      "howItWorks": "\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">1. Periodic (Timer-Driven) Updates</h3>\n        <p class=\"mb-3 text-xs\">\n          In traditional distance vector protocols (such as RIP), each router broadcasts its complete distance vector to direct neighbors at fixed intervals. In RIP, the standard timers are:\n        </p>\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-3 text-xs mb-4\">\n          <div class=\"p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n            <strong class=\"text-emerald-700 dark:text-emerald-300\">Periodic Update Timer (30 seconds):</strong>\n            <p class=\"text-slate-600 dark:text-slate-300 mt-1\">\n              Every 30 seconds, the router broadcasts its entire routing table out every active interface. To prevent all routers on a shared LAN from broadcasting simultaneously (timer synchronization), small random jitter (±15%) is added.\n            </p>\n          </div>\n          <div class=\"p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n            <strong class=\"text-blue-700 dark:text-blue-300\">Route Invalid / Timeout Timer (180 seconds):</strong>\n            <p class=\"text-slate-600 dark:text-slate-300 mt-1\">\n              If a router does not hear an update for a specific route within 180 seconds (6 consecutive update cycles), the route is marked as invalid and its metric is set to 16 (unreachable).\n            </p>\n          </div>\n          <div class=\"p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n            <strong class=\"text-amber-700 dark:text-amber-300\">Holddown Timer (180 seconds):</strong>\n            <p class=\"text-slate-600 dark:text-slate-300 mt-1\">\n              When a route is marked unreachable, the router enters a holddown state during which it ignores any updates with poorer or equal metrics for that destination, preventing routing loops from re-infecting the table.\n            </p>\n          </div>\n          <div class=\"p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n            <strong class=\"text-rose-700 dark:text-rose-300\">Flush / Garbage-Collection Timer (240 seconds):</strong>\n            <p class=\"text-slate-600 dark:text-slate-300 mt-1\">\n              After an unreachable route remains invalid for an additional 60 seconds (total 240 seconds), it is permanently purged from the routing table.\n            </p>\n          </div>\n        </div>\n\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">2. Triggered (Flash) Updates</h3>\n        <p class=\"mb-3 text-xs\">\n          Waiting up to 30 seconds to announce a severed link is unacceptably slow. <strong>Triggered Updates</strong> (also called <em>Flash Updates</em>) require that whenever a router detects a metric change or interface failure:\n        </p>\n        <ul class=\"list-disc pl-5 space-y-1.5 text-xs mb-4\">\n          <li>The router does <strong>NOT wait</strong> for its 30-second periodic timer.</li>\n          <li>It immediately generates an update message containing the poisoned route ((\text{Metric} = 16)) and sends it out to all neighbors.</li>\n          <li>Each receiving neighbor immediately updates its own table and cascades the triggered update outward.</li>\n          <li>Convergence time drops from tens of seconds to milliseconds!</li>\n        </ul>\n\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">3. Incremental Updates in Link State Protocols</h3>\n        <p class=\"text-xs mb-3\">\n          Modern Link State protocols (OSPF) take this efficiency even further. They send <strong>incremental updates</strong>: when a link fails, OSPF does not transmit the entire routing table; it generates a tiny Link State Advertisement (LSA) containing only the single modified link, which is flooded immediately across the area.\n        </p>\n      ",
-      "technicalDetails": "\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">4. Route Flapping and Damping Timers</h3>\n        <p class=\"text-xs mb-3\">\n          If a damaged cable rapidly connects and disconnects 20 times a second, triggered updates would flood the network continuously, causing 100% router CPU load. Routing engines implement <strong>Triggered Update Timers</strong> (suppressing triggered updates to at most one every 1–5 seconds) to prevent storm conditions.\n        </p>\n      ",
+      "overview": "\n        <h3 class=\"wiki-subtitle\">1. Why Routing Table Updates Occur</h3>\n        <p class=\"wiki-paragraph\">\n          From Section 5 of the syllabus PDF notes:\n        </p>\n        <p class=\"wiki-paragraph\">\n          Routing table updates are critical because modern computer networks are dynamic environments where topology conditions change constantly. A router updates its forwarding information when:\n        </p>\n        <div class=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-4 text-xs\">\n          <div class=\"p-3 bg-gray-50 dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">1. New Router Added</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">A new department or branch router joins the network, advertising newly reachable destination subnets.</p>\n          </div>\n          <div class=\"p-3 bg-gray-50 dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">2. Network Connection Fails</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">A physical fiber line is cut, or an interface drops carrier signal, invalidating current paths.</p>\n          </div>\n          <div class=\"p-3 bg-gray-50 dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">3. Link Cost Changes</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">Bandwidth throttling, congestion spikes, or administrative metric adjustments alter path optimality.</p>\n          </div>\n          <div class=\"p-3 bg-gray-50 dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">4. New Subnet Available</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">A company commissions a new VLAN or cloud VPC, requiring global routing updates.</p>\n          </div>\n          <div class=\"p-3 bg-gray-50 dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">5. Neighbor Router Fails</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">An adjacent router loses power or crashes, missing consecutive HELLO keepalive timers.</p>\n          </div>\n        </div>\n      ",
+      "howItWorks": "\n        <h3 class=\"wiki-subtitle\">1. Distance Vector vs. Link State Update Mechanics</h3>\n        <p class=\"wiki-paragraph\">\n          Sections 5.1 and 5.2 of the syllabus PDF contrast how updates are executed across the two routing families:\n        </p>\n\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 text-xs my-4\">\n          <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <div class=\"font-bold text-amber-600 dark:text-amber-400 text-sm mb-2\">Distance Vector Updates (PDF Section 5.1)</div>\n            <ol class=\"list-decimal pl-5 space-y-1.5 text-slate-600 dark:text-slate-300\">\n              <li>A router detects a cost change or receives an update from a neighbor.</li>\n              <li>The router compares the advertised cost plus link cost with its current route.</li>\n              <li>If the new path has lower cost, it updates its routing table.</li>\n              <li>The router waits for its periodic timer (e.g. 30s) or generates a triggered update.</li>\n              <li>The updated vector is sent <em>only to directly connected neighbors</em>.</li>\n              <li>Neighbors repeat the process, allowing information to <strong>gradually ripple</strong> through the network.</li>\n            </ol>\n          </div>\n\n          <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <div class=\"font-bold text-emerald-600 dark:text-emerald-400 text-sm mb-2\">Link State Updates (PDF Section 5.2)</div>\n            <ol class=\"list-decimal pl-5 space-y-1.5 text-slate-600 dark:text-slate-300\">\n              <li>A router detects a change in one of its local links (e.g. carrier loss).</li>\n              <li>It immediately creates an updated Link State Advertisement (LSA).</li>\n              <li>The LSA is <strong>flooded instantaneously</strong> to all routers in the area.</li>\n              <li>Every router updates its local Link State Database (LSDB).</li>\n              <li>All routers independently recalculate shortest paths using Dijkstra's algorithm.</li>\n              <li>Updated least-cost paths are installed into local routing tables simultaneously.</li>\n            </ol>\n          </div>\n        </div>\n\n        <h3 class=\"wiki-subtitle\">2. Classification of Update Types</h3>\n        <div class=\"grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs my-3\">\n          <div class=\"p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800\">\n            <div class=\"font-bold text-blue-600 dark:text-blue-400 mb-1\">Periodic Updates vs. Triggered Updates</div>\n            <p class=\"text-slate-600 dark:text-slate-300 leading-relaxed\">\n              • <strong>Periodic Updates:</strong> Broadcast at rigid, fixed intervals (e.g. RIP every 30s) even when zero changes occur. Reliable but wastes link bandwidth.<br/>\n              • <strong>Triggered (Flash) Updates:</strong> Transmitted immediately when a significant routing change occurs (e.g. link severed). Dramatically speeds up convergence.\n            </p>\n          </div>\n          <div class=\"p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800\">\n            <div class=\"font-bold text-purple-600 dark:text-purple-400 mb-1\">Full Updates vs. Partial Updates</div>\n            <p class=\"text-slate-600 dark:text-slate-300 leading-relaxed\">\n              • <strong>Full Updates:</strong> The router transmits its entire routing table in every update packet (e.g. legacy RIPv1). Inefficient for large networks.<br/>\n              • <strong>Partial (Incremental) Updates:</strong> The router transmits ONLY the specific network prefix whose metric or reachability changed (e.g. EIGRP, OSPF LSAs). Highly bandwidth-efficient.\n            </p>\n          </div>\n        </div>\n      ",
+      "technicalDetails": "\n        <h3 class=\"wiki-subtitle\">1. Master Comparison of Routing Table Updates (PDF Section 5.3)</h3>\n        <div class=\"wiki-table-wrapper my-4\">\n          <table class=\"wiki-table w-full text-xs\">\n            <thead>\n              <tr class=\"bg-emerald-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200\">\n                <th>Comparison Feature</th>\n                <th>Distance Vector Routing</th>\n                <th>Link State Routing</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr>\n                <td class=\"font-bold\">Information Exchanged</td>\n                <td>Distances (costs) to all destinations and next-hop vectors.</td>\n                <td>Status and metrics of local directly connected links only.</td>\n              </tr>\n              <tr>\n                <td class=\"font-bold\">Information Sent To</td>\n                <td><strong>Directly connected neighbors only</strong>.</td>\n                <td><strong>All routers throughout the routing area</strong> (via flooding).</td>\n              </tr>\n              <tr>\n                <td class=\"font-bold\">Main Path Calculation</td>\n                <td>Bellman-Ford equation relaxation.</td>\n                <td>Dijkstra's Shortest Path First (SPF) algorithm.</td>\n              </tr>\n              <tr>\n                <td class=\"font-bold\">Topology Knowledge</td>\n                <td>Limited (only what neighbors report).</td>\n                <td>Detailed complete network map in LSDB.</td>\n              </tr>\n              <tr>\n                <td class=\"font-bold\">Change Notification</td>\n                <td>Periodic timer exchanges and triggered updates.</td>\n                <td>Immediate event-driven LSA generation and reliable flooding.</td>\n              </tr>\n              <tr>\n                <td class=\"font-bold\">Route Recalculation</td>\n                <td>Incremental update based on neighbor's advertised distance.</td>\n                <td>Complete/incremental SPF tree calculation on updated LSDB.</td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n\n        <h3 class=\"wiki-subtitle\">2. Definition &amp; Metrics of Convergence (PDF Section 5.3 &amp; Terminology)</h3>\n        <p class=\"wiki-paragraph\">\n          <strong>Convergence</strong> is the process and state in which all routers in a network have completed exchanging information, resolved all topological changes, and reached an identical, consistent view of all routing paths.\n        </p>\n        <p class=\"wiki-paragraph\">\n          <strong>Why Link State converges faster:</strong> In Link State routing, an LSA is flooded at wire-speed across the area without waiting for intermediate path recalculations. In Distance Vector routing, router 1 must receive an update, run Bellman-Ford, update its table, wait for its send timer, and transmit to router 2, which repeats the delay for router 3.\n        </p>\n      ",
       "workedExamples": {
-        "level1": "\n          <strong>Timer Timeline Following a Router Failure:</strong><br/>\n          Router A loses contact with neighbor Router B at time (t = 0).<br/>\n          • (t = 0\text{ to }180\text{ s}): Router A continues using B's route, waiting for an update.<br/>\n          • (t = 180\text{ s}): Invalid Timer expires. Route to B is marked Metric = 16 (Unreachable). Holddown begins.<br/>\n          • (t = 240\text{ s}): Flush Timer expires. Route to B is completely removed from RAM.\n        ",
-        "level2": "\n          <strong>Action of Triggered Flash Update:</strong><br/>\n          Consider nodes (A leftrightarrow B leftrightarrow C).<br/>\n          • Link between B and C breaks.<br/>\n          • With Periodic Updates: B waits up to 30 seconds before notifying A. In that window, A might route packets into the dead link.<br/>\n          • With Triggered Updates: B detects carrier loss within 2 ms, immediately crafts a packet stating <code>Cost(C) = 16</code>, and transmits to A in under 5 ms. A updates its table instantly.\n        ",
-        "level3": "\n          <strong>OSPF LSA Refresh vs Periodic Dumps:</strong><br/>\n          Contrast the bandwidth load over 1 hour:<br/>\n          • RIP: 120 full table dumps transmitted every hour regardless of network state.<br/>\n          • OSPF: 0 updates transmitted if the network is stable, except for an hourly parity refresh (every 30 minutes in OSPF, LSA MaxAge = 60 min).\n        "
+        "level1": "\n          <strong>Triggered Update in Action:</strong><br/>\n          In a RIP network, Router A connects to Network 192.168.5.0/24. The physical cable is unplugged at time $t = 10.2\\text{s}$. The next scheduled periodic update is at $t = 30.0\\text{s}$.<br/>\n          (1) Without Triggered Updates, when do neighbors learn of the failure?<br/>\n          (2) With Triggered Updates enabled, when do neighbors learn of the failure?<br/><br/>\n          <strong>Answer:</strong><br/>\n          • Without Triggered Updates: Neighbors must wait until the 30.0-second periodic timer fires ($19.8$ seconds of black-holed traffic!).<br/>\n          • With Triggered Updates: Router A immediately generates a flash update packet with metric 16 (unreachable) within milliseconds ($t = 10.25\\text{s}$), stopping neighbor traffic almost instantly.\n        ",
+        "level2": "\n          <strong>Bandwidth Consumption: Full vs Partial Updates:</strong><br/>\n          A corporate network has 1,000 routes. Each route entry in an update packet requires 20 bytes of payload.<br/>\n          Calculate the bandwidth consumed per update for: (1) Full updates, and (2) A partial update when a single link changes.<br/><br/>\n          <strong>Calculation:</strong><br/>\n          • <strong>Full Update Size:</strong> $1,000\\text{ routes} \\times 20\\text{ bytes} = 20,000\\text{ bytes}$ (requires ~14 Ethernet frames). If sent every 30s across 50 links, this consumes megabytes of continuous background overhead.<br/>\n          • <strong>Partial Update Size:</strong> Only 1 route is advertised: $1 \\times 20 = 20\\text{ bytes}$ (fits inside a single 64-byte frame). Partial updates reduce routing protocol overhead by over 99.8%!\n        ",
+        "level3": "\n          <strong>Link Flapping &amp; LSA Throttle Timers:</strong><br/>\n          A loose fiber connection causes an interface to flap between UP and DOWN 10 times per second. Explain how OSPF LSA pacing and throttle timers protect routers from CPU exhaustion.<br/><br/>\n          <strong>Remediation:</strong><br/>\n          If OSPF ran Dijkstra on every single flap, router CPUs would lock at 100%. OSPF uses three exponential backoff timers:<br/>\n          • <code>spf-start</code>: Initial delay before running Dijkstra (e.g. 50ms).<br/>\n          • <code>spf-hold</code>: Minimum wait between consecutive SPF runs (doubles exponentially: 200ms &rarr; 400ms &rarr; 800ms &rarr; 5000ms).<br/>\n          • <code>spf-max-wait</code>: Maximum cap on SPF hold time.<br/>\n          This dampens the oscillation, allowing the network to absorb rapid flaps without crashing router control planes.\n        "
       },
-      "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 text-xs\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800\">\n            <h4 class=\"font-bold text-emerald-800 dark:text-emerald-300 mb-2\">Advantages of Modern Update Mechanisms</h4>\n            <ul class=\"space-y-1 list-disc pl-4 text-slate-700 dark:text-slate-300\">\n              <li>Triggered updates minimize transient routing loops and black holes.</li>\n              <li>Incremental updates conserve link bandwidth on expensive WAN connections.</li>\n              <li>Holddown timers allow time for poisoned routes to propagate globally.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/30 rounded-lg border border-rose-200 dark:border-rose-800\">\n            <h4 class=\"font-bold text-rose-800 dark:text-rose-300 mb-2\">Potential Pitfalls</h4>\n            <ul class=\"space-y-1 list-disc pl-4 text-slate-700 dark:text-slate-300\">\n              <li>Periodic broadcast updates waste bandwidth on stable links.</li>\n              <li>Un-damped triggered updates can cause CPU exhaustion during link flaps.</li>\n            </ul>\n          </div>\n        </div>\n      ",
+      "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 text-xs my-3\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200 dark:border-emerald-800\">\n            <span class=\"font-bold text-emerald-800 dark:text-emerald-300 text-sm block mb-1\">Triggered &amp; Partial Update Benefits</span>\n            <ul class=\"list-disc pl-4 space-y-1 text-slate-700 dark:text-slate-300\">\n              <li>Sub-second reaction to link cuts and router crashes.</li>\n              <li>Minimal bandwidth consumption during normal stable operations.</li>\n              <li>Faster network convergence reduces dropped application packets.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/40 rounded-xl border border-rose-200 dark:border-rose-800\">\n            <span class=\"font-bold text-rose-800 dark:text-rose-300 text-sm block mb-1\">Update Storm Hazards</span>\n            <ul class=\"list-disc pl-4 space-y-1 text-slate-700 dark:text-slate-300\">\n              <li>Unthrottled triggered updates during major disasters can create CPU spikes.</li>\n              <li>Periodic broadcast updates waste battery and bandwidth in wireless/cellular links.</li>\n            </ul>\n          </div>\n        </div>\n      ",
       "whereUsed": [
-        "Cisco IOS and Juniper Junos routing timer configurations",
-        "Campus network convergence engineering",
-        "WAN failover optimization in banking and high-frequency trading networks"
+        "Core WAN Routers: Handling BGP flash updates upon transatlantic submarine cable breaks.",
+        "Internal Data Centers: OSPF sub-second LSA generation maintaining zero-packet-loss leaf-spine routing.",
+        "Cellular Backhaul: Employing partial updates over metered microwave transmission towers."
       ],
-      "commonMistakes": "\n        <ul class=\"space-y-2 text-xs\">\n          <li><strong>Confusing the Invalid Timer with the Flush Timer:</strong> At 180 seconds, the route is NOT deleted; it is marked unreachable (metric 16). It is only deleted after the Flush Timer expires at 240 seconds.</li>\n          <li><strong>Assuming triggered updates eliminate the need for periodic updates:</strong> In RIP, triggered updates supplement periodic updates; periodic updates are still retained as a heartbeat check.</li>\n        </ul>\n      ",
-      "compareWith": "periodic-vs-triggered-updates",
+      "commonMistakes": [
+        "Assuming Periodic Updates are Better than Event-Driven: Periodic updates send redundant data when nothing has changed and react slowly when failures occur.",
+        "Confusing Convergence with Forwarding Speed: Convergence is the time required for all routers to agree on the new topology; forwarding speed is how fast packets move through the ASIC switching fabric."
+      ],
+      "compareWith": [
+        {
+          "target": "comparison-dv-ls",
+          "title": "DV vs. LS Routing",
+          "description": "Full architectural comparison of both paradigms."
+        }
+      ],
       "quiz": [
         {
-          "question": "What is the standard interval for periodic routing table updates in the RIP protocol?",
+          "question": "What is convergence in computer network routing?",
           "options": [
-            "5 seconds",
-            "15 seconds",
-            "30 seconds",
-            "60 seconds"
+            "The state where all routers have updated their tables and reached a consistent view of the topology",
+            "A computer shutting down",
+            "A network cable becoming longer",
+            "An IP address changing its format"
           ],
-          "answer": 2,
-          "explanation": "In RIP (RFC 1058), routers broadcast their complete distance vector table every 30 seconds."
+          "correct": 0,
+          "explanation": "Convergence occurs when all routers in the network have updated their routing information and agreed upon a consistent, loop-free view of all paths."
         },
         {
-          "question": "What is a Triggered (Flash) Update?",
+          "question": "Which type of routing update is sent immediately when an important network change occurs rather than waiting for a periodic timer?",
           "options": [
-            "An update sent whenever the router's battery is low",
-            "An immediate update sent out as soon as a link failure or metric change occurs, without waiting for the timer",
-            "An update sent only during system boot",
-            "An update broadcast to the entire Internet"
+            "Periodic Update",
+            "Triggered (Flash) Update",
+            "Default Update",
+            "Static Update"
           ],
-          "answer": 1,
-          "explanation": "A triggered update is transmitted immediately upon detecting a network topology change, bypassing the regular 30-second timer."
+          "correct": 1,
+          "explanation": "Triggered updates are dispatched immediately upon link state changes, greatly speeding up convergence and stopping routing loops."
         },
         {
-          "question": "What is the purpose of the Holddown Timer in distance vector routing?",
+          "question": "Why do Link State routing table updates converge faster than Distance Vector updates?",
           "options": [
-            "To pause the router's CPU to cool down",
-            "To prevent newly announced worse paths from creating routing loops while a bad news update propagates",
-            "To delay packet transmissions by 10 seconds",
-            "To hold the physical cable in place"
+            "Link State updates use smaller cables",
+            "Link State floods topology changes immediately to all routers in the area, allowing simultaneous recalculation",
+            "Distance Vector routers never update their tables",
+            "Link State uses telephone circuits"
           ],
-          "answer": 1,
-          "explanation": "The holddown timer instructs a router to ignore updates with poorer metrics for an unreachable route for a set duration, stopping loops."
+          "correct": 1,
+          "explanation": "Link State distributes LSAs via area-wide flooding, allowing all routers to receive the notification and run Dijkstra simultaneously, whereas DV updates ripple hop-by-hop."
         },
         {
-          "question": "How do Link State protocols (OSPF) differ from Distance Vector protocols regarding routing table updates?",
+          "question": "Which of the following is NOT one of the 5 primary triggers for a routing table update listed in the syllabus PDF?",
           "options": [
-            "They never send updates under any circumstance",
-            "They send incremental Link State Advertisements (LSAs) only when events occur, rather than periodic full table dumps",
-            "They send updates every 500 milliseconds",
-            "They broadcast their tables over Wi-Fi only"
+            "A new router is added",
+            "A link connection fails",
+            "A user changes their computer screen resolution",
+            "A link cost changes"
           ],
-          "answer": 1,
-          "explanation": "Link state protocols transmit small incremental LSAs only when link changes occur, conserving bandwidth and CPU."
+          "correct": 2,
+          "explanation": "Screen resolution is a local OS display property and has zero impact on network topology or router forwarding tables."
         }
       ],
       "references": [
         {
-          "cite": "RFC 2453: RIP Version 2 (Timers Specification)",
+          "cite": "RFC 2453: RIP Version 2 (Timers and Triggered Updates), IETF.",
           "url": "https://datatracker.ietf.org/doc/html/rfc2453"
         },
         {
-          "cite": "RFC 2328: OSPF Version 2",
+          "cite": "RFC 2328: OSPF Version 2 (LSA Processing and Flooding), IETF.",
           "url": "https://datatracker.ietf.org/doc/html/rfc2328"
+        },
+        {
+          "cite": "SlideServe: Network Layer II - Routing Table Updates (ID: 6871591).",
+          "url": "https://slideserve.com"
         }
       ]
     },
@@ -2074,126 +2152,154 @@ const TOPICS_U3_EXT = {
   "comparison-dv-ls": {
     "id": "comparison-dv-ls",
     "title": "Comparison of Distance Vector and Link State Routing",
-    "unit": "Unit 3 – Network Layer",
+    "unit": "Unit 3: Network Layer",
     "unitId": "unit3",
-    "level": "Level 1 — Core Topic",
-    "category": "network",
-    "difficulty": "Core",
-    "readingTime": "15 min read",
-    "standard": "Tanenbaum Ch 5.2.4-5.2.5 / Kurose & Ross Ch 5.2 / Forouzan Ch 20",
-    "oneLiner": "Comprehensive comparative analysis of Distance Vector vs Link State routing paradigms across complexity, convergence, and robustness.",
-    "quickAnswer": "Distance Vector and Link State are the two foundational interior dynamic routing paradigms. Distance Vector ('Routing by Rumor') shares full distance tables with direct neighbors periodically using Bellman-Ford, requiring low CPU/memory but suffering from slow convergence and count-to-infinity. Link State ('Tell the World About Neighbors') floods link state packets to all routers using Dijkstra SPF, achieving rapid loop-free convergence at the cost of higher CPU and memory overhead.",
-    "whyItMatters": "Comparing Distance Vector and Link State routing is one of the most classic, fundamental questions in computer networking examinations (GATE, university semesters) and system design interviews. It illustrates the fundamental trade-off between localized decentralized computing and synchronized global state architectures.",
+    "level": "Undergraduate / GATE CSE",
+    "category": "Comparative Routing Analysis",
+    "difficulty": "Intermediate",
+    "readingTime": "25 min",
+    "standard": "Master Syllabus & Textbook Notes (Tanenbaum Ch. 5 / Forouzan Ch. 18 / Master PDF Notes)",
+    "oneLiner": "A comprehensive 10-dimension comparison between decentralized Distance Vector (Bellman-Ford) and global Link State (Dijkstra SPF) routing.",
+    "quickAnswer": "Distance Vector and Link State routing represent the two major paradigms of dynamic interior gateway routing. Distance Vector (exemplified by RIP) is decentralized: routers know only destination distances and next-hop directions, sharing vectors exclusively with immediate neighbors ('routing by rumor'). It requires minimal memory and CPU but converges slowly and is vulnerable to Count-to-Infinity loops. Conversely, Link State (exemplified by OSPF) is based on global mapping: routers flood local link facts across the area, each building an identical Link State Database (LSDB) and independently executing Dijkstra's SPF algorithm. It converges rapidly, scales to large hierarchical networks, and is immune to classic distance vector loops, but demands higher router memory and CPU resources. Neither is universally superior; the choice depends on network scale, complexity, and performance requirements.",
+    "whyItMatters": "Selecting the correct routing protocol is one of the most critical decisions in network architecture. Understanding the algorithmic, computational, and convergence trade-offs prevents costly routing design mistakes in enterprise campus, data center, and service provider networks.",
     "infobox": {
+      "paradigmsCompared": [
+        "Distance Vector (Bellman-Ford)",
+        "Link State (Dijkstra SPF)"
+      ],
+      "canonicalProtocols": [
+        "RIP (RFC 2453)",
+        "OSPF (RFC 2328)"
+      ],
+      "keyDifferentiators": [
+        "Network Knowledge (Neighbor-based vs Full Topology)",
+        "Convergence Speed (Slow ripple vs Fast flooding)",
+        "Resource Consumption (Low RAM/CPU vs High RAM/CPU)",
+        "Loop Susceptibility (Vulnerable vs Loop-free)"
+      ],
       "prerequisites": [
         "distance-vector",
         "link-state-routing"
       ],
       "relatedConcepts": [
-        "routing-table-updates",
-        "count-to-infinity"
+        "count-to-infinity",
+        "routing-table-updates"
       ],
       "compareWith": [
-        "distance-vector-vs-link-state"
-      ],
-      "primaryUses": [
-        "Network architecture protocol selection (RIP vs OSPF / IS-IS)",
-        "Enterprise network design and scalability evaluations",
-        "Academic curricula and GATE exam revision",
-        "Understanding Distributed Bellman-Ford vs Global Dijkstra trade-offs"
-      ],
-      "standardRfc": "RFC 1058 (RIP), RFC 2328 (OSPF)"
+        "rip-vs-ospf",
+        "bellman-ford-vs-dijkstra"
+      ]
     },
-    "learningObjectives": [
-      "Compare Distance Vector and Link State across 10 key technical dimensions",
-      "Contrast 'Routing by Rumor' with 'Synchronized Global Topology'",
-      "Evaluate algorithmic complexity: Bellman-Ford vs Dijkstra SPF",
-      "Analyze network convergence speed and susceptibility to routing loops",
-      "Explain why Link State superseded Distance Vector in modern large-scale networks"
-    ],
     "prerequisitesList": [
       {
         "concept": "Distance Vector Routing",
-        "meaning": "Understanding Bellman-Ford neighbor exchanges"
+        "meaning": "Understanding vector exchanges and the Bellman-Ford algorithm."
       },
       {
         "concept": "Link State Routing",
-        "meaning": "Understanding LSP flooding and Dijkstra calculations"
+        "meaning": "Understanding LSAs, LSDBs, and Dijkstra's Shortest Path First calculation."
       }
     ],
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/14/Link_state_routing.svg",
-    "imageCaption": "Figure 3.15: Comparative Analysis: Distance Vector (Local Knowledge) vs Link State (Global Topology).",
+    "learningObjectives": [
+      "Compare Distance Vector and Link State routing across all 10 criteria specified in Section 6 of the syllabus PDF.",
+      "Analyze the fundamental trade-off between memory/CPU consumption and convergence speed.",
+      "Explain why Link State routing is immune to the classic Count-to-Infinity problem.",
+      "Apply the decision criteria from Section 6.1 of the syllabus PDF to choose the optimal protocol for small vs enterprise networks.",
+      "Examine real-world applications in Small Office Networks, Enterprise Campuses, and Internet Service Providers.",
+      "Clarify why BGP is a Path-Vector protocol and should not be confused with traditional Distance Vector or Link State."
+    ],
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Internet_map_1024.jpg/800px-Internet_map_1024.jpg",
+    "imageCaption": "Figure 4: Autonomous system routing comparing interior gateway protocols.",
     "sections": {
-      "overview": "\n        <p class=\"mb-3\">\n          Inside any Autonomous System, routers must run an <strong>Interior Gateway Protocol (IGP)</strong> to dynamically construct their forwarding tables. Over the history of computer networks, two fundamentally different architectural paradigms were developed: <strong>Distance Vector Routing</strong> and <strong>Link State Routing</strong>.\n        </p>\n        <p class=\"mb-3\">\n          The essential philosophical difference can be summarized succinctly:\n        </p>\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-3 text-xs mb-3 font-mono\">\n          <div class=\"p-3 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 rounded\">\n            <strong>Distance Vector:</strong><br/>\n            <em>\"Tell your direct neighbors about your view of the entire world.\"</em>\n          </div>\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded\">\n            <strong>Link State:</strong><br/>\n            <em>\"Tell the entire world about your direct neighbors.\"</em>\n          </div>\n        </div>\n      ",
-      "howItWorks": "\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">1. Master 10-Point Comparison Matrix</h3>\n        <table class=\"wiki-table w-full text-xs mb-4\">\n          <thead>\n            <tr class=\"bg-blue-50 dark:bg-gray-800\">\n              <th>Dimension</th>\n              <th>Distance Vector Routing</th>\n              <th>Link State Routing</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr><td class=\"font-bold\">Algorithmic Basis</td><td>Bellman-Ford Algorithm (Distributed)</td><td>Dijkstra's Shortest Path First (SPF) Algorithm</td></tr>\n            <tr><td class=\"font-bold\">Network Knowledge</td><td>Local knowledge only; knows distance through neighbors</td><td>Global knowledge; complete topological map (LSDB) in memory</td></tr>\n            <tr><td class=\"font-bold\">Information Sent</td><td>Complete routing table vector (Destinations, Costs)</td><td>Only the states and metrics of direct links (LSP)</td></tr>\n            <tr><td class=\"font-bold\">Destination of Updates</td><td>Direct physical neighbors only</td><td>All routers in the area / network (via flooding)</td></tr>\n            <tr><td class=\"font-bold\">Update Timing</td><td>Periodic (e.g. every 30s) + Triggered updates</td><td>Event-driven (triggered when link state changes)</td></tr>\n            <tr><td class=\"font-bold\">Convergence Speed</td><td><strong>Slow</strong> (requires multiple periodic cycles)</td><td><strong>Fast</strong> (immediate flooding; sub-second convergence)</td></tr>\n            <tr><td class=\"font-bold\">Susceptibility to Loops</td><td>High (prone to Count-to-Infinity and transient loops)</td><td>Extremely low (immune to count-to-infinity in steady state)</td></tr>\n            <tr><td class=\"font-bold\">Memory & Storage</td><td>Low (stores only distance vectors)</td><td>Higher (stores complete Link State Database of whole network)</td></tr>\n            <tr><td class=\"font-bold\">CPU Processing</td><td>Minimal (simple addition and minimum operations)</td><td>Higher (runs (O(E log V)) Dijkstra calculations)</td></tr>\n            <tr><td class=\"font-bold\">Bandwidth Overhead</td><td>High on idle links (due to repeated periodic broadcasts)</td><td>Low during steady state; bursts during topology changes</td></tr>\n            <tr><td class=\"font-bold\">Scalability Limit</td><td>Capped at 15 hops (in RIP)</td><td>Scales to thousands of routers using hierarchical areas</td></tr>\n            <tr><td class=\"font-bold\">Protocol Examples</td><td>RIPv1, RIPv2, Cisco IGRP</td><td>OSPFv2, OSPFv3, IS-IS</td></tr>\n          </tbody>\n        </table>\n      ",
-      "technicalDetails": "\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">2. Robustness and Failure Isolation</h3>\n        <p class=\"text-xs mb-2\">\n          What happens when a malfunctioning router injects corrupted routing data?\n        </p>\n        <ul class=\"list-disc pl-5 space-y-1.5 text-xs mb-4\">\n          <li><strong>Under Distance Vector:</strong> A malfunctioning router can advertise incorrect lowest-cost paths to any destination (e.g., \"I can reach Google in 1 hop\"). Neighbors accept this falsehood and advertise it onward, poisoning the entire network.</li>\n          <li><strong>Under Link State:</strong> A router can only lie about its own directly attached links! It cannot alter or forge LSPs originated by other routers because LSPs are authenticated and signed by their creators. The damage is strictly localized to the misbehaving node.</li>\n        </ul>\n      ",
+      "overview": "\n        <h3 class=\"wiki-subtitle\">1. Master Comparison Matrix (PDF Section 6)</h3>\n        <p class=\"wiki-paragraph\">\n          From Section 6 of the syllabus PDF notes, the table below provides the authoritative 10-point examination comparison:\n        </p>\n\n        <div class=\"wiki-table-wrapper my-4\">\n          <table class=\"wiki-table w-full text-xs\">\n            <thead>\n              <tr class=\"bg-emerald-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200\">\n                <th>Feature / Dimension</th>\n                <th>Distance Vector Routing</th>\n                <th>Link State Routing</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr>\n                <td class=\"font-bold\">Basic Approach</td>\n                <td>Shares route distances and next hops with neighbors.</td>\n                <td>Shares information about local directly connected links with all routers.</td>\n              </tr>\n              <tr>\n                <td class=\"font-bold\">Network Knowledge</td>\n                <td><strong>Limited:</strong> Knows only what immediate neighbors report (\"Routing by rumor\").</td>\n                <td><strong>Complete:</strong> Maintains detailed, identical topology map in LSDB.</td>\n              </tr>\n              <tr>\n                <td class=\"font-bold\">Information Exchange</td>\n                <td>Mainly with directly connected neighbors.</td>\n                <td>Flooded throughout the entire routing area.</td>\n              </tr>\n              <tr>\n                <td class=\"font-bold\">Core Algorithm</td>\n                <td>Bellman-Ford shortest-path algorithm.</td>\n                <td>Dijkstra's Shortest Path First (SPF) algorithm.</td>\n              </tr>\n              <tr>\n                <td class=\"font-bold\">Convergence Speed</td>\n                <td><strong>Slower:</strong> Changes ripple hop-by-hop from router to router.</td>\n                <td><strong>Generally faster:</strong> Event-driven LSA flooding allows immediate recalculation.</td>\n              </tr>\n              <tr>\n                <td class=\"font-bold\">Memory Requirement</td>\n                <td><strong>Usually lower:</strong> Stores only distance vectors for known destinations.</td>\n                <td><strong>Usually higher:</strong> Must store the full topology database (LSDB) of the area.</td>\n              </tr>\n              <tr>\n                <td class=\"font-bold\">CPU Requirement</td>\n                <td><strong>Usually lower:</strong> Simple addition and minimum comparison.</td>\n                <td><strong>Usually higher:</strong> Executes compute-intensive Dijkstra SPF calculations.</td>\n              </tr>\n              <tr>\n                <td class=\"font-bold\">Routing Loops</td>\n                <td>More vulnerable to transient routing loops.</td>\n                <td>Less vulnerable; builds loop-free Shortest Path Trees.</td>\n              </tr>\n              <tr>\n                <td class=\"font-bold\">Count-to-Infinity</td>\n                <td><strong>Can occur</strong> when destinations become unreachable.</td>\n                <td><strong>Does not apply:</strong> Routers possess the full graph and do not rely on second-hand distances.</td>\n              </tr>\n              <tr>\n                <td class=\"font-bold\">Canonical Example</td>\n                <td><strong>RIP (Routing Information Protocol)</strong>, IGRP.</td>\n                <td><strong>OSPF (Open Shortest Path First)</strong>, IS-IS.</td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n      ",
+      "howItWorks": "\n        <h3 class=\"wiki-subtitle\">1. Which Routing Approach Is Better? (PDF Section 6.1)</h3>\n        <p class=\"wiki-paragraph\">\n          As emphasized in the syllabus PDF notes, <strong>neither method is universally superior in every scenario</strong>. The choice depends on network size, topology complexity, hardware budgets, and administrative performance requirements:\n        </p>\n\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 text-xs my-4\">\n          <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <div class=\"font-bold text-amber-600 dark:text-amber-400 text-sm mb-1 flex items-center gap-1.5\">\n              <i class=\"fa-solid fa-house\"></i> When to Choose Distance Vector:\n            </div>\n            <ul class=\"list-disc pl-4 space-y-1 text-slate-600 dark:text-slate-300 mt-2\">\n              <li><strong>Small to Medium Networks:</strong> Networks with fewer than 15 hops and simple hub-and-spoke designs.</li>\n              <li><strong>Constrained Router Hardware:</strong> Routers with minimal RAM and low-power embedded CPUs that cannot support large LSDBs.</li>\n              <li><strong>Administrative Simplicity:</strong> Quick deployment without needing complex area hierarchies or metric tuning.</li>\n              <li><strong>Limited Technical Staff:</strong> Environments where simple maintenance is valued over microsecond failover.</li>\n            </ul>\n          </div>\n\n          <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <div class=\"font-bold text-emerald-600 dark:text-emerald-400 text-sm mb-1 flex items-center gap-1.5\">\n              <i class=\"fa-solid fa-building-columns\"></i> When to Choose Link State:\n            </div>\n            <ul class=\"list-disc pl-4 space-y-1 text-slate-600 dark:text-slate-300 mt-2\">\n              <li><strong>Large or Complex Networks:</strong> Multi-building enterprise campuses, hospital networks, or regional intranets.</li>\n              <li><strong>Mission-Critical Failover:</strong> Environments requiring sub-second convergence where dropped voice/video packets are unacceptable.</li>\n              <li><strong>Bandwidth-Optimized Routing:</strong> Situations where routing decisions must be based on actual link speed rather than arbitrary hop counts.</li>\n              <li><strong>Hierarchical Design:</strong> Networks that benefit from dividing into Area 0 backbone and regional stub areas.</li>\n            </ul>\n          </div>\n        </div>\n\n        <h3 class=\"wiki-subtitle\">2. Real-World Applications (PDF Section 7)</h3>\n        <ul class=\"list-disc pl-5 space-y-2 text-xs text-gray-600 dark:text-gray-300 my-3\">\n          <li><strong>Small Office Networks (PDF 7.1):</strong> Small branch offices often use RIPv2 to exchange routes with edge firewalls due to minimal configuration overhead.</li>\n          <li><strong>Enterprise Campus Networks (PDF 7.2):</strong> Large organizations, universities, and hospitals universally deploy <strong>OSPF</strong> to maintain high-speed, redundant, loop-free routing across departmental areas.</li>\n          <li><strong>Internet Service Providers (PDF 7.3):</strong> ISPs deploy <strong>IS-IS</strong> or <strong>OSPF</strong> as their internal interior gateway protocol (IGP). For inter-domain routing between autonomous systems, they deploy <strong>BGP (Border Gateway Protocol)</strong>.</li>\n        </ul>\n        <div class=\"p-3 bg-purple-50 dark:bg-purple-950/40 rounded-lg border border-purple-200 dark:border-purple-800 text-xs text-purple-800 dark:text-purple-300 my-3\">\n          <strong>Important Architectural Note (From PDF Section 7.3):</strong> BGP is a <em>Path-Vector protocol</em> that records the entire sequence of Autonomous System (AS) numbers in the AS-Path attribute. It should NOT be confused with traditional interior Distance Vector or Link State routing!\n        </div>\n      ",
+      "technicalDetails": "\n        <h3 class=\"wiki-subtitle\">1. Algorithmic Complexity Comparison</h3>\n        <div class=\"wiki-table-wrapper my-4\">\n          <table class=\"wiki-table w-full text-xs\">\n            <thead>\n              <tr class=\"bg-emerald-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200\">\n                <th>Metric / Parameter</th>\n                <th>Distance Vector (Bellman-Ford)</th>\n                <th>Link State (Dijkstra SPF)</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr>\n                <td class=\"font-bold\">Time Complexity</td>\n                <td class=\"font-mono font-bold\">$O(V \\cdot E)$</td>\n                <td class=\"font-mono font-bold\">$O((V + E) \\log V)$ (with Min-Heap)</td>\n              </tr>\n              <tr>\n                <td class=\"font-bold\">Space Complexity</td>\n                <td class=\"font-mono font-bold\">$O(V)$</td>\n                <td class=\"font-mono font-bold\">$O(V + E)$ (Stores all vertices and edges in LSDB)</td>\n              </tr>\n              <tr>\n                <td class=\"font-bold\">Message Complexity</td>\n                <td>Small: $O(V)$ entries exchanged with neighbors.</td>\n                <td>High: $O(E \\cdot V)$ LSA packets flooded across all links.</td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n      ",
       "workedExamples": {
-        "level1": "\n          <strong>Comparing Protocol Memory Requirements:</strong><br/>\n          In a network with 200 routers and 500 links:<br/>\n          • <strong>Distance Vector Router:</strong> Stores 200 entries: <code>(Dest, Cost, NextHop)</code>. Memory footprint is a few kilobytes.<br/>\n          • <strong>Link State Router:</strong> Stores LSPs from all 200 routers, modeling all 500 edges in an adjacency matrix/list. Requires several megabytes of RAM to run Dijkstra SPF.\n        ",
-        "level2": "\n          <strong>Convergence Time Comparison in WAN:</strong><br/>\n          A trans-Atlantic fiber cable breaks between London and New York.<br/>\n          • Distance Vector (RIP): London detects failure. London must wait for next update cycle or triggered update. Paris and Frankfurt exchange vectors over 3-4 rounds. Convergence takes 30–90 seconds.<br/>\n          • Link State (OSPF): London immediately floods an LSA. All routers receive it in under 50 ms and run Dijkstra in 5 ms. Network completely reconverges in under 100 milliseconds!\n        ",
-        "level3": "\n          <strong>Evaluating Hybrid Protocols (EIGRP):</strong><br/>\n          Cisco created EIGRP (Enhanced Interior Gateway Routing Protocol) as an Advanced Distance Vector protocol.<br/>\n          It uses the <strong>DUAL (Diffusing Update Algorithm)</strong> to achieve the low CPU footprint of Distance Vector while guaranteeing 100% loop-free convergence through 'Feasible Successors', demonstrating how modern engineering bridges both paradigms.\n        "
+        "level1": "\n          <strong>Scenario: Protocol Selection for a Hospital Network:</strong><br/>\n          A hospital network connects 45 routers across 6 buildings. Real-time patient telemetry and IP telephony (VoIP) run over the network. Link failures must re-converge in under 1 second. Would you recommend RIP (Distance Vector) or OSPF (Link State)?<br/><br/>\n          <strong>Recommendation & Rationale:</strong><br/>\n          Recommend <strong>OSPF (Link State)</strong>. RIP's periodic 30-second timers and slow hop-by-hop convergence would cause telephony calls to drop and telemetry to disconnect during link cuts. OSPF's event-driven LSA flooding re-converges in milliseconds, maintaining uninterrupted patient care.\n        ",
+        "level2": "\n          <strong>Memory Footprint Comparison:</strong><br/>\n          An autonomous system has 100 routers ($V = 100$) and 400 point-to-point links ($E = 400$).<br/>\n          Estimate the memory required for (1) a Distance Vector routing table, and (2) a Link State Database (LSDB).<br/><br/>\n          <strong>Calculation:</strong><br/>\n          • <strong>Distance Vector:</strong> Stores 1 entry per destination: $100\\text{ destinations} \\times 32\\text{ bytes} \\approx 3.2\\text{ KB}$.<br/>\n          • <strong>Link State:</strong> Stores an LSA for all 100 routers plus link descriptions for all 400 bidirectional edges ($800\\text{ link records}$): $(100 \\times 64\\text{B}) + (800 \\times 32\\text{B}) \\approx 32\\text{ KB}$ (10&times; higher memory footprint).\n        ",
+        "level3": "\n          <strong>Handling Network Partitions:</strong><br/>\n          A dual-homed link cut splits a 20-router network into two isolated partitions (Partition 1 has 12 routers, Partition 2 has 8 routers).<br/>\n          Compare how Distance Vector and Link State handle this partition.<br/><br/>\n          <strong>Analysis:</strong><br/>\n          • <strong>Distance Vector:</strong> When Partition 1 loses connectivity to Partition 2, routers in Partition 1 mistakenly exchange stale paths with each other, triggering Count-to-Infinity loops until hop counts reach 16.<br/>\n          • <strong>Link State:</strong> The severed links are immediately reflected in flooded LSAs. Routers in Partition 1 run Dijkstra and discover no edges connect to Partition 2. They immediately mark Partition 2 as unreachable in a single calculation cycle with zero loops.\n        "
       },
-      "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 text-xs\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800\">\n            <h4 class=\"font-bold text-emerald-800 dark:text-emerald-300 mb-2\">When to Choose Distance Vector</h4>\n            <ul class=\"space-y-1 list-disc pl-4 text-slate-700 dark:text-slate-300\">\n              <li>Small networks with fewer than 15 hops.</li>\n              <li>Resource-constrained embedded hardware or IoT microcontrollers.</li>\n              <li>Simple network environments requiring zero complex configuration.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-200 dark:border-blue-800\">\n            <h4 class=\"font-bold text-blue-800 dark:text-blue-300 mb-2\">When to Choose Link State</h4>\n            <ul class=\"space-y-1 list-disc pl-4 text-slate-700 dark:text-slate-300\">\n              <li>Large enterprise networks and multi-datacenter backbones.</li>\n              <li>Networks requiring rapid sub-second convergence after link cuts.</li>\n              <li>Environments requiring Traffic Engineering and Equal-Cost Multi-Path.</li>\n            </ul>\n          </div>\n        </div>\n      ",
+      "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 text-xs my-3\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200 dark:border-emerald-800\">\n            <span class=\"font-bold text-emerald-800 dark:text-emerald-300 text-sm block mb-1\">When Distance Vector Wins</span>\n            <ul class=\"list-disc pl-4 space-y-1 text-slate-700 dark:text-slate-300\">\n              <li>Low memory and CPU consumption on legacy/IoT devices.</li>\n              <li>Minimal bandwidth on ultra-slow serial telemetry circuits.</li>\n              <li>Easy, error-free setup in small single-switch networks.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-blue-50 dark:bg-blue-950/40 rounded-xl border border-blue-200 dark:border-blue-800\">\n            <span class=\"font-bold text-blue-800 dark:text-blue-300 text-sm block mb-1\">When Link State Wins</span>\n            <ul class=\"list-disc pl-4 space-y-1 text-slate-700 dark:text-slate-300\">\n              <li>Rapid sub-second convergence for VoIP and video streaming.</li>\n              <li>Immunity to Count-to-Infinity routing loops.</li>\n              <li>Hierarchical area design scales to large enterprise backbones.</li>\n            </ul>\n          </div>\n        </div>\n      ",
       "whereUsed": [
-        "Network Engineering curriculum and university examinations",
-        "Enterprise network architecture decisions (RIP vs OSPF)",
-        "Technical interview questions for Network Engineers and SREs"
+        "RIP vs OSPF Evaluation in University Network Laboratories",
+        "CCNA / CCNP Enterprise Core Network Engineering Certifications",
+        "Enterprise Campus Backbone Design (Cisco, Juniper, Arista)"
       ],
-      "commonMistakes": "\n        <ul class=\"space-y-2 text-xs\">\n          <li><strong>Confusing the scope of update destinations:</strong> Distance Vector sends to direct neighbors only; Link State sends LSPs to ALL routers in the area.</li>\n          <li><strong>Thinking Link State uses more bandwidth continuously:</strong> In steady state, Link State is much more bandwidth efficient than Distance Vector because it does not broadcast periodic full table dumps.</li>\n        </ul>\n      ",
-      "compareWith": "distance-vector-vs-link-state",
+      "commonMistakes": [
+        "Assuming Link State is Always Better: For small, resource-constrained networks, Link State's memory and flooding overhead can be wasteful.",
+        "Thinking BGP is a Distance Vector Protocol: BGP is a Path Vector protocol that prevents loops using Autonomous System (AS) path sequences.",
+        "Confusing Convergence Speed with Packet Forwarding Rate: Convergence is the time to agree on routes; forwarding is the rate of switching bits."
+      ],
+      "compareWith": [
+        {
+          "target": "distance-vector",
+          "title": "Distance Vector Routing",
+          "description": "Decentralized Bellman-Ford details."
+        },
+        {
+          "target": "link-state-routing",
+          "title": "Link State Routing",
+          "description": "Global topology Dijkstra SPF details."
+        }
+      ],
       "quiz": [
         {
-          "question": "Which algorithm forms the mathematical computational core of Link State routing?",
+          "question": "Which routing approach maintains a complete, identical map of the network topology in a database?",
           "options": [
-            "Bellman-Ford",
-            "Dijkstra's SPF",
-            "Prim's Algorithm",
-            "Kruskal's Algorithm"
+            "Distance Vector Routing",
+            "Link State Routing",
+            "Static Routing",
+            "Default Routing"
           ],
-          "answer": 1,
-          "explanation": "Link State routing protocols (OSPF, IS-IS) use Dijkstra's Shortest Path First (SPF) algorithm to calculate loop-free sink trees."
+          "correct": 1,
+          "explanation": "In Link State routing, all routers flood local link information to construct an identical Link State Database (LSDB) representing the full network map."
         },
         {
-          "question": "What is a major advantage of Link State routing over Distance Vector routing?",
+          "question": "Why is Link State routing generally faster to converge than Distance Vector routing?",
           "options": [
-            "It requires much less memory and CPU",
-            "It converges significantly faster and is immune to the count-to-infinity problem in steady state",
-            "It does not require IP addresses",
-            "It operates without network cables"
+            "Link State updates are flooded immediately, allowing routers to recalculate paths simultaneously",
+            "Link State uses smaller IP addresses",
+            "Distance Vector protocols do not support Ethernet",
+            "Link State routers do not check for link failures"
           ],
-          "answer": 1,
-          "explanation": "Link state protocols converge rapidly via event-driven flooding and completely eliminate count-to-infinity loops."
+          "correct": 0,
+          "explanation": "Link State floods topology changes immediately to all routers in the area, allowing simultaneous recalculation using local LSDBs."
         },
         {
-          "question": "To whom does a Distance Vector router send its routing updates?",
-          "options": [
-            "To all routers in the global Internet",
-            "To its immediate physical neighbors only",
-            "To the root DNS server",
-            "To the destination host only"
-          ],
-          "answer": 1,
-          "explanation": "In Distance Vector, a router communicates only with its direct physically connected neighbors ('routing by rumor')."
-        },
-        {
-          "question": "Which of the following is a classic example of a Distance Vector protocol?",
+          "question": "Which of the following is an example of a Distance Vector routing protocol?",
           "options": [
             "OSPF",
             "IS-IS",
             "RIP",
-            "BGP-4"
+            "BGP"
           ],
-          "answer": 2,
-          "explanation": "Routing Information Protocol (RIP) is the quintessential Distance Vector protocol."
+          "correct": 2,
+          "explanation": "RIP (Routing Information Protocol) is the classic Distance Vector protocol based on hop counts and the Bellman-Ford algorithm."
+        },
+        {
+          "question": "What is BGP classified as in modern networking?",
+          "options": [
+            "Pure Distance Vector",
+            "Link State with Dijkstra",
+            "Path-Vector Protocol",
+            "Flooding Protocol"
+          ],
+          "correct": 2,
+          "explanation": "BGP is classified as a Path-Vector protocol because it tracks the complete sequence of Autonomous System numbers to prevent inter-domain loops."
         }
       ],
       "references": [
         {
-          "cite": "A.S. Tanenbaum & D.J. Wetherall, Computer Networks, 6th Ed., Ch. 5.2.4 & 5.2.5",
-          "url": ""
+          "cite": "A.S. Tanenbaum & D.J. Wetherall, 'Computer Networks', 6th Edition, Chapter 5: Routing Algorithms Comparison.",
+          "url": "https://www.pearson.com"
         },
         {
-          "cite": "J.F. Kurose & K.W. Ross, Computer Networking: A Top-Down Approach, 8th Ed., Ch. 5.2",
-          "url": ""
+          "cite": "Cisco Press: CCDE Study Guide: Enterprise Campus Architecture Design.",
+          "url": "https://www.ciscopress.com"
+        },
+        {
+          "cite": "SlideServe: Comparison of Dynamic Routing Protocols (ID: 4636309).",
+          "url": "https://slideserve.com"
         }
       ]
     },
@@ -2203,123 +2309,154 @@ const TOPICS_U3_EXT = {
   "count-to-infinity": {
     "id": "count-to-infinity",
     "title": "Count-to-Infinity Problem",
-    "unit": "Unit 3 – Network Layer",
+    "unit": "Unit 3: Network Layer",
     "unitId": "unit3",
-    "level": "Level 1 — Core Topic",
-    "category": "network",
-    "difficulty": "Advanced",
-    "readingTime": "20 min read",
-    "standard": "Tanenbaum Ch 5.2.4 / RFC 1058 / Kurose & Ross Ch 5.2",
-    "oneLiner": "Classic failure mode of Distance Vector routing where link breakage causes adjacent routers to bounce increasing metrics toward infinity.",
-    "quickAnswer": "The Count-to-Infinity problem is a severe convergence failure inherent in Distance Vector routing algorithms caused by mutual dependency between neighbors. When a link breaks, routers exchange outdated routing vectors and continuously increment the metric step-by-step (1 -> 2 -> 3 -> ... -> 16), creating a temporary routing loop until the metric reaches the defined infinity ceiling.",
-    "whyItMatters": "Count-to-Infinity is the single most celebrated bug and architectural vulnerability in routing protocol history. Understanding its root cause led to foundational solutions like Split Horizon, Poison Reverse, and Holddown Timers, and ultimately motivated the invention of modern Link State routing.",
+    "level": "Undergraduate / GATE CSE",
+    "category": "Routing Anomalies & Loop Prevention",
+    "difficulty": "Intermediate",
+    "readingTime": "30 min",
+    "standard": "Tanenbaum Ch. 5 / RFC 1058 / RFC 2453 / Master PDF Notes",
+    "oneLiner": "A Distance Vector failure mode where routers repeatedly increment metrics to a failed destination due to mutually stale routing information.",
+    "quickAnswer": "The Count-to-Infinity Problem is a classic routing anomaly that occurs in Distance Vector routing when a destination network becomes unreachable, but neighboring routers exchange stale, mutually dependent routing advertisements. Because a router believes its neighbor still has an alternate valid path, it updates its own cost to reflect that path. The neighbor then hears this update and increments its cost in response. The two routers repeatedly bounce the metric higher and higher in an infinite loop ('good news travels fast, bad news travels slow') until reaching the protocol's defined infinity (such as 16 in RIP). The problem is solved or mitigated through Split Horizon, Route Poisoning, Poison Reverse, Hold-Down Timers, and Triggered Updates.",
+    "whyItMatters": "Count-to-Infinity is the single most important failure mode taught in computer networking theory. It explains why simple distance vector routing breaks down in complex topologies, and motivated the development of loop-prevention techniques (Split Horizon, Poison Reverse) as well as the transition to modern Link-State protocols.",
     "infobox": {
+      "associatedParadigm": "Distance Vector Routing (Bellman-Ford)",
+      "classicPhenomenon": "'Good news travels fast, bad news travels slow'",
+      "infinityValueRIP": "16 Hops",
+      "primaryRemedies": [
+        "Split Horizon",
+        "Route Poisoning",
+        "Poison Reverse",
+        "Hold-Down Timers",
+        "Triggered Updates"
+      ],
+      "loopPreventionScope": "Split Horizon cures 2-node loops; Poison Reverse & Timers cure multi-node loops",
       "prerequisites": [
-        "distance-vector"
+        "distance-vector",
+        "routing-table-updates"
       ],
       "relatedConcepts": [
-        "routing-table-updates",
-        "comparison-dv-ls",
-        "link-state-routing"
+        "link-state-routing",
+        "comparison-dv-ls"
       ],
       "compareWith": [
-        "split-horizon-vs-poison-reverse"
-      ],
-      "primaryUses": [
-        "Designing loop-free distance vector protocol implementations",
-        "Configuring Split Horizon with Poison Reverse on Cisco and Juniper routers",
-        "Setting Holddown Timers in RIPv2 and EIGRP",
-        "Primary examination problem in university and GATE networking papers"
-      ],
-      "standardRfc": "RFC 1058 (Section 3.4.3: Solutions to Counting to Infinity)"
+        "split-horizon-vs-poison-reverse",
+        "count-to-infinity-vs-normal-convergence"
+      ]
     },
-    "learningObjectives": [
-      "Explain the fundamental cause of the Count-to-Infinity problem",
-      "Trace the step-by-step metric bouncing between nodes A, B, and C following link failure",
-      "Explain the asymmetric rule: 'Good news spreads fast, but bad news travels slow'",
-      "Describe the Split Horizon solution and explain its two-node limitation",
-      "Explain Split Horizon with Poison Reverse (advertising metric = 16 back)",
-      "Explain how Holddown Timers and Maximum Hop Count (15) mitigate loop impacts"
-    ],
     "prerequisitesList": [
       {
         "concept": "Distance Vector Routing",
-        "meaning": "Understanding Bellman-Ford periodic table exchanges"
+        "meaning": "Understanding how routers learn and advertise distance vectors."
+      },
+      {
+        "concept": "Routing Loops",
+        "meaning": "How circular forwarding causes packets to bounce endlessly."
       }
     ],
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2e/Distance_vector_routing.svg",
-    "imageCaption": "Figure 3.16: The Count-to-Infinity Problem: Routing Loop Convergence Failure After Link Breakage.",
+    "learningObjectives": [
+      "Define the Count-to-Infinity problem and explain the phrase 'good news travels fast, bad news travels slow.'",
+      "Trace the step-by-step 3-router failure scenario (A-B-C-X) from Section 3.2 of the syllabus PDF.",
+      "Analyze the iterative table showing how Router A and Router B increment metrics up to 16.",
+      "Explain why 16 represents infinity in RIP and why a finite infinity threshold is necessary.",
+      "Evaluate the five solutions to the Count-to-Infinity problem: Split Horizon, Route Poisoning, Poison Reverse, Hold-Down Timers, and Triggered Updates.",
+      "Compare Split Horizon and Poison Reverse in a head-to-head comparison table."
+    ],
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Count_to_infinity.png/800px-Count_to_infinity.png",
+    "imageCaption": "Figure 5: The Count-to-Infinity loop bouncing stale metrics between adjacent routers.",
     "sections": {
-      "overview": "\n        <p class=\"mb-3\">\n          The <strong>Count-to-Infinity Problem</strong> is a classic routing loop condition in distance vector routing algorithms where two or more routers continually increment the metric to an unreachable destination until a predefined threshold (Infinity) is reached.\n        </p>\n        <p class=\"mb-3\">\n          This problem arises from the core philosophy of distance vector: <em>routers do not know the complete network topology</em>. They only know that a neighbor claims to have a path. If neighbor B claims it can reach destination A, router C has no way of knowing whether B's path actually routes through C itself!\n        </p>\n      ",
-      "howItWorks": "\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">1. Step-by-Step Walkthrough of the Failure Trace</h3>\n        <p class=\"mb-2 text-xs\">Consider three routers connected in a simple linear topology:</p>\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700 font-mono text-xs mb-3 text-center\">\n          <strong>[ Node A ] &lt;=== link ===&gt; [ Node B ] &lt;=== link ===&gt; [ Node C ]</strong><br/>\n          (All link costs = 1)\n        </div>\n        \n        <div class=\"space-y-2 text-xs mb-4 font-mono\">\n          <div class=\"p-2 bg-slate-100 dark:bg-slate-800 rounded\">\n            <strong>Initial Stable State:</strong><br/>\n            • B's table: Cost to A = 1 (via direct link)<br/>\n            • C's table: Cost to A = 2 (via B)\n          </div>\n          <div class=\"p-2 bg-rose-50 dark:bg-rose-950/40 text-rose-800 dark:text-rose-200 rounded\">\n            💥 <strong>The Event: Link between A and B is suddenly cut!</strong> Node A is now completely dead.\n          </div>\n          <div class=\"p-2 bg-slate-100 dark:bg-slate-800 rounded\">\n            <strong>Cycle 1:</strong> Node B detects link to A is down. But before B can send an update, C's periodic update arrives stating: <em>\"I can reach A with cost 2!\"</em><br/>\n            B thinks: <em>\"Great! I can reach A through C with cost 1 + 2 = 3!\"</em> B updates its table: <code>Cost(A) = 3, NextHop = C</code>!\n          </div>\n          <div class=\"p-2 bg-slate-100 dark:bg-slate-800 rounded\">\n            <strong>Cycle 2:</strong> In the next round, B advertises its new cost to C: <em>\"I can reach A with cost 3!\"</em><br/>\n            C thinks: <em>\"B's cost increased to 3, so my cost through B is now 1 + 3 = 4!\"</em> C updates: <code>Cost(A) = 4, NextHop = B</code>!\n          </div>\n          <div class=\"p-2 bg-slate-100 dark:bg-slate-800 rounded\">\n            <strong>Subsequent Cycles:</strong> B updates to 5, C updates to 6, B updates to 7... Packets destined for A bounce back and forth between B and C in an endless loop while the cost increments: (2 \to 3 \to 4 \to dots \to 16)!\n          </div>\n          <div class=\"p-2 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-200 rounded\">\n            <strong>Termination:</strong> Only when the metric reaches <strong>16 (Infinity)</strong> does B finally conclude that A is permanently unreachable.\n          </div>\n        </div>\n      ",
-      "technicalDetails": "\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">2. Solutions to the Count-to-Infinity Problem</h3>\n        \n        <div class=\"space-y-3 text-xs mb-4\">\n          <div class=\"p-3 bg-white dark:bg-slate-800 rounded-lg border-l-4 border-emerald-500 shadow-sm\">\n            <h4 class=\"font-bold text-emerald-700 dark:text-emerald-300\">A. Split Horizon</h4>\n            <p class=\"text-slate-600 dark:text-slate-300 mt-1\">\n              <strong>Rule:</strong> <em>Never advertise a route back out the same interface it was learned from.</em><br/>\n              Since C learned about A from B, C will NEVER advertise reaching A back to B. When B's link to A fails, B will not hear about A from C, avoiding the 2-node loop!\n            </p>\n          </div>\n\n          <div class=\"p-3 bg-white dark:bg-slate-800 rounded-lg border-l-4 border-blue-500 shadow-sm\">\n            <h4 class=\"font-bold text-blue-700 dark:text-blue-300\">B. Split Horizon with Poison Reverse</h4>\n            <p class=\"text-slate-600 dark:text-slate-300 mt-1\">\n              Instead of staying silent, C explicitly advertises the route back to B with <strong>Metric = 16 (Infinity / Poisoned)</strong>: <em>\"I learned about A from you, so as far as you are concerned, my cost to A is ∞!\"</em> This immediately breaks mutual dependencies.\n            </p>\n          </div>\n\n          <div class=\"p-3 bg-white dark:bg-slate-800 rounded-lg border-l-4 border-amber-500 shadow-sm\">\n            <h4 class=\"font-bold text-amber-700 dark:text-amber-300\">C. Holddown Timers</h4>\n            <p class=\"text-slate-600 dark:text-slate-300 mt-1\">\n              When a router receives word that a link has failed, it starts a holddown timer (e.g. 180s) and refuses to accept any new path to that destination with an equal or worse metric, allowing bad news to propagate completely across the network.\n            </p>\n          </div>\n\n          <div class=\"p-3 bg-white dark:bg-slate-800 rounded-lg border-l-4 border-purple-500 shadow-sm\">\n            <h4 class=\"font-bold text-purple-700 dark:text-purple-300\">D. Defining Infinity as a Small Integer (16)</h4>\n            <p class=\"text-slate-600 dark:text-slate-300 mt-1\">\n              By capping Infinity at 16 hops in RIP, counting to infinity terminates after at most 16 cycles, bounding the maximum loop duration.\n            </p>\n          </div>\n        </div>\n\n        <div class=\"wiki-callout note mb-3\">\n          <div class=\"callout-header\">⚠️ The Limitation of Split Horizon (Multi-Node Loops)</div>\n          <p class=\"text-xs\">\n            While Split Horizon easily fixes 2-node loops ((B leftrightarrow C)), it <strong>fails to solve 3-node or larger loops</strong> (e.g., triangle topology (A-B-C-D-A)). In a 3-node loop, router C advertises to D, D advertises to B, and B advertises to C—none of them sending back out the interface they learned from! This fundamental limitation was the key reason computer networks transitioned to Link State routing.\n          </p>\n        </div>\n      ",
+      "overview": "\n        <h3 class=\"wiki-subtitle\">1. What Is the Count-to-Infinity Problem?</h3>\n        <p class=\"wiki-paragraph\">\n          From Section 3.1 of the syllabus PDF notes:\n        </p>\n        <p class=\"wiki-paragraph\">\n          The <strong>Count-to-Infinity Problem</strong> is a routing anomaly that can occur in Distance Vector Routing when routers continue to increase their estimated distance to a destination after that destination has become unreachable.\n        </p>\n        <p class=\"wiki-paragraph\">\n          Routers incorrectly believe that an adjacent neighbor still possesses an independent, valid path to the failed destination. As a result, they repeatedly exchange updates and increment their routing tables with larger and larger distance values.\n        </p>\n\n        <div class=\"p-3 bg-rose-50 dark:bg-rose-950/40 rounded-xl border border-rose-200 dark:border-rose-800 text-xs my-3\">\n          <div class=\"font-bold text-rose-800 dark:text-rose-300 mb-1\">\n            <i class=\"fa-solid fa-triangle-exclamation mr-1.5\"></i> Five Harmful Consequences of Count-to-Infinity:\n          </div>\n          <ul class=\"list-disc pl-5 space-y-1 text-slate-700 dark:text-slate-300\">\n            <li><strong>Routing Loops:</strong> Packets destined for the dead network bounce back and forth between routers endlessly.</li>\n            <li><strong>Polluted Routing Tables:</strong> Routers store fictitious paths that do not physically exist.</li>\n            <li><strong>Extremely Slow Convergence:</strong> It takes minutes for the network to realize the destination is dead.</li>\n            <li><strong>Wasted Link Bandwidth:</strong> High-frequency update packets flood the links between looping routers.</li>\n            <li><strong>Delayed Network Recovery:</strong> Prevents routers from failing over to genuine alternate backup links.</li>\n          </ul>\n        </div>\n      ",
+      "howItWorks": "\n        <h3 class=\"wiki-subtitle\">1. How the Count-to-Infinity Problem Occurs (PDF Section 3.2)</h3>\n        <p class=\"wiki-paragraph\">\n          Consider the exact 3-router topology described in Section 3.2 of the syllabus PDF:\n        </p>\n        <div class=\"p-3 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 font-mono text-center text-xs my-2 text-emerald-600 dark:text-emerald-400 font-bold\">\n          [ Network X ] &mdash;(cost 1)&rarr; [ Router A ] &mdash;(cost 1)&rarr; [ Router B ] &mdash;(cost 1)&rarr; [ Router C ]\n        </div>\n        <p class=\"wiki-paragraph\">\n          Destination network <strong>X</strong> is directly attached to Router A. Initially, all links are functional:\n        </p>\n        <div class=\"grid grid-cols-1 md:grid-cols-3 gap-2 font-mono text-xs my-2\">\n          <div class=\"p-2 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700\">Router A: Distance to X = 1 (Direct)</div>\n          <div class=\"p-2 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700\">Router B: Distance to X = 2 (Next-hop A)</div>\n          <div class=\"p-2 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700\">Router C: Distance to X = 3 (Next-hop B)</div>\n        </div>\n\n        <h3 class=\"wiki-subtitle\">2. Step-by-Step Failure Sequence</h3>\n        <div class=\"space-y-3 text-xs my-4\">\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/40 rounded-xl border border-rose-200 dark:border-rose-800\">\n            <strong class=\"text-rose-800 dark:text-rose-300 font-bold block mb-1\">Step 1: Link Failure Occurs</strong>\n            <p class=\"text-slate-700 dark:text-slate-300\">\n              The physical connection between Router A and Network X is severed! Router A detects the failure and marks Network X as unreachable ($infty$). However, Router B has not yet sent its periodic update and still believes it can reach X with cost 2 through A.\n            </p>\n          </div>\n\n          <div class=\"p-3 bg-amber-50 dark:bg-amber-950/40 rounded-xl border border-amber-200 dark:border-amber-800\">\n            <strong class=\"text-amber-800 dark:text-amber-300 font-bold block mb-1\">Step 2: Stale Route Advertisement &amp; The Fatal Calculation</strong>\n            <p class=\"text-slate-700 dark:text-slate-300\">\n              Router B broadcasts its scheduled periodic update to Router A: <em>\"I can reach Network X with cost 2.\"</em><br/>\n              Router A receives this stale advertisement. Router A does NOT realize that B's route originally traversed A! Router A calculates:\n            </p>\n            <div class=\"p-2 bg-white dark:bg-gray-800 rounded border border-amber-300 dark:border-amber-700 font-mono font-bold text-center text-amber-800 dark:text-amber-300 my-1\">\n              New Cost(A &rarr; X) = Cost(A &rarr; B) + Cost(B &rarr; X) = 1 + 2 = 3\n            </div>\n            <p class=\"text-slate-700 dark:text-slate-300\">\n              Router A now updates its table: <strong>Network X is reachable via Router B with cost 3!</strong> A circular routing loop is born.\n            </p>\n          </div>\n\n          <div class=\"p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <strong class=\"text-slate-800 dark:text-slate-100 font-bold block mb-1\">Step 3: Escalating Metric Table (PDF Section 3.2)</strong>\n            <p class=\"text-slate-600 dark:text-slate-300 mb-2\">\n              Next round, Router A advertises cost 3 to B. Router B calculates: $1 + 3 = 4$ via A. B advertises cost 4 back to A, causing A to update to $1 + 4 = 5$.\n            </p>\n            <div class=\"overflow-x-auto\">\n              <table class=\"wiki-table w-full text-xs font-mono text-center\">\n                <thead>\n                  <tr class=\"bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200\">\n                    <th>Update Round</th>\n                    <th>Router A's Estimate to X</th>\n                    <th>Router B's Estimate to X</th>\n                    <th>Network Status</th>\n                  </tr>\n                </thead>\n                <tbody>\n                  <tr><td>Initial State</td><td>1 (Direct)</td><td>2 (via A)</td><td>Normal operation</td></tr>\n                  <tr class=\"bg-rose-50 dark:bg-rose-950/30 text-rose-700 dark:text-rose-300 font-bold\"><td>After Failure &amp; Stale Update</td><td>3 (via B)</td><td>2 (via A)</td><td>Routing Loop Formed!</td></tr>\n                  <tr><td>Next Update</td><td>3</td><td>4 (via A)</td><td>Metric climbing</td></tr>\n                  <tr><td>Next Update</td><td>5 (via B)</td><td>4</td><td>Metric climbing</td></tr>\n                  <tr><td>Next Update</td><td>5</td><td>6 (via A)</td><td>Metric climbing</td></tr>\n                  <tr class=\"font-bold text-emerald-600\"><td>Final Round (Infinity)</td><td>16 (Unreachable)</td><td>16 (Unreachable)</td><td>Count terminated at 16! 🛑</td></tr>\n                </tbody>\n              </table>\n            </div>\n          </div>\n        </div>\n\n        <h3 class=\"wiki-subtitle\">3. Why Is It Called \"Count-to-Infinity\"? (PDF Section 3.3)</h3>\n        <p class=\"wiki-paragraph\">\n          It is called Count-to-Infinity because the routers repeatedly increment their distance metric step-by-step ($1, 2, 3, 4, 5 dots$) attempting to reach a destination that is physically dead. In RIP, <strong>infinity is defined as 16 hops</strong>. Setting a small threshold for infinity caps the maximum loop duration; otherwise, routers with 32-bit integer counters would count up to $4,294,967,295$, locking the network for decades!\n        </p>\n      ",
+      "technicalDetails": "\n        <h3 class=\"wiki-subtitle\">1. Five Solutions to the Count-to-Infinity Problem</h3>\n        <p class=\"wiki-paragraph\">\n          Section 3.4 of the syllabus PDF notes details the 5 proven industry solutions:\n        </p>\n\n        <div class=\"space-y-3 my-4 text-xs\">\n          <div class=\"p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <div class=\"font-bold text-emerald-600 dark:text-emerald-400 text-sm mb-1\">1. Split Horizon</div>\n            <p class=\"text-gray-600 dark:text-gray-300 leading-relaxed\">\n              <strong>Rule:</strong> A router must <em>never advertise a route back out the same interface</em> through which it was learned. Since Router B learned of Network X from Router A on interface 1, Router B is forbidden from advertising Network X back to Router A on interface 1. This completely prevents the 2-router loop!\n            </p>\n          </div>\n\n          <div class=\"p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <div class=\"font-bold text-blue-600 dark:text-blue-400 text-sm mb-1\">2. Route Poisoning</div>\n            <p class=\"text-gray-600 dark:text-gray-300 leading-relaxed\">\n              When a router detects that a directly connected link has failed, it immediately advertises that route to its neighbors with an <strong>infinite metric ($\text{Cost} = 16$ in RIP)</strong>. This explicitly 'poisons' the route in all neighbor tables, ensuring no router considers it valid.\n            </p>\n          </div>\n\n          <div class=\"p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <div class=\"font-bold text-purple-600 dark:text-purple-400 text-sm mb-1\">3. Poison Reverse</div>\n            <p class=\"text-gray-600 dark:text-gray-300 leading-relaxed\">\n              Poison Reverse is an explicit variation of Split Horizon. Instead of simply omitting the route from the advertisement sent back to the neighbor, the router <em>explicitly advertises the route back with an infinite metric ($infty = 16$)</em>. This explicitly confirms to the source router that the reverse path is unusable.\n            </p>\n          </div>\n\n          <div class=\"p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <div class=\"font-bold text-amber-600 dark:text-amber-400 text-sm mb-1\">4. Hold-Down Timers</div>\n            <p class=\"text-gray-600 dark:text-gray-300 leading-relaxed\">\n              When a router receives an update marking a route as dead or increasing its metric, it starts a <strong>Hold-Down Timer</strong> (typically 180 seconds). During this hold-down window, the router ignores any new advertisements claiming to reach that destination with equal or poorer metrics, giving the entire network time to purge stale routes.\n            </p>\n          </div>\n\n          <div class=\"p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <div class=\"font-bold text-rose-600 dark:text-rose-400 text-sm mb-1\">5. Triggered Updates</div>\n            <p class=\"text-gray-600 dark:text-gray-300 leading-relaxed\">\n              Instead of waiting up to 30 seconds for the next periodic timer to expire, a router immediately transmits a flash update the instant a link failure occurs, dramatically shrinking the window during which stale routes can circulate.\n            </p>\n          </div>\n        </div>\n\n        <h3 class=\"wiki-subtitle\">2. Split Horizon vs. Poison Reverse (PDF Section 3.5)</h3>\n        <div class=\"wiki-table-wrapper my-4\">\n          <table class=\"wiki-table w-full text-xs\">\n            <thead>\n              <tr class=\"bg-emerald-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200\">\n                <th style=\"width: 25%;\">Feature</th>\n                <th style=\"width: 37.5%;\">Split Horizon</th>\n                <th style=\"width: 37.5%;\">Poison Reverse</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr>\n                <td class=\"font-bold\">Advertisement Action</td>\n                <td><strong>Suppresses the route:</strong> Does not advertise a learned route back through the incoming interface.</td>\n                <td><strong>Advertises with infinity:</strong> Sends the route back with metric $infty$ (16 in RIP).</td>\n              </tr>\n              <tr>\n                <td class=\"font-bold\">Packet Size / Overhead</td>\n                <td>Smaller update packets (routes omitted).</td>\n                <td>Slightly larger update packets (explicit entries with metric 16).</td>\n              </tr>\n              <tr>\n                <td class=\"font-bold\">Clarity / Determinism</td>\n                <td>Implicit (neighbor assumes path is unavailable).</td>\n                <td>Explicit (affirmatively informs neighbor that route is poisoned).</td>\n              </tr>\n              <tr>\n                <td class=\"font-bold\">Loop Prevention</td>\n                <td>Prevents 2-router loops.</td>\n                <td>Prevents 2-router loops and breaks certain 3-router loops faster.</td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n      ",
       "workedExamples": {
-        "level1": "\n          <strong>Identifying the Core Flaw:</strong><br/>\n          Why did B believe C could reach A?<br/>\n          Because B did not realize that C's route to A was <code>C ➔ B ➔ A</code>!<br/>\n          When B lost its link to A, C's route was already broken, but C had not yet heard that B's link failed.\n        ",
-        "level2": "\n          <strong>Poison Reverse in Action:</strong><br/>\n          Node C's routing table: <code>Dest A, Cost 2, Next Hop B</code>.<br/>\n          • In normal Split Horizon: C sends updates to D containing A, but sends NOTHING about A to B.<br/>\n          • In Split Horizon with Poison Reverse: C sends an update to B stating <code>Dest A, Cost 16</code>.<br/>\n          If B's direct link to A goes down, B sees that C's cost is 16, so B never mistakenly routes through C.\n        ",
-        "level3": "\n          <strong>Convergence Time Calculation:</strong><br/>\n          Suppose periodic updates occur every 30 seconds with no triggered updates, and a loop occurs in pure distance vector:<br/>\n          • Starting cost = 2.<br/>\n          • Target infinity = 16.<br/>\n          • Number of increments = (16 - 2 = 14\text{ cycles}).<br/>\n          • Total convergence duration = (14 \times 30\text{ seconds} = 420\text{ seconds} = mathbf{7\text{ minutes}})!<br/>\n          During these 7 minutes, packets are trapped and dropped in the loop.\n        "
+        "level1": "\n          <strong>How Split Horizon Solves the A-B-X Loop:</strong><br/>\n          In the network $X - A - B$, Router B learns about Network X from Router A.<br/>\n          (1) What does Split Horizon require Router B to do when sending updates to A?<br/>\n          (2) What happens when link A-X breaks?<br/><br/>\n          <strong>Resolution:</strong><br/>\n          1. Under Split Horizon, Router B is forbidden from sending any advertisement regarding Network X out the interface connected to Router A.<br/>\n          2. When link A-X fails, Router A marks X as unreachable ($infty$). Router A receives B's periodic update, but B's update <em>contains zero entries for X</em>.<br/>\n          3. Because Router A never hears a false route from B, A never updates its cost to 3. The loop is eliminated at the source!\n        ",
+        "level2": "\n          <strong>Why Split Horizon Fails on 3-Router Triangular Loops:</strong><br/>\n          Consider three routers arranged in a triangle: A, B, and C all connected to each other. Network X is connected to A.<br/>\n          • Both B and C learn about X from A.<br/>\n          • Under Split Horizon, B does not advertise X back to A. However, B DOES advertise X to C (since B learned X from A, not C)!<br/>\n          • Similarly, C advertises X to B.<br/>\n          Explain what happens when link A-X fails.<br/><br/>\n          <strong>Analysis:</strong><br/>\n          When link A-X breaks, A marks X unreachable. But B hears from C that C can reach X, and C hears from B that B can reach X! Neither violated Split Horizon because neither advertised back to A. B and C now bounce traffic between themselves in a 3-node loop ($B \rightarrow C \rightarrow B \rightarrow C$).<br/>\n          <strong>Remediation:</strong> This proves that Split Horizon alone cannot prevent multi-node loops. Networks must combine Split Horizon with <strong>Hold-Down Timers</strong> or transition to <strong>Link State (OSPF)</strong>.\n        ",
+        "level3": "\n          <strong>Calculating Maximum Unreachable Convergence Time in RIP:</strong><br/>\n          If a network topology creates a Count-to-Infinity loop without Split Horizon, and the periodic update timer is 30 seconds:<br/>\n          Calculate how long it takes for a failed network at distance 1 to be declared dead at metric 16.<br/><br/>\n          <strong>Calculation:</strong><br/>\n          • Starting metric after failure: 2<br/>\n          • Each exchange round increments the metric by 1 (or 2 per full round-trip).<br/>\n          • Number of increments to reach 16 = $16 - 2 = 14$ steps.<br/>\n          • Total time = $14 \times 30\text{ seconds} = 420\text{ seconds} = mathbf{7\text{ minutes}}$!<br/>\n          For seven entire minutes, packets are trapped in loops and dropped, illustrating why unmitigated Count-to-Infinity is catastrophic for enterprise networks.\n        "
       },
-      "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 text-xs\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800\">\n            <h4 class=\"font-bold text-emerald-800 dark:text-emerald-300 mb-2\">Techniques to Cure the Problem</h4>\n            <ul class=\"space-y-1 list-disc pl-4 text-slate-700 dark:text-slate-300\">\n              <li>Split Horizon stops 2-node metric bouncing.</li>\n              <li>Poison Reverse explicitly advertises metric 16 back to the predecessor.</li>\n              <li>Holddown timers freeze updates while bad news propagates.</li>\n              <li>Triggered updates dramatically accelerate loop termination.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/30 rounded-lg border border-rose-200 dark:border-rose-800\">\n            <h4 class=\"font-bold text-rose-800 dark:text-rose-300 mb-2\">Inherent Architectural Limit</h4>\n            <ul class=\"space-y-1 list-disc pl-4 text-slate-700 dark:text-slate-300\">\n              <li>Split Horizon cannot prevent 3-node or higher circular routing loops.</li>\n              <li>Setting Max Hops to 15 limits the physical size of the network.</li>\n            </ul>\n          </div>\n        </div>\n      ",
+      "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 text-xs my-3\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200 dark:border-emerald-800\">\n            <span class=\"font-bold text-emerald-800 dark:text-emerald-300 text-sm block mb-1\">Effectiveness of Solutions</span>\n            <ul class=\"list-disc pl-4 space-y-1 text-slate-700 dark:text-slate-300\">\n              <li><strong>Split Horizon:</strong> Eliminates 100% of two-node mutual dependency loops with zero bandwidth overhead.</li>\n              <li><strong>Poison Reverse:</strong> Provides explicit positive confirmation of route invalidation.</li>\n              <li><strong>Hold-Down Timers:</strong> Blocks stale routes from reinstating dead networks during convergence.</li>\n              <li><strong>Triggered Updates:</strong> Cuts recovery time from minutes down to milliseconds.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/40 rounded-xl border border-rose-200 dark:border-rose-800\">\n            <span class=\"font-bold text-rose-800 dark:text-rose-300 text-sm block mb-1\">Inherent DV Constraints</span>\n            <ul class=\"list-disc pl-4 space-y-1 text-slate-700 dark:text-slate-300\">\n              <li>Split Horizon alone cannot solve 3-node or multi-node circular loops.</li>\n              <li>Hold-down timers artificially delay failover to valid alternate backup paths.</li>\n              <li>Ultimately, large networks resolve this by migrating to Link State protocols (OSPF).</li>\n            </ul>\n          </div>\n        </div>\n      ",
       "whereUsed": [
-        "RIPv1 and RIPv2 routing loop prevention configurations",
-        "EIGRP Feasibility Condition (which mathematically eliminates count-to-infinity)",
-        "Crucial theoretical problem in GATE Computer Science exams"
+        "RIPv1 & RIPv2: Core RFC 1058 / RFC 2453 loop-prevention implementation.",
+        "Cisco EIGRP: Employs Split Horizon on interface configurations alongside DUAL.",
+        "Academic Graph Theory & Network Engineering Certification Curricula (CCNA, GATE CSE)."
       ],
-      "commonMistakes": "\n        <ul class=\"space-y-2 text-xs\">\n          <li><strong>Believing Split Horizon solves all routing loops:</strong> Split Horizon only solves 2-node loops. Loops involving 3 or more routers in a ring still count to infinity!</li>\n          <li><strong>Confusing Poison Reverse with Route Poisoning:</strong> Route poisoning is advertising metric 16 when a local link fails; Poison Reverse is advertising metric 16 back to the neighbor from whom the route was learned.</li>\n        </ul>\n      ",
-      "compareWith": "split-horizon-vs-poison-reverse",
+      "commonMistakes": [
+        "Believing Split Horizon Solves All Loops: Split Horizon prevents only 2-node loops; triangular and circular 3+ node loops require hold-down timers or poison reverse.",
+        "Confusing Route Poisoning with Poison Reverse: Route Poisoning advertises metric 16 forward to all neighbors; Poison Reverse advertises metric 16 backward to the neighbor the route was learned from.",
+        "Assuming Link State Suffers from Count-to-Infinity: Link State protocols do NOT suffer from Count-to-Infinity because all routers possess the full topological graph in their LSDB."
+      ],
+      "compareWith": [
+        {
+          "target": "split-horizon-vs-poison-reverse",
+          "title": "Split Horizon vs. Poison Reverse",
+          "description": "Route suppression vs explicit infinite metric advertisement."
+        },
+        {
+          "target": "distance-vector",
+          "title": "Distance Vector Routing",
+          "description": "Algorithmic foundation of Bellman-Ford."
+        }
+      ],
       "quiz": [
         {
-          "question": "What is the primary cause of the Count-to-Infinity problem in Distance Vector routing?",
+          "question": "What is the Count-to-Infinity Problem?",
           "options": [
-            "Routers having too much RAM",
-            "Mutual dependency: routers do not know the complete topology and mistakenly believe a neighbor has an alternative path that actually routes back through themselves",
-            "Packets exceeding link MTU",
-            "High electrical resistance in copper cables"
+            "Routers repeatedly increase their route metrics to a failed destination due to mutually stale information",
+            "Routers running out of IP addresses",
+            "All network routers powering off simultaneously",
+            "Packets becoming corrupted by cosmic rays"
           ],
-          "answer": 1,
-          "explanation": "Routers lack global topology visibility, leading them to select paths through neighbors that actually route back through themselves."
+          "correct": 0,
+          "explanation": "Count-to-Infinity occurs when routers repeatedly increment distance metrics to an unreachable destination because they believe an adjacent neighbor still has a path."
         },
         {
-          "question": "What does the Split Horizon rule state?",
+          "question": "What does the Split Horizon rule dictate?",
           "options": [
-            "Never send a packet larger than 1500 bytes",
-            "Never advertise a route back out the same interface through which it was learned",
-            "Always divide the network into two equal halves",
-            "Split every packet into two fragments"
+            "A router must advertise all routes out of every interface",
+            "A router must never advertise a learned route back through the interface from which it was learned",
+            "A router must delete its routing table every 30 seconds",
+            "A router must double its metric upon receiving an update"
           ],
-          "answer": 1,
-          "explanation": "Split Horizon dictates that a router should never advertise a route back out the same interface it learned the route from."
+          "correct": 1,
+          "explanation": "Split Horizon prevents 2-node routing loops by forbidding a router from advertising a learned route back out the same interface it came from."
         },
         {
-          "question": "How does Poison Reverse enhance the basic Split Horizon rule?",
+          "question": "What is the key difference between Split Horizon and Poison Reverse?",
           "options": [
-            "It drops all incoming packets",
-            "It explicitly advertises the route back to the source with a metric of Infinity (16)",
-            "It deletes the routing table permanently",
-            "It doubles the periodic timer"
+            "Split Horizon suppresses the route; Poison Reverse advertises it back with an infinite metric (16 in RIP)",
+            "Split Horizon works only on fiber; Poison Reverse works only on copper",
+            "Poison Reverse deletes the router's operating system",
+            "Split Horizon is used only in Link State routing"
           ],
-          "answer": 1,
-          "explanation": "Poison Reverse explicitly advertises the route back out the incoming interface with a cost of Infinity (16), definitively invalidating the reverse path."
+          "correct": 0,
+          "explanation": "Split Horizon simply omits the route from the advertisement, whereas Poison Reverse explicitly includes the route with an infinite metric (16 in RIP) to affirm it is unusable."
         },
         {
-          "question": "Why does the basic Split Horizon rule fail in a 3-node circular loop (A - B - C - A)?",
+          "question": "What is the primary function of a Hold-Down Timer in Distance Vector routing?",
           "options": [
-            "Because 3 is an odd number",
-            "Because each router learns about the destination through a different interface than the one it advertises on, so Split Horizon does not suppress the updates",
-            "Because routers cannot count past 2",
-            "Because circular cables are physically impossible"
+            "To speed up packet forwarding by 50%",
+            "To temporarily prevent a router from accepting potentially incorrect or stale route updates after a failure",
+            "To reboot the router every 24 hours",
+            "To encrypt routing tables"
           ],
-          "answer": 1,
-          "explanation": "In a 3-node loop, updates travel in a cycle (A to B to C to A); because each router advertises on a different interface than it received on, Split Horizon is not triggered."
+          "correct": 1,
+          "explanation": "Hold-down timers prevent stale routing updates from reinstating a failed route, giving the network time to stabilize before accepting equal or poorer metric advertisements."
         }
       ],
       "references": [
         {
-          "cite": "RFC 1058: Routing Information Protocol (Section 3.4.3)",
+          "cite": "RFC 1058: Routing Information Protocol (Section 3.4.3: Split Horizon and Poisoned Reverse).",
           "url": "https://datatracker.ietf.org/doc/html/rfc1058"
         },
         {
-          "cite": "A.S. Tanenbaum & D.J. Wetherall, Computer Networks, 6th Ed., Ch. 5.2.4",
-          "url": ""
+          "cite": "RFC 2453: RIP Version 2, Internet Engineering Task Force (IETF).",
+          "url": "https://datatracker.ietf.org/doc/html/rfc2453"
+        },
+        {
+          "cite": "SlideShare: Unicast Routing - Distance Vector vs Link State & Count-to-Infinity.",
+          "url": "https://slideshare.net"
+        },
+        {
+          "cite": "A.S. Tanenbaum & D.J. Wetherall, 'Computer Networks', 6th Edition, Chapter 5: The Count-to-Infinity Problem."
         }
       ]
     },
@@ -2977,130 +3114,159 @@ const TOPICS_U3_EXT = {
     "nextTopicId": "flooding"
   },
   "distance-vector-routing": {
-    "id": "distance-vector",
+    "id": "distance-vector-routing",
     "title": "Distance Vector Routing",
-    "unit": "Unit 3 – Network Layer",
+    "unit": "Unit 3: Network Layer",
     "unitId": "unit3",
-    "level": "Level 1 — Core Topic",
-    "category": "network",
-    "difficulty": "Advanced",
-    "readingTime": "20 min read",
-    "standard": "RFC 1058 (RIP) / Bellman-Ford 1957 / Tanenbaum Ch 5.2.4",
-    "oneLiner": "Distributed Bellman-Ford routing where each node periodically shares its known distance vector with immediate physical neighbors.",
-    "quickAnswer": "Distance Vector Routing is a distributed, dynamic routing algorithm based on the Bellman-Ford equation. Each router maintains a table (vector) of its best-known distance to every destination in the network and the outgoing line to use. Periodically, routers exchange this vector with their immediate physical neighbors and update their tables using: D_x(y) = min_v { c(x,v) + D_v(y) }.",
-    "whyItMatters": "Distance Vector was the original routing algorithm of ARPANET and powers the Routing Information Protocol (RIP). It introduced distributed computing to computer networks, allowing routers to dynamically converge on shortest paths without requiring any single router to know the entire global network topology.",
+    "level": "Undergraduate / GATE CSE",
+    "category": "Dynamic Routing Protocols",
+    "difficulty": "Intermediate",
+    "readingTime": "30 min",
+    "standard": "Bellman-Ford / RFC 1058 (RIP) / RFC 2453 (RIPv2) / Master PDF Notes",
+    "oneLiner": "A dynamic routing approach where routers periodically exchange distance vectors with direct neighbors, calculating shortest paths using the Bellman-Ford equation.",
+    "quickAnswer": "Distance Vector Routing is a dynamic routing method in which each router maintains information about the distance (cost) to reach different destination networks and the vector (direction or next-hop router) to use. Routers periodically share their routing tables exclusively with directly connected physical neighbors. Using the Bellman-Ford shortest path equation $D_x(y) = \\min_v \\{ c(x,v) + D_v(y) \\}$, a router updates its table whenever a neighbor advertises a lower-cost path. Characterized by the philosophy 'tell your neighbors about what you know,' it is simple to configure and has low memory overhead, but suffers from slow convergence and susceptibility to routing loops.",
+    "whyItMatters": "Distance Vector routing represents the foundational dynamic routing concept in computer networking. It powers the Routing Information Protocol (RIP) and Cisco's EIGRP, and forms the historical basis for understanding decentralized, distributed shortest-path computation across networks.",
     "infobox": {
+      "algorithmBasis": "Bellman-Ford Algorithm (Distributed Iterative)",
+      "informationExchanged": "Full/partial routing table (Destinations & Costs)",
+      "exchangeTarget": "Directly connected neighbors only",
+      "updateTiming": "Periodic (e.g. RIP every 30s) and Triggered",
+      "commonProtocols": [
+        "RIPv1 (RFC 1058)",
+        "RIPv2 (RFC 2453)",
+        "IGRP",
+        "EIGRP"
+      ],
+      "maxHopLimitRIP": "15 Hops (16 = Infinity / Unreachable)",
       "prerequisites": [
+        "internetwork-routing",
         "optimality-principle"
       ],
       "relatedConcepts": [
-        "count-to-infinity",
         "link-state-routing",
-        "routing-table-updates",
-        "comparison-dv-ls"
+        "count-to-infinity",
+        "routing-table-updates"
       ],
       "compareWith": [
+        "comparison-dv-ls",
         "distance-vector-vs-link-state"
-      ],
-      "primaryUses": [
-        "Routing Information Protocol (RIPv1 and RIPv2, RFC 2453)",
-        "Interior Gateway Routing Protocol (Cisco IGRP and EIGRP DUAL)",
-        "Small to medium enterprise campus networks (under 15 hops)",
-        "Fundamental routing theory in university curricula and GATE exams"
-      ],
-      "standardRfc": "RFC 1058 (RIPv1), RFC 2453 (RIPv2)"
+      ]
     },
-    "learningObjectives": [
-      "Explain the distributed philosophy of Distance Vector: 'Routing by rumor'",
-      "Master the Bellman-Ford equation: D_x(y) = min_v { c(x,v) + D_v(y) }",
-      "Trace routing table calculations upon receiving a neighbor's vector",
-      "Explain the structure of a Distance Vector table: Destination, Cost, Next Hop",
-      "Understand the periodic update mechanism (e.g. 30-second broadcast timers)",
-      "Identify the scalability limits of Distance Vector (slow convergence and metric capping)"
-    ],
     "prerequisitesList": [
       {
-        "concept": "The Optimality Principle",
-        "meaning": "Understanding shortest path trees and subpath optimality"
+        "concept": "Internetwork Routing Basics",
+        "meaning": "Understanding routing tables, next-hop forwarding, and metrics."
+      },
+      {
+        "concept": "Bellman's Optimality Principle",
+        "meaning": "Understanding why optimal subpaths compose globally optimal paths."
       }
     ],
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2e/Distance_vector_routing.svg",
-    "imageCaption": "Figure 3.12: Distributed Distance Vector Routing: Periodic Neighbor Distance Vector Exchanges.",
+    "learningObjectives": [
+      "Define dynamic routing and explain why it is essential in large, changing networks.",
+      "Explain the exact meaning of Distance (cost) and Vector (direction/next-hop).",
+      "Trace the 6-step operational lifecycle of Distance Vector routing from table initialization to convergence.",
+      "Work through the 3-router A-B-C distance vector exchange from the syllabus PDF.",
+      "Apply the Bellman-Ford equation to compute minimum-cost paths across multiple competing neighbors.",
+      "State the key characteristics of the Routing Information Protocol (RIP), including its 15-hop limit and periodic timers.",
+      "Evaluate the advantages and disadvantages of Distance Vector routing."
+    ],
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Distance_Vector_Routing.svg/800px-Distance_Vector_Routing.svg.png",
+    "imageCaption": "Figure 1: Distance Vector exchange where routers share routing vectors exclusively with direct neighbors.",
     "sections": {
-      "overview": "\n        <p class=\"mb-3\">\n          <strong>Distance Vector Routing</strong> (historically known as the distributed <em>Bellman-Ford algorithm</em> or the <em>Ford-Fulkerson algorithm</em>) is a dynamic routing algorithm in which each router maintains a routing table giving the best-known distance to each destination and the communication line to use to get there.\n        </p>\n        <p class=\"mb-3\">\n          Under Distance Vector, routers operate on the philosophy often termed <strong>\"Routing by Rumor\"</strong>:\n          <em>\"Each router tells its direct physical neighbors about its perspective of the entire network.\"</em> A router does not possess a complete topological map of the network; it only knows the cost to reach destinations through its immediate neighbors.\n        </p>\n      ",
-      "howItWorks": "\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">1. The Bellman-Ford Equation</h3>\n        <p class=\"mb-3 text-xs\">\n          The mathematical engine of Distance Vector routing is the <strong>Bellman-Ford equation</strong>. Let (D_x(y)) be the cost of the least-cost path from node (x) to node (y). Then:\n        </p>\n        <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-lg text-center font-mono text-xs font-bold text-emerald-800 dark:text-emerald-300 mb-3\">\n          D<sub>x</sub>(y) = min<sub>v ∈ neighbors(x)</sub> { c(x, v) + D<sub>v</sub>(y) }\n        </div>\n        <p class=\"text-xs mb-3\">\n          Where (c(x, v)) is the direct link cost from node (x) to neighbor (v), and (D_v(y)) is the neighbor (v)'s reported distance to destination (y). The minimum is taken over all direct neighbors of (x).\n        </p>\n\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">2. Routing Table Structure</h3>\n        <p class=\"text-xs mb-2\">Every router maintains a routing table containing triplets:</p>\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700 font-mono text-xs mb-4\">\n          [ Destination Network | Cost (Metric / Hops) | Next Hop Interface / Router ]\n        </div>\n\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">3. The Update Cycle</h3>\n        <ol class=\"list-decimal pl-5 space-y-1.5 text-xs mb-4\">\n          <li><strong>Periodic Timer Expiry:</strong> Every 30 seconds (in RIP), router (x) transmits a copy of its distance vector ({D_x}) to all direct physical neighbors.</li>\n          <li><strong>Neighbor Processing:</strong> When neighbor (v) receives this vector, it adds the cost of the link (c(v, x)) to each entry in the vector.</li>\n          <li><strong>Table Replacement:</strong> If the newly calculated cost to any destination is lower than the router's current table entry, or if the update comes from the existing next-hop router, the router updates its table and records (x) as the next hop.</li>\n        </ol>\n      ",
-      "technicalDetails": "\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">4. Distance Vector Convergence Characteristics</h3>\n        <p class=\"text-xs mb-3\">\n          Distance Vector routing works well in small topologies, but suffers from two distinct convergence traits:\n        </p>\n        <div class=\"space-y-2 text-xs mb-4\">\n          <div class=\"p-2.5 bg-emerald-50 dark:bg-emerald-950/30 rounded border border-emerald-200 dark:border-emerald-800\">\n            <strong>\"Good News Spreads Fast\":</strong> When a new router or low-cost link appears, this positive information propagates across the network in (O(D)) exchange cycles (where (D) is the network diameter).\n          </div>\n          <div class=\"p-2.5 bg-rose-50 dark:bg-rose-950/30 rounded border border-rose-200 dark:border-rose-800\">\n            <strong>\"Bad News Travels Slow\":</strong> When a router fails or a link breaks, the lack of global topological knowledge causes adjacent routers to create mutual routing loops, leading to the infamous <strong>Count-to-Infinity problem</strong>.\n          </div>\n        </div>\n      ",
+      "overview": "\n        <h3 class=\"wiki-subtitle\">1. Introduction to Dynamic Routing</h3>\n        <p class=\"wiki-paragraph\">\n          <strong>Dynamic routing</strong> is a routing method in which routers automatically learn routes, exchange routing information with other routers, and update their routing tables dynamically whenever network conditions change. Instead of requiring a network administrator to manually program thousands of static routes, routers use <strong>dynamic routing protocols</strong> to discover available paths autonomously.\n        </p>\n\n        <div class=\"wiki-callout note mb-6\">\n          <div class=\"callout-header\"><i class=\"fa-solid fa-network-wired text-emerald-600 mr-2\"></i> Linear Network Example (From Section 1.1 of the Syllabus PDF)</div>\n          <p class=\"text-xs text-gray-600 dark:text-gray-300\">\n            Consider a network containing four interconnected routers:\n          </p>\n          <div class=\"p-2.5 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 font-mono text-center text-xs my-2 font-bold text-emerald-600 dark:text-emerald-400\">\n            R1 &rarr; R2 &rarr; R3 &rarr; R4\n          </div>\n          <p class=\"text-xs text-gray-600 dark:text-gray-300\">\n            If the link between R2 and R3 fails, static routing would require an administrator to manually log into R1 and R2 to redirect packets. Dynamic routing protocols, however, detect the failure automatically, exchange routing updates, and re-converge onto an alternate available path within seconds.\n          </p>\n        </div>\n\n        <h3 class=\"wiki-subtitle\">2. Why Is Dynamic Routing Needed?</h3>\n        <p class=\"wiki-paragraph\">\n          Section 1.2 of the syllabus PDF highlights the six fundamental reasons why dynamic routing is essential:\n        </p>\n        <div class=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-4 text-xs\">\n          <div class=\"p-3 bg-gray-50 dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">1. High Router Density</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">Enterprise networks contain hundreds or thousands of routers where manual configuration is impossible.</p>\n          </div>\n          <div class=\"p-3 bg-gray-50 dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">2. Connection Failures</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">Physical cables are severed, equipment loses power, and fiber links suffer attenuation unexpectedly.</p>\n          </div>\n          <div class=\"p-3 bg-gray-50 dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">3. Dynamic Network Growth</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">New subnets, departments, and branch routers are added without rebuilding the existing network core.</p>\n          </div>\n          <div class=\"p-3 bg-gray-50 dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">4. Traffic Fluctuations</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">Allows traffic to shift dynamically to under-utilized links when primary circuits become saturated.</p>\n          </div>\n          <div class=\"p-3 bg-gray-50 dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">5. Reduced Human Error</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">Eliminates manual typos and configuration inconsistencies that cause black holes and routing loops.</p>\n          </div>\n          <div class=\"p-3 bg-gray-50 dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">6. Autonomous Topology Adaptation</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">Routers continuously listen for neighbor keepalives and automatically recalculate paths upon state changes.</p>\n          </div>\n        </div>\n\n        <h3 class=\"wiki-subtitle\">3. Meaning of \"Distance\" and \"Vector\"</h3>\n        <p class=\"wiki-paragraph\">\n          From Section 2.2 of the syllabus PDF notes:\n        </p>\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-3 text-xs my-3\">\n          <div class=\"p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-blue-600 dark:text-blue-400 block mb-1\">Distance (The Cost)</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">\n              The numerical metric required to reach the destination network. Examples:\n            </p>\n            <ul class=\"list-disc pl-4 mt-1 text-slate-500\">\n              <li>Distance to Network A = 1 hop</li>\n              <li>Distance to Network B = 3 hops</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">Vector (The Direction)</span>\n            <p class=\"text-gray-600 dark:text-gray-300\">\n              The direction or next-hop router through which the destination can be reached. Example:\n            </p>\n            <ul class=\"list-disc pl-4 mt-1 text-slate-500\">\n              <li>Destination = Network B | Distance = 3 hops | <strong>Next Hop = Router R2</strong></li>\n            </ul>\n          </div>\n        </div>\n        <p class=\"wiki-paragraph\">\n          <strong>Key Philosophy:</strong> A distance vector tells a router both the <em>cost</em> and the <em>direction</em> to reach a destination. Each router informs its neighbors about what it knows and how far away those destinations are (\"routing by rumor\").\n        </p>\n      ",
+      "howItWorks": "\n        <h3 class=\"wiki-subtitle\">1. How Distance Vector Routing Works (6-Step Lifecycle)</h3>\n        <p class=\"wiki-paragraph\">\n          Section 2.3 of the syllabus PDF details the six phases of the Distance Vector algorithm:\n        </p>\n        <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 my-4 text-xs space-y-2\">\n          <div><strong class=\"text-emerald-600 dark:text-emerald-400\">Step 1: Initial Routing Table Creation:</strong> Upon booting, each router knows only its directly connected interfaces (cost = 0 or direct link cost). All other destinations in the universe are set to infinity ($infty$).</div>\n          <div><strong class=\"text-emerald-600 dark:text-emerald-400\">Step 2: Exchange Routing Information:</strong> Each router sends a copy of its current distance vector to its directly connected neighbors.</div>\n          <div><strong class=\"text-emerald-600 dark:text-emerald-400\">Step 3: Receive Neighbor Updates:</strong> A router receives distance vectors advertised by its neighbors.</div>\n          <div><strong class=\"text-emerald-600 dark:text-emerald-400\">Step 4: Calculate New Route Costs:</strong> The router adds the link cost to the neighbor to each advertised distance.</div>\n          <div><strong class=\"text-emerald-600 dark:text-emerald-400\">Step 5: Update Routing Table:</strong> If the newly calculated cost to a destination is lower than the existing cost in its table, the router updates its table with the new lower cost and sets the next-hop to that neighbor.</div>\n          <div><strong class=\"text-emerald-600 dark:text-emerald-400\">Step 6: Iterate Until Convergence:</strong> Routers continue exchanging updates periodically until no further table changes occur. At this point, the network has <strong>converged</strong>.</div>\n        </div>\n\n        <h3 class=\"wiki-subtitle\">2. Worked Example from Section 2.4 of the Syllabus PDF</h3>\n        <p class=\"wiki-paragraph\">\n          Consider three routers: <strong>Router A</strong>, <strong>Router B</strong>, and <strong>Router C</strong>.\n        </p>\n        <div class=\"p-3 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 font-mono text-center text-xs my-2 text-emerald-600 dark:text-emerald-400 font-bold\">\n          [ Router A ] &mdash;(cost 2)&rarr; [ Router B ] &mdash;(cost 3)&rarr; [ Router C ]\n        </div>\n        <p class=\"wiki-paragraph\">\n          Router A is directly connected to B with cost 2. Router B is connected to C with cost 3. Router A is <em>not directly connected</em> to Router C. We want Router A to learn the route to Router C.\n        </p>\n\n        <div class=\"grid grid-cols-1 md:grid-cols-3 gap-2 text-xs font-mono my-3\">\n          <div class=\"p-2.5 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n            <div class=\"font-bold text-slate-800 dark:text-slate-100 mb-1\">Initial Router A:</div>\n            <div>Dest A: Cost 0 (Direct)</div>\n            <div>Dest B: Cost 2 (Direct)</div>\n            <div>Dest C: Cost &infin; (Unknown)</div>\n          </div>\n          <div class=\"p-2.5 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n            <div class=\"font-bold text-slate-800 dark:text-slate-100 mb-1\">Initial Router B:</div>\n            <div>Dest A: Cost 2 (Direct)</div>\n            <div>Dest B: Cost 0 (Direct)</div>\n            <div>Dest C: Cost 3 (Direct)</div>\n          </div>\n          <div class=\"p-2.5 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n            <div class=\"font-bold text-slate-800 dark:text-slate-100 mb-1\">Initial Router C:</div>\n            <div>Dest A: Cost &infin; (Unknown)</div>\n            <div>Dest B: Cost 3 (Direct)</div>\n            <div>Dest C: Cost 0 (Direct)</div>\n          </div>\n        </div>\n\n        <div class=\"p-4 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200 dark:border-emerald-800 text-xs my-3\">\n          <strong class=\"text-emerald-800 dark:text-emerald-300 font-bold block mb-1\">Step 1: Router B Shares Its Distance Vector with Router A</strong>\n          <p class=\"text-slate-700 dark:text-slate-300 mb-2\">\n            Router A receives Router B's vector, which advertises that B can reach C with cost 3. Router A calculates the cost to C through B:\n          </p>\n          <div class=\"p-2 bg-white dark:bg-gray-800 rounded border border-emerald-300 dark:border-emerald-700 font-mono font-bold text-center text-emerald-800 dark:text-emerald-300 mb-2\">\n            Cost(A &rarr; C) = Cost(A &rarr; B) + Cost(B &rarr; C) = 2 + 3 = 5\n          </div>\n          <strong class=\"text-emerald-800 dark:text-emerald-300 font-bold block mb-1\">Step 2: Router A Updates Its Routing Table</strong>\n          <div class=\"overflow-x-auto\">\n            <table class=\"wiki-table w-full text-xs font-mono\">\n              <thead>\n                <tr class=\"bg-emerald-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200\">\n                  <th>Destination</th>\n                  <th>Next Hop</th>\n                  <th>Cost</th>\n                  <th>Status</th>\n                </tr>\n              </thead>\n              <tbody>\n                <tr><td>A</td><td>Direct</td><td>0</td><td>Directly connected</td></tr>\n                <tr><td>B</td><td>B</td><td>2</td><td>Directly connected</td></tr>\n                <tr class=\"font-bold text-emerald-700 dark:text-emerald-300\"><td>C</td><td>B</td><td>5</td><td>Route Learned via B! 🏆</td></tr>\n              </tbody>\n            </table>\n          </div>\n          <p class=\"text-slate-600 dark:text-slate-400 mt-2 text-[11px]\">\n            Selected Path: <code>A &rarr; B &rarr; C</code> with Total Cost = 5.\n          </p>\n        </div>\n      ",
+      "technicalDetails": "\n        <h3 class=\"wiki-subtitle\">1. The Bellman-Ford Equation (PDF Section 2.5)</h3>\n        <p class=\"wiki-paragraph\">\n          Distance Vector routing is mathematically based on the <strong>Bellman-Ford shortest-path algorithm</strong>:\n        </p>\n        <div class=\"p-3 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 font-mono text-center text-xs my-3 font-bold text-emerald-600 dark:text-emerald-400\">\n          D_x(y) = min_v { c(x, v) + D_v(y) }\n        </div>\n        <p class=\"wiki-paragraph\">\n          Where:\n        </p>\n        <ul class=\"list-disc pl-5 space-y-1 text-xs text-gray-600 dark:text-gray-300 my-2\">\n          <li>$D_x(y)$: Minimum known cost from router $x$ to destination $y$.</li>\n          <li>$v$: A directly connected neighbor of router $x$.</li>\n          <li>$c(x, v)$: Direct physical link cost between router $x$ and neighbor $v$.</li>\n          <li>$D_v(y)$: Neighbor $v$'s advertised cost to destination $y$.</li>\n          <li>$min_v$: Choose the neighbor that yields the minimum total sum.</li>\n        </ul>\n\n        <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 text-xs my-3\">\n          <div class=\"font-bold text-slate-800 dark:text-slate-100 mb-2\">\n            Numerical Example from Section 2.5 of the Syllabus PDF\n          </div>\n          <p class=\"text-slate-600 dark:text-slate-300 mb-2\">\n            Router A has two neighboring routers: <strong>B</strong> and <strong>C</strong>.\n          </p>\n          <div class=\"grid grid-cols-2 gap-2 font-mono text-[11px] mb-3\">\n            <div class=\"p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800\">\n              Link Costs from A:<br/>\n              • A to B = 2<br/>\n              • A to C = 4\n            </div>\n            <div class=\"p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800\">\n              Advertised Costs to Destination D:<br/>\n              • B to D = 5<br/>\n              • C to D = 1\n            </div>\n          </div>\n          <div class=\"space-y-1.5 font-mono text-[11px]\">\n            <div>• Cost through Neighbor B: $c(A, B) + D_B(D) = 2 + 5 = 7$</div>\n            <div>• Cost through Neighbor C: $c(A, C) + D_C(D) = 4 + 1 = 5$</div>\n            <div class=\"font-bold text-emerald-600 dark:text-emerald-400 pt-1\">\n              • Minimum: $min(7, 5) = 5$\n            </div>\n          </div>\n          <div class=\"mt-2 p-2 bg-emerald-50 dark:bg-emerald-950/40 rounded border border-emerald-300 dark:border-emerald-700 text-emerald-800 dark:text-emerald-300 font-bold\">\n            🏆 The best route is $A \rightarrow C \rightarrow D$ with Total Cost = 5! Next-hop = Router C.\n          </div>\n        </div>\n\n        <h3 class=\"wiki-subtitle\">2. Distance Vector Protocol – RIP (PDF Section 2.7)</h3>\n        <p class=\"wiki-paragraph\">\n          The classic implementation of Distance Vector routing is the <strong>Routing Information Protocol (RIP)</strong>:\n        </p>\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-3 text-xs my-3\">\n          <div class=\"p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-emerald-600 dark:text-emerald-400 block mb-1\">Key Specifications</span>\n            <ul class=\"list-disc pl-4 space-y-1 text-slate-600 dark:text-slate-300\">\n              <li><strong>Metric:</strong> Strictly hop count (1 to 15).</li>\n              <li><strong>Periodic Timer:</strong> Broadcasts full routing table every 30 seconds.</li>\n              <li><strong>Maximum Usable Hops:</strong> 15 hops.</li>\n              <li><strong>Metric 16 = Infinity:</strong> A metric of 16 represents an unreachable network.</li>\n              <li><strong>RIPv2 Support:</strong> RFC 2453 adds subnet masks (CIDR/VLSM) and multicast updates (224.0.0.9).</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700\">\n            <span class=\"font-bold text-blue-600 dark:text-blue-400 block mb-1\">Hop Count Interpretations</span>\n            <ul class=\"space-y-1 text-slate-600 dark:text-slate-300 font-mono text-[11px]\">\n              <li>• 1 hop &rarr; Directly adjacent network (Reachable)</li>\n              <li>• 5 hops &rarr; Moderately sized path (Reachable)</li>\n              <li>• 15 hops &rarr; Maximum allowable reachable distance</li>\n              <li>• 16 hops &rarr; <strong class=\"text-rose-600\">UNREACHABLE (Infinite Metric)</strong></li>\n            </ul>\n            <p class=\"text-[10px] text-slate-500 mt-2\">\n              <em>Note: The 15-hop limit is a RIP-specific constraint to prevent count-to-infinity, not a universal rule of all DV protocols (e.g. EIGRP supports up to 255 hops).</em>\n            </p>\n          </div>\n        </div>\n      ",
       "workedExamples": {
-        "level1": "\n          <strong>Updating Distance Vector with Bellman-Ford:</strong><br/>\n          Router A has direct links to neighbors B (cost 1) and C (cost 4).<br/>\n          Router A receives distance vectors from B and C:<br/>\n          • From B: D_B(Dest X) = 3<br/>\n          • From C: D_C(Dest X) = 1<br/>\n          <br/>\n          Router A evaluates:<br/>\n          • Path via B: (c(A, B) + D_B(X) = 1 + 3 = mathbf{4})<br/>\n          • Path via C: (c(A, C) + D_C(X) = 4 + 1 = mathbf{5})<br/>\n          Minimum cost is 4 via B. Router A sets <code>Cost to X = 4, Next Hop = B</code>!\n        ",
-        "level2": "\n          <strong>Full Routing Table Update Trace:</strong><br/>\n          Router J has direct neighbors A, I, H, K with link costs: (c(J,A)=8, c(J,I)=10, c(J,H)=12, c(J,K)=6).<br/>\n          All neighbors report their distance to destination <code>D</code>:<br/>\n          • A reports: 12 ➔ Total via A = (8 + 12 = 20)<br/>\n          • I reports: 20 ➔ Total via I = (10 + 20 = 30)<br/>\n          • H reports: 7 ➔ Total via H = (12 + 7 = mathbf{19})<br/>\n          • K reports: 15 ➔ Total via K = (6 + 15 = 21)<br/>\n          Router J picks the minimum: Cost = 19, Next Hop = H.\n        ",
-        "level3": "\n          <strong>RIP Hop Count Metric Ceiling:</strong><br/>\n          In the Routing Information Protocol (RFC 1058), the metric is strictly hop count.<br/>\n          To bound the convergence time of the count-to-infinity loop, the maximum allowable metric is set to <strong>15 hops</strong>.<br/>\n          A metric of <strong>16 is defined as Infinity</strong> (Unreachable). Consequently, RIP cannot be deployed on any network with a diameter greater than 15 hops!\n        "
+        "level1": "\n          <strong>Problem Statement:</strong><br/>\n          Router R receives distance vectors from its neighbors N1 and N2 regarding destination network 10.0.0.0/8:<br/>\n          • N1 advertises distance 4. Link cost R &ndash; N1 is 3.<br/>\n          • N2 advertises distance 2. Link cost R &ndash; N2 is 6.<br/>\n          Which path will Router R select, and what will be the entry in its routing table?<br/><br/>\n          <strong>Calculation:</strong><br/>\n          Applying the Bellman-Ford equation:<br/>\n          • Path via N1: $c(R, N1) + D_{N1}(10.0.0.0) = 3 + 4 = 7$<br/>\n          • Path via N2: $c(R, N2) + D_{N2}(10.0.0.0) = 6 + 2 = 8$<br/>\n          $$\\min(7, 8) = 7\\text{ via N1}$$<br/>\n          <strong>Routing Table Entry:</strong><br/>\n          Destination = <code>10.0.0.0/8</code> | Next Hop = <code>N1</code> | Metric = <code>7</code>.\n        ",
+        "level2": "\n          <strong>Full Convergence Iteration on a 4-Router Ring:</strong><br/>\n          Consider routers A, B, C, D in a ring: $A-B=1, B-C=2, C-D=1, D-A=4$.<br/>\n          Show how Router A updates its distance to D across two update rounds.<br/><br/>\n          <strong>Round 1 (Initial knowledge):</strong><br/>\n          • Direct link $A-D$ has cost 4.<br/>\n          • Router B does not yet know how to reach D ($D_B(D) = \\infty$).<br/>\n          • Router A's initial table: Dest D = 4 (via Direct link).<br/><br/>\n          <strong>Round 2 (After B learns from C):</strong><br/>\n          • Router C is directly connected to D with cost 1.<br/>\n          • Router B learns of D from C: $D_B(D) = c(B,C) + D_C(D) = 2 + 1 = 3$.<br/>\n          • Router B advertises its new vector ($D_B(D) = 3$) to Router A.<br/>\n          • Router A calculates cost to D via B: $c(A,B) + D_B(D) = 1 + 3 = 4$.<br/>\n          • Since cost 4 via B equals direct cost 4, Router A retains its current route or enables equal-cost multi-path (ECMP).\n        ",
+        "level3": "\n          <strong>Why Distance Vector Protocols Suffer from Routing by Rumor:</strong><br/>\n          Router A learns about destination network X through Router B. Router B learned about X from Router C. Router C's physical link to X is severed.<br/>\n          Explain why Router A cannot independently detect that link C-X failed, and what packet capture evidence reveals.<br/><br/>\n          <strong>Analysis:</strong><br/>\n          Unlike Link State protocols where routers inspect the full topology map, a Distance Vector router has <em>zero visibility</em> beyond its immediate neighbors. Router A only knows that B advertised metric 3; it has no record that B's path traverses C, nor does it know that link C-X exists.<br/>\n          When link C-X goes down, Router A continues forwarding packets toward B until B sends an update. If B's update is delayed or dropped, packets loop between A and B, triggering the classic Count-to-Infinity problem.\n        "
       },
-      "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 text-xs\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800\">\n            <h4 class=\"font-bold text-emerald-800 dark:text-emerald-300 mb-2\">Advantages of Distance Vector</h4>\n            <ul class=\"space-y-1 list-disc pl-4 text-slate-700 dark:text-slate-300\">\n              <li>Low computational footprint: simple Bellman-Ford calculations require minimal CPU and RAM.</li>\n              <li>Minimal memory: routers store only destination vectors, not the entire graph topology.</li>\n              <li>Simple implementation: easy to configure and maintain in small enterprise networks.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/30 rounded-lg border border-rose-200 dark:border-rose-800\">\n            <h4 class=\"font-bold text-rose-800 dark:text-rose-300 mb-2\">Disadvantages</h4>\n            <ul class=\"space-y-1 list-disc pl-4 text-slate-700 dark:text-slate-300\">\n              <li>Slow convergence after link failures.</li>\n              <li>Susceptible to Count-to-Infinity routing loops.</li>\n              <li>Periodic broadcasting consumes bandwidth even when network topology is stable.</li>\n              <li>Network diameter strictly capped at 15 hops in RIP.</li>\n            </ul>\n          </div>\n        </div>\n      ",
+      "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 text-xs my-3\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200 dark:border-emerald-800\">\n            <span class=\"font-bold text-emerald-800 dark:text-emerald-300 text-sm block mb-1\">Advantages (PDF Section 2.8)</span>\n            <ul class=\"list-disc pl-4 space-y-1 text-slate-700 dark:text-slate-300\">\n              <li><strong>Simple Configuration:</strong> Extremely straightforward to deploy and troubleshoot on small networks.</li>\n              <li><strong>Minimal Hardware Requirements:</strong> Low CPU and memory footprint; stores only single-entry vectors per destination.</li>\n              <li><strong>Neighbor-Only Communication:</strong> Routers never need to flood packets across the entire autonomous system.</li>\n              <li><strong>Automatic Route Discovery:</strong> Seamlessly learns new destination subnets as neighbors advertise them.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/40 rounded-xl border border-rose-200 dark:border-rose-800\">\n            <span class=\"font-bold text-rose-800 dark:text-rose-300 text-sm block mb-1\">Disadvantages (PDF Section 2.9)</span>\n            <ul class=\"list-disc pl-4 space-y-1 text-slate-700 dark:text-slate-300\">\n              <li><strong>Slow Convergence:</strong> Route changes must ripple hop-by-hop through every intermediate router.</li>\n              <li><strong>Susceptible to Routing Loops:</strong> Transient inconsistencies readily cause circular forwarding loops.</li>\n              <li><strong>Count-to-Infinity Problem:</strong> Metric steadily climbs to infinity when destinations fail.</li>\n              <li><strong>Bandwidth Overhead:</strong> Periodic broadcasts (every 30s) waste link capacity even on static networks.</li>\n              <li><strong>Lack of Global Topology Visibility:</strong> Routers make decisions blind to the overall network graph.</li>\n            </ul>\n          </div>\n        </div>\n      ",
       "whereUsed": [
-        "Routing Information Protocol (RIPv1 and RIPv2)",
-        "Cisco Enhanced Interior Gateway Routing Protocol (EIGRP)",
-        "Small private office branch networks and legacy telecom switches"
+        "Small Office & Branch Networks: Using RIPv2 where router hardware resources are constrained and topologies are simple.",
+        "Legacy Telecom Systems: Deploying Bellman-Ford variants over low-bandwidth serial lines.",
+        "Interior Gateway Protocols (IGRP/EIGRP): Utilizing advanced distance vector concepts with diffusion update algorithms (DUAL)."
       ],
-      "commonMistakes": "\n        <ul class=\"space-y-2 text-xs\">\n          <li><strong>Believing Distance Vector routers know the whole topology:</strong> Distance Vector routers know ONLY what their immediate physical neighbors report. They have no concept of graph layout.</li>\n          <li><strong>Confusing the 30-second timer with event-driven updates:</strong> Standard RIP sends periodic updates every 30 seconds regardless of whether any link has changed.</li>\n        </ul>\n      ",
-      "compareWith": "distance-vector-vs-link-state",
+      "commonMistakes": [
+        "Confusing Hop Count with Metric: Hop count is just one specific metric used by RIP; other distance vector protocols use composite metrics (bandwidth, delay).",
+        "Believing Distance Vector Routers Store the Full Network Graph: DV routers store ONLY destination costs and next hops; they have no concept of the topology beyond their neighbors.",
+        "Assuming Periodic Updates Carry Only Changes: Classic Distance Vector (RIP) transmits its entire routing table every 30 seconds regardless of whether any change occurred."
+      ],
+      "compareWith": [
+        {
+          "target": "comparison-dv-ls",
+          "title": "Distance Vector vs. Link State",
+          "description": "Decentralized Bellman-Ford vs global synchronized Dijkstra SPF."
+        },
+        {
+          "target": "routing-table-updates",
+          "title": "Periodic vs. Triggered Updates",
+          "description": "Timer-driven broadcasting vs event-driven flash notifications."
+        }
+      ],
       "quiz": [
         {
-          "question": "Which mathematical equation serves as the foundation for Distance Vector routing?",
+          "question": "What does the word Vector represent in Distance Vector Routing?",
           "options": [
-            "Dijkstra SPF formula",
-            "Bellman-Ford equation",
-            "Shannon Channel Capacity formula",
-            "Nyquist Bit Rate formula"
+            "The physical cable length in meters",
+            "The direction or next-hop router through which the destination is reached",
+            "The number of computers on the network",
+            "The encryption key"
           ],
-          "answer": 1,
-          "explanation": "Distance Vector algorithms are distributed implementations of the Bellman-Ford shortest path equation."
+          "correct": 1,
+          "explanation": "In Distance Vector routing, Distance represents the cost to the destination, while Vector represents the direction (the next-hop router)."
         },
         {
-          "question": "What information does a Distance Vector router periodically transmit to its neighbors?",
+          "question": "Which mathematical equation forms the algorithmic basis of Distance Vector routing?",
           "options": [
-            "The entire physical topology of the network",
-            "A vector of its best-known distances to all network destinations",
-            "Its ARP cache",
-            "The raw packet payload history"
+            "Dijkstra's Shortest Path Equation",
+            "Bellman-Ford Equation: D_x(y) = min_v { c(x,v) + D_v(y) }",
+            "Shannon's Capacity Theorem",
+            "Nyquist Bit Rate Formula"
           ],
-          "answer": 1,
-          "explanation": "In Distance Vector, each router periodically transmits its distance vector (table of distances to all destinations) to its immediate physical neighbors."
+          "correct": 1,
+          "explanation": "Distance Vector routing is based on the Bellman-Ford equation, which iteratively finds shortest paths through neighbor cost relaxation."
         },
         {
-          "question": "In the RIP protocol, what hop count value represents 'Infinity' (unreachable)?",
+          "question": "In the Routing Information Protocol (RIP), what metric value represents an unreachable destination (infinity)?",
           "options": [
-            "10",
-            "15",
+            "255",
+            "100",
             "16",
-            "255"
+            "0"
           ],
-          "answer": 2,
-          "explanation": "RIP caps the network metric at 15 hops; a metric of 16 is defined as infinity (unreachable) to bound count-to-infinity loops."
+          "correct": 2,
+          "explanation": "RIP defines 16 hops as infinity (unreachable), restricting the maximum operational diameter of a RIP network to 15 hops."
         },
         {
-          "question": "Why is Distance Vector characterized as 'Routing by Rumor'?",
+          "question": "In the 3-router A-B-C example from the syllabus PDF, with Cost(A-B)=2 and Cost(B-C)=3, what is the cost of the path learned by A to reach C?",
           "options": [
-            "Because routers invent false destinations",
-            "Because routers rely solely on what their direct neighbors tell them without verifying the complete global topology",
-            "Because it only works over wireless radio channels",
-            "Because routing tables are stored in unencrypted plain text"
+            "6",
+            "5",
+            "3",
+            "1"
           ],
-          "answer": 1,
-          "explanation": "Routers have no independent global map of the network; they must trust the path metrics reported by their immediate neighbors."
+          "correct": 1,
+          "explanation": "Router A calculates: Cost(A->C) = Cost(A->B) + Cost(B->C) = 2 + 3 = 5."
         }
       ],
       "references": [
         {
-          "cite": "RFC 1058: Routing Information Protocol",
+          "cite": "RFC 1058: Routing Information Protocol (RIPv1), Internet Engineering Task Force (IETF).",
           "url": "https://datatracker.ietf.org/doc/html/rfc1058"
         },
         {
-          "cite": "RFC 2453: RIP Version 2",
+          "cite": "RFC 2453: RIP Version 2 (STD 56), IETF.",
           "url": "https://datatracker.ietf.org/doc/html/rfc2453"
         },
         {
-          "cite": "A.S. Tanenbaum & D.J. Wetherall, Computer Networks, 6th Ed., Ch. 5.2.4",
-          "url": ""
+          "cite": "The Network DNA: Enhanced Interior Gateway Routing Protocol (EIGRP) Architecture.",
+          "url": "https://thenetworkdna.com"
+        },
+        {
+          "cite": "A.S. Tanenbaum & D.J. Wetherall, 'Computer Networks', 6th Edition, Chapter 5: Distance Vector Routing.",
+          "url": "https://www.pearson.com"
         }
       ]
     },
