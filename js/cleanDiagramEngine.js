@@ -9,6 +9,47 @@ const CleanDiagramEngine = {
     if (!topic) return '';
     const id = topic.id || '';
 
+    // --- Unit 3 – Network Layer Interactive Schematics ---
+    if (id === 'ip-addressing' || id === 'u3-ip-addressing-basics') {
+      return this.renderIpAddressingDiagram();
+    }
+    if (id === 'ipv4' || id === 'ipv4-classes' || id === 'ipv4-protocol') {
+      return this.renderIpv4ClassesDiagram();
+    }
+    if (id === 'subnetting' || id === 'u3-subnetting') {
+      return this.renderSubnettingDiagram();
+    }
+    if (id === 'ipv6' || id === 'ipv6-addressing' || id === 'ipv6-protocol') {
+      return this.renderIpv6Diagram();
+    }
+    if (id === 'ipv4-vs-ipv6' || id === 'u3-ipv4-vs-ipv6') {
+      return this.renderIpv4VsIpv6Diagram();
+    }
+    if (id === 'internetworking' || id === 'tunneling' || id === 'internetwork-routing') {
+      return this.renderInternetworkingDiagram(id);
+    }
+    if (id === 'optimality-principle' || id === 'dijkstra' || id === 'shortest-path-algorithm' || id === 'flooding') {
+      return this.renderRoutingAlgorithmsDiagram(id);
+    }
+    if (id === 'distance-vector' || id === 'distance-vector-routing') {
+      return this.renderDistanceVectorDiagram();
+    }
+    if (id === 'link-state-routing') {
+      return this.renderLinkStateDiagram();
+    }
+    if (id === 'routing-table-updates') {
+      return this.renderRoutingTableUpdatesDiagram();
+    }
+    if (id === 'comparison-dv-ls') {
+      return this.renderComparisonDvLsDiagram();
+    }
+    if (id === 'count-to-infinity') {
+      return this.renderCountToInfinityDiagram();
+    }
+    if (id === 'traffic-aware-routing' || id === 'admission-control' || id === 'traffic-throttling' || id === 'load-shedding' || id === 'congestion-control') {
+      return this.renderCongestionControlDiagram(id);
+    }
+
     // 1. Framing & Bit Stuffing
     if (id === 'framing' || id === 'byte-stuffing' || id === 'bit-stuffing') {
       return this.renderFramingDiagram();
@@ -2421,6 +2462,632 @@ const CleanDiagramEngine = {
       </div>
     `;
   },
+
+  // ===========================================================================
+  // UNIT 3 – NETWORK LAYER ARCHITECTURAL SCHEMATICS & DIAGRAMS
+  // ===========================================================================
+
+  // 3.1 IP Addressing Basics: Logical Address Structure & MAC Re-encapsulation
+  renderIpAddressingDiagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div>
+            <span class="text-[10px] font-black tracking-wider uppercase text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded">Interactive Architecture Diagram</span>
+            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">IP Addressing: Network/Host Division & Router Hop Forwarding</h4>
+          </div>
+          <span class="text-xs font-mono text-slate-500">RFC 791 / OSI Layer 3</span>
+        </div>
+
+        <!-- Two Part Structure of IP -->
+        <div class="mb-5 bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+          <div class="text-xs font-bold text-slate-700 dark:text-slate-200 mb-2 flex items-center justify-between">
+            <span>A. Hierarchical 32-Bit Address Division (Example: 192.168.1.10 /24)</span>
+            <span class="text-[10px] font-mono text-emerald-600 bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded">Prefix Length /24</span>
+          </div>
+          <div class="grid grid-cols-12 gap-1 text-center font-mono text-xs">
+            <div class="col-span-9 bg-emerald-500 text-white font-bold p-2.5 rounded-l-lg shadow-sm">
+              <div class="text-[10px] uppercase tracking-wider text-emerald-100">Network Portion (Prefix)</div>
+              <div class="text-sm">192.168.1</div>
+              <div class="text-[9px] text-emerald-200 mt-0.5">24 Bits (Identifies the Subnet)</div>
+            </div>
+            <div class="col-span-3 bg-blue-500 text-white font-bold p-2.5 rounded-r-lg shadow-sm">
+              <div class="text-[10px] uppercase tracking-wider text-blue-100">Host Portion</div>
+              <div class="text-sm">.10</div>
+              <div class="text-[9px] text-blue-200 mt-0.5">8 Bits (Interface)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- IP vs MAC Forwarding Journey -->
+        <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+          <div class="text-xs font-bold text-slate-700 dark:text-slate-200 mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-route text-emerald-600"></i>
+            <span>B. Packet Journey Across Subnets (IP Stays Constant, MAC Changes at Each Hop)</span>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 items-center text-center text-xs">
+            <!-- Source Host -->
+            <div class="p-3 rounded-lg border-2 border-emerald-500 bg-emerald-50/50 dark:bg-emerald-950/30">
+              <div class="font-bold text-emerald-700 dark:text-emerald-300">Host A (Source)</div>
+              <div class="font-mono text-[11px] text-slate-600 dark:text-slate-300 mt-1">IP: 192.168.1.10</div>
+              <div class="font-mono text-[10px] text-slate-500">MAC: 00:AA:11:22:33:44</div>
+              <div class="mt-2 text-[10px] bg-emerald-200 dark:bg-emerald-900 text-emerald-900 dark:text-emerald-100 py-0.5 px-1 rounded">Local Subnet 1</div>
+            </div>
+
+            <!-- Default Gateway Router -->
+            <div class="p-3 rounded-lg border-2 border-amber-500 bg-amber-50/50 dark:bg-amber-950/30">
+              <div class="font-bold text-amber-700 dark:text-amber-300">Router (Default Gateway)</div>
+              <div class="font-mono text-[10px] text-slate-600 dark:text-slate-300 mt-1">
+                In: 192.168.1.1 (MAC: R1-In)<br/>
+                Out: 10.0.0.1 (MAC: R1-Out)
+              </div>
+              <div class="mt-2 text-[10px] bg-amber-200 dark:bg-amber-900 text-amber-900 dark:text-amber-100 py-0.5 px-1 rounded">
+                Inspects Dest IP ➔ Rewrites MAC
+              </div>
+            </div>
+
+            <!-- Destination Host -->
+            <div class="p-3 rounded-lg border-2 border-blue-500 bg-blue-50/50 dark:bg-blue-950/30">
+              <div class="font-bold text-blue-700 dark:text-blue-300">Host B (Destination)</div>
+              <div class="font-mono text-[11px] text-slate-600 dark:text-slate-300 mt-1">IP: 10.0.0.20</div>
+              <div class="font-mono text-[10px] text-slate-500">MAC: 00:BB:55:66:77:88</div>
+              <div class="mt-2 text-[10px] bg-blue-200 dark:bg-blue-900 text-blue-900 dark:text-blue-100 py-0.5 px-1 rounded">Remote Subnet 2</div>
+            </div>
+          </div>
+
+          <div class="mt-3 p-2.5 rounded bg-slate-100 dark:bg-slate-900/80 text-[11px] text-slate-600 dark:text-slate-300 flex items-center justify-around font-mono">
+            <span>Payload IP Header: [Src: 192.168.1.10 ➔ Dst: 10.0.0.20] (UNALTERED)</span>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 3.2 IPv4 Addressing and Classes: Classful Breakdown A-E
+  renderIpv4ClassesDiagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div>
+            <span class="text-[10px] font-black tracking-wider uppercase text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2.5 py-1 rounded">Classful Architecture & Octets</span>
+            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">IPv4 32-Bit Dotted Decimal & Historical Classes (A, B, C, D, E)</h4>
+          </div>
+          <span class="text-xs font-mono text-slate-500">2^32 = 4,294,967,296 Addresses</span>
+        </div>
+
+        <div class="space-y-3 font-mono text-xs">
+          <!-- Class A -->
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border-l-4 border-emerald-500 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+            <div>
+              <span class="font-bold text-emerald-600 dark:text-emerald-400">Class A (1 – 126)</span>
+              <span class="text-[10px] text-slate-500 ml-2">Leading Bit: <strong>0</strong> | Default Mask: <strong>255.0.0.0 (/8)</strong></span>
+              <div class="text-[11px] text-slate-600 dark:text-slate-300 mt-0.5">8 Net Bits (126 Networks) • 24 Host Bits (16,777,214 Hosts/Net)</div>
+            </div>
+            <div class="flex gap-1 text-[10px] font-bold">
+              <span class="bg-emerald-500 text-white px-2 py-0.5 rounded">0xxxxxxx</span>
+              <span class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-2 py-0.5 rounded">Host</span>
+              <span class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-2 py-0.5 rounded">Host</span>
+              <span class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-2 py-0.5 rounded">Host</span>
+            </div>
+          </div>
+
+          <!-- Class B -->
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border-l-4 border-blue-500 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+            <div>
+              <span class="font-bold text-blue-600 dark:text-blue-400">Class B (128 – 191)</span>
+              <span class="text-[10px] text-slate-500 ml-2">Leading Bits: <strong>10</strong> | Default Mask: <strong>255.255.0.0 (/16)</strong></span>
+              <div class="text-[11px] text-slate-600 dark:text-slate-300 mt-0.5">16 Net Bits (16,384 Networks) • 16 Host Bits (65,534 Hosts/Net)</div>
+            </div>
+            <div class="flex gap-1 text-[10px] font-bold">
+              <span class="bg-blue-500 text-white px-2 py-0.5 rounded">10xxxxxx</span>
+              <span class="bg-blue-400 text-white px-2 py-0.5 rounded">Network</span>
+              <span class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-2 py-0.5 rounded">Host</span>
+              <span class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-2 py-0.5 rounded">Host</span>
+            </div>
+          </div>
+
+          <!-- Class C -->
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border-l-4 border-amber-500 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+            <div>
+              <span class="font-bold text-amber-600 dark:text-amber-400">Class C (192 – 223)</span>
+              <span class="text-[10px] text-slate-500 ml-2">Leading Bits: <strong>110</strong> | Default Mask: <strong>255.255.255.0 (/24)</strong></span>
+              <div class="text-[11px] text-slate-600 dark:text-slate-300 mt-0.5">24 Net Bits (2,097,152 Networks) • 8 Host Bits (254 Hosts/Net)</div>
+            </div>
+            <div class="flex gap-1 text-[10px] font-bold">
+              <span class="bg-amber-500 text-white px-2 py-0.5 rounded">110xxxxx</span>
+              <span class="bg-amber-400 text-white px-2 py-0.5 rounded">Network</span>
+              <span class="bg-amber-400 text-white px-2 py-0.5 rounded">Network</span>
+              <span class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-2 py-0.5 rounded">Host</span>
+            </div>
+          </div>
+
+          <!-- Class D & E -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+            <div class="p-2.5 bg-purple-50 dark:bg-purple-950/30 rounded border border-purple-200 dark:border-purple-800">
+              <div class="font-bold text-purple-700 dark:text-purple-300">Class D (224 – 239) • Multicast</div>
+              <div class="text-[10px] text-slate-600 dark:text-slate-400 mt-0.5">Leading: <strong>1110</strong> • Delivers packets to interested multicast groups.</div>
+            </div>
+            <div class="p-2.5 bg-rose-50 dark:bg-rose-950/30 rounded border border-rose-200 dark:border-rose-800">
+              <div class="font-bold text-rose-700 dark:text-rose-300">Class E (240 – 255) • Experimental</div>
+              <div class="text-[10px] text-slate-600 dark:text-slate-400 mt-0.5">Leading: <strong>1111</strong> • Reserved by IETF for future research & experiments.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 3.3 Subnetting: Host Bit Borrowing & 4-Subnet Division
+  renderSubnettingDiagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div>
+            <span class="text-[10px] font-black tracking-wider uppercase text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded">Subnetting Worked Schematic</span>
+            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">Dividing 192.168.1.0/24 into 4 Subnets (/26, Block Size = 64)</h4>
+          </div>
+          <span class="text-xs font-mono text-slate-500">2^s = 4 ➔ s=2, h=6</span>
+        </div>
+
+        <!-- Bit Borrowing Diagram -->
+        <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 mb-4 font-mono text-xs text-center">
+          <div class="text-[11px] font-bold text-slate-700 dark:text-slate-200 mb-2">4th Octet Bit Decomposition (Original /24 ➔ New /26)</div>
+          <div class="flex justify-center gap-1">
+            <span class="p-2 bg-emerald-600 text-white font-bold rounded w-12" title="Borrowed bit 1 (weight 128)">1<br/><span class="text-[8px]">128</span></span>
+            <span class="p-2 bg-emerald-600 text-white font-bold rounded w-12" title="Borrowed bit 2 (weight 64)">1<br/><span class="text-[8px]">64</span></span>
+            <span class="p-2 bg-blue-500 text-white rounded w-9" title="Host bit 6">0<br/><span class="text-[8px]">32</span></span>
+            <span class="p-2 bg-blue-500 text-white rounded w-9" title="Host bit 5">0<br/><span class="text-[8px]">16</span></span>
+            <span class="p-2 bg-blue-500 text-white rounded w-9" title="Host bit 4">0<br/><span class="text-[8px]">8</span></span>
+            <span class="p-2 bg-blue-500 text-white rounded w-9" title="Host bit 3">0<br/><span class="text-[8px]">4</span></span>
+            <span class="p-2 bg-blue-500 text-white rounded w-9" title="Host bit 2">0<br/><span class="text-[8px]">2</span></span>
+            <span class="p-2 bg-blue-500 text-white rounded w-9" title="Host bit 1">0<br/><span class="text-[8px]">1</span></span>
+          </div>
+          <div class="mt-2 text-[10px] text-slate-500 flex justify-center gap-6">
+            <span class="text-emerald-600 font-bold">Borrowed Subnet Bits: 2 (2^2 = 4 Subnets)</span>
+            <span class="text-blue-600 font-bold">Remaining Host Bits: 6 (2^6 - 2 = 62 Usable Hosts)</span>
+          </div>
+        </div>
+
+        <!-- 4 Subnet Blocks Visual -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-2.5 text-xs font-mono">
+          <div class="p-2.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800">
+            <div class="font-black text-emerald-700 dark:text-emerald-300">Subnet 1 (.0/26)</div>
+            <div class="text-[10px] text-slate-600 dark:text-slate-300 mt-1">Net: .0</div>
+            <div class="text-[10px] text-emerald-800 dark:text-emerald-200 font-bold">Usable: .1 – .62</div>
+            <div class="text-[10px] text-slate-500">Bcast: .63</div>
+          </div>
+          <div class="p-2.5 rounded-lg bg-blue-50 dark:bg-blue-950/40 border border-blue-300 dark:border-blue-800">
+            <div class="font-black text-blue-700 dark:text-blue-300">Subnet 2 (.64/26)</div>
+            <div class="text-[10px] text-slate-600 dark:text-slate-300 mt-1">Net: .64</div>
+            <div class="text-[10px] text-blue-800 dark:text-blue-200 font-bold">Usable: .65 – .126</div>
+            <div class="text-[10px] text-slate-500">Bcast: .127</div>
+          </div>
+          <div class="p-2.5 rounded-lg bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-800">
+            <div class="font-black text-amber-700 dark:text-amber-300">Subnet 3 (.128/26)</div>
+            <div class="text-[10px] text-slate-600 dark:text-slate-300 mt-1">Net: .128</div>
+            <div class="text-[10px] text-amber-800 dark:text-amber-200 font-bold">Usable: .129 – .190</div>
+            <div class="text-[10px] text-slate-500">Bcast: .191</div>
+          </div>
+          <div class="p-2.5 rounded-lg bg-purple-50 dark:bg-purple-950/40 border border-purple-300 dark:border-purple-800">
+            <div class="font-black text-purple-700 dark:text-purple-300">Subnet 4 (.192/26)</div>
+            <div class="text-[10px] text-slate-600 dark:text-slate-300 mt-1">Net: .192</div>
+            <div class="text-[10px] text-purple-800 dark:text-purple-200 font-bold">Usable: .193 – .254</div>
+            <div class="text-[10px] text-slate-500">Bcast: .255</div>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 3.4 IPv6 Architecture: 128-Bit Hextets & Fixed 40-Byte Header
+  renderIpv6Diagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div>
+            <span class="text-[10px] font-black tracking-wider uppercase text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded">128-Bit Architecture</span>
+            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">IPv6 Address Format, Zero Compression & 40-Byte Base Header</h4>
+          </div>
+          <span class="text-xs font-mono text-slate-500">2^128 ≈ 3.4 × 10^38 Addresses</span>
+        </div>
+
+        <!-- Abbreviation Rules Visual -->
+        <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 mb-4 font-mono text-xs">
+          <div class="text-[11px] font-bold text-slate-700 dark:text-slate-200 mb-2">RFC 5952 Compression Rules:</div>
+          <div class="space-y-1.5 text-[11px]">
+            <div class="p-2 rounded bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400">
+              <span class="font-bold text-slate-900 dark:text-white">Original:</span> 2001:0DB8:0000:0000:0000:0000:0000:0001
+            </div>
+            <div class="p-2 rounded bg-blue-50 dark:bg-blue-950/40 text-blue-800 dark:text-blue-300">
+              <span class="font-bold">Rule 1 (Omit Leading Zeros):</span> 2001:DB8:0:0:0:0:0:1
+            </div>
+            <div class="p-2 rounded bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 font-bold">
+              <span>Rule 2 (Double Colon '::' Once):</span> 2001:DB8::1
+            </div>
+          </div>
+        </div>
+
+        <!-- 40-Byte Header Layout -->
+        <div class="bg-white dark:bg-slate-800 p-3.5 rounded-xl border border-slate-200 dark:border-slate-700">
+          <div class="text-xs font-bold text-slate-700 dark:text-slate-200 mb-2">Fixed 40-Byte IPv6 Header Structure (8 Fields)</div>
+          <div class="grid grid-cols-12 gap-1 text-center font-mono text-[10px] font-bold">
+            <div class="col-span-2 bg-emerald-600 text-white p-2 rounded">Ver (4b)</div>
+            <div class="col-span-3 bg-teal-600 text-white p-2 rounded">Traffic Class (8b)</div>
+            <div class="col-span-7 bg-cyan-600 text-white p-2 rounded">Flow Label (20b)</div>
+            <div class="col-span-4 bg-blue-600 text-white p-2 rounded">Payload Length (16b)</div>
+            <div class="col-span-4 bg-indigo-600 text-white p-2 rounded">Next Header (8b)</div>
+            <div class="col-span-4 bg-purple-600 text-white p-2 rounded">Hop Limit (8b)</div>
+            <div class="col-span-12 bg-emerald-700 text-white p-2 rounded">Source IPv6 Address (128 bits / 16 bytes)</div>
+            <div class="col-span-12 bg-blue-700 text-white p-2 rounded">Destination IPv6 Address (128 bits / 16 bytes)</div>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 3.5 IPv4 vs IPv6: Header Comparison & Transition Mechanisms
+  renderIpv4VsIpv6Diagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div>
+            <span class="text-[10px] font-black tracking-wider uppercase text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/60 px-2.5 py-1 rounded">Coexistence & Transition</span>
+            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">IPv4 vs IPv6: 3 Major Transition Mechanisms</h4>
+          </div>
+          <span class="text-xs font-mono text-slate-500">Dual Stack • Tunneling • Translation</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+          <!-- Dual Stack -->
+          <div class="p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+            <div class="font-bold text-blue-600 dark:text-blue-400 mb-1 flex items-center gap-1.5">
+              <i class="fa-solid fa-layer-group"></i> 1. Dual Stack
+            </div>
+            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed mb-2">
+              Devices run both IPv4 and IPv6 protocol stacks simultaneously and choose based on DNS (A vs AAAA).
+            </p>
+            <div class="font-mono text-[10px] p-2 rounded bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300">
+              Host has:<br/>
+              • 192.168.1.10 (IPv4)<br/>
+              • 2001:DB8::10 (IPv6)
+            </div>
+          </div>
+
+          <!-- Tunneling -->
+          <div class="p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+            <div class="font-bold text-emerald-600 dark:text-emerald-400 mb-1 flex items-center gap-1.5">
+              <i class="fa-solid fa-arrows-split-up-and-left"></i> 2. Tunneling (6to4)
+            </div>
+            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed mb-2">
+              Encapsulates an IPv6 packet inside an IPv4 packet to traverse an IPv4-only transit network.
+            </p>
+            <div class="font-mono text-[10px] p-2 rounded bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-200">
+              [IPv4 Header | [IPv6 Packet]]
+            </div>
+          </div>
+
+          <!-- Translation -->
+          <div class="p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+            <div class="font-bold text-amber-600 dark:text-amber-400 mb-1 flex items-center gap-1.5">
+              <i class="fa-solid fa-language"></i> 3. Translation (NAT64)
+            </div>
+            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed mb-2">
+              Translates packet headers between IPv6 and IPv4, allowing IPv6 clients to reach legacy IPv4 servers.
+            </p>
+            <div class="font-mono text-[10px] p-2 rounded bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-200">
+              IPv6 Client ➔ NAT64 ➔ IPv4 Server
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // Distance Vector Routing: Bellman-Ford Vector Exchange
+  renderDistanceVectorDiagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div>
+            <span class="text-[10px] font-black tracking-wider uppercase text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/60 px-2.5 py-1 rounded">Distance Vector Algorithm</span>
+            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">Bellman-Ford Distributed Vector Exchange</h4>
+          </div>
+          <span class="text-xs font-mono text-slate-500">D_x(y) = min_v { c(x,v) + D_v(y) }</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs mb-3">
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+            <div class="font-bold text-blue-600 dark:text-blue-400 mb-1">1. Local Cost Table</div>
+            <p class="text-[11px] text-slate-500">Each node measures physical link delays $c(x,v)$ to directly attached neighbors $v$.</p>
+          </div>
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+            <div class="font-bold text-emerald-600 dark:text-emerald-400 mb-1">2. Periodic Exchange</div>
+            <p class="text-[11px] text-slate-500">Every 30s, sends its current estimated vector $D_x$ to immediate direct neighbors only.</p>
+          </div>
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+            <div class="font-bold text-indigo-600 dark:text-indigo-400 mb-1">3. Bellman-Ford Min</div>
+            <p class="text-[11px] text-slate-500">Recomputes least cost to destination $y$ via neighbor $v$: updates routing table if cost drops.</p>
+          </div>
+        </div>
+
+        <div class="p-3 bg-amber-50 dark:bg-amber-950/30 rounded-lg border border-amber-200 dark:border-amber-800/50 text-[11px] text-amber-800 dark:text-amber-300">
+          <strong>Key Philosophy:</strong> "Tell your immediate neighbors about the entire world as you currently know it." Susceptible to slow convergence and Count-to-Infinity.
+        </div>
+      </div>
+    `;
+  },
+
+  // Link State Routing: 5-Step SPF Process
+  renderLinkStateDiagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div>
+            <span class="text-[10px] font-black tracking-wider uppercase text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded">Link State Algorithm</span>
+            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">5-Step Dijkstra Shortest Path First (SPF) Pipeline</h4>
+          </div>
+          <span class="text-xs font-mono text-slate-500">OSPF / IS-IS • Global Topology Map</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-5 gap-2 text-center text-xs mb-3">
+          <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+            <div class="w-6 h-6 rounded-full bg-blue-100 text-blue-600 font-bold mx-auto mb-1 flex items-center justify-center text-[10px]">1</div>
+            <div class="font-bold text-slate-700 dark:text-slate-200 text-[11px]">HELLO</div>
+            <p class="text-[10px] text-slate-500">Discover immediate physical neighbors</p>
+          </div>
+          <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+            <div class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 font-bold mx-auto mb-1 flex items-center justify-center text-[10px]">2</div>
+            <div class="font-bold text-slate-700 dark:text-slate-200 text-[11px]">Echo/Delay</div>
+            <p class="text-[10px] text-slate-500">Measure round-trip delay to each neighbor</p>
+          </div>
+          <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+            <div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold mx-auto mb-1 flex items-center justify-center text-[10px]">3</div>
+            <div class="font-bold text-slate-700 dark:text-slate-200 text-[11px]">Build LSP</div>
+            <p class="text-[10px] text-slate-500">Assemble packet with Seq # and Link Costs</p>
+          </div>
+          <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+            <div class="w-6 h-6 rounded-full bg-amber-100 text-amber-600 font-bold mx-auto mb-1 flex items-center justify-center text-[10px]">4</div>
+            <div class="font-bold text-slate-700 dark:text-slate-200 text-[11px]">Flood LSP</div>
+            <p class="text-[10px] text-slate-500">Reliably flood LSP to entire network AS</p>
+          </div>
+          <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+            <div class="w-6 h-6 rounded-full bg-purple-100 text-purple-600 font-bold mx-auto mb-1 flex items-center justify-center text-[10px]">5</div>
+            <div class="font-bold text-slate-700 dark:text-slate-200 text-[11px]">Dijkstra</div>
+            <p class="text-[10px] text-slate-500">Execute SPF on LSDB to compute routes</p>
+          </div>
+        </div>
+
+        <div class="p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800/50 text-[11px] text-emerald-800 dark:text-emerald-300">
+          <strong>Key Philosophy:</strong> "Tell the entire world about your immediate neighbors." Fast convergence, loop-free, but requires higher memory and CPU for LSDB maintenance.
+        </div>
+      </div>
+    `;
+  },
+
+  // 3.6 Routing Table Updates: Periodic Timers vs Triggered Updates
+  renderRoutingTableUpdatesDiagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div>
+            <span class="text-[10px] font-black tracking-wider uppercase text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded">Update Mechanisms</span>
+            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">Periodic Timers vs. Triggered (Flash) Updates</h4>
+          </div>
+          <span class="text-xs font-mono text-slate-500">RIP 30s • Triggered on Link Failure</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+          <div class="p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+            <div class="font-bold text-blue-600 dark:text-blue-400 mb-2">Periodic Updates (Timer-Driven)</div>
+            <div class="space-y-1.5 text-[11px] font-mono text-slate-600 dark:text-slate-300">
+              <div class="p-1.5 rounded bg-slate-100 dark:bg-slate-900">⏱️ Update Timer: Every 30 seconds</div>
+              <div class="p-1.5 rounded bg-slate-100 dark:bg-slate-900">⏳ Invalid/Timeout Timer: 180 seconds</div>
+              <div class="p-1.5 rounded bg-slate-100 dark:bg-slate-900">🗑️ Flush/Garbage Timer: 120 seconds</div>
+            </div>
+            <p class="text-[11px] text-slate-500 mt-2">Router sends complete distance vector to direct neighbors regardless of topology changes.</p>
+          </div>
+
+          <div class="p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+            <div class="font-bold text-emerald-600 dark:text-emerald-400 mb-2">Triggered (Flash) Updates</div>
+            <div class="p-2 rounded bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-200 text-[11px] font-mono mb-2">
+              🚨 Event: Link to Network X severed!
+            </div>
+            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+              Router does NOT wait for the 30-second timer. It immediately broadcasts an update setting Cost(X) = ∞ (16) to stop neighbor routing loops.
+            </p>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 3.7 Comparison of DV vs LS Routing
+  renderComparisonDvLsDiagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div>
+            <span class="text-[10px] font-black tracking-wider uppercase text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2.5 py-1 rounded">Routing Paradigm Comparison</span>
+            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">Distance Vector (Bellman-Ford) vs. Link State (Dijkstra SPF)</h4>
+          </div>
+          <span class="text-xs font-mono text-slate-500">RIP vs OSPF / IS-IS</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+          <div class="p-4 bg-white dark:bg-slate-800 rounded-xl border-t-4 border-amber-500 shadow-sm">
+            <div class="font-bold text-amber-700 dark:text-amber-400 text-sm mb-1">Distance Vector (Tell Neighbors About the World)</div>
+            <ul class="space-y-1.5 text-[11px] text-slate-600 dark:text-slate-300 mt-2">
+              <li>• <strong>Knowledge:</strong> Only knows cost to reach destinations via direct neighbors ("Routing by rumor").</li>
+              <li>• <strong>Updates:</strong> Periodic table exchanges with direct physical neighbors.</li>
+              <li>• <strong>CPU & Memory:</strong> Low footprint; stores only distance vector.</li>
+              <li>• <strong>Convergence:</strong> Slow; susceptible to Count-to-Infinity loops.</li>
+            </ul>
+          </div>
+
+          <div class="p-4 bg-white dark:bg-slate-800 rounded-xl border-t-4 border-emerald-500 shadow-sm">
+            <div class="font-bold text-emerald-700 dark:text-emerald-400 text-sm mb-1">Link State (Tell the World About Neighbors)</div>
+            <ul class="space-y-1.5 text-[11px] text-slate-600 dark:text-slate-300 mt-2">
+              <li>• <strong>Knowledge:</strong> Complete identical topology map of entire AS in Link State Database (LSDB).</li>
+              <li>• <strong>Updates:</strong> Event-driven reliable flooding of Link State Packets (LSP).</li>
+              <li>• <strong>CPU & Memory:</strong> Higher footprint; runs Dijkstra SPF locally.</li>
+              <li>• <strong>Convergence:</strong> Fast; completely immune to count-to-infinity.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 3.8 Count-to-Infinity Problem: Step-by-Step Link Failure Trace
+  renderCountToInfinityDiagram: function() {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div>
+            <span class="text-[10px] font-black tracking-wider uppercase text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/60 px-2.5 py-1 rounded">Classic Failure Mode</span>
+            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">The Count-to-Infinity Problem & Solution Techniques</h4>
+          </div>
+          <span class="text-xs font-mono text-slate-500">Good News Fast, Bad News Slow</span>
+        </div>
+
+        <!-- Failure Trace -->
+        <div class="p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 mb-3 font-mono text-xs">
+          <div class="text-[11px] font-bold text-slate-700 dark:text-slate-200 mb-2">Topology: [ A ] &lt;=== link ===&gt; [ B ] &lt;=== link ===&gt; [ C ]</div>
+          <div class="p-2 rounded bg-rose-50 dark:bg-rose-950/40 text-rose-800 dark:text-rose-200 mb-2 text-[11px]">
+            💥 Link A-B goes down! A is now unreachable.
+          </div>
+          <div class="space-y-1 text-[11px] text-slate-600 dark:text-slate-300">
+            <div>1. B sees link to A is down. But before B can act, C announces: "I can reach A with cost 2!"</div>
+            <div>2. B mistakenly updates: Cost to A = 1 + 2 = 3 (via C).</div>
+            <div>3. Next round: C hears B can reach A with cost 3 ➔ C updates Cost to A = 1 + 3 = 4 (via B).</div>
+            <div>4. Packets bounce between B and C while cost climbs: 2 ➔ 3 ➔ 4 ➔ ... ➔ 16 (Infinity).</div>
+          </div>
+        </div>
+
+        <!-- Remedies -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs">
+          <div class="p-2.5 bg-emerald-50 dark:bg-emerald-950/30 rounded border border-emerald-200 dark:border-emerald-800">
+            <span class="font-bold text-emerald-700 dark:text-emerald-300">Split Horizon</span>
+            <p class="text-[10px] text-slate-600 dark:text-slate-400 mt-0.5">Never advertise a route back out the same interface it was learned from.</p>
+          </div>
+          <div class="p-2.5 bg-blue-50 dark:bg-blue-950/30 rounded border border-blue-200 dark:border-blue-800">
+            <span class="font-bold text-blue-700 dark:text-blue-300">Poison Reverse</span>
+            <p class="text-[10px] text-slate-600 dark:text-slate-400 mt-0.5">Explicitly advertise the route back with metric ∞ (16) to invalidate reverse paths.</p>
+          </div>
+          <div class="p-2.5 bg-purple-50 dark:bg-purple-950/30 rounded border border-purple-200 dark:border-purple-800">
+            <span class="font-bold text-purple-700 dark:text-purple-300">Max Hop Limit (15)</span>
+            <p class="text-[10px] text-slate-600 dark:text-slate-400 mt-0.5">Defines 16 as unreachable infinity, capping loop convergence time.</p>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 3.9 Internetworking & Tunneling
+  renderInternetworkingDiagram: function(id) {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div>
+            <span class="text-[10px] font-black tracking-wider uppercase text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded">Internetworking Architecture</span>
+            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">Connecting Disparate LANs & WANs Across Heterogeneous Networks</h4>
+          </div>
+          <span class="text-xs font-mono text-slate-500">MTU Handling • IP Protocol Encapsulation</span>
+        </div>
+
+        <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 font-mono text-xs">
+          <div class="flex flex-col md:flex-row justify-between items-center gap-2 text-center">
+            <div class="p-2.5 bg-emerald-100 dark:bg-emerald-900 text-emerald-900 dark:text-emerald-100 rounded w-full">
+              Ethernet LAN 1<br/><span class="text-[9px]">MTU = 1500 B</span>
+            </div>
+            <div class="text-slate-400 font-bold">➔ [Router 1] ➔</div>
+            <div class="p-2.5 bg-blue-100 dark:bg-blue-900 text-blue-900 dark:text-blue-100 rounded w-full">
+              WAN / Tunnel Backbone<br/><span class="text-[9px]">Encapsulated / Fragmented</span>
+            </div>
+            <div class="text-slate-400 font-bold">➔ [Router 2] ➔</div>
+            <div class="p-2.5 bg-purple-100 dark:bg-purple-900 text-purple-900 dark:text-purple-100 rounded w-full">
+              802.11 Wi-Fi LAN 2<br/><span class="text-[9px]">MTU = 2272 B</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 3.10 Routing Algorithms: Dijkstra SPF & Flooding
+  renderRoutingAlgorithmsDiagram: function(id) {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div>
+            <span class="text-[10px] font-black tracking-wider uppercase text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2.5 py-1 rounded">Graph Algorithm</span>
+            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">Dijkstra Shortest Path Tree & Optimality Principle</h4>
+          </div>
+          <span class="text-xs font-mono text-slate-500">Non-negative weights • O(V^2) / O(E log V)</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+            <div class="font-bold text-blue-600 dark:text-blue-400 mb-1">Bellman's Optimality Principle</div>
+            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+              If router J is on the optimal path from I to K, then the optimal path from J to K falls along the same route. Consequently, the set of optimal paths from all sources to a destination forms a tree rooted at the destination (Sink Tree).
+            </p>
+          </div>
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+            <div class="font-bold text-emerald-600 dark:text-emerald-400 mb-1">Flooding Damping</div>
+            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+              Flooding sends packets out on every interface except incoming. Duplicate explosion is damped using hop counters (decremented to 0) and sequence-number tracking tables.
+            </p>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 3.11 Congestion Control: Leaky Bucket, Token Bucket & Load Shedding
+  renderCongestionControlDiagram: function(id) {
+    return `
+      <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+          <div>
+            <span class="text-[10px] font-black tracking-wider uppercase text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded">Congestion Approaches</span>
+            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">Traffic Shaping (Leaky vs Token Bucket) & Load Shedding Policies</h4>
+          </div>
+          <span class="text-xs font-mono text-slate-500">Open-Loop vs Closed-Loop</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+          <!-- Leaky vs Token Bucket -->
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+            <div class="font-bold text-emerald-700 dark:text-emerald-300 mb-2">Traffic Shaping Models</div>
+            <div class="space-y-2 text-[11px]">
+              <div class="p-2 rounded bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-200 font-mono">
+                🪣 Leaky Bucket: Rigid constant rate output regardless of burstiness. Excess dropped.
+              </div>
+              <div class="p-2 rounded bg-blue-50 dark:bg-blue-950/40 text-blue-800 dark:text-blue-200 font-mono">
+                🪙 Token Bucket: Accumulates tokens; allows regulated bursts up to bucket capacity.
+              </div>
+            </div>
+          </div>
+
+          <!-- Wine vs Milk Load Shedding -->
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+            <div class="font-bold text-purple-700 dark:text-purple-300 mb-2">Load Shedding Discard Policies</div>
+            <div class="space-y-2 text-[11px]">
+              <div class="p-2 rounded bg-purple-50 dark:bg-purple-950/40 text-purple-800 dark:text-purple-200">
+                🍷 <strong>Wine Policy (File Transfer):</strong> Discard newly arrived packets; preserve old packets already close to destination.
+              </div>
+              <div class="p-2 rounded bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-200">
+                🥛 <strong>Milk Policy (Streaming Video/Voice):</strong> Discard stale old packets; preserve fresh incoming packets.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
 };
 
 if (typeof window !== 'undefined') {

@@ -1390,58 +1390,85 @@
                     {
                 id: "unit3",
                 module: "Unit 3: Network Layer",
-                badge: "24 Topics",
+                badge: "5 Topics • 20 Subtopics",
                 chapters: [
                     {
-                        id: "ch-u3-design",
+                        id: "topic-u3-1",
                         number: 1,
-                        title: "1. Network Layer Design Issues & Routing Fundamentals",
-                        shortTitle: "1. NL Design & Routing",
-                        subtopicIds: ["routing-design-issues", "network-layer", "forwarding", "routing", "optimality-principle"]
+                        title: "TOPIC 1 – IP ADDRESSES (IPv4 AND IPv6)",
+                        shortTitle: "Topic 1 – IP Addresses (IPv4 and IPv6)",
+                        type: "folder",
+                        items: [
+                            { id: "ip-addressing", title: "IP Addressing Basics", type: "document" },
+                            { id: "ipv4", title: "IPv4 Addressing and Classes", type: "document" },
+                            { id: "subnetting", title: "Subnetting", type: "document" },
+                            { id: "ipv6", title: "IPv6 Addressing", type: "document" },
+                            { id: "ipv4-vs-ipv6", title: "IPv4 vs IPv6", type: "document" }
+                        ],
+                        subtopicIds: ["ip-addressing", "ipv4", "subnetting", "ipv6", "ipv4-vs-ipv6"]
                     },
                     {
-                        id: "ch-u3-algorithms",
+                        id: "topic-u3-2",
                         number: 2,
-                        title: "2. Routing Algorithms (Dijkstra, Flooding, DV, Link-State)",
-                        shortTitle: "2. Routing Algorithms",
-                        subtopicIds: ["dijkstra", "flooding", "distance-vector", "link-state-routing"]
+                        title: "TOPIC 2 – INTERNETWORKING",
+                        shortTitle: "Topic 2 – Internetworking",
+                        type: "folder",
+                        items: [
+                            { id: "internetworking", title: "Internetworking Concepts", type: "document" },
+                            { id: "internetwork-routing", title: "Internetwork Routing", type: "document" },
+                            { id: "tunneling", title: "Tunneling", type: "document" }
+                        ],
+                        subtopicIds: ["internetworking", "internetwork-routing", "tunneling"]
                     },
                     {
-                        id: "ch-u3-congestion",
+                        id: "topic-u3-3",
                         number: 3,
-                        title: "3. Congestion Control in Computer Networks",
-                        shortTitle: "3. Congestion Control",
-                        subtopicIds: ["congestion-control", "traffic-aware-routing", "admission-control", "traffic-throttling", "load-shedding"]
+                        title: "TOPIC 3 – ROUTING ALGORITHMS",
+                        shortTitle: "Topic 3 – Routing Algorithms",
+                        type: "folder",
+                        items: [
+                            { id: "optimality-principle", title: "Optimality Principle", type: "document" },
+                            { id: "dijkstra", title: "Shortest Path Algorithm (Dijkstra's Algorithm)", type: "document" },
+                            { id: "flooding", title: "Flooding", type: "document" }
+                        ],
+                        subtopicIds: ["optimality-principle", "dijkstra", "flooding"]
                     },
                     {
-                        id: "ch-u3-internetworking",
+                        id: "topic-u3-4",
                         number: 4,
-                        title: "4. Internetworking and IP Routing",
-                        shortTitle: "4. Internetworking & Routing",
-                        subtopicIds: ["internetworking", "tunneling", "internetwork-routing"]
+                        title: "TOPIC 4 – DISTANCE VECTOR AND LINK STATE ROUTING",
+                        shortTitle: "Topic 4 – Distance Vector & Link State",
+                        type: "folder",
+                        items: [
+                            { id: "distance-vector", title: "Distance Vector Routing", type: "document" },
+                            { id: "link-state-routing", title: "Link State Routing", type: "document" },
+                            { id: "routing-table-updates", title: "Routing Table Updates", type: "document" },
+                            { id: "comparison-dv-ls", title: "Comparison of Distance Vector and Link State Routing", type: "document" },
+                            { id: "count-to-infinity", title: "Count-to-Infinity Problem", type: "document" }
+                        ],
+                        subtopicIds: ["distance-vector", "link-state-routing", "routing-table-updates", "comparison-dv-ls", "count-to-infinity"]
                     },
                     {
-                        id: "ch-u3-addressing",
+                        id: "topic-u3-5",
                         number: 5,
-                        title: "5. IP Addressing — IPv4 and IPv6",
-                        shortTitle: "5. IPv4 & IPv6 Addressing",
-                        subtopicIds: ["ipv4", "ip-addressing", "nat", "ipv6"]
-                    },
-                    {
-                        id: "ch-u3-protocols",
-                        number: 6,
-                        title: "6. Routing Protocols & Internet Architecture (OSPF, BGP, SDN)",
-                        shortTitle: "6. Internet Routing Protocols",
-                        subtopicIds: ["ospf", "bgp", "sdn"]
+                        title: "TOPIC 5 – CONGESTION CONTROL APPROACHES",
+                        shortTitle: "Topic 5 – Congestion Control Approaches",
+                        type: "folder",
+                        items: [
+                            { id: "traffic-aware-routing", title: "Traffic-Aware Routing", type: "document" },
+                            { id: "admission-control", title: "Admission Control", type: "document" },
+                            { id: "traffic-throttling", title: "Traffic Throttling", type: "document" },
+                            { id: "load-shedding", title: "Load Shedding", type: "document" }
+                        ],
+                        subtopicIds: ["traffic-aware-routing", "admission-control", "traffic-throttling", "load-shedding"]
                     }
                 ],
                 topicIds: [
-                    "routing-design-issues", "network-layer", "forwarding", "routing", "optimality-principle",
-                    "dijkstra", "flooding", "distance-vector", "link-state-routing",
-                    "congestion-control", "traffic-aware-routing", "admission-control", "traffic-throttling", "load-shedding",
-                    "internetworking", "tunneling", "internetwork-routing",
-                    "ipv4", "ip-addressing", "nat", "ipv6",
-                    "ospf", "bgp", "sdn"
+                    "ip-addressing", "ipv4", "subnetting", "ipv6", "ipv4-vs-ipv6",
+                    "internetworking", "internetwork-routing", "tunneling",
+                    "optimality-principle", "dijkstra", "flooding",
+                    "distance-vector", "link-state-routing", "routing-table-updates", "comparison-dv-ls", "count-to-infinity",
+                    "traffic-aware-routing", "admission-control", "traffic-throttling", "load-shedding"
                 ]
             },
             {

@@ -151,45 +151,48 @@ const TOPIC_CHAPTER_MAP = {
   "u2-practice-test": { chapNum: 11, chapTitle: "Topic 11 – Revision and Assessment" },
 
   // Unit 3: Master Pedagogical Hierarchy Mapping from Syllabus PDF
-  // Chapter 1: Topic 1: Network Layer Design Issues & Routing Fundamentals
-  "routing-design-issues": { chapNum: 1, chapTitle: "Topic 1: Network Layer Design Issues & Routing Fundamentals" },
-  "network-layer": { chapNum: 1, chapTitle: "Topic 1: Network Layer Design Issues & Routing Fundamentals" },
-  "forwarding": { chapNum: 1, chapTitle: "Topic 1: Network Layer Design Issues & Routing Fundamentals" },
-  "routing": { chapNum: 1, chapTitle: "Topic 1: Network Layer Design Issues & Routing Fundamentals" },
-  "optimality-principle": { chapNum: 1, chapTitle: "Topic 1: Network Layer Design Issues & Routing Fundamentals" },
+  // Topic 1 – IP Addresses (IPv4 and IPv6)
+  "ip-addressing": { chapNum: 1, chapTitle: "Topic 1 – IP Addresses (IPv4 and IPv6)" },
+  "ipv4": { chapNum: 1, chapTitle: "Topic 1 – IP Addresses (IPv4 and IPv6)" },
+  "ipv4-protocol": { chapNum: 1, chapTitle: "Topic 1 – IP Addresses (IPv4 and IPv6)" },
+  "subnetting": { chapNum: 1, chapTitle: "Topic 1 – IP Addresses (IPv4 and IPv6)" },
+  "ipv6": { chapNum: 1, chapTitle: "Topic 1 – IP Addresses (IPv4 and IPv6)" },
+  "ipv6-protocol": { chapNum: 1, chapTitle: "Topic 1 – IP Addresses (IPv4 and IPv6)" },
+  "ipv4-vs-ipv6": { chapNum: 1, chapTitle: "Topic 1 – IP Addresses (IPv4 and IPv6)" },
+  "nat": { chapNum: 1, chapTitle: "Topic 1 – IP Addresses (IPv4 and IPv6)" },
 
-  // Chapter 2: Topic 2: Routing Algorithms
-  "shortest-path-algorithm": { chapNum: 2, chapTitle: "Topic 2: Routing Algorithms" },
-  "dijkstra": { chapNum: 2, chapTitle: "Topic 2: Routing Algorithms" },
-  "flooding": { chapNum: 2, chapTitle: "Topic 2: Routing Algorithms" },
-  "distance-vector-routing": { chapNum: 2, chapTitle: "Topic 2: Routing Algorithms" },
-  "distance-vector": { chapNum: 2, chapTitle: "Topic 2: Routing Algorithms" },
-  "link-state-routing": { chapNum: 2, chapTitle: "Topic 2: Routing Algorithms" },
+  // Topic 2 – Internetworking
+  "internetworking": { chapNum: 2, chapTitle: "Topic 2 – Internetworking" },
+  "internetwork-routing": { chapNum: 2, chapTitle: "Topic 2 – Internetworking" },
+  "tunneling": { chapNum: 2, chapTitle: "Topic 2 – Internetworking" },
 
-  // Chapter 3: Topic 3: Congestion Control in Computer Networks
-  "congestion-control": { chapNum: 3, chapTitle: "Topic 3: Congestion Control in Computer Networks" },
-  "traffic-aware-routing": { chapNum: 3, chapTitle: "Topic 3: Congestion Control in Computer Networks" },
-  "admission-control": { chapNum: 3, chapTitle: "Topic 3: Congestion Control in Computer Networks" },
-  "traffic-throttling": { chapNum: 3, chapTitle: "Topic 3: Congestion Control in Computer Networks" },
-  "load-shedding": { chapNum: 3, chapTitle: "Topic 3: Congestion Control in Computer Networks" },
+  // Topic 3 – Routing Algorithms
+  "optimality-principle": { chapNum: 3, chapTitle: "Topic 3 – Routing Algorithms" },
+  "routing-design-issues": { chapNum: 3, chapTitle: "Topic 3 – Routing Algorithms" },
+  "network-layer": { chapNum: 3, chapTitle: "Topic 3 – Routing Algorithms" },
+  "forwarding": { chapNum: 3, chapTitle: "Topic 3 – Routing Algorithms" },
+  "routing": { chapNum: 3, chapTitle: "Topic 3 – Routing Algorithms" },
+  "dijkstra": { chapNum: 3, chapTitle: "Topic 3 – Routing Algorithms" },
+  "shortest-path-algorithm": { chapNum: 3, chapTitle: "Topic 3 – Routing Algorithms" },
+  "flooding": { chapNum: 3, chapTitle: "Topic 3 – Routing Algorithms" },
 
-  // Chapter 4: Topic 4: Internetworking and IP Routing
-  "internetworking": { chapNum: 4, chapTitle: "Topic 4: Internetworking and IP Routing" },
-  "tunneling": { chapNum: 4, chapTitle: "Topic 4: Internetworking and IP Routing" },
-  "internetwork-routing": { chapNum: 4, chapTitle: "Topic 4: Internetworking and IP Routing" },
+  // Topic 4 – Distance Vector and Link State Routing
+  "distance-vector": { chapNum: 4, chapTitle: "Topic 4 – Distance Vector and Link State Routing" },
+  "distance-vector-routing": { chapNum: 4, chapTitle: "Topic 4 – Distance Vector and Link State Routing" },
+  "link-state-routing": { chapNum: 4, chapTitle: "Topic 4 – Distance Vector and Link State Routing" },
+  "routing-table-updates": { chapNum: 4, chapTitle: "Topic 4 – Distance Vector and Link State Routing" },
+  "comparison-dv-ls": { chapNum: 4, chapTitle: "Topic 4 – Distance Vector and Link State Routing" },
+  "count-to-infinity": { chapNum: 4, chapTitle: "Topic 4 – Distance Vector and Link State Routing" },
+  "ospf": { chapNum: 4, chapTitle: "Topic 4 – Distance Vector and Link State Routing" },
+  "bgp": { chapNum: 4, chapTitle: "Topic 4 – Distance Vector and Link State Routing" },
+  "sdn": { chapNum: 4, chapTitle: "Topic 4 – Distance Vector and Link State Routing" },
 
-  // Chapter 5: Topic 5: IP Addressing — IPv4 and IPv6
-  "ipv4-protocol": { chapNum: 5, chapTitle: "Topic 5: IP Addressing — IPv4 and IPv6" },
-  "ipv4": { chapNum: 5, chapTitle: "Topic 5: IP Addressing — IPv4 and IPv6" },
-  "ip-addressing": { chapNum: 5, chapTitle: "Topic 5: IP Addressing — IPv4 and IPv6" },
-  "nat": { chapNum: 5, chapTitle: "Topic 5: IP Addressing — IPv4 and IPv6" },
-  "ipv6-protocol": { chapNum: 5, chapTitle: "Topic 5: IP Addressing — IPv4 and IPv6" },
-  "ipv6": { chapNum: 5, chapTitle: "Topic 5: IP Addressing — IPv4 and IPv6" },
-
-  // Chapter 6: Routing Protocols & Internet Architecture
-  "ospf": { chapNum: 6, chapTitle: "Topic 6: Routing Protocols & Architecture" },
-  "bgp": { chapNum: 6, chapTitle: "Topic 6: Routing Protocols & Architecture" },
-  "sdn": { chapNum: 6, chapTitle: "Topic 6: Routing Protocols & Architecture" }
+  // Topic 5 – Congestion Control Approaches
+  "traffic-aware-routing": { chapNum: 5, chapTitle: "Topic 5 – Congestion Control Approaches" },
+  "congestion-control": { chapNum: 5, chapTitle: "Topic 5 – Congestion Control Approaches" },
+  "admission-control": { chapNum: 5, chapTitle: "Topic 5 – Congestion Control Approaches" },
+  "traffic-throttling": { chapNum: 5, chapTitle: "Topic 5 – Congestion Control Approaches" },
+  "load-shedding": { chapNum: 5, chapTitle: "Topic 5 – Congestion Control Approaches" }
 };
 
 var TopicPageEngine = {
