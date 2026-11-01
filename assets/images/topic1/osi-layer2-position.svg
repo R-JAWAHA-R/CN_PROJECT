@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="100%" height="100%" style="background:#ffffff; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <defs>
+    <linearGradient id="l2Grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#10B981" />
+    </linearGradient>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#334155" />
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.08" />
+    </filter>
+    <filter id="glow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#10B981" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <!-- Title Card -->
+  <rect x="30" y="20" width="840" height="60" rx="12" fill="url(#headerGrad)" filter="url(#shadow)" />
+  <text x="50" y="56" fill="#F8FAFC" font-size="20" font-weight="700">OSI Reference Architecture: Data Link Layer Position &amp; PDU Flow</text>
+  <rect x="710" y="38" width="140" height="26" rx="6" fill="#10B981" />
+  <text x="780" y="55" fill="#FFFFFF" font-size="11" font-weight="700" text-anchor="middle">LAYER 2 EMPHASIS</text>
+
+  <!-- Left: OSI 7-Layer Stack -->
+  <g transform="translate(50, 105)">
+    <!-- Layer 7 -->
+    <rect x="0" y="0" width="340" height="38" rx="6" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5" />
+    <text x="20" y="24" fill="#64748B" font-size="12" font-weight="700">Layer 7</text>
+    <text x="90" y="24" fill="#334155" font-size="13" font-weight="600">Application Layer</text>
+
+    <!-- Layer 6 -->
+    <rect x="0" y="44" width="340" height="38" rx="6" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5" />
+    <text x="20" y="68" fill="#64748B" font-size="12" font-weight="700">Layer 6</text>
+    <text x="90" y="68" fill="#334155" font-size="13" font-weight="600">Presentation Layer</text>
+
+    <!-- Layer 5 -->
+    <rect x="0" y="88" width="340" height="38" rx="6" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5" />
+    <text x="20" y="112" fill="#64748B" font-size="12" font-weight="700">Layer 5</text>
+    <text x="90" y="112" fill="#334155" font-size="13" font-weight="600">Session Layer</text>
+
+    <!-- Layer 4 -->
+    <rect x="0" y="132" width="340" height="38" rx="6" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5" />
+    <text x="20" y="156" fill="#64748B" font-size="12" font-weight="700">Layer 4</text>
+    <text x="90" y="156" fill="#334155" font-size="13" font-weight="600">Transport Layer</text>
+
+    <!-- Layer 3 -->
+    <rect x="0" y="176" width="340" height="38" rx="6" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.5" />
+    <text x="20" y="200" fill="#2563EB" font-size="12" font-weight="700">Layer 3</text>
+    <text x="90" y="200" fill="#1E40AF" font-size="13" font-weight="600">Network Layer (Packets)</text>
+
+    <!-- Layer 2: HIGHLIGHTED -->
+    <rect x="-8" y="218" width="356" height="56" rx="10" fill="url(#l2Grad)" filter="url(#glow)" />
+    <rect x="0" y="224" width="340" height="44" rx="8" fill="#059669" />
+    <text x="20" y="251" fill="#A7F3D0" font-size="13" font-weight="800">Layer 2</text>
+    <text x="90" y="251" fill="#FFFFFF" font-size="15" font-weight="800">DATA LINK LAYER (Frames)</text>
+    <circle cx="320" cy="246" r="6" fill="#34D399" />
+
+    <!-- Layer 1 -->
+    <rect x="0" y="280" width="340" height="38" rx="6" fill="#FEF3C7" stroke="#FCD34D" stroke-width="1.5" />
+    <text x="20" y="304" fill="#D97706" font-size="12" font-weight="700">Layer 1</text>
+    <text x="90" y="304" fill="#92400E" font-size="13" font-weight="600">Physical Layer (Bits)</text>
+
+    <!-- Physical Medium -->
+    <rect x="0" y="328" width="340" height="30" rx="6" fill="#334155" />
+    <text x="170" y="348" fill="#F8FAFC" font-size="11" font-weight="600" text-anchor="middle">Physical Transmission Medium (Cable / Wireless)</text>
+  </g>
+
+  <!-- Right: PDU Transformation & Encapsulation Flow -->
+  <g transform="translate(440, 105)">
+    <rect x="0" y="0" width="410" height="358" rx="12" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2" filter="url(#shadow)" />
+    
+    <text x="25" y="34" fill="#0F172A" font-size="15" font-weight="700">Data Link Layer Encapsulation Role</text>
+    <line x1="25" y1="46" x2="385" y2="46" stroke="#E2E8F0" stroke-width="1.5" />
+
+    <!-- Step 1: Ingress Packet -->
+    <g transform="translate(25, 65)">
+      <text x="0" y="15" fill="#475569" font-size="11" font-weight="600">1. Receives Packet from Layer 3 (Network Layer)</text>
+      <rect x="0" y="25" width="360" height="34" rx="6" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1.5" />
+      <text x="180" y="47" fill="#1E40AF" font-size="12" font-weight="700" text-anchor="middle">Network Layer Packet (IP Header + Payload)</text>
+    </g>
+
+    <!-- Arrow Down -->
+    <path d="M 205 140 L 205 160" stroke="#059669" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow)" />
+    <polygon points="205,164 200,154 210,154" fill="#059669" />
+
+    <!-- Step 2: DLL Frame Construction -->
+    <g transform="translate(25, 175)">
+      <text x="0" y="15" fill="#059669" font-size="12" font-weight="700">2. Encapsulates into Layer 2 Frame with Header &amp; Trailer</text>
+      
+      <!-- Frame Structure -->
+      <g transform="translate(0, 25)">
+        <!-- Header -->
+        <rect x="0" y="0" width="95" height="44" rx="6" fill="#10B981" />
+        <text x="47" y="20" fill="#FFFFFF" font-size="11" font-weight="700" text-anchor="middle">Frame Header</text>
+        <text x="47" y="34" fill="#D1FAE5" font-size="9" text-anchor="middle">MAC / Control</text>
+
+        <!-- Payload -->
+        <rect x="100" y="0" width="165" height="44" rx="6" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1.5" />
+        <text x="182" y="20" fill="#1E40AF" font-size="11" font-weight="700" text-anchor="middle">Packet Payload</text>
+        <text x="182" y="34" fill="#64748B" font-size="9" text-anchor="middle">(Network Layer Data)</text>
+
+        <!-- Trailer -->
+        <rect x="270" y="0" width="90" height="44" rx="6" fill="#F59E0B" />
+        <text x="315" y="20" fill="#FFFFFF" font-size="11" font-weight="700" text-anchor="middle">Trailer</text>
+        <text x="315" y="34" fill="#FEF3C7" font-size="9" text-anchor="middle">CRC / FCS</text>
+      </g>
+    </g>
+
+    <!-- Arrow Down -->
+    <polygon points="205,274 200,264 210,264" fill="#D97706" />
+
+    <!-- Step 3: Egress Bits -->
+    <g transform="translate(25, 285)">
+      <text x="0" y="15" fill="#475569" font-size="11" font-weight="600">3. Streams Raw Bits to Layer 1 for Physical Transmission</text>
+      <rect x="0" y="25" width="360" height="28" rx="6" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.5" />
+      <text x="180" y="44" fill="#92400E" font-size="12" font-family="monospace" font-weight="700" text-anchor="middle">01100001 01101100 01101111 ...</text>
+    </g>
+  </g>
+
+  <!-- Footer Tagline -->
+  <rect x="30" y="480" width="840" height="28" rx="6" fill="#F8FAFC" />
+  <text x="450" y="498" fill="#64748B" font-size="11" font-weight="500" text-anchor="middle">Tanenbaum Ch. 3 &bull; Forouzan Ch. 11 &bull; Layer 2 transforms raw unguided physical bit transmission into reliable frame-level node delivery</text>
+</svg>

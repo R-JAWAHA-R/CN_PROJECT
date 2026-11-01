@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="100%" height="100%" style="background:#ffffff; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <rect x="30" y="20" width="840" height="54" rx="10" fill="#0F172A" />
+  <text x="50" y="53" fill="#F8FAFC" font-size="18" font-weight="700">Comprehensive Comparison: All Multiple Access Protocols</text>
+
+  <g transform="translate(50, 95)">
+    <!-- Header -->
+    <rect x="0" y="0" width="800" height="36" rx="6" fill="#1E293B" />
+    <text x="15" y="23" fill="#FFF" font-size="11" font-weight="bold">Protocol</text>
+    <text x="170" y="23" fill="#A7F3D0" font-size="11" font-weight="bold">Sensing?</text>
+    <text x="260" y="23" fill="#A7F3D0" font-size="11" font-weight="bold">Collision Detection?</text>
+    <text x="420" y="23" fill="#93C5FD" font-size="11" font-weight="bold">Max Throughput</text>
+    <text x="560" y="23" fill="#C4B5FD" font-size="11" font-weight="bold">Primary Medium</text>
+    <text x="690" y="23" fill="#FDE68A" font-size="11" font-weight="bold">Key Strength</text>
+
+    <!-- Pure ALOHA -->
+    <rect x="0" y="40" width="800" height="38" fill="#F8FAFC" stroke="#E2E8F0" />
+    <text x="15" y="64" fill="#0F172A" font-size="10.5" font-weight="bold">Pure ALOHA</text>
+    <text x="170" y="64" fill="#DC2626" font-size="10">No</text>
+    <text x="260" y="64" fill="#DC2626" font-size="10">No (ACK timeout)</text>
+    <text x="420" y="64" fill="#DC2626" font-size="10.5" font-weight="bold">18.4% (G=0.5)</text>
+    <text x="560" y="64" fill="#64748B" font-size="10">Wireless / Satellite</text>
+    <text x="690" y="64" fill="#64748B" font-size="9.5">Extremely simple</text>
+
+    <!-- Slotted ALOHA -->
+    <rect x="0" y="82" width="800" height="38" fill="#FFFFFF" stroke="#E2E8F0" />
+    <text x="15" y="106" fill="#0F172A" font-size="10.5" font-weight="bold">Slotted ALOHA</text>
+    <text x="170" y="106" fill="#DC2626" font-size="10">No</text>
+    <text x="260" y="106" fill="#DC2626" font-size="10">No (ACK timeout)</text>
+    <text x="420" y="106" fill="#D97706" font-size="10.5" font-weight="bold">36.8% (G=1.0)</text>
+    <text x="560" y="106" fill="#64748B" font-size="10">Satellite Up-link</text>
+    <text x="690" y="106" fill="#64748B" font-size="9.5">2&times; capacity of Pure</text>
+
+    <!-- 1-Persistent CSMA -->
+    <rect x="0" y="124" width="800" height="38" fill="#F8FAFC" stroke="#E2E8F0" />
+    <text x="15" y="148" fill="#0F172A" font-size="10.5" font-weight="bold">1-Persistent CSMA</text>
+    <text x="170" y="148" fill="#059669" font-size="10">Yes (Continuous)</text>
+    <text x="260" y="148" fill="#DC2626" font-size="10">No</text>
+    <text x="420" y="148" fill="#2563EB" font-size="10.5">&approx; 50%</text>
+    <text x="560" y="148" fill="#64748B" font-size="10">Baseband Bus</text>
+    <text x="690" y="148" fill="#64748B" font-size="9.5">Lowest idle latency</text>
+
+    <!-- CSMA/CD -->
+    <rect x="0" y="166" width="800" height="42" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5" />
+    <text x="15" y="192" fill="#1E40AF" font-size="11" font-weight="bold">CSMA/CD (802.3)</text>
+    <text x="170" y="192" fill="#059669" font-size="10.5" font-weight="bold">Yes</text>
+    <text x="260" y="192" fill="#059669" font-size="10.5" font-weight="bold">Yes (Hardware abort)</text>
+    <text x="420" y="192" fill="#059669" font-size="11" font-weight="bold">&gt; 90% (Low &tau;)</text>
+    <text x="560" y="192" fill="#1E40AF" font-size="10.5" font-weight="bold">Wired Ethernet</text>
+    <text x="690" y="192" fill="#059669" font-size="10" font-weight="bold">Zero time wasted on collision</text>
+
+    <!-- CSMA/CA -->
+    <rect x="0" y="212" width="800" height="42" fill="#ECFDF5" stroke="#10B981" stroke-width="1.5" />
+    <text x="15" y="238" fill="#065F46" font-size="11" font-weight="bold">CSMA/CA (802.11)</text>
+    <text x="170" y="238" fill="#059669" font-size="10.5" font-weight="bold">Yes (Phys + NAV)</text>
+    <text x="260" y="238" fill="#D97706" font-size="10.5">Avoidance (RTS/CTS)</text>
+    <text x="420" y="238" fill="#059669" font-size="11">&approx; 70-80%</text>
+    <text x="560" y="238" fill="#065F46" font-size="10.5" font-weight="bold">Wi-Fi Wireless</text>
+    <text x="690" y="238" fill="#059669" font-size="10" font-weight="bold">Solves hidden terminal</text>
+
+    <!-- Token Ring -->
+    <rect x="0" y="258" width="800" height="38" fill="#F8FAFC" stroke="#E2E8F0" />
+    <text x="15" y="282" fill="#0F172A" font-size="10.5" font-weight="bold">Token Passing (802.5)</text>
+    <text x="170" y="282" fill="#64748B" font-size="10">Token based</text>
+    <text x="260" y="282" fill="#059669" font-size="10">Collision-Free</text>
+    <text x="420" y="282" fill="#7C3AED" font-size="10.5" font-weight="bold">&approx; 100% (Heavy load)</text>
+    <text x="560" y="282" fill="#64748B" font-size="10">Ring Topology</text>
+    <text x="690" y="282" fill="#64748B" font-size="9.5">Bounded max latency</text>
+  </g>
+</svg>

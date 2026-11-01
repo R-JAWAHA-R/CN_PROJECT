@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="100%" height="100%" style="background:#ffffff; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <!-- Title -->
+  <rect x="30" y="20" width="840" height="54" rx="10" fill="#0F172A" />
+  <text x="50" y="53" fill="#F8FAFC" font-size="18" font-weight="700">The 6 Core Functions of the Data Link Layer</text>
+
+  <!-- 6 Grid Cards -->
+  <g transform="translate(45, 95)">
+    <!-- 1. Framing -->
+    <g transform="translate(0, 0)">
+      <rect width="255" height="185" rx="10" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5" />
+      <rect width="255" height="6" rx="3" fill="#10B981" />
+      <circle cx="35" cy="38" r="16" fill="#ECFDF5" />
+      <text x="35" y="44" fill="#059669" font-size="16" font-weight="800" text-anchor="middle">1</text>
+      <text x="65" y="42" fill="#0F172A" font-size="14" font-weight="700">Framing</text>
+      <text x="20" y="75" fill="#475569" font-size="11.5" font-weight="500">Divides the raw bit stream from Network Layer into distinct data units (frames) with header and trailer delimiters.</text>
+      <rect x="15" y="130" width="225" height="40" rx="6" fill="#FFFFFF" stroke="#CBD5E1" />
+      <text x="127" y="154" fill="#059669" font-size="10.5" font-family="monospace" font-weight="700" text-anchor="middle">[FLAG] Header | Data | FCS [FLAG]</text>
+    </g>
+
+    <!-- 2. Physical Addressing -->
+    <g transform="translate(275, 0)">
+      <rect width="255" height="185" rx="10" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5" />
+      <rect width="255" height="6" rx="3" fill="#3B82F6" />
+      <circle cx="35" cy="38" r="16" fill="#EFF6FF" />
+      <text x="35" y="44" fill="#2563EB" font-size="16" font-weight="800" text-anchor="middle">2</text>
+      <text x="65" y="42" fill="#0F172A" font-size="14" font-weight="700">Physical Addressing</text>
+      <text x="20" y="75" fill="#475569" font-size="11.5" font-weight="500">Attaches 48-bit hardware MAC addresses to ensure delivery to the intended local recipient network card (NIC).</text>
+      <rect x="15" y="130" width="225" height="40" rx="6" fill="#FFFFFF" stroke="#CBD5E1" />
+      <text x="127" y="154" fill="#2563EB" font-size="10.5" font-family="monospace" font-weight="700" text-anchor="middle">00:1A:2B:3C:4D:5E (48 bits)</text>
+    </g>
+
+    <!-- 3. Flow Control -->
+    <g transform="translate(550, 0)">
+      <rect width="255" height="185" rx="10" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5" />
+      <rect width="255" height="6" rx="3" fill="#F59E0B" />
+      <circle cx="35" cy="38" r="16" fill="#FEF3C7" />
+      <text x="35" y="44" fill="#D97706" font-size="16" font-weight="800" text-anchor="middle">3</text>
+      <text x="65" y="42" fill="#0F172A" font-size="14" font-weight="700">Flow Control</text>
+      <text x="20" y="75" fill="#475569" font-size="11.5" font-weight="500">Prevents a fast sender from swamping a slow receiver by regulating transmission rates via feedback (Stop-and-Wait / Sliding Window).</text>
+      <rect x="15" y="130" width="225" height="40" rx="6" fill="#FFFFFF" stroke="#CBD5E1" />
+      <text x="127" y="154" fill="#D97706" font-size="10" font-weight="700" text-anchor="middle">Sender Window = N &le; 2^m - 1</text>
+    </g>
+
+    <!-- 4. Error Control -->
+    <g transform="translate(0, 205)">
+      <rect width="255" height="185" rx="10" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5" />
+      <rect width="255" height="6" rx="3" fill="#EF4444" />
+      <circle cx="35" cy="38" r="16" fill="#FEE2E2" />
+      <text x="35" y="44" fill="#DC2626" font-size="16" font-weight="800" text-anchor="middle">4</text>
+      <text x="65" y="42" fill="#0F172A" font-size="14" font-weight="700">Error Control</text>
+      <text x="20" y="75" fill="#475569" font-size="11.5" font-weight="500">Detects and corrects bit corruption or lost frames using checksums (CRC) and Automatic Repeat reQuest (ARQ) retransmissions.</text>
+      <rect x="15" y="130" width="225" height="40" rx="6" fill="#FFFFFF" stroke="#CBD5E1" />
+      <text x="127" y="154" fill="#DC2626" font-size="10.5" font-family="monospace" font-weight="700" text-anchor="middle">CRC-32 &bull; ACK / NAK &bull; Timers</text>
+    </g>
+
+    <!-- 5. Access Control (MAC) -->
+    <g transform="translate(275, 205)">
+      <rect width="255" height="185" rx="10" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5" />
+      <rect width="255" height="6" rx="3" fill="#8B5CF6" />
+      <circle cx="35" cy="38" r="16" fill="#F5F3FF" />
+      <text x="35" y="44" fill="#7C3AED" font-size="16" font-weight="800" text-anchor="middle">5</text>
+      <text x="65" y="42" fill="#0F172A" font-size="14" font-weight="700">Access Control</text>
+      <text x="20" y="75" fill="#475569" font-size="11.5" font-weight="500">Arbitrates multi-station access to shared communication channels (bus or radio) to avoid collisions using CSMA, Token, or Polling.</text>
+      <rect x="15" y="130" width="225" height="40" rx="6" fill="#FFFFFF" stroke="#CBD5E1" />
+      <text x="127" y="154" fill="#7C3AED" font-size="10.5" font-weight="700" text-anchor="middle">CSMA/CD &bull; CSMA/CA &bull; Token Ring</text>
+    </g>
+
+    <!-- 6. Link Management -->
+    <g transform="translate(550, 205)">
+      <rect width="255" height="185" rx="10" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5" />
+      <rect width="255" height="6" rx="3" fill="#06B6D4" />
+      <circle cx="35" cy="38" r="16" fill="#ECFEFF" />
+      <text x="35" y="44" fill="#0891B2" font-size="16" font-weight="800" text-anchor="middle">6</text>
+      <text x="65" y="42" fill="#0F172A" font-size="14" font-weight="700">Link Management</text>
+      <text x="20" y="75" fill="#475569" font-size="11.5" font-weight="500">Controls the establishment, maintenance, parameter negotiation (MTU, speed, duplex), and orderly termination of the data link.</text>
+      <rect x="15" y="130" width="225" height="40" rx="6" fill="#FFFFFF" stroke="#CBD5E1" />
+      <text x="127" y="154" fill="#0891B2" font-size="10.5" font-weight="700" text-anchor="middle">LCP (PPP) &bull; Auto-Negotiation</text>
+    </g>
+  </g>
+</svg>

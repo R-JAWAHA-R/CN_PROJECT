@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="100%" height="100%" style="background:#ffffff; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <rect x="30" y="20" width="840" height="54" rx="10" fill="#0F172A" />
+  <text x="50" y="53" fill="#F8FAFC" font-size="18" font-weight="700">Circular Sequence Number Buffer (Modulo-2^m Arithmetic)</text>
+
+  <g transform="translate(100, 95)">
+    <!-- Circular Ring of 8 Sequence Slots (m = 3 bits) -->
+    <circle cx="200" cy="180" r="140" fill="none" stroke="#E2E8F0" stroke-width="38" />
+
+    <!-- 8 Slots around circle -->
+    <!-- 0: top -->
+    <circle cx="200" cy="40" r="18" fill="#E2E8F0" /><text x="200" y="46" fill="#334" font-size="14" font-weight="bold" text-anchor="middle">0</text>
+    <!-- 1: top-right -->
+    <circle cx="299" cy="81" r="18" fill="#E2E8F0" /><text x="299" y="87" fill="#334" font-size="14" font-weight="bold" text-anchor="middle">1</text>
+    <!-- 2: right (Active Window start) -->
+    <circle cx="340" cy="180" r="20" fill="#3B82F6" /><text x="340" y="186" fill="#FFF" font-size="14" font-weight="bold" text-anchor="middle">2</text>
+    <!-- 3: bottom-right -->
+    <circle cx="299" cy="279" r="20" fill="#3B82F6" /><text x="299" y="285" fill="#FFF" font-size="14" font-weight="bold" text-anchor="middle">3</text>
+    <!-- 4: bottom -->
+    <circle cx="200" cy="320" r="20" fill="#3B82F6" /><text x="200" y="326" fill="#FFF" font-size="14" font-weight="bold" text-anchor="middle">4</text>
+    <!-- 5: bottom-left -->
+    <circle cx="101" cy="279" r="20" fill="#10B981" /><text x="101" y="285" fill="#FFF" font-size="14" font-weight="bold" text-anchor="middle">5</text>
+    <!-- 6: left -->
+    <circle cx="60" cy="180" r="18" fill="#F1F5F9" stroke="#CBD5E1" /><text x="60" y="186" fill="#94A3B8" font-size="14" text-anchor="middle">6</text>
+    <!-- 7: top-left -->
+    <circle cx="101" cy="81" r="18" fill="#F1F5F9" stroke="#CBD5E1" /><text x="101" y="87" fill="#94A3B8" font-size="14" text-anchor="middle">7</text>
+
+    <!-- Center Label -->
+    <text x="200" y="170" fill="#0F172A" font-size="14" font-weight="bold" text-anchor="middle">Modulo 8</text>
+    <text x="200" y="190" fill="#64748B" font-size="11" text-anchor="middle">(3-bit Seq)</text>
+    <text x="200" y="208" fill="#2563EB" font-size="10" font-weight="bold" text-anchor="middle">Clockwise Flow</text>
+
+    <!-- Arc highlighting active window -->
+    <path d="M 340 180 A 140 140 0 0 1 101 279" fill="none" stroke="#2563EB" stroke-width="4" stroke-dasharray="6 3" />
+
+    <!-- Explanatory Panel on Right -->
+    <g transform="translate(430, 20)">
+      <rect width="320" height="320" rx="10" fill="#F8FAFC" stroke="#CBD5E1" />
+      <text x="20" y="30" fill="#0F172A" font-size="14" font-weight="bold">Why Circular Modulo 2^m?</text>
+      <text x="20" y="55" fill="#475569" font-size="11">Sequence numbers cannot grow indefinitely because packet headers have limited bit fields (e.g. m = 3 bits).</text>
+
+      <text x="20" y="100" fill="#1E40AF" font-size="12" font-weight="bold">Window Wrap-Around Rule:</text>
+      <text x="20" y="120" fill="#475569" font-size="11">Sequence numbers wrap from (2^m - 1) back to 0.</text>
+      <text x="20" y="140" fill="#DC2626" font-size="11" font-weight="bold">To prevent ambiguity between old &amp; new frames:</text>
+      <rect x="20" y="155" width="280" height="60" rx="6" fill="#EFF6FF" stroke="#3B82F6" />
+      <text x="30" y="175" fill="#1E40AF" font-size="11" font-weight="bold">Go-Back-N:</text>
+      <text x="130" y="175" fill="#1E40AF" font-size="11" font-family="monospace">S_w &le; 2^m - 1 = 7</text>
+      <text x="30" y="198" fill="#7C3AED" font-size="11" font-weight="bold">Selective Repeat:</text>
+      <text x="130" y="198" fill="#7C3AED" font-size="11" font-family="monospace">S_w = R_w &le; 2^(m-1) = 4</text>
+
+      <text x="20" y="245" fill="#059669" font-size="11" font-weight="bold">Active Window Shown:</text>
+      <text x="20" y="265" fill="#64748B" font-size="11">&bull; Blue slots [2, 3, 4]: Sent, awaiting ACK.</text>
+      <text x="20" y="285" fill="#64748B" font-size="11">&bull; Green slot [5]: Usable for immediate transmission.</text>
+      <text x="20" y="305" fill="#64748B" font-size="11">&bull; Grey slots [6, 7]: Outside window (locked).</text>
+    </g>
+  </g>
+</svg>

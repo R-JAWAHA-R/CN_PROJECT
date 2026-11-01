@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520">
+  <defs>
+    <linearGradient id="staticHdr" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+    <linearGradient id="dynHdr" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <filter id="cs">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  
+  <rect width="800" height="520" fill="#FAFBFF" rx="8"/>
+  
+  <!-- Title -->
+  <text x="400" y="34" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="#1E293B">Static vs Dynamic Channel Allocation</text>
+  <line x1="210" y1="44" x2="590" y2="44" stroke="#64748B" stroke-width="2.5" stroke-linecap="round"/>
+  
+  <!-- VS badge -->
+  <circle cx="400" cy="78" r="22" fill="#1E293B" filter="url(#cs)"/>
+  <text x="400" y="84" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="800" fill="white">VS</text>
+  
+  <!-- ===== LEFT PANEL: STATIC ===== -->
+  <rect x="20" y="56" width="365" height="450" rx="16" fill="white" stroke="#BFDBFE" stroke-width="1.5" filter="url(#cs)"/>
+  
+  <!-- Header -->
+  <rect x="20" y="56" width="365" height="52" rx="16" fill="url(#staticHdr)"/>
+  <rect x="20" y="90" width="365" height="18" fill="url(#staticHdr)"/>
+  <text x="202" y="82" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="white">📐 Static Allocation</text>
+  <text x="202" y="100" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="rgba(255,255,255,0.85)">FDMA / TDMA / CDMA</text>
+  
+  <!-- How it works -->
+  <text x="40" y="135" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="#1E40AF">How It Works:</text>
+  <rect x="40" y="145" width="325" height="55" rx="8" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1"/>
+  <text x="55" y="164" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334155">Channel divided into fixed portions</text>
+  <text x="55" y="180" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334155">(frequency bands, time slots, or codes)</text>
+  <text x="55" y="194" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334155">Each user gets a pre-assigned portion.</text>
+  
+  <!-- Mini visualization: FDMA-style bars -->
+  <rect x="45" y="210" width="315" height="40" rx="6" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+  <rect x="50" y="215" width="72" height="30" rx="3" fill="#3B82F6" opacity="0.7"/>
+  <rect x="127" y="215" width="72" height="30" rx="3" fill="#8B5CF6" opacity="0.7"/>
+  <rect x="204" y="215" width="72" height="30" rx="3" fill="#10B981" opacity="0.7"/>
+  <rect x="281" y="215" width="72" height="30" rx="3" fill="#F59E0B" opacity="0.7"/>
+  <text x="86" y="235" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" font-weight="600" fill="white">U1</text>
+  <text x="163" y="235" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" font-weight="600" fill="white">U2</text>
+  <text x="240" y="235" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" font-weight="600" fill="white">U3</text>
+  <text x="317" y="235" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" font-weight="600" fill="white">U4</text>
+  <text x="202" y="262" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">Fixed pre-assigned channels</text>
+  
+  <!-- Advantages (Green) -->
+  <text x="40" y="286" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="#059669">✅ Advantages:</text>
+  <rect x="40" y="295" width="325" height="80" rx="8" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1"/>
+  <text x="55" y="314" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#065F46">✓ No collisions — dedicated channel</text>
+  <text x="55" y="332" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#065F46">✓ Guaranteed bandwidth per user</text>
+  <text x="55" y="350" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#065F46">✓ Predictable latency &amp; performance</text>
+  <text x="55" y="368" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#065F46">✓ Simple to implement</text>
+  
+  <!-- Disadvantages (Red) -->
+  <text x="40" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="#DC2626">❌ Disadvantages:</text>
+  <rect x="40" y="407" width="325" height="80" rx="8" fill="#FEF2F2" stroke="#FECACA" stroke-width="1"/>
+  <text x="55" y="426" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#991B1B">✗ Wastes bandwidth when user is idle</text>
+  <text x="55" y="444" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#991B1B">✗ Fixed number of users (inflexible)</text>
+  <text x="55" y="462" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#991B1B">✗ Poor for bursty traffic patterns</text>
+  <text x="55" y="480" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#991B1B">✗ High delay with many users (N × T_fr)</text>
+  
+  <!-- ===== RIGHT PANEL: DYNAMIC ===== -->
+  <rect x="415" y="56" width="365" height="450" rx="16" fill="white" stroke="#A7F3D0" stroke-width="1.5" filter="url(#cs)"/>
+  
+  <!-- Header -->
+  <rect x="415" y="56" width="365" height="52" rx="16" fill="url(#dynHdr)"/>
+  <rect x="415" y="90" width="365" height="18" fill="url(#dynHdr)"/>
+  <text x="597" y="82" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="white">⚡ Dynamic Allocation</text>
+  <text x="597" y="100" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="rgba(255,255,255,0.85)">ALOHA / CSMA / Token / Polling</text>
+  
+  <!-- How it works -->
+  <text x="435" y="135" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="#065F46">How It Works:</text>
+  <rect x="435" y="145" width="325" height="55" rx="8" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1"/>
+  <text x="450" y="164" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334155">Stations contend for channel access</text>
+  <text x="450" y="180" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334155">on-demand. No pre-assigned slots.</text>
+  <text x="450" y="194" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334155">Transmit when channel is available.</text>
+  
+  <!-- Mini visualization: contention -->
+  <rect x="440" y="210" width="315" height="40" rx="6" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+  <rect x="445" y="215" width="140" height="30" rx="3" fill="#3B82F6" opacity="0.7"/>
+  <text x="515" y="235" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" font-weight="600" fill="white">U1 (on demand)</text>
+  <rect x="590" y="215" width="80" height="30" rx="3" fill="#10B981" opacity="0.7"/>
+  <text x="630" y="235" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" font-weight="600" fill="white">U3</text>
+  <rect x="675" y="215" width="75" height="30" rx="3" fill="#8B5CF6" opacity="0.7"/>
+  <text x="712" y="235" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" font-weight="600" fill="white">U2</text>
+  <text x="597" y="262" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">On-demand, variable-length allocation</text>
+  
+  <!-- Advantages (Green) -->
+  <text x="435" y="286" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="#059669">✅ Advantages:</text>
+  <rect x="435" y="295" width="325" height="80" rx="8" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1"/>
+  <text x="450" y="314" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#065F46">✓ Efficient — bandwidth used only when needed</text>
+  <text x="450" y="332" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#065F46">✓ Handles bursty traffic well</text>
+  <text x="450" y="350" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#065F46">✓ Flexible number of users</text>
+  <text x="450" y="368" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#065F46">✓ Low delay under light load</text>
+  
+  <!-- Disadvantages (Red) -->
+  <text x="435" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="#DC2626">❌ Disadvantages:</text>
+  <rect x="435" y="407" width="325" height="80" rx="8" fill="#FEF2F2" stroke="#FECACA" stroke-width="1"/>
+  <text x="450" y="426" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#991B1B">✗ Collisions possible → wasted time</text>
+  <text x="450" y="444" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#991B1B">✗ No guaranteed bandwidth</text>
+  <text x="450" y="462" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#991B1B">✗ Performance degrades under heavy load</text>
+  <text x="450" y="480" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#991B1B">✗ Complex protocols needed (CSMA/CD)</text>
+</svg>

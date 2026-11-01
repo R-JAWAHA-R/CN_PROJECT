@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="100%" height="100%" style="background:#ffffff; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <rect x="30" y="20" width="840" height="54" rx="10" fill="#0F172A" />
+  <text x="50" y="53" fill="#F8FAFC" font-size="18" font-weight="700">Four Key Responsibilities of the MAC Sublayer</text>
+
+  <g transform="translate(50, 95)">
+    <!-- 1. Frame Assembly & Delimiting -->
+    <rect x="0" y="0" width="380" height="165" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+    <rect x="0" y="0" width="380" height="34" rx="10" fill="#ECFDF5" />
+    <text x="20" y="22" fill="#065F46" font-size="13" font-weight="bold">1. Frame Assembly &amp; Delimitation</text>
+    <text x="20" y="58" fill="#334155" font-size="11.5">&bull; Appends 7-byte Preamble and 1-byte SFD (10101011) for bit clock synchronization.</text>
+    <text x="20" y="90" fill="#334155" font-size="11.5">&bull; Pads data payloads under 46 bytes to enforce minimum frame length (64 bytes for collision detection).</text>
+    <text x="20" y="122" fill="#059669" font-size="11" font-weight="bold">&bull; IEEE 802.3 Frame Formatting</text>
+
+    <!-- 2. Medium Contention & Access -->
+    <rect x="420" y="0" width="380" height="165" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+    <rect x="420" y="0" width="380" height="34" rx="10" fill="#EFF6FF" />
+    <text x="440" y="22" fill="#1E40AF" font-size="13" font-weight="bold">2. Medium Allocation &amp; Collision Handling</text>
+    <text x="440" y="58" fill="#334155" font-size="11.5">&bull; Executes carrier sensing algorithms (1-persistent, non-persistent, p-persistent).</text>
+    <text x="440" y="90" fill="#334155" font-size="11.5">&bull; Detects collisions during transmission and aborts with a 32-bit Jamming signal.</text>
+    <text x="440" y="122" fill="#2563EB" font-size="11" font-weight="bold">&bull; Triggers Binary Exponential Backoff</text>
+
+    <!-- 3. Physical Addressing (MAC) -->
+    <rect x="0" y="185" width="380" height="165" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+    <rect x="0" y="185" width="380" height="34" rx="10" fill="#FEF3C7" />
+    <text x="20" y="207" fill="#92400E" font-size="13" font-weight="bold">3. Physical (MAC) Addressing</text>
+    <text x="20" y="243" fill="#334155" font-size="11.5">&bull; Encapsulates 6-byte Source MAC and Destination MAC addresses into headers.</text>
+    <text x="20" y="275" fill="#334155" font-size="11.5">&bull; Implements hardware address filtering on NICs (Unicast match, Broadcast FF:FF:FF:FF:FF:FF, Multicast).</text>
+    <text x="20" y="307" fill="#D97706" font-size="11" font-weight="bold">&bull; Promiscuous mode support for packet capture</text>
+
+    <!-- 4. Error Checking (CRC-32) -->
+    <rect x="420" y="185" width="380" height="165" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+    <rect x="420" y="185" width="380" height="34" rx="10" fill="#FEE2E2" />
+    <text x="440" y="207" fill="#991B1B" font-size="13" font-weight="bold">4. Frame Integrity &amp; CRC-32 Verification</text>
+    <text x="440" y="243" fill="#334155" font-size="11.5">&bull; Calculates 32-bit Frame Check Sequence (FCS) using CRC-32 polynomial over all fields.</text>
+    <text x="440" y="275" fill="#334155" font-size="11.5">&bull; Receiver recomputes FCS on ingress; silently drops damaged frames with zero retransmission overhead at MAC layer.</text>
+    <text x="440" y="307" fill="#DC2626" font-size="11" font-weight="bold">&bull; Protects higher layers from corrupt bits</text>
+  </g>
+</svg>

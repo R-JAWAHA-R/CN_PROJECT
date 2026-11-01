@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 530" width="800" height="530">
+  <defs>
+    <linearGradient id="dcGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <linearGradient id="decisionGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+    <filter id="dcs">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  
+  <rect width="800" height="530" fill="#FAFBFF" rx="8"/>
+  
+  <!-- Title -->
+  <text x="400" y="34" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="#1E293B">Dynamic Channel Allocation</text>
+  <line x1="240" y1="44" x2="560" y2="44" stroke="#10B981" stroke-width="2.5" stroke-linecap="round"/>
+  
+  <!-- ===== LEFT SIDE: Stations contending ===== -->
+  <text x="140" y="72" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="#334155">Stations Contending</text>
+  
+  <!-- Station A -->
+  <rect x="50" y="85" width="80" height="48" rx="10" fill="#3B82F6" filter="url(#dcs)"/>
+  <text x="90" y="108" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white">Station A</text>
+  <text x="90" y="124" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.8)">Has data</text>
+  
+  <!-- Station B -->
+  <rect x="50" y="145" width="80" height="48" rx="10" fill="#8B5CF6" filter="url(#dcs)"/>
+  <text x="90" y="168" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white">Station B</text>
+  <text x="90" y="184" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.8)">Waiting</text>
+  
+  <!-- Station C -->
+  <rect x="50" y="205" width="80" height="48" rx="10" fill="#10B981" filter="url(#dcs)"/>
+  <text x="90" y="228" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white">Station C</text>
+  <text x="90" y="244" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.8)">Has data</text>
+  
+  <!-- Station D -->
+  <rect x="50" y="265" width="80" height="48" rx="10" fill="#F59E0B" filter="url(#dcs)"/>
+  <text x="90" y="288" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white">Station D</text>
+  <text x="90" y="304" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.8)">Idle</text>
+  
+  <!-- Arrows from stations to decision -->
+  <line x1="130" y1="109" x2="218" y2="155" stroke="#3B82F6" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+  <line x1="130" y1="169" x2="218" y2="170" stroke="#8B5CF6" stroke-width="1.5"/>
+  <line x1="130" y1="229" x2="218" y2="185" stroke="#10B981" stroke-width="1.5"/>
+  
+  <!-- ===== CENTER: Decision Flowchart ===== -->
+  <!-- "Want to transmit?" -->
+  <rect x="170" y="82" width="140" height="36" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5"/>
+  <text x="240" y="105" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="600" fill="#1E40AF">Want to Transmit?</text>
+  
+  <line x1="240" y1="118" x2="240" y2="138" stroke="#64748B" stroke-width="1.5"/>
+  <polygon points="235,136 245,136 240,143" fill="#64748B"/>
+  
+  <!-- Decision Diamond: "Is channel idle?" -->
+  <polygon points="310,170 240,140 170,170 240,200" fill="url(#decisionGrad)" stroke="#B45309" stroke-width="1.5" filter="url(#dcs)"/>
+  <text x="240" y="165" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" fill="white">Is channel</text>
+  <text x="240" y="180" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" fill="white">idle?</text>
+  
+  <!-- YES path (right) -->
+  <line x1="310" y1="170" x2="360" y2="170" stroke="#10B981" stroke-width="2"/>
+  <polygon points="358,165 368,170 358,175" fill="#10B981"/>
+  <text x="335" y="163" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="700" fill="#10B981">YES</text>
+  
+  <!-- Transmit box -->
+  <rect x="370" y="148" width="120" height="44" rx="10" fill="#10B981" filter="url(#dcs)"/>
+  <text x="430" y="170" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="white">TRANSMIT</text>
+  <text x="430" y="185" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.8)">Send the frame</text>
+  
+  <!-- After transmit: Success or Collision? -->
+  <line x1="490" y1="170" x2="530" y2="170" stroke="#64748B" stroke-width="1.5"/>
+  <polygon points="528,165 538,170 528,175" fill="#64748B"/>
+  
+  <polygon points="610,170 540,140 470,170 540,200" fill="#64748B" opacity="0" stroke="#64748B" stroke-width="1.5"/>
+  <!-- Using rect for simpler collision check -->
+  <rect x="530" y="148" width="100" height="44" rx="10" fill="white" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="580" y="167" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#991B1B">Collision</text>
+  <text x="580" y="182" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#991B1B">detected?</text>
+  
+  <!-- No collision: success -->
+  <line x1="630" y1="155" x2="680" y2="120" stroke="#10B981" stroke-width="1.5"/>
+  <text x="650" y="130" font-family="Segoe UI, Arial, sans-serif" font-size="9" font-weight="600" fill="#10B981">NO</text>
+  <rect x="675" y="100" width="90" height="35" rx="8" fill="#D1FAE5" stroke="#10B981" stroke-width="1.5"/>
+  <text x="720" y="122" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" fill="#065F46">SUCCESS ✓</text>
+  
+  <!-- Collision: backoff and retry -->
+  <line x1="630" y1="185" x2="680" y2="220" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="650" y="210" font-family="Segoe UI, Arial, sans-serif" font-size="9" font-weight="600" fill="#EF4444">YES</text>
+  <rect x="660" y="215" width="120" height="50" rx="8" fill="#FEE2E2" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="720" y="237" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#991B1B">BACK OFF</text>
+  <text x="720" y="253" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#B91C1C">Wait random time</text>
+  
+  <!-- Arrow back to retry -->
+  <path d="M 720 265 L 720 285 L 240 285 L 240 200" fill="none" stroke="#EF4444" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <polygon points="235,205 245,205 240,198" fill="#EF4444"/>
+  <text x="480" y="280" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#EF4444">Retry</text>
+  
+  <!-- NO path (down from diamond) -->
+  <line x1="240" y1="200" x2="240" y2="220" stroke="#EF4444" stroke-width="2"/>
+  <text x="255" y="213" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="700" fill="#EF4444">NO</text>
+  
+  <!-- Wait box -->
+  <rect x="185" y="220" width="110" height="40" rx="10" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.5"/>
+  <text x="240" y="240" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="600" fill="#92400E">WAIT &amp; Sense</text>
+  <text x="240" y="254" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#B45309">Keep listening</text>
+  
+  <!-- Loop back up -->
+  <path d="M 185 240 L 155 240 L 155 170 L 170 170" fill="none" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <polygon points="168,165 168,175 175,170" fill="#F59E0B"/>
+  
+  <!-- ===== BOTTOM: 5 Key Assumptions ===== -->
+  <rect x="30" y="320" width="740" height="200" rx="16" fill="white" stroke="#A7F3D0" stroke-width="1.8" filter="url(#dcs)"/>
+  <rect x="30" y="320" width="740" height="38" rx="16" fill="url(#dcGrad)"/>
+  <rect x="30" y="342" width="740" height="16" fill="url(#dcGrad)"/>
+  <text x="400" y="345" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700" fill="white">5 Key Assumptions of Dynamic Channel Allocation</text>
+  
+  <!-- Assumption 1 -->
+  <rect x="50" y="372" width="135" height="135" rx="10" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1"/>
+  <circle cx="70" cy="390" r="12" fill="#3B82F6"/>
+  <text x="70" y="395" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white">1</text>
+  <text x="86" y="394" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" fill="#1E40AF">Station Model</text>
+  <text x="58" y="416" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">N independent</text>
+  <text x="58" y="430" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">stations, each with</text>
+  <text x="58" y="444" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">frames to send.</text>
+  <text x="58" y="462" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">Probability λ of</text>
+  <text x="58" y="476" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">frame generation</text>
+  <text x="58" y="498" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#3B82F6">Poisson distribution</text>
+  
+  <!-- Assumption 2 -->
+  <rect x="196" y="372" width="135" height="135" rx="10" fill="#F5F3FF" stroke="#C4B5FD" stroke-width="1"/>
+  <circle cx="216" cy="390" r="12" fill="#8B5CF6"/>
+  <text x="216" y="395" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white">2</text>
+  <text x="232" y="394" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" fill="#5B21B6">Single Channel</text>
+  <text x="204" y="416" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">Only ONE channel</text>
+  <text x="204" y="430" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">available for all</text>
+  <text x="204" y="444" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">stations to use.</text>
+  <text x="204" y="462" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">All compete for</text>
+  <text x="204" y="476" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">same medium</text>
+  
+  <!-- Assumption 3 -->
+  <rect x="342" y="372" width="135" height="135" rx="10" fill="#ECFDF5" stroke="#6EE7B7" stroke-width="1"/>
+  <circle cx="362" cy="390" r="12" fill="#10B981"/>
+  <text x="362" y="395" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white">3</text>
+  <text x="378" y="394" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="700" fill="#065F46">Collision Detect</text>
+  <text x="350" y="416" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">Collisions are</text>
+  <text x="350" y="430" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">observable. If 2+</text>
+  <text x="350" y="444" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">frames overlap →</text>
+  <text x="350" y="458" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">collision detected.</text>
+  <text x="350" y="476" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">Must retransmit</text>
+  
+  <!-- Assumption 4 -->
+  <rect x="488" y="372" width="135" height="135" rx="10" fill="#FEF3C7" stroke="#FCD34D" stroke-width="1"/>
+  <circle cx="508" cy="390" r="12" fill="#F59E0B"/>
+  <text x="508" y="395" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white">4</text>
+  <text x="524" y="394" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="700" fill="#92400E">Time (Cont/Slot)</text>
+  <text x="496" y="416" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">Continuous time:</text>
+  <text x="496" y="430" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">transmit anytime.</text>
+  <text x="496" y="448" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">Slotted time:</text>
+  <text x="496" y="462" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">transmit at slot</text>
+  <text x="496" y="476" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">boundaries only.</text>
+  
+  <!-- Assumption 5 -->
+  <rect x="634" y="372" width="125" height="135" rx="10" fill="#FEE2E2" stroke="#FCA5A5" stroke-width="1"/>
+  <circle cx="654" cy="390" r="12" fill="#EF4444"/>
+  <text x="654" y="395" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white">5</text>
+  <text x="670" y="394" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="700" fill="#991B1B">Carrier Sense</text>
+  <text x="642" y="416" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">Stations can (or</text>
+  <text x="642" y="430" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">cannot) sense if</text>
+  <text x="642" y="444" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">channel is in use</text>
+  <text x="642" y="462" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">before transmitting.</text>
+  <text x="642" y="480" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">"Listen before</text>
+  <text x="642" y="494" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">talk" principle</text>
+</svg>

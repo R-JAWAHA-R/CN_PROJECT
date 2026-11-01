@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 530" width="800" height="530">
+  <defs>
+    <linearGradient id="rootGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+    <linearGradient id="staticGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+    <linearGradient id="dynGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <filter id="ds">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-opacity="0.13"/>
+    </filter>
+  </defs>
+  
+  <rect width="800" height="530" fill="#FAFBFF" rx="8"/>
+  
+  <!-- Title -->
+  <text x="400" y="34" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="#1E293B">Channel Allocation Methods — Overview</text>
+  <line x1="215" y1="44" x2="585" y2="44" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round"/>
+  
+  <!-- Root Node -->
+  <rect x="290" y="55" width="220" height="48" rx="14" fill="url(#rootGrad)" filter="url(#ds)"/>
+  <text x="400" y="78" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700" fill="white">Channel Allocation</text>
+  <text x="400" y="95" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.7)">How to share the medium?</text>
+  
+  <!-- Lines from root to branches -->
+  <line x1="340" y1="103" x2="200" y2="135" stroke="#3B82F6" stroke-width="2.5"/>
+  <line x1="460" y1="103" x2="600" y2="135" stroke="#10B981" stroke-width="2.5"/>
+  
+  <!-- ===== STATIC ALLOCATION ===== -->
+  <rect x="80" y="135" width="240" height="44" rx="12" fill="url(#staticGrad)" filter="url(#ds)"/>
+  <text x="200" y="157" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700" fill="white">📐 Static Allocation</text>
+  <text x="200" y="173" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.8)">Fixed, pre-assigned channels</text>
+  
+  <!-- Lines from Static to children -->
+  <line x1="120" y1="179" x2="90" y2="210" stroke="#3B82F6" stroke-width="1.8"/>
+  <line x1="200" y1="179" x2="200" y2="210" stroke="#3B82F6" stroke-width="1.8"/>
+  <line x1="280" y1="179" x2="310" y2="210" stroke="#3B82F6" stroke-width="1.8"/>
+  
+  <!-- FDMA -->
+  <rect x="28" y="210" width="135" height="120" rx="12" fill="white" stroke="#3B82F6" stroke-width="1.8" filter="url(#ds)"/>
+  <rect x="28" y="210" width="135" height="30" rx="12" fill="#3B82F6"/>
+  <rect x="28" y="228" width="135" height="12" fill="#3B82F6"/>
+  <text x="95" y="232" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white">FDMA</text>
+  <text x="40" y="258" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">Frequency Division</text>
+  <text x="40" y="272" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">Multiple Access</text>
+  <line x1="42" y1="280" x2="148" y2="280" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="40" y="296" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">Each user gets a</text>
+  <text x="40" y="308" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">unique frequency band</text>
+  <text x="40" y="323" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#3B82F6">📻 Used in FM radio</text>
+  
+  <!-- TDMA -->
+  <rect x="180" y="210" width="135" height="120" rx="12" fill="white" stroke="#3B82F6" stroke-width="1.8" filter="url(#ds)"/>
+  <rect x="180" y="210" width="135" height="30" rx="12" fill="#60A5FA"/>
+  <rect x="180" y="228" width="135" height="12" fill="#60A5FA"/>
+  <text x="247" y="232" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white">TDMA</text>
+  <text x="192" y="258" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">Time Division</text>
+  <text x="192" y="272" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">Multiple Access</text>
+  <line x1="194" y1="280" x2="300" y2="280" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="192" y="296" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">Each user gets a</text>
+  <text x="192" y="308" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">unique time slot</text>
+  <text x="192" y="323" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#3B82F6">📱 Used in GSM/2G</text>
+  
+  <!-- CDMA (under static but it's a channelization variant - included as per request) -->
+  <!-- Actually, we'll keep CDMA separate as a static method per the request -->
+  
+  <!-- ===== DYNAMIC ALLOCATION ===== -->
+  <rect x="480" y="135" width="240" height="44" rx="12" fill="url(#dynGrad)" filter="url(#ds)"/>
+  <text x="600" y="157" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700" fill="white">⚡ Dynamic Allocation</text>
+  <text x="600" y="173" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.8)">On-demand channel access</text>
+  
+  <!-- Lines from Dynamic to children -->
+  <line x1="520" y1="179" x2="480" y2="210" stroke="#10B981" stroke-width="1.8"/>
+  <line x1="600" y1="179" x2="600" y2="210" stroke="#10B981" stroke-width="1.8"/>
+  <line x1="680" y1="179" x2="720" y2="210" stroke="#10B981" stroke-width="1.8"/>
+  
+  <!-- Random Access -->
+  <rect x="415" y="210" width="135" height="120" rx="12" fill="white" stroke="#10B981" stroke-width="1.8" filter="url(#ds)"/>
+  <rect x="415" y="210" width="135" height="30" rx="12" fill="#10B981"/>
+  <rect x="415" y="228" width="135" height="12" fill="#10B981"/>
+  <text x="482" y="232" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white">Random Access</text>
+  <text x="427" y="258" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">Contention-based</text>
+  <text x="427" y="272" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">No pre-allocation</text>
+  <line x1="429" y1="280" x2="536" y2="280" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="427" y="296" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">ALOHA, CSMA/CD,</text>
+  <text x="427" y="308" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">CSMA/CA</text>
+  <text x="427" y="323" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#10B981">🌐 Used in Ethernet/WiFi</text>
+  
+  <!-- Controlled Access -->
+  <rect x="565" y="210" width="135" height="120" rx="12" fill="white" stroke="#10B981" stroke-width="1.8" filter="url(#ds)"/>
+  <rect x="565" y="210" width="135" height="30" rx="12" fill="#34D399"/>
+  <rect x="565" y="228" width="135" height="12" fill="#34D399"/>
+  <text x="632" y="232" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" fill="white">Controlled Access</text>
+  <text x="577" y="258" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">Permission-based</text>
+  <text x="577" y="272" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">Central/distributed ctrl</text>
+  <line x1="579" y1="280" x2="686" y2="280" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="577" y="296" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">Polling, Token</text>
+  <text x="577" y="308" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">Passing, Reservation</text>
+  <text x="577" y="323" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#10B981">🔁 Used in Token Ring</text>
+  
+  <!-- Channelization -->
+  <rect x="715" y="210" width="135" height="120" rx="12" fill="white" stroke="#10B981" stroke-width="1.8" filter="url(#ds)"/>
+  <rect x="715" y="210" width="135" height="30" rx="12" fill="#6EE7B7"/>
+  <rect x="715" y="228" width="135" height="12" fill="#6EE7B7"/>
+  <text x="782" y="232" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" fill="#065F46">Channelization</text>
+  <text x="727" y="258" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">Hybrid approach</text>
+  <text x="727" y="272" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">Orthogonal codes</text>
+  <line x1="729" y1="280" x2="836" y2="280" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="727" y="296" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">CDMA (Code Div.)</text>
+  <text x="727" y="308" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">WDMA, OFDMA</text>
+  <text x="727" y="323" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#10B981">📶 Used in 3G/4G/5G</text>
+  
+  <!-- CDMA card under static (as requested: FDMA, TDMA, CDMA under static) -->
+  <rect x="28" y="345" width="135" height="90" rx="12" fill="white" stroke="#93C5FD" stroke-width="1.5" filter="url(#ds)"/>
+  <rect x="28" y="345" width="135" height="28" rx="12" fill="#93C5FD"/>
+  <rect x="28" y="361" width="135" height="12" fill="#93C5FD"/>
+  <text x="95" y="366" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white">CDMA</text>
+  <text x="40" y="392" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">Code Division</text>
+  <text x="40" y="406" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">Multiple Access</text>
+  <text x="40" y="428" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">Unique codes per user</text>
+  <line x1="95" y1="335" x2="95" y2="345" stroke="#3B82F6" stroke-width="1.8"/>
+
+  <!-- Also TDMA connects down for alignment -->
+  <!-- Connecting line from FDMA to CDMA -->
+  
+  <!-- Bottom Summary bar -->
+  <rect x="30" y="458" width="740" height="60" rx="14" fill="white" stroke="#E2E8F0" stroke-width="1.5" filter="url(#ds)"/>
+  <rect x="30" y="458" width="370" height="60" rx="14" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1"/>
+  <rect x="400" y="458" width="370" height="60" rx="14" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1"/>
+  
+  <text x="215" y="480" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="#1E40AF">Static: Predictable &amp; Simple</text>
+  <text x="215" y="498" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#3B82F6">Fixed slots → No collisions, but may waste capacity</text>
+  
+  <text x="585" y="480" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="#065F46">Dynamic: Flexible &amp; Efficient</text>
+  <text x="585" y="498" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#10B981">On-demand → High utilization, but needs coordination</text>
+</svg>

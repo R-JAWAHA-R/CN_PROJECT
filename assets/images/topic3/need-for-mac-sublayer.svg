@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520">
+  <defs>
+    <linearGradient id="chaosGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FEE2E2"/>
+      <stop offset="100%" stop-color="#FECACA"/>
+    </linearGradient>
+    <linearGradient id="orderGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#D1FAE5"/>
+      <stop offset="100%" stop-color="#A7F3D0"/>
+    </linearGradient>
+    <linearGradient id="busGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+    <filter id="sh">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  
+  <rect width="800" height="520" fill="#FAFBFF" rx="8"/>
+  
+  <!-- Title -->
+  <text x="400" y="36" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="#1E293B">Why Do We Need the MAC Sublayer?</text>
+  <line x1="230" y1="46" x2="570" y2="46" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"/>
+  
+  <!-- ===== LEFT PANEL: WITHOUT MAC ===== -->
+  <rect x="20" y="58" width="370" height="400" rx="16" fill="url(#chaosGrad)" stroke="#FECACA" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="20" y="58" width="370" height="40" rx="16" fill="#EF4444"/>
+  <rect x="20" y="82" width="370" height="16" fill="#EF4444"/>
+  <text x="205" y="83" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700" fill="white">❌  Without MAC → Chaos</text>
+  
+  <!-- Shared bus -->
+  <rect x="55" y="200" width="300" height="10" rx="5" fill="url(#busGrad)"/>
+  <text x="205" y="228" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#92400E">Shared Medium (Bus)</text>
+  
+  <!-- Station A -->
+  <rect x="55" y="120" width="70" height="45" rx="8" fill="#3B82F6" filter="url(#sh)"/>
+  <text x="90" y="142" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white">Station A</text>
+  <text x="90" y="157" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.8)">💻</text>
+  <line x1="90" y1="165" x2="90" y2="200" stroke="#3B82F6" stroke-width="2"/>
+  
+  <!-- Station B -->
+  <rect x="170" y="120" width="70" height="45" rx="8" fill="#8B5CF6" filter="url(#sh)"/>
+  <text x="205" y="142" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white">Station B</text>
+  <text x="205" y="157" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.8)">💻</text>
+  <line x1="205" y1="165" x2="205" y2="200" stroke="#8B5CF6" stroke-width="2"/>
+  
+  <!-- Station C -->
+  <rect x="285" y="120" width="70" height="45" rx="8" fill="#10B981" filter="url(#sh)"/>
+  <text x="320" y="142" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white">Station C</text>
+  <text x="320" y="157" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.8)">💻</text>
+  <line x1="320" y1="165" x2="320" y2="200" stroke="#10B981" stroke-width="2"/>
+  
+  <!-- Transmit arrows clashing -->
+  <line x1="80" y1="185" x2="140" y2="200" stroke="#EF4444" stroke-width="2.5" stroke-dasharray="5,3"/>
+  <line x1="215" y1="185" x2="160" y2="200" stroke="#EF4444" stroke-width="2.5" stroke-dasharray="5,3"/>
+  <line x1="310" y1="185" x2="260" y2="200" stroke="#EF4444" stroke-width="2.5" stroke-dasharray="5,3"/>
+  
+  <!-- Collision burst -->
+  <text x="148" y="195" font-size="24">💥</text>
+  <text x="248" y="195" font-size="20">💥</text>
+  
+  <!-- Problems list -->
+  <rect x="45" y="245" width="310" height="120" rx="10" fill="white" stroke="#FCA5A5" stroke-width="1" opacity="0.9"/>
+  <text x="60" y="270" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#991B1B">Problems:</text>
+  <text x="60" y="292" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#7F1D1D">▸ Multiple stations transmit simultaneously</text>
+  <text x="60" y="312" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#7F1D1D">▸ Data collisions → corrupted frames</text>
+  <text x="60" y="332" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#7F1D1D">▸ No coordination → wasted bandwidth</text>
+  <text x="60" y="352" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#7F1D1D">▸ Chaos on the shared medium</text>
+  
+  <!-- Result label -->
+  <rect x="100" y="380" width="210" height="32" rx="16" fill="#EF4444" filter="url(#sh)"/>
+  <text x="205" y="401" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="white">Result: Total Chaos! 🔥</text>
+  
+  <!-- ===== CENTER ARROW ===== -->
+  <rect x="385" y="220" width="30" height="60" rx="4" fill="#10B981"/>
+  <polygon points="415,230 435,250 415,270" fill="#10B981"/>
+  <text x="400" y="200" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" fill="#10B981">Add</text>
+  <text x="400" y="213" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" fill="#10B981">MAC</text>
+  
+  <!-- ===== RIGHT PANEL: WITH MAC ===== -->
+  <rect x="440" y="58" width="345" height="400" rx="16" fill="url(#orderGrad)" stroke="#A7F3D0" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="440" y="58" width="345" height="40" rx="16" fill="#10B981"/>
+  <rect x="440" y="82" width="345" height="16" fill="#10B981"/>
+  <text x="612" y="83" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700" fill="white">✅  With MAC → Orderly Access</text>
+  
+  <!-- Shared bus -->
+  <rect x="470" y="290" width="290" height="10" rx="5" fill="url(#busGrad)"/>
+  <text x="615" y="318" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#065F46">Organized Shared Medium</text>
+  
+  <!-- MAC Controller Box -->
+  <rect x="530" y="195" width="170" height="45" rx="10" fill="#059669" filter="url(#sh)" stroke="#047857" stroke-width="1"/>
+  <text x="615" y="216" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="white">MAC Controller</text>
+  <text x="615" y="232" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.85)">"You transmit now!"</text>
+  
+  <!-- Station A -->
+  <rect x="470" y="120" width="60" height="40" rx="8" fill="#3B82F6" filter="url(#sh)"/>
+  <text x="500" y="143" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" fill="white">Stn A</text>
+  <line x1="500" y1="160" x2="560" y2="198" stroke="#3B82F6" stroke-width="1.5"/>
+  
+  <!-- Station B -->
+  <rect x="585" y="120" width="60" height="40" rx="8" fill="#8B5CF6" filter="url(#sh)"/>
+  <text x="615" y="143" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" fill="white">Stn B</text>
+  <line x1="615" y1="160" x2="615" y2="195" stroke="#8B5CF6" stroke-width="1.5"/>
+  
+  <!-- Station C -->
+  <rect x="700" y="120" width="60" height="40" rx="8" fill="#10B981" filter="url(#sh)"/>
+  <text x="730" y="143" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" fill="white">Stn C</text>
+  <line x1="730" y1="160" x2="670" y2="198" stroke="#10B981" stroke-width="1.5"/>
+  
+  <!-- Only one transmits (A) -->
+  <line x1="615" y1="240" x2="615" y2="290" stroke="#059669" stroke-width="2.5"/>
+  <polygon points="610,285 620,285 615,295" fill="#059669"/>
+  <text x="615" y="265" text-anchor="end" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#059669" dx="-8">Controlled</text>
+  
+  <!-- Benefits list -->
+  <rect x="460" y="335" width="305" height="108" rx="10" fill="white" stroke="#6EE7B7" stroke-width="1" opacity="0.9"/>
+  <text x="475" y="358" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#065F46">Benefits:</text>
+  <text x="475" y="378" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#064E3B">✓ Only one station transmits at a time</text>
+  <text x="475" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#064E3B">✓ Fair access for all stations</text>
+  <text x="475" y="418" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#064E3B">✓ Collisions detected &amp; resolved</text>
+  <text x="475" y="438" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#064E3B">✓ Efficient bandwidth utilization</text>
+  
+  <!-- Bottom summary -->
+  <rect x="150" y="480" width="500" height="30" rx="15" fill="#1E293B" filter="url(#sh)"/>
+  <text x="400" y="500" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="white">MAC Sublayer = The Traffic Controller of the Shared Medium 🚦</text>
+</svg>

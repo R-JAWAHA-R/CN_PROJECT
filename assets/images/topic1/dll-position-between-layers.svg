@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="bgG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f8fafc"/><stop offset="100%" stop-color="#e2e8f0"/></linearGradient>
+    <linearGradient id="netG" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#60A5FA"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient>
+    <linearGradient id="llcG" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#34D399"/><stop offset="100%" stop-color="#10B981"/></linearGradient>
+    <linearGradient id="macG" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#047857"/></linearGradient>
+    <linearGradient id="phyG" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#F59E0B"/><stop offset="100%" stop-color="#D97706"/></linearGradient>
+    <marker id="arrDown" markerWidth="10" markerHeight="7" refX="5" refY="7" orient="auto"><path d="M0,0 L5,7 L10,0" fill="none" stroke="#64748b" stroke-width="1.5"/></marker>
+    <marker id="arrUp" markerWidth="10" markerHeight="7" refX="5" refY="0" orient="auto"><path d="M0,7 L5,0 L10,7" fill="none" stroke="#64748b" stroke-width="1.5"/></marker>
+    <marker id="arrR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#64748b"/></marker>
+    <filter id="shadow"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#00000020"/></filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bgG)" rx="12"/>
+
+  <!-- Title -->
+  <text x="400" y="36" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="700" fill="#1e293b">Data Link Layer — Position Between Layers</text>
+
+  <!-- Network Layer box -->
+  <rect x="200" y="60" width="400" height="60" rx="10" fill="url(#netG)" filter="url(#shadow)"/>
+  <text x="400" y="87" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="500" fill="white" opacity="0.8">Layer 3</text>
+  <text x="400" y="107" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="white">Network Layer</text>
+
+  <!-- Arrow: Network → LLC -->
+  <line x1="320" y1="120" x2="320" y2="152" stroke="#64748b" stroke-width="2" marker-end="url(#arrDown)"/>
+  <line x1="480" y1="152" x2="480" y2="120" stroke="#64748b" stroke-width="2" marker-end="url(#arrUp)"/>
+  <text x="264" y="142" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#64748b">Packets ↓</text>
+  <text x="544" y="142" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#64748b">↑ Packets</text>
+
+  <!-- DLL container -->
+  <rect x="140" y="160" width="520" height="200" rx="14" fill="white" stroke="#10B981" stroke-width="3" filter="url(#shadow)"/>
+  <rect x="140" y="160" width="520" height="30" rx="14" fill="#10B981" opacity="0.12"/>
+  <text x="400" y="181" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#059669">DATA LINK LAYER (Layer 2)</text>
+
+  <!-- LLC Sublayer -->
+  <rect x="175" y="200" width="450" height="65" rx="8" fill="url(#llcG)" filter="url(#shadow)"/>
+  <text x="400" y="227" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700" fill="white">LLC — Logical Link Control</text>
+  <text x="400" y="252" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="white" opacity="0.9">Flow Control • Error Detection • Multiplexing Protocols (IEEE 802.2)</text>
+
+  <!-- Divider arrow between sublayers -->
+  <line x1="360" y1="265" x2="360" y2="283" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="440" y1="283" x2="440" y2="265" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- MAC Sublayer -->
+  <rect x="175" y="285" width="450" height="65" rx="8" fill="url(#macG)" filter="url(#shadow)"/>
+  <text x="400" y="312" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700" fill="white">MAC — Media Access Control</text>
+  <text x="400" y="337" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="white" opacity="0.9">Physical Addressing • Channel Access • Frame Assembly (IEEE 802.3/802.11)</text>
+
+  <!-- Annotations on the side -->
+  <!-- LLC services -->
+  <rect x="10" y="200" width="120" height="65" rx="6" fill="#34D399" opacity="0.12" stroke="#10B981" stroke-width="1"/>
+  <text x="70" y="220" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#059669">LLC Services</text>
+  <text x="70" y="234" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#047857">• SAP Identification</text>
+  <text x="70" y="247" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#047857">• Frame Sequencing</text>
+  <text x="70" y="260" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#047857">• Acknowledgments</text>
+  <line x1="130" y1="232" x2="175" y2="232" stroke="#10B981" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arrR)"/>
+
+  <!-- MAC services -->
+  <rect x="670" y="285" width="120" height="65" rx="6" fill="#059669" opacity="0.12" stroke="#059669" stroke-width="1"/>
+  <text x="730" y="305" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#047857">MAC Services</text>
+  <text x="730" y="319" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#047857">• CSMA/CD, CSMA/CA</text>
+  <text x="730" y="332" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#047857">• MAC Addressing</text>
+  <text x="730" y="345" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#047857">• Token Passing</text>
+  <line x1="670" y1="317" x2="625" y2="317" stroke="#059669" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- Arrow: MAC → Physical -->
+  <line x1="320" y1="360" x2="320" y2="392" stroke="#64748b" stroke-width="2" marker-end="url(#arrDown)"/>
+  <line x1="480" y1="392" x2="480" y2="360" stroke="#64748b" stroke-width="2" marker-end="url(#arrUp)"/>
+  <text x="264" y="383" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#64748b">Frames ↓</text>
+  <text x="544" y="383" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#64748b">↑ Frames</text>
+
+  <!-- Physical Layer box -->
+  <rect x="200" y="400" width="400" height="60" rx="10" fill="url(#phyG)" filter="url(#shadow)"/>
+  <text x="400" y="427" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="500" fill="white" opacity="0.8">Layer 1</text>
+  <text x="400" y="447" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="white">Physical Layer</text>
+
+  <!-- Bottom note -->
+  <text x="400" y="487" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#94a3b8" font-style="italic">The DLL's two sublayers bridge the gap between logical networking and physical transmission</text>
+</svg>

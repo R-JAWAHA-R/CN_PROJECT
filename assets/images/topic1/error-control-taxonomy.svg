@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="100%" height="100%" style="background:#ffffff; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <rect x="30" y="20" width="840" height="54" rx="10" fill="#0F172A" />
+  <text x="50" y="53" fill="#F8FAFC" font-size="18" font-weight="700">Data Link Error Control: Error Detection vs Error Correction</text>
+
+  <g transform="translate(50, 95)">
+    <!-- Branch 1: Error Detection -->
+    <rect x="0" y="0" width="380" height="370" rx="10" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5" />
+    <rect x="0" y="0" width="380" height="36" rx="10" fill="#EFF6FF" />
+    <text x="190" y="24" fill="#1E40AF" font-size="13" font-weight="700" text-anchor="middle">Error Detection &amp; ARQ Retransmission</text>
+
+    <g transform="translate(20, 55)">
+      <!-- Technique 1 -->
+      <rect x="0" y="0" width="340" height="60" rx="6" fill="#FFFFFF" stroke="#CBD5E1" />
+      <text x="15" y="22" fill="#0F172A" font-size="12" font-weight="bold">1. Simple Parity Check (Single-bit)</text>
+      <text x="15" y="42" fill="#64748B" font-size="10.5">Adds 1 redundant bit (even/odd). Detects all odd-number bit errors; misses even-number errors.</text>
+
+      <!-- Technique 2 -->
+      <rect x="0" y="70" width="340" height="60" rx="6" fill="#FFFFFF" stroke="#CBD5E1" />
+      <text x="15" y="92" fill="#0F172A" font-size="12" font-weight="bold">2. Internet 16-bit Checksum</text>
+      <text x="15" y="112" fill="#64748B" font-size="10.5">1's complement sum of 16-bit words. Fast in software; used in IPv4, TCP, UDP.</text>
+
+      <!-- Technique 3 -->
+      <rect x="0" y="140" width="340" height="75" rx="6" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1.5" />
+      <text x="15" y="162" fill="#1E40AF" font-size="12" font-weight="bold">3. Cyclic Redundancy Check (CRC)</text>
+      <text x="15" y="180" fill="#475569" font-size="10.5">Polynomial modulo-2 division in hardware. Detects burst errors up to degree r of generator G(x).</text>
+      <text x="15" y="200" fill="#2563EB" font-size="10" font-family="monospace" font-weight="bold">Ethernet CRC-32 &bull; HDLC CRC-CCITT</text>
+    </g>
+
+    <rect x="20" y="305" width="340" height="50" rx="6" fill="#DBEAFE" />
+    <text x="190" y="325" fill="#1E40AF" font-size="11" font-weight="bold" text-anchor="middle">Low Redundancy Overhead</text>
+    <text x="190" y="342" fill="#64748B" font-size="10" text-anchor="middle">Best for low-error wired channels (copper, optical fiber)</text>
+
+    <!-- Branch 2: Error Correction (FEC) -->
+    <rect x="420" y="0" width="380" height="370" rx="10" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5" />
+    <rect x="420" y="0" width="380" height="36" rx="10" fill="#ECFDF5" />
+    <text x="610" y="24" fill="#065F46" font-size="13" font-weight="700" text-anchor="middle">Forward Error Correction (FEC)</text>
+
+    <g transform="translate(440, 55)">
+      <!-- Technique 1 -->
+      <rect x="0" y="0" width="340" height="65" rx="6" fill="#FFFFFF" stroke="#CBD5E1" />
+      <text x="15" y="22" fill="#0F172A" font-size="12" font-weight="bold">Hamming Codes (e.g. Hamming(7,4))</text>
+      <text x="15" y="40" fill="#64748B" font-size="10.5">Parity bits at powers of 2 (1, 2, 4, 8...). Detects double-bit errors and corrects single-bit errors.</text>
+      <text x="15" y="56" fill="#059669" font-size="9.5" font-weight="bold">Hamming Distance: d_min &ge; 2t + 1</text>
+
+      <!-- Technique 2 -->
+      <rect x="0" y="75" width="340" height="65" rx="6" fill="#FFFFFF" stroke="#CBD5E1" />
+      <text x="15" y="97" fill="#0F172A" font-size="12" font-weight="bold">Reed-Solomon &amp; Convolutional Codes</text>
+      <text x="15" y="115" fill="#64748B" font-size="10.5">Block-based codes capable of correcting multiple burst byte errors. Used in satellite and CDs/DVDs.</text>
+
+      <!-- Technique 3 -->
+      <rect x="0" y="150" width="340" height="65" rx="6" fill="#FFFFFF" stroke="#CBD5E1" />
+      <text x="15" y="172" fill="#0F172A" font-size="12" font-weight="bold">LDPC (Low-Density Parity-Check)</text>
+      <text x="15" y="190" fill="#64748B" font-size="10.5">Modern near-Shannon-limit capacity codes used in Wi-Fi 6 (802.11ax) and 5G NR networks.</text>
+    </g>
+
+    <rect x="440" y="305" width="340" height="50" rx="6" fill="#D1FAE5" />
+    <text x="610" y="325" fill="#065F46" font-size="11" font-weight="bold" text-anchor="middle">Higher Redundancy &bull; Zero Retransmission Delay</text>
+    <text x="610" y="342" fill="#64748B" font-size="10" text-anchor="middle">Crucial for deep-space links, satellite, and noisy wireless</text>
+  </g>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="100%" height="100%" style="background:#ffffff; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <rect x="30" y="20" width="840" height="54" rx="10" fill="#0F172A" />
+  <text x="50" y="53" fill="#F8FAFC" font-size="18" font-weight="700">Selective Repeat ARQ: Symmetric Windows (S_w = R_w = 2^(m-1))</text>
+
+  <g transform="translate(50, 95)">
+    <!-- Sender Window -->
+    <rect x="0" y="0" width="800" height="175" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+    <text x="25" y="30" fill="#0F172A" font-size="14" font-weight="bold">Sender Window (m = 3 bits &rarr; S_w = 2^(3-1) = 4)</text>
+    <text x="25" y="50" fill="#64748B" font-size="11">Each transmitted frame has an INDEPENDENT retransmission timer. Only lost frames are retransmitted.</text>
+
+    <!-- Buffer Slots -->
+    <g transform="translate(60, 75)">
+      <rect x="0" y="0" width="70" height="50" rx="6" fill="#E2E8F0" stroke="#94A3B8" /><text x="35" y="28" fill="#64748B" font-size="16" font-weight="bold" text-anchor="middle">0</text><text x="35" y="44" fill="#64748B" font-size="8" text-anchor="middle">ACKed</text>
+      <rect x="80" y="0" width="70" height="50" rx="6" fill="#E2E8F0" stroke="#94A3B8" /><text x="115" y="28" fill="#64748B" font-size="16" font-weight="bold" text-anchor="middle">1</text><text x="115" y="44" fill="#64748B" font-size="8" text-anchor="middle">ACKed</text>
+
+      <rect x="155" y="-6" width="315" height="62" rx="8" fill="none" stroke="#7C3AED" stroke-width="3" stroke-dasharray="6 3" />
+      <text x="312" y="-12" fill="#7C3AED" font-size="11" font-weight="bold" text-anchor="middle">Sender Window = 4</text>
+
+      <rect x="160" y="0" width="70" height="50" rx="6" fill="#FEE2E2" stroke="#EF4444" stroke-width="2" /><text x="195" y="28" fill="#DC2626" font-size="16" font-weight="bold" text-anchor="middle">2</text><text x="195" y="44" fill="#DC2626" font-size="8" font-weight="bold" text-anchor="middle">Lost (Timer)</text>
+      <rect x="240" y="0" width="70" height="50" rx="6" fill="#ECFDF5" stroke="#10B981" stroke-width="2" /><text x="275" y="28" fill="#065F46" font-size="16" font-weight="bold" text-anchor="middle">3</text><text x="275" y="44" fill="#059669" font-size="8" font-weight="bold" text-anchor="middle">ACKed (Sel)</text>
+      <rect x="320" y="0" width="70" height="50" rx="6" fill="#ECFDF5" stroke="#10B981" stroke-width="2" /><text x="355" y="28" fill="#065F46" font-size="16" font-weight="bold" text-anchor="middle">4</text><text x="355" y="44" fill="#059669" font-size="8" font-weight="bold" text-anchor="middle">ACKed (Sel)</text>
+      <rect x="400" y="0" width="70" height="50" rx="6" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2" /><text x="435" y="28" fill="#1E40AF" font-size="16" font-weight="bold" text-anchor="middle">5</text><text x="435" y="44" fill="#2563EB" font-size="8" font-weight="bold" text-anchor="middle">Can Send</text>
+
+      <rect x="480" y="0" width="70" height="50" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-dasharray="3 3" /><text x="515" y="28" fill="#94A3B8" font-size="16" text-anchor="middle">6</text>
+      <rect x="560" y="0" width="70" height="50" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-dasharray="3 3" /><text x="595" y="28" fill="#94A3B8" font-size="16" text-anchor="middle">7</text>
+    </g>
+
+    <!-- Receiver Window -->
+    <rect x="0" y="195" width="800" height="175" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+    <text x="25" y="225" fill="#0F172A" font-size="14" font-weight="bold">Receiver Window: Equal Size R_w = S_w = 4 (With Out-of-Order Buffering)</text>
+    <text x="25" y="245" fill="#64748B" font-size="11">The receiver has memory buffers to accept and hold frames 3 and 4 out of order while waiting for lost frame 2:</text>
+
+    <g transform="translate(60, 270)">
+      <rect x="0" y="0" width="70" height="50" rx="6" fill="#E2E8F0" stroke="#94A3B8" /><text x="35" y="28" fill="#64748B" font-size="14" text-anchor="middle">0 (Deliv)</text>
+      <rect x="80" y="0" width="70" height="50" rx="6" fill="#E2E8F0" stroke="#94A3B8" /><text x="115" y="28" fill="#64748B" font-size="14" text-anchor="middle">1 (Deliv)</text>
+
+      <rect x="155" y="-6" width="315" height="62" rx="8" fill="none" stroke="#059669" stroke-width="3" stroke-dasharray="6 3" />
+      <text x="312" y="-12" fill="#059669" font-size="11" font-weight="bold" text-anchor="middle">Receiver Buffer Window = 4</text>
+
+      <rect x="160" y="0" width="70" height="50" rx="6" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2" stroke-dasharray="4 2" /><text x="195" y="28" fill="#D97706" font-size="16" font-weight="bold" text-anchor="middle">?</text><text x="195" y="44" fill="#D97706" font-size="8" font-weight="bold" text-anchor="middle">Awaiting 2</text>
+      <rect x="240" y="0" width="70" height="50" rx="6" fill="#ECFDF5" stroke="#10B981" stroke-width="2" /><text x="275" y="28" fill="#065F46" font-size="16" font-weight="bold" text-anchor="middle">3</text><text x="275" y="44" fill="#059669" font-size="8" font-weight="bold" text-anchor="middle">Buffered</text>
+      <rect x="320" y="0" width="70" height="50" rx="6" fill="#ECFDF5" stroke="#10B981" stroke-width="2" /><text x="355" y="28" fill="#065F46" font-size="16" font-weight="bold" text-anchor="middle">4</text><text x="355" y="44" fill="#059669" font-size="8" font-weight="bold" text-anchor="middle">Buffered</text>
+      <rect x="400" y="0" width="70" height="50" rx="6" fill="#FFFFFF" stroke="#CBD5E1" /><text x="435" y="28" fill="#94A3B8" font-size="16" text-anchor="middle">5</text><text x="435" y="44" fill="#94A3B8" font-size="8" text-anchor="middle">Expected</text>
+    </g>
+  </g>
+</svg>

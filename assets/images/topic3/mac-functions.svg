@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520">
+  <defs>
+    <linearGradient id="centerGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <filter id="cardSh">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+    <filter id="centerGlow">
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#10B981" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  
+  <rect width="800" height="520" fill="#FAFBFF" rx="8"/>
+  
+  <!-- Title -->
+  <text x="400" y="36" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="#1E293B">MAC Sublayer Functions &amp; Responsibilities</text>
+  <line x1="215" y1="46" x2="585" y2="46" stroke="#10B981" stroke-width="2.5" stroke-linecap="round"/>
+  
+  <!-- Center Hub -->
+  <circle cx="400" cy="275" r="68" fill="url(#centerGrad)" filter="url(#centerGlow)" stroke="#047857" stroke-width="2"/>
+  <text x="400" y="265" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="800" fill="white">MAC</text>
+  <text x="400" y="283" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="rgba(255,255,255,0.9)">Sublayer</text>
+  <text x="400" y="300" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="rgba(255,255,255,0.75)">Functions</text>
+  
+  <!-- Spokes -->
+  <!-- Top-left spoke -->
+  <line x1="348" y1="225" x2="210" y2="130" stroke="#3B82F6" stroke-width="2" stroke-dasharray="4,3"/>
+  <!-- Top spoke -->
+  <line x1="400" y1="207" x2="400" y2="118" stroke="#8B5CF6" stroke-width="2" stroke-dasharray="4,3"/>
+  <!-- Top-right spoke -->
+  <line x1="452" y1="225" x2="590" y2="130" stroke="#EF4444" stroke-width="2" stroke-dasharray="4,3"/>
+  <!-- Bottom-left spoke -->
+  <line x1="348" y1="325" x2="195" y2="415" stroke="#F59E0B" stroke-width="2" stroke-dasharray="4,3"/>
+  <!-- Bottom-right spoke -->
+  <line x1="452" y1="325" x2="605" y2="415" stroke="#06B6D4" stroke-width="2" stroke-dasharray="4,3"/>
+  
+  <!-- ===== Function Card 1: Frame Delimiting (Top-Left) ===== -->
+  <rect x="60" y="68" width="210" height="95" rx="14" fill="white" stroke="#3B82F6" stroke-width="2" filter="url(#cardSh)"/>
+  <rect x="60" y="68" width="210" height="32" rx="14" fill="#3B82F6"/>
+  <rect x="60" y="86" width="210" height="14" fill="#3B82F6"/>
+  <text x="90" y="90" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="white">📦 Frame Delimiting</text>
+  <text x="75" y="118" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334155">Marks start &amp; end of each frame</text>
+  <text x="75" y="135" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334155">using special bit patterns</text>
+  <text x="75" y="152" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#64748B">(Preamble, SFD, Flags)</text>
+  
+  <!-- ===== Function Card 2: MAC Addressing (Top-Center) ===== -->
+  <rect x="295" y="56" width="210" height="95" rx="14" fill="white" stroke="#8B5CF6" stroke-width="2" filter="url(#cardSh)"/>
+  <rect x="295" y="56" width="210" height="32" rx="14" fill="#8B5CF6"/>
+  <rect x="295" y="74" width="210" height="14" fill="#8B5CF6"/>
+  <text x="325" y="78" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="white">🏷️ MAC Addressing</text>
+  <text x="310" y="106" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334155">48-bit hardware addresses</text>
+  <text x="310" y="123" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334155">(e.g., AA:BB:CC:DD:EE:FF)</text>
+  <text x="310" y="140" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#64748B">Unique per network interface</text>
+  
+  <!-- ===== Function Card 3: Error Detection (Top-Right) ===== -->
+  <rect x="530" y="68" width="210" height="95" rx="14" fill="white" stroke="#EF4444" stroke-width="2" filter="url(#cardSh)"/>
+  <rect x="530" y="68" width="210" height="32" rx="14" fill="#EF4444"/>
+  <rect x="530" y="86" width="210" height="14" fill="#EF4444"/>
+  <text x="560" y="90" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="white">🔍 Error Detection</text>
+  <text x="545" y="118" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334155">CRC-32 checksum appended</text>
+  <text x="545" y="135" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334155">to each frame for integrity</text>
+  <text x="545" y="152" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#64748B">Detects bit errors in transit</text>
+  
+  <!-- ===== Function Card 4: Medium Access Control (Bottom-Left) ===== -->
+  <rect x="50" y="375" width="230" height="105" rx="14" fill="white" stroke="#F59E0B" stroke-width="2" filter="url(#cardSh)"/>
+  <rect x="50" y="375" width="230" height="32" rx="14" fill="#F59E0B"/>
+  <rect x="50" y="393" width="230" height="14" fill="#F59E0B"/>
+  <text x="80" y="397" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="white">🎛️ Medium Access Control</text>
+  <text x="65" y="425" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334155">Determines WHEN a station</text>
+  <text x="65" y="442" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334155">can use the shared channel</text>
+  <text x="65" y="459" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#64748B">(CSMA/CD, CSMA/CA, Token)</text>
+  <text x="65" y="473" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#64748B">Primary function of MAC!</text>
+  
+  <!-- ===== Function Card 5: Collision Handling (Bottom-Right) ===== -->
+  <rect x="520" y="375" width="230" height="105" rx="14" fill="white" stroke="#06B6D4" stroke-width="2" filter="url(#cardSh)"/>
+  <rect x="520" y="375" width="230" height="32" rx="14" fill="#06B6D4"/>
+  <rect x="520" y="393" width="230" height="14" fill="#06B6D4"/>
+  <text x="550" y="397" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="white">💥 Collision Handling</text>
+  <text x="535" y="425" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334155">Detects when two frames</text>
+  <text x="535" y="442" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334155">collide on the medium</text>
+  <text x="535" y="459" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#64748B">Uses backoff algorithms to</text>
+  <text x="535" y="473" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#64748B">retry (Binary Exponential Backoff)</text>
+  
+  <!-- Bottom annotation -->
+  <rect x="220" y="496" width="360" height="20" rx="10" fill="#10B981" opacity="0.1"/>
+  <text x="400" y="510" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="600" fill="#065F46">All functions work together to ensure reliable shared-medium communication</text>
+</svg>

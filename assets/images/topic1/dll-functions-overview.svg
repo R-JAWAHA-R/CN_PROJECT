@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="bgG3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f8fafc"/><stop offset="100%" stop-color="#e2e8f0"/></linearGradient>
+    <linearGradient id="centerG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#10B981"/><stop offset="100%" stop-color="#059669"/></linearGradient>
+    <filter id="sh3"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#00000018"/></filter>
+    <marker id="ar3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#94a3b8"/></marker>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bgG3)" rx="12"/>
+
+  <!-- Title -->
+  <text x="400" y="36" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="700" fill="#1e293b">Data Link Layer — Key Functions Overview</text>
+
+  <!-- Central hub -->
+  <circle cx="400" cy="260" r="72" fill="url(#centerG)" filter="url(#sh3)"/>
+  <text x="400" y="250" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="white">Data Link</text>
+  <text x="400" y="268" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="white">Layer</text>
+  <text x="400" y="284" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="white" opacity="0.8">Functions</text>
+
+  <!-- Spokes and Function Boxes -->
+  <!-- 1. Framing (top-left) -->
+  <line x1="345" y1="205" x2="188" y2="112" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar3)"/>
+  <rect x="30" y="62" width="165" height="100" rx="10" fill="white" stroke="#3B82F6" stroke-width="2" filter="url(#sh3)"/>
+  <rect x="30" y="62" width="165" height="28" rx="10" fill="#3B82F6"/>
+  <rect x="30" y="82" width="165" height="8" fill="#3B82F6"/>
+  <text x="56" y="82" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="white">📦 Framing</text>
+  <text x="112" y="110" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#475569">Encapsulates packets</text>
+  <text x="112" y="124" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#475569">into frames with headers</text>
+  <text x="112" y="138" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#475569">and trailers</text>
+  <text x="112" y="153" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#94a3b8" font-style="italic">Start/End delimiters</text>
+
+  <!-- 2. Error Control (top-right) -->
+  <line x1="455" y1="205" x2="612" y2="112" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar3)"/>
+  <rect x="605" y="62" width="165" height="100" rx="10" fill="white" stroke="#EF4444" stroke-width="2" filter="url(#sh3)"/>
+  <rect x="605" y="62" width="165" height="28" rx="10" fill="#EF4444"/>
+  <rect x="605" y="82" width="165" height="8" fill="#EF4444"/>
+  <text x="631" y="82" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="white">🛡️ Error Control</text>
+  <text x="687" y="110" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#475569">Detects &amp; corrects</text>
+  <text x="687" y="124" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#475569">errors in transmitted</text>
+  <text x="687" y="138" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#475569">frames</text>
+  <text x="687" y="153" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#94a3b8" font-style="italic">CRC, Parity, Checksum</text>
+
+  <!-- 3. Flow Control (middle-left) -->
+  <line x1="328" y1="260" x2="210" y2="260" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar3)"/>
+  <rect x="30" y="210" width="165" height="100" rx="10" fill="white" stroke="#8B5CF6" stroke-width="2" filter="url(#sh3)"/>
+  <rect x="30" y="210" width="165" height="28" rx="10" fill="#8B5CF6"/>
+  <rect x="30" y="230" width="165" height="8" fill="#8B5CF6"/>
+  <text x="56" y="230" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="white">⏱️ Flow Control</text>
+  <text x="112" y="258" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#475569">Prevents fast sender</text>
+  <text x="112" y="272" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#475569">from overwhelming a</text>
+  <text x="112" y="286" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#475569">slow receiver</text>
+  <text x="112" y="301" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#94a3b8" font-style="italic">Stop-and-Wait, Sliding Window</text>
+
+  <!-- 4. Access Control (middle-right) -->
+  <line x1="472" y1="260" x2="590" y2="260" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar3)"/>
+  <rect x="605" y="210" width="165" height="100" rx="10" fill="white" stroke="#F59E0B" stroke-width="2" filter="url(#sh3)"/>
+  <rect x="605" y="210" width="165" height="28" rx="10" fill="#F59E0B"/>
+  <rect x="605" y="230" width="165" height="8" fill="#F59E0B"/>
+  <text x="631" y="230" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="white">🔑 Access Control</text>
+  <text x="687" y="258" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#475569">Determines which</text>
+  <text x="687" y="272" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#475569">device has control of</text>
+  <text x="687" y="286" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#475569">the shared link</text>
+  <text x="687" y="301" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#94a3b8" font-style="italic">CSMA/CD, Token Ring</text>
+
+  <!-- 5. Addressing / MAC (bottom-left) -->
+  <line x1="345" y1="315" x2="188" y2="408" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar3)"/>
+  <rect x="30" y="358" width="165" height="100" rx="10" fill="white" stroke="#10B981" stroke-width="2" filter="url(#sh3)"/>
+  <rect x="30" y="358" width="165" height="28" rx="10" fill="#10B981"/>
+  <rect x="30" y="378" width="165" height="8" fill="#10B981"/>
+  <text x="56" y="378" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="white">🏷️ MAC Addressing</text>
+  <text x="112" y="406" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#475569">Uses hardware (MAC)</text>
+  <text x="112" y="420" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#475569">addresses for unique</text>
+  <text x="112" y="434" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#475569">device identification</text>
+  <text x="112" y="449" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#94a3b8" font-style="italic">48-bit: AA:BB:CC:DD:EE:FF</text>
+
+  <!-- 6. Node-to-Node Delivery (bottom-right) -->
+  <line x1="455" y1="315" x2="612" y2="408" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar3)"/>
+  <rect x="605" y="358" width="165" height="100" rx="10" fill="white" stroke="#2563EB" stroke-width="2" filter="url(#sh3)"/>
+  <rect x="605" y="358" width="165" height="28" rx="10" fill="#2563EB"/>
+  <rect x="605" y="378" width="165" height="8" fill="#2563EB"/>
+  <text x="631" y="378" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="white">🔗 Node-to-Node</text>
+  <text x="687" y="406" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#475569">Responsible for hop-</text>
+  <text x="687" y="420" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#475569">by-hop delivery of</text>
+  <text x="687" y="434" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#475569">frames between nodes</text>
+  <text x="687" y="449" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#94a3b8" font-style="italic">Adjacent node transfer</text>
+</svg>

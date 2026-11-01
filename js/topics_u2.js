@@ -68,6 +68,8 @@ const TOPICS_U2 = {
         "Ethernet LANs, Point-to-Point Protocol (PPP), HDLC serial links, Wi-Fi 802.11"
       ]
     },
+    "imageUrl": "assets/images/topic1/framing-techniques.svg",
+    "imageCaption": "Figure 1.11: Four Classical Framing Techniques: Character Count, Byte Stuffing, Bit Stuffing, and Coding Violations.",
     "sections": {
       "overview": "the Data Link Layer function in which a continuous sequence of bits received from the Physical Layer is organized into protocol-defined <strong>frames</strong>. The protocol establishes exact rules allowing the receiver to recognize frame boundaries, interpret header metadata, and safely extract the payload for delivery to the Network Layer.",
       "eli10": "Imagine receiving a letter written as one unbroken string with no spaces or punctuation: <code>HELLOWORLDHOWAREYOUGOODMORNING</code>. You wouldn't know where one thought begins and another ends. Framing adds the \"spaces\", \"capital letters\", and \"periods\" to computer communication so devices know where each individual message starts and finishes.",
@@ -175,12 +177,12 @@ const TOPICS_U2 = {
           "url": "https://standards.ieee.org"
         }
       ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/55/Bit_stuffing.png",
+      "imageUrl": "assets/images/topic1/bit-stuffing-mechanism.svg",
       "imageCaption": "Figure: Framing Boundary Delineation & Bit Stuffing with 01111110 Flag Delimiters."
     },
     "prevTopicId": "dll-design-issues",
     "nextTopicId": "byte-stuffing",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/55/Bit_stuffing.png",
+    "imageUrl": "assets/images/topic1/bit-stuffing-mechanism.svg",
     "imageCaption": "Figure: Framing Boundary Delineation & Bit Stuffing with 01111110 Flag Delimiters."
   },
   "byte-stuffing": {
@@ -297,12 +299,12 @@ const TOPICS_U2 = {
           "url": "https://www.rfc-editor.org/rfc/rfc1662"
         }
       ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/55/Bit_stuffing.png",
+      "imageUrl": "assets/images/topic1/bit-stuffing-mechanism.svg",
       "imageCaption": "Figure: Byte Stuffing (Character-Oriented) vs. Bit Stuffing (Bit-Oriented) Delimiting."
     },
     "prevTopicId": "framing",
     "nextTopicId": "bit-stuffing",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/55/Bit_stuffing.png",
+    "imageUrl": "assets/images/topic1/bit-stuffing-mechanism.svg",
     "imageCaption": "Figure: Byte Stuffing (Character-Oriented) vs. Bit Stuffing (Bit-Oriented) Delimiting."
   },
   "bit-stuffing": {
@@ -415,12 +417,12 @@ const TOPICS_U2 = {
           "url": "https://www.iso.org"
         }
       ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/55/Bit_stuffing.png",
+      "imageUrl": "assets/images/topic1/bit-stuffing-mechanism.svg",
       "imageCaption": "Figure: Bit Stuffing Rule: Zero-bit inserted after every 5 consecutive 1s in payload."
     },
     "prevTopicId": "byte-stuffing",
     "nextTopicId": "error-detection",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/55/Bit_stuffing.png",
+    "imageUrl": "assets/images/topic1/bit-stuffing-mechanism.svg",
     "imageCaption": "Figure: Bit Stuffing Rule: Zero-bit inserted after every 5 consecutive 1s in payload."
   },
   "error-detection": {
@@ -1115,6 +1117,8 @@ const TOPICS_U2 = {
         "Ethernet PAUSE frames (802.3x), TCP Sliding Window, serial XON/XOFF"
       ]
     },
+    "imageUrl": "assets/images/topic1/flow-control-models.svg",
+    "imageCaption": "Figure 1.13: Data Link Flow Control: Stop-and-Wait vs Sliding Window pipelined protocol.",
     "sections": {
       "overview": "the set of mechanisms that regulates the amount or rate of unacknowledged data a sender may transmit, matching transmission speed to the receiving station's memory and processing capacity.",
       "eli10": "Imagine pouring water from a big bucket into a tiny drinking glass. If you pour as fast as you can, water spills all over the table. You must slow down and pour only as fast as the glass can take it. Flow control is the valve on the bucket!",
@@ -1165,12 +1169,12 @@ const TOPICS_U2 = {
           "url": "https://www.pearson.com"
         }
       ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/76/Stop_and_wait_arq.png",
+      "imageUrl": "assets/images/topic1/flow-control-models.svg",
       "imageCaption": "Figure: Flow Control Mechanism: Preventing Fast Sender from Overwhelming Slow Receiver."
     },
     "prevTopicId": "crc",
     "nextTopicId": "simplex-protocol",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/76/Stop_and_wait_arq.png",
+    "imageUrl": "assets/images/topic1/flow-control-models.svg",
     "imageCaption": "Figure: Flow Control Mechanism: Preventing Fast Sender from Overwhelming Slow Receiver."
   },
   "stop-and-wait": {
@@ -1225,6 +1229,8 @@ const TOPICS_U2 = {
         "TFTP, simple embedded RF links, legacy serial modems"
       ]
     },
+    "imageUrl": "assets/images/topic2/stop-and-wait-arq-fsm.svg",
+    "imageCaption": "Figure 2.9: Stop-and-Wait ARQ state transitions: normal flow, lost frame timeout, and lost ACK duplicate filtering.",
     "sections": {
       "overview": "a fundamental Automatic Repeat reQuest (ARQ) protocol in which the sender transmits a single frame and waits for an acknowledgment from the receiver before dispatching the subsequent frame.",
       "eli10": "Imagine playing catch with someone, but you are only allowed to throw the second ball after they shout: \"I caught ball #1!\" If you wait too long and don't hear them shout, you assume the ball landed in the bushes and throw a backup ball.",
@@ -1275,12 +1281,12 @@ const TOPICS_U2 = {
           "url": "https://www.pearson.com"
         }
       ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/76/Stop_and_wait_arq.png",
+      "imageUrl": "assets/images/topic1/flow-control-models.svg",
       "imageCaption": "Figure: Stop-and-Wait ARQ on Noisy Channels: Timer, Retransmission, and Alternating 0/1 ACKs."
     },
     "prevTopicId": "simplex-protocol",
     "nextTopicId": "sliding-window",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/76/Stop_and_wait_arq.png",
+    "imageUrl": "assets/images/topic1/flow-control-models.svg",
     "imageCaption": "Figure: Stop-and-Wait ARQ on Noisy Channels: Timer, Retransmission, and Alternating 0/1 ACKs."
   },
   "sliding-window": {
@@ -1437,6 +1443,8 @@ const TOPICS_U2 = {
         "HDLC, legacy satellite links, basic reliable transport"
       ]
     },
+    "imageUrl": "assets/images/topic2/go-back-n-sliding-window.svg",
+    "imageCaption": "Figure 2.11: Go-Back-N ARQ sliding window buffer (S_w = 2^m - 1, R_w = 1) and cumulative ACK mechanics.",
     "sections": {
       "overview": "a sliding window ARQ protocol in which the sender may transmit multiple frames up to window size $N$, but the receiver accepts strictly the single next expected frame in sequential order, discarding any out-of-order arrivals.",
       "eli10": "Imagine you are baking a cake following steps 1, 2, 3, 4, and 5. If step 2 is dropped and you only get step 3 and 4, you refuse to read steps 3 and 4! You throw them away and yell: \"Give me step 2!\" When step 2 finally arrives, the chef must re-read steps 2, 3, 4, and 5 all over again!",
@@ -1542,6 +1550,8 @@ const TOPICS_U2 = {
         "TCP Selective Acknowledgment (SACK), Wi-Fi Block ACK, satellite links"
       ]
     },
+    "imageUrl": "assets/images/topic2/selective-repeat-windows.svg",
+    "imageCaption": "Figure 2.13: Selective Repeat ARQ symmetric sliding windows (S_w = R_w = 2^(m-1)) with independent buffering.",
     "sections": {
       "overview": "an advanced sliding window ARQ protocol in which the receiver accepts and buffers correctly received frames even when preceding frames are missing, allowing the sender to retransmit only the specific frames that were lost or corrupted.",
       "eli10": "Imagine receiving pages 1, 3, and 4 of a story. Instead of throwing pages 3 and 4 in the trash like Go-Back-N, you put them neatly on your desk and just say: \"Hey, page 2 was missing, please re-send only page 2!\" When page 2 arrives, you read 1, 2, 3, and 4 in order!",

@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="100%" height="100%" style="background:#ffffff; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <rect x="30" y="20" width="840" height="54" rx="10" fill="#0F172A" />
+  <text x="50" y="53" fill="#F8FAFC" font-size="18" font-weight="700">Stop-and-Wait ARQ: Normal Flow, Lost Frame &amp; Lost ACK Recovery</text>
+
+  <g transform="translate(40, 95)">
+    <!-- Column 1: Normal Operation -->
+    <rect x="0" y="0" width="265" height="395" rx="8" fill="#F8FAFC" stroke="#E2E8F0" />
+    <rect x="0" y="0" width="265" height="32" rx="8" fill="#ECFDF5" />
+    <text x="132" y="21" fill="#065F46" font-size="12" font-weight="bold" text-anchor="middle">Case 1: Normal Transmission</text>
+    <!-- Sequence -->
+    <g transform="translate(25, 45)">
+      <line x1="30" y1="0" x2="30" y2="170" stroke="#94A3B8" stroke-width="1.5" />
+      <line x1="185" y1="0" x2="185" y2="170" stroke="#94A3B8" stroke-width="1.5" />
+      <text x="30" y="-6" fill="#0F172A" font-size="10" font-weight="bold" text-anchor="middle">Tx</text>
+      <text x="185" y="-6" fill="#0F172A" font-size="10" font-weight="bold" text-anchor="middle">Rx</text>
+      <!-- Frame 0 -->
+      <line x1="30" y1="20" x2="185" y2="50" stroke="#10B981" stroke-width="2" />
+      <polygon points="185,50 174,44 176,55" fill="#10B981" />
+      <text x="105" y="30" fill="#065F46" font-size="9" font-weight="bold" text-anchor="middle">Frame 0</text>
+      <!-- ACK 1 -->
+      <line x1="185" y1="65" x2="30" y2="95" stroke="#059669" stroke-width="2" stroke-dasharray="4 2" />
+      <polygon points="30,95 41,89 40,100" fill="#059669" />
+      <text x="105" y="75" fill="#059669" font-size="9" font-weight="bold" text-anchor="middle">ACK 1</text>
+      <!-- Frame 1 -->
+      <line x1="30" y1="110" x2="185" y2="140" stroke="#10B981" stroke-width="2" />
+      <polygon points="185,140 174,134 176,145" fill="#10B981" />
+      <text x="105" y="120" fill="#065F46" font-size="9" font-weight="bold" text-anchor="middle">Frame 1</text>
+    </g>
+    <rect x="15" y="240" width="235" height="140" rx="6" fill="#FFFFFF" stroke="#CBD5E1" />
+    <text x="25" y="260" fill="#0F172A" font-size="10.5" font-weight="bold">Mechanism:</text>
+    <text x="25" y="280" fill="#64748B" font-size="9.5">&bull; Sender transmits Frame 0.</text>
+    <text x="25" y="298" fill="#64748B" font-size="9.5">&bull; Receiver checks CRC; error-free.</text>
+    <text x="25" y="316" fill="#64748B" font-size="9.5">&bull; Receiver returns ACK 1 (expecting 1).</text>
+    <text x="25" y="334" fill="#64748B" font-size="9.5">&bull; Sender cancels timer, sends Frame 1.</text>
+    <text x="25" y="352" fill="#059669" font-size="9.5" font-weight="bold">&bull; Zero duplicates, minimal delay.</text>
+
+    <!-- Column 2: Lost Frame Case -->
+    <rect x="280" y="0" width="265" height="395" rx="8" fill="#F8FAFC" stroke="#E2E8F0" />
+    <rect x="280" y="0" width="265" height="32" rx="8" fill="#FEE2E2" />
+    <text x="412" y="21" fill="#991B1B" font-size="12" font-weight="bold" text-anchor="middle">Case 2: Frame Lost in Transit</text>
+    <g transform="translate(305, 45)">
+      <line x1="30" y1="0" x2="30" y2="170" stroke="#94A3B8" stroke-width="1.5" />
+      <line x1="185" y1="0" x2="185" y2="170" stroke="#94A3B8" stroke-width="1.5" />
+      <text x="30" y="-6" fill="#0F172A" font-size="10" font-weight="bold" text-anchor="middle">Tx</text>
+      <text x="185" y="-6" fill="#0F172A" font-size="10" font-weight="bold" text-anchor="middle">Rx</text>
+      <!-- Frame 0 Lost -->
+      <line x1="30" y1="20" x2="110" y2="35" stroke="#EF4444" stroke-width="2" />
+      <line x1="105" y1="30" x2="115" y2="40" stroke="#DC2626" stroke-width="2.5" />
+      <line x1="115" y1="30" x2="105" y2="40" stroke="#DC2626" stroke-width="2.5" />
+      <text x="105" y="26" fill="#DC2626" font-size="9" font-weight="bold">LOST</text>
+      <!-- Timer Expiry -->
+      <line x1="15" y1="20" x2="15" y2="90" stroke="#D97706" stroke-width="2" stroke-dasharray="3 3" />
+      <text x="10" y="60" fill="#D97706" font-size="8" font-weight="bold" text-anchor="end">Timer Expired</text>
+      <!-- Retransmission -->
+      <line x1="30" y1="100" x2="185" y2="130" stroke="#3B82F6" stroke-width="2" />
+      <polygon points="185,130 174,124 176,135" fill="#3B82F6" />
+      <text x="105" y="110" fill="#1E40AF" font-size="9" font-weight="bold" text-anchor="middle">Frame 0 (Retransmit)</text>
+      <!-- ACK 1 -->
+      <line x1="185" y1="140" x2="30" y2="170" stroke="#059669" stroke-width="2" stroke-dasharray="4 2" />
+      <polygon points="30,170 41,164 40,175" fill="#059669" />
+      <text x="105" y="150" fill="#059669" font-size="9" font-weight="bold" text-anchor="middle">ACK 1</text>
+    </g>
+    <rect x="295" y="240" width="235" height="140" rx="6" fill="#FFFFFF" stroke="#CBD5E1" />
+    <text x="305" y="260" fill="#0F172A" font-size="10.5" font-weight="bold">Mechanism:</text>
+    <text x="305" y="280" fill="#64748B" font-size="9.5">&bull; Frame 0 destroyed by channel noise.</text>
+    <text x="305" y="298" fill="#64748B" font-size="9.5">&bull; Receiver unaware; sends no ACK.</text>
+    <text x="305" y="316" fill="#64748B" font-size="9.5">&bull; Sender timer expires after timeout.</text>
+    <text x="305" y="334" fill="#64748B" font-size="9.5">&bull; Sender retransmits exact Frame 0.</text>
+    <text x="305" y="352" fill="#DC2626" font-size="9.5" font-weight="bold">&bull; Solved cleanly via sender timer.</text>
+
+    <!-- Column 3: Lost ACK Case -->
+    <rect x="560" y="0" width="265" height="395" rx="8" fill="#F8FAFC" stroke="#E2E8F0" />
+    <rect x="560" y="0" width="265" height="32" rx="8" fill="#FEF3C7" />
+    <text x="692" y="21" fill="#92400E" font-size="12" font-weight="bold" text-anchor="middle">Case 3: Acknowledgment (ACK) Lost</text>
+    <g transform="translate(585, 45)">
+      <line x1="30" y1="0" x2="30" y2="170" stroke="#94A3B8" stroke-width="1.5" />
+      <line x1="185" y1="0" x2="185" y2="170" stroke="#94A3B8" stroke-width="1.5" />
+      <text x="30" y="-6" fill="#0F172A" font-size="10" font-weight="bold" text-anchor="middle">Tx</text>
+      <text x="185" y="-6" fill="#0F172A" font-size="10" font-weight="bold" text-anchor="middle">Rx</text>
+      <!-- Frame 0 -->
+      <line x1="30" y1="15" x2="185" y2="45" stroke="#10B981" stroke-width="2" />
+      <polygon points="185,45 174,39 176,50" fill="#10B981" />
+      <!-- ACK 1 Lost -->
+      <line x1="185" y1="55" x2="105" y2="70" stroke="#EF4444" stroke-width="2" stroke-dasharray="3 2" />
+      <line x1="100" y1="65" x2="110" y2="75" stroke="#DC2626" stroke-width="2.5" />
+      <line x1="110" y1="65" x2="100" y2="75" stroke="#DC2626" stroke-width="2.5" />
+      <text x="105" y="60" fill="#DC2626" font-size="8.5" font-weight="bold">ACK LOST</text>
+      <!-- Retransmission -->
+      <line x1="30" y1="95" x2="185" y2="125" stroke="#3B82F6" stroke-width="2" />
+      <polygon points="185,125 174,119 176,130" fill="#3B82F6" />
+      <text x="105" y="105" fill="#1E40AF" font-size="8.5" font-weight="bold" text-anchor="middle">Duplicate Frame 0</text>
+      <!-- Duplicate Discarded Note -->
+      <text x="185" y="142" fill="#EF4444" font-size="8" font-weight="bold" text-anchor="middle">(Discarded!)</text>
+      <!-- Resent ACK 1 -->
+      <line x1="185" y1="145" x2="30" y2="175" stroke="#059669" stroke-width="2" stroke-dasharray="4 2" />
+      <polygon points="30,175 41,169 40,180" fill="#059669" />
+      <text x="105" y="155" fill="#059669" font-size="8.5" font-weight="bold" text-anchor="middle">ACK 1 Resent</text>
+    </g>
+    <rect x="575" y="240" width="235" height="140" rx="6" fill="#FFFFFF" stroke="#CBD5E1" />
+    <text x="585" y="260" fill="#0F172A" font-size="10.5" font-weight="bold">Mechanism:</text>
+    <text x="585" y="280" fill="#64748B" font-size="9.5">&bull; Rx receives Frame 0, sends ACK 1.</text>
+    <text x="585" y="298" fill="#64748B" font-size="9.5">&bull; ACK 1 lost in channel noise.</text>
+    <text x="585" y="316" fill="#64748B" font-size="9.5">&bull; Tx timer expires; Tx re-sends Frame 0.</text>
+    <text x="585" y="334" fill="#64748B" font-size="9.5">&bull; Rx sees Seq 0 already received; discards duplicate!</text>
+    <text x="585" y="352" fill="#7C3AED" font-size="9.5" font-weight="bold">&bull; 1-bit sequence number prevents duplicate delivery.</text>
+  </g>
+</svg>

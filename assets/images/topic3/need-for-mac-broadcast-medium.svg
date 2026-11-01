@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 490" width="100%" height="100%" style="background:#ffffff; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <rect x="30" y="20" width="840" height="54" rx="10" fill="#0F172A" />
+  <text x="50" y="53" fill="#F8FAFC" font-size="18" font-weight="700">The Need for the MAC Sublayer: Broadcast Channels &amp; Collision Elimination</text>
+
+  <g transform="translate(50, 95)">
+    <!-- Top Half: Scenario WITHOUT MAC (Collisions &amp; Chaos) -->
+    <rect x="0" y="0" width="800" height="165" rx="10" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1.5" />
+    <rect x="15" y="12" width="180" height="24" rx="4" fill="#EF4444" />
+    <text x="105" y="28" fill="#FFF" font-size="11" font-weight="bold" text-anchor="middle">WITHOUT MAC: Channel Chaos</text>
+
+    <!-- Bus Line -->
+    <line x1="80" y1="90" x2="720" y2="90" stroke="#94A3B8" stroke-width="6" stroke-linecap="round" />
+
+    <!-- Host A transmits -->
+    <g transform="translate(100, 45)">
+      <rect width="60" height="35" rx="4" fill="#FFFFFF" stroke="#EF4444" stroke-width="2" /><text x="30" y="22" fill="#DC2626" font-weight="bold" text-anchor="middle">Node A</text>
+      <line x1="30" y1="35" x2="30" y2="45" stroke="#EF4444" stroke-width="2" />
+    </g>
+
+    <!-- Host B transmits simultaneously -->
+    <g transform="translate(250, 45)">
+      <rect width="60" height="35" rx="4" fill="#FFFFFF" stroke="#EF4444" stroke-width="2" /><text x="30" y="22" fill="#DC2626" font-weight="bold" text-anchor="middle">Node B</text>
+      <line x1="30" y1="35" x2="30" y2="45" stroke="#EF4444" stroke-width="2" />
+    </g>
+
+    <!-- Collision Blast -->
+    <g transform="translate(400, 90)">
+      <circle cx="0" cy="0" r="26" fill="#FEE2E2" stroke="#EF4444" stroke-width="2" />
+      <polygon points="0,-16 5,-5 16,-5 8,3 11,14 0,7 -11,14 -8,3 -16,-5 -5,-5" fill="#EF4444" />
+      <text x="0" y="42" fill="#DC2626" font-size="11" font-weight="bold" text-anchor="middle">COLLISION!</text>
+      <text x="0" y="56" fill="#991B1B" font-size="9.5" text-anchor="middle">Garbled Signals &bull; 0% Throughput</text>
+    </g>
+
+    <!-- Host C -->
+    <g transform="translate(630, 45)">
+      <rect width="60" height="35" rx="4" fill="#FFFFFF" stroke="#94A3B8" /><text x="30" y="22" fill="#64748B" text-anchor="middle">Node C</text>
+      <line x1="30" y1="35" x2="30" y2="45" stroke="#94A3B8" stroke-width="2" />
+    </g>
+
+    <!-- Bottom Half: Scenario WITH MAC Sublayer (Orderly Access) -->
+    <rect x="0" y="180" width="800" height="180" rx="10" fill="#ECFDF5" stroke="#6EE7B7" stroke-width="1.5" />
+    <rect x="15" y="192" width="220" height="24" rx="4" fill="#10B981" />
+    <text x="125" y="208" fill="#FFF" font-size="11" font-weight="bold" text-anchor="middle">WITH MAC: Coordinated Transmission</text>
+
+    <!-- Coordinated Bus -->
+    <line x1="80" y1="270" x2="720" y2="270" stroke="#059669" stroke-width="6" stroke-linecap="round" />
+
+    <!-- Host A Transmitting -->
+    <g transform="translate(100, 225)">
+      <rect width="60" height="35" rx="4" fill="#FFFFFF" stroke="#10B981" stroke-width="2" /><text x="30" y="22" fill="#065F46" font-weight="bold" text-anchor="middle">Node A</text>
+      <line x1="30" y1="35" x2="30" y2="45" stroke="#10B981" stroke-width="2" />
+      <rect x="-10" y="50" width="80" height="18" rx="3" fill="#D1FAE5" />
+      <text x="30" y="63" fill="#065F46" font-size="8.5" font-weight="bold" text-anchor="middle">Transmitting</text>
+    </g>
+
+    <!-- Host B Deferring -->
+    <g transform="translate(250, 225)">
+      <rect width="60" height="35" rx="4" fill="#FFFFFF" stroke="#F59E0B" stroke-width="1.5" /><text x="30" y="22" fill="#D97706" text-anchor="middle">Node B</text>
+      <line x1="30" y1="35" x2="30" y2="45" stroke="#F59E0B" stroke-width="2" />
+      <rect x="-5" y="50" width="70" height="18" rx="3" fill="#FEF3C7" />
+      <text x="30" y="63" fill="#92400E" font-size="8.5" font-weight="bold" text-anchor="middle">Senses Busy</text>
+    </g>
+
+    <!-- Clean Signal Flow -->
+    <g transform="translate(390, 260)">
+      <rect x="0" y="-12" width="200" height="24" rx="4" fill="#FFFFFF" stroke="#059669" stroke-width="1.5" />
+      <text x="100" y="4" fill="#065F46" font-size="10" font-weight="bold" text-anchor="middle">Clean Uninterrupted Frame Delivery</text>
+    </g>
+
+    <!-- Host C Receiving -->
+    <g transform="translate(630, 225)">
+      <rect width="60" height="35" rx="4" fill="#FFFFFF" stroke="#3B82F6" stroke-width="2" /><text x="30" y="22" fill="#1E40AF" font-weight="bold" text-anchor="middle">Node C</text>
+      <line x1="30" y1="35" x2="30" y2="45" stroke="#3B82F6" stroke-width="2" />
+      <rect x="-10" y="50" width="80" height="18" rx="3" fill="#DBEAFE" />
+      <text x="30" y="63" fill="#1E40AF" font-size="8.5" font-weight="bold" text-anchor="middle">Receiving Frame</text>
+    </g>
+  </g>
+</svg>

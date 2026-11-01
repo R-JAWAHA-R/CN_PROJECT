@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <filter id="ts">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+  
+  <rect width="800" height="500" fill="#FAFBFF" rx="8"/>
+  
+  <!-- Title -->
+  <text x="400" y="34" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="#1E293B">TDMA — Time Division Multiple Access</text>
+  <line x1="195" y1="44" x2="605" y2="44" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round"/>
+  
+  <!-- Subtitle -->
+  <text x="400" y="62" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#64748B">Each user transmits in a dedicated time slot, sharing the same frequency band</text>
+  
+  <!-- Y-axis -->
+  <line x1="120" y1="90" x2="120" y2="330" stroke="#334155" stroke-width="2"/>
+  <polygon points="120,85 115,95 125,95" fill="#334155"/>
+  <text x="55" y="210" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#334155" transform="rotate(-90 55 210)">Frequency →</text>
+  
+  <!-- X-axis -->
+  <line x1="120" y1="330" x2="730" y2="330" stroke="#334155" stroke-width="2"/>
+  <polygon points="735,330 725,325 725,335" fill="#334155"/>
+  <text x="425" y="358" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#334155">Time →</text>
+  
+  <!-- Single frequency band label -->
+  <text x="112" y="215" text-anchor="end" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#64748B">Full</text>
+  <text x="112" y="228" text-anchor="end" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#64748B">Band</text>
+  
+  <!-- ===== FRAME 1 ===== -->
+  <text x="265" y="88" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="600" fill="#475569">Frame 1</text>
+  
+  <!-- Slot 1 - User 1 (Blue) -->
+  <rect x="121" y="100" width="72" height="225" rx="4" fill="#3B82F6" opacity="0.8"/>
+  <text x="157" y="218" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white" transform="rotate(-90 157 218)">User 1 (Slot 1)</text>
+  
+  <!-- Guard time -->
+  <rect x="193" y="100" width="8" height="225" rx="1" fill="#E2E8F0"/>
+  
+  <!-- Slot 2 - User 2 (Purple) -->
+  <rect x="201" y="100" width="72" height="225" rx="4" fill="#8B5CF6" opacity="0.8"/>
+  <text x="237" y="218" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white" transform="rotate(-90 237 218)">User 2 (Slot 2)</text>
+  
+  <!-- Guard time -->
+  <rect x="273" y="100" width="8" height="225" rx="1" fill="#E2E8F0"/>
+  
+  <!-- Slot 3 - User 3 (Green) -->
+  <rect x="281" y="100" width="72" height="225" rx="4" fill="#10B981" opacity="0.8"/>
+  <text x="317" y="218" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white" transform="rotate(-90 317 218)">User 3 (Slot 3)</text>
+  
+  <!-- Guard time -->
+  <rect x="353" y="100" width="8" height="225" rx="1" fill="#E2E8F0"/>
+  
+  <!-- Slot 4 - User 4 (Amber) -->
+  <rect x="361" y="100" width="72" height="225" rx="4" fill="#F59E0B" opacity="0.8"/>
+  <text x="397" y="218" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white" transform="rotate(-90 397 218)">User 4 (Slot 4)</text>
+  
+  <!-- Frame 1 bracket -->
+  <line x1="121" y1="94" x2="433" y2="94" stroke="#475569" stroke-width="1" stroke-dasharray="3,2"/>
+  
+  <!-- ===== FRAME 2 (Repeat) ===== -->
+  <text x="555" y="88" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="600" fill="#475569">Frame 2 (Repeats)</text>
+  
+  <!-- Gap between frames -->
+  <rect x="433" y="100" width="12" height="225" rx="2" fill="#CBD5E1"/>
+  <text x="439" y="220" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#64748B" transform="rotate(-90 439 220)">Frame Gap</text>
+  
+  <!-- Slot 1 - User 1 -->
+  <rect x="445" y="100" width="72" height="225" rx="4" fill="#3B82F6" opacity="0.8"/>
+  <text x="481" y="218" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white" transform="rotate(-90 481 218)">User 1 (Slot 1)</text>
+  
+  <rect x="517" y="100" width="8" height="225" rx="1" fill="#E2E8F0"/>
+  
+  <!-- Slot 2 - User 2 -->
+  <rect x="525" y="100" width="72" height="225" rx="4" fill="#8B5CF6" opacity="0.8"/>
+  <text x="561" y="218" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white" transform="rotate(-90 561 218)">User 2 (Slot 2)</text>
+  
+  <rect x="597" y="100" width="8" height="225" rx="1" fill="#E2E8F0"/>
+  
+  <!-- Slot 3 - User 3 -->
+  <rect x="605" y="100" width="72" height="225" rx="4" fill="#10B981" opacity="0.8"/>
+  <text x="641" y="218" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="white" transform="rotate(-90 641 218)">User 3 (Slot 3)</text>
+  
+  <rect x="677" y="100" width="8" height="225" rx="1" fill="#E2E8F0"/>
+  
+  <!-- Slot 4 - User 4 -->
+  <rect x="685" y="100" width="40" height="225" rx="4" fill="#F59E0B" opacity="0.6"/>
+  <text x="705" y="215" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="700" fill="white" transform="rotate(-90 705 215)">User 4...</text>
+  
+  <!-- Continuation dots -->
+  <text x="735" y="215" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#64748B">…</text>
+  
+  <!-- Frame 2 bracket -->
+  <line x1="445" y1="94" x2="725" y2="94" stroke="#475569" stroke-width="1" stroke-dasharray="3,2"/>
+  
+  <!-- Time slot labels -->
+  <text x="157" y="345" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">t₁</text>
+  <text x="237" y="345" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">t₂</text>
+  <text x="317" y="345" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">t₃</text>
+  <text x="397" y="345" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">t₄</text>
+  <text x="481" y="345" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">t₁</text>
+  <text x="561" y="345" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">t₂</text>
+  <text x="641" y="345" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#64748B">t₃</text>
+  
+  <!-- Guard time labels -->
+  <line x1="197" y1="328" x2="197" y2="338" stroke="#94A3B8" stroke-width="0.5"/>
+  <text x="197" y="350" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#94A3B8">GT</text>
+  
+  <!-- Legend -->
+  <rect x="120" y="375" width="610" height="110" rx="14" fill="white" stroke="#DDD6FE" stroke-width="1.5" filter="url(#ts)"/>
+  
+  <text x="140" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="#4C1D95">Key Characteristics:</text>
+  <text x="140" y="418" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334155">✦ All users share the same frequency band, but transmit at different times</text>
+  <text x="140" y="436" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334155">✦ Guard times between slots prevent overlap/interference</text>
+  <text x="140" y="454" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334155">✦ Frames repeat cyclically — each user gets periodic access</text>
+  <text x="140" y="472" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#64748B">Example: GSM (2G) cellular networks — 8 time slots per frame at 4.615 ms/frame</text>
+  
+  <!-- Color legend -->
+  <rect x="570" y="388" width="12" height="12" rx="2" fill="#3B82F6"/>
+  <text x="588" y="399" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">User 1</text>
+  <rect x="630" y="388" width="12" height="12" rx="2" fill="#8B5CF6"/>
+  <text x="648" y="399" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">User 2</text>
+  <rect x="570" y="406" width="12" height="12" rx="2" fill="#10B981"/>
+  <text x="588" y="417" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">User 3</text>
+  <rect x="630" y="406" width="12" height="12" rx="2" fill="#F59E0B"/>
+  <text x="648" y="417" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#334155">User 4</text>
+</svg>

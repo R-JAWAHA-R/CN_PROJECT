@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="100%" height="100%" style="background:#ffffff; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <rect x="30" y="20" width="840" height="54" rx="10" fill="#0F172A" />
+  <text x="50" y="53" fill="#F8FAFC" font-size="18" font-weight="700">Go-Back-N ARQ: Error Recovery &amp; Retransmission of Full Window</text>
+
+  <g transform="translate(60, 95)">
+    <!-- Lifelines -->
+    <line x1="80" y1="0" x2="80" y2="390" stroke="#94A3B8" stroke-width="2" />
+    <line x1="450" y1="0" x2="450" y2="390" stroke="#94A3B8" stroke-width="2" />
+    <text x="80" y="-8" fill="#0F172A" font-size="12" font-weight="bold" text-anchor="middle">Sender (N = 4)</text>
+    <text x="450" y="-8" fill="#0F172A" font-size="12" font-weight="bold" text-anchor="middle">Receiver (R_w = 1)</text>
+
+    <!-- Frame 0: Success -->
+    <line x1="80" y1="20" x2="450" y2="60" stroke="#10B981" stroke-width="2" />
+    <polygon points="450,60 438,54 440,65" fill="#10B981" />
+    <text x="260" y="35" fill="#065F46" font-size="10" font-weight="bold" text-anchor="middle">Frame 0</text>
+
+    <!-- Frame 1: Lost -->
+    <line x1="80" y1="45" x2="260" y2="70" stroke="#EF4444" stroke-width="2" />
+    <line x1="255" y1="65" x2="265" y2="75" stroke="#DC2626" stroke-width="3" />
+    <line x1="265" y1="65" x2="255" y2="75" stroke="#DC2626" stroke-width="3" />
+    <text x="270" y="65" fill="#DC2626" font-size="10" font-weight="bold">LOST</text>
+    <text x="170" y="50" fill="#DC2626" font-size="10" font-weight="bold">Frame 1</text>
+
+    <!-- ACK 1 for Frame 0 -->
+    <line x1="450" y1="65" x2="80" y2="105" stroke="#059669" stroke-width="2" stroke-dasharray="4 2" />
+    <polygon points="80,105 92,99 90,110" fill="#059669" />
+    <text x="260" y="80" fill="#059669" font-size="10" font-weight="bold" text-anchor="middle">ACK 1 (Ready for 1)</text>
+
+    <!-- Frame 2: Arrives out-of-order -->
+    <line x1="80" y1="70" x2="450" y2="110" stroke="#F59E0B" stroke-width="2" />
+    <polygon points="450,110 438,104 440,115" fill="#F59E0B" />
+    <text x="260" y="95" fill="#92400E" font-size="10" font-weight="bold" text-anchor="middle">Frame 2</text>
+    <text x="460" y="115" fill="#EF4444" font-size="9" font-weight="bold">Discarded! (Expecting 1)</text>
+
+    <!-- Frame 3: Arrives out-of-order -->
+    <line x1="80" y1="95" x2="450" y2="135" stroke="#F59E0B" stroke-width="2" />
+    <polygon points="450,135 438,129 440,140" fill="#F59E0B" />
+    <text x="260" y="120" fill="#92400E" font-size="10" font-weight="bold" text-anchor="middle">Frame 3</text>
+    <text x="460" y="140" fill="#EF4444" font-size="9" font-weight="bold">Discarded! (Expecting 1)</text>
+
+    <!-- Timer for Frame 1 expires -->
+    <line x1="60" y1="45" x2="60" y2="175" stroke="#DC2626" stroke-width="2" stroke-dasharray="3 3" />
+    <text x="50" y="115" fill="#DC2626" font-size="9" font-weight="bold" text-anchor="end">Timer 1 Expired!</text>
+
+    <!-- Retransmission Phase: GO BACK TO 1 -->
+    <rect x="65" y="180" width="30" height="15" rx="3" fill="#EF4444" />
+    <text x="80" y="192" fill="#FFF" font-size="9" font-weight="bold" text-anchor="middle">GO BACK N</text>
+
+    <!-- Frame 1 Retransmitted -->
+    <line x1="80" y1="205" x2="450" y2="245" stroke="#3B82F6" stroke-width="2" />
+    <polygon points="450,245 438,239 440,250" fill="#3B82F6" />
+    <text x="260" y="220" fill="#1E40AF" font-size="10" font-weight="bold" text-anchor="middle">Frame 1 (Retransmitted)</text>
+
+    <!-- Frame 2 Retransmitted -->
+    <line x1="80" y1="230" x2="450" y2="270" stroke="#3B82F6" stroke-width="2" />
+    <polygon points="450,270 438,264 440,275" fill="#3B82F6" />
+    <text x="260" y="245" fill="#1E40AF" font-size="10" font-weight="bold" text-anchor="middle">Frame 2 (Retransmitted)</text>
+
+    <!-- Frame 3 Retransmitted -->
+    <line x1="80" y1="255" x2="450" y2="295" stroke="#3B82F6" stroke-width="2" />
+    <polygon points="450,295 438,289 440,300" fill="#3B82F6" />
+    <text x="260" y="270" fill="#1E40AF" font-size="10" font-weight="bold" text-anchor="middle">Frame 3 (Retransmitted)</text>
+
+    <!-- ACK 4 (Cumulative) -->
+    <line x1="450" y1="305" x2="80" y2="345" stroke="#059669" stroke-width="2.5" stroke-dasharray="4 2" />
+    <polygon points="80,345 92,339 90,350" fill="#059669" />
+    <text x="260" y="320" fill="#059669" font-size="11" font-weight="bold" text-anchor="middle">ACK 4 (Cumulative &bull; Frames 1,2,3 all received)</text>
+
+    <!-- Explanation Card on Right -->
+    <g transform="translate(560, 40)">
+      <rect width="220" height="310" rx="8" fill="#F8FAFC" stroke="#CBD5E1" />
+      <text x="15" y="25" fill="#0F172A" font-size="12" font-weight="bold">Why "Go-Back-N"?</text>
+      <text x="15" y="50" fill="#475569" font-size="10.5">When Frame 1 is lost, the receiver rejects valid Frames 2 and 3 because R_w = 1.</text>
+      <text x="15" y="90" fill="#DC2626" font-size="10.5" font-weight="bold">Inherent Inefficiency:</text>
+      <text x="15" y="110" fill="#475569" font-size="10.5">Sender must retransmit ALL N frames starting from the damaged frame (1, 2, 3), wasting channel bandwidth.</text>
+      <text x="15" y="165" fill="#059669" font-size="10.5" font-weight="bold">Advantage:</text>
+      <text x="15" y="185" fill="#475569" font-size="10.5">Receiver requires NO complex buffering logic (memory = 1 frame).</text>
+      <rect x="15" y="240" width="190" height="50" rx="6" fill="#DBEAFE" />
+      <text x="110" y="260" fill="#1E40AF" font-size="10" font-weight="bold" text-anchor="middle">Max Window Formula:</text>
+      <text x="110" y="278" fill="#1E40AF" font-size="11" font-family="monospace" font-weight="bold" text-anchor="middle">S_w = 2^m - 1</text>
+    </g>
+  </g>
+</svg>

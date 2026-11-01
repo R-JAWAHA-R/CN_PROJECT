@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="100%" height="100%" style="background:#ffffff; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <rect x="30" y="20" width="840" height="54" rx="10" fill="#0F172A" />
+  <text x="50" y="53" fill="#F8FAFC" font-size="18" font-weight="700">Bit Stuffing &amp; Unstuffing Protocol Trace (Zero-Bit Insertion)</text>
+
+  <g transform="translate(50, 95)">
+    <!-- Stage 1 -->
+    <rect x="0" y="0" width="800" height="95" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+    <text x="20" y="30" fill="#0F172A" font-size="13" font-weight="700">Step 1: Original Unstuffed Data Stream from Network Layer</text>
+    <text x="20" y="52" fill="#64748B" font-size="11">Data payload contains a sequence with five consecutive '1's that would mimic a flag if another '1' followed:</text>
+    <rect x="20" y="60" width="760" height="26" rx="4" fill="#FFFFFF" stroke="#94A3B8" />
+    <text x="35" y="77" fill="#0F172A" font-size="13" font-family="monospace" font-weight="700">0 1 1 0 1 1 1 1 1 1 0 1 1 1 1 1 0 0 1 0 1 0</text>
+
+    <!-- Stage 2 -->
+    <rect x="0" y="115" width="800" height="115" rx="10" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.5" />
+    <text x="20" y="145" fill="#1E40AF" font-size="13" font-weight="700">Step 2: Transmitter Stuffs a '0' Bit After Every Five Consecutive '1's</text>
+    <text x="20" y="167" fill="#3B82F6" font-size="11">Transmitter logic: count consecutive 1s. When count == 5, insert '0' bit regardless of whether the next bit is 0 or 1.</text>
+    <rect x="20" y="180" width="760" height="36" rx="4" fill="#FFFFFF" stroke="#3B82F6" />
+    <text x="35" y="203" fill="#0F172A" font-size="13" font-family="monospace" font-weight="700">
+      0 1 1 0 1 1 1 1 1 <tspan fill="#EF4444" font-weight="900" font-size="15">[0]</tspan> 1 0 1 1 1 1 1 <tspan fill="#EF4444" font-weight="900" font-size="15">[0]</tspan> 0 0 1 0 1 0
+    </text>
+
+    <!-- Stage 3 -->
+    <rect x="0" y="250" width="800" height="115" rx="10" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1.5" />
+    <text x="20" y="280" fill="#065F46" font-size="13" font-weight="700">Step 3: Receiver Detects and Strips (Unstuffs) the Inserted '0's</text>
+    <text x="20" y="302" fill="#059669" font-size="11">Receiver rule: After seeing five 1s: if 6th bit is '0', strip it. If 6th bit is '1' and 7th bit is '0', it is a FLAG!</text>
+    <rect x="20" y="315" width="760" height="36" rx="4" fill="#FFFFFF" stroke="#10B981" />
+    <text x="35" y="338" fill="#059669" font-size="13" font-family="monospace" font-weight="700">
+      0 1 1 0 1 1 1 1 1 1 0 1 1 1 1 1 0 0 1 0 1 0 <tspan fill="#10B981" font-sans font-weight="bold">(Original Data Faithfully Restored)</tspan>
+    </text>
+  </g>
+</svg>

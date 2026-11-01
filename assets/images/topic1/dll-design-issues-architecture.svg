@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="100%" height="100%" style="background:#ffffff; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <rect x="30" y="20" width="840" height="54" rx="10" fill="#0F172A" />
+  <text x="50" y="53" fill="#F8FAFC" font-size="18" font-weight="700">Key Design Issues of the Data Link Layer (Tanenbaum Ch. 3)</text>
+
+  <g transform="translate(50, 95)">
+    <!-- Issue 1: Services to Network Layer -->
+    <rect x="0" y="0" width="380" height="175" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+    <rect x="0" y="0" width="380" height="34" rx="10" fill="#EFF6FF" />
+    <text x="20" y="23" fill="#1E40AF" font-size="13" font-weight="700">1. Services Provided to the Network Layer</text>
+    <text x="20" y="60" fill="#334155" font-size="11.5" font-weight="600">&bull; Unacknowledged Connectionless:</text>
+    <text x="35" y="78" fill="#64748B" font-size="11">Fast, low overhead; suitable for reliable links (LANs) &amp; real-time audio.</text>
+    <text x="20" y="102" fill="#334155" font-size="11.5" font-weight="600">&bull; Acknowledged Connectionless:</text>
+    <text x="35" y="120" fill="#64748B" font-size="11">Each frame individually ACKed; ideal for unreliable wireless (Wi-Fi 802.11).</text>
+    <text x="20" y="144" fill="#334155" font-size="11.5" font-weight="600">&bull; Acknowledged Connection-Oriented:</text>
+    <text x="35" y="162" fill="#64748B" font-size="11">Guaranteed in-order delivery via setup/data/release phases (HDLC, LAPB).</text>
+
+    <!-- Issue 2: Framing -->
+    <rect x="420" y="0" width="380" height="175" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+    <rect x="0" y="0" width="380" height="34" rx="10" fill="#ECFDF5" transform="translate(420, 0)" />
+    <text x="440" y="23" fill="#065F46" font-size="13" font-weight="700">2. Framing &amp; Synchronization</text>
+    <text x="440" y="60" fill="#334155" font-size="11.5" font-weight="600">&bull; Character Count:</text>
+    <text x="455" y="78" fill="#64748B" font-size="11">Count field in header; catastrophic if count bit corrupted.</text>
+    <text x="440" y="102" fill="#334155" font-size="11.5" font-weight="600">&bull; Byte Stuffing (Character-Oriented):</text>
+    <text x="455" y="120" fill="#64748B" font-size="11">Special FLAG bytes with ESC (Escape) prefixes for transparency.</text>
+    <text x="440" y="144" fill="#334155" font-size="11.5" font-weight="600">&bull; Bit Stuffing (Bit-Oriented):</text>
+    <text x="455" y="162" fill="#64748B" font-size="11">Flag 01111110; sender inserts '0' after five consecutive '1's.</text>
+
+    <!-- Issue 3: Flow Control -->
+    <rect x="0" y="195" width="380" height="175" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+    <rect x="0" y="0" width="380" height="34" rx="10" fill="#FEF3C7" transform="translate(0, 195)" />
+    <text x="20" y="218" fill="#92400E" font-size="13" font-weight="700">3. Flow Control Mechanisms</text>
+    <text x="20" y="255" fill="#334155" font-size="11.5" font-weight="600">&bull; Feedback-Based Flow Control:</text>
+    <text x="35" y="273" fill="#64748B" font-size="11">Receiver sends permission back to sender before next frame can be transmitted.</text>
+    <text x="20" y="297" fill="#334155" font-size="11.5" font-weight="600">&bull; Stop-and-Wait:</text>
+    <text x="35" y="315" fill="#64748B" font-size="11">Window = 1; inefficient on high Bandwidth-Delay Product (BDP) links.</text>
+    <text x="20" y="339" fill="#334155" font-size="11.5" font-weight="600">&bull; Sliding Window Protocols:</text>
+    <text x="35" y="357" fill="#64748B" font-size="11">Pipelines multiple unacknowledged frames (Go-Back-N / Selective Repeat).</text>
+
+    <!-- Issue 4: Error Control -->
+    <rect x="420" y="195" width="380" height="175" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+    <rect x="0" y="0" width="380" height="34" rx="10" fill="#FEE2E2" transform="translate(420, 195)" />
+    <text x="440" y="218" fill="#991B1B" font-size="13" font-weight="700">4. Error Control &amp; Reliability</text>
+    <text x="440" y="255" fill="#334155" font-size="11.5" font-weight="600">&bull; Error Detection (Redundancy):</text>
+    <text x="455" y="273" fill="#64748B" font-size="11">Parity, Checksum, and CRC (Cyclic Redundancy Check) appended in FCS trailer.</text>
+    <text x="440" y="297" fill="#334155" font-size="11.5" font-weight="600">&bull; Automatic Repeat reQuest (ARQ):</text>
+    <text x="455" y="315" fill="#64748B" font-size="11">Combines error detection with timer expiry and retransmissions.</text>
+    <text x="440" y="339" fill="#334155" font-size="11.5" font-weight="600">&bull; Sequence Numbers:</text>
+    <text x="455" y="357" fill="#64748B" font-size="11">Guards against duplicate frames caused by delayed or lost ACKs.</text>
+  </g>
+</svg>
