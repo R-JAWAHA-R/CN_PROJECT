@@ -3908,63 +3908,385 @@ const CleanDiagramEngine = {
     `;
   },
 
-  // 3.9 Internetworking & Tunneling
+  // 3.9 Internetworking Architecture, Routing & Tunneling (Detailed PDF Models)
   renderInternetworkingDiagram: function(id) {
+    if (id === 'internetwork-routing') {
+      return `
+        <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+            <div>
+              <span class="text-[10px] font-black tracking-wider uppercase text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2.5 py-1 rounded">Router Operations & Decision Engine</span>
+              <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">7-Step Packet Processing Pipeline & Longest Prefix Match (LPM)</h4>
+            </div>
+            <span class="text-xs font-mono text-slate-500">Control Plane (Routing) vs Data Plane (Forwarding)</span>
+          </div>
+
+          <!-- 7-Step Router Pipeline -->
+          <div class="mb-4">
+            <div class="text-[11px] font-bold text-slate-700 dark:text-slate-200 mb-2 flex items-center gap-1.5">
+              <i class="fa-solid fa-arrows-split-up-and-left text-blue-600"></i> The 7-Step Internal Packet Handling Cycle:
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-1.5 text-center text-xs">
+              <div class="p-2 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+                <div class="w-5 h-5 rounded-full bg-blue-100 text-blue-700 font-bold mx-auto mb-1 flex items-center justify-center text-[10px]">1</div>
+                <div class="font-bold text-[10px]">Rx Frame</div>
+                <div class="text-[9px] text-slate-400">Buffer into RAM</div>
+              </div>
+              <div class="p-2 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+                <div class="w-5 h-5 rounded-full bg-blue-100 text-blue-700 font-bold mx-auto mb-1 flex items-center justify-center text-[10px]">2</div>
+                <div class="font-bold text-[10px]">Strip L2</div>
+                <div class="text-[9px] text-slate-400">Remove MAC hdr</div>
+              </div>
+              <div class="p-2 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+                <div class="w-5 h-5 rounded-full bg-blue-100 text-blue-700 font-bold mx-auto mb-1 flex items-center justify-center text-[10px]">3</div>
+                <div class="font-bold text-[10px]">Read IP</div>
+                <div class="text-[9px] text-slate-400">Read Dest IP</div>
+              </div>
+              <div class="p-2 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+                <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 font-bold mx-auto mb-1 flex items-center justify-center text-[10px]">4</div>
+                <div class="font-bold text-[10px] text-emerald-600">Check FIB</div>
+                <div class="text-[9px] text-slate-400">LPM Lookup</div>
+              </div>
+              <div class="p-2 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+                <div class="w-5 h-5 rounded-full bg-blue-100 text-blue-700 font-bold mx-auto mb-1 flex items-center justify-center text-[10px]">5</div>
+                <div class="font-bold text-[10px]">Select Next</div>
+                <div class="text-[9px] text-slate-400">Choose Egress</div>
+              </div>
+              <div class="p-2 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+                <div class="w-5 h-5 rounded-full bg-blue-100 text-blue-700 font-bold mx-auto mb-1 flex items-center justify-center text-[10px]">6</div>
+                <div class="font-bold text-[10px]">Rewrite L2</div>
+                <div class="text-[9px] text-slate-400">New MAC + TTL-1</div>
+              </div>
+              <div class="p-2 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+                <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 font-bold mx-auto mb-1 flex items-center justify-center text-[10px]">7</div>
+                <div class="font-bold text-[10px] text-emerald-600">Tx Packet</div>
+                <div class="text-[9px] text-slate-400">To Next Router</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Longest Prefix Match Walkthrough Card -->
+          <div class="p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-bold text-slate-800 dark:text-slate-100">Longest Prefix Match (LPM) Example: Dest = <code class="text-emerald-600 dark:text-emerald-400 font-bold">10.1.2.50</code></span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 font-bold">PDF Section 3.6</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 font-mono text-[11px] text-center">
+              <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800">
+                <div class="text-slate-500 text-[10px]">10.0.0.0/8</div>
+                <div class="text-blue-600 font-bold text-[10px]">Matches 8 bits</div>
+                <div class="text-[9px] text-slate-400">Router A</div>
+              </div>
+              <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800">
+                <div class="text-slate-500 text-[10px]">10.1.0.0/16</div>
+                <div class="text-blue-600 font-bold text-[10px]">Matches 16 bits</div>
+                <div class="text-[9px] text-slate-400">Router B</div>
+              </div>
+              <div class="p-2 bg-emerald-50 dark:bg-emerald-950/40 rounded border-2 border-emerald-500 text-emerald-800 dark:text-emerald-200 shadow-sm">
+                <div class="font-black text-[10px]">10.1.2.0/24</div>
+                <div class="font-bold text-[10px]">Matches 24 bits 🏆</div>
+                <div class="text-[9px] font-bold text-emerald-600">Selected (Router C)</div>
+              </div>
+              <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800">
+                <div class="text-slate-500 text-[10px]">0.0.0.0/0 (Default)</div>
+                <div class="text-slate-500 text-[10px]">Matches 0 bits</div>
+                <div class="text-[9px] text-slate-400">Router D</div>
+              </div>
+            </div>
+            <p class="text-[10px] text-slate-500 mt-2">
+              <strong>Rule:</strong> The router selects <code>10.1.2.0/24</code> via Router C because /24 is strictly longer and more specific than /16, /8, or /0.
+            </p>
+          </div>
+        </div>
+      `;
+    }
+
+    if (id === 'tunneling') {
+      return `
+        <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+            <div>
+              <span class="text-[10px] font-black tracking-wider uppercase text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/60 px-2.5 py-1 rounded">Encapsulation & Overlays</span>
+              <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">IP Tunneling: Postal Envelope Analogy & IPv6-over-IPv4 Transit</h4>
+            </div>
+            <span class="text-xs font-mono text-slate-500">GRE • IPsec • WireGuard • MTU Overhead</span>
+          </div>
+
+          <!-- Postal Envelope Analogy Grid -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center text-xs mb-3 font-mono">
+            <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+              <div class="text-emerald-600 font-bold mb-0.5">📄 Confidential Letter</div>
+              <div class="text-[10px] text-slate-500">Original Payload Packet (e.g. IPv6 / Private IP)</div>
+            </div>
+            <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+              <div class="text-blue-600 font-bold mb-0.5">✉️ Outer Envelope</div>
+              <div class="text-[10px] text-slate-500">Carrier Header added at Ingress Router</div>
+            </div>
+            <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+              <div class="text-purple-600 font-bold mb-0.5">🚚 Postal Courier</div>
+              <div class="text-[10px] text-slate-500">Intermediate Transit Network (ISP Routers)</div>
+            </div>
+            <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+              <div class="text-amber-600 font-bold mb-0.5">✂️ Opening Envelope</div>
+              <div class="text-[10px] text-slate-500">Decapsulation at Egress Router</div>
+            </div>
+          </div>
+
+          <!-- Packet Structure & MTU Formula Card -->
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs">
+            <div class="font-bold text-slate-800 dark:text-slate-100 mb-2">Encapsulated Packet Sizing &amp; The MTU Penalty:</div>
+            <div class="flex items-center gap-1 font-mono text-[10px] text-center overflow-x-auto pb-1 mb-2">
+              <div class="p-2 bg-blue-100 dark:bg-blue-900 text-blue-900 dark:text-blue-100 rounded shrink-0">
+                Outer IPv4 Hdr<br/><span class="font-bold">20 Bytes</span>
+              </div>
+              <div class="p-2 bg-purple-100 dark:bg-purple-900 text-purple-900 dark:text-purple-100 rounded shrink-0">
+                GRE Hdr<br/><span class="font-bold">4 Bytes</span>
+              </div>
+              <div class="p-2 bg-emerald-100 dark:bg-emerald-900 text-emerald-900 dark:text-emerald-100 rounded flex-1 min-w-[150px]">
+                Inner Original Payload Packet (IPv6 / Private Corporate Data)<br/>
+                <span class="font-bold">Effective MTU = 1500 - 24 = 1476 Bytes</span>
+              </div>
+            </div>
+            <p class="text-[10px] text-slate-500">
+              <strong>Path MTU Warning:</strong> Exceeding effective MTU with Don't Fragment (DF=1) bit set causes packet loss and Path MTU Black Holes if ICMP Type 3 Code 4 errors are blocked.
+            </p>
+          </div>
+        </div>
+      `;
+    }
+
+    // Default: internetworking (Concepts)
     return `
       <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
         <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
           <div>
-            <span class="text-[10px] font-black tracking-wider uppercase text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded">Internetworking Architecture</span>
-            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">Connecting Disparate LANs & WANs Across Heterogeneous Networks</h4>
+            <span class="text-[10px] font-black tracking-wider uppercase text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded">Internetworking Fundamentals</span>
+            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">Connecting Disparate Department LANs & Multi-City Offices via Routers</h4>
           </div>
-          <span class="text-xs font-mono text-slate-500">MTU Handling • IP Protocol Encapsulation</span>
+          <span class="text-xs font-mono text-slate-500">Store-and-Forward • Heterogeneous Systems</span>
         </div>
 
-        <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 font-mono text-xs">
-          <div class="flex flex-col md:flex-row justify-between items-center gap-2 text-center">
-            <div class="p-2.5 bg-emerald-100 dark:bg-emerald-900 text-emerald-900 dark:text-emerald-100 rounded w-full">
-              Ethernet LAN 1<br/><span class="text-[9px]">MTU = 1500 B</span>
-            </div>
-            <div class="text-slate-400 font-bold">➔ [Router 1] ➔</div>
-            <div class="p-2.5 bg-blue-100 dark:bg-blue-900 text-blue-900 dark:text-blue-100 rounded w-full">
-              WAN / Tunnel Backbone<br/><span class="text-[9px]">Encapsulated / Fragmented</span>
-            </div>
-            <div class="text-slate-400 font-bold">➔ [Router 2] ➔</div>
-            <div class="p-2.5 bg-purple-100 dark:bg-purple-900 text-purple-900 dark:text-purple-100 rounded w-full">
-              802.11 Wi-Fi LAN 2<br/><span class="text-[9px]">MTU = 2272 B</span>
-            </div>
+        <!-- 3 Department / 3 Office Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-center text-xs mb-3 font-mono">
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border-t-4 border-emerald-500 border-x border-b border-slate-200 dark:border-slate-700">
+            <div class="font-bold text-emerald-700 dark:text-emerald-400">Chennai / CS Dept</div>
+            <div class="text-[10px] text-slate-500 mt-1">Subnet 192.168.1.0/24</div>
+            <div class="text-[9px] text-slate-400">Windows Clients &bull; Wi-Fi 6</div>
           </div>
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border-t-4 border-blue-500 border-x border-b border-slate-200 dark:border-slate-700">
+            <div class="font-bold text-blue-700 dark:text-blue-400">Bangalore / Mech Dept</div>
+            <div class="text-[10px] text-slate-500 mt-1">Subnet 192.168.2.0/24</div>
+            <div class="text-[9px] text-slate-400">Linux Clusters &bull; 10G Fiber</div>
+          </div>
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border-t-4 border-purple-500 border-x border-b border-slate-200 dark:border-slate-700">
+            <div class="font-bold text-purple-700 dark:text-purple-400">Mumbai / EE Dept</div>
+            <div class="text-[10px] text-slate-500 mt-1">Subnet 10.0.0.0/8</div>
+            <div class="text-[9px] text-slate-400">Core Database &bull; GigE LAN</div>
+          </div>
+        </div>
+
+        <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs">
+          <div class="font-bold text-slate-800 dark:text-slate-100 mb-1">Store-and-Forward Packet Switching Architecture:</div>
+          <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+            Routers buffer entire incoming frames, verify IP checksums, look up the destination network in forwarding tables, decrement TTL, and re-encapsulate with new outgoing Data Link MAC headers. IP acts as the unified abstraction layer bridging heterogeneous networks.
+          </p>
         </div>
       </div>
     `;
   },
 
-  // 3.10 Routing Algorithms: Dijkstra SPF & Flooding
+  // 3.10 Routing Algorithms: Optimality Principle, Dijkstra SPF & Flooding (Detailed PDF Models)
   renderRoutingAlgorithmsDiagram: function(id) {
+    if (id === 'optimality-principle') {
+      return `
+        <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+            <div>
+              <span class="text-[10px] font-black tracking-wider uppercase text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2.5 py-1 rounded">Routing Graph Theory</span>
+              <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">Bellman's Optimality Principle &amp; The Sink Tree Structure</h4>
+            </div>
+            <span class="text-xs font-mono text-slate-500">Loop-Free Guarantee • Dynamic Programming</span>
+          </div>
+
+          <!-- Optimality Principle Demonstration Card -->
+          <div class="p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 mb-3 text-xs">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-bold text-blue-600 dark:text-blue-400">1. Subpath Optimality Theorem (PDF Section 2.2)</span>
+              <span class="text-[10px] font-mono text-slate-400">Total Path Cost = 2 + 3 + 1 = 6</span>
+            </div>
+            <div class="p-2.5 bg-slate-50 dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 font-mono text-center text-xs mb-2">
+              <span class="text-emerald-600 font-bold">[ A ]</span>
+              <span class="text-slate-400"> &mdash;(cost 2)&rarr; </span>
+              <span class="text-blue-600 font-bold">[ B ]</span>
+              <span class="text-slate-400"> &mdash;(cost 3)&rarr; </span>
+              <span class="text-purple-600 font-bold">[ C ]</span>
+              <span class="text-slate-400"> &mdash;(cost 1)&rarr; </span>
+              <span class="text-emerald-600 font-bold">[ D ]</span>
+            </div>
+            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+              <strong>Theorem:</strong> Since Router B lies on the optimal path from A to D, the subpath $B \rightarrow C \rightarrow D$ (cost 4) <em>must also be optimal</em> between B and D. If a hypothetical cheaper route existed (say, cost 2), concatenating $A \rightarrow B$ with it would give a total cost of $2 + 2 = 4 < 6$, contradicting the assumption that the original path was optimal!
+            </p>
+          </div>
+
+          <!-- Sink Tree Demonstration Card -->
+          <div class="p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-bold text-emerald-600 dark:text-emerald-400">2. Sink Tree Rooted at Destination E (PDF Section 2.4)</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 font-bold">100% Loop-Free</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 font-mono text-[11px] text-center mb-2">
+              <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800">
+                <span class="text-slate-500">From A:</span><br/>
+                <span class="font-bold text-blue-600">A &rarr; B &rarr; E</span>
+              </div>
+              <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800">
+                <span class="text-slate-500">From B:</span><br/>
+                <span class="font-bold text-blue-600">B &rarr; E</span>
+              </div>
+              <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800">
+                <span class="text-slate-500">From C:</span><br/>
+                <span class="font-bold text-purple-600">C &rarr; D &rarr; E</span>
+              </div>
+              <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800">
+                <span class="text-slate-500">From D:</span><br/>
+                <span class="font-bold text-purple-600">D &rarr; E</span>
+              </div>
+            </div>
+            <p class="text-[10px] text-slate-500">
+              <strong>Key Property:</strong> A tree contains no cycles. Every node has exactly one path into the root. A network with $N$ destinations possesses $N$ distinct sink trees.
+            </p>
+          </div>
+        </div>
+      `;
+    }
+
+    if (id === 'dijkstra' || id === 'shortest-path-algorithm') {
+      return `
+        <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+            <div>
+              <span class="text-[10px] font-black tracking-wider uppercase text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded">Link-State SPF Algorithm</span>
+              <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">Dijkstra's Algorithm: 6-Node Step-by-Step Relaxation Trace</h4>
+            </div>
+            <span class="text-xs font-mono text-slate-500">Source Node = A &bull; Non-Negative Weights</span>
+          </div>
+
+          <!-- 6-Node Graph Specs -->
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 mb-3 text-xs">
+            <div class="font-bold text-slate-800 dark:text-slate-100 mb-1.5">Network Topology Links &amp; Costs (PDF Section 3.5):</div>
+            <div class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-9 gap-1.5 font-mono text-[10px] text-center">
+              <div class="p-1.5 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800">A-B: 4</div>
+              <div class="p-1.5 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 font-bold rounded border border-emerald-300">A-C: 2</div>
+              <div class="p-1.5 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 font-bold rounded border border-emerald-300">B-C: 1</div>
+              <div class="p-1.5 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 font-bold rounded border border-emerald-300">B-D: 5</div>
+              <div class="p-1.5 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800">C-D: 8</div>
+              <div class="p-1.5 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800">C-E: 10</div>
+              <div class="p-1.5 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 font-bold rounded border border-emerald-300">D-E: 2</div>
+              <div class="p-1.5 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800">D-F: 6</div>
+              <div class="p-1.5 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 font-bold rounded border border-emerald-300">E-F: 3</div>
+            </div>
+          </div>
+
+          <!-- Iteration Stepper Summary -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 text-xs font-mono text-center mb-3">
+            <div class="p-2 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+              <div class="text-[10px] text-slate-400">Iter 1</div>
+              <div class="font-bold text-emerald-600">Visit A (d=0)</div>
+              <div class="text-[9px] text-slate-500">C=2, B=4</div>
+            </div>
+            <div class="p-2 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+              <div class="text-[10px] text-slate-400">Iter 2</div>
+              <div class="font-bold text-emerald-600">Visit C (d=2)</div>
+              <div class="text-[9px] text-slate-500">B&rarr;3, D=10, E=12</div>
+            </div>
+            <div class="p-2 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+              <div class="text-[10px] text-slate-400">Iter 3</div>
+              <div class="font-bold text-emerald-600">Visit B (d=3)</div>
+              <div class="text-[9px] text-slate-500">D&rarr;8</div>
+            </div>
+            <div class="p-2 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+              <div class="text-[10px] text-slate-400">Iter 4</div>
+              <div class="font-bold text-emerald-600">Visit D (d=8)</div>
+              <div class="text-[9px] text-slate-500">E&rarr;10, F=14</div>
+            </div>
+            <div class="p-2 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+              <div class="text-[10px] text-slate-400">Iter 5</div>
+              <div class="font-bold text-emerald-600">Visit E (d=10)</div>
+              <div class="text-[9px] text-slate-500">F&rarr;13</div>
+            </div>
+            <div class="p-2 bg-emerald-50 dark:bg-emerald-950/40 rounded-lg border border-emerald-300 dark:border-emerald-700">
+              <div class="text-[10px] text-emerald-600">Iter 6 [Done]</div>
+              <div class="font-bold text-emerald-700 dark:text-emerald-300">Visit F (d=13)</div>
+              <div class="text-[9px] text-emerald-600 font-bold">All Visited 🏆</div>
+            </div>
+          </div>
+
+          <div class="p-2.5 bg-emerald-50 dark:bg-emerald-950/40 rounded-lg border border-emerald-200 dark:border-emerald-800 text-[11px] text-emerald-800 dark:text-emerald-300 flex items-center justify-between">
+            <span><strong>Final Shortest Path A &rarr; F:</strong> <code>A &rarr; C &rarr; B &rarr; D &rarr; E &rarr; F</code></span>
+            <span class="font-bold font-mono">Cost: 2 + 1 + 5 + 2 + 3 = 13</span>
+          </div>
+        </div>
+      `;
+    }
+
+    if (id === 'flooding') {
+      return `
+        <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+            <div>
+              <span class="text-[10px] font-black tracking-wider uppercase text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/60 px-2.5 py-1 rounded">Multi-Path Dissemination</span>
+              <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">Flooding Algorithm, Duplicate Storms &amp; Damping Controls</h4>
+            </div>
+            <span class="text-xs font-mono text-slate-500">Uncontrolled vs Controlled &bull; RPF</span>
+          </div>
+
+          <!-- Multi-Path Propagation -->
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 mb-3 text-xs">
+            <div class="font-bold text-slate-800 dark:text-slate-100 mb-1.5">Packet Propagation Cycle (PDF Section 4.3):</div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 font-mono text-[11px] text-center">
+              <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800">
+                <span class="text-emerald-600 font-bold">1. Source A</span><br/>
+                <span class="text-slate-400 text-[10px]">Replicates &amp; forwards copies to B &amp; C</span>
+              </div>
+              <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800">
+                <span class="text-blue-600 font-bold">2. B &amp; C Forward</span><br/>
+                <span class="text-slate-400 text-[10px]">B &rarr; D; C &rarr; D and E</span>
+              </div>
+              <div class="p-2 bg-amber-50 dark:bg-amber-950/40 rounded border border-amber-300 dark:border-amber-700 text-amber-800 dark:text-amber-300">
+                <span class="font-bold">3. Destination E</span><br/>
+                <span class="text-[10px]">Receives multiple copies from C and D!</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 Damping Controls -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+            <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+              <div class="font-bold text-emerald-600 dark:text-emerald-400 mb-0.5">1. Hop Count (TTL)</div>
+              <p class="text-[10px] text-slate-500">Decremented at each router. Discarded when TTL reaches 0 to cap lifespan.</p>
+            </div>
+            <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+              <div class="font-bold text-blue-600 dark:text-blue-400 mb-0.5">2. Sequence Numbers</div>
+              <p class="text-[10px] text-slate-500">Routers cache (Source, Seq#). Duplicate arrivals are immediately dropped.</p>
+            </div>
+            <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+              <div class="font-bold text-purple-600 dark:text-purple-400 mb-0.5">3. Selective Flooding</div>
+              <p class="text-[10px] text-slate-500">Forwards packets only through links pointing toward destination sector.</p>
+            </div>
+            <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+              <div class="font-bold text-amber-600 dark:text-amber-400 mb-0.5">4. Reverse Path (RPF)</div>
+              <p class="text-[10px] text-slate-500">Forwards only if packet arrives on interface used to reach source.</p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Fallback
     return `
       <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
-        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
-          <div>
-            <span class="text-[10px] font-black tracking-wider uppercase text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2.5 py-1 rounded">Graph Algorithm</span>
-            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">Dijkstra Shortest Path Tree & Optimality Principle</h4>
-          </div>
-          <span class="text-xs font-mono text-slate-500">Non-negative weights • O(V^2) / O(E log V)</span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-          <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
-            <div class="font-bold text-blue-600 dark:text-blue-400 mb-1">Bellman's Optimality Principle</div>
-            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
-              If router J is on the optimal path from I to K, then the optimal path from J to K falls along the same route. Consequently, the set of optimal paths from all sources to a destination forms a tree rooted at the destination (Sink Tree).
-            </p>
-          </div>
-          <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
-            <div class="font-bold text-emerald-600 dark:text-emerald-400 mb-1">Flooding Damping</div>
-            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
-              Flooding sends packets out on every interface except incoming. Duplicate explosion is damped using hop counters (decremented to 0) and sequence-number tracking tables.
-            </p>
-          </div>
-        </div>
+        <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mb-2">Routing Algorithm Framework</h4>
+        <p class="text-xs text-slate-600 dark:text-slate-300">Graph-based path finding and multi-path dissemination.</p>
       </div>
     `;
   },
