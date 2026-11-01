@@ -1,6 +1,10 @@
-// topics_u2_syllabus.js - Master Academic Topic Content Repository for Unit 2
-// Cleaned: All ASCII symbol art removed. Integrated complete Topic 2, Topic 3, Topic 4, Topic 5, Topic 6, & Topic 7 content.
-var TOPICS_U2_SYLLABUS = {
+// =============================================================================
+// UNIT 2: DATA LINK LAYER & MAC SUBLAYER - COMPLETE CURRICULUM SYLLABUS TOPICS
+// Aligned with Forouzan (4th & 6th Ed. Ch. 11-15), Tanenbaum (6th Ed. Ch. 3-4), Kurose & Ross
+// Full 17-Point Structural Article Schema with Real-World Diagrams, Worked Examples & Practice Quizzes
+// =============================================================================
+
+const TOPICS_U2_SYLLABUS = {
   "u2-dll-intro": {
     "id": "u2-dll-intro",
     "title": "Introduction to Data Link Layer",
@@ -3819,9 +3823,55 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"space-y-2 text-xs\">\n          <p><strong>Summary:</strong> The physical properties of wireless transmission eliminate wires at the cost of non-deterministic channel quality, requiring link adaptation and collision avoidance.</p>\n        </div>\n      ",
-      "whereUsed": "RF engineering, indoor Wi-Fi planning, cellular site surveys, and wireless link budgeting.",
-      "references": "Forouzan, Data Communications and Networking (5th Ed.), Section 14.1; Rappaport, Wireless Communications: Principles and Practice."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 1 (Physical) & Layer 2 (MAC)",
+      "standard": "Forouzan Chapter 14 / Rappaport",
+      "type": "Physical & Radio Frequency Characteristics",
+      "prerequisites": [
+        "wireless-lan-protocols"
+      ],
+      "relatedConcepts": [
+        "u2-wireless-lan-architecture",
+        "u2-wireless-multiple-access"
+      ],
+      "compareWith": [
+        "transmission-media"
+      ],
+      "primaryUses": [
+        "Indoor RF planning, Wi-Fi coverage site surveys, link budgeting"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Electromagnetic Wave Propagation",
+        "meaning": "Radio frequency transmission, wavelength, and frequency relationships"
+      },
+      {
+        "concept": "Transmission Media",
+        "meaning": "Unguided atmospheric media vs. guided copper/fiber cables"
+      }
+    ],
+    "learningObjectives": [
+      "Master the 7 core physical and electromagnetic characteristics of wireless communication links.",
+      "Calculate free-space path loss (FSPL) and understand inverse-square signal attenuation.",
+      "Analyze how multipath propagation causes fading, inter-symbol interference, and phase distortion."
+    ]
   },
   "u2-wireless-lan-architecture": {
     "id": "u2-wireless-lan-architecture",
@@ -3847,9 +3897,56 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Key Advantage:</strong> ESS decouples physical RF coverage from network size, permitting arbitrary geographic scaling.</p>\n        </div>\n      ",
-      "whereUsed": "Enterprise campus networking, multi-AP home mesh systems, hospital wireless networks, and airport Wi-Fi.",
-      "references": "Forouzan Ch. 14, Section 14.2; Tanenbaum Ch. 4, Section 4.4."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (Data Link Layer Architecture)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Hierarchical Wireless Architecture",
+      "prerequisites": [
+        "wireless-lan-protocols",
+        "u2-wireless-characteristics"
+      ],
+      "relatedConcepts": [
+        "wifi-mac-sublayer",
+        "u2-ieee-802-11-architecture"
+      ],
+      "compareWith": [
+        "u2-ethernet-architecture"
+      ],
+      "primaryUses": [
+        "Enterprise Wi-Fi roaming, campus wide-area coverage, hospital medical wireless networks"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Network Topologies",
+        "meaning": "Star, mesh, and infrastructure network layouts"
+      },
+      {
+        "concept": "Bridging and Switching",
+        "meaning": "Connecting network segments at Layer 2"
+      }
+    ],
+    "learningObjectives": [
+      "Distinguish between Basic Service Set (BSS) Ad Hoc mode (IBSS) and Infrastructure mode.",
+      "Explain the role and architecture of an Access Point (AP) and the Distribution System (DS).",
+      "Differentiate the 3 levels of station mobility: No-Transition, BSS-Transition (Roaming), and ESS-Transition."
+    ]
   },
   "u2-hidden-terminal-problem": {
     "id": "u2-hidden-terminal-problem",
@@ -3875,9 +3972,57 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Trade-off:</strong> RTS/CTS eliminates hidden collisions for large frames but adds small control overhead for short frames.</p>\n        </div>\n      ",
-      "whereUsed": "Large meeting rooms, outdoor directional Wi-Fi links, dense classroom auditoriums, and wireless mesh topologies.",
-      "references": "Forouzan, Data Communications and Networking, Chapter 14, Section 14.3; Tanenbaum, Section 4.4.2."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (MAC Sublayer Contention)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Medium Access Contention Dilemma",
+      "prerequisites": [
+        "wireless-lan-protocols",
+        "u2-wireless-lan-architecture"
+      ],
+      "relatedConcepts": [
+        "u2-exposed-terminal-problem",
+        "u2-rts-cts-mechanism",
+        "u2-network-allocation-vector"
+      ],
+      "compareWith": [
+        "u2-exposed-terminal-problem"
+      ],
+      "primaryUses": [
+        "High-density classrooms, auditoriums, large meeting spaces, outdoor directional links"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Carrier Sensing",
+        "meaning": "Clear Channel Assessment (CCA) energy detection"
+      },
+      {
+        "concept": "RF Coverage Cells",
+        "meaning": "Transmission radius and reception sensitivity thresholds"
+      }
+    ],
+    "learningObjectives": [
+      "Understand the root cause of the Hidden Station Problem in asymmetrical wireless topologies.",
+      "Trace how simultaneous transmissions from out-of-range stations collide at the central Access Point.",
+      "Master the 4-way RTS/CTS virtual carrier sensing solution and Network Allocation Vector (NAV) timers."
+    ]
   },
   "u2-exposed-terminal-problem": {
     "id": "u2-exposed-terminal-problem",
@@ -3903,9 +4048,55 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Summary:</strong> Exposed stations underutilize the spectrum; resolved in modern networks via BSS coloring and beamforming.</p>\n        </div>\n      ",
-      "whereUsed": "Dense apartment complexes, high-density auditoriums, and wireless mesh backhauls.",
-      "references": "Forouzan Ch. 14, Section 14.3; Tanenbaum Ch. 4, Section 4.4.2."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (MAC Sublayer Contention)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Medium Access Inefficiency Dilemma",
+      "prerequisites": [
+        "u2-hidden-terminal-problem"
+      ],
+      "relatedConcepts": [
+        "u2-hidden-terminal-problem",
+        "u2-wireless-multiple-access"
+      ],
+      "compareWith": [
+        "u2-hidden-terminal-problem"
+      ],
+      "primaryUses": [
+        "High-density apartment complexes, enterprise wireless mesh, Wi-Fi 6 spatial reuse"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Physical Carrier Sensing",
+        "meaning": "Energy detection on antenna interfaces"
+      },
+      {
+        "concept": "Hidden Terminal Problem",
+        "meaning": "Collisions caused by under-sensing"
+      }
+    ],
+    "learningObjectives": [
+      "Define the Exposed Station Problem and explain why it causes over-sensing and unnecessary deferrals.",
+      "Calculate the spatial capacity and throughput loss resulting from exposed station starvation.",
+      "Explain why standard RTS/CTS does not inherently solve exposed terminals and how Wi-Fi 6 BSS Coloring mitigates it."
+    ]
   },
   "u2-wireless-multiple-access": {
     "id": "u2-wireless-multiple-access",
@@ -3931,9 +4122,57 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Summary:</strong> CSMA/CA incurs ACK and backoff overhead but provides robust communication over unguided RF channels.</p>\n        </div>\n      ",
-      "whereUsed": "All Wi-Fi standards (802.11a/b/g/n/ac/ax), Zigbee (IEEE 802.15.4), and underwater acoustic networks.",
-      "references": "Forouzan Ch. 14, Section 14.3; Tanenbaum Ch. 4, Section 4.4.2."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (MAC Sublayer Access Control)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Multiple Access Protocol Theory",
+      "prerequisites": [
+        "u2-ethernet-csma-cd-operation",
+        "u2-wireless-characteristics"
+      ],
+      "relatedConcepts": [
+        "u2-ieee-802-11-csma-ca",
+        "u2-rts-cts-mechanism"
+      ],
+      "compareWith": [
+        "u2-ethernet-csma-cd-operation",
+        "u2-comparison-multiple-access"
+      ],
+      "primaryUses": [
+        "Wireless channel arbitration, Wi-Fi firmware drivers, wireless protocol design"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "CSMA/CD Operation",
+        "meaning": "Wired Ethernet collision detection and jamming signals"
+      },
+      {
+        "concept": "Radio Transceiver Front-End",
+        "meaning": "Transmit power, receive sensitivity, and antenna dynamic range"
+      }
+    ],
+    "learningObjectives": [
+      "Prove the 3 fundamental reasons why CSMA/CD is physically impossible in wireless LANs.",
+      "Explain how transceiver blindness (100 dB difference) prevents listening during transmission.",
+      "Contrast CSMA/CD and CSMA/CA across collision handling, layer 2 ACKs, and channel utilization."
+    ]
   },
   "u2-wireless-lan-access-methods": {
     "id": "u2-wireless-lan-access-methods",
@@ -3959,9 +4198,56 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Summary:</strong> DCF provides robust distributed fairness; PCF guarantees bounded latency at the cost of AP complexity.</p>\n        </div>\n      ",
-      "whereUsed": "Voice over Wi-Fi (VoWLAN), industrial IoT wireless control loops, and modern 802.11e/ax QoS queues.",
-      "references": "Forouzan Ch. 14, Section 14.3; Tanenbaum Ch. 4, Section 4.4.2."
-    }
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (MAC Coordination Functions)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Medium Access Coordination Methods",
+      "prerequisites": [
+        "u2-wireless-multiple-access"
+      ],
+      "relatedConcepts": [
+        "u2-ieee-802-11-dcf",
+        "u2-ieee-802-11-pcf",
+        "u2-dcf-vs-pcf"
+      ],
+      "compareWith": [
+        "u2-dcf-vs-pcf"
+      ],
+      "primaryUses": [
+        "Voice over Wi-Fi (VoWLAN), real-time streaming, enterprise multimedia QoS"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Multiple Access Coordination",
+        "meaning": "Contention vs. polling channel arbitration"
+      },
+      {
+        "concept": "Interframe Spaces",
+        "meaning": "Preemptive priority timing intervals"
+      }
+    ],
+    "learningObjectives": [
+      "Compare Distributed Coordination Function (DCF) and Point Coordination Function (PCF).",
+      "Analyze the IEEE 802.11 Superframe architecture (Contention-Free Period CFP + Contention Period CP).",
+      "Explain how PIFS gives the Point Coordinator priority access over standard DCF stations."
+    ]
   },
   "u2-wireless-communication-challenges": {
     "id": "u2-wireless-communication-challenges",
@@ -3987,909 +4273,849 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Summary:</strong> Wireless communication trade-offs require robust protocol engineering to achieve reliable local networking.</p>\n        </div>\n      ",
-      "whereUsed": "Curriculum synthesis, exam preparation, GATE review, and wireless network architecture design.",
-      "references": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14 (Sections 14.1 to 14.4)."
-    }
-  },
-  "u2-ieee-802-11-architecture": {
-    "id": "u2-ieee-802-11-architecture",
-    "title": "IEEE 802.11 Architecture",
-    "unit": "Unit 2 – Data Link Layer",
-    "unitId": "unit2",
-    "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "IEEE 802.11 Standard",
-    "oneLiner": "The hierarchical architecture of Wi-Fi: Station (STA), BSS, AP, DS, ESS, and portal gateways.",
-    "quickAnswer": "The IEEE 802.11 architecture organizes mobile stations (STAs) into Basic Service Sets (BSS). An infrastructure BSS contains an Access Point (AP). APs connect via a Distribution System (DS) to form an Extended Service Set (ESS). A Portal connects the 802.11 LAN to external wired networks (e.g., 802.3 Ethernet).",
-    "whyItMatters": "This architecture is the blueprint for all home routers, campus Wi-Fi deployments, and cellular Wi-Fi offloading.",
-    "prerequisitesList": [
-      {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
-      },
-      {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
-      }
-    ],
-    "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
-    ],
-    "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
-      "prerequisites": [
-        "u2-dll-intro"
-      ],
-      "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
-      ],
-      "compareWith": [],
-      "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
-      ]
-    },
-    "sections": {
-      "overview": "<p>IEEE 802.11 defines a modular cellular architecture where mobile stations can roam between APs within the same Extended Service Set (ESS) without losing their IP addresses or breaking active TCP connections.</p>",
-      "eli10": "In simple words: The hierarchical architecture of Wi-Fi: Station (STA), BSS, AP, DS, ESS, and portal gateways.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of IEEE 802.11 Architecture?<br><br><strong>Answer:</strong> The IEEE 802.11 architecture organizes mobile stations (STAs) into Basic Service Sets (BSS). An infrastructure BSS contains an Access Point (AP). APs connect via a Distribution System (DS) to form an Extended Service Set (ESS). A Portal connects the 802.11 LAN to external wired networks (e.g., 802.3 Ethernet).",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
-      ],
-      "quiz": [
-        {
-          "question": "What is the primary function of IEEE 802.11 Architecture?",
-          "options": [
-            "The IEEE 802.11 architecture organizes mobile stations (STAs...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
-          ],
-          "correct": 0,
-          "explanation": "The primary role is: The IEEE 802.11 architecture organizes mobile stations (STAs) into Basic Service Sets (BSS). An infrastructure BSS contains an Access Point (AP). APs connect via a Distribution System (DS) to form an Extended Service Set (ESS). A Portal connects the 802.11 LAN to external wired networks (e.g., 802.3 Ethernet)."
-        }
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/53/802.11_MAC_Frame.svg",
-      "imageCaption": "Figure: IEEE 802.11 Architecture: Ad-hoc (IBSS) Mode vs. Infrastructure (BSS/ESS) Mode with Distribution System."
+      ]
     },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/53/802.11_MAC_Frame.svg",
-    "imageCaption": "Figure: IEEE 802.11 Architecture: Ad-hoc (IBSS) Mode vs. Infrastructure (BSS/ESS) Mode with Distribution System."
+    "infobox": {
+      "layer": "Layer 2 & Layer 1 (Wireless Engineering)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Curriculum Synthesis & Trade-off Evaluation",
+      "prerequisites": [
+        "wireless-lan-protocols",
+        "u2-wireless-lan-architecture",
+        "u2-wireless-multiple-access"
+      ],
+      "relatedConcepts": [
+        "wifi-mac-sublayer",
+        "u2-ieee-802-11-frame-formats"
+      ],
+      "compareWith": [
+        "u2-ethernet-advantages-limitations"
+      ],
+      "primaryUses": [
+        "University exam preparation, GATE review, enterprise Wi-Fi system evaluation"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Wireless LAN Fundamentals",
+        "meaning": "BSS, ESS, CSMA/CA, and RF characteristics"
+      },
+      {
+        "concept": "Network Security Basics",
+        "meaning": "Encryption, authentication, and wireless perimeters"
+      }
+    ],
+    "learningObjectives": [
+      "Synthesize the major advantages, disadvantages, and engineering trade-offs of Wireless LANs.",
+      "Master the 14 essential technical terms in IEEE 802.11 wireless networking.",
+      "Review high-yield exam takeaways, formulas, and structured answers for university assessments."
+    ]
+  },
+  "u2-ieee-802-11-architecture": {
+    "id": "u2-ieee-802-11-architecture",
+    "title": "IEEE 802.11 MAC Architecture",
+    "unit": "Unit 2 - Data Link Layer",
+    "level": "Intermediate",
+    "standard": "IEEE 802.11 / Forouzan Ch. 14 / Tanenbaum Ch. 4",
+    "oneLiner": "The architectural framework of the 802.11 MAC sublayer: Distributed Coordination Function (DCF) and Point Coordination Function (PCF).",
+    "quickAnswer": "The IEEE 802.11 MAC sublayer architecture is built on two coordination functions: 1) Distributed Coordination Function (DCF), which is mandatory and provides distributed contention-based access using CSMA/CA; and 2) Point Coordination Function (PCF), which is optional and sits on top of DCF to provide centralized contention-free polling access.",
+    "whyItMatters": "Understanding the dual-function architecture of the 802.11 MAC layer explains how wireless LANs gracefully handle both standard asynchronous data traffic and delay-sensitive multimedia applications.",
+    "sections": {
+      "overview": "\n        <p>In the IEEE 802.11 standard, the Medium Access Control (MAC) sublayer architecture is structured as a dual-mode access hierarchy sitting directly above the Physical Layer (PHY) and below Logical Link Control (LLC):</p>\n        \n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">1. Distributed Coordination Function (DCF)</h3>\n        <p><strong>DCF</strong> is the foundational, mandatory medium access control mechanism in all IEEE 802.11 devices:</p>\n        <ul class=\"wiki-bullet-list\">\n          <li>Operates as a completely decentralized, distributed contention protocol.</li>\n          <li>Uses <strong>CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance)</strong>.</li>\n          <li>All mobile stations contend for the radio medium on an equal basis using random backoff intervals.</li>\n          <li>Employs the <strong>DIFS (DCF Interframe Space)</strong> interval to arbitrate normal contention.</li>\n          <li>Supported in both <strong>Ad Hoc (Independent BSS)</strong> and <strong>Infrastructure BSS</strong> networks.</li>\n        </ul>\n\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">2. Point Coordination Function (PCF)</h3>\n        <p><strong>PCF</strong> is an optional, centralized channel access mechanism designed to provide contention-free communication:</p>\n        <ul class=\"wiki-bullet-list\">\n          <li>Operates as a centralized master-slave polling architecture.</li>\n          <li>The <strong>Point Coordinator (PC)</strong>, which resides inside the Access Point (AP), actively polls associated stations to grant transmission opportunities.</li>\n          <li>Uses the shorter <strong>PIFS (PCF Interframe Space)</strong> interval, giving the Point Coordinator absolute priority over all DCF stations.</li>\n          <li>Supported strictly in <strong>Infrastructure mode</strong> (cannot function in Ad Hoc networks).</li>\n        </ul>\n\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">The 802.11 Superframe Structure</h3>\n        <p>When PCF is enabled, channel time is structured into repeating cycles called <strong>Superframes</strong>:</p>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 font-mono text-xs text-center my-3\">\n          [Beacon Frame] &rarr; [Contention-Free Period (CFP) - PCF] &rarr; [Contention Period (CP) - DCF]\n        </div>\n        <p class=\"text-xs text-slate-600 dark:text-slate-300\">During the CFP, the Point Coordinator polls time-bounded stations (e.g. VoIP phones) with zero collision risk. During the CP, standard stations compete for best-effort web traffic using DCF.</p>\n      ",
+      "howItWorks": "\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Interaction Between DCF and PCF</h3>\n        <ol class=\"wiki-ordered-list\">\n          <li>At the start of a Superframe, the Point Coordinator waits for a <strong>PIFS</strong> duration. Because PIFS &lt; DIFS, the AP seizes the medium before any DCF station can finish waiting.</li>\n          <li>The AP transmits a <strong>Beacon</strong> frame announcing the Contention-Free Period (CFP). All DCF stations read the CFP duration and set their NAV timers to sleep.</li>\n          <li>The AP polls station 1 &rarr; station 1 replies with data after SIFS &rarr; AP acknowledges and polls station 2 &rarr; repeating collision-free.</li>\n          <li>The AP transmits a <strong>CF-End</strong> control frame, releasing the medium. Stations clear their NAV and DCF contention resumes for the remainder of the Superframe.</li>\n        </ol>\n      ",
+      "technicalDetails": "\n        <table class=\"wiki-table\">\n          <thead>\n            <tr><th>Architectural Property</th><th>DCF (Distributed)</th><th>PCF (Centralized)</th></tr>\n          </thead>\n          <tbody>\n            <tr><td><strong>Mandatory / Optional</strong></td><td>Mandatory in all Wi-Fi hardware</td><td>Optional; rarely implemented in commercial APs</td></tr>\n            <tr><td><strong>Channel Coordination</strong></td><td>Distributed peer contention</td><td>Centralized AP Point Coordinator</td></tr>\n            <tr><td><strong>Interframe Space</strong></td><td>DIFS ($SIFS + 2 \\times SlotTime$)</td><td>PIFS ($SIFS + 1 \\times SlotTime$)</td></tr>\n            <tr><td><strong>Priority</strong></td><td>Lower priority</td><td>Higher priority than DCF</td></tr>\n            <tr><td><strong>Traffic Target</strong></td><td>Best-effort asynchronous data</td><td>Time-bounded streaming (VoIP, Video)</td></tr>\n          </tbody>\n        </table>\n      ",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/802.11_DCF_PCF.svg/800px-802.11_DCF_PCF.svg.png",
+      "imageCaption": "Figure 14.10: Layered IEEE 802.11 MAC Sublayer Architecture showing DCF and PCF sitting above the Physical Layer.",
+      "workedExamples": [
+        {
+          "title": "Worked Example 1: PCF Priority Preemption Analysis",
+          "difficulty": "Easy",
+          "problem": "A DCF station has an outgoing web packet and senses the medium become idle. Simultaneously, an Access Point running PCF wishes to poll a station. Explain which device transmits first if SIFS = 10 microseconds and Slot Time = 20 microseconds.",
+          "solution": "\n            <p><strong>Step 1: Calculate PCF Waiting Time (PIFS):</strong></p>\n            <p>$$\\text{PIFS} = \\text{SIFS} + \\text{SlotTime} = 10\\,\\mu\\text{s} + 20\\,\\mu\\text{s} = 30\\,\\mu\\text{s}$$</p>\n            <p><strong>Step 2: Calculate DCF Waiting Time (DIFS):</strong></p>\n            <p>$$\\text{DIFS} = \\text{SIFS} + 2(\\text{SlotTime}) = 10\\,\\mu\\text{s} + 2(20\\,\\mu\\text{s}) = 50\\,\\mu\\text{s}$$</p>\n            <p><strong>Step 3: Compare Timers:</strong></p>\n            <p>The AP waits 30 microseconds and begins transmitting its Beacon/Poll frame. At $t = 30\\,\\mu\\text{s}$, the DCF station is still in the middle of its mandatory 50-microsecond DIFS wait.</p>\n            <p><strong>Conclusion:</strong> The DCF station senses the AP's transmission, detects the channel is busy, and freezes its attempt. PCF achieves absolute preemptive priority.</p>\n          "
+        }
+      ],
+      "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Key Insight:</strong> DCF guarantees robustness and decentralization; PCF guarantees bounded latency for time-sensitive traffic.</p>\n        </div>\n      ",
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (MAC Architecture)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Protocol Stack Architecture",
+      "prerequisites": [
+        "wifi-mac-sublayer"
+      ],
+      "relatedConcepts": [
+        "u2-ieee-802-11-dcf",
+        "u2-ieee-802-11-pcf",
+        "u2-dcf-vs-pcf"
+      ],
+      "compareWith": [
+        "u2-ethernet-architecture"
+      ],
+      "primaryUses": [
+        "Wi-Fi system architecture design, multimedia streaming scheduling, QoS queues"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "MAC Sublayer Roles",
+        "meaning": "Coordination functions and channel access arbitration"
+      },
+      {
+        "concept": "LLC Sublayer (802.2)",
+        "meaning": "Multiplexing network protocols above the MAC layer"
+      }
+    ],
+    "learningObjectives": [
+      "Analyze the dual-coordination architecture of the 802.11 MAC sublayer (DCF and PCF).",
+      "Explain the interaction between the Logical Link Control (LLC) sublayer and the Physical Layer.",
+      "Understand how PIFS allows PCF to seize priority channel access over standard DCF."
+    ]
   },
   "u2-ieee-802-11-dcf": {
     "id": "u2-ieee-802-11-dcf",
     "title": "Distributed Coordination Function (DCF)",
-    "unit": "Unit 2 – Data Link Layer",
-    "unitId": "unit2",
+    "unit": "Unit 2 - Data Link Layer",
     "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "IEEE 802.11 Section 10.3",
-    "oneLiner": "The fundamental contention-based CSMA/CA access mechanism mandatory in all 802.11 Wi-Fi stations.",
-    "quickAnswer": "DCF uses CSMA/CA with binary exponential backoff. Before transmitting, a station senses the medium. If idle for a DIFS duration, it decrements its backoff counter. When the counter reaches zero, it transmits the frame. The receiver verifies CRC and responds with an ACK after a SIFS duration.",
-    "whyItMatters": "Over 99% of all Wi-Fi traffic globally is transmitted using DCF.",
-    "prerequisitesList": [
-      {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
-      },
-      {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
-      }
-    ],
-    "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
-    ],
-    "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
-      "prerequisites": [
-        "u2-dll-intro"
-      ],
-      "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
-      ],
-      "compareWith": [],
-      "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
-      ]
-    },
+    "standard": "IEEE 802.11 / Forouzan Ch. 14 / Section 3",
+    "oneLiner": "In-depth protocol rules, 7-step working mechanism, and contention algorithms of the Distributed Coordination Function.",
+    "quickAnswer": "The Distributed Coordination Function (DCF) is the primary, mandatory medium access protocol in IEEE 802.11 that enables multiple wireless stations to share a common RF spectrum autonomously using CSMA/CA, carrier sensing, DIFS waiting intervals, pseudo-random backoff, and explicit positive ACKs.",
+    "whyItMatters": "DCF coordinates over 99% of all commercial Wi-Fi traffic globally, operating without any centralized scheduler to achieve distributed fairness among competing smartphones and laptops.",
     "sections": {
-      "overview": "<p>DCF provides distributed, peer-level contention access without requiring a central scheduler. Physical and virtual carrier sensing work together to prevent collisions.</p>",
-      "eli10": "In simple words: The fundamental contention-based CSMA/CA access mechanism mandatory in all 802.11 Wi-Fi stations.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Distributed Coordination Function (DCF)?<br><br><strong>Answer:</strong> DCF uses CSMA/CA with binary exponential backoff. Before transmitting, a station senses the medium. If idle for a DIFS duration, it decrements its backoff counter. When the counter reaches zero, it transmits the frame. The receiver verifies CRC and responds with an ACK after a SIFS duration.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
-      "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
-      ],
-      "quiz": [
+      "overview": "\n        <p>The <strong>Distributed Coordination Function (DCF)</strong> is the fundamental medium access mechanism used in IEEE 802.11 wireless LANs. It enables multiple autonomous stations to communicate over a shared wireless channel without relying on any central controller or master scheduler.</p>\n        \n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Seven Key Characteristics of DCF</h3>\n        <ul class=\"wiki-bullet-list\">\n          <li><strong>Distributed Operation:</strong> Decisions to transmit are made locally by each individual station.</li>\n          <li><strong>Dual Carrier Sensing:</strong> Combines physical Clear Channel Assessment (CCA) with virtual carrier sensing (NAV).</li>\n          <li><strong>Interframe Space (DIFS):</strong> Enforces a mandatory idle wait time of DIFS before any station may initiate backoff.</li>\n          <li><strong>Slotted Random Backoff:</strong> Staggers transmissions across a randomized Contention Window $[0, CW]$ to minimize collision probabilities.</li>\n          <li><strong>Counter Freezing:</strong> Stations freeze their backoff counters when the medium is busy, resuming countdown once the channel is idle for DIFS.</li>\n          <li><strong>Layer 2 Positive Acknowledgements:</strong> Receivers verify frame integrity via CRC-32 and return an immediate ACK after SIFS.</li>\n          <li><strong>Optional RTS/CTS Protection:</strong> Stations can prepend a 4-way RTS/CTS exchange for frames exceeding the RTS Threshold.</li>\n        </ul>\n      ",
+      "howItWorks": "\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Step-by-Step Working Mechanism of DCF (7 Steps)</h3>\n        <ol class=\"wiki-ordered-list\">\n          <li><strong>Step 1: Channel Sensing:</strong> When a station has a frame to send, it checks whether the channel is physically or virtually busy (CCA or NAV &gt; 0).</li>\n          <li><strong>Step 2: Channel Idle Deferral:</strong> If the channel is sensed idle, the station must verify that it remains idle for a continuous <strong>DIFS</strong> period (typically 50 $mu$s in 802.11b).</li>\n          <li><strong>Step 3: Random Backoff Selection:</strong> The station selects a pseudo-random integer $B$ uniformly distributed in the interval $[0, CW]$, where initial $CW = CW_{\\min}$ (e.g. 15 or 31 slots).</li>\n          <li><strong>Step 4: Backoff Countdown & Freezing:</strong> The station decrements its backoff counter by 1 for each elapsed idle Slot Time ($20\\,\\mu\\text{s}$). If another station begins transmitting, the counter is <strong>frozen</strong> and preserved until the channel becomes idle again for DIFS.</li>\n          <li><strong>Step 5: Frame Transmission:</strong> When the backoff counter reaches zero ($B = 0$), the station immediately transmits its MAC data frame.</li>\n          <li><strong>Step 6: Receiver Verification & ACK:</strong> The destination station verifies the 32-bit FCS. If valid, the receiver waits for a short <strong>SIFS</strong> interval (10 $mu$s) and transmits an ACK frame.</li>\n          <li><strong>Step 7: Retransmission (Retry Procedure):</strong> If the sender does not receive an ACK before its ACK timeout expires, it assumes collision, doubles its contention window ($CW = 2(CW+1)-1$), and repeats the backoff procedure.</li>\n        </ol>\n      ",
+      "technicalDetails": "\n        <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-lg border border-emerald-200 dark:border-emerald-800 text-xs\">\n          <h4 class=\"font-bold text-emerald-900 dark:text-emerald-200 mb-1\">DCF Contention Window Evolution</h4>\n          <p class=\"text-slate-700 dark:text-slate-300\">In 802.11b: $CW_{\\min} = 31$ slots, $CW_{\\max} = 1023$ slots. After collision 1: $CW = 63$. After collision 2: $CW = 127$. After collision 5: $CW = 1023$. Upon reaching 7 retries for small frames (or 4 for large frames), the packet is dropped.</p>\n        </div>\n      ",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/CSMA_CA.svg/800px-CSMA_CA.svg.png",
+      "imageCaption": "Figure 14.11: Complete operation flowchart of the Distributed Coordination Function (DCF) with random backoff.",
+      "workedExamples": [
         {
-          "question": "What is the primary function of Distributed Coordination Function (DCF)?",
-          "options": [
-            "DCF uses CSMA/CA with binary exponential backoff. Before tra...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
-          ],
-          "correct": 0,
-          "explanation": "The primary role is: DCF uses CSMA/CA with binary exponential backoff. Before transmitting, a station senses the medium. If idle for a DIFS duration, it decrements its backoff counter. When the counter reaches zero, it transmits the frame. The receiver verifies CRC and responds with an ACK after a SIFS duration."
+          "title": "Worked Example 1: Backoff Countdown with Channel Freezing",
+          "difficulty": "Medium",
+          "problem": "Station A selects a random backoff counter of 6 slots (Slot Time = 20 microseconds). After 2 idle slots, Station B transmits a frame lasting 100 microseconds. Station A waits for B to finish and detects the channel idle for DIFS (50 microseconds). How much total time elapses before Station A transmits its frame?",
+          "solution": "\n            <p><strong>Step 1: Initial Countdown:</strong></p>\n            <p>Station A counts down 2 slots: $t_1 = 2 \\times 20\\,\\mu\\text{s} = 40\\,\\mu\\text{s}$. Remaining backoff counter $= 6 - 2 = 4$ slots.</p>\n            <p><strong>Step 2: Channel Busy Period:</strong></p>\n            <p>Station B transmits for $t_{\\text{busy}} = 100\\,\\mu\\text{s}$. Station A freezes its counter at 4 slots.</p>\n            <p><strong>Step 3: DIFS Deferral:</strong></p>\n            <p>Once Station B finishes, Station A must wait for the channel to remain idle for continuous DIFS: $t_{\\text{DIFS}} = 50\\,\\mu\\text{s}$.</p>\n            <p><strong>Step 4: Remaining Backoff Countdown:</strong></p>\n            <p>Station A resumes counting down its remaining 4 slots: $t_2 = 4 \\times 20\\,\\mu\\text{s} = 80\\,\\mu\\text{s}$.</p>\n            <p><strong>Step 5: Total Elapsed Time:</strong></p>\n            <p>$$T_{\\text{total}} = 40\\,\\mu\\text{s} + 100\\,\\mu\\text{s} + 50\\,\\mu\\text{s} + 80\\,\\mu\\text{s} = 270\\,\\mu\\text{s}$$</p>\n            <p><strong>Conclusion:</strong> Station A transmits its frame after 270 microseconds.</p>\n          "
         }
+      ],
+      "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Advantages:</strong> Completely autonomous, highly resilient, and zero single-point-of-failure.</p>\n        </div>\n      ",
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Csma_ca.svg",
-      "imageCaption": "Figure: Distributed Coordination Function (DCF): Asynchronous Best-Effort CSMA/CA Access."
+      ]
     },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Csma_ca.svg",
-    "imageCaption": "Figure: Distributed Coordination Function (DCF): Asynchronous Best-Effort CSMA/CA Access."
+    "infobox": {
+      "layer": "Layer 2 (MAC Contention Access)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Distributed Contention Access Protocol",
+      "prerequisites": [
+        "wifi-mac-sublayer",
+        "u2-ieee-802-11-architecture"
+      ],
+      "relatedConcepts": [
+        "u2-ieee-802-11-csma-ca",
+        "u2-ieee-802-11-ifs",
+        "u2-dcf-vs-pcf"
+      ],
+      "compareWith": [
+        "u2-ieee-802-11-pcf",
+        "u2-dcf-vs-pcf"
+      ],
+      "primaryUses": [
+        "Standard asynchronous data delivery in Wi-Fi (HTTP, email, file downloads)"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "CSMA/CA Principles",
+        "meaning": "Carrier sensing and collision avoidance mechanics"
+      },
+      {
+        "concept": "Contention Windows",
+        "meaning": "Random backoff slot intervals and timer freezing"
+      }
+    ],
+    "learningObjectives": [
+      "Master the 7-step working mechanism of the Distributed Coordination Function (DCF).",
+      "Explain the operation of the Contention Window, backoff countdown, and counter freezing.",
+      "Analyze the exponential backoff window expansion upon frame collision or missing ACK."
+    ]
   },
   "u2-ieee-802-11-pcf": {
     "id": "u2-ieee-802-11-pcf",
     "title": "Point Coordination Function (PCF)",
-    "unit": "Unit 2 – Data Link Layer",
-    "unitId": "unit2",
+    "unit": "Unit 2 - Data Link Layer",
     "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "IEEE 802.11 Section 10.4",
-    "oneLiner": "Centralized contention-free polling access coordinated by the Access Point for time-bounded traffic.",
-    "quickAnswer": "PCF is an optional centralized polling mechanism where the AP acts as a Point Coordinator. During the Contention-Free Period (CFP), the AP polls registered stations one by one, granting guaranteed collision-free transmission slots suitable for real-time voice and video.",
-    "whyItMatters": "PCF paved the way for modern 802.11e/ax Quality of Service (QoS) scheduled access mechanisms.",
-    "prerequisitesList": [
-      {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
-      },
-      {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
-      }
-    ],
-    "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
-    ],
-    "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
-      "prerequisites": [
-        "u2-dll-intro"
-      ],
-      "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
-      ],
-      "compareWith": [],
-      "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
-      ]
-    },
+    "standard": "IEEE 802.11 / Forouzan Ch. 14 / Section 8",
+    "oneLiner": "Principles, centralized polling workflow, and Superframe structure of the Point Coordination Function.",
+    "quickAnswer": "The Point Coordination Function (PCF) is an optional, centralized channel access protocol implemented in Infrastructure networks where an Access Point acts as the Point Coordinator (PC). By using PIFS intervals, the AP gains priority access to poll registered stations sequentially during a Contention-Free Period (CFP), providing delay-bounded service for real-time traffic.",
+    "whyItMatters": "PCF represents the theoretical foundation of contention-free wireless scheduling in IEEE 802.11, which directly inspired modern Wi-Fi 6 OFDMA deterministic resource allocation.",
     "sections": {
-      "overview": "<p>In PCF, the Access Point uses a shorter interframe space (PIFS) than normal stations (DIFS), giving it preemptive priority to seize the medium and begin polling stations.</p>",
-      "eli10": "In simple words: Centralized contention-free polling access coordinated by the Access Point for time-bounded traffic.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Point Coordination Function (PCF)?<br><br><strong>Answer:</strong> PCF is an optional centralized polling mechanism where the AP acts as a Point Coordinator. During the Contention-Free Period (CFP), the AP polls registered stations one by one, granting guaranteed collision-free transmission slots suitable for real-time voice and video.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
-      "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
-      ],
-      "quiz": [
+      "overview": "\n        <p>The <strong>Point Coordination Function (PCF)</strong> is an optional centralized channel access mechanism defined in the IEEE 802.11 standard. Unlike the distributed, competitive nature of DCF, PCF operates as a centralized master-slave polling system.</p>\n        <p>In PCF, the <strong>Access Point (AP)</strong> functions as the <strong>Point Coordinator (PC)</strong>, actively maintaining a polling list of associated stations that require guaranteed, delay-bounded transmission opportunities.</p>\n\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">The Superframe Concept: CFP and CP Alternation</h3>\n        <p>Under PCF, time on the wireless medium is partitioned into repeating <strong>Superframes</strong> divided into two phases:</p>\n        <ul class=\"wiki-bullet-list\">\n          <li><strong>Contention-Free Period (CFP):</strong>\n            <ul class=\"wiki-bullet-list mt-1\">\n              <li>The Point Coordinator controls all channel access.</li>\n              <li>Stations only transmit when explicitly polled by the AP.</li>\n              <li>Collisions between stations are <strong>strictly eliminated</strong>.</li>\n              <li>Designed to support time-sensitive traffic (VoIP, teleconferencing, video streaming).</li>\n            </ul>\n          </li>\n          <li><strong>Contention Period (CP):</strong>\n            <ul class=\"wiki-bullet-list mt-1\">\n              <li>The AP releases the channel by transmitting a <code>CF-End</code> control frame.</li>\n              <li>All stations compete for medium access using standard DCF (CSMA/CA).</li>\n              <li>Accommodates bursty, asynchronous web and file transfer traffic.</li>\n            </ul>\n          </li>\n        </ul>\n      ",
+      "howItWorks": "\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Step-by-Step Working Mechanism of PCF</h3>\n        <ol class=\"wiki-ordered-list\">\n          <li><strong>PIFS Seizure:</strong> At the start of a Superframe, the AP senses the medium and waits for <strong>PIFS (Point Coordination IFS)</strong>. Because $\\text{PIFS} < \\text{DIFS}$, the AP seizes the channel before any DCF station can start transmitting.</li>\n          <li><strong>Beacon Broadcast:</strong> The AP broadcasts a Beacon frame containing the maximum CFP duration. All ordinary stations set their NAV timers to the CFP duration, muting DCF contention.</li>\n          <li><strong>Sequential Polling:</strong> The AP transmits a <code>CF-Poll</code> frame (often piggybacked with downlink data) to the first station on its polling list.</li>\n          <li><strong>Station Transmission:</strong> The polled station responds with its uplink data frame after waiting a short <strong>SIFS</strong> interval.</li>\n          <li><strong>Acknowledgement & Next Poll:</strong> The AP receives the data, acknowledges it, and immediately polls the next station after SIFS.</li>\n          <li><strong>CF-End Termination:</strong> When the CFP timer expires, or if the polling queue is exhausted, the AP broadcasts a <code>CF-End</code> frame, resetting all stations' NAV timers and opening the Contention Period (CP).</li>\n        </ol>\n      ",
+      "technicalDetails": "\n        <div class=\"p-3 bg-violet-50 dark:bg-violet-950/40 rounded-lg border border-violet-200 dark:border-violet-800 text-xs\">\n          <h4 class=\"font-bold text-violet-900 dark:text-violet-200 mb-1\">Why PCF Was Replaced by 802.11e EDCA</h4>\n          <p class=\"text-slate-700 dark:text-slate-300\">PCF suffered from high polling overhead, complex station registration, and variable beacon delays caused by lingering DCF transmissions crossing the superframe boundary. IEEE 802.11e introduced <strong>EDCA</strong> and <strong>HCCA</strong> to deliver hardware-based Quality of Service (QoS) queues without PCF's rigid polling inefficiency.</p>\n        </div>\n      ",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/802.11_DCF_PCF.svg/800px-802.11_DCF_PCF.svg.png",
+      "imageCaption": "Figure 14.12: IEEE 802.11 Superframe showing the Contention-Free Period (PCF) alternating with Contention Period (DCF).",
+      "workedExamples": [
         {
-          "question": "What is the primary function of Point Coordination Function (PCF)?",
-          "options": [
-            "PCF is an optional centralized polling mechanism where the A...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
-          ],
-          "correct": 0,
-          "explanation": "The primary role is: PCF is an optional centralized polling mechanism where the AP acts as a Point Coordinator. During the Contention-Free Period (CFP), the AP polls registered stations one by one, granting guaranteed collision-free transmission slots suitable for real-time voice and video."
+          "title": "Worked Example 1: PCF Piggybacking Efficiency",
+          "difficulty": "Easy",
+          "problem": "An Access Point running PCF has downlink data for Station 1 and wishes to poll it. Instead of sending an ACK, a Data frame, and a Poll frame separately, it combines them into a single Data+CF-Ack+CF-Poll frame. If each independent frame has 24 bytes of MAC header, calculate the bytes saved by piggybacking.",
+          "solution": "\n            <p><strong>Step 1: Separate Transmissions:</strong></p>\n            <p>Three separate frames would require $3 \\times 24 = 72$ bytes of MAC headers, plus two SIFS intervals.</p>\n            <p><strong>Step 2: Piggybacked Frame:</strong></p>\n            <p>A single combined Data+CF-Ack+CF-Poll frame uses only one 24-byte MAC header.</p>\n            <p><strong>Step 3: Overhead Saved:</strong></p>\n            <p>$$\\Delta = 72\\text{ bytes} - 24\\text{ bytes} = 48\\text{ bytes}$$</p>\n            <p><strong>Conclusion:</strong> Piggybacking eliminates 48 bytes of MAC header overhead per station exchange, optimizing polling throughput.</p>\n          "
         }
+      ],
+      "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800 text-xs\">\n            <h4 class=\"font-bold text-emerald-800 dark:text-emerald-300 mb-1\">Advantages</h4>\n            <ul class=\"space-y-1 text-slate-700 dark:text-slate-300\">\n              <li>&bull; Completely eliminates collisions during CFP.</li>\n              <li>&bull; Predictable latency for real-time VoIP.</li>\n              <li>&bull; Centralized bandwidth management.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/30 rounded-lg border border-rose-200 dark:border-rose-800 text-xs\">\n            <h4 class=\"font-bold text-rose-800 dark:text-rose-300 mb-1\">Limitations</h4>\n            <ul class=\"space-y-1 text-slate-700 dark:text-slate-300\">\n              <li>&bull; High polling overhead for idle stations.</li>\n              <li>&bull; Requires complex AP coordinator software.</li>\n              <li>&bull; Not supported in Ad Hoc networks.</li>\n            </ul>\n          </div>\n        </div>\n      ",
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Csma_ca.svg",
-      "imageCaption": "Figure: Point Coordination Function (PCF): Centralized Polling Mechanism for Real-Time Traffic."
+      ]
     },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Csma_ca.svg",
-    "imageCaption": "Figure: Point Coordination Function (PCF): Centralized Polling Mechanism for Real-Time Traffic."
+    "infobox": {
+      "layer": "Layer 2 (MAC Contention-Free Access)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Centralized Polling Access Protocol",
+      "prerequisites": [
+        "u2-ieee-802-11-architecture",
+        "u2-ieee-802-11-dcf"
+      ],
+      "relatedConcepts": [
+        "u2-ieee-802-11-ifs",
+        "u2-dcf-vs-pcf"
+      ],
+      "compareWith": [
+        "u2-ieee-802-11-dcf",
+        "u2-dcf-vs-pcf"
+      ],
+      "primaryUses": [
+        "Time-sensitive voice and video polling, specialized industrial Wi-Fi automation"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Access Point Roles",
+        "meaning": "Point Coordinator centralized scheduling in Infrastructure mode"
+      },
+      {
+        "concept": "Interframe Spaces",
+        "meaning": "Preemptive priority timing via PIFS"
+      }
+    ],
+    "learningObjectives": [
+      "Explain the centralized polling operation of the Point Coordination Function (PCF).",
+      "Analyze the IEEE 802.11 Superframe structure (Beacon, CFP, and CP periods).",
+      "Evaluate the advantages, limitations, and reasons why PCF was superseded by 802.11e EDCA."
+    ]
   },
   "u2-ieee-802-11-csma-ca": {
     "id": "u2-ieee-802-11-csma-ca",
     "title": "CSMA/CA in IEEE 802.11",
-    "unit": "Unit 2 – Data Link Layer",
-    "unitId": "unit2",
+    "unit": "Unit 2 - Data Link Layer",
     "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "IEEE 802.11",
-    "oneLiner": "Detailed mechanics of physical carrier sensing, backoff countdown, and random contention windows.",
-    "quickAnswer": "In 802.11 CSMA/CA, a station selects a random backoff integer from [0, CW]. If the channel remains idle for a DIFS, the backoff timer counts down during idle slot times. If the channel becomes busy, the timer pauses and resumes after the channel is idle again for DIFS.",
-    "whyItMatters": "Pausing backoff countdown rather than resetting preserves fairness among waiting stations.",
-    "prerequisitesList": [
-      {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
-      },
-      {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
-      }
-    ],
-    "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
-    ],
-    "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
-      "prerequisites": [
-        "u2-dll-intro"
-      ],
-      "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
-      ],
-      "compareWith": [],
-      "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
-      ]
-    },
+    "standard": "IEEE 802.11 / Forouzan Ch. 14 / Section 4",
+    "oneLiner": "The complete Carrier Sense Multiple Access with Collision Avoidance protocol mechanics, components, and timing rules.",
+    "quickAnswer": "CSMA/CA is the primary medium access protocol of IEEE 802.11 designed to proactively avoid collisions before transmission begins. It integrates six cooperating components: physical carrier sensing (CCA), virtual carrier sensing (NAV), interframe spacing (DIFS/SIFS), slotted pseudo-random backoff, explicit positive acknowledgements (ACK), and optional 4-way RTS/CTS handshakes.",
+    "whyItMatters": "CSMA/CA is the defining protocol of wireless LAN networking, illustrating how to solve the channel sharing problem when collision detection is physically infeasible.",
     "sections": {
-      "overview": "<p>By freezing backoff timers when other stations transmit, stations that have already waited longer retain higher priority to transmit once the channel becomes free again.</p>",
-      "eli10": "In simple words: Detailed mechanics of physical carrier sensing, backoff countdown, and random contention windows.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of CSMA/CA in IEEE 802.11?<br><br><strong>Answer:</strong> In 802.11 CSMA/CA, a station selects a random backoff integer from [0, CW]. If the channel remains idle for a DIFS, the backoff timer counts down during idle slot times. If the channel becomes busy, the timer pauses and resumes after the channel is idle again for DIFS.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
-      "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
-      ],
-      "quiz": [
+      "overview": "\n        <p><strong>Carrier Sense Multiple Access with Collision Avoidance (CSMA/CA)</strong> is the foundational medium access technique used across all IEEE 802.11 wireless LAN generations.</p>\n        <p>While wired Ethernet uses CSMA/CD to detect and abort collisions after they occur, CSMA/CA focuses entirely on <strong>minimizing the mathematical probability that collisions happen in the first place</strong>.</p>\n\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">The Six Core Components of CSMA/CA</h3>\n        <ol class=\"wiki-ordered-list\">\n          <li><strong>Physical Carrier Sensing:</strong> The Physical Layer performs Clear Channel Assessment (CCA) by measuring radio frequency energy on the antenna. If RF energy exceeds the carrier sense threshold (e.g. -82 dBm), the channel is reported as busy.</li>\n          <li><strong>Virtual Carrier Sensing:</strong> The MAC sublayer maintains an internal <strong>Network Allocation Vector (NAV)</strong> timer based on duration fields in overheard frames. If NAV &gt; 0, the channel is treated as virtually busy.</li>\n          <li><strong>Interframe Spaces (IFS):</strong> Mandatory waiting periods (SIFS, PIFS, DIFS, EIFS) that prioritize different types of traffic.</li>\n          <li><strong>Slotted Random Backoff:</strong> A pseudo-random countdown mechanism ($k in [0, CW]$) that prevents all waiting stations from transmitting simultaneously when the channel becomes idle.</li>\n          <li><strong>Layer 2 Positive Acknowledgements:</strong> Because the sender cannot hear collisions while transmitting, the receiver returns an explicit ACK frame after SIFS to confirm undamaged reception.</li>\n          <li><strong>Optional RTS/CTS Handshake:</strong> A 4-way reservation exchange that clears the channel around both sender and receiver, resolving the hidden terminal problem.</li>\n        </ol>\n\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Comprehensive Comparison: CSMA/CA vs. CSMA/CD</h3>\n        <table class=\"wiki-table\">\n          <thead>\n            <tr><th>Feature</th><th>CSMA/CA (IEEE 802.11 Wireless)</th><th>CSMA/CD (IEEE 802.3 Wired)</th></tr>\n          </thead>\n          <tbody>\n            <tr><td><strong>Core Strategy</strong></td><td><strong>Collision Avoidance:</strong> Staggers transmissions prior to sending.</td><td><strong>Collision Detection:</strong> Detects collisions while sending and aborts.</td></tr>\n            <tr><td><strong>Medium</strong></td><td>Unguided atmospheric radio frequency spectrum.</td><td>Guided copper / coaxial conductors.</td></tr>\n            <tr><td><strong>Backoff Execution</strong></td><td>Executes backoff <strong>before</strong> frame transmission.</td><td>Executes backoff <strong>after</strong> collision is detected.</td></tr>\n            <tr><td><strong>Confirmation Mechanism</strong></td><td>Mandatory Layer 2 ACK frame for every unicast packet.</td><td>No link-layer ACK; absence of collision implies success.</td></tr>\n            <tr><td><strong>Handshake Support</strong></td><td>Supports RTS/CTS 4-way virtual carrier sensing.</td><td>Does not support or require RTS/CTS.</td></tr>\n            <tr><td><strong>Collision Recovery Overhead</strong></td><td>Entire frame time is wasted upon unacknowledged collision.</td><td>Only small slot time ($2\\tau = 51.2\\,\\mu\\text{s}$) is lost.</td></tr>\n          </tbody>\n        </table>\n      ",
+      "howItWorks": "\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Detailed Operational Sequence of Basic CSMA/CA</h3>\n        <ol class=\"wiki-ordered-list\">\n          <li>A station prepares a MAC frame received from the Network Layer.</li>\n          <li>It senses the channel using both physical CCA and virtual NAV.</li>\n          <li>If the channel is busy, it defers until the ongoing transmission completes.</li>\n          <li>When the channel becomes idle, the station waits for a continuous <strong>DIFS</strong> period.</li>\n          <li>If the channel remains idle during DIFS, the station selects a random backoff integer from $[0, CW]$.</li>\n          <li>The station decrements its counter by 1 for each idle Slot Time. If the channel becomes busy, the counter freezes.</li>\n          <li>When the backoff counter reaches zero, the station transmits the frame.</li>\n          <li>The destination verifies FCS and returns an <strong>ACK</strong> after a <strong>SIFS</strong> interval.</li>\n          <li>If no ACK is received before the ACK timeout, the sender assumes collision, doubles $CW$, and retransmits.</li>\n        </ol>\n      ",
+      "technicalDetails": "\n        <div class=\"p-3 bg-blue-50 dark:bg-blue-950/40 rounded-lg border border-blue-200 dark:border-blue-800 text-xs\">\n          <p class=\"font-bold text-blue-800 dark:text-blue-300\">Important Conceptual Rule:</p>\n          <p class=\"text-slate-700 dark:text-slate-300 mt-1\">CSMA/CA cannot guarantee that collisions will <em>never</em> happen. If two stations independently pick the exact same random backoff integer, their counters reach zero simultaneously, causing a collision. CSMA/CA minimizes collision probability to acceptable levels.</p>\n        </div>\n      ",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/CSMA_CA.svg/800px-CSMA_CA.svg.png",
+      "imageCaption": "Figure 14.13: Flow diagram of Carrier Sense Multiple Access with Collision Avoidance (CSMA/CA).",
+      "workedExamples": [
         {
-          "question": "What is the primary function of CSMA/CA in IEEE 802.11?",
-          "options": [
-            "In 802.11 CSMA/CA, a station selects a random backoff intege...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
-          ],
-          "correct": 0,
-          "explanation": "The primary role is: In 802.11 CSMA/CA, a station selects a random backoff integer from [0, CW]. If the channel remains idle for a DIFS, the backoff timer counts down during idle slot times. If the channel becomes busy, the timer pauses and resumes after the channel is idle again for DIFS."
+          "title": "Worked Example 1: Probability of Simultaneous Backoff Collision",
+          "difficulty": "Medium",
+          "problem": "Two stations (A and B) both have frames to transmit and enter backoff with $CW = 15$ ($k \\in \\{0, 1, 2, \\dots, 15\\}$). Assuming their random integer selections are independent and uniform, calculate the probability that both stations pick the exact same slot number and collide.",
+          "solution": "\n            <p><strong>Step 1: Total Possible Outcomes:</strong></p>\n            <p>Each station has 16 possible slot choices ($CW + 1 = 16$). Total outcomes $= 16 \\times 16 = 256$.</p>\n            <p><strong>Step 2: Favorable Collision Outcomes:</strong></p>\n            <p>A collision occurs if both pick slot 0, slot 1, ..., or slot 15. There are exactly 16 such pairs.</p>\n            <p><strong>Step 3: Calculate Probability:</strong></p>\n            <p>$$P(\\text{Collision}) = \\frac{16}{256} = \\frac{1}{16} = 0.0625 = 6.25\\%$$</p>\n            <p><strong>Conclusion:</strong> With $CW = 15$, there is a 6.25% collision probability between two contending stations. If collision occurs, $CW$ expands to 31, reducing the collision probability to $1/32 = 3.125\\%$.</p>\n          "
         }
+      ],
+      "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Summary:</strong> CSMA/CA achieves robust distributed channel sharing across noisy, unguided RF spectrum.</p>\n        </div>\n      ",
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Csma_ca.svg",
-      "imageCaption": "Figure: CSMA/CA Protocol in IEEE 802.11: Physical Carrier Sense + Virtual Carrier Sense."
+      ]
     },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Csma_ca.svg",
-    "imageCaption": "Figure: CSMA/CA Protocol in IEEE 802.11: Physical Carrier Sense + Virtual Carrier Sense."
+    "infobox": {
+      "layer": "Layer 2 (MAC Access Control)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Carrier Sense Multiple Access Protocol",
+      "prerequisites": [
+        "wifi-mac-sublayer",
+        "u2-ieee-802-11-dcf"
+      ],
+      "relatedConcepts": [
+        "u2-rts-cts-mechanism",
+        "u2-network-allocation-vector"
+      ],
+      "compareWith": [
+        "u2-ethernet-csma-cd-operation",
+        "u2-comparison-multiple-access"
+      ],
+      "primaryUses": [
+        "Wi-Fi channel contention, Zigbee radio links, wireless IoT sensor networks"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Physical Carrier Sensing",
+        "meaning": "Clear Channel Assessment energy measurement"
+      },
+      {
+        "concept": "Virtual Carrier Sensing",
+        "meaning": "Network Allocation Vector (NAV) reservation"
+      }
+    ],
+    "learningObjectives": [
+      "Master the 6 cooperating components of CSMA/CA in wireless networking.",
+      "Calculate collision probability during simultaneous random backoff slot selection.",
+      "Compare CSMA/CA and CSMA/CD across operational timing, backoff trigger, and recovery."
+    ]
   },
   "u2-ieee-802-11-ifs": {
     "id": "u2-ieee-802-11-ifs",
-    "title": "Interframe Spaces (IFS)",
-    "unit": "Unit 2 – Data Link Layer",
-    "unitId": "unit2",
+    "title": "Interframe Spaces (IFS) in IEEE 802.11",
+    "unit": "Unit 2 - Data Link Layer",
     "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "IEEE 802.11",
-    "oneLiner": "Priority arbitration through timed gaps: SIFS, PIFS, DIFS, and EIFS.",
-    "quickAnswer": "IEEE 802.11 enforces priority by varying the time gap a station must wait before transmitting: (1) SIFS (Shortest IFS): Highest priority, used for ACKs, CTS, and data fragments. (2) PIFS (PCF IFS): Medium priority, used by AP for polling. (3) DIFS (DCF IFS): Standard priority for normal data frames. (4) EIFS (Extended IFS): Lowest priority, used after frame errors.",
-    "whyItMatters": "Different IFS durations implement hardware-level priority without requiring packet header tags.",
-    "prerequisitesList": [
-      {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
-      },
-      {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
-      }
-    ],
-    "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
-    ],
-    "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
-      "prerequisites": [
-        "u2-dll-intro"
-      ],
-      "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
-      ],
-      "compareWith": [],
-      "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
-      ]
-    },
+    "standard": "IEEE 802.11 / Forouzan Ch. 14 / Section 7",
+    "oneLiner": "Detailed analysis of IEEE 802.11 waiting intervals: SIFS, PIFS, DIFS, EIFS, formulas, and priority arbitration.",
+    "quickAnswer": "An Interframe Space (IFS) is a mandatory idle waiting period between consecutive frame transmissions in IEEE 802.11. By assigning different durations to different frame types, IEEE 802.11 creates a strict priority hierarchy: SIFS (shortest, highest priority for ACK/CTS) < PIFS (Point Coordinator polling) < DIFS (standard DCF contention) < EIFS (longest, frame error recovery).",
+    "whyItMatters": "Interframe spacing is the primary mechanism IEEE 802.11 uses to implement Quality of Service and collision-free transactions without needing physical control channels.",
     "sections": {
-      "overview": "<p>Rule of thumb in 802.11: <strong>Shorter gap = Higher priority</strong>. Because an ACK only needs to wait SIFS, no other station waiting DIFS can interrupt or collide with the acknowledgement.</p>",
-      "eli10": "In simple words: Priority arbitration through timed gaps: SIFS, PIFS, DIFS, and EIFS.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Interframe Spaces (IFS)?<br><br><strong>Answer:</strong> IEEE 802.11 enforces priority by varying the time gap a station must wait before transmitting: (1) SIFS (Shortest IFS): Highest priority, used for ACKs, CTS, and data fragments. (2) PIFS (PCF IFS): Medium priority, used by AP for polling. (3) DIFS (DCF IFS): Standard priority for normal data frames. (4) EIFS (Extended IFS): Lowest priority, used after frame errors.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
-      "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
-      ],
-      "quiz": [
+      "overview": "\n        <p>In IEEE 802.11 wireless networks, an <strong>Interframe Space (IFS)</strong> is a standardized idle waiting interval required between consecutive transmissions on the radio channel.</p>\n        <p>The fundamental principle of IFS is simple yet powerful: <strong>A shorter interframe space confers higher transmission priority.</strong> A station with a shorter IFS waits less time and therefore seizes the channel before stations with longer IFS intervals can begin transmitting.</p>\n\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">The Four Types of Interframe Spaces</h3>\n        <ol class=\"wiki-ordered-list\">\n          <li><strong>SIFS (Short Interframe Space):</strong>\n            <p class=\"text-xs text-slate-600 dark:text-slate-300 mt-1\">The shortest interval in 802.11 (typically 10 $mu$s in 2.4 GHz OFDM). Used for high-priority immediate responses: <strong>ACK frames</strong>, <strong>CTS frames</strong>, and subsequent fragments of a fragmented frame. Because SIFS is the shortest, the receiver can acknowledge a frame before any other station can interrupt.</p>\n          </li>\n          <li><strong>PIFS (Point Coordination IFS):</strong>\n            <p class=\"text-xs text-slate-600 dark:text-slate-300 mt-1\">Used strictly by the <strong>Point Coordinator (AP)</strong> during PCF operation. The AP waits for PIFS before seizing the channel to begin the Contention-Free Period (CFP). Because PIFS &lt; DIFS, the AP always preempts ordinary stations.</p>\n          </li>\n          <li><strong>DIFS (Distributed Coordination IFS):</strong>\n            <p class=\"text-xs text-slate-600 dark:text-slate-300 mt-1\">The standard waiting period used by stations operating under normal DCF access before initiating or resuming random backoff. Stations must sense the channel continuously idle for DIFS before transmitting.</p>\n          </li>\n          <li><strong>EIFS (Extended Interframe Space):</strong>\n            <p class=\"text-xs text-slate-600 dark:text-slate-300 mt-1\">The longest interframe space, invoked when a station receives a frame with an invalid CRC-32 checksum. EIFS gives other stations that correctly decoded the frame sufficient time to complete their ACK exchange before the confused station attempts transmission.</p>\n          </li>\n        </ol>\n\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Master Comparison & Priority Order</h3>\n        <table class=\"wiki-table\">\n          <thead>\n            <tr><th>IFS Acronym</th><th>Full Name</th><th>Relative Priority</th><th>Primary Operational Purpose</th></tr>\n          </thead>\n          <tbody>\n            <tr><td><strong>SIFS</strong></td><td>Short Interframe Space</td><td><strong>Highest Priority (1)</strong></td><td>ACK, CTS, and immediate frame exchange responses.</td></tr>\n            <tr><td><strong>PIFS</strong></td><td>PCF Interframe Space</td><td><strong>Second Priority (2)</strong></td><td>Gains priority access for the AP Point Coordinator.</td></tr>\n            <tr><td><strong>DIFS</strong></td><td>DCF Interframe Space</td><td><strong>Normal Priority (3)</strong></td><td>Standard contention-based access for ordinary data frames.</td></tr>\n            <tr><td><strong>EIFS</strong></td><td>Extended Interframe Space</td><td><strong>Lowest Priority (4)</strong></td><td>Protective recovery after receiving a corrupted frame.</td></tr>\n          </tbody>\n        </table>\n      ",
+      "howItWorks": "\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Mathematical Formulas and Relationships (Section 7.9)</h3>\n        <p>In traditional IEEE 802.11 implementations, interframe spaces are mathematically derived from the physical layer's basic <strong>Slot Time</strong> and <strong>SIFS</strong> duration:</p>\n        <div class=\"p-4 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 font-mono text-xs text-center space-y-2 my-3\">\n          <p class=\"text-blue-600 dark:text-blue-400 font-bold\">PIFS = SIFS + SlotTime</p>\n          <p class=\"text-indigo-600 dark:text-indigo-400 font-bold\">DIFS = SIFS + 2(SlotTime)</p>\n          <p class=\"text-slate-500\">$$\\text{SIFS} < \\text{PIFS} < \\text{DIFS} < \\text{EIFS}$$</p>\n        </div>\n      ",
+      "technicalDetails": "\n        <div class=\"p-3 bg-amber-50 dark:bg-amber-950/40 rounded-lg border border-amber-200 dark:border-amber-800 text-xs\">\n          <h4 class=\"font-bold text-amber-900 dark:text-amber-200 mb-1\">PHY-Specific Timing Parameters</h4>\n          <ul class=\"space-y-1 text-slate-700 dark:text-slate-300\">\n            <li><strong>802.11b (DSSS):</strong> SIFS = 10 $mu$s, Slot Time = 20 $mu$s &rarr; PIFS = 30 $mu$s, DIFS = 50 $mu$s.</li>\n            <li><strong>802.11a/g/n/ac/ax (5 GHz OFDM):</strong> SIFS = 16 $mu$s, Slot Time = 9 $mu$s &rarr; PIFS = 25 $mu$s, DIFS = 34 $mu$s.</li>\n          </ul>\n        </div>\n      ",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/IEEE_802.11_IFS.svg/800px-IEEE_802.11_IFS.svg.png",
+      "imageCaption": "Figure 14.14: Timing relationships and duration hierarchy of IEEE 802.11 Interframe Spaces.",
+      "workedExamples": [
         {
-          "question": "What is the primary function of Interframe Spaces (IFS)?",
-          "options": [
-            "IEEE 802.11 enforces priority by varying the time gap a stat...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
-          ],
-          "correct": 0,
-          "explanation": "The primary role is: IEEE 802.11 enforces priority by varying the time gap a station must wait before transmitting: (1) SIFS (Shortest IFS): Highest priority, used for ACKs, CTS, and data fragments. (2) PIFS (PCF IFS): Medium priority, used by AP for polling. (3) DIFS (DCF IFS): Standard priority for normal data frames. (4) EIFS (Extended IFS): Lowest priority, used after frame errors."
+          "title": "Worked Example 1: Calculating PIFS and DIFS from Legacy Values",
+          "difficulty": "Easy",
+          "problem": "Given an IEEE 802.11 PHY layer where SIFS = 10 microseconds and Slot Time = 20 microseconds, calculate the exact values of PIFS and DIFS.",
+          "solution": "\n            <p><strong>Step 1: Calculate PIFS:</strong></p>\n            <p>$$\\text{PIFS} = \\text{SIFS} + \\text{SlotTime} = 10\\,\\mu\\text{s} + 20\\,\\mu\\text{s} = 30\\,\\mu\\text{s}$$</p>\n            <p><strong>Step 2: Calculate DIFS:</strong></p>\n            <p>$$\\text{DIFS} = \\text{SIFS} + 2(\\text{SlotTime}) = 10\\,\\mu\\text{s} + 2(20\\,\\mu\\text{s}) = 10 + 40 = 50\\,\\mu\\text{s}$$</p>\n            <p><strong>Conclusion:</strong> $\\text{PIFS} = 30\\,\\mu\\text{s}$ and $\\text{DIFS} = 50\\,\\mu\\text{s}$.</p>\n          "
         }
+      ],
+      "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Summary:</strong> Interframe spacing allows deterministic prioritisation of control traffic without extra protocol messages.</p>\n        </div>\n      ",
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Csma_ca.svg",
-      "imageCaption": "Figure: Interframe Spaces Hierarchy: SIFS (Highest Priority) < PIFS < DIFS < EIFS."
+      ]
     },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Csma_ca.svg",
-    "imageCaption": "Figure: Interframe Spaces Hierarchy: SIFS (Highest Priority) < PIFS < DIFS < EIFS."
+    "infobox": {
+      "layer": "Layer 2 (MAC Timing & Priority)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Interframe Timing Hierarchy",
+      "prerequisites": [
+        "wifi-mac-sublayer",
+        "u2-ieee-802-11-csma-ca"
+      ],
+      "relatedConcepts": [
+        "u2-ieee-802-11-dcf",
+        "u2-ieee-802-11-pcf"
+      ],
+      "compareWith": [
+        "u2-ethernet-csma-cd-operation"
+      ],
+      "primaryUses": [
+        "MAC timing engines, wireless frame prioritization, Wi-Fi chip hardware clocks"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Slot Time",
+        "meaning": "Basic time slice determined by physical layer propagation and RF switching"
+      },
+      {
+        "concept": "Priority Scheduling",
+        "meaning": "Using shorter time delays to achieve preemptive access"
+      }
+    ],
+    "learningObjectives": [
+      "Define all four IEEE 802.11 Interframe Spaces: SIFS, PIFS, DIFS, and EIFS.",
+      "Calculate PIFS and DIFS using standard formulas from SIFS and Slot Time.",
+      "Explain why SIFS is the shortest interval and how it preserves atomic frame exchanges."
+    ]
   },
   "u2-rts-cts-mechanism": {
     "id": "u2-rts-cts-mechanism",
-    "title": "RTS/CTS Mechanism",
-    "unit": "Unit 2 – Data Link Layer",
-    "unitId": "unit2",
+    "title": "RTS and CTS Handshake Mechanism",
+    "unit": "Unit 2 - Data Link Layer",
     "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "IEEE 802.11 / Tanenbaum Ch. 4.4",
-    "oneLiner": "4-way handshake (RTS-CTS-DATA-ACK) eliminating hidden terminal collisions.",
-    "quickAnswer": "To transmit a large frame, a sender first broadcasts a short Request to Send (RTS) frame. The receiver replies with a Clear to Send (CTS) frame. All stations hearing the RTS or CTS read the duration field and remain silent for that time. The sender then transmits its data frame safely and receives an ACK.",
-    "whyItMatters": "RTS and CTS frames are small (20 and 14 bytes), so collisions between RTS frames waste negligible bandwidth compared to colliding 1500-byte data frames.",
-    "prerequisitesList": [
-      {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
-      },
-      {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
-      }
-    ],
-    "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
-    ],
-    "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
-      "prerequisites": [
-        "u2-dll-intro"
-      ],
-      "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
-      ],
-      "compareWith": [],
-      "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
-      ]
-    },
+    "standard": "IEEE 802.11 / Forouzan Ch. 14 / Section 5",
+    "oneLiner": "The 4-way Request-To-Send / Clear-To-Send protocol sequence, frame structure, and collision elimination mechanism.",
+    "quickAnswer": "The RTS/CTS handshake is a 4-way control exchange (RTS &rarr; SIFS &rarr; CTS &rarr; SIFS &rarr; DATA &rarr; SIFS &rarr; ACK) used in IEEE 802.11 to reserve the wireless channel before transmitting data. It eliminates hidden station collisions by having the receiver broadcast a CTS that sets the Network Allocation Vector (NAV) for all hidden stations within its range.",
+    "whyItMatters": "RTS/CTS solves the classic hidden terminal problem in wireless LANs, trading small control frame overhead for guaranteed collision-free transmission of large payload frames.",
     "sections": {
-      "overview": "<div class=\"wiki-img-box my-4 text-center\"><img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/802.11_RTS_CTS.svg/600px-802.11_RTS_CTS.svg.png\" alt=\"802.11 RTS CTS\" class=\"mx-auto rounded-lg shadow border border-gray-200 dark:border-gray-700 max-h-80 object-contain\" onerror=\"this.style.display='none'\"><p class=\"text-xs text-gray-500 mt-1 italic\">Figure: The 4-way RTS/CTS/Data/ACK handshake reserving channel airtime.</p></div>",
-      "eli10": "In simple words: 4-way handshake (RTS-CTS-DATA-ACK) eliminating hidden terminal collisions.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of RTS/CTS Mechanism?<br><br><strong>Answer:</strong> To transmit a large frame, a sender first broadcasts a short Request to Send (RTS) frame. The receiver replies with a Clear to Send (CTS) frame. All stations hearing the RTS or CTS read the duration field and remain silent for that time. The sender then transmits its data frame safely and receives an ACK.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
-      "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
-      ],
-      "quiz": [
+      "overview": "\n        <p>In IEEE 802.11 wireless networks, the <strong>RTS/CTS Handshake</strong> is an optional 4-way control frame exchange that establishes a virtual channel reservation before transmitting a large data frame.</p>\n\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Definitions of RTS and CTS</h3>\n        <ul class=\"wiki-bullet-list\">\n          <li><strong>RTS (Request To Send):</strong> A 20-byte control frame transmitted by a sending station to request exclusive medium access. It contains a <em>Duration/ID</em> field specifying the total time needed to complete the entire subsequent transaction (CTS + DATA + ACK + 3 SIFS).</li>\n          <li><strong>CTS (Clear To Send):</strong> A 14-byte control frame returned by the destination station in response to a valid RTS. It echoes the remaining duration, confirming that the receiver is ready to receive data.</li>\n        </ul>\n\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">The Complete 4-Way Handshake Sequence</h3>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 font-mono text-xs text-center my-3\">\n          $$\\text{RTS} \\xrightarrow{\\text{SIFS}} \\text{CTS} \\xrightarrow{\\text{SIFS}} \\text{DATA} \\xrightarrow{\\text{SIFS}} \\text{ACK}$$\n        </div>\n        <ol class=\"wiki-ordered-list\">\n          <li><strong>Step 1 (RTS Transmission):</strong> Station A wins contention, waits for DIFS, and transmits an RTS frame to Station B.</li>\n          <li><strong>Step 2 (CTS Response):</strong> Station B receives the RTS, waits for a short SIFS interval, and broadcasts a CTS frame. <strong>Any station in range of Station B (including hidden Station C) hears this CTS!</strong></li>\n          <li><strong>Step 3 (Channel Reservation via NAV):</strong> All stations that hear the RTS or CTS read the Duration field and set their <strong>Network Allocation Vector (NAV)</strong> timers, deferring all transmissions.</li>\n          <li><strong>Step 4 (DATA Transmission):</strong> Station A waits SIFS after receiving the CTS and transmits its large DATA frame collision-free.</li>\n          <li><strong>Step 5 (Positive ACK):</strong> Station B verifies the CRC-32 checksum and transmits an ACK frame after SIFS. The NAV expires and the medium becomes available.</li>\n        </ol>\n      ",
+      "howItWorks": "\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">The RTS Threshold Optimization</h3>\n        <p>Because RTS (20 bytes) and CTS (14 bytes) control frames consume channel time, using RTS/CTS for very small data packets (e.g., 64-byte DNS queries or ACKs) actually degrades network efficiency. Therefore, 802.11 network adapters implement an <strong>RTS Threshold</strong> parameter:</p>\n        <ul class=\"wiki-bullet-list text-xs\">\n          <li><strong>Frame Size &lt; RTS Threshold:</strong> Transmitted directly using basic CSMA/CA (DIFS + Backoff + DATA + ACK).</li>\n          <li><strong>Frame Size &ge; RTS Threshold:</strong> Mandatory 4-way RTS/CTS handshake is executed.</li>\n        </ul>\n      ",
+      "technicalDetails": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800 text-xs\">\n            <h4 class=\"font-bold text-emerald-800 dark:text-emerald-300 mb-1\">Advantages of RTS/CTS</h4>\n            <ul class=\"space-y-1 text-slate-700 dark:text-slate-300\">\n              <li>&bull; Completely eliminates destructive hidden station collisions.</li>\n              <li>&bull; If an RTS collides, only 20 bytes are lost instead of 1500 bytes.</li>\n              <li>&bull; Coordinates multi-station shared access cleanly.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/30 rounded-lg border border-rose-200 dark:border-rose-800 text-xs\">\n            <h4 class=\"font-bold text-rose-800 dark:text-rose-300 mb-1\">Disadvantages of RTS/CTS</h4>\n            <ul class=\"space-y-1 text-slate-700 dark:text-slate-300\">\n              <li>&bull; Adds control-frame transmission and SIFS overhead.</li>\n              <li>&bull; Decreases overall throughput for small packets.</li>\n              <li>&bull; Does not solve the exposed station problem.</li>\n            </ul>\n          </div>\n        </div>\n      ",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Hidden_terminal_problem.svg/800px-Hidden_terminal_problem.svg.png",
+      "imageCaption": "Figure 14.15: RTS/CTS virtual channel reservation preventing collisions from hidden stations.",
+      "workedExamples": [
         {
-          "question": "What is the primary function of RTS/CTS Mechanism?",
-          "options": [
-            "To transmit a large frame, a sender first broadcasts a short...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
-          ],
-          "correct": 0,
-          "explanation": "The primary role is: To transmit a large frame, a sender first broadcasts a short Request to Send (RTS) frame. The receiver replies with a Clear to Send (CTS) frame. All stations hearing the RTS or CTS read the duration field and remain silent for that time. The sender then transmits its data frame safely and receives an ACK."
+          "title": "Worked Example 1: Calculating Total RTS/CTS Exchange Duration",
+          "difficulty": "Medium",
+          "problem": "An IEEE 802.11 frame exchange consists of: RTS transmission time = 40 microseconds, CTS = 30 microseconds, DATA = 500 microseconds, ACK = 30 microseconds, and SIFS = 10 microseconds. Calculate the total exchange duration, ignoring DIFS and backoff.",
+          "solution": "\n            <p><strong>Step 1: Formula for Total Exchange Duration:</strong></p>\n            <p>$$T_{\\text{exchange}} = T_{\\text{RTS}} + T_{\\text{CTS}} + T_{\\text{DATA}} + T_{\\text{ACK}} + 3(T_{\\text{SIFS}})$$</p>\n            <p><strong>Step 2: Substitute Values:</strong></p>\n            <p>$$T_{\\text{exchange}} = 40\\,\\mu\\text{s} + 30\\,\\mu\\text{s} + 500\\,\\mu\\text{s} + 30\\,\\mu\\text{s} + 3(10\\,\\mu\\text{s})$$</p>\n            <p>$$T_{\\text{exchange}} = 600\\,\\mu\\text{s}$$</p>\n            <p><strong>Conclusion:</strong> The total transaction time is 600 microseconds.</p>\n          "
         }
+      ],
+      "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Summary:</strong> RTS/CTS provides insurance against costly collisions for large packets in dense wireless cells.</p>\n        </div>\n      ",
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bb/RTS_CTS_FRTS_Schema.png",
-      "imageCaption": "Figure: RTS/CTS 4-Way Handshake: Reserving Channel & Solving the Hidden Terminal Problem."
+      ]
     },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bb/RTS_CTS_FRTS_Schema.png",
-    "imageCaption": "Figure: RTS/CTS 4-Way Handshake: Reserving Channel & Solving the Hidden Terminal Problem."
+    "infobox": {
+      "layer": "Layer 2 (MAC Virtual Sensing Handshake)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "4-Way Virtual Carrier Sensing Handshake",
+      "prerequisites": [
+        "u2-hidden-terminal-problem",
+        "u2-ieee-802-11-csma-ca"
+      ],
+      "relatedConcepts": [
+        "u2-network-allocation-vector",
+        "u2-ieee-802-11-frame-formats"
+      ],
+      "compareWith": [
+        "u2-hidden-terminal-problem"
+      ],
+      "primaryUses": [
+        "Dense enterprise auditoriums, large data file transfers, outdoor Wi-Fi backhauls"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Hidden Station Problem",
+        "meaning": "Collisions occurring at the receiver from hidden nodes"
+      },
+      {
+        "concept": "Control Frames",
+        "meaning": "Short MAC frames used for channel coordination"
+      }
+    ],
+    "learningObjectives": [
+      "Trace the complete 4-way RTS/CTS frame exchange: RTS &rarr; SIFS &rarr; CTS &rarr; SIFS &rarr; DATA &rarr; SIFS &rarr; ACK.",
+      "Calculate the total exchange duration and Duration field reservation value.",
+      "Explain the trade-offs of the RTS Threshold parameter for small vs. large frames."
+    ]
   },
   "u2-network-allocation-vector": {
     "id": "u2-network-allocation-vector",
     "title": "Network Allocation Vector (NAV)",
-    "unit": "Unit 2 – Data Link Layer",
-    "unitId": "unit2",
+    "unit": "Unit 2 - Data Link Layer",
     "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "IEEE 802.11",
-    "oneLiner": "The virtual carrier sensing timer that tells stations how long the radio medium will remain occupied.",
-    "quickAnswer": "The Network Allocation Vector (NAV) is an internal countdown timer maintained by every 802.11 station. When a station overhears any frame (RTS, CTS, or data), it extracts the Duration field and sets its NAV to that value. As long as NAV > 0, the station treats the medium as virtually busy without even checking physical RF energy.",
-    "whyItMatters": "NAV virtual carrier sensing silences hidden stations that cannot physically hear the transmitter.",
-    "prerequisitesList": [
-      {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
-      },
-      {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
-      }
-    ],
-    "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
-    ],
-    "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
-      "prerequisites": [
-        "u2-dll-intro"
-      ],
-      "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
-      ],
-      "compareWith": [],
-      "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
-      ]
-    },
+    "standard": "IEEE 802.11 / Forouzan Ch. 14 / Section 6",
+    "oneLiner": "The virtual carrier sensing countdown timer mechanism, mathematical operation, and comparison with physical carrier sensing.",
+    "quickAnswer": "The Network Allocation Vector (NAV) is an internal countdown timer maintained in software/hardware by every IEEE 802.11 station to implement virtual carrier sensing. When a station overhears a frame (RTS, CTS, or DATA) containing a Duration field, it sets its NAV to that value and treats the channel as virtually busy until the timer reaches zero.",
+    "whyItMatters": "NAV prevents stations from transmitting when the channel appears physically idle but is actively receiving a transmission from a hidden node, bridging the gap between radio physics and reliable MAC protocols.",
     "sections": {
-      "overview": "<p>Virtual carrier sensing via NAV ensures that stations out of physical range of the sender (but within range of the receiver) do not transmit during data and ACK exchange.</p>",
-      "eli10": "In simple words: The virtual carrier sensing timer that tells stations how long the radio medium will remain occupied.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Network Allocation Vector (NAV)?<br><br><strong>Answer:</strong> The Network Allocation Vector (NAV) is an internal countdown timer maintained by every 802.11 station. When a station overhears any frame (RTS, CTS, or data), it extracts the Duration field and sets its NAV to that value. As long as NAV > 0, the station treats the medium as virtually busy without even checking physical RF energy.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
-      "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
-      ],
-      "quiz": [
+      "overview": "\n        <p>The <strong>Network Allocation Vector (NAV)</strong> is the virtual carrier-sensing mechanism specified by the IEEE 802.11 standard to resolve medium access contention in environments where physical sensing alone is inadequate.</p>\n        \n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Why NAV is Required</h3>\n        <p>In wireless networks, physical carrier sensing (measuring RF energy on an antenna) only reveals whether a station's <em>immediate local vicinity</em> is active. Due to the <strong>hidden station problem</strong>, a distant station may be actively transmitting to an Access Point without producing any detectable RF energy at a third station.</p>\n        <p>If the third station relied solely on physical carrier sensing, it would conclude the medium is idle, transmit, and destroy the AP's ongoing reception. <strong>NAV prevents this by creating a virtual reservation timer.</strong></p>\n\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">How NAV Operates (Step-by-Step)</h3>\n        <ol class=\"wiki-ordered-list\">\n          <li>Every IEEE 802.11 unicast frame contains a 2-byte <strong>Duration/ID</strong> field specifying the microsecond reservation duration.</li>\n          <li>When any station overhears a valid frame (even if the station is neither the source nor the destination), it inspects the Duration field.</li>\n          <li>If the extracted duration value is greater than the station's current NAV timer, the station updates its NAV: $NAV_{\\text{new}} = \\text{Duration}$.</li>\n          <li>The NAV continuously counts down towards zero at a uniform 1 MHz clock rate (1 tick per microsecond).</li>\n          <li><strong>Transmission Rule:</strong> A station is strictly forbidden from initiating transmission as long as $NAV > 0$, even if its antenna detects zero physical RF energy!</li>\n          <li>When NAV reaches 0, the station must then verify that the medium remains physically idle for DIFS before initiating backoff.</li>\n        </ol>\n\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Physical vs. Virtual Carrier Sensing Master Comparison</h3>\n        <table class=\"wiki-table\">\n          <thead>\n            <tr><th>Comparison Parameter</th><th>Physical Carrier Sensing (CCA)</th><th>Virtual Carrier Sensing (NAV)</th></tr>\n          </thead>\n          <tbody>\n            <tr><td><strong>Operating Layer</strong></td><td>Physical Layer (PHY).</td><td>Medium Access Control sublayer (MAC).</td></tr>\n            <tr><td><strong>Detection Technique</strong></td><td>RF energy detection & preamble correlation.</td><td>Reads numeric <em>Duration</em> field in MAC headers.</td></tr>\n            <tr><td><strong>What It Measures</strong></td><td>Whether RF power exceeds threshold (e.g. -82 dBm).</td><td>Whether the channel is contractually reserved by others.</td></tr>\n            <tr><td><strong>Hidden Station Defense</strong></td><td>Completely blind to hidden stations.</td><td><strong>Immune to hidden stations</strong> (set via broadcast CTS).</td></tr>\n            <tr><td><strong>Implementation</strong></td><td>Hardware radio front-end circuitry.</td><td>Internal hardware/software countdown timer.</td></tr>\n          </tbody>\n        </table>\n      ",
+      "howItWorks": "\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Worked Example: NAV Setting During RTS/CTS</h3>\n        <p>Suppose Station A transmits an RTS to Station B with a Duration field of <strong>500 microseconds</strong>. Nearby Station C overhears the RTS:</p>\n        <ul class=\"wiki-bullet-list text-xs\">\n          <li>Station C programs its timer: $NAV = 500\\,\\mu\\text{s}$.</li>\n          <li>Station C immediately enters sleep / deferral mode for 500 microseconds.</li>\n          <li>During this 500 $mu$s window, Station B sends CTS, Station A sends DATA, and Station B returns ACK.</li>\n          <li>Station C never transmits during this window, guaranteeing zero collision.</li>\n        </ul>\n      ",
+      "technicalDetails": "\n        <div class=\"p-3 bg-indigo-50 dark:bg-indigo-950/40 rounded-lg border border-indigo-200 dark:border-indigo-800 text-xs\">\n          <p class=\"font-bold text-indigo-900 dark:text-indigo-200\">Important Exam Note:</p>\n          <p class=\"text-slate-700 dark:text-slate-300 mt-1\">NAV is a virtual timer. It does not physically broadcast radio waves or block RF signals; it simply informs the station's local MAC state machine to defer transmission.</p>\n        </div>\n      ",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Hidden_terminal_problem.svg/800px-Hidden_terminal_problem.svg.png",
+      "imageCaption": "Figure 14.16: Network Allocation Vector (NAV) countdown timer deferring station transmission during active exchange.",
+      "workedExamples": [
         {
-          "question": "What is the primary function of Network Allocation Vector (NAV)?",
-          "options": [
-            "The Network Allocation Vector (NAV) is an internal countdown...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
-          ],
-          "correct": 0,
-          "explanation": "The primary role is: The Network Allocation Vector (NAV) is an internal countdown timer maintained by every 802.11 station. When a station overhears any frame (RTS, CTS, or data), it extracts the Duration field and sets its NAV to that value. As long as NAV > 0, the station treats the medium as virtually busy without even checking physical RF energy."
+          "title": "Worked Example 1: Updating an Existing NAV Value",
+          "difficulty": "Easy",
+          "problem": "Station C's current NAV timer is 120 microseconds. It overhears a new CTS frame from an adjacent Access Point with a Duration field of 280 microseconds. What is Station C's new NAV value?",
+          "solution": "\n            <p><strong>Step 1: NAV Update Rule:</strong></p>\n            <p>A station updates its NAV only if the newly received Duration value exceeds its current remaining NAV timer:</p>\n            <p>$$NAV_{\\text{new}} = \\max(NAV_{\\text{current}}, \\text{Duration}_{\\text{new}})$$</p>\n            <p><strong>Step 2: Evaluate:</strong></p>\n            <p>$$NAV_{\\text{new}} = \\max(120\\,\\mu\\text{s}, 280\\,\\mu\\text{s}) = 280\\,\\mu\\text{s}$$</p>\n            <p><strong>Conclusion:</strong> Station C updates its NAV to 280 microseconds.</p>\n          "
         }
+      ],
+      "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Summary:</strong> Dual carrier sensing (Physical CCA + Virtual NAV) ensures robust medium arbitration in asymmetrical RF topologies.</p>\n        </div>\n      ",
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bb/RTS_CTS_FRTS_Schema.png",
-      "imageCaption": "Figure: Network Allocation Vector (NAV): Virtual Carrier Sensing Countdown Timer in Station Hardware."
+      ]
     },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bb/RTS_CTS_FRTS_Schema.png",
-    "imageCaption": "Figure: Network Allocation Vector (NAV): Virtual Carrier Sensing Countdown Timer in Station Hardware."
+    "infobox": {
+      "layer": "Layer 2 (MAC Virtual Carrier Sensing)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Virtual Carrier Sensing Timer",
+      "prerequisites": [
+        "u2-rts-cts-mechanism"
+      ],
+      "relatedConcepts": [
+        "u2-ieee-802-11-csma-ca",
+        "u2-hidden-terminal-problem"
+      ],
+      "compareWith": [
+        "u2-hidden-terminal-problem"
+      ],
+      "primaryUses": [
+        "Wi-Fi MAC state machines, collision prevention, hidden terminal protection"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "RTS/CTS Duration Field",
+        "meaning": "Time value written into MAC control frames"
+      },
+      {
+        "concept": "Physical vs. Virtual Sensing",
+        "meaning": "RF energy measurement vs. contract reservation"
+      }
+    ],
+    "learningObjectives": [
+      "Define the Network Allocation Vector (NAV) and explain its virtual carrier-sensing role.",
+      "Explain the mathematical rules for updating the NAV countdown timer upon overhearing frames.",
+      "Contrast physical carrier sensing (CCA) with virtual carrier sensing (NAV) in a comparison table."
+    ]
   },
   "u2-ieee-802-11-frame-formats": {
     "id": "u2-ieee-802-11-frame-formats",
-    "title": "IEEE 802.11 Frame Formats",
-    "unit": "Unit 2 – Data Link Layer",
-    "unitId": "unit2",
+    "title": "IEEE 802.11 MAC Frame Formats & Addressing",
+    "unit": "Unit 2 - Data Link Layer",
     "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "IEEE 802.11 Section 9",
-    "oneLiner": "The 802.11 MAC frame layout: Frame Control, Duration/ID, 4 MAC addresses, Sequence Control, QoS, and FCS.",
-    "quickAnswer": "An 802.11 frame contains: (1) 2-byte Frame Control (Type, Subtype, ToDS, FromDS, Retry, Power Mgmt), (2) 2-byte Duration/ID (sets NAV), (3) Four 6-byte MAC Address fields (Receiver, Transmitter, Destination, Source), (4) 2-byte Sequence Control, (5) 0-2312 byte Payload, and (6) 4-byte CRC-32 FCS.",
-    "whyItMatters": "Having up to 4 MAC address fields allows frames to bridge seamlessly across wireless distribution systems between APs.",
-    "prerequisitesList": [
-      {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
-      },
-      {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
-      }
-    ],
-    "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
-    ],
-    "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
-      "prerequisites": [
-        "u2-dll-intro"
-      ],
-      "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
-      ],
-      "compareWith": [],
-      "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
-      ]
-    },
+    "standard": "IEEE 802.11 / Forouzan Ch. 14 / Section 9-11",
+    "oneLiner": "The 9 fields of the 802.11 MAC frame, 16-bit Frame Control breakdown, 3 frame categories, and the 4 address field interpretations.",
+    "quickAnswer": "The general IEEE 802.11 MAC frame comprises 9 fields: Frame Control (2B), Duration/ID (2B), Address 1 (6B), Address 2 (6B), Address 3 (6B), Sequence Control (2B), Address 4 (6B optional), Frame Body (0-2312B), and FCS (4B CRC-32). Frames are categorized into Management, Control, and Data frames, and utilize up to four 48-bit MAC addresses depending on To DS and From DS bits.",
+    "whyItMatters": "The 802.11 frame format is the most tested long-answer topic in university Computer Networks examinations, explaining how Wi-Fi handles multi-hop distribution bridging, power saving, and fragmentation.",
     "sections": {
-      "overview": "<table class=\"wiki-table\"><thead><tr><th>Field</th><th>Size (Bytes)</th><th>Purpose</th></tr></thead><tbody><tr><td>Frame Control</td><td>2</td><td>Protocol version, Type (Management, Control, Data), Subtype, ToDS, FromDS flags</td></tr><tr><td>Duration / ID</td><td>2</td><td>Airtime reservation duration in microseconds (sets overhearing stations' NAV)</td></tr><tr><td>Address 1</td><td>6</td><td>Receiver MAC address (the station or AP receiving the frame over air)</td></tr><tr><td>Address 2</td><td>6</td><td>Transmitter MAC address (the station or AP transmitting over air)</td></tr><tr><td>Address 3</td><td>6</td><td>Final destination or original source MAC address</td></tr><tr><td>Sequence Control</td><td>2</td><td>4-bit fragment number + 12-bit sequence number (for duplicate detection)</td></tr><tr><td>Address 4</td><td>6</td><td>Optional, used when frames travel wirelessly from AP to AP (WDS mesh)</td></tr><tr><td>FCS</td><td>4</td><td>32-bit CRC checksum</td></tr></tbody></table>",
-      "eli10": "In simple words: The 802.11 MAC frame layout: Frame Control, Duration/ID, 4 MAC addresses, Sequence Control, QoS, and FCS.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of IEEE 802.11 Frame Formats?<br><br><strong>Answer:</strong> An 802.11 frame contains: (1) 2-byte Frame Control (Type, Subtype, ToDS, FromDS, Retry, Power Mgmt), (2) 2-byte Duration/ID (sets NAV), (3) Four 6-byte MAC Address fields (Receiver, Transmitter, Destination, Source), (4) 2-byte Sequence Control, (5) 0-2312 byte Payload, and (6) 4-byte CRC-32 FCS.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
-      "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
-      ],
-      "quiz": [
+      "overview": "\n        <p>An <strong>IEEE 802.11 MAC frame</strong> is the fundamental unit of data transmission at the Data Link Layer in wireless local area networks. Unlike the simple 14-byte Ethernet header, an 802.11 header can span up to 34 bytes to support wireless bridging, virtual sensing, power management, and frame fragmentation.</p>\n\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">The Nine Fields of the General IEEE 802.11 MAC Frame</h3>\n        <ol class=\"wiki-ordered-list\">\n          <li><strong>Frame Control (2 Bytes / 16 Bits):</strong> Defines protocol version, frame type, subtype, and flags.</li>\n          <li><strong>Duration / ID (2 Bytes):</strong> Carries the NAV channel reservation duration (or Association ID in power-save frames).</li>\n          <li><strong>Address 1 (6 Bytes):</strong> Identifies the immediate physical receiver address (RA).</li>\n          <li><strong>Address 2 (6 Bytes):</strong> Identifies the immediate physical transmitter address (TA).</li>\n          <li><strong>Address 3 (6 Bytes):</strong> Identifies filtering or original source/destination address (BSSID, SA, or DA).</li>\n          <li><strong>Sequence Control (2 Bytes / 16 Bits):</strong> Divided into a 4-bit <em>Fragment Number</em> and a 12-bit <em>Sequence Number</em> (0 to 4095) for reassembly and duplicate filtering.</li>\n          <li><strong>Address 4 (6 Bytes, Optional):</strong> Used strictly in four-address wireless mesh / bridge links when both To DS = 1 and From DS = 1.</li>\n          <li><strong>Frame Body (Variable, 0 to 2312 Bytes):</strong> Carries the network-layer payload (IP packet) or management information.</li>\n          <li><strong>Frame Check Sequence (FCS - 4 Bytes / 32 Bits):</strong> Contains a standard CRC-32 checksum to detect bit errors.</li>\n        </ol>\n\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">The 16-Bit Frame Control Field Breakdown</h3>\n        <table class=\"wiki-table\">\n          <thead>\n            <tr><th>Subfield</th><th>Size</th><th>Function and Description</th></tr>\n          </thead>\n          <tbody>\n            <tr><td><strong>Protocol Version</strong></td><td>2 bits</td><td>Always set to <code>00</code> for current standard; future-proofs standard changes.</td></tr>\n            <tr><td><strong>Type</strong></td><td>2 bits</td><td>Identifies major category: <code>00</code> = Management, <code>01</code> = Control, <code>10</code> = Data.</td></tr>\n            <tr><td><strong>Subtype</strong></td><td>4 bits</td><td>Specifies exact frame: Beacon, Probe, RTS, CTS, ACK, Data, QoS Data.</td></tr>\n            <tr><td><strong>To DS</strong></td><td>1 bit</td><td>Set to 1 if frame is travelling <em>into</em> the wired Distribution System via an AP.</td></tr>\n            <tr><td><strong>From DS</strong></td><td>1 bit</td><td>Set to 1 if frame is emerging <em>out of</em> the Distribution System from an AP.</td></tr>\n            <tr><td><strong>More Frag</strong></td><td>1 bit</td><td>Set to 1 if additional fragments of this frame follow.</td></tr>\n            <tr><td><strong>Retry</strong></td><td>1 bit</td><td>Set to 1 if this frame is a retransmission of an unacknowledged frame.</td></tr>\n            <tr><td><strong>Power Mgmt</strong></td><td>1 bit</td><td>Indicates station power-management state: 0 = Active mode, 1 = Sleep mode.</td></tr>\n            <tr><td><strong>More Data</strong></td><td>1 bit</td><td>Informs sleeping stations that AP has additional buffered frames waiting.</td></tr>\n            <tr><td><strong>Protected Frame</strong></td><td>1 bit</td><td>Set to 1 if frame body is encrypted using WPA2 (AES-CCMP) or WPA3 (GCMP).</td></tr>\n            <tr><td><strong>Order</strong></td><td>1 bit</td><td>Set to 1 if strictly ordered frame delivery is required.</td></tr>\n          </tbody>\n        </table>\n\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Three Major IEEE 802.11 Frame Categories (Section 10)</h3>\n        <ul class=\"wiki-bullet-list\">\n          <li><strong>Management Frames (Type 00):</strong> Establish and maintain wireless association: Beacon, Probe Request, Probe Response, Authentication, Deauthentication, Association Request, Association Response, Reassociation Request, Disassociation.</li>\n          <li><strong>Control Frames (Type 01):</strong> Coordinate medium access and reliability: RTS, CTS, ACK, PS-Poll, Block ACK, Block ACK Request, CF-End. (Important exam point: RTS, CTS, and ACK are control frames, NOT management frames!).</li>\n          <li><strong>Data Frames (Type 10):</strong> Transport upper-layer user data: Normal Data, QoS Data, Null Data (used for power-save keep-alives).</li>\n        </ul>\n\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">The Four Address Fields &amp; To DS / From DS Mapping</h3>\n        <table class=\"wiki-table\">\n          <thead>\n            <tr><th>To DS</th><th>From DS</th><th>Address 1 (RA)</th><th>Address 2 (TA)</th><th>Address 3</th><th>Address 4</th><th>Meaning and Context</th></tr>\n          </thead>\n          <tbody>\n            <tr><td><strong>0</strong></td><td><strong>0</strong></td><td>DA (Destination)</td><td>SA (Source)</td><td>BSSID (AP MAC)</td><td>Not Used</td><td>Direct communication within an Ad Hoc BSS or local cell.</td></tr>\n            <tr><td><strong>1</strong></td><td><strong>0</strong></td><td>BSSID (AP MAC)</td><td>SA (Source)</td><td>DA (Destination)</td><td>Not Used</td><td>Station transmitting uplink frame <em>into</em> the Distribution System.</td></tr>\n            <tr><td><strong>0</strong></td><td><strong>1</strong></td><td>DA (Destination)</td><td>BSSID (AP MAC)</td><td>SA (Source)</td><td>Not Used</td><td>AP transmitting downlink frame <em>out of</em> the Distribution System to a station.</td></tr>\n            <tr><td><strong>1</strong></td><td><strong>1</strong></td><td>RA (Receiver AP)</td><td>TA (Transmitter AP)</td><td>DA (Destination)</td><td>SA (Source)</td><td>Wireless Distribution System (WDS) bridging two APs together across a wireless link.</td></tr>\n          </tbody>\n        </table>\n      ",
+      "howItWorks": "\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Sequence Control Field Subfield Breakdown</h3>\n        <p>The 2-byte (16-bit) Sequence Control field provides fragmentation and duplicate detection:</p>\n        <div class=\"grid grid-cols-2 gap-3 text-center font-mono text-xs my-2\">\n          <div class=\"p-2 bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 rounded\">\n            <strong>Fragment Number (4 bits):</strong> Values 0 to 15. Tracks fragments of a single frame.\n          </div>\n          <div class=\"p-2 bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 rounded\">\n            <strong>Sequence Number (12 bits):</strong> Values 0 to 4095. Incremented for each new MSDU.\n          </div>\n        </div>\n      ",
+      "technicalDetails": "\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 text-xs font-mono\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Exam Memory Aid:</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\">Address 1 is ALWAYS the Receiver Address (RA) that must immediately acknowledge the frame!</p>\n        </div>\n      ",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/WLAN_overview.svg/800px-WLAN_overview.svg.png",
+      "imageCaption": "Figure 14.17: Complete structure and field sizes of the IEEE 802.11 MAC Data Frame.",
+      "workedExamples": [
         {
-          "question": "What is the primary function of IEEE 802.11 Frame Formats?",
-          "options": [
-            "An 802.11 frame contains: (1) 2-byte Frame Control (Type, Su...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
-          ],
-          "correct": 0,
-          "explanation": "The primary role is: An 802.11 frame contains: (1) 2-byte Frame Control (Type, Subtype, ToDS, FromDS, Retry, Power Mgmt), (2) 2-byte Duration/ID (sets NAV), (3) Four 6-byte MAC Address fields (Receiver, Transmitter, Destination, Source), (4) 2-byte Sequence Control, (5) 0-2312 byte Payload, and (6) 4-byte CRC-32 FCS."
+          "title": "Worked Example 1: Address Mapping for a Station Uploading to Internet Server",
+          "difficulty": "Medium",
+          "problem": "A laptop with MAC address AA:AA:AA:AA:AA:AA connects to Access Point with BSSID BB:BB:BB:BB:BB:BB to send a packet to default gateway router with MAC address CC:CC:CC:CC:CC:CC across the Distribution System. Identify the values of To DS, From DS, Address 1, Address 2, Address 3, and Address 4.",
+          "solution": "\n            <p><strong>Step 1: Determine Direction:</strong></p>\n            <p>The frame is travelling from a wireless client into the Distribution System (uplink). Therefore, $\\text{To DS} = 1$ and $\\text{From DS} = 0$.</p>\n            <p><strong>Step 2: Assign Address Fields based on Table:</strong></p>\n            <ul class=\"list-disc pl-4 space-y-1\">\n              <li><strong>Address 1 (RA / BSSID):</strong> BB:BB:BB:BB:BB:BB (The Access Point's radio).</li>\n              <li><strong>Address 2 (TA / SA):</strong> AA:AA:AA:AA:AA:AA (The transmitting Laptop).</li>\n              <li><strong>Address 3 (DA):</strong> CC:CC:CC:CC:CC:CC (The destination default gateway router).</li>\n              <li><strong>Address 4:</strong> Not used (0 bytes).</li>\n            </ul>\n          "
         }
+      ],
+      "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Summary:</strong> Flexible 4-address format enables complex mesh bridging and multi-BSS campus roaming.</p>\n        </div>\n      ",
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/53/802.11_MAC_Frame.svg",
-      "imageCaption": "Figure: IEEE 802.11 MAC Frame Structure: Frame Control, Duration/ID, 4 MAC Addresses, Sequence Control, FCS."
+      ]
     },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/53/802.11_MAC_Frame.svg",
-    "imageCaption": "Figure: IEEE 802.11 MAC Frame Structure: Frame Control, Duration/ID, 4 MAC Addresses, Sequence Control, FCS."
+    "infobox": {
+      "layer": "Layer 2 (MAC Frame Structure & Addressing)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Data Link Frame Specification",
+      "prerequisites": [
+        "wifi-mac-sublayer",
+        "u2-ethernet-frame-format"
+      ],
+      "relatedConcepts": [
+        "u2-ieee-802-11-architecture",
+        "u2-rts-cts-mechanism"
+      ],
+      "compareWith": [
+        "u2-ethernet-frame-format"
+      ],
+      "primaryUses": [
+        "Wireshark 802.11 packet capture analysis, wireless router firmware, bridge routing"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "MAC Frame Structure",
+        "meaning": "Headers, addressing, payloads, and CRC checksums"
+      },
+      {
+        "concept": "Distribution System Routing",
+        "meaning": "Bridging frames between wireless stations and wired LANs"
+      }
+    ],
+    "learningObjectives": [
+      "Identify and explain all 9 fields of the general IEEE 802.11 MAC frame.",
+      "Detail the 11 subfields within the 16-bit Frame Control field.",
+      "Master the interpretation of the 4 address fields based on the To DS and From DS bits."
+    ]
   },
   "u2-dcf-vs-pcf": {
     "id": "u2-dcf-vs-pcf",
-    "title": "DCF vs PCF",
-    "unit": "Unit 2 – Data Link Layer",
-    "unitId": "unit2",
+    "title": "Comparison of DCF and PCF",
+    "unit": "Unit 2 - Data Link Layer",
     "level": "Intermediate",
-    "category": "datalink",
-    "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "IEEE 802.11",
-    "oneLiner": "Contrasting distributed contention CSMA/CA with centralized contention-free AP polling.",
-    "quickAnswer": "DCF is distributed, contention-based, best-effort, uses DIFS/SIFS, and is supported by all Wi-Fi devices. PCF is centralized, contention-free, deterministic, coordinated by the AP using PIFS polling, but rarely implemented in commercial consumer hardware.",
-    "whyItMatters": "Helps students understand why modern Wi-Fi evolved 802.11e EDCA rather than relying on legacy PCF.",
-    "prerequisitesList": [
-      {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
-      },
-      {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
-      }
-    ],
-    "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
-    ],
-    "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
-      "prerequisites": [
-        "u2-dll-intro"
-      ],
-      "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
-      ],
-      "compareWith": [],
-      "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
-      ]
-    },
+    "standard": "IEEE 802.11 / Forouzan Ch. 14 / Section 8.6",
+    "oneLiner": "Master comparative analysis of Distributed Coordination Function (DCF) vs. Point Coordination Function (PCF).",
+    "quickAnswer": "DCF is a mandatory, decentralized, contention-based protocol using CSMA/CA and DIFS for best-effort asynchronous data across both Ad Hoc and Infrastructure networks. PCF is an optional, centralized, contention-free protocol using AP polling and PIFS for delay-bounded real-time streaming strictly within Infrastructure networks.",
+    "whyItMatters": "This comprehensive comparison is a staple 5-to-8-mark question in university examinations and competitive tests (GATE/ISRO), testing fundamental understanding of wireless medium access control.",
     "sections": {
-      "overview": "<table class=\"wiki-table\"><thead><tr><th>Feature</th><th>Distributed Coordination Function (DCF)</th><th>Point Coordination Function (PCF)</th></tr></thead><tbody><tr><td><strong>Coordination Mode</strong></td><td>Decentralized, all stations equal</td><td>Centralized, AP coordinates</td></tr><tr><td><strong>Medium Access</strong></td><td>Contention-based (CSMA/CA)</td><td>Contention-free (Polling)</td></tr><tr><td><strong>Interframe Space</strong></td><td>DIFS / SIFS</td><td>PIFS / SIFS</td></tr><tr><td><strong>Implementation</strong></td><td>Mandatory in all 802.11 devices</td><td>Optional, rarely used</td></tr><tr><td><strong>Traffic Supported</strong></td><td>Best-effort asynchronous data</td><td>Time-sensitive voice / streaming</td></tr></tbody></table>",
-      "eli10": "In simple words: Contrasting distributed contention CSMA/CA with centralized contention-free AP polling.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of DCF vs PCF?<br><br><strong>Answer:</strong> DCF is distributed, contention-based, best-effort, uses DIFS/SIFS, and is supported by all Wi-Fi devices. PCF is centralized, contention-free, deterministic, coordinated by the AP using PIFS polling, but rarely implemented in commercial consumer hardware.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
-      "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
-      ],
-      "quiz": [
+      "overview": "\n        <p>The IEEE 802.11 MAC sublayer is built on an architectural duality that supports both competitive decentralized traffic and controlled centralized traffic:</p>\n        \n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Master Comparison Table: DCF vs. PCF</h3>\n        <table class=\"wiki-table\">\n          <thead>\n            <tr><th>Comparison Parameter</th><th>Distributed Coordination Function (DCF)</th><th>Point Coordination Function (PCF)</th></tr>\n          </thead>\n          <tbody>\n            <tr><td><strong>Status in 802.11 Standard</strong></td><td><strong>Mandatory</strong> for all compliant devices.</td><td><strong>Optional;</strong> rarely implemented in commercial Wi-Fi.</td></tr>\n            <tr><td><strong>Coordination Philosophy</strong></td><td>Decentralized; fully distributed peer access.</td><td>Centralized; master-slave polling architecture.</td></tr>\n            <tr><td><strong>Central Controller</strong></td><td>No central controller required.</td><td>Access Point acts as the <strong>Point Coordinator (PC)</strong>.</td></tr>\n            <tr><td><strong>Channel Access Mechanism</strong></td><td><strong>CSMA/CA</strong> with random backoff and positive ACKs.</td><td><strong>Sequential Polling:</strong> AP polls stations one-by-one.</td></tr>\n            <tr><td><strong>Interframe Space (IFS)</strong></td><td><strong>DIFS</strong> ($SIFS + 2 \\times SlotTime$).</td><td><strong>PIFS</strong> ($SIFS + 1 \\times SlotTime$, shorter than DIFS).</td></tr>\n            <tr><td><strong>Channel Access Priority</strong></td><td>Lower priority (longer waiting time).</td><td>Higher priority (shorter waiting time preempts DCF).</td></tr>\n            <tr><td><strong>Collision Possibility</strong></td><td>Collisions can occur during simultaneous backoff expiry.</td><td><strong>Zero collisions</strong> during the Contention-Free Period.</td></tr>\n            <tr><td><strong>Network Topology Supported</strong></td><td>Both <strong>Ad Hoc (IBSS)</strong> and <strong>Infrastructure</strong>.</td><td>Strictly <strong>Infrastructure mode</strong> with an AP.</td></tr>\n            <tr><td><strong>Operating Period</strong></td><td>Operates during the <strong>Contention Period (CP)</strong>.</td><td>Operates during the <strong>Contention-Free Period (CFP)</strong>.</td></tr>\n            <tr><td><strong>Target Traffic Class</strong></td><td>Asynchronous best-effort data (web, FTP, email).</td><td>Time-bounded, delay-sensitive streaming (VoIP, video).</td></tr>\n            <tr><td><strong>Implementation Complexity</strong></td><td>Moderate; standardized state machine.</td><td>High; requires polling queues and AP scheduling.</td></tr>\n            <tr><td><strong>Modern Evolution</strong></td><td>Enhanced in 802.11e as <strong>EDCA</strong> (4 QoS queues).</td><td>Replaced in 802.11e/ax by <strong>HCCA</strong> and <strong>OFDMA</strong>.</td></tr>\n          </tbody>\n        </table>\n      ",
+      "howItWorks": "\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Summary of Key Differences for Quick Exam Revision</h3>\n        <ol class=\"wiki-ordered-list text-xs space-y-1\">\n          <li><strong>Access Type:</strong> DCF is contention-based; PCF is contention-free.</li>\n          <li><strong>Control:</strong> DCF is distributed; PCF is centralized.</li>\n          <li><strong>IFS Used:</strong> DCF uses DIFS; PCF uses PIFS.</li>\n          <li><strong>Priority:</strong> PCF has higher priority because PIFS is shorter than DIFS.</li>\n          <li><strong>Collisions:</strong> DCF attempts to avoid collisions; PCF completely eliminates collisions during CFP.</li>\n          <li><strong>Ad Hoc Support:</strong> DCF works in Ad Hoc; PCF does not.</li>\n        </ol>\n      ",
+      "technicalDetails": "\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 text-xs\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Exam Memory Mnemonic:</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>D</strong>CF = <strong>D</strong>istributed &amp; <strong>D</strong>IFS. <strong>P</strong>CF = <strong>P</strong>olling &amp; <strong>P</strong>IFS.</p>\n        </div>\n      ",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/802.11_DCF_PCF.svg/800px-802.11_DCF_PCF.svg.png",
+      "imageCaption": "Figure 14.18: Master comparison between contention-based DCF and centralized contention-free PCF.",
+      "workedExamples": [
         {
-          "question": "What is the primary function of DCF vs PCF?",
-          "options": [
-            "DCF is distributed, contention-based, best-effort, uses DIFS...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
-          ],
-          "correct": 0,
-          "explanation": "The primary role is: DCF is distributed, contention-based, best-effort, uses DIFS/SIFS, and is supported by all Wi-Fi devices. PCF is centralized, contention-free, deterministic, coordinated by the AP using PIFS polling, but rarely implemented in commercial consumer hardware."
+          "title": "Worked Example 1: Bounded Delay Calculation in PCF vs DCF",
+          "difficulty": "Easy",
+          "problem": "An Access Point running PCF has 10 registered VoIP stations. Each polling transaction takes 200 microseconds. What is the maximum guaranteed delay before a station is polled again if CFP lasts 2 milliseconds?",
+          "solution": "\n            <p><strong>Step 1: Calculate Total Polling Round Time:</strong></p>\n            <p>$$T_{\\text{round}} = 10 \\times 200\\,\\mu\\text{s} = 2000\\,\\mu\\text{s} = 2.0\\text{ ms}$$</p>\n            <p><strong>Conclusion:</strong> Every station is guaranteed to be polled once every 2.0 milliseconds. In DCF, random backoff and collisions make delay non-deterministic and potentially unbounded under heavy load.</p>\n          "
         }
+      ],
+      "advantagesLimitations": "\n        <div class=\"space-y-1 text-xs\">\n          <p><strong>Summary:</strong> DCF provides robust fairness; PCF guarantees bounded latency for time-sensitive traffic.</p>\n        </div>\n      ",
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Csma_ca.svg",
-      "imageCaption": "Figure: Comparison of DCF (Distributed Contention) vs. PCF (Centralized Polling)."
+      ]
     },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Csma_ca.svg",
-    "imageCaption": "Figure: Comparison of DCF (Distributed Contention) vs. PCF (Centralized Polling)."
+    "infobox": {
+      "layer": "Layer 2 (MAC Coordination Comparison)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Comparative Architectural Analysis",
+      "prerequisites": [
+        "u2-ieee-802-11-dcf",
+        "u2-ieee-802-11-pcf"
+      ],
+      "relatedConcepts": [
+        "u2-ieee-802-11-architecture",
+        "u2-wireless-lan-access-methods"
+      ],
+      "compareWith": [
+        "u2-wireless-lan-access-methods"
+      ],
+      "primaryUses": [
+        "Academic examinations, GATE preparation, Wi-Fi QoS architecture evaluation"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Distributed Coordination Function",
+        "meaning": "Contention CSMA/CA access"
+      },
+      {
+        "concept": "Point Coordination Function",
+        "meaning": "Centralized contention-free polling access"
+      }
+    ],
+    "learningObjectives": [
+      "Compare DCF and PCF across 12 comprehensive architectural and performance parameters.",
+      "Analyze why DCF is mandatory and works in Ad Hoc, while PCF is optional and requires an AP.",
+      "Understand the modern evolution of DCF and PCF into 802.11e EDCA and Wi-Fi 6 OFDMA."
+    ]
   },
   "u2-bridges-overview": {
     "id": "u2-bridges-overview",
-    "title": "Bridges in Data Link Layer",
+    "title": "Bridges",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "level": "Intermediate",
-    "category": "datalink",
+    "level": "Beginner",
+    "category": "switching",
     "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "IEEE 802.1D / Tanenbaum Ch. 4.7",
-    "oneLiner": "Store-and-forward Layer 2 devices interconnecting separate LAN segments to isolate collision domains.",
-    "quickAnswer": "A bridge is a Layer 2 networking device that connects multiple LAN segments. It inspects incoming frames' MAC addresses, operates in store-and-forward mode, regenerates clean signals, and separates collision domains while maintaining a single shared broadcast domain.",
-    "whyItMatters": "Bridges replaced simple Layer 1 repeaters, ending the physical distance and station limits of early shared Ethernet.",
+    "readingTime": "20–25 min",
+    "standard": "Forouzan Ch. 15 / IEEE 802.1D",
+    "oneLiner": "A Layer 2 networking device that connects two or more LAN segments and forwards frames based on MAC addresses.",
+    "quickAnswer": "A bridge is a networking device that connects two or more LAN segments and forwards frames between them at the Data Link Layer (Layer 2). Bridges inspect incoming frame MAC addresses to filter local segment traffic, forward inter-segment traffic, dynamically learn device locations, and divide a large shared network into smaller, more efficient collision domains.",
+    "whyItMatters": "Bridges were the historic foundation of switched internetworking. By breaking large broadcast buses into separate collision domains, bridges prevented signal degradation, increased network diameter, and introduced the self-learning filtering paradigm that powers all modern Ethernet switches.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "LAN Segment",
+        "meaning": "A physical division of a local network sharing common electrical media"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Frame Filtering",
+        "meaning": "Preventing local frames from crossing unnecessarily into other segments"
+      },
+      {
+        "concept": "MAC Learning",
+        "meaning": "Automatic discovery of station locations from frame source addresses"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define a bridge and state its operating OSI layer.",
+      "Enumerate the 5 key functions of a network bridge.",
+      "Explain the 5 sequential steps a bridge executes upon frame reception.",
+      "Evaluate the advantages and historical limitations of legacy bridges."
     ],
     "infobox": {
       "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "standard": "IEEE 802.1D",
+      "type": "Bridging & LAN Interconnection",
       "prerequisites": [
-        "u2-dll-intro"
+        "dll-switching",
+        "ethernet-mac-sublayer"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "transparent-bridges",
+        "learning-bridges",
+        "forwarding-filtering",
+        "switches"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "repeaters",
+        "routers",
+        "hubs"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Connecting legacy coaxial Ethernet segments, interconnecting different physical layers, traffic isolation"
       ]
     },
+    "imageUrl": "https://images.openai.com/static-rsc-4/DuZgVF38ZhvT4v7VlqkCCNghRLqWgHGpmrv7afju_iSiEiIkBP_F-anNjzqKZhdkpxk3Aydz1fD2vhW39S10hs2rVyZWI57SVXePprIux8iEKeYwNoGqVrrbRKJz4r5L5N8o9CTUsVy_l7jQhCCHgfNqNaBP5Zes2MtwaPdAB4d1q6lRd2yT8ATAXeJlcwGR?purpose=fullsize",
+    "imageCaption": "Figure: Network Bridge Architecture: LAN Segmentation & Inter-Segment Filtering at Layer 2.",
     "sections": {
-      "overview": "<p>A bridge inspects the destination MAC address of incoming frames and selectively forwards them only to the segment where the destination host resides, preventing local traffic from clogging remote segments.</p>",
-      "eli10": "In simple words: Store-and-forward Layer 2 devices interconnecting separate LAN segments to isolate collision domains.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Bridges in Data Link Layer?<br><br><strong>Answer:</strong> A bridge is a Layer 2 networking device that connects multiple LAN segments. It inspects incoming frames' MAC addresses, operates in store-and-forward mode, regenerates clean signals, and separates collision domains while maintaining a single shared broadcast domain.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "overview": "\n      <p class=\"lead\">A <strong>bridge</strong> is a networking device that operates at the <strong>Data Link Layer (Layer 2)</strong> of the OSI model, connecting two or more distinct LAN segments and intelligently forwarding data frames between them based on physical MAC addresses.</p>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">The 5 Core Functions of a Bridge</h4>\n      <p class=\"text-xs\">As detailed in authoritative curricula (Forouzan & Tanenbaum), a network bridge performs five essential functions:</p>\n      <ul class=\"list-disc pl-5 space-y-1.5 text-xs\">\n        <li><strong>1. Frame Forwarding:</strong> Examines the destination MAC address and transmits frames to the appropriate target network segment.</li>\n        <li><strong>2. Frame Filtering:</strong> Prevents frames whose destination is on the local segment from unnecessarily crossing into other segments.</li>\n        <li><strong>3. MAC Address Learning:</strong> Inspects incoming source addresses to dynamically learn which stations reside on which segment without manual intervention.</li>\n        <li><strong>4. Traffic Reduction:</strong> Confines intra-segment traffic locally, drastically reducing congestion on neighboring network segments.</li>\n        <li><strong>5. Network Segmentation:</strong> Divides a single large collision domain into multiple smaller, independent collision domains.</li>\n      </ul>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Step-by-Step Working of a Bridge</h4>\n      <p class=\"text-xs\">Whenever a bridge receives a frame on any interface, it executes the following five operational steps:</p>\n      <ol class=\"list-decimal pl-5 space-y-1 text-xs\">\n        <li><strong>Receives the frame</strong> from the physical layer of the incoming segment.</li>\n        <li><strong>Reads both source and destination MAC addresses</strong> from the Layer 2 header.</li>\n        <li><strong>Learns the source MAC address</strong> and records its association with the arrival port in its internal forwarding table.</li>\n        <li><strong>Checks its forwarding table</strong> to determine the port corresponding to the destination MAC address.</li>\n        <li><strong>Executes decision:</strong> Forwards the frame to the destination port, filters (drops) it if destination is on the incoming segment, or floods it if destination is unknown.</li>\n      </ol>\n    ",
+      "eli10": "A bridge is like a security guard standing between two rooms. If two people inside Room 1 talk to each other, the guard keeps the door shut (filtering). If someone in Room 1 wants to talk to someone in Room 2, the guard opens the door and lets them pass (forwarding).",
+      "analogy": "A bridge works like a toll booth connecting two islands. It checks where each car is going. If a car is simply driving to a store on Island 1, it doesn't cross the bridge. If it is traveling to Island 2, it is permitted across.",
+      "howItWorks": "\n      <p class=\"text-xs leading-relaxed\">Unlike a physical repeater or hub which blindly repeats raw electrical bits across all connected wires, a bridge is an intelligent store-and-forward processor:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li>It completely receives and reassembles the frame into local buffer RAM.</li>\n        <li>It computes the CRC-32 Frame Check Sequence. If the frame contains errors, it is dropped immediately, protecting other segments from noise.</li>\n        <li>It separates collision domains. A collision occurring on Segment 1 does not affect or propagate to Segment 2.</li>\n        <li>However, it maintains a <strong>single broadcast domain</strong>: all broadcast frames (e.g., ARP requests) are flooded across all segments.</li>\n      </ul>\n    ",
+      "technicalDetails": "\n      <p class=\"text-xs leading-relaxed\">Bridge performance and characteristics:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li><strong>Forwarding Delay:</strong> Because bridges use store-and-forward processing in software, forwarding introduces modest latency ($T_{\\text{bridge}} \\approx 50\\text{--}150\\;\\mu\\text{s}$).</li>\n        <li><strong>Protocol Independence:</strong> Bridges are transparent to Layer 3 protocols. They seamlessly forward IPv4, IPv6, ARP, IPX, and AppleTalk frames without understanding network layer headers.</li>\n        <li><strong>Loop Susceptibility:</strong> If network engineers install multiple bridges in a ring to provide fault tolerance, loops will cause broadcast storms unless IEEE 802.1D Spanning Tree Protocol is enabled.</li>\n      </ul>\n    ",
+      "workedExamples": [
+        {
+          "title": "Example: Inter-Segment vs. Intra-Segment Traffic",
+          "difficulty": "Beginner",
+          "problem": "Bridge B connects Segment 1 (Stations A and B) and Segment 2 (Stations C and D). Station A sends a frame to Station B. Station C sends a frame to Station A. Describe the bridge's action for both frames.",
+          "solution": "1. For Frame 1 (A -> B): The bridge receives the frame on Port 1. Source A is recorded on Port 1. Destination B is also on Port 1. The bridge FILTERS (drops) the frame from crossing to Segment 2. Segment 2 remains quiet.\n2. For Frame 2 (C -> A): The bridge receives the frame on Port 2. Source C is recorded on Port 2. Destination A is on Port 1. The bridge FORWARDS the frame out Port 1 onto Segment 1."
+        }
+      ],
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Key Advantages</th><th>Key Disadvantages</th></tr></thead>\n        <tbody>\n          <tr><td>Reduces unnecessary network congestion between segments.</td><td>Generally limited to fewer ports (2–4 ports) compared to modern switches.</td></tr>\n          <tr><td>Isolates collision domains, increasing effective bandwidth per segment.</td><td>Store-and-forward architecture introduces forwarding delay.</td></tr>\n          <tr><td>Connects heterogeneous LAN segments (e.g., 10BASE5 coax to 10BASE-T twisted pair).</td><td>Requires loop-prevention protocols (STP) to avoid broadcast storms in redundant designs.</td></tr>\n          <tr><td>Learns device locations dynamically without manual configuration.</td><td>Does not route traffic between different IP subnetworks (Layer 3 routing required).</td></tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Industrial Ethernet: Connecting isolated machinery segments with different electrical grounding.",
+        "Wireless Bridges: Outdoor point-to-point links connecting two separate school or corporate buildings.",
+        "Virtualization: Linux Kernel bridging (`brctl` / `bridge-utils`) connecting VM TAP interfaces to physical NICs."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Bridges in Data Link Layer?",
+          "question": "Which of the following is NOT a function of a Data Link Layer bridge?",
           "options": [
-            "A bridge is a Layer 2 networking device that connects multip...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "Frame filtering",
+            "MAC address learning",
+            "IP packet routing",
+            "Collision domain separation"
           ],
-          "correct": 0,
-          "explanation": "The primary role is: A bridge is a Layer 2 networking device that connects multiple LAN segments. It inspects incoming frames' MAC addresses, operates in store-and-forward mode, regenerates clean signals, and separates collision domains while maintaining a single shared broadcast domain."
+          "correct": 2,
+          "explanation": "IP packet routing is performed at Layer 3 (Network Layer) by routers, not Layer 2 bridges."
+        },
+        {
+          "question": "What happens when a bridge receives a frame whose destination is on the same segment as the sender?",
+          "options": [
+            "It forwards the frame to all other segments",
+            "It filters (discards) the frame from crossing the bridge",
+            "It sends an error message to the sender",
+            "It broadcasts the frame to the internet"
+          ],
+          "correct": 1,
+          "explanation": "The bridge filters the frame because the destination has already received it directly over the local physical segment."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 15.1: Bridges.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "William Stallings, Data and Computer Communications, 10th Edition, Chapter 15: Local Area Networks.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
-      "imageCaption": "Figure: Network Bridges: Interconnecting Multiple LAN Segments at Layer 2."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
-    "imageCaption": "Figure: Network Bridges: Interconnecting Multiple LAN Segments at Layer 2."
+      ]
+    }
   },
   "u2-transparent-bridges": {
     "id": "u2-transparent-bridges",
@@ -4897,89 +5123,100 @@ var TOPICS_U2_SYLLABUS = {
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
     "level": "Intermediate",
-    "category": "datalink",
+    "category": "switching",
     "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "IEEE 802.1D",
-    "oneLiner": "Plug-and-play bridges that operate completely invisibly without requiring station configuration.",
-    "quickAnswer": "A transparent bridge is entirely invisible to connected stations. Computers simply send frames as if on a single giant cable, completely unaware that bridges are inspecting, filtering, and forwarding their packets. Defined by IEEE 802.1D with plug-and-play installation.",
-    "whyItMatters": "Transparent operation made LAN expansion zero-configuration, accelerating Ethernet adoption across corporations.",
+    "readingTime": "20–25 min",
+    "standard": "IEEE 802.1D / Forouzan Ch. 15",
+    "oneLiner": "A bridge that automatically learns device locations and forwards frames without connected stations knowing the bridge exists.",
+    "quickAnswer": "A transparent bridge is an IEEE 802.1D standard bridge that forwards and filters Ethernet frames completely invisibly to end stations. Stations send frames as if they were on a single shared cable, requiring zero hardware modifications or network configuration. Transparent bridges achieve this autonomy through three concurrent operations: dynamic learning, selective forwarding, and local filtering.",
+    "whyItMatters": "Transparent bridging made Ethernet's exponential scaling possible. When network administrators added bridges or replaced hubs with switches, existing computers, servers, and software continued operating without a reboot or reconfiguration, establishing true plug-and-play local networking.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "Transparency in Networking",
+        "meaning": "A device or protocol operating completely undetected by end hosts"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Forwarding Table",
+        "meaning": "Dynamic database mapping MAC addresses to bridge port interfaces"
+      },
+      {
+        "concept": "IEEE 802.1D",
+        "meaning": "The international standard defining MAC bridges and transparent operation"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define a transparent bridge and explain why it is called 'transparent'.",
+      "Identify the 6 core characteristics of an IEEE 802.1D transparent bridge.",
+      "Explain the three fundamental operations: Learning, Forwarding, and Filtering.",
+      "Describe how transparent bridges prevent operational disruption during host mobility."
     ],
     "infobox": {
       "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "standard": "IEEE 802.1D",
+      "type": "Transparent Bridging",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-bridges-overview",
+        "mac-address"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "learning-bridges",
+        "forwarding-and-filtering",
+        "spanning-tree-protocol"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "source-routing-bridges",
+        "transparent-firewalls"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Standard Ethernet LANs, IEEE 802.3 networks, plug-and-play switch interconnects"
       ]
     },
+    "imageUrl": "https://images.openai.com/static-rsc-4/DuZgVF38ZhvT4v7VlqkCCNghRLqWgHGpmrv7afju_iSiEiIkBP_F-anNjzqKZhdkpxk3Aydz1fD2vhW39S10hs2rVyZWI57SVXePprIux8iEKeYwNoGqVrrbRKJz4r5L5N8o9CTUsVy_l7jQhCCHgfNqNaBP5Zes2MtwaPdAB4d1q6lRd2yT8ATAXeJlcwGR?purpose=fullsize",
+    "imageCaption": "Figure: Transparent Bridge Operation: Automatic Self-Learning and Plug-and-Play Transparency.",
     "sections": {
-      "overview": "<p>When an admin connects a transparent bridge into an existing network, no host reconfiguration, IP changes, or software updates are required. It immediately begins learning and filtering.</p>",
-      "eli10": "In simple words: Plug-and-play bridges that operate completely invisibly without requiring station configuration.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Transparent Bridges?<br><br><strong>Answer:</strong> A transparent bridge is entirely invisible to connected stations. Computers simply send frames as if on a single giant cable, completely unaware that bridges are inspecting, filtering, and forwarding their packets. Defined by IEEE 802.1D with plug-and-play installation.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "overview": "\n      <p class=\"lead\">A <strong>transparent bridge</strong> is a bridge that automatically learns the physical locations of all active devices and forwards frames across segments without requiring connected computers to have any awareness of the bridge's presence.</p>\n\n      <p>The term <strong>\"transparent\"</strong> signifies that stations communicate exactly as if they were sharing a single uninterrupted cable. Stations do not format frames differently, do not specify bridge intermediate hops, and require zero special driver or protocol configurations. You can insert or remove a transparent bridge from a live network without reconfiguring any host!</p>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Core Characteristics of Transparent Bridges</h4>\n      <ul class=\"list-disc pl-5 space-y-1.5 text-xs\">\n        <li><strong>Layer 2 Operation:</strong> Operates strictly at the Data Link Layer, completely oblivious to higher-layer protocols (IP, IPX, TCP, UDP).</li>\n        <li><strong>MAC-Based Decision:</strong> Uses 48-bit hardware MAC addresses for all forwarding and filtering decisions.</li>\n        <li><strong>Automatic Location Learning:</strong> Inspects the source MAC of incoming frames to autonomously construct and refresh its forwarding database.</li>\n        <li><strong>Dynamic Forwarding Table:</strong> Maintains an internal database of MAC addresses, port mappings, and timestamps.</li>\n        <li><strong>Destination-Based Delivery:</strong> Delivers frames selectively to the appropriate port when destination location is known.</li>\n        <li><strong>STP Compatibility:</strong> Integrates the IEEE 802.1D Spanning Tree Protocol to eliminate fatal forwarding loops in redundant network topologies.</li>\n      </ul>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">The Three Pillars of Transparent Bridge Operation</h4>\n      <div class=\"grid grid-cols-1 md:grid-cols-3 gap-3 my-3 text-xs\">\n        <div class=\"p-3 rounded-lg bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800\">\n          <strong class=\"text-blue-800 dark:text-blue-300 block mb-1\"><i class=\"fa-solid fa-graduation-cap\"></i> 1. Learning</strong>\n          <p class=\"text-[11px] text-slate-600 dark:text-slate-400\">Observes the source MAC address of every arriving frame and records its incoming port to know where stations reside.</p>\n        </div>\n        <div class=\"p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800\">\n          <strong class=\"text-emerald-800 dark:text-emerald-300 block mb-1\"><i class=\"fa-solid fa-arrow-right\"></i> 2. Forwarding</strong>\n          <p class=\"text-[11px] text-slate-600 dark:text-slate-400\">Directs frames destined for a station on another port out through that specific port only.</p>\n        </div>\n        <div class=\"p-3 rounded-lg bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800\">\n          <strong class=\"text-amber-800 dark:text-amber-300 block mb-1\"><i class=\"fa-solid fa-filter\"></i> 3. Filtering</strong>\n          <p class=\"text-[11px] text-slate-600 dark:text-slate-400\">Discards frames whose destination is located on the same segment as the sender to keep external segments silent.</p>\n        </div>\n      </div>\n    ",
+      "eli10": "Transparent means invisible. It's like an invisible magic wall that catches tennis balls hit to someone on your side of the net, but lets balls hit to the other side fly right through — without players ever knowing the magic wall is there.",
+      "analogy": "Like a transparent glass revolving door in an office building: visitors walk in and out naturally without changing how they walk or having to know how the door's automatic sensors work.",
+      "howItWorks": "\n      <p class=\"text-xs leading-relaxed\">The transparent bridge constantly executes an event-driven loop on every arriving frame:</p>\n      <ol class=\"list-decimal pl-5 space-y-1 text-xs\">\n        <li>A frame is picked up from an interface port.</li>\n        <li>The bridge extracts the <strong>Source MAC</strong>. If not present in the table, it adds an entry <code>(Source MAC, Port, Timestamp)</code>. If already present, it refreshes the timestamp.</li>\n        <li>The bridge extracts the <strong>Destination MAC</strong>.\n          <ul class=\"list-disc pl-5 mt-1\">\n            <li>If destination matches a broadcast/multicast address &rarr; Flood.</li>\n            <li>If destination is in table with <em>different port</em> &rarr; Forward out that port.</li>\n            <li>If destination is in table with <em>same port</em> &rarr; Filter (discard).</li>\n            <li>If destination is not in table &rarr; Flood out all ports except arrival port.</li>\n          </ul>\n        </li>\n      </ol>\n    ",
+      "technicalDetails": "\n      <p class=\"text-xs leading-relaxed\">Contrast with Token Ring <strong>Source Routing Bridges (SRB)</strong>: In IBM Token Ring networks, end stations were non-transparent; they discovered routes by sending discovery frames and inserted explicit routing information fields (RIF) inside every packet header. Transparent bridging completely conquered the market because it eliminated host protocol complexity.</p>\n    ",
+      "workedExamples": [
+        {
+          "title": "Example: Host Relocation Across Ports",
+          "difficulty": "Intermediate",
+          "problem": "Laptop L (MAC: 11:22:33:44:55:66) was plugged into Port 1. The user unplugs it and connects to Port 3. What happens when Laptop L transmits its first frame from Port 3?",
+          "solution": "1. The frame arrives on Port 3.\n2. The transparent bridge reads the Source MAC: 11:22:33:44:55:66.\n3. It checks its table and finds the old mapping (Port 1).\n4. The bridge immediately updates the entry: Table[11:22:33:44:55:66] = Port 3, resetting the aging timer.\n5. Future frames for Laptop L are now accurately forwarded to Port 3 without network administrator intervention."
+        }
+      ],
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Transparent Bridging Strengths</th><th>Engineering Challenges</th></tr></thead>\n        <tbody>\n          <tr><td>Complete plug-and-play; zero host software modification.</td><td>Vulnerable to catastrophic loops in mesh topologies.</td></tr>\n          <tr><td>Automatic adaptation to dynamic host additions and mobility.</td><td>Flooding unknown unicasts consumes temporary link bandwidth.</td></tr>\n          <tr><td>Isolates local segment errors and signal collisions.</td><td>Cannot partition broadcast domains (requires VLANs / routers).</td></tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Standard IEEE 802.3 Ethernet Local Area Networks worldwide.",
+        "Wi-Fi to Ethernet Access Point Bridging.",
+        "Docker Bridge Networking (`docker0` default container network)."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Transparent Bridges?",
+          "question": "Why is a transparent bridge referred to as 'transparent'?",
           "options": [
-            "A transparent bridge is entirely invisible to connected stat...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "Because its physical casing is made of clear plastic",
+            "Because connected host computers are completely unaware of its existence",
+            "Because it does not filter or block any frames",
+            "Because it can transmit optical light signals"
           ],
-          "correct": 0,
-          "explanation": "The primary role is: A transparent bridge is entirely invisible to connected stations. Computers simply send frames as if on a single giant cable, completely unaware that bridges are inspecting, filtering, and forwarding their packets. Defined by IEEE 802.1D with plug-and-play installation."
+          "correct": 1,
+          "explanation": "It is called transparent because end stations require zero configuration and operate unaware that a bridge is actively segmenting the network."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "IEEE Std 802.1D: Media Access Control (MAC) Bridges, IEEE Computer Society.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, Chapter 15.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
-      "imageCaption": "Figure: Transparent Bridges (IEEE 802.1D): Plug-and-Play Operation Invisible to End Stations."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
-    "imageCaption": "Figure: Transparent Bridges (IEEE 802.1D): Plug-and-Play Operation Invisible to End Stations."
+      ]
+    }
   },
   "u2-learning-bridges": {
     "id": "u2-learning-bridges",
@@ -4987,89 +5224,100 @@ var TOPICS_U2_SYLLABUS = {
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
     "level": "Intermediate",
-    "category": "datalink",
+    "category": "switching",
     "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "IEEE 802.1D Section 7",
-    "oneLiner": "Bridges that automatically build and maintain their MAC address forwarding database by inspecting source addresses.",
-    "quickAnswer": "A learning bridge builds its forwarding table (CAM table) dynamically through backward learning. By inspecting the source MAC address and incoming port of every arriving frame, the bridge records which host is reachable on which port.",
-    "whyItMatters": "Eliminates manual forwarding table configuration and automatically adapts when laptops move to new switch ports.",
+    "readingTime": "20–25 min",
+    "standard": "Forouzan Ch. 15 / IEEE 802.1D",
+    "oneLiner": "A bridge that dynamically builds its forwarding table by inspecting source MAC addresses of incoming frames.",
+    "quickAnswer": "A learning bridge is a bridge that autonomously builds and maintains its forwarding database (FDB) by inspecting the source MAC address and arrival port of incoming frames. It completely eliminates manual table entry by administrators. If a destination address is unknown, it temporarily floods the frame, but as soon as the target replies, the bridge learns its location and switches to precise unicast forwarding.",
+    "whyItMatters": "Manual entry of MAC addresses in large corporate networks with thousands of dynamic laptops and phones would be impossible to maintain. Self-learning bridges turn network expansion into zero-touch plug-and-play engineering.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "Source MAC Address",
+        "meaning": "The physical address of the station that generated the frame"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Forwarding Database (FDB)",
+        "meaning": "Lookup table mapping MAC addresses to bridge port interfaces"
+      },
+      {
+        "concept": "Flooding",
+        "meaning": "Forwarding a frame out all ports except the arrival port"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define a learning bridge and its primary automation mechanism.",
+      "Explain how inspecting source MAC addresses builds the forwarding database.",
+      "Trace the 3-segment bridge example (Ports 1, 2, 3 with MACs AA, BB, CC).",
+      "Describe what happens when an entry is missing vs when it has been learned."
     ],
     "infobox": {
       "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "standard": "IEEE 802.1D",
+      "type": "Self-Learning Protocol",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-transparent-bridges",
+        "mac-address"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "bridge-learning-process",
+        "forwarding-and-filtering",
+        "cam-table"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "static-mac-tables",
+        "routing-tables"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Enterprise Ethernet Switches, Learning Bridges, Wireless Access Points, Virtual Switches"
       ]
     },
+    "imageUrl": "https://images.openai.com/static-rsc-4/V5F_p784NFunSkSmkZNKSrrxtMzoIT27-NVKdo3nUbDpE_BgxOFY5Xaz_f8jHghsm8eQtWnAVQZIEPVmIpPe59V9VnAWfMrnG5IOrP97-ZtUrL7p0q2UUGPfNZl_1b36GzrHbuF6N7oTz_3_NQO9HecRHtRxAeOAb78YYgBC7753h0TewppsRc9yRKz8YNux?purpose=fullsize",
+    "imageCaption": "Figure: Self-Learning Bridge Process: Dynamic MAC Table Construction & Port Mapping (AA, BB, CC).",
     "sections": {
-      "overview": "<div class=\"wiki-img-box my-4 text-center\"><img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Network_bridge_operation.svg/600px-Network_bridge_operation.svg.png\" alt=\"Network Bridge Operation\" class=\"mx-auto rounded-lg shadow border border-gray-200 dark:border-gray-700 max-h-80 object-contain\" onerror=\"this.style.display='none'\"><p class=\"text-xs text-gray-500 mt-1 italic\">Figure: Learning bridge inspecting frame source addresses to build its forwarding database.</p></div>",
-      "eli10": "In simple words: Bridges that automatically build and maintain their MAC address forwarding database by inspecting source addresses.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Learning Bridges?<br><br><strong>Answer:</strong> A learning bridge builds its forwarding table (CAM table) dynamically through backward learning. By inspecting the source MAC address and incoming port of every arriving frame, the bridge records which host is reachable on which port.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "overview": "\n      <p class=\"lead\">A <strong>learning bridge</strong> is a bridge that automatically creates and updates its forwarding table by examining the <strong>source MAC addresses</strong> of incoming frames.</p>\n\n      <p>In early network designs, bridges required manual static configuration of device tables. A learning bridge removes this requirement completely: it boots with an empty forwarding table and populates it dynamically as stations transmit data.</p>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">How Does a Learning Bridge Work?</h4>\n      <p class=\"text-xs\">Whenever an Ethernet frame arrives on any port:</p>\n      <ol class=\"list-decimal pl-5 space-y-1 text-xs\">\n        <li><strong>Reads the Source MAC address:</strong> The bridge identifies which device generated the transmission.</li>\n        <li><strong>Identifies the arrival port:</strong> The bridge notes the physical port on which the frame was received.</li>\n        <li><strong>Stores/Refreshes the entry:</strong> It saves the pair <code>(Source MAC, Port Number)</code> into its forwarding table and restarts the timer.</li>\n        <li><strong>Checks the Destination MAC:</strong> It queries the table for the destination address.</li>\n        <li><strong>Decides action:</strong> Forwards to target port if known; filters if destination is on arrival port; or floods to all other ports if unknown.</li>\n      </ol>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Concrete Multi-Segment Example from Syllabus</h4>\n      <p class=\"text-xs\">Consider a 3-port bridge connecting three distinct LAN segments:</p>\n      <div class=\"overflow-x-auto my-3\">\n        <table class=\"wiki-table text-xs\">\n          <thead><tr class=\"bg-slate-100 dark:bg-slate-800\"><th>MAC Address</th><th>Port</th><th>Status</th></tr></thead>\n          <tbody>\n            <tr><td><code>AA:AA:AA:AA:AA:AA</code></td><td><strong>Port 1</strong></td><td>Learned dynamically from Segment 1</td></tr>\n            <tr><td><code>BB:BB:BB:BB:BB:BB</code></td><td><strong>Port 2</strong></td><td>Learned dynamically from Segment 2</td></tr>\n            <tr><td><code>CC:CC:CC:CC:CC:CC</code></td><td><strong>Port 3</strong></td><td>Learned dynamically from Segment 3</td></tr>\n          </tbody>\n        </table>\n      </div>\n      <p class=\"text-xs leading-relaxed\">\n        If a frame arrives on <strong>Port 1</strong> with source MAC <code>AA:...</code> and destination MAC <code>BB:...</code>:\n        <br>&bull; The bridge learns that Station AA is reachable through <strong>Port 1</strong>.\n        <br>&bull; It checks its forwarding table for Station BB, finds that BB is on <strong>Port 2</strong>.\n        <br>&bull; It forwards the frame directly through <strong>Port 2 only</strong>. Port 3 receives zero traffic!\n      </p>\n    ",
+      "eli10": "A learning bridge is like a new receptionist at an office. When someone walks in through Door 1 and says 'Hi, I am Alice', the receptionist writes down 'Alice is at Door 1'. From then on, whenever mail arrives for Alice, the receptionist knows to send it to Door 1.",
+      "analogy": "Like a postal worker who learns where people live by looking at the return address on envelopes they send out.",
+      "howItWorks": "\n      <p class=\"text-xs leading-relaxed\">A learning bridge performs backward learning:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li><strong>Backward Learning:</strong> Bridges never learn from the destination MAC (which only states where the frame is going, not where the destination currently sits). They learn exclusively from the <em>source MAC</em>, which proves beyond doubt that the station is currently located behind that specific port.</li>\n        <li><strong>Cold Start (Empty Table):</strong> When powered on, the table is blank. The first few frames are flooded. However, within seconds of normal network operation (e.g., ARP, DHCP, DNS), the table fills and the network operates almost entirely via unicast forwarding.</li>\n      </ul>\n    ",
+      "technicalDetails": "\n      <p class=\"text-xs leading-relaxed\">Forwarding table scaling and hash collisions:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li>Forwarding tables are implemented as <strong>hash tables</strong> in RAM or dedicated <strong>CAM (Content Addressable Memory)</strong> in hardware switches.</li>\n        <li>Search time in CAM is $O(1)$ independent of whether the table contains 10 or 100,000 entries.</li>\n        <li>Entry capacity: Enterprise switches typically support between 16,000 and 128,000 learned MAC addresses. If table capacity is exceeded, new addresses cause MAC flooding (CAM Table Overflow vulnerability).</li>\n      </ul>\n    ",
+      "workedExamples": [
+        {
+          "title": "Example: Cold Start Frame Exchange Sequence",
+          "difficulty": "Intermediate",
+          "problem": "A learning bridge connects 3 stations: A on Port 1, B on Port 2, C on Port 3. The table is initially empty. Trace table states and port outputs when:\n1. A sends to B\n2. B replies to A",
+          "solution": "Step 1: Frame A -> B arrives on Port 1.\n- Bridge learns A is on Port 1. Table: [A: Port 1].\n- Bridge looks up B: Not found! Bridge FLOODS frame out Ports 2 and 3.\n- Station B receives the frame on Port 2 (Station C discards it).\n\nStep 2: Reply B -> A arrives on Port 2.\n- Bridge learns B is on Port 2. Table: [A: Port 1, B: Port 2].\n- Bridge looks up A: Found on Port 1!\n- Bridge FORWARDS frame out Port 1 ONLY. Port 3 receives nothing!\nFlooding is now eliminated for all future communication between A and B."
+        }
+      ],
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Strengths of Dynamic Learning</th><th>System Challenges</th></tr></thead>\n        <tbody>\n          <tr><td>Zero manual configuration; pure plug-and-play.</td><td>Initial frames undergo flooding before addresses are learned.</td></tr>\n          <tr><td>Automatically accommodates topology changes and cable swaps.</td><td>MAC table flooding attacks (CAM overflow) can force a switch into hub mode.</td></tr>\n          <tr><td>Maintains optimal local forwarding tables per switch.</td><td>Requires aging timers to purge inactive or disconnected devices.</td></tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "All standard commercial Ethernet switches (Cisco, Juniper, HPE, Netgear).",
+        "Software SDN switches (Open vSwitch, Linux Bridge).",
+        "Enterprise Wi-Fi controller AP client tracking."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Learning Bridges?",
+          "question": "Which address field in an Ethernet frame does a learning bridge use to populate its forwarding database?",
           "options": [
-            "A learning bridge builds its forwarding table (CAM table) dy...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "Destination MAC address",
+            "Source MAC address",
+            "Destination IP address",
+            "Frame Check Sequence"
           ],
-          "correct": 0,
-          "explanation": "The primary role is: A learning bridge builds its forwarding table (CAM table) dynamically through backward learning. By inspecting the source MAC address and incoming port of every arriving frame, the bridge records which host is reachable on which port."
+          "correct": 1,
+          "explanation": "A learning bridge inspects the Source MAC address, because it confirms that the transmitting device is connected to the receiving port."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, Chapter 15.1.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "Cisco Networking Academy: CCNA Switching Essentials — MAC Address Table Operations.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
-      "imageCaption": "Figure: Self-Learning Bridges: Dynamic MAC Forwarding Database (FDB) Construction from Source Addresses."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
-    "imageCaption": "Figure: Self-Learning Bridges: Dynamic MAC Forwarding Database (FDB) Construction from Source Addresses."
+      ]
+    }
   },
   "u2-bridge-learning-process": {
     "id": "u2-bridge-learning-process",
@@ -5077,449 +5325,532 @@ var TOPICS_U2_SYLLABUS = {
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
     "level": "Intermediate",
-    "category": "datalink",
+    "category": "switching",
     "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "IEEE 802.1D",
-    "oneLiner": "Step-by-step mechanics of table updates, aging timers, and port mapping.",
-    "quickAnswer": "When a frame enters Port X: (1) The bridge checks its table for the Source MAC. If not present, it adds (Source MAC, Port X, Timestamp). If present, it refreshes the timestamp. (2) An Aging Timer (default 300s) purges stale entries when hosts disconnect.",
-    "whyItMatters": "The aging timer prevents forwarding frames to obsolete locations when a user disconnects or moves.",
+    "readingTime": "20–25 min",
+    "standard": "IEEE 802.1D / Forouzan Ch. 15",
+    "oneLiner": "The formal algorithmic rules governing MAC address table insertion, refresh, lookup, and aging timer eviction.",
+    "quickAnswer": "The Bridge Learning Process is the formal algorithmic routine that executes on every frame arrival: the bridge reads Source MAC S on arrival port P and updates Table[S] = P with a refreshed aging timer; then it looks up Destination MAC D: if D is on another port, it forwards; if D is on port P, it filters; if D is unknown or broadcast, it floods out all other ports.",
+    "whyItMatters": "Understanding the exact pseudocode and decision tree of the bridge learning algorithm is essential for computer networks students to solve forwarding trace problems, analyze network captures in Wireshark, and prevent Layer 2 security vulnerabilities.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "Forwarding Table",
+        "meaning": "Internal hash map containing (MAC, Port, AgingTimer) tuples"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Aging Timer",
+        "meaning": "Countdown timer (typically 300s) after which inactive entries are deleted"
+      },
+      {
+        "concept": "Filter vs Flood",
+        "meaning": "Discarding local traffic vs copying unknown traffic to all other ports"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "State the formal bridge learning algorithm for frame ingress at port P.",
+      "Trace and write the standard algorithmic pseudocode.",
+      "Explain the 4 condition-action decision rules for destination forwarding.",
+      "Describe the function and operational necessity of the MAC address aging timer."
     ],
     "infobox": {
       "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "standard": "IEEE 802.1D",
+      "type": "Formal Algorithm",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-learning-bridges"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "forwarding-and-filtering",
+        "cam-table-aging",
+        "cam-overflow"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "dijkstra-routing-algorithm",
+        "distance-vector"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Switching ASIC microcode, software bridge kernel drivers, network simulation tools"
       ]
     },
+    "imageUrl": "https://images.openai.com/static-rsc-4/V5F_p784NFunSkSmkZNKSrrxtMzoIT27-NVKdo3nUbDpE_BgxOFY5Xaz_f8jHghsm8eQtWnAVQZIEPVmIpPe59V9VnAWfMrnG5IOrP97-ZtUrL7p0q2UUGPfNZl_1b36GzrHbuF6N7oTz_3_NQO9HecRHtRxAeOAb78YYgBC7753h0TewppsRc9yRKz8YNux?purpose=fullsize",
+    "imageCaption": "Figure: Bridge Learning Algorithm: Source Address Table Insertion and Aging Timer Lifecycle.",
     "sections": {
-      "overview": "<p>The backward learning algorithm ensures the forwarding database reflects real-time host locations. The aging timer automatically purges devices that stop transmitting.</p>",
-      "eli10": "In simple words: Step-by-step mechanics of table updates, aging timers, and port mapping.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Bridge Learning Process?<br><br><strong>Answer:</strong> When a frame enters Port X: (1) The bridge checks its table for the Source MAC. If not present, it adds (Source MAC, Port X, Timestamp). If present, it refreshes the timestamp. (2) An Aging Timer (default 300s) purges stale entries when hosts disconnect.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "overview": "\n      <p class=\"lead\">The <strong>Bridge Learning Algorithm</strong> is the formal algorithmic procedure used by bridges and switches to automatically identify and maintain the port connected to each network device.</p>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">The Standard Learning & Forwarding Algorithm</h4>\n      <p class=\"text-xs\">When a frame arrives on port <code>P</code>:</p>\n      <ol class=\"list-decimal pl-5 space-y-1 text-xs\">\n        <li>Read the source MAC address <code>S</code>.</li>\n        <li>Store or update the table entry for <code>S</code> with port <code>P</code>, resetting its aging timer.</li>\n        <li>Read the destination MAC address <code>D</code>.</li>\n        <li>Search for <code>D</code> in the forwarding table.</li>\n        <li>Apply the condition-action decision rules:</li>\n      </ol>\n\n      <div class=\"overflow-x-auto my-3\">\n        <table class=\"wiki-table text-xs\">\n          <thead><tr class=\"bg-slate-100 dark:bg-slate-800\"><th>Condition</th><th>Action Executed</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Destination is known on another port ($Q \neq P$)</strong></td><td><strong class=\"text-emerald-600 dark:text-emerald-400\">Forward</strong> through that port $Q$.</td></tr>\n            <tr><td><strong>Destination is known on the incoming port ($Q == P$)</strong></td><td><strong class=\"text-amber-600 dark:text-amber-400\">Filter</strong> (drop) the frame.</td></tr>\n            <tr><td><strong>Destination is unknown ($D \notin \text{Table}$)</strong></td><td><strong class=\"text-blue-600 dark:text-blue-400\">Flood</strong> to all ports except incoming port $P$.</td></tr>\n            <tr><td><strong>Destination is a broadcast address (<code>FF:FF:FF:FF:FF:FF</code>)</strong></td><td><strong class=\"text-blue-600 dark:text-blue-400\">Flood</strong> to all ports except incoming port $P$.</td></tr>\n          </tbody>\n        </table>\n      </div>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Formal Algorithmic Pseudocode</h4>\n      <div class=\"code-block-wrapper my-2\">\n        <pre class=\"bg-slate-900 text-slate-200 p-3 rounded-lg text-xs font-mono\">\nWhen a frame arrives on port P:\n  S = Source MAC address\n  D = Destination MAC address\n\n  // Phase 1: Learn / Update\n  ForwardingTable[S] = P\n  ResetAgingTimer(S)\n\n  // Phase 2: Forward / Filter / Flood\n  if (D is Broadcast OR D is Multicast):\n      Flood frame through all ports except P\n  else if (D is found in ForwardingTable):\n      if (ForwardingTable[D] != P):\n          Forward frame through ForwardingTable[D]\n      else:\n          Discard (Filter) the frame\n  else:\n      Flood frame through all ports except P\n        </pre>\n      </div>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Importance of the MAC Address Aging Timer</h4>\n      <p class=\"text-xs leading-relaxed\">\n        Real switches never keep learned entries indefinitely. Every entry in the forwarding database is tagged with an <strong>aging timer</strong> (default: <strong>300 seconds / 5 minutes</strong> in Cisco switches).\n        <br>&bull; Whenever a frame from <code>S</code> is received, its timer resets to 300s.\n        <br>&bull; If a device goes offline or is unplugged, its timer counts down to 0, and the switch silently flushes the entry.\n        <br>&bull; If the device is reconnected to a different port, the new frame arrival immediately updates the table with the new port mapping, preventing persistent misdirection.\n      </p>\n    ",
+      "eli10": "It's like a computer doing a 2-step chore every time an envelope arrives: Step 1: Note who sent it and where they sit. Step 2: Look up where the recipient sits and hand it over, drop it if they already heard it, or ask everyone if you don't know.",
+      "analogy": "Like a restaurant hostess who checks people in: 'Table 4 belongs to the Smith family.' If someone arrives asking for the Smiths, she points them straight to Table 4. If nobody sits at Table 4 for 5 hours, she clears the reservation card.",
+      "howItWorks": "\n      <p class=\"text-xs leading-relaxed\">Memory management in learning bridges:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li>The table is structured as a hash map indexed by MAC address.</li>\n        <li>Entries contain: <code>[MAC: 48 bits, Port: 8 bits, VLAN ID: 12 bits, Type: Dynamic/Static, TTL: 16 bits]</code>.</li>\n        <li>An asynchronous timer interrupt decrements the TTL of all dynamic entries once per second. Entries hitting 0 are evicted.</li>\n      </ul>\n    ",
+      "technicalDetails": "\n      <p class=\"text-xs leading-relaxed\">Edge conditions and failure modes:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li><strong>MAC Flapping:</strong> If the switch sees the same MAC address rapidly alternating between Port 1 and Port 2 within milliseconds, it logs a <em>MAC flap notification</em> — a definite indicator of an active Layer 2 switching loop or duplicate NIC hardware address!</li>\n        <li><strong>Aging Timer Adjustment:</strong> During Spanning Tree topology recalculations, switches temporarily reduce the aging timer to <code>Forward Delay</code> (15 seconds) to quickly purge obsolete paths.</li>\n      </ul>\n    ",
+      "workedExamples": [
+        {
+          "title": "Example: Trace Table Updates and Aging",
+          "difficulty": "Intermediate",
+          "problem": "At T=0s, Host X transmits on Port 1. At T=100s, Host X transmits again on Port 1. At T=350s, Host Y transmits to Host X. Assuming a 300s aging timer, describe the bridge's action at T=350s.",
+          "solution": "- At T=0s: Entry (X: Port 1) is created with timer=300s.\n- At T=100s: Frame arrives from X. Timer resets to 300s (expires at T=400s).\n- At T=350s: Host Y sends to X. The entry for X is still valid (50s remaining before expiration).\n- Therefore, the bridge forwards the frame directly out Port 1 as a unicast. No flooding occurs."
+        }
+      ],
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Algorithm Strengths</th><th>Engineering Constraints</th></tr></thead>\n        <tbody>\n          <tr><td>Deterministic $O(1)$ decision complexity.</td><td>Requires memory resources for thousands of MAC table rows.</td></tr>\n          <tr><td>Auto-recovering: adapts gracefully when users move cables.</td><td>Aging timers must balance quick adaptation against unnecessary flooding.</td></tr>\n          <tr><td>Separates local segment traffic automatically.</td><td>Broadcast and unknown frames still flood throughout the VLAN.</td></tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Ethernet switch firmware (Cisco IOS, Arista EOS, Junos).",
+        "Linux kernel networking subsystem (`net/bridge/br_fdb.c`).",
+        "Embedded network adapters and industrial programmable logic controllers."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Bridge Learning Process?",
+          "question": "What is the primary purpose of the MAC address aging timer in a switch?",
           "options": [
-            "When a frame enters Port X: (1) The bridge checks its table ...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "To encrypt old MAC addresses",
+            "To remove inactive or relocated devices from the forwarding database",
+            "To speed up physical signal propagation",
+            "To reduce power consumption on inactive ports"
           ],
-          "correct": 0,
-          "explanation": "The primary role is: When a frame enters Port X: (1) The bridge checks its table for the Source MAC. If not present, it adds (Source MAC, Port X, Timestamp). If present, it refreshes the timestamp. (2) An Aging Timer (default 300s) purges stale entries when hosts disconnect."
+          "correct": 1,
+          "explanation": "The aging timer automatically purges inactive entries so that if a device is disconnected or moved to another port, the switch learns its new location."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, Chapter 15.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "IEEE Std 802.1D Section 7.8: The Learning Process.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
-      "imageCaption": "Figure: Step-by-Step Learning Process: Inspect Source MAC, Update Hash Table, Set Aging Timer."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
-    "imageCaption": "Figure: Step-by-Step Learning Process: Inspect Source MAC, Update Hash Table, Set Aging Timer."
+      ]
+    }
   },
   "u2-forwarding-and-filtering": {
     "id": "u2-forwarding-and-filtering",
-    "title": "Forwarding and Filtering Decisions",
+    "title": "Forwarding and Filtering",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
     "level": "Intermediate",
-    "category": "datalink",
+    "category": "switching",
     "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "IEEE 802.1D",
-    "oneLiner": "How a bridge decides whether to forward a frame across ports or silently drop it to conserve bandwidth.",
-    "quickAnswer": "Upon receiving a frame on Port X with Destination MAC D: (1) If D is in the table on Port X, the frame is on the same segment -> FILTER (discard). (2) If D is in the table on Port Y (Y != X) -> FORWARD to Port Y only. (3) If D is unknown -> FLOOD to all ports except Port X.",
-    "whyItMatters": "Filtering confines local conversations to local wires, dramatically multiplying effective network capacity.",
+    "readingTime": "20–25 min",
+    "standard": "Forouzan Ch. 15 / IEEE 802.1D",
+    "oneLiner": "The twin decision mechanisms of bridges: sending frames across ports vs. blocking frames from crossing segments.",
+    "quickAnswer": "Forwarding and Filtering are the two fundamental operational decisions made by bridges and switches. Forwarding means transmitting a received frame out the specific port leading to its destination station. Filtering means dropping/discarding a frame when its destination resides on the same segment as the sender, preventing local traffic from consuming external bandwidth.",
+    "whyItMatters": "Filtering is what makes bridging superior to repeaters and hubs. By blocking intra-segment frames from crossing to other cables, bridges conserve overall bandwidth, eliminate remote collisions, and allow simultaneous independent transmissions across different segments.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "Forwarding",
+        "meaning": "Transmitting a frame out an egress port towards its destination"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Filtering",
+        "meaning": "Discarding a frame because destination is on the ingress segment"
+      },
+      {
+        "concept": "Collision Domain Isolation",
+        "meaning": "Preventing collisions on one segment from impacting another"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Differentiate precisely between forwarding, filtering, and flooding.",
+      "Explain the specific condition that triggers frame filtering.",
+      "Solve port forwarding exercises using MAC-to-port lookup tables.",
+      "Evaluate how filtering improves overall LAN aggregate capacity."
     ],
     "infobox": {
       "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "standard": "IEEE 802.1D",
+      "type": "Switching Decision Logic",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-bridge-learning-process"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "flooding",
+        "collision-domain",
+        "packet-filtering-firewall"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "routing-vs-switching",
+        "layer3-filtering"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Local LAN traffic isolation, network efficiency optimization, collision reduction"
       ]
     },
+    "imageUrl": "https://images.openai.com/static-rsc-4/1_HGKh9T4tgrmMR2lqvPJnpUIpnJv8ShNgWMFr53dP3z_hMkMowIegvhR5vJdCdip6AEYKh0_BHZwVTbS0n31yP1KTHfProi8HyQX5X1vJaY0Sj0UHz6z4xQ2OouIeKWcaTGbOPR9r8APc6bmOj4-EPhRjInFZPHtgRf9AXUY8rGs2i74o8sBTkupVooap7r?purpose=fullsize",
+    "imageCaption": "Figure: Frame Forwarding vs. Local Segment Filtering Based on Destination MAC Match.",
     "sections": {
-      "overview": "<p>Filtering prevents local packets on Segment 1 from needlessly spilling onto Segment 2, isolating local collisions and freeing bandwidth for simultaneous remote transfers.</p>",
-      "eli10": "In simple words: How a bridge decides whether to forward a frame across ports or silently drop it to conserve bandwidth.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Forwarding and Filtering Decisions?<br><br><strong>Answer:</strong> Upon receiving a frame on Port X with Destination MAC D: (1) If D is in the table on Port X, the frame is on the same segment -> FILTER (discard). (2) If D is in the table on Port Y (Y != X) -> FORWARD to Port Y only. (3) If D is unknown -> FLOOD to all ports except Port X.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "overview": "\n      <p class=\"lead\"><strong>Forwarding</strong> and <strong>filtering</strong> are the two foundational decisions executed by bridges and switches to control frame propagation across local networks.</p>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">1. Forwarding</h4>\n      <p class=\"text-xs leading-relaxed\">\n        <strong>Forwarding</strong> means sending a received frame out through the specific port that leads toward its intended destination station.\n        <br><em>Condition:</em> Destination MAC is present in the table, and its mapped port is <strong>different</strong> from the incoming arrival port ($Q \neq P$).\n      </p>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">2. Filtering</h4>\n      <p class=\"text-xs leading-relaxed\">\n        <strong>Filtering</strong> means preventing a frame from being forwarded across the bridge when the destination station is reachable through the very same port/segment on which the frame arrived.\n        <br><em>Condition:</em> Destination MAC is present in the table, and its mapped port is <strong>identical</strong> to the incoming arrival port ($Q == P$).\n        <br><em>Action:</em> The bridge quietly drops the frame from its buffer. Why? Because on a shared physical segment (or hub), the recipient station has already received the electrical signal directly over the wire!\n      </p>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">3. Flooding</h4>\n      <p class=\"text-xs leading-relaxed\">\n        <strong>Flooding</strong> occurs when the destination MAC address is unknown (not present in the table) or is the broadcast address. The switch replicates and transmits the frame out through all relevant ports except the port on which it arrived.\n      </p>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Detailed Example from Syllabus</h4>\n      <p class=\"text-xs\">Suppose a bridge maintains the following forwarding table:</p>\n      <div class=\"overflow-x-auto my-3\">\n        <table class=\"wiki-table text-xs\">\n          <thead><tr class=\"bg-slate-100 dark:bg-slate-800\"><th>MAC Address</th><th>Port</th></tr></thead>\n          <tbody>\n            <tr><td><code>MAC-A</code></td><td>Port 1</td></tr>\n            <tr><td><code>MAC-B</code></td><td>Port 2</td></tr>\n            <tr><td><code>MAC-C</code></td><td>Port 3</td></tr>\n          </tbody>\n        </table>\n      </div>\n      <ul class=\"list-disc pl-5 space-y-1.5 text-xs\">\n        <li><strong>Forwarding Case:</strong> A frame arrives on <strong>Port 1</strong> destined for <code>MAC-B</code>. The bridge inspects its table, sees MAC-B on Port 2 ($2 \neq 1$), and forwards the frame out <strong>Port 2</strong>.</li>\n        <li><strong>Filtering Case:</strong> A frame arrives on <strong>Port 1</strong> destined for <code>MAC-A</code>. The table shows MAC-A is on Port 1 ($1 == 1$). The bridge <strong>filters (discards)</strong> the frame. No transmission occurs on Ports 2 or 3!</li>\n      </ul>\n    ",
+      "eli10": "Forwarding is opening the door because the person lives in the next room. Filtering is keeping the door shut because the person is already standing in the same room with you.",
+      "analogy": "Like a soundproof divider in a large conference hall. If two people at Table 1 whisper to each other, the soundproof partition blocks the sound from disturbing Table 2 (filtering). If someone at Table 1 calls for someone at Table 2, the partition door opens to let the message through (forwarding).",
+      "howItWorks": "\n      <p class=\"text-xs leading-relaxed\">Decision logic comparison:</p>\n      <table class=\"wiki-table text-xs\">\n        <thead><tr><th>Scenario</th><th>Input Port</th><th>Dest Port in Table</th><th>Bridge Decision</th></tr></thead>\n        <tbody>\n          <tr><td>Sender & Receiver on different ports</td><td>Port 1</td><td>Port 3</td><td><strong>FORWARD</strong> to Port 3</td></tr>\n          <tr><td>Sender & Receiver on same segment</td><td>Port 2</td><td>Port 2</td><td><strong>FILTER</strong> (drop frame)</td></tr>\n          <tr><td>Receiver location not in table</td><td>Port 1</td><td>Not Found</td><td><strong>FLOOD</strong> to Ports 2, 3, 4...</td></tr>\n          <tr><td>Broadcast frame (FF:FF:FF:FF:FF:FF)</td><td>Port 1</td><td>All Ports</td><td><strong>FLOOD</strong> to Ports 2, 3, 4...</td></tr>\n        </tbody>\n      </table>\n    ",
+      "technicalDetails": "\n      <p class=\"text-xs leading-relaxed\">Hardware implementation:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li>In modern ASIC switches, forwarding and filtering decisions occur in hardware within nanoseconds using an egress port bitmask.</li>\n        <li>If an ingress frame is filtered, the buffer pointer is returned to the free pool without transmitting any electrical bits.</li>\n      </ul>\n    ",
+      "workedExamples": [
+        {
+          "title": "Example: Solving Solved Examples 2 & 3 from Syllabus",
+          "difficulty": "Beginner",
+          "problem": "Given forwarding table: [A: P1, B: P2, C: P3].\n1. Frame arrives on P1 with Dest B. What action occurs?\n2. Frame arrives on P2 with Dest C, but the table actually shows C is on P2. What action occurs?",
+          "solution": "1. Frame arrives on P1 with Dest B. Table lookup maps B to P2. Since P2 != P1, the switch FORWARDS the frame through Port 2 only.\n2. Frame arrives on P2 with Dest C. Table shows C is on P2. Since destination port P2 == arrival port P2, the switch FILTERS the frame because Station C already received it directly over the local wire."
+        }
+      ],
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Filtering Benefits</th><th>Network Trade-offs</th></tr></thead>\n        <tbody>\n          <tr><td>Saves massive bandwidth by containing local traffic.</td><td>Requires processing every incoming frame header.</td></tr>\n          <tr><td>Enables concurrent simultaneous conversations in other segments.</td><td>Does not filter broadcast frames (all broadcasts cross).</td></tr>\n          <tr><td>Enhances security by not leaking local frames to other ports.</td><td>Misconfigured tables can cause false drops until re-learned.</td></tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Ethernet switch port forwarding engines.",
+        "Wireless LAN client isolation features in Wi-Fi APs.",
+        "VLAN boundary traffic segmenting in enterprise campus networks."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Forwarding and Filtering Decisions?",
+          "question": "When does an Ethernet bridge filter a received frame?",
           "options": [
-            "Upon receiving a frame on Port X with Destination MAC D: (1)...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "When the destination MAC address is unknown",
+            "When the destination station is located on the same port as the incoming frame",
+            "When the frame payload exceeds 1500 bytes",
+            "When the frame arrives from an unauthorized IP address"
           ],
-          "correct": 0,
-          "explanation": "The primary role is: Upon receiving a frame on Port X with Destination MAC D: (1) If D is in the table on Port X, the frame is on the same segment -> FILTER (discard). (2) If D is in the table on Port Y (Y != X) -> FORWARD to Port Y only. (3) If D is unknown -> FLOOD to all ports except Port X."
+          "correct": 1,
+          "explanation": "The bridge filters the frame when the destination station is on the incoming port, preventing unnecessary duplicate transmission across other segments."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, Chapter 15.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "IEEE Std 802.1D Section 7.7: The Forwarding Process.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
-      "imageCaption": "Figure: Forwarding and Filtering Rules: Filter if on Same Port; Forward if on Different Port."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
-    "imageCaption": "Figure: Forwarding and Filtering Rules: Filter if on Same Port; Forward if on Different Port."
+      ]
+    }
   },
   "u2-bridge-flooding": {
     "id": "u2-bridge-flooding",
-    "title": "Flooding in Bridges",
+    "title": "Flooding",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
     "level": "Intermediate",
-    "category": "datalink",
+    "category": "switching",
     "difficulty": "Core",
     "readingTime": "15–20 min",
-    "standard": "IEEE 802.1D",
-    "oneLiner": "Forwarding frames out of all ports except the arrival port when the destination MAC is unknown or broadcast.",
-    "quickAnswer": "Flooding occurs when a bridge receives a frame whose destination MAC address is not yet in its forwarding database, or when the frame is addressed to the broadcast address (FF:FF:FF:FF:FF:FF). The frame is copied and transmitted out of every port except the port it arrived on.",
-    "whyItMatters": "Flooding guarantees delivery even before a destination host has ever transmitted a packet.",
+    "standard": "Forouzan Ch. 15 / IEEE 802.1D",
+    "oneLiner": "The broadcasting fallback mechanism of forwarding a frame out all active switch ports except the arrival port.",
+    "quickAnswer": "Flooding is a Data Link Layer forwarding behavior where a switch replicates an incoming frame and transmits a copy out of every active port except the port on which the frame arrived. Flooding occurs under two specific circumstances: (1) Unknown Unicast frames where the destination MAC is not yet learned in the forwarding table, and (2) Broadcast or Multicast frames (such as ARP requests).",
+    "whyItMatters": "Flooding guarantees that frames reach their destination even when the switch has zero prior knowledge of where the destination lives. However, if redundant physical loops exist, uncontrolled flooding creates catastrophic broadcast storms that crash entire networks within seconds.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "Unknown Unicast",
+        "meaning": "A frame addressed to a single host whose MAC is absent from the FDB"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Broadcast Address",
+        "meaning": "48-bit address FF:FF:FF:FF:FF:FF destined for every station in the LAN"
+      },
+      {
+        "concept": "Broadcast Domain",
+        "meaning": "The set of all network ports that receive a flooded broadcast frame"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define flooding and identify the two primary triggers for flooded frames.",
+      "Explain why incoming arrival ports are strictly excluded from flooding.",
+      "Contrast unknown unicast flooding with broadcast frame flooding.",
+      "Analyze the operational risks of uncontrolled flooding and broadcast storms."
     ],
     "infobox": {
       "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "standard": "IEEE 802.1D",
+      "type": "Forwarding Behavior",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-forwarding-and-filtering"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "broadcast-storm",
+        "spanning-tree-protocol",
+        "vlan",
+        "arp"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "multicast-pruning",
+        "unicast-forwarding"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Resolving ARP requests, initial station discovery, broadcast announcements, DHCP discovery"
       ]
     },
+    "imageUrl": "https://images.openai.com/static-rsc-4/1_HGKh9T4tgrmMR2lqvPJnpUIpnJv8ShNgWMFr53dP3z_hMkMowIegvhR5vJdCdip6AEYKh0_BHZwVTbS0n31yP1KTHfProi8HyQX5X1vJaY0Sj0UHz6z4xQ2OouIeKWcaTGbOPR9r8APc6bmOj4-EPhRjInFZPHtgRf9AXUY8rGs2i74o8sBTkupVooap7r?purpose=fullsize",
+    "imageCaption": "Figure: Unknown Unicast and Broadcast Flooding across Non-Ingress Ports.",
     "sections": {
-      "overview": "<p>Flooding ensures that new or silent devices still receive traffic. Once the destination responds, the bridge learns its location and ceases flooding for that MAC.</p>",
-      "eli10": "In simple words: Forwarding frames out of all ports except the arrival port when the destination MAC is unknown or broadcast.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Flooding in Bridges?<br><br><strong>Answer:</strong> Flooding occurs when a bridge receives a frame whose destination MAC address is not yet in its forwarding database, or when the frame is addressed to the broadcast address (FF:FF:FF:FF:FF:FF). The frame is copied and transmitted out of every port except the port it arrived on.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "overview": "\n      <p class=\"lead\"><strong>Flooding</strong> occurs when a bridge or switch replicates an incoming data frame and transmits it through <strong>all active ports except the incoming port</strong> on which the frame was received.</p>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">When Does Flooding Occur?</h4>\n      <p class=\"text-xs\">A switch triggers flooding under two fundamental conditions:</p>\n      <ul class=\"list-disc pl-5 space-y-1.5 text-xs\">\n        <li><strong>1. Unknown Destination (Unknown Unicast):</strong> The incoming frame has a unicast destination MAC address, but the switch has never seen this MAC before (or its entry expired from the aging timer). The switch must flood to ensure delivery.</li>\n        <li><strong>2. Broadcast / Multicast Address:</strong> The frame is explicitly addressed to the Layer 2 broadcast address (<code>FF:FF:FF:FF:FF:FF</code>) or a multicast group. Every station in the broadcast domain (or VLAN) is expected to receive it.</li>\n      </ul>\n\n      <div class=\"wiki-callout note my-3\">\n        <div class=\"callout-header\"><i class=\"fa-solid fa-circle-question\"></i> Why is the Incoming Port Excluded?</div>\n        <p class=\"text-xs\">The incoming port is excluded (<em>split horizon principle</em>) because the sender and all other stations on that local physical segment have already received the electrical transmission directly. Sending it back would cause echo interference and waste bandwidth.</p>\n      </div>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Concrete Syllabus Example (Unknown Destination)</h4>\n      <p class=\"text-xs leading-relaxed\">\n        Consider a switch with ports P1, P2, and P3:\n        <br>&bull; A frame arrives on <strong>Port 3</strong> with Destination MAC <code>DD:DD:DD:DD:DD:DD</code>.\n        <br>&bull; The switch queries its table: Destination MAC <code>DD:...</code> is <strong>not found</strong>!\n        <br>&bull; <em>Action:</em> The switch updates its table with the frame's source address on Port 3, and then <strong>floods the frame out through Port 1 and Port 2</strong>.\n      </p>\n    ",
+      "eli10": "If the mail carrier arrives at a 4-house cul-de-sac with a letter for 'Bob', and has never met Bob before, they knock on doors 2, 3, and 4 asking 'Are you Bob?' Once Bob answers, the mail carrier remembers where he lives and never has to knock on all doors again.",
+      "analogy": "Like paging someone over a school intercom: when the office doesn't know which classroom a student is currently in, they announce the name school-wide so the student can respond.",
+      "howItWorks": "\n      <p class=\"text-xs leading-relaxed\">The lifecycle of an unknown unicast flood:</p>\n      <ol class=\"list-decimal pl-5 space-y-1 text-xs\">\n        <li>Host A sends a frame to Host B. Host B's MAC is not in the switch table.</li>\n        <li>Switch floods the frame out all other ports.</li>\n        <li>Host C and Host D receive the frame, check the destination MAC, see it doesn't match their NIC address, and silently discard it.</li>\n        <li>Host B receives the frame, matches its NIC MAC, processes the payload, and sends a reply frame back to Host A.</li>\n        <li>The reply frame enters the switch! The switch instantly reads Host B's Source MAC and records its port.</li>\n        <li>From this exact millisecond forward, flooding stops: all traffic between A and B is switched via direct unicast!</li>\n      </ol>\n    ",
+      "technicalDetails": "\n      <p class=\"text-xs leading-relaxed\">VLAN boundaries and flooding containment:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li><strong>VLAN Isolation:</strong> Flooding is strictly bounded by the active <strong>VLAN (Virtual Local Area Network)</strong>. Broadcast or unknown frames received on a Port assigned to VLAN 10 are only flooded out ports belonging to VLAN 10.</li>\n        <li><strong>Security Risk (MAC Flooding Attack):</strong> Attackers use tools like <code>macof</code> to flood thousands of fake source MAC addresses into a switch. When the CAM table fills up, the switch fails open and begins flooding every packet to all ports, turning the switch into a dumb hub and allowing eavesdropping!</li>\n      </ul>\n    ",
+      "workedExamples": [
+        {
+          "title": "Example: Solving Solved Examples 1 & 4 from Syllabus",
+          "difficulty": "Beginner",
+          "problem": "1. Switch has ports P1, P2, P3. Frame arrives on P1 with Source A, Destination B. Destination B is unknown. What happens?\n2. Frame arrives on P3 with Dest D. D is not in MAC table. What happens?",
+          "solution": "1. The switch learns Source A -> Port 1. Since Destination B is unknown, it FLOODS the frame through Port 2 and Port 3 (all ports except incoming P1).\n2. The switch learns the source address on Port 3. Since Destination D is not in the table, it FLOODS the frame through all relevant ports except incoming P3 (i.e., Ports 1 and 2)."
+        }
+      ],
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Flooding Advantages</th><th>Flooding Hazards</th></tr></thead>\n        <tbody>\n          <tr><td>Guarantees packet delivery without prior topology knowledge.</td><td>Consumes link bandwidth and CPU cycles on all non-target hosts.</td></tr>\n          <tr><td>Essential for bootstrap protocols (DHCP, ARP, mDNS).</td><td>Can cause catastrophic broadcast storms if switching loops exist.</td></tr>\n          <tr><td>Allows seamless self-learning of newly connected devices.</td><td>Exploitable via MAC flooding / CAM table overflow attacks.</td></tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Address Resolution Protocol (ARP) IP-to-MAC resolution broadcasts.",
+        "DHCP Discover client broadcast requests.",
+        "Initial unicast frame exchanges prior to CAM table learning."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Flooding in Bridges?",
+          "question": "What does an Ethernet switch do when it receives a frame addressed to an unknown unicast MAC address?",
           "options": [
-            "Flooding occurs when a bridge receives a frame whose destina...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "It drops the frame immediately and sends an ICMP error",
+            "It sends the frame only back to the sending port",
+            "It floods the frame out all ports except the arrival port",
+            "It routes the frame to the default gateway"
           ],
-          "correct": 0,
-          "explanation": "The primary role is: Flooding occurs when a bridge receives a frame whose destination MAC address is not yet in its forwarding database, or when the frame is addressed to the broadcast address (FF:FF:FF:FF:FF:FF). The frame is copied and transmitted out of every port except the port it arrived on."
+          "correct": 2,
+          "explanation": "The switch floods the frame out all ports except the arrival port so that the unknown destination can receive it and reply."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, Chapter 15.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "Andrew S. Tanenbaum, Computer Networks, 6th Edition, Chapter 4.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
-      "imageCaption": "Figure: Bridge Flooding: Replicating Unicast Frames with Unknown Destination MACs to All Other Ports."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
-    "imageCaption": "Figure: Bridge Flooding: Replicating Unicast Frames with Unknown Destination MACs to All Other Ports."
+      ]
+    }
   },
   "u2-spanning-tree-protocol": {
     "id": "u2-spanning-tree-protocol",
     "title": "Spanning Tree Protocol (STP)",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "level": "Intermediate",
-    "category": "datalink",
+    "level": "Advanced",
+    "category": "switching",
     "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "IEEE 802.1D / Radia Perlman",
-    "oneLiner": "Radia Perlman's algorithm breaking physical loops to eliminate catastrophic broadcast storms.",
-    "quickAnswer": "If bridges are connected in physical loops for redundancy, flooded frames circulate endlessly, multiplying exponentially in a catastrophic broadcast storm. Radia Perlman's Spanning Tree Protocol (STP - IEEE 802.1D) elect a Root Bridge and selectively blocks redundant switch ports to maintain a loop-free logical tree.",
-    "whyItMatters": "STP allows enterprise networks to build fault-tolerant redundant physical cabling without crashing from forwarding loops.",
+    "readingTime": "30–35 min",
+    "standard": "IEEE 802.1D / IEEE 802.1w",
+    "oneLiner": "A Layer 2 protocol that prevents switching loops and broadcast storms by disabling redundant paths while maintaining backup availability.",
+    "quickAnswer": "The Spanning Tree Protocol (STP, standardized as IEEE 802.1D) is a foundational Layer 2 protocol designed by Radia Perlman that creates a loop-free logical topology in switched Ethernet networks. Redundant physical connections are necessary to prevent single points of failure, but redundant Layer 2 links create catastrophic broadcast loops, duplicate frames, and MAC table thrashing. STP solves this by electing a Root Bridge, calculating shortest paths, and dynamically placing redundant ports into a Blocked state.",
+    "whyItMatters": "Unlike Layer 3 IP packets which have a Time-To-Live (TTL) hop counter that terminates looping packets, standard Layer 2 Ethernet frames have NO TTL field! A looping Ethernet frame will circulate forever at wire speed, multiplying exponentially until the entire enterprise network collapses. STP is the ultimate safeguard against this fatal vulnerability.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "Switching Loop",
+        "meaning": "A physical ring or redundant path between bridges that allows frames to cycle infinitely"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Broadcast Storm",
+        "meaning": "Exponential multiplication of looping broadcast frames saturating 100% of network capacity"
+      },
+      {
+        "concept": "Bridge Protocol Data Unit (BPDU)",
+        "meaning": "Special control frames exchanged by bridges every 2 seconds to calculate the spanning tree"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Explain why Layer 2 switching loops cause catastrophic network collapse (broadcast storms, duplicate frames, MAC table flapping).",
+      "Identify why Ethernet frames cannot self-terminate loops (absence of a TTL field).",
+      "Describe the 5 core STP terms: Root Bridge, Root Port, Designated Port, Blocked Port, BPDU.",
+      "Trace the STP tree calculation process and port state transitions.",
+      "Evaluate the benefits and convergence characteristics of IEEE 802.1D Spanning Tree."
     ],
     "infobox": {
       "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "standard": "IEEE 802.1D / IEEE 802.1w (RSTP)",
+      "type": "Loop Prevention Protocol",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-bridges-overview",
+        "dll-switching"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "bpdu",
+        "root-bridge",
+        "designated-port",
+        "rstp-802-1w",
+        "broadcast-storm"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "trill",
+        "shortest-path-bridging-802-1aq",
+        "ip-ttl"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Enterprise redundant switched topologies, data center leaf-spine fabrics, campus backbone switches"
       ]
     },
+    "imageUrl": "https://images.openai.com/static-rsc-4/hEN4npqMRwIDO1pTtIvcnJeqYrAl6N2BWujKlfUA4F36KcXFp2wXzhY42YMKG3rgAoecLSQiOqlRZKmzRAskNtE-KGwVTP0oakv81TSdEb1b4vQdanYlNhhTIQLZfxEuXuRx0rfnklHFV-a_3LZ0DpmUH7GfelAdY5SGL5bzurwmhETwdXPbErk60VDr3RfE?purpose=fullsize",
+    "imageCaption": "Figure: Spanning Tree Protocol (IEEE 802.1D): Root Bridge Election, Designated Ports, and Loop Elimination via Blocked Ports.",
     "sections": {
-      "overview": "<div class=\"wiki-img-box my-4 text-center\"><img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Spanning_Tree_Protocol.svg/500px-Spanning_Tree_Protocol.svg.png\" alt=\"Spanning Tree Protocol\" class=\"mx-auto rounded-lg shadow border border-gray-200 dark:border-gray-700 max-h-80 object-contain\" onerror=\"this.style.display='none'\"><p class=\"text-xs text-gray-500 mt-1 italic\">Figure: Spanning Tree Protocol electing root bridge and blocking redundant backup links.</p></div>",
-      "eli10": "In simple words: Radia Perlman's algorithm breaking physical loops to eliminate catastrophic broadcast storms.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Spanning Tree Protocol (STP)?<br><br><strong>Answer:</strong> If bridges are connected in physical loops for redundancy, flooded frames circulate endlessly, multiplying exponentially in a catastrophic broadcast storm. Radia Perlman's Spanning Tree Protocol (STP - IEEE 802.1D) elect a Root Bridge and selectively blocks redundant switch ports to maintain a loop-free logical tree.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "overview": "\n      <p class=\"lead\">The <strong>Spanning Tree Protocol (STP)</strong> is a standardized Layer 2 protocol (<strong>IEEE 802.1D</strong>) invented by Dr. Radia Perlman that creates a loop-free logical topology in switched Ethernet networks containing redundant physical cabling.</p>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Why are Switching Loops a Fatal Problem?</h4>\n      <p class=\"text-xs\">Network engineers intentionally deploy redundant switches and dual cables between racks to provide backup paths against hardware failure. However, without STP, these physical loops create catastrophic Layer 2 hazards:</p>\n\n      <div class=\"wiki-callout alert my-3\">\n        <div class=\"callout-header\"><i class=\"fa-solid fa-triangle-exclamation\"></i> The Fundamental Flaw: No Time-to-Live (TTL) in Ethernet!</div>\n        <p class=\"text-xs\">While Layer 3 IPv4 and IPv6 packets contain a TTL / Hop Limit field that decrements at every router and discards packets after a loop, <strong>standard Layer 2 Ethernet frames have NO TTL field</strong>! Once an Ethernet frame begins circulating around a switch loop, it will circulate indefinitely until switches are powered off.</p>\n      </div>\n\n      <p class=\"text-xs font-bold text-slate-800 dark:text-slate-200 mt-3 mb-1\">A Layer 2 switching loop causes three fatal failures:</p>\n      <ul class=\"list-disc pl-5 space-y-1.5 text-xs\">\n        <li><strong>1. Broadcast Storms:</strong> When a broadcast frame (e.g., an ARP request) enters a loop, every switch floods it out all ports. The frame is re-received, re-flooded, and multiplies exponentially. Within seconds, link utilization hits 100%, device CPUs freeze, and all legitimate network communication drops.</li>\n        <li><strong>2. Multiple Frame Duplication:</strong> Unicast frames with destinations unknown to the switches are flooded endlessly, causing the recipient station to receive thousands of duplicate copies of the same packet.</li>\n        <li><strong>3. MAC Address Table Instability (Flapping / Thrashing):</strong> As copies of a frame arrive at Switch A from Port 1 and Port 2 alternately every microsecond, the switch continuously overwrites the port entry for that MAC address, destroying the forwarding database.</li>\n      </ul>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Important STP Terminology</h4>\n      <div class=\"overflow-x-auto my-3\">\n        <table class=\"wiki-table text-xs\">\n          <thead><tr class=\"bg-slate-100 dark:bg-slate-800\"><th>Term</th><th>Technical Meaning & Function</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Root Bridge</strong></td><td>The central logical reference bridge of the network, elected because it has the <em>lowest Bridge ID (BID = Priority + MAC)</em>.</td></tr>\n            <tr><td><strong>Root Port (RP)</strong></td><td>On every non-root bridge, the single port that provides the lowest cumulative path cost to reach the Root Bridge. Always in Forwarding state.</td></tr>\n            <tr><td><strong>Designated Port (DP)</strong></td><td>On each network segment, the port that has the lowest path cost to the Root Bridge. Forwards traffic for that segment. Always in Forwarding state.</td></tr>\n            <tr><td><strong>Blocked Port (Alternate)</strong></td><td>A redundant port prevented from forwarding ordinary user data frames to break the physical loop. Drops all user traffic but continues listening to BPDUs.</td></tr>\n            <tr><td><strong>BPDU (Bridge Protocol Data Unit)</strong></td><td>Special control frames exchanged by switches every 2 seconds to exchange bridge priority, root path costs, and topology change notices.</td></tr>\n          </tbody>\n        </table>\n      </div>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">How STP Works (The 5-Step Process)</h4>\n      <ol class=\"list-decimal pl-5 space-y-1 text-xs\">\n        <li><strong>Electing a Root Bridge:</strong> Switches exchange BPDUs. The switch with the lowest Bridge Priority (default: 32768, configurable in steps of 4096) and lowest MAC address becomes the Root Bridge.</li>\n        <li><strong>Selecting Root Ports:</strong> Each non-root switch determines which of its ports has the lowest cumulative link cost to the Root Bridge (e.g., 100M cost=19, 1G cost=4, 10G cost=2).</li>\n        <li><strong>Selecting Designated Ports:</strong> On every link segment, one switch port is chosen to forward traffic. All ports on the Root Bridge are Designated Ports.</li>\n        <li><strong>Blocking Redundant Paths:</strong> All remaining ports that are neither Root Ports nor Designated Ports are placed into the <strong>BLOCKED state</strong>, breaking all loops!</li>\n        <li><strong>Automatic Recalculation on Topology Change:</strong> If an active cable is severed, the blocked port detects the loss of BPDUs and transitions to Forwarding state, restoring connectivity.</li>\n      </ol>\n    ",
+      "eli10": "STP is like a team of firefighters creating a tree map of a building with multiple circular hallways. To prevent people from running around in endless circles during an evacuation, the firefighters padlock one door. If another hallway collapses, they immediately unlock the padlocked door.",
+      "analogy": "Like a tree in nature: a tree has branches that spread out in every direction, but branches never loop back into each other to form a closed ring. STP prunes closed loops so network links resemble a single tree branching out from a root trunk.",
+      "howItWorks": "\n      <p class=\"text-xs leading-relaxed\">IEEE 802.1D Port State Progression (Total Convergence Time = 30–50 seconds):</p>\n      <div class=\"grid grid-cols-1 md:grid-cols-4 gap-2 my-2 text-xs font-mono\">\n        <div class=\"p-2 rounded bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700\">\n          <span class=\"font-bold text-slate-700 dark:text-slate-300 block\">1. Blocking</span>\n          <span class=\"text-[10px] text-slate-500 font-sans\">Drops user data; receives BPDUs only.</span>\n        </div>\n        <div class=\"p-2 rounded bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-800\">\n          <span class=\"font-bold text-amber-800 dark:text-amber-300 block\">2. Listening (15s)</span>\n          <span class=\"text-[10px] text-amber-700 dark:text-amber-400 font-sans\">Processes BPDUs; no MAC learning or forwarding.</span>\n        </div>\n        <div class=\"p-2 rounded bg-blue-50 dark:bg-blue-950/40 border border-blue-300 dark:border-blue-800\">\n          <span class=\"font-bold text-blue-800 dark:text-blue-300 block\">3. Learning (15s)</span>\n          <span class=\"text-[10px] text-blue-700 dark:text-blue-400 font-sans\">Learns MAC addresses into FDB; no data forwarding.</span>\n        </div>\n        <div class=\"p-2 rounded bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800\">\n          <span class=\"font-bold text-emerald-800 dark:text-emerald-300 block\">4. Forwarding</span>\n          <span class=\"text-[10px] text-emerald-700 dark:text-emerald-400 font-sans\">Fully operational; forwards data frames and BPDUs.</span>\n        </div>\n      </div>\n    ",
+      "technicalDetails": "\n      <p class=\"text-xs leading-relaxed\">Bridge ID (BID) and Path Costs:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li><strong>Bridge ID Format (8 bytes):</strong> 2-byte Bridge Priority (typically 32768 + VLAN ID in PVST+) + 6-byte Switch Base MAC Address.</li>\n        <li><strong>Standard IEEE Path Costs:</strong> 10 Mbps = 100, 100 Mbps = 19, 1 Gbps = 4, 10 Gbps = 2.</li>\n        <li><strong>Evolution:</strong> Legacy 802.1D took 30–50 seconds to converge. <strong>Rapid Spanning Tree Protocol (RSTP - IEEE 802.1w)</strong> reduced convergence to under 1 second using explicit handshakes (Proposal/Agreement) instead of timers.</li>\n      </ul>\n    ",
+      "workedExamples": [
+        {
+          "title": "Example: 3-Switch Triangle Root Election & Port Roles",
+          "difficulty": "Advanced",
+          "problem": "Three switches (SW1, SW2, SW3) form a triangle with 1 Gbps links (Cost = 4).\n- SW1: Priority 4096, MAC 00:01\n- SW2: Priority 32768, MAC 00:02\n- SW3: Priority 32768, MAC 00:03\nIdentify: 1. Root Bridge, 2. Root Ports on SW2 and SW3, 3. Which port is blocked?",
+          "solution": "1. Root Bridge Election: SW1 has priority 4096 (lower than 32768). SW1 is elected ROOT BRIDGE. All ports on SW1 become Designated Ports (Forwarding).\n\n2. Root Ports: SW2's direct link to SW1 has cost 4 (via Port 1). SW3's direct link to SW1 has cost 4 (via Port 1). Thus, Port 1 on SW2 and Port 1 on SW3 become ROOT PORTS.\n\n3. Redundant Link (SW2 to SW3): SW2 and SW3 both have path cost 4 to the Root Bridge. Tiebreaker is lower Bridge ID: SW2 has MAC 00:02 which is lower than SW3's MAC 00:03. Therefore, SW2's port becomes Designated, and SW3's port is placed into the BLOCKED state, breaking the loop!"
+        }
+      ],
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>STP Advantages</th><th>STP Limitations</th></tr></thead>\n        <tbody>\n          <tr><td>Completely prevents catastrophic broadcast storms and MAC thrashing.</td><td>Blocked links represent unused bandwidth during normal operation.</td></tr>\n          <tr><td>Enables physical cable and switch redundancy for high availability.</td><td>Legacy 802.1D convergence is slow (30 to 50 seconds outage).</td></tr>\n          <tr><td>Autonomous failover: unlocks backup paths if a primary link fails.</td><td>Misconfigured bridge priorities can cause suboptimal traffic paths.</td></tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Enterprise Switched Networks: Cisco Per-VLAN Spanning Tree Plus (PVST+ / R-PVST+).",
+        "Data Center Networks: Multiple Spanning Tree Protocol (MSTP - IEEE 802.1s).",
+        "Carrier Ethernet: Protecting ring topologies in metropolitan access networks."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Spanning Tree Protocol (STP)?",
+          "question": "What is the primary danger that the Spanning Tree Protocol (STP) prevents in Ethernet networks?",
           "options": [
-            "If bridges are connected in physical loops for redundancy, f...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "IP address exhaustion",
+            "Layer 2 broadcast storms caused by switching loops",
+            "TCP SYN flood attacks",
+            "Optical signal attenuation"
           ],
-          "correct": 0,
-          "explanation": "The primary role is: If bridges are connected in physical loops for redundancy, flooded frames circulate endlessly, multiplying exponentially in a catastrophic broadcast storm. Radia Perlman's Spanning Tree Protocol (STP - IEEE 802.1D) elect a Root Bridge and selectively blocks redundant switch ports to maintain a loop-free logical tree."
+          "correct": 1,
+          "explanation": "STP prevents Layer 2 switching loops, which cause broadcast storms, duplicate frames, and MAC address table thrashing."
+        },
+        {
+          "question": "Which switch is chosen as the Root Bridge in an IEEE 802.1D STP network?",
+          "options": [
+            "The switch with the highest IP address",
+            "The switch with the lowest Bridge ID (Priority + MAC)",
+            "The switch with the largest number of connected ports",
+            "The switch that boots up first"
+          ],
+          "correct": 1,
+          "explanation": "The switch with the lowest Bridge ID (composed of Bridge Priority and Base MAC address) is elected Root Bridge."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "IEEE Std 802.1D: Media Access Control (MAC) Bridges and Spanning Tree Protocol.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "Radia Perlman, 'An Algorithm for Distributed Computation of a Spanning Tree in an Extended LAN', ACM SIGCOMM.",
+          "url": ""
+        },
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, Chapter 15.2.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Spanning_tree_protocol_at_work_1.svg",
-      "imageCaption": "Figure: IEEE 802.1D Spanning Tree Protocol (STP): Breaking Physical Loops and Preventing Broadcast Storms."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Spanning_tree_protocol_at_work_1.svg",
-    "imageCaption": "Figure: IEEE 802.1D Spanning Tree Protocol (STP): Breaking Physical Loops and Preventing Broadcast Storms."
+      ]
+    }
   },
   "u2-bridges-vs-switches": {
     "id": "u2-bridges-vs-switches",
     "title": "Bridges vs Switches",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "level": "Intermediate",
-    "category": "datalink",
+    "level": "Beginner",
+    "category": "switching",
     "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "IEEE 802.1D / IEEE 802.3",
-    "oneLiner": "Software-based 2-port bridges vs hardware ASIC multiport high-speed switches.",
-    "quickAnswer": "A switch is fundamentally a multiport bridge implemented in specialized hardware (ASIC chips). Bridges typically had 2-4 ports and processed frames via software CPU interrupts. Switches offer 24-48+ ports, cut-through forwarding, dedicated full-duplex wire-speed bandwidth, and microsegmentation.",
-    "whyItMatters": "Hardware switching enabled modern enterprise LANs to abandon half-duplex shared Ethernet entirely.",
+    "readingTime": "20–25 min",
+    "standard": "Forouzan Ch. 15 / Tanenbaum Ch. 4",
+    "oneLiner": "The architectural comparison between software-based 2-port bridges and modern hardware-based multi-port ASIC switches.",
+    "quickAnswer": "Both bridges and switches operate primarily at the Data Link Layer (Layer 2) and use MAC addresses to forward frames. However, they differ radically in architecture, port density, and performance: a bridge is typically a software-driven device with 2 to 4 ports connecting LAN segments, whereas a modern switch is a high-performance multiport bridge implemented in dedicated hardware ASICs, providing dedicated collision-free bandwidth to dozens or hundreds of ports simultaneously.",
+    "whyItMatters": "Understanding the distinction between bridges and switches clarifies the history of Local Area Networking and highlights why modern high-speed campus networks and cloud data centers rely exclusively on wire-speed ASIC switching fabrics.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "Layer 2 Forwarding",
+        "meaning": "Transmitting frames based on 48-bit MAC addresses"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "ASIC Hardware",
+        "meaning": "Application-Specific Integrated Circuits for wire-speed packet processing"
+      },
+      {
+        "concept": "Multiport Architecture",
+        "meaning": "A switch design where every single port has its own dedicated MAC controller"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Compare bridges and switches across all 8 standard technical dimensions.",
+      "Explain the famous architectural dictum: 'A switch is a high-performance multiport bridge'.",
+      "Analyze the advantages and disadvantages of Data Link Layer switching.",
+      "Evaluate solved exam comparison problems."
     ],
     "infobox": {
       "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "standard": "IEEE 802.3 / IEEE 802.1D",
+      "type": "Hardware & Architectural Comparison",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-bridges-overview",
+        "dll-switching"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "asic-forwarding",
+        "collision-domains",
+        "microsegmentation"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "routers-vs-switches",
+        "hubs-vs-switches"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Campus network design, device selection, data center fabric engineering, computer science exam preparation"
       ]
     },
+    "imageUrl": "https://images.openai.com/static-rsc-4/DuZgVF38ZhvT4v7VlqkCCNghRLqWgHGpmrv7afju_iSiEiIkBP_F-anNjzqKZhdkpxk3Aydz1fD2vhW39S10hs2rVyZWI57SVXePprIux8iEKeYwNoGqVrrbRKJz4r5L5N8o9CTUsVy_l7jQhCCHgfNqNaBP5Zes2MtwaPdAB4d1q6lRd2yT8ATAXeJlcwGR?purpose=fullsize",
+    "imageCaption": "Figure: Structural Comparison: Legacy Software Bridges vs. Modern High-Density Hardware Switches.",
     "sections": {
-      "overview": "<table class=\"wiki-table\"><thead><tr><th>Feature</th><th>Legacy Bridge</th><th>Modern Switch</th></tr></thead><tbody><tr><td><strong>Hardware Architecture</strong></td><td>Software-driven CPU forwarding</td><td>Hardware ASIC / TCAM forwarding</td></tr><tr><td><strong>Port Density</strong></td><td>Few ports (typically 2 to 4)</td><td>High density (24, 48, 96+ ports)</td></tr><tr><td><strong>Forwarding Mode</strong></td><td>Store-and-forward only</td><td>Cut-through, Fragment-free, or Store-and-forward</td></tr><tr><td><strong>Collision Domains</strong></td><td>Few segments separated</td><td>Microsegmentation (each port is its own domain)</td></tr><tr><td><strong>Full Duplex Support</strong></td><td>Rare</td><td>Standard on all ports</td></tr></tbody></table>",
-      "eli10": "In simple words: Software-based 2-port bridges vs hardware ASIC multiport high-speed switches.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Bridges vs Switches?<br><br><strong>Answer:</strong> A switch is fundamentally a multiport bridge implemented in specialized hardware (ASIC chips). Bridges typically had 2-4 ports and processed frames via software CPU interrupts. Switches offer 24-48+ ports, cut-through forwarding, dedicated full-duplex wire-speed bandwidth, and microsegmentation.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "overview": "\n      <p class=\"lead\">Both <strong>bridges</strong> and <strong>switches</strong> operate primarily at the <strong>Data Link Layer (Layer 2)</strong> of the OSI model and use MAC addresses to make intelligent forwarding decisions. However, they differ significantly in design, performance, and application.</p>\n\n      <div class=\"wiki-callout note my-3\">\n        <div class=\"callout-header\"><i class=\"fa-solid fa-quote-left\"></i> The Core Identity</div>\n        <p class=\"text-xs\"><strong>\"A switch can be understood as a high-performance multiport bridge.\"</strong><br>Every modern Ethernet switch is fundamentally a bridge whose forwarding logic has been cast into silicon ASICs across dozens of parallel ports.</p>\n      </div>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Comprehensive Comparison Table (From Syllabus)</h4>\n      <div class=\"overflow-x-auto my-3\">\n        <table class=\"wiki-table text-xs\">\n          <thead>\n            <tr class=\"bg-slate-100 dark:bg-slate-800\">\n              <th>Feature</th>\n              <th>Bridge</th>\n              <th>Switch</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr><td><strong>OSI Layer</strong></td><td>Layer 2 (Data Link Layer)</td><td>Primarily Layer 2 (L3 switches also route IP)</td></tr>\n            <tr><td><strong>Main Purpose</strong></td><td>Connect 2–4 separate LAN segments</td><td>Connect dozens of individual LAN host devices</td></tr>\n            <tr><td><strong>Number of Ports</strong></td><td>Usually fewer (typically 2 to 4 ports)</td><td>Usually more (24, 48, 96 to hundreds of ports)</td></tr>\n            <tr><td><strong>Forwarding Method</strong></td><td>MAC-based (processed via software CPU)</td><td>MAC-based (processed via dedicated hardware ASICs)</td></tr>\n            <tr><td><strong>Performance & Latency</strong></td><td>Lower throughput; higher store-and-forward latency</td><td>Massive throughput (wire-speed); sub-microsecond latency</td></tr>\n            <tr><td><strong>Collision Domains</strong></td><td>Separates network into 2–4 larger collision domains</td><td>Each individual port is its own dedicated collision domain</td></tr>\n            <tr><td><strong>Transmission Mode</strong></td><td>Mostly half-duplex shared access</td><td>Full-duplex dedicated links (zero collisions)</td></tr>\n            <tr><td><strong>Common Use</strong></td><td>Older, legacy, or specialized industrial LANs</td><td>Modern campus, enterprise, and data center Ethernet LANs</td></tr>\n          </tbody>\n        </table>\n      </div>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Advantages and Disadvantages of Data Link Layer Switching</h4>\n      <div class=\"grid grid-cols-1 md:grid-cols-2 gap-3 my-3 text-xs\">\n        <div class=\"p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800\">\n          <strong class=\"text-emerald-800 dark:text-emerald-300 block mb-1.5\"><i class=\"fa-solid fa-thumbs-up\"></i> Key Advantages</strong>\n          <ul class=\"list-disc pl-4 space-y-1 text-slate-600 dark:text-slate-300 text-[11px]\">\n            <li><strong>Reduced Unnecessary Traffic:</strong> Known unicast frames travel only to the intended recipient port.</li>\n            <li><strong>Improved Performance:</strong> Separate switch ports create separate collision domains (microsegmentation).</li>\n            <li><strong>Automatic Learning:</strong> Switches learn MAC addresses dynamically without manual configuration.</li>\n            <li><strong>Scalability:</strong> High port density allows hundreds of devices to be interconnected easily.</li>\n            <li><strong>Full-Duplex Communication:</strong> Simultaneous send and receive without CSMA/CD collisions.</li>\n            <li><strong>Loop Prevention:</strong> Integrated STP/RSTP prevents switching loops in redundant topologies.</li>\n          </ul>\n        </div>\n        <div class=\"p-3 rounded-lg bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800\">\n          <strong class=\"text-red-800 dark:text-red-300 block mb-1.5\"><i class=\"fa-solid fa-thumbs-down\"></i> Key Disadvantages</strong>\n          <ul class=\"list-disc pl-4 space-y-1 text-slate-600 dark:text-slate-300 text-[11px]\">\n            <li><strong>Higher Cost:</strong> Switches are significantly more expensive than simple repeaters or hubs.</li>\n            <li><strong>Configuration Complexity:</strong> Misconfigured VLANs, trunks, or STP can cause serious outages.</li>\n            <li><strong>Switching Loops:</strong> If STP fails or is disabled, catastrophic broadcast storms take down the LAN.</li>\n            <li><strong>Broadcast Domain Exposure:</strong> Broadcast traffic still reaches every device within the same VLAN.</li>\n            <li><strong>Hardware Capacity Limits:</strong> MAC address table (CAM) size is finite and vulnerable to overflow attacks.</li>\n          </ul>\n        </div>\n      </div>\n    ",
+      "eli10": "A bridge is like a two-lane toll bridge connecting two small towns. A switch is like a giant multi-story highway interchange with 48 private express lanes so every car drives at top speed without traffic jams.",
+      "analogy": "A bridge is like a general doctor who handles everything slowly in their head (software). A switch is like a specialized automated robotic surgery center (hardware ASIC) that handles 48 patients at once at the speed of light.",
+      "howItWorks": "\n      <p class=\"text-xs leading-relaxed\">Hardware switching fabric architecture:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li><strong>Crossbar Switching Matrix:</strong> Connects $N$ input ports to $N$ output ports through a grid of electronic semiconductor switches, allowing multiple frame transfers simultaneously as long as destinations do not conflict.</li>\n        <li><strong>Shared Memory Architecture:</strong> Frames enter a central high-speed memory pool where the ASIC scheduler maps pointers to egress queues.</li>\n        <li><strong>Cut-Through Switching:</strong> The switch reads the 6-byte destination MAC and begins transmitting the frame onto the destination wire before the rest of the frame has even arrived, reducing latency to ~1 microsecond!</li>\n      </ul>\n    ",
+      "technicalDetails": "\n      <p class=\"text-xs leading-relaxed\">Comparison with Layer 3 Routers:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li>Bitches/Switches forward frames based on <strong>flat MAC addresses</strong> within a single local network. They do NOT modify the MAC header.</li>\n        <li>Routers forward packets based on <strong>hierarchical IP addresses</strong> across different networks. They strip the incoming Layer 2 frame, decrement TTL, and build a brand-new Layer 2 frame with the next-hop MAC.</li>\n      </ul>\n    ",
+      "workedExamples": [
+        {
+          "title": "Example: Port Density and Collision Domain Calculation",
+          "difficulty": "Intermediate",
+          "problem": "Network A uses two 2-port bridges to connect 4 legacy Ethernet hubs, each hub hosting 8 computers. Network B replaces all equipment with a single 32-port Ethernet switch connecting all 32 computers directly.\n1. How many collision domains exist in Network A vs Network B?\n2. What is the collision domain size (number of hosts) in each?",
+          "solution": "1. In Network A: Each bridge port connects to a hub (shared bus). Two 2-port bridges connecting 4 hubs create 4 collision domains.\n   In Network B: With a 32-port switch, every port is an independent collision domain. Therefore, Network B has 32 separate collision domains!\n\n2. In Network A, each collision domain has 8 hosts competing for shared bandwidth (half-duplex, collisions occur).\n   In Network B, each collision domain contains exactly 1 host (microsegmentation, full-duplex, zero collisions)!"
+        }
+      ],
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Evolutionary Metric</th><th>Bridge (Legacy)</th><th>Switch (Modern)</th></tr></thead>\n        <tbody>\n          <tr><td>Forwarding Engine</td><td>Software CPU</td><td>Hardware ASIC / Crossbar</td></tr>\n          <tr><td>Typical Latency</td><td>100–500 &mu;s</td><td>0.5–5 &mu;s</td></tr>\n          <tr><td>Port Density</td><td>2 to 4</td><td>24 to 384+</td></tr>\n          <tr><td>Cost per Port</td><td>Expensive in 1980s</td><td>Extremely economical today</td></tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Modern Enterprise Data Centers: Top-of-Rack (ToR) and Spine switches.",
+        "Office LANs: Power-over-Ethernet (PoE) access layer switches connecting IP phones and PCs.",
+        "Smart Home Networks: Unmanaged desktop Gigabit switches."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Bridges vs Switches?",
+          "question": "Why is a modern Ethernet switch capable of significantly higher performance than a traditional bridge?",
           "options": [
-            "A switch is fundamentally a multiport bridge implemented in ...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "Because switches use software CPU interrupts to inspect frames",
+            "Because switches execute MAC forwarding in hardware ASICs across multiple dedicated ports",
+            "Because switches compress the frame payload",
+            "Because switches operate only over optical fiber"
           ],
-          "correct": 0,
-          "explanation": "The primary role is: A switch is fundamentally a multiport bridge implemented in specialized hardware (ASIC chips). Bridges typically had 2-4 ports and processed frames via software CPU interrupts. Switches offer 24-48+ ports, cut-through forwarding, dedicated full-duplex wire-speed bandwidth, and microsegmentation."
+          "correct": 1,
+          "explanation": "Modern switches use dedicated Application-Specific Integrated Circuits (ASICs) to forward frames in hardware at wire speed with minimal latency."
+        },
+        {
+          "question": "How many collision domains are created by a 24-port Ethernet switch with 24 connected computers?",
+          "options": [
+            "1 collision domain",
+            "2 collision domains",
+            "12 collision domains",
+            "24 collision domains"
+          ],
+          "correct": 3,
+          "explanation": "Each individual port on an Ethernet switch constitutes an independent, isolated collision domain (24 ports = 24 collision domains)."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, Chapter 15: Connecting LANs.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, Chapter 4: Data Link Layer Switching.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
-      "imageCaption": "Figure: Bridges (Software-Based, Few Ports) vs. Modern Switches (Hardware ASIC-Based, Many Ports)."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
-    "imageCaption": "Figure: Bridges (Software-Based, Few Ports) vs. Modern Switches (Hardware ASIC-Based, Many Ports)."
+      ]
+    }
   },
   "u2-networking-device-repeaters": {
     "id": "u2-networking-device-repeaters",
@@ -5527,89 +5858,114 @@ var TOPICS_U2_SYLLABUS = {
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
     "level": "Beginner",
-    "category": "datalink",
+    "category": "devices",
     "difficulty": "Core",
     "readingTime": "15–20 min",
-    "standard": "OSI Layer 1 (Physical Layer)",
-    "oneLiner": "Physical layer devices that regenerate and amplify electrical or optical signals to extend cable reach.",
-    "quickAnswer": "A repeater operates at Layer 1 (Physical Layer). It receives attenuated, distorted electrical or optical signals from one cable segment, amplifies and reshapes them to restore pristine wave shape and voltage, and retransmits them onto the next segment. It does not inspect frames or filter traffic.",
-    "whyItMatters": "Repeaters overcome the physical attenuation limits of copper cables (e.g., the 100m Ethernet limit).",
+    "standard": "Forouzan Ch. 15.1 / IEEE 802.3",
+    "oneLiner": "A Layer 1 physical device that overcomes signal attenuation by regenerating and retransmitting electrical/optical signals.",
+    "quickAnswer": "A repeater is a physical layer (Layer 1) networking device that receives a weak or degraded electrical or optical signal, cleans out transmission noise, regenerates the signal to its original amplitude and timing, and retransmits it to extend the maximum geographical reach of a physical network segment.",
+    "whyItMatters": "Electrical signals traveling across copper twisted-pair cables attenuate significantly after 100 meters due to physical electrical resistance and dielectric losses. Without repeaters to regenerate signals, Local Area Networks would be physically constrained to single rooms or short distances.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "Attenuation",
+        "meaning": "The progressive loss of signal energy and amplitude as it traverses a transmission medium"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Signal Regeneration",
+        "meaning": "Reconstructing the clean digital wave shape (0s and 1s) rather than merely amplifying noise"
+      },
+      {
+        "concept": "Layer 1 Operation",
+        "meaning": "Operating exclusively on raw physical bits without reading frame headers or addresses"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define a repeater and state its primary OSI operating layer.",
+      "Explain why a repeater is required to overcome signal attenuation.",
+      "Describe the 3 operational working steps of a signal repeater.",
+      "Contrast digital signal regeneration with simple analog amplification.",
+      "Identify the key characteristics, advantages, and limitations of repeaters."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layer 1 (Physical Layer)",
+      "standard": "IEEE 802.3 Physical Layer Specifications",
+      "type": "Signal Regeneration Hardware",
       "prerequisites": [
-        "u2-dll-intro"
+        "network-devices",
+        "attenuation"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "hubs",
+        "amplifiers",
+        "5-4-3-rule",
+        "collision-domain"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "analog-amplifiers",
+        "hubs",
+        "bridges"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Extending copper Ethernet runs, long-distance optical fiber transmission, submarine cable repeaters"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Ethernet-broadcast-collision_%28hub%29.svg",
+    "imageCaption": "Figure: Physical Layer Repeater (L1): Analog Signal Amplification, Regeneration, and Retiming.",
     "sections": {
-      "overview": "<p>A repeater operates at the bit level. It has no concept of frames, packets, MAC addresses, or IP addresses; it simply cleans and boosts physical signals.</p>",
-      "eli10": "In simple words: Physical layer devices that regenerate and amplify electrical or optical signals to extend cable reach.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Repeaters?<br><br><strong>Answer:</strong> A repeater operates at Layer 1 (Physical Layer). It receives attenuated, distorted electrical or optical signals from one cable segment, amplifies and reshapes them to restore pristine wave shape and voltage, and retransmits them onto the next segment. It does not inspect frames or filter traffic.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "overview": "\n      <p class=\"lead\">A <strong>repeater</strong> is a networking device that receives a weak, distorted, or attenuated signal, regenerates it to its original voltage and pulse shape, and retransmits it across another physical segment to extend total network distance.</p>\n\n      <p>A repeater operates strictly at the <strong>Physical Layer (Layer 1)</strong> of the OSI model. It treats data entirely as a continuous stream of electrical voltages, optical pulses, or radio frequencies.</p>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Why is a Repeater Needed? The Problem of Attenuation</h4>\n      <p class=\"text-xs leading-relaxed\">\n        When digital signals propagate through copper twisted-pair wires, coaxial cables, or optical fibers, signal strength deteriorates over distance due to medium resistance, capacitance, and thermal dissipation. This physical degradation is known as <strong>attenuation</strong>.\n        <br>&bull; In standard Cat5e/Cat6 copper cabling, signal degradation limits reliable transmission to exactly <strong>100 meters (328 feet)</strong>.\n        <br>&bull; Beyond 100 meters, signal edges round off and voltage drops, causing receivers to misinterpret 1s as 0s (bit errors).\n        <br>&bull; A repeater placed at or before the 100-meter mark regenerates crisp, full-amplitude square waves, allowing the network to span another 100 meters!\n      </p>\n\n      <div class=\"wiki-callout tip my-3\">\n        <div class=\"callout-header\"><i class=\"fa-solid fa-bolt\"></i> Regeneration vs. Amplification</div>\n        <p class=\"text-xs\">An <strong>amplifier</strong> blindly boosts both the signal and the accumulated noise, increasing distortion. A <strong>repeater</strong> performs digital <em>regeneration</em>: it samples the input wave, reconstructs fresh, clean digital pulses with sharp rising and falling edges, and retransmits the newly minted bits without accumulated noise!</p>\n      </div>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Working of a Repeater (3 Operational Steps)</h4>\n      <ol class=\"list-decimal pl-5 space-y-1 text-xs\">\n        <li><strong>Receives a signal</strong> from one physical network segment that has degraded over cable distance.</li>\n        <li><strong>Regenerates or retimes the signal:</strong> Extracts the underlying binary bitstream and reconstructs identical high-amplitude square waves aligned to the standard network clock.</li>\n        <li><strong>Transmits the renewed signal</strong> onto the adjacent network segment at full original power.</li>\n      </ol>\n    ",
+      "eli10": "Imagine you are whispering a message across a giant playground. By the time it travels 50 feet, it is too faint to hear. A friend standing at 50 feet listens, understands the words, and speaks them out loud at full volume to the next friend 50 feet away.",
+      "analogy": "Like a relay runner in an Olympic 4x100m race: rather than one tired runner slowing down over a long distance, a fresh runner takes the baton and sprints with maximum speed and energy.",
+      "howItWorks": "\n      <p class=\"text-xs leading-relaxed\">Key characteristics of Layer 1 repeaters:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li><strong>No Address Inspection:</strong> Does not examine 48-bit MAC addresses or 32-bit IP addresses.</li>\n        <li><strong>No Forwarding Decisions:</strong> Does not decide where frames travel; whatever enters Port 1 is regenerated and pushed out Port 2.</li>\n        <li><strong>Extends Physical Reach Only:</strong> Extends the geographical span of the cable plant.</li>\n        <li><strong>Single Collision Domain:</strong> Does <em>not</em> separate collision domains. If a collision occurs on Segment 1, the repeater faithfully regenerates the collision noise onto Segment 2!</li>\n        <li><strong>The 5-4-3 Rule:</strong> In legacy 10 Mbps coaxial Ethernet, a network could have at most 5 segments, 4 repeaters, and only 3 populated host segments to ensure collision detection timing bounds remained intact.</li>\n      </ul>\n    ",
+      "technicalDetails": "\n      <p class=\"text-xs leading-relaxed\">Optical Repeaters / Optical Amplifiers (EDFA):</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li>In transoceanic submarine fiber-optic cables, Erbium-Doped Fiber Amplifiers (EDFA) and optical regenerators are submerged every 50 to 80 km along the ocean floor to regenerate laser pulses across thousands of kilometers.</li>\n        <li>In wireless networks, Wi-Fi range extenders act as wireless repeaters, receiving weak 2.4 GHz/5 GHz frames from the main router and rebroadcasting them to dead zones.</li>\n      </ul>\n    ",
+      "workedExamples": [
+        {
+          "title": "Example: Extending a Weak Signal (PDF Solved Example 2)",
+          "difficulty": "Beginner",
+          "problem": "A signal becomes weak and degraded when travelling over a long industrial cable run between two manufacturing buildings.\nQuestion: Which networking device can regenerate the signal and what is the underlying physical reason?",
+          "solution": "Answer: A **Repeater**.\nPhysical Reason: As electrical signals travel through transmission media, electrical resistance and capacitance cause signal attenuation (loss of amplitude and rounded digital transitions). A repeater receives the degraded signal, reconstructs clean binary square waves, and retransmits the renewed signal at full power to extend the communication distance."
+        }
+      ],
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Advantages</th><th>Disadvantages / Limitations</th></tr></thead>\n        <tbody>\n          <tr><td>Extends signal transmission distance significantly.</td><td>Does not filter or block any network traffic.</td></tr>\n          <tr><td>Helps overcome medium attenuation and noise distortion.</td><td>Does not reduce collisions; both sides share 1 collision domain.</td></tr>\n          <tr><td>Completely simple to install and operate (plug-and-play).</td><td>Cannot connect different IP networks or different MAC architectures.</td></tr>\n          <tr><td>Extremely low hardware cost and minimal processing latency.</td><td>Cannot partition broadcast domains.</td></tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Submarine Fiber-Optic Communication Links (transatlantic internet cables).",
+        "Ethernet Extenders in industrial automation environments.",
+        "Consumer Wi-Fi range extenders and mesh repeater nodes."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Repeaters?",
+          "question": "At which layer of the OSI model does a network repeater operate?",
           "options": [
-            "A repeater operates at Layer 1 (Physical Layer). It receives...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "Physical Layer (Layer 1)",
+            "Data Link Layer (Layer 2)",
+            "Network Layer (Layer 3)",
+            "Transport Layer (Layer 4)"
           ],
           "correct": 0,
-          "explanation": "The primary role is: A repeater operates at Layer 1 (Physical Layer). It receives attenuated, distorted electrical or optical signals from one cable segment, amplifies and reshapes them to restore pristine wave shape and voltage, and retransmits them onto the next segment. It does not inspect frames or filter traffic."
+          "explanation": "A repeater operates at Layer 1 (Physical Layer), regenerating raw electrical, optical, or radio signals."
+        },
+        {
+          "question": "How does digital signal regeneration in a repeater differ from analog amplification?",
+          "options": [
+            "Amplification removes noise while regeneration boosts noise",
+            "Regeneration reconstructs clean digital square pulses while amplification boosts both signal and accumulated noise",
+            "Regeneration converts IP packets to MAC frames",
+            "Amplification operates at Layer 3 while regeneration operates at Layer 1"
+          ],
+          "correct": 1,
+          "explanation": "Digital regeneration reconstructs fresh, clean square waves, completely eliminating accumulated transmission noise, whereas amplifiers blindly magnify both signal and noise."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, Chapter 15.1: Repeaters.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "IEEE Std 802.3 Clause 9: Repeater Unit for 10 Mb/s Baseband Networks.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Ethernet-broadcast-collision_%28hub%29.svg",
-      "imageCaption": "Figure: Physical Layer Repeater (L1): Analog Signal Amplification, Regeneration, and Retiming."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Ethernet-broadcast-collision_%28hub%29.svg",
-    "imageCaption": "Figure: Physical Layer Repeater (L1): Analog Signal Amplification, Regeneration, and Retiming."
+      ]
+    }
   },
   "u2-networking-device-hubs": {
     "id": "u2-networking-device-hubs",
@@ -5617,89 +5973,112 @@ var TOPICS_U2_SYLLABUS = {
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
     "level": "Beginner",
-    "category": "datalink",
+    "category": "devices",
     "difficulty": "Core",
     "readingTime": "15–20 min",
-    "standard": "OSI Layer 1 (Multiport Repeater)",
-    "oneLiner": "Multiport physical layer devices that blindly broadcast incoming bits to all connected ports.",
-    "quickAnswer": "A hub is a multiport repeater operating at Layer 1. When an electrical signal arrives on one port, the hub regenerates it and broadcasts it out to ALL other ports simultaneously. All connected computers share a single collision domain and a single broadcast domain.",
-    "whyItMatters": "Hubs enabled early star-topology 10BASE-T cabling before being completely replaced by switches.",
+    "standard": "Forouzan Ch. 15.1 / Tanenbaum Ch. 4",
+    "oneLiner": "A multiport physical layer broadcast device that repeats incoming signals to all other connected ports.",
+    "quickAnswer": "A hub is a basic multiport physical layer (Layer 1) networking device used to connect multiple computers in a Local Area Network. When an electrical signal enters any hub port, the hub blindly replicates and repeats the signal out through all other connected ports. All devices connected to a hub share a single common collision domain and a single broadcast domain, operating strictly in half-duplex mode.",
+    "whyItMatters": "Hubs were the dominant central wiring device of 10BASE-T Ethernet in the 1990s, replacing fragile coaxial daisy-chains with star cabling. Understanding hubs is essential to appreciate why modern Ethernet switches were invented to replace them.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "Multiport Repeater",
+        "meaning": "A device that functions like a repeater across multiple physical interfaces"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Shared Collision Domain",
+        "meaning": "A network segment where simultaneous transmissions from any two hosts collide"
+      },
+      {
+        "concept": "Half-Duplex",
+        "meaning": "A communication channel where devices can transmit or receive, but not both at the same time"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define an Ethernet hub and state its operating OSI layer.",
+      "Explain the step-by-step working of a hub with the 4-computer scenario (Computer A, B, C, D).",
+      "Identify and compare the 3 types of hubs: Passive Hub, Active Hub, and Intelligent Hub.",
+      "Evaluate the major disadvantages of hubs: shared bandwidth, collisions, and security risks."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layer 1 (Physical Layer)",
+      "standard": "IEEE 802.3 (10BASE-T / 100BASE-TX Hubs)",
+      "type": "Multiport Broadcast Concentrator",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-networking-device-repeaters"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "switches",
+        "collision-domain",
+        "half-duplex",
+        "csma-cd"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "switches",
+        "bridges",
+        "repeaters"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Legacy 10BASE-T star networks, low-cost network taps for packet analysis, legacy test labs"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Ethernet-broadcast-collision_%28hub%29.svg",
+    "imageCaption": "Figure: Multiport Hub (L1): Electrical Signal Repeating: Single Collision Domain, Single Broadcast Domain.",
     "sections": {
-      "overview": "<p>Because a hub blindly repeats bits to all ports, if two computers transmit at once, their signals collide inside the hub. Bandwidth is shared among all connected devices.</p>",
-      "eli10": "In simple words: Multiport physical layer devices that blindly broadcast incoming bits to all connected ports.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Hubs?<br><br><strong>Answer:</strong> A hub is a multiport repeater operating at Layer 1. When an electrical signal arrives on one port, the hub regenerates it and broadcasts it out to ALL other ports simultaneously. All connected computers share a single collision domain and a single broadcast domain.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "overview": "\n      <p class=\"lead\">A <strong>hub</strong> is a basic networking device used to interconnect multiple computers and devices in a Local Area Network (LAN). It is fundamentally a <strong>multiport repeater</strong> operating at the <strong>Physical Layer (Layer 1)</strong> of the OSI model.</p>\n\n      <p>A hub receives incoming electrical signals on any port and immediately repeats and broadcasts them out through all of its other ports without inspecting packet contents or addresses.</p>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Step-by-Step Working of a Hub (From Syllabus)</h4>\n      <p class=\"text-xs\">Suppose four computers (A, B, C, and D) are connected to a 4-port hub:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li><strong>Step 1:</strong> Computer A sends an Ethernet data frame intended specifically for Computer C.</li>\n        <li><strong>Step 2:</strong> The hub receives the electrical signal from Computer A on Port 1.</li>\n        <li><strong>Step 3:</strong> The hub does <em>not</em> read Computer C's MAC address; it blindly <strong>repeats the signal through all other ports (Ports 2, 3, and 4)</strong>.</li>\n        <li><strong>Step 4:</strong> Computers B, C, and D all receive the physical signal simultaneously!</li>\n        <li><strong>Step 5:</strong> Computer C checks the destination MAC address, sees a match, and processes the frame. Computers B and D inspect the destination MAC, see that it does not match their hardware addresses, and silently discard the frame.</li>\n      </ul>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">The Three Types of Hubs</h4>\n      <div class=\"grid grid-cols-1 md:grid-cols-3 gap-2.5 my-3 text-xs\">\n        <div class=\"p-3 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700\">\n          <strong class=\"text-slate-800 dark:text-slate-200 block mb-1\">1. Passive Hub</strong>\n          <ul class=\"list-disc pl-4 space-y-1 text-slate-600 dark:text-slate-400 text-[11px]\">\n            <li>Acts purely as a physical connection point.</li>\n            <li>Does <strong>not</strong> regenerate or amplify signals.</li>\n            <li>Requires no external electrical power.</li>\n            <li>Merely splits/distributes the electrical signal across connected pins.</li>\n          </ul>\n        </div>\n        <div class=\"p-3 rounded-lg bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800\">\n          <strong class=\"text-blue-800 dark:text-blue-300 block mb-1\">2. Active Hub</strong>\n          <ul class=\"list-disc pl-4 space-y-1 text-slate-600 dark:text-slate-400 text-[11px]\">\n            <li>Regenerates and amplifies signals like a multiport repeater.</li>\n            <li>Requires an external power supply.</li>\n            <li>Overcomes cable attenuation and extends the maximum network diameter.</li>\n            <li>Helps clean out transmission noise before repeating to other ports.</li>\n          </ul>\n        </div>\n        <div class=\"p-3 rounded-lg bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800\">\n          <strong class=\"text-purple-800 dark:text-purple-300 block mb-1\">3. Intelligent Hub (Smart Hub)</strong>\n          <ul class=\"list-disc pl-4 space-y-1 text-slate-600 dark:text-slate-400 text-[11px]\">\n            <li>Includes built-in microprocessor and memory.</li>\n            <li>Provides network monitoring, port mirroring, and SNMP management.</li>\n            <li>Allows network administrators to remotely enable, disable, or monitor individual ports.</li>\n          </ul>\n        </div>\n      </div>\n    ",
+      "eli10": "A hub is like a megaphone in a crowded classroom. When Alice wants to tell Bob a secret, she has to shout it through the megaphone so Charlie and David hear it too. Bob listens, while Charlie and David try to ignore it.",
+      "analogy": "Like a multipin electrical power strip: whatever voltage enters the main cord is delivered equally to every single outlet plugged into the strip.",
+      "howItWorks": "\n      <p class=\"text-xs leading-relaxed\">Core operational characteristics of hubs:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li><strong>Layer 1 Device:</strong> Operates strictly at the physical layer; completely unaware of MAC addresses, IP addresses, or frame formats.</li>\n        <li><strong>Single Collision Domain:</strong> All connected devices reside in the exact same collision domain. If Computer A and Computer B transmit at the same instant, their signals collide on the hub's internal shared bus.</li>\n        <li><strong>Half-Duplex Only:</strong> A station cannot transmit and receive simultaneously. All stations must run CSMA/CD backoff algorithms.</li>\n        <li><strong>Shared Bandwidth:</strong> If a hub is rated for 100 Mbps, that 100 Mbps is shared among all connected stations. If 10 computers transmit, each gets an average of only 10 Mbps!</li>\n      </ul>\n    ",
+      "technicalDetails": "\n      <p class=\"text-xs leading-relaxed\">Security vulnerabilities of hub networks:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li><strong>Eavesdropping (Packet Sniffing):</strong> Because the hub broadcasts every frame to every port, any workstation running Wireshark or <code>tcpdump</code> in promiscuous mode can capture and read all unencrypted network traffic (passwords, emails, files) intended for other computers.</li>\n        <li>This fundamental architectural flaw led to the complete phaseout of hubs in commercial networks in favor of secure Layer 2 switches.</li>\n      </ul>\n    ",
+      "workedExamples": [
+        {
+          "title": "Example: Hub Distribution Behavior (PDF Solved Example 4)",
+          "difficulty": "Beginner",
+          "problem": "A hub connects five computers. If Computer A sends a data frame intended for Computer C, how does the hub distribute it, and what do the other computers do?",
+          "solution": "1. The hub receives the physical signal from Computer A on its port.\n2. Since the hub operates at Layer 1 and cannot read MAC addresses, it repeats the incoming signal through all other 4 ports.\n3. All connected computers (B, C, D, and E) receive the physical frame.\n4. Computer C identifies that the destination MAC matches its own network card and processes the payload.\n5. Computers B, D, and E see that the destination MAC does not match their hardware address and discard the frame."
+        }
+      ],
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Hub Advantages</th><th>Hub Disadvantages</th></tr></thead>\n        <tbody>\n          <tr><td>Extremely simple network connectivity and plug-and-play installation.</td><td>Sends all traffic to every connected device, wasting network bandwidth.</td></tr>\n          <tr><td>Very inexpensive compared to intelligent switches.</td><td>Shares total bandwidth among all connected devices.</td></tr>\n          <tr><td>Easily interconnects small clusters of devices in simple legacy setups.</td><td>Frequent collisions occur, drastically degrading throughput under heavy load.</td></tr>\n          <tr><td>Can serve as a cheap hardware network tap for packet inspection.</td><td>Severe security vulnerability (any station can sniff all frames).</td></tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Legacy 1990s 10BASE-T and 100BASE-TX Ethernet Local Area Networks.",
+        "Hardware network tapping in educational or security penetration testing labs.",
+        "Industrial automation legacy diagnostic points."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Hubs?",
+          "question": "How many collision domains does a 16-port Ethernet hub create?",
           "options": [
-            "A hub is a multiport repeater operating at Layer 1. When an ...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "1 collision domain",
+            "8 collision domains",
+            "16 collision domains",
+            "32 collision domains"
           ],
           "correct": 0,
-          "explanation": "The primary role is: A hub is a multiport repeater operating at Layer 1. When an electrical signal arrives on one port, the hub regenerates it and broadcasts it out to ALL other ports simultaneously. All connected computers share a single collision domain and a single broadcast domain."
+          "explanation": "All ports on a hub share a single internal bus, forming exactly ONE shared collision domain."
+        },
+        {
+          "question": "Which type of hub does NOT require external electrical power and does not regenerate signals?",
+          "options": [
+            "Active hub",
+            "Passive hub",
+            "Intelligent hub",
+            "Layer 3 hub"
+          ],
+          "correct": 1,
+          "explanation": "A passive hub merely serves as a physical connection point without signal regeneration and requires no power."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, Chapter 15.1: Hubs.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "Andrew S. Tanenbaum, Computer Networks, 6th Edition, Chapter 4.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Ethernet-broadcast-collision_%28hub%29.svg",
-      "imageCaption": "Figure: Multiport Hub (L1): Electrical Signal Repeating: Single Collision Domain, Single Broadcast Domain."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Ethernet-broadcast-collision_%28hub%29.svg",
-    "imageCaption": "Figure: Multiport Hub (L1): Electrical Signal Repeating: Single Collision Domain, Single Broadcast Domain."
+      ]
+    }
   },
   "u2-networking-device-bridges": {
     "id": "u2-networking-device-bridges",
@@ -5707,89 +6086,102 @@ var TOPICS_U2_SYLLABUS = {
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
     "level": "Beginner",
-    "category": "datalink",
+    "category": "devices",
     "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "OSI Layer 2 (Data Link Layer)",
-    "oneLiner": "Layer 2 devices that inspect MAC addresses to filter and forward frames between network segments.",
-    "quickAnswer": "A bridge operates at Layer 2 (Data Link Layer). It inspects destination MAC addresses in frame headers, maintaining a forwarding table to isolate local traffic. It divides a network into separate collision domains while keeping a single broadcast domain.",
-    "whyItMatters": "Bridges introduced intelligent address-based traffic filtering to local area networking.",
+    "readingTime": "20–25 min",
+    "standard": "Forouzan Ch. 15 / IEEE 802.1D",
+    "oneLiner": "A Layer 2 networking device that connects LAN segments and filters frames based on MAC addresses to partition collision domains.",
+    "quickAnswer": "A bridge is a Data Link Layer (Layer 2) networking device that connects two or more LAN segments and forwards frames between them using physical MAC addresses. A bridge examines incoming frames, dynamically learns device locations in its forwarding database, forwards frames across segments when necessary, and filters (drops) intra-segment frames to eliminate unnecessary traffic and separate collision domains.",
+    "whyItMatters": "Bridges introduced intelligent packet filtering to Local Area Networks. By dividing large shared buses into distinct collision domains, bridges multiplied network bandwidth, extended maximum network diameter, and paved the way for modern Ethernet switches.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "MAC Address",
+        "meaning": "48-bit unique hardware identifier burned into each network interface"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Collision Domain Segmentation",
+        "meaning": "Dividing a single large collision domain into isolated smaller segments"
+      },
+      {
+        "concept": "Forwarding Table",
+        "meaning": "Dynamic database mapping station MAC addresses to bridge port interfaces"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define a bridge and state its operating OSI layer.",
+      "Enumerate the 5 key functions of a bridge.",
+      "Describe the 5 sequential working steps of a bridge upon receiving an Ethernet frame.",
+      "Explain how bridges isolate collision domains while maintaining a single broadcast domain."
     ],
     "infobox": {
       "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "standard": "IEEE 802.1D",
+      "type": "Segment Interconnection & Filtering",
       "prerequisites": [
-        "u2-dll-intro"
+        "network-devices",
+        "u2-networking-device-hubs"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "switches",
+        "transparent-bridges",
+        "forwarding-and-filtering",
+        "stp"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "hubs",
+        "switches",
+        "routers"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Connecting legacy coaxial segments, segmenting collision domains, wireless bridging"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
+    "imageCaption": "Figure: Layer 2 Bridge: Separating Collision Domains while Maintaining a Single Broadcast Domain.",
     "sections": {
-      "overview": "<p>Bridges read frames, verify FCS checksums, and forward frames only across ports where the destination device actually resides.</p>",
-      "eli10": "In simple words: Layer 2 devices that inspect MAC addresses to filter and forward frames between network segments.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Bridges?<br><br><strong>Answer:</strong> A bridge operates at Layer 2 (Data Link Layer). It inspects destination MAC addresses in frame headers, maintaining a forwarding table to isolate local traffic. It divides a network into separate collision domains while keeping a single broadcast domain.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "overview": "\n      <p class=\"lead\">A <strong>bridge</strong> is a networking device that operates at the <strong>Data Link Layer (Layer 2)</strong> of the OSI model, connecting two or more distinct LAN segments and intelligently forwarding data frames between them based on physical MAC addresses.</p>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">The 5 Essential Functions of a Bridge</h4>\n      <ul class=\"list-disc pl-5 space-y-1.5 text-xs\">\n        <li><strong>1. Connects LAN Segments:</strong> Bridges physical boundaries between different segments (e.g., connecting a fiber link to a copper link).</li>\n        <li><strong>2. Learns MAC Addresses:</strong> Dynamically builds a forwarding table by inspecting the source MAC address of incoming frames.</li>\n        <li><strong>3. Forwards Frames:</strong> Transmits frames to the appropriate destination segment when the recipient is located across the bridge.</li>\n        <li><strong>4. Filters Unnecessary Frames:</strong> Discards frames whose destination is on the local segment, keeping remote segments silent.</li>\n        <li><strong>5. Reduces Inter-Segment Traffic:</strong> Confines intra-segment chatter locally, increasing overall network throughput.</li>\n      </ul>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Working of a Bridge (From Syllabus)</h4>\n      <ol class=\"list-decimal pl-5 space-y-1 text-xs\">\n        <li><strong>Receives an Ethernet frame</strong> from the physical layer of the incoming segment.</li>\n        <li><strong>Reads both source and destination MAC addresses</strong> from the Layer 2 header.</li>\n        <li><strong>Learns the source address</strong> and incoming port, updating its forwarding database.</li>\n        <li><strong>Checks its forwarding table</strong> to determine the port mapped to the destination MAC address.</li>\n        <li><strong>Executes action:</strong> Forwards the frame to the destination port, filters (drops) it if destination is on the same port, or floods it if destination is unknown.</li>\n      </ol>\n    ",
+      "eli10": "A bridge is like a smart door between two rooms. If two people in Room A talk, the door stays shut. If someone in Room A wants to send a note to Room B, the bridge opens the door and hands the note across.",
+      "analogy": "Like a traffic control checkpoint between two city districts: cars staying within District 1 are turned away from the bridge (filtering), while cars heading to District 2 are permitted to cross.",
+      "howItWorks": "\n      <p class=\"text-xs leading-relaxed\">Collision and broadcast domain separation:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li><strong>Collision Domain Separation:</strong> A bridge divides a single collision domain into multiple independent collision domains. Collisions on Segment 1 do not propagate to Segment 2.</li>\n        <li><strong>Single Broadcast Domain:</strong> A bridge does <em>not</em> separate broadcast domains. Broadcast frames (such as ARP requests) are flooded across all segments so that all stations receive them.</li>\n      </ul>\n    ",
+      "technicalDetails": "\n      <p class=\"text-xs leading-relaxed\">Bridge limitations compared to modern switches:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li>Traditional bridges were software-based, using a general-purpose processor to inspect frames in system memory, limiting throughput to tens of thousands of frames per second.</li>\n        <li>Traditional bridges offered very few ports (typically 2 to 4 ports), whereas modern switches offer dozens of hardware ASIC ports.</li>\n      </ul>\n    ",
+      "workedExamples": [
+        {
+          "title": "Example: Forwarding vs Filtering on Bridge Ports",
+          "difficulty": "Beginner",
+          "problem": "Bridge B connects Segment 1 (Hosts A and B) and Segment 2 (Hosts C and D). Host A transmits a frame destined for Host B. Describe the bridge's operation.",
+          "solution": "1. The frame arrives on Port 1 from Host A.\n2. Bridge B inspects its table: Host B is on Port 1.\n3. Since destination port (Port 1) == incoming arrival port (Port 1), Bridge B FILTERS (discards) the frame.\n4. Host B has already received the frame directly over Segment 1's shared wire. Segment 2 is spared from unnecessary traffic."
+        }
+      ],
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Bridge Advantages</th><th>Bridge Disadvantages</th></tr></thead>\n        <tbody>\n          <tr><td>Reduces unnecessary traffic between LAN segments.</td><td>Traditional bridges have very limited port capacity (2–4 ports).</td></tr>\n          <tr><td>Separates collision domains, multiplying available bandwidth.</td><td>Software frame inspection can introduce forwarding delays.</td></tr>\n          <tr><td>Learns MAC addresses automatically in learning bridges.</td><td>Redundant connections can create fatal broadcast loops without STP.</td></tr>\n          <tr><td>Connects heterogeneous physical media (coaxial to twisted pair).</td><td>Does not separate broadcast domains.</td></tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Legacy 10BASE5 / 10BASE-T campus interconnects.",
+        "Wireless Point-to-Point bridges connecting distant office buildings.",
+        "Linux container network bridging (`br0` interface)."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Bridges?",
+          "question": "How does a bridge affect collision domains and broadcast domains?",
           "options": [
-            "A bridge operates at Layer 2 (Data Link Layer). It inspects ...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "Separates collision domains; maintains a single broadcast domain",
+            "Separates broadcast domains; maintains a single collision domain",
+            "Separates both collision and broadcast domains",
+            "Does not separate either domain"
           ],
           "correct": 0,
-          "explanation": "The primary role is: A bridge operates at Layer 2 (Data Link Layer). It inspects destination MAC addresses in frame headers, maintaining a forwarding table to isolate local traffic. It divides a network into separate collision domains while keeping a single broadcast domain."
+          "explanation": "A bridge separates collision domains between its ports, but maintains a single shared broadcast domain."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, Chapter 15.1: Bridges.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "IEEE Std 802.1D: MAC Bridges.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
-      "imageCaption": "Figure: Layer 2 Bridge: Separating Collision Domains while Maintaining a Single Broadcast Domain."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
-    "imageCaption": "Figure: Layer 2 Bridge: Separating Collision Domains while Maintaining a Single Broadcast Domain."
+      ]
+    }
   },
   "u2-networking-device-switches": {
     "id": "u2-networking-device-switches",
@@ -5797,179 +6189,206 @@ var TOPICS_U2_SYLLABUS = {
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
     "level": "Beginner",
-    "category": "datalink",
+    "category": "devices",
     "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "OSI Layer 2 (Multiport Bridge)",
-    "oneLiner": "High-performance Layer 2 devices providing dedicated full-duplex bandwidth per port via ASIC forwarding.",
-    "quickAnswer": "A switch operates at Layer 2 (Data Link Layer) as a high-speed multiport bridge. It maintains a MAC address table in hardware (CAM/TCAM) and forwards frames directly from input port to destination port without disturbing other ports. Each switch port is an isolated collision domain.",
-    "whyItMatters": "Switches form the backbone of modern enterprise LANs, Wi-Fi networks, and cloud datacenter fabrics.",
+    "readingTime": "20–25 min",
+    "standard": "Forouzan Ch. 15 / IEEE 802.3",
+    "oneLiner": "A high-performance multiport bridge that forwards frames at wire speed using hardware ASICs, providing dedicated collision domains per port.",
+    "quickAnswer": "A switch is a high-speed networking device that connects multiple computers and devices in a Local Area Network and forwards frames using MAC addresses. Operating primarily at the Data Link Layer (Layer 2), an Ethernet switch provides dedicated full-duplex bandwidth to each port (microsegmentation), eliminating collisions completely. Advanced multilayer switches can also perform Layer 3 IP routing between VLANs.",
+    "whyItMatters": "The Ethernet switch is the indispensable foundation of all modern wired LANs. By replacing shared hubs with dedicated full-duplex ASIC switching fabrics, switches enabled the transition from 10 Mbps shared networks to 100 Gbps wire-speed cloud data centers.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "CAM Table",
+        "meaning": "Content Addressable Memory table mapping MAC addresses to switch ports"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Microsegmentation",
+        "meaning": "Isolating every single switch port into its own private collision domain"
+      },
+      {
+        "concept": "VLAN",
+        "meaning": "Virtual Local Area Network partitioning broadcast domains within a switch"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define an Ethernet switch and identify its operating OSI layers.",
+      "Explain the step-by-step working of a switch including MAC learning and CAM lookup.",
+      "Compare the 3 types of switches: Unmanaged Switch, Managed Switch, and Layer 3 Switch.",
+      "Explain the concept and performance benefits of microsegmentation and full-duplex operation."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layer 2 (Data Link Layer) & Layer 3 (Multilayer)",
+      "standard": "IEEE 802.3 / IEEE 802.1Q",
+      "type": "Multiport Wire-Speed Switching",
       "prerequisites": [
-        "u2-dll-intro"
+        "u2-networking-device-bridges",
+        "dll-switching"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "vlan",
+        "cam-table",
+        "stp",
+        "layer3-switch"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "hubs",
+        "bridges",
+        "routers"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Enterprise campus access/distribution/core, data center leaf-spine fabrics, home LANs"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
+    "imageCaption": "Figure: Multiport Layer 2 Switch: Dedicated Collision Domain per Port with Full-Duplex Microsegmentation.",
     "sections": {
-      "overview": "<p>Switches provide dedicated collision-free communication to every attached computer, allowing simultaneous transmissions across different pairs of ports at full wire speed.</p>",
-      "eli10": "In simple words: High-performance Layer 2 devices providing dedicated full-duplex bandwidth per port via ASIC forwarding.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Switches?<br><br><strong>Answer:</strong> A switch operates at Layer 2 (Data Link Layer) as a high-speed multiport bridge. It maintains a MAC address table in hardware (CAM/TCAM) and forwards frames directly from input port to destination port without disturbing other ports. Each switch port is an isolated collision domain.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "overview": "\n      <p class=\"lead\">A <strong>switch</strong> is a high-speed networking device that connects multiple devices in a Local Area Network (LAN) and intelligently forwards data frames using <strong>hardware MAC addresses</strong>.</p>\n\n      <p>A traditional Ethernet switch operates primarily at the <strong>Data Link Layer (Layer 2)</strong>. It is architecturally a high-performance, wire-speed multiport bridge. In modern networks, <strong>multilayer switches (Layer 3 switches)</strong> can also inspect IP headers and perform inter-VLAN routing at hardware wire speed.</p>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Step-by-Step Working of a Switch (From Syllabus)</h4>\n      <ol class=\"list-decimal pl-5 space-y-1 text-xs\">\n        <li><strong>Receives a frame</strong> on an ingress port.</li>\n        <li><strong>Reads the Source MAC address:</strong> Identifies which device transmitted the frame.</li>\n        <li><strong>Learns the Source MAC and incoming port:</strong> Records the mapping into its high-speed CAM table, resetting its aging timer.</li>\n        <li><strong>Checks the Destination MAC address:</strong> Queries the CAM table for the destination address.</li>\n        <li><strong>Forwards the frame:</strong> If destination is known on another port, directs the frame exclusively through that port.</li>\n        <li><strong>Floods the frame:</strong> If destination is unknown or broadcast, floods copies to all active ports (except incoming port) within the applicable VLAN.</li>\n      </ol>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">The Three Main Types of Switches</h4>\n      <div class=\"grid grid-cols-1 md:grid-cols-3 gap-2.5 my-3 text-xs\">\n        <div class=\"p-3 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700\">\n          <strong class=\"text-slate-800 dark:text-slate-200 block mb-1\">1. Unmanaged Switch</strong>\n          <p class=\"text-[11px] text-slate-600 dark:text-slate-400\">Works with zero configuration (plug-and-play). Fixed settings, no VLANs or remote monitoring. Ideal for home networks and small offices.</p>\n        </div>\n        <div class=\"p-3 rounded-lg bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800\">\n          <strong class=\"text-blue-800 dark:text-blue-300 block mb-1\">2. Managed Switch</strong>\n          <p class=\"text-[11px] text-slate-600 dark:text-slate-400\">Supports extensive configuration and monitoring (CLI, Web, SNMP). Supports VLANs (802.1Q), STP loop prevention, QoS prioritization, and port security.</p>\n        </div>\n        <div class=\"p-3 rounded-lg bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800\">\n          <strong class=\"text-purple-800 dark:text-purple-300 block mb-1\">3. Layer 3 Switch</strong>\n          <p class=\"text-[11px] text-slate-600 dark:text-slate-400\">Combines high-density Layer 2 switching with hardware-based Layer 3 IP routing. Routes traffic between VLANs at wire speed without bottlenecking an external router.</p>\n        </div>\n      </div>\n    ",
+      "eli10": "A switch is like a private telephone exchange. When you call your friend in Room 3, the switch creates a private direct connection between you two, allowing 20 other people in other rooms to make private calls at the exact same moment without interference.",
+      "analogy": "Like a private courier sorting hub with dedicated conveyor belts: instead of dumping all packages into a central pile, robotic scanners read each package's barcode and route it down a private track directly to the delivery truck.",
+      "howItWorks": "\n      <p class=\"text-xs leading-relaxed\">Microsegmentation and Full-Duplex wire speed:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li><strong>Microsegmentation:</strong> Every single port on a switch is its own private collision domain. When a computer is connected directly to a switch port, only two devices exist on that link (the computer's NIC and the switch port).</li>\n        <li><strong>Full-Duplex Mode:</strong> Because collision risks are eliminated, the link operates in full-duplex mode: separate pairs of wires are used for transmitting and receiving, doubling link capacity (e.g., 1000 Mbps send + 1000 Mbps receive = 2000 Mbps bandwidth).</li>\n      </ul>\n    ",
+      "technicalDetails": "\n      <p class=\"text-xs leading-relaxed\">Switching forwarding modes:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li><strong>Store-and-Forward:</strong> Completely receives and buffers the frame, validates the 32-bit CRC checksum, and drops corrupted frames. Standard in enterprise switches.</li>\n        <li><strong>Cut-Through:</strong> Reads only the first 6 bytes (destination MAC) and immediately forwards the frame before the rest arrives, achieving $< 1\\;\\mu\\text{s}$ latency.</li>\n        <li><strong>Fragment-Free:</strong> Checks the first 64 bytes (Ethernet collision window) to filter runt frames before forwarding.</li>\n      </ul>\n    ",
+      "workedExamples": [
+        {
+          "title": "Example: Connecting 30 Computers in a LAN (PDF Solved Example 3)",
+          "difficulty": "Beginner",
+          "problem": "A computer laboratory has 30 computers that need to communicate reliably and fast within the same Local Area Network.\nQuestion: Which networking device is most suitable, and what is the technical reason?",
+          "solution": "Answer: An **Ethernet Switch**.\nTechnical Reason: An Ethernet switch connects multiple devices, maintains a dynamic CAM table, and forwards frames specifically to destination ports using MAC addresses. Furthermore, it provides a dedicated collision domain for each of the 30 computers, enabling full-duplex, collision-free communication."
+        }
+      ],
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Switch Advantages</th><th>Switch Disadvantages</th></tr></thead>\n        <tbody>\n          <tr><td>Reduces unnecessary traffic by directing unicast frames only to target ports.</td><td>More expensive than basic unmanaged hubs.</td></tr>\n          <tr><td>Provides a dedicated collision domain for each switch port.</td><td>Requires knowledgeable configuration for VLANs, trunks, and security.</td></tr>\n          <tr><td>Supports full-duplex simultaneous transmission and reception.</td><td>Incorrect configuration (e.g., VLAN mismatch) can disrupt communication.</td></tr>\n          <tr><td>Drastically improves LAN performance, scalability, and security.</td><td>Broadcast traffic still floods across the VLAN and must be managed.</td></tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Access Layer Switches connecting office PCs, printers, and phones.",
+        "Data Center Top-of-Rack (ToR) 10G/25G/100G switches.",
+        "Smart Home Gigabit switches connecting gaming PCs, NAS storage, and smart TVs."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Switches?",
+          "question": "What is the primary benefit of microsegmentation provided by an Ethernet switch?",
           "options": [
-            "A switch operates at Layer 2 (Data Link Layer) as a high-spe...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "It compresses data frames to reduce size",
+            "Each port becomes its own isolated collision domain, eliminating collisions",
+            "It assigns static IP addresses automatically",
+            "It encrypts frame payloads with AES-256"
           ],
-          "correct": 0,
-          "explanation": "The primary role is: A switch operates at Layer 2 (Data Link Layer) as a high-speed multiport bridge. It maintains a MAC address table in hardware (CAM/TCAM) and forwards frames directly from input port to destination port without disturbing other ports. Each switch port is an isolated collision domain."
+          "correct": 1,
+          "explanation": "Microsegmentation isolates every switch port into an independent collision domain, allowing full-duplex communication without collisions."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, Chapter 15.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "Cisco Networking Academy: CCNA Switch Operations and Architecture.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
-      "imageCaption": "Figure: Multiport Layer 2 Switch: Dedicated Collision Domain per Port with Full-Duplex Microsegmentation."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
-    "imageCaption": "Figure: Multiport Layer 2 Switch: Dedicated Collision Domain per Port with Full-Duplex Microsegmentation."
+      ]
+    }
   },
   "u2-networking-device-routers": {
     "id": "u2-networking-device-routers",
     "title": "Routers",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "level": "Beginner",
-    "category": "datalink",
+    "level": "Intermediate",
+    "category": "devices",
     "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "OSI Layer 3 (Network Layer)",
-    "oneLiner": "Layer 3 internetworking devices that forward packets between different IP subnets based on routing tables.",
-    "quickAnswer": "A router operates at Layer 3 (Network Layer). It inspects destination IP addresses, looks up best paths in routing tables (built via OSPF, BGP, or static routes), and forwards packets between different subnets. Routers break up both collision domains and broadcast domains.",
-    "whyItMatters": "Routers interconnect disparate network technologies (Ethernet, Wi-Fi, 5G, fiber) to form the global Internet.",
+    "readingTime": "25–30 min",
+    "standard": "Forouzan Ch. 15 / Kurose & Ross Ch. 4",
+    "oneLiner": "A Layer 3 internetworking device that connects different IP networks and forwards packets using logical routing tables.",
+    "quickAnswer": "A router is a Network Layer (Layer 3) networking device that connects two or more different IP networks (such as a local LAN and an ISP WAN) and forwards data packets between them using logical IP addresses. A router inspects the destination IP address of incoming packets, consults its routing table, calculates the optimal path using routing algorithms, decrements the TTL, and forwards the packet out the appropriate interface, separating broadcast domains.",
+    "whyItMatters": "While switches interconnect machines within a single subnetwork, routers are the architects of the global Internet. Routers bind millions of independent heterogeneous networks together into a single cohesive worldwide internetwork.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "Logical IP Address",
+        "meaning": "Hierarchical 32-bit (IPv4) or 128-bit (IPv6) network layer address"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Routing Table",
+        "meaning": "Database of known network prefixes, subnet masks, next-hop IPs, and interface metrics"
+      },
+      {
+        "concept": "Broadcast Domain Boundary",
+        "meaning": "Routers block Layer 2 broadcast frames, confining broadcasts to the local subnet"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define a router and identify its primary operating layer in the OSI Reference Model.",
+      "Explain why a router is required to connect different IP networks.",
+      "Describe the 5 operational steps a router executes upon receiving an IP packet.",
+      "Identify and compare the 4 main types of routers: Wired, Wireless, Core, and Edge routers.",
+      "Explain the role of routers in separating broadcast domains and providing NAT/DHCP/firewall services."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layer 3 (Network Layer)",
+      "standard": "IETF IPv4 (RFC 791) / IPv6 (RFC 8200) / OSPF / BGP",
+      "type": "Network Layer Routing & Path Determination",
       "prerequisites": [
-        "u2-dll-intro"
+        "network-devices",
+        "ip-addressing"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "routing-table",
+        "default-gateway",
+        "nat",
+        "broadcast-domain"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "switches",
+        "gateways",
+        "layer3-switches"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Internet WAN routing, campus core routing, branch office SD-WAN, residential internet gateways"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Router_on_a_stick.png",
+    "imageCaption": "Figure: Layer 3 Router: Logical IP Addressing, Path Determination, and Broadcast Domain Separation.",
     "sections": {
-      "overview": "<p>Unlike switches which operate within a single local subnet, routers connect entirely separate IP networks, making routing decisions based on IP prefixes.</p>",
-      "eli10": "In simple words: Layer 3 internetworking devices that forward packets between different IP subnets based on routing tables.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Routers?<br><br><strong>Answer:</strong> A router operates at Layer 3 (Network Layer). It inspects destination IP addresses, looks up best paths in routing tables (built via OSPF, BGP, or static routes), and forwards packets between different subnets. Routers break up both collision domains and broadcast domains.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "overview": "\n      <p class=\"lead\">A <strong>router</strong> is a networking device that connects different IP networks and forwards data packets between them using <strong>logical IP addresses</strong>.</p>\n\n      <p>A router operates at the <strong>Network Layer (Layer 3)</strong> of the OSI model. Whereas a switch connects devices within a single local LAN, a router allows devices on one local network to communicate with devices on completely different subnets, remote branches, or across the global Internet.</p>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Why is a Router Needed?</h4>\n      <p class=\"text-xs leading-relaxed\">\n        Switches only understand flat 48-bit MAC addresses and broadcast frames across their local VLAN. If an entire city were connected with switches, broadcast storms would instantly paralyze the network!\n        <br>&bull; A router <strong>blocks Layer 2 broadcasts</strong>, terminating the broadcast domain at each of its routed interfaces.\n        <br>&bull; A router understands <strong>hierarchical IP addressing</strong> (network ID + host ID), enabling scalable packet forwarding across millions of networks worldwide.\n        <br>&bull; For example, your home wireless router connects your private home LAN (e.g., <code><code>192.168.1.0/24</code></code>') to your Internet Service Provider's public routing network.\n      </p>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Working of a Router (5 Operational Steps)</h4>\n      <ol class=\"list-decimal pl-5 space-y-1 text-xs\">\n        <li><strong>Receives an incoming frame</strong> and strips off the Layer 2 Ethernet header and trailer to extract the enclosed IP packet.</li>\n        <li><strong>Examines the Destination IP address</strong> inside the Layer 3 header.</li>\n        <li><strong>Checks its Routing Table</strong> to find the longest matching network prefix.</li>\n        <li><strong>Selects the best available route:</strong> Determines the next-hop router IP and the corresponding outgoing physical interface.</li>\n        <li><strong>Re-encapsulates & Forwards:</strong> Decrements the Time-to-Live (TTL) field, recalculates the IP header checksum, builds a brand-new Layer 2 frame addressed to the next-hop MAC, and transmits it out the selected interface.</li>\n      </ol>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">The Four Types of Routers</h4>\n      <div class=\"grid grid-cols-1 md:grid-cols-2 gap-3 my-3 text-xs\">\n        <div class=\"p-3 rounded-lg bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800\">\n          <strong class=\"text-blue-800 dark:text-blue-300 block mb-1\">1. Wired Router</strong>\n          <p class=\"text-[11px] text-slate-600 dark:text-slate-400\">Connects devices and networks through high-speed wired interfaces (Ethernet, Gigabit fiber, serial T1/E1 lines).</p>\n        </div>\n        <div class=\"p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800\">\n          <strong class=\"text-emerald-800 dark:text-emerald-300 block mb-1\">2. Wireless Router</strong>\n          <p class=\"text-[11px] text-slate-600 dark:text-slate-400\">Combines IP routing with Wi-Fi wireless access point functionality, commonly used in residential homes and small offices.</p>\n        </div>\n        <div class=\"p-3 rounded-lg bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800\">\n          <strong class=\"text-purple-800 dark:text-purple-300 block mb-1\">3. Core Router</strong>\n          <p class=\"text-[11px] text-slate-600 dark:text-slate-400\">High-capacity backbone routers deployed within the core of ISPs, telecom carriers, and cloud providers forwarding Terabits of data per second.</p>\n        </div>\n        <div class=\"p-3 rounded-lg bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800\">\n          <strong class=\"text-amber-800 dark:text-amber-300 block mb-1\">4. Edge / Border Router</strong>\n          <p class=\"text-[11px] text-slate-600 dark:text-slate-400\">Positioned at the boundary of an enterprise network to connect the internal organization to external ISP connections and WAN links.</p>\n        </div>\n      </div>\n    ",
+      "eli10": "A switch is like a mail carrier who delivers letters inside your apartment building. A router is like an airport air-traffic controller who sends airplanes between different cities across the world.",
+      "analogy": "Like an international postal sorting hub: it reads the country and city name on the envelope, decides whether to put it on a train, plane, or truck, and hands it to the next postal hub along the best highway route.",
+      "howItWorks": "\n      <p class=\"text-xs leading-relaxed\">Integrated services in modern routers:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li><strong>NAT (Network Address Translation):</strong> Translates multiple private non-routable IP addresses (e.g., <code><code>192.168.1.0/24</code></code>') into a single publicly routable IP address provided by the ISP.</li>\n        <li><strong>DHCP Server:</strong> Automatically assigns dynamic IP addresses, subnet masks, DNS servers, and default gateways to client computers upon connection.</li>\n        <li><strong>Stateful Firewall & ACLs:</strong> Inspects packet headers to block unauthorized inbound traffic and safeguard local devices.</li>\n      </ul>\n    ",
+      "technicalDetails": "\n      <p class=\"text-xs leading-relaxed\">Dynamic Routing Protocols:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li>Routers automatically discover network topologies and adapt to cable cuts using interior routing protocols (OSPF, IS-IS, EIGRP) and the global exterior routing protocol (BGP-4).</li>\n        <li>Longest Prefix Match (LPM): When multiple routing entries match a destination IP, the router chooses the entry with the most specific (longest) subnet mask prefix.</li>\n      </ul>\n    ",
+      "workedExamples": [
+        {
+          "title": "Example: Choosing the Correct Device (PDF Solved Example 1)",
+          "difficulty": "Beginner",
+          "problem": "A company wants to connect two completely different IP networks: Network 1 (192.168.10.0/24) in Building A, and Network 2 (172.16.50.0/24) in Building B.\nQuestion: Which networking device should be used, and what is the technical reason?",
+          "solution": "Answer: A **Router**.\nTechnical Reason: A switch connects devices within the same IP subnet using MAC addresses. Because the two buildings operate on distinct logical IP network prefixes (192.168.10.0/24 and 172.16.50.0/24), a Layer 3 Router is required to maintain routing tables, translate Layer 2 framing, and forward packets between the two different IP networks."
+        }
+      ],
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Router Advantages</th><th>Router Disadvantages</th></tr></thead>\n        <tbody>\n          <tr><td>Connects disparate IP networks and WAN technologies.</td><td>Significantly more complex to configure and manage than switches.</td></tr>\n          <tr><td>Selects the best available path using dynamic metrics.</td><td>More expensive per interface port than Layer 2 switches.</td></tr>\n          <tr><td>Separates broadcast domains, eliminating broadcast storms.</td><td>Header parsing and routing table lookups introduce packet latency.</td></tr>\n          <tr><td>Provides robust network security (NAT, ACLs, firewalls).</td><td>Incorrect routing configurations (e.g., loops) can cause blackholes.</td></tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Enterprise Branch Offices connecting to corporate SD-WANs and cloud services.",
+        "ISP Backbone Networks: Cisco 8000 / Juniper PTX core routers.",
+        "Consumer Home Broadband: Wi-Fi 6 cable/fiber optic wireless gateways."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Routers?",
+          "question": "What happens to the Layer 2 header of an Ethernet frame when it passes through a router?",
           "options": [
-            "A router operates at Layer 3 (Network Layer). It inspects de...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "The router preserves the Layer 2 header unchanged",
+            "The router strips the incoming Layer 2 header and builds a brand-new Layer 2 header with the next-hop MAC address",
+            "The router converts the MAC address into an IP address",
+            "The router encrypts the Layer 2 header"
           ],
-          "correct": 0,
-          "explanation": "The primary role is: A router operates at Layer 3 (Network Layer). It inspects destination IP addresses, looks up best paths in routing tables (built via OSPF, BGP, or static routes), and forwards packets between different subnets. Routers break up both collision domains and broadcast domains."
+          "correct": 1,
+          "explanation": "Routers strip the old Layer 2 header at each hop, decrement the IP TTL, and build a new Layer 2 header corresponding to the next-hop physical medium."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, Chapter 15: Connecting LANs and Routers.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "James Kurose & Keith Ross, Computer Networks: A Top-Down Approach, Chapter 4: The Network Layer.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Router_on_a_stick.png",
-      "imageCaption": "Figure: Layer 3 Router: Logical IP Addressing, Path Determination, and Broadcast Domain Separation."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Router_on_a_stick.png",
-    "imageCaption": "Figure: Layer 3 Router: Logical IP Addressing, Path Determination, and Broadcast Domain Separation."
+      ]
+    }
   },
   "u2-networking-device-gateways": {
     "id": "u2-networking-device-gateways",
@@ -5977,89 +6396,103 @@ var TOPICS_U2_SYLLABUS = {
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
     "level": "Intermediate",
-    "category": "datalink",
+    "category": "devices",
     "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "OSI Layer 4–7 (Application Layer)",
-    "oneLiner": "Protocol translators interconnecting systems with completely different architecture and protocol stacks.",
-    "quickAnswer": "A gateway operates across all upper OSI layers (Layers 4 to 7). Unlike routers which only route IP packets, a gateway translates between fundamentally different protocol architectures—such as converting between VoIP SIP telephony and analog PSTN, or translating email protocols.",
-    "whyItMatters": "Gateways enable communication between completely incompatible network architectures.",
+    "readingTime": "20–25 min",
+    "standard": "Forouzan Ch. 15 / ISO 7498-1",
+    "oneLiner": "A multi-layer protocol converter that connects networks utilizing completely different architectures, formats, or protocols.",
+    "quickAnswer": "A gateway is a networking device or software system that connects networks operating on different protocols, architectures, or data communication formats. Unlike repeaters, switches, or routers which pass data payloads transparently, a gateway actively translates data at the Transport, Session, Presentation, or Application layers. In everyday consumer networking, the term 'default gateway' refers to the local router that provides an exit point from the local subnet to external networks.",
+    "whyItMatters": "Different computing platforms, cloud environments, industrial automation buses, and legacy mainframes speak entirely incompatible communication protocols. Gateways make heterogeneous internetworking possible by acting as universal multi-layer protocol translators.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "Protocol Translation",
+        "meaning": "Converting message syntax, encoding, and control structures between divergent protocols"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Default Gateway",
+        "meaning": "The local router IP address configured on end hosts to reach external IP destinations"
+      },
+      {
+        "concept": "Application Proxy",
+        "meaning": "An intermediary server that terminates client requests, inspects data, and re-initiates server requests"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define a gateway and distinguish it from repeaters, switches, and routers.",
+      "Explain why a gateway is not restricted to a single OSI layer.",
+      "Identify and compare the 3 types of gateways: Default Gateway, Protocol Gateway, and Application Gateway.",
+      "Describe the working of a default gateway in everyday TCP/IP host communication.",
+      "Evaluate the advantages and latency trade-offs of protocol translation gateways."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layers 4 through 7 (Multi-Layer / Application Layer)",
+      "standard": "IETF / ITU-T / ISO Cross-Layer Specifications",
+      "type": "Protocol & Architecture Translation",
       "prerequisites": [
-        "u2-dll-intro"
+        "network-devices",
+        "u2-networking-device-routers"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "default-gateway",
+        "api-gateway",
+        "nat64",
+        "application-proxy"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "routers",
+        "firewalls",
+        "proxies"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Connecting legacy systems to IP networks, VoIP SIP-to-PSTN gateways, cloud API gateways, IoT sensor gateways"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Router_on_a_stick.png",
+    "imageCaption": "Figure: Protocol Gateway: Multi-Layer Translation between Incompatible Application and Transport Protocols.",
     "sections": {
-      "overview": "<p>A gateway translates payloads, commands, and encoding formats across incompatible protocol stacks (e.g., an IoT Zigbee-to-IP cloud gateway).</p>",
-      "eli10": "In simple words: Protocol translators interconnecting systems with completely different architecture and protocol stacks.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Gateways?<br><br><strong>Answer:</strong> A gateway operates across all upper OSI layers (Layers 4 to 7). Unlike routers which only route IP packets, a gateway translates between fundamentally different protocol architectures—such as converting between VoIP SIP telephony and analog PSTN, or translating email protocols.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "overview": "\n      <p class=\"lead\">A <strong>gateway</strong> is a device or software system that connects networks that may use completely different communication protocols, architectures, or data formats.</p>\n\n      <p>While repeaters operate at Layer 1, bridges/switches at Layer 2, and routers at Layer 3, <strong>a gateway is not restricted to any single OSI layer</strong>. Depending on its function, a gateway can operate across Layers 4, 5, 6, and 7, parsing and actively translating full data payloads.</p>\n\n      <div class=\"wiki-callout note my-3\">\n        <div class=\"callout-header\"><i class=\"fa-solid fa-network-wired\"></i> Everyday Networking: The Default Gateway</div>\n        <p class=\"text-xs\">In everyday IP networking, the term <strong>default gateway</strong> refers specifically to the local router or Layer 3 switch interface configured on a computer (e.g., <code><code>192.168.1.1</code></code>'). Whenever a host wants to send a packet to an IP address outside its local subnet, it sends the packet directly to its default gateway for forwarding.</p>\n      </div>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">The Three Main Types of Gateways</h4>\n      <div class=\"grid grid-cols-1 md:grid-cols-3 gap-2.5 my-3 text-xs\">\n        <div class=\"p-3 rounded-lg bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800\">\n          <strong class=\"text-blue-800 dark:text-blue-300 block mb-1\">1. Default Gateway</strong>\n          <p class=\"text-[11px] text-slate-600 dark:text-slate-400\">The local Layer 3 router interface that an end-host uses as its next hop to reach destinations outside its local IP subnetwork.</p>\n        </div>\n        <div class=\"p-3 rounded-lg bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800\">\n          <strong class=\"text-purple-800 dark:text-purple-300 block mb-1\">2. Protocol Gateway</strong>\n          <p class=\"text-[11px] text-slate-600 dark:text-slate-400\">Translates or adapts communication between two fundamentally different protocol suites (e.g., converting IPv4 packets to IPv6 via NAT64, or industrial Modbus to Ethernet TCP/IP).</p>\n        </div>\n        <div class=\"p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800\">\n          <strong class=\"text-emerald-800 dark:text-emerald-300 block mb-1\">3. Application Gateway (Proxy)</strong>\n          <p class=\"text-[11px] text-slate-600 dark:text-slate-400\">Provides communication and security translation at the Application Layer (Layer 7). Examples include VoIP SIP gateways, Web Application Firewalls (WAF), and Cloud API Gateways.</p>\n        </div>\n      </div>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Step-by-Step Working of a Gateway</h4>\n      <ol class=\"list-decimal pl-5 space-y-1 text-xs\">\n        <li><strong>Receives data</strong> from one network or communication system.</li>\n        <li><strong>Examines destination & communication requirements:</strong> Determines the protocol and encoding used by the destination system.</li>\n        <li><strong>Performs protocol & format translation:</strong> Reassembles the payload, strips source protocol headers, maps data fields, and translates character encoding (e.g., ASCII to EBCDIC) or message formatting (e.g., XML to JSON).</li>\n        <li><strong>Encapsulates & Transmits:</strong> Repackages the translated data into the destination network's protocol stack and sends it on its way.</li>\n      </ol>\n    ",
+      "eli10": "A gateway is like an international diplomatic translator. When the French ambassador wants to talk to the Japanese ambassador, they can't understand each other directly. The gateway listens to French, translates the meaning, and speaks Japanese so both can cooperate.",
+      "analogy": "Like an electrical plug travel adapter that also converts voltage: when traveling from the US (110V flat prongs) to Europe (230V round prongs), the gateway adapter changes both the physical plug shape and the electrical voltage so your laptop doesn't fry.",
+      "howItWorks": "\n      <p class=\"text-xs leading-relaxed\">Functions performed by modern gateways:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li><strong>Protocol Conversion:</strong> Mapping commands and acknowledgments between dissimilar protocol state machines.</li>\n        <li><strong>Data Format Transformation:</strong> Converting between legacy binary formats and modern REST/JSON microservices.</li>\n        <li><strong>Entry and Exit Control:</strong> Enforcing authentication, TLS encryption offloading, rate limiting, and access policies.</li>\n      </ul>\n    ",
+      "technicalDetails": "\n      <p class=\"text-xs leading-relaxed\">API Gateways and Cloud Architectures:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li>In modern cloud computing, <strong>API Gateways</strong> (e.g., AWS API Gateway, Kong, Envoy) serve as the unified entry point for mobile and web clients, routing HTTP requests to internal gRPC or microservice endpoints, terminating SSL, and handling token verification.</li>\n      </ul>\n    ",
+      "workedExamples": [
+        {
+          "title": "Example: Identifying a Default Gateway (PDF Solved Example 5)",
+          "difficulty": "Beginner",
+          "problem": "A computer has an IP address of `<code><code>192.168.1.1</code>0</code>`, subnet mask `<code>255.255.255.0</code>`, and a default gateway of `<code>192.168.1.1</code>`. The computer wants to open a web page on `<code>142.250.190.46</code>` (Google).\nQuestion: What is the specific operational purpose of the default gateway in this transaction?",
+          "solution": "1. The computer compares the destination IP (`<code>142.250.190.46</code>`) with its own subnet mask (`<code>255.255.255.0</code>`).\n2. It determines that the destination resides on a remote network outside its local subnet.\n3. The computer cannot deliver the frame directly via Layer 2 MAC address. Therefore, it transmits the IP packet to its **Default Gateway (`<code>192.168.1.1</code>`)**.\n4. The default gateway router receives the packet, inspects its routing table, and forwards the packet out to the ISP WAN to reach Google."
+        }
+      ],
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Gateway Advantages</th><th>Gateway Disadvantages</th></tr></thead>\n        <tbody>\n          <tr><td>Enables communication between completely incompatible architectures.</td><td>Deep protocol and format translation introduces significant latency.</td></tr>\n          <tr><td>Can translate between divergent network protocols and encodings.</td><td>Complex to configure, troubleshoot, and maintain.</td></tr>\n          <tr><td>Provides powerful application-level security and filtering.</td><td>Can become a bottleneck and single point of failure without redundancy.</td></tr>\n          <tr><td>Supports hybrid legacy-to-cloud network migrations.</td><td>Requires high processing power and memory for full payload buffering.</td></tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "VoIP Telecom Gateways connecting digital IP phone networks to traditional analog PSTN telephone lines.",
+        "Cloud Microservices API Gateways (Kong, Envoy, Apigee, AWS API Gateway).",
+        "Industrial IoT Gateways converting Zigbee/LoRaWAN sensor readings into MQTT/HTTP cloud packets."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Gateways?",
+          "question": "Why is a gateway not restricted to a single specific layer of the OSI model?",
           "options": [
-            "A gateway operates across all upper OSI layers (Layers 4 to ...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "Because gateways do not use electricity",
+            "Because a gateway can operate across Layers 4 through 7 depending on the required protocol and format translation",
+            "Because gateways only operate at the Physical Layer",
+            "Because gateways bypass all networking standards"
           ],
-          "correct": 0,
-          "explanation": "The primary role is: A gateway operates across all upper OSI layers (Layers 4 to 7). Unlike routers which only route IP packets, a gateway translates between fundamentally different protocol architectures—such as converting between VoIP SIP telephony and analog PSTN, or translating email protocols."
+          "correct": 1,
+          "explanation": "A gateway translates protocols, data formats, or application semantics, allowing it to function at Transport, Session, Presentation, or Application layers."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, Chapter 15.1: Gateways.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "ISO/IEC 7498-1: Open Systems Interconnection Basic Reference Model.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Router_on_a_stick.png",
-      "imageCaption": "Figure: Protocol Gateway: Multi-Layer Translation between Incompatible Application and Transport Protocols."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Router_on_a_stick.png",
-    "imageCaption": "Figure: Protocol Gateway: Multi-Layer Translation between Incompatible Application and Transport Protocols."
+      ]
+    }
   },
   "u2-device-working-principles": {
     "id": "u2-device-working-principles",
@@ -6067,89 +6500,101 @@ var TOPICS_U2_SYLLABUS = {
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
     "level": "Intermediate",
-    "category": "datalink",
+    "category": "devices",
     "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "Tanenbaum Ch. 4.7 / Forouzan Ch. 15",
-    "oneLiner": "Detailed analysis of packet inspection depth and forwarding engines across L1 through L7 devices.",
-    "quickAnswer": "Repeaters/Hubs amplify bits at physical Layer 1 without buffering. Bridges/Switches inspect Layer 2 MAC addresses and verify CRC before forwarding. Routers strip Layer 2 frames, inspect Layer 3 IP headers, decrement TTL, and re-encapsulate into new link frames. Gateways translate Layer 4-7 payloads.",
-    "whyItMatters": "Understanding packet inspection depth is the foundation of network architecture and security troubleshooting.",
+    "readingTime": "25–30 min",
+    "standard": "Forouzan Ch. 15 / Tanenbaum Ch. 4",
+    "oneLiner": "The operational mechanisms of connecting devices and their precise demarcation of collision and broadcast domains.",
+    "quickAnswer": "The working principles of networking devices reflect their operating OSI layer: Repeaters regenerate physical signals; Hubs repeat bits to all ports; Bridges filter and forward frames via MAC addresses; Switches microsegment traffic in hardware ASICs; Routers route packets between IP subnets; and Gateways translate protocols. Crucially, Hubs share 1 collision and 1 broadcast domain; Bridges and Switches provide separate collision domains per port but 1 broadcast domain per VLAN; while Routers separate both collision and broadcast domains.",
+    "whyItMatters": "Mastering collision and broadcast domain boundaries is the single most tested concept in undergraduate computer networking examinations and industrial network engineering certifications (CCNA/Network+).",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "Collision Domain",
+        "meaning": "A logical network area where simultaneous frame transmissions collide on a shared physical medium"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Broadcast Domain",
+        "meaning": "The collection of all network interfaces that receive a Layer 2 broadcast frame"
+      },
+      {
+        "concept": "Split Horizon",
+        "meaning": "The operational rule preventing a device from sending a frame back out the arrival port"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Define collision domain and broadcast domain with absolute clarity.",
+      "Explain how hubs, switches, and routers partition collision and broadcast boundaries.",
+      "Reproduce the definitive Domain Boundary Comparison Table from the curriculum.",
+      "Solve network topology analysis problems calculating total collision and broadcast domains."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layers 1, 2, and 3",
+      "standard": "IEEE 802.3 / IEEE 802.1D / IETF IP",
+      "type": "Comparative Principles & Domain Boundaries",
       "prerequisites": [
-        "u2-dll-intro"
+        "network-devices",
+        "u2-networking-device-hubs",
+        "u2-networking-device-switches"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "microsegmentation",
+        "vlan",
+        "broadcast-storm",
+        "cam-table"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "collision-domain-vs-broadcast-domain"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Network topology design, collision elimination, broadcast containment, exam numericals"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Ethernet-broadcast-collision_%28hub%29.svg",
+    "imageCaption": "Figure: Comparative Working Principles of Hubs, Switches, and Routers.",
     "sections": {
-      "overview": "<p>A comprehensive walkthrough of the internal processing pipeline when a packet traverses a Repeater, Hub, Bridge, Switch, Router, and Gateway.</p>",
-      "eli10": "In simple words: Detailed analysis of packet inspection depth and forwarding engines across L1 through L7 devices.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Working Principles of Each Networking Device?<br><br><strong>Answer:</strong> Repeaters/Hubs amplify bits at physical Layer 1 without buffering. Bridges/Switches inspect Layer 2 MAC addresses and verify CRC before forwarding. Routers strip Layer 2 frames, inspect Layer 3 IP headers, decrement TTL, and re-encapsulate into new link frames. Gateways translate Layer 4-7 payloads.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "overview": "\n      <p class=\"lead\">Understanding <strong>collision domains</strong> and <strong>broadcast domains</strong> is the fundamental theoretical key to understanding the differences between repeaters, hubs, bridges, switches, and routers.</p>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">1. What is a Collision Domain?</h4>\n      <p class=\"text-xs leading-relaxed\">\n        A <strong>collision domain</strong> is a network segment in which simultaneous transmissions from two or more stations can interfere and collide with each other on a shared communication medium.\n        <br>&bull; <strong>Hubs:</strong> A hub places all its connected devices into <strong>one single shared collision domain</strong>. If any two computers transmit at once, a collision occurs.\n        <br>&bull; <strong>Switches & Bridges:</strong> Each individual switch port is typically a <strong>separate, isolated collision domain</strong> (microsegmentation). With full-duplex cabling, collisions are mathematically impossible!\n        <br>&bull; <strong>Routers:</strong> Routers completely isolate collision domains across every routed interface.\n      </p>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">2. What is a Broadcast Domain?</h4>\n      <p class=\"text-xs leading-relaxed\">\n        A <strong>broadcast domain</strong> is the complete set of all connected network devices that receive a Layer 2 broadcast frame (destination MAC: <code>FF:FF:FF:FF:FF:FF</code>').\n        <br>&bull; <strong>Hubs:</strong> Do not separate broadcast domains (all ports receive all broadcasts).\n        <br>&bull; <strong>Switches:</strong> A standard Layer 2 switch forwards broadcast frames to all ports within the same VLAN. Thus, by default, a switch maintains <strong>one single broadcast domain</strong> per VLAN.\n        <br>&bull; <strong>Routers:</strong> <strong>Routers break and separate broadcast domains</strong> between their interfaces! By default, routers never forward Layer 2 broadcast frames to other networks.\n      </p>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">The Definitive Domain Comparison Table (From Syllabus)</h4>\n      <div class=\"overflow-x-auto my-3\">\n        <table class=\"wiki-table text-xs\">\n          <thead>\n            <tr class=\"bg-slate-100 dark:bg-slate-800\">\n              <th>Networking Device</th>\n              <th>Operating Layer</th>\n              <th>Collision Domains</th>\n              <th>Broadcast Domains</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr>\n              <td><strong>Hub</strong></td>\n              <td>Layer 1 (Physical)</td>\n              <td><span class=\"text-red-600 font-bold\">1 Shared Domain</span> (for all ports)</td>\n              <td><span class=\"text-red-600 font-bold\">1 Shared Domain</span> (for all ports)</td>\n            </tr>\n            <tr>\n              <td><strong>Bridge</strong></td>\n              <td>Layer 2 (Data Link)</td>\n              <td><span class=\"text-emerald-600 font-bold\">1 per segment / port</span></td>\n              <td>Normally 1 shared broadcast domain</td>\n            </tr>\n            <tr>\n              <td><strong>Switch</strong></td>\n              <td>Layer 2 (Data Link)</td>\n              <td><span class=\"text-emerald-600 font-bold\">1 per individual port</span> (Microsegmented)</td>\n              <td>Normally 1 shared domain per active VLAN</td>\n            </tr>\n            <tr>\n              <td><strong>Router</strong></td>\n              <td>Layer 3 (Network)</td>\n              <td><span class=\"text-emerald-600 font-bold\">Separates connected segments</span></td>\n              <td><span class=\"text-emerald-600 font-bold\">Separates broadcast domains</span> (1 per interface)</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n      <p class=\"text-[11px] text-slate-500 italic mt-1\">Note: VLAN configuration, switch architecture, and network topology can affect the exact broadcast boundaries.</p>\n    ",
+      "eli10": "A collision domain is a room where people shout: if two people shout at once, their voices crash. A broadcast domain is the entire house: when someone rings the front doorbell, every room in the house hears it.",
+      "analogy": "Think of an apartment complex: each private apartment is a collision domain (you can talk privately inside your apartment without disturbing neighbors). The entire apartment building is a broadcast domain: if the building fire alarm sounds, every apartment hears it.",
+      "howItWorks": "\n      <p class=\"text-xs leading-relaxed\">Domain boundary rules for exam calculations:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li><strong>Rule 1:</strong> To count collision domains, count every active link connected directly to a switch port, bridge port, or router interface. Hubs do NOT create new collision domains; all ports on a hub count as 1 collision domain.</li>\n        <li><strong>Rule 2:</strong> To count broadcast domains, count every active router interface (or configured VLAN). Switches and hubs do NOT separate broadcast domains.</li>\n      </ul>\n    ",
+      "technicalDetails": "\n      <p class=\"text-xs leading-relaxed\">Broadcast containment via VLANs:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li>Although Layer 2 switches forward broadcasts to all ports by default, configuring <strong>VLANs (IEEE 802.1Q)</strong> logically divides a single physical switch into multiple virtual broadcast domains.</li>\n        <li>Frames broadcast inside VLAN 10 (Sales) are physically blocked from reaching ports assigned to VLAN 20 (Engineering) without a Layer 3 router.</li>\n      </ul>\n    ",
+      "workedExamples": [
+        {
+          "title": "Example: Topology Domain Calculation",
+          "difficulty": "Intermediate",
+          "problem": "A network consists of 1 Router with 2 interfaces. Interface 1 connects to a 12-port Switch with 10 PCs attached. Interface 2 connects to an 8-port Hub with 6 PCs attached.\n1. How many collision domains exist in the entire network?\n2. How many broadcast domains exist in the entire network?",
+          "solution": "1. Collision Domains:\n- On the Switch side: Each connected PC has its own collision domain (10 domains) + link from switch to router (1 domain) = 11 collision domains.\n- On the Hub side: The entire hub and all 6 PCs share 1 collision domain + link from hub to router (shared) = 1 collision domain.\n- Total Collision Domains = 11 + 1 = **12 collision domains**.\n\n2. Broadcast Domains:\n- The Router has 2 active interfaces, and routers break broadcast domains.\n- Interface 1 (Switch side) forms Broadcast Domain 1.\n- Interface 2 (Hub side) forms Broadcast Domain 2.\n- Total Broadcast Domains = **2 broadcast domains**."
+        }
+      ],
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Domain Optimization Strategy</th><th>Primary Advantage</th><th>Trade-off</th></tr></thead>\n        <tbody>\n          <tr><td><strong>Microsegmentation (Switches)</strong></td><td>Eliminates all collisions; enables full-duplex 200% wire speed.</td><td>Requires high-density switch hardware.</td></tr>\n          <tr><td><strong>Subnetting & Routing (Routers)</strong></td><td>Blocks broadcast storms; isolates security boundaries.</td><td>Introduces packet header routing latency.</td></tr>\n          <tr><td><strong>VLAN Segmentation</strong></td><td>Divides broadcast domains without purchasing extra physical routers.</td><td>Requires Layer 3 inter-VLAN routing for cross-talk.</td></tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Enterprise Campus Network Planning: Sizing subnets to keep broadcast traffic under 20% of link capacity.",
+        "Industrial Control Networks: Eliminating collision jitter for deterministic manufacturing.",
+        "Computer Science University Examinations: Standard quantitative topology analysis questions."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Working Principles of Each Networking Device?",
+          "question": "How many collision domains and broadcast domains are created by a 16-port switch with 16 connected hosts (no VLANs configured)?",
           "options": [
-            "Repeaters/Hubs amplify bits at physical Layer 1 without buff...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "1 collision domain, 16 broadcast domains",
+            "16 collision domains, 1 broadcast domain",
+            "16 collision domains, 16 broadcast domains",
+            "1 collision domain, 1 broadcast domain"
           ],
-          "correct": 0,
-          "explanation": "The primary role is: Repeaters/Hubs amplify bits at physical Layer 1 without buffering. Bridges/Switches inspect Layer 2 MAC addresses and verify CRC before forwarding. Routers strip Layer 2 frames, inspect Layer 3 IP headers, decrement TTL, and re-encapsulate into new link frames. Gateways translate Layer 4-7 payloads."
+          "correct": 1,
+          "explanation": "Each switch port forms its own collision domain (16 collision domains), but without VLANs, all ports share 1 broadcast domain."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, Chapter 15.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "Andrew S. Tanenbaum, Computer Networks, 6th Edition, Chapter 4.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Ethernet-broadcast-collision_%28hub%29.svg",
-      "imageCaption": "Figure: Comparative Working Principles of Hubs, Switches, and Routers."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Ethernet-broadcast-collision_%28hub%29.svg",
-    "imageCaption": "Figure: Comparative Working Principles of Hubs, Switches, and Routers."
+      ]
+    }
   },
   "u2-comparison-networking-devices": {
     "id": "u2-comparison-networking-devices",
@@ -6157,179 +6602,214 @@ var TOPICS_U2_SYLLABUS = {
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
     "level": "Intermediate",
-    "category": "datalink",
+    "category": "devices",
     "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "Tanenbaum Ch. 4.7 / Forouzan Ch. 15",
-    "oneLiner": "Master comparison table comparing Repeaters, Hubs, Bridges, Switches, Routers, and Gateways.",
-    "quickAnswer": "Master matrix contrasting operating OSI layers, PDU data units, addressing schemes, collision domain separation, and broadcast domain separation across all networking devices.",
-    "whyItMatters": "Universally tested across all computer science semester exams, GATE, and network engineering interviews.",
+    "readingTime": "20–25 min",
+    "standard": "Forouzan Ch. 15 / Tanenbaum Ch. 4",
+    "oneLiner": "The master architectural comparison matrix evaluating Repeaters, Hubs, Bridges, Switches, Routers, and Gateways across all operational metrics.",
+    "quickAnswer": "The comprehensive comparison of networking devices synthesizes the entire connecting hardware spectrum: Repeaters and Hubs operate at Layer 1 using raw signals; Bridges and Switches operate at Layer 2 using hardware MAC addresses; Routers operate at Layer 3 using logical IP addresses; and Gateways operate across Layers 4–7 performing multi-layer protocol translation. Each device trades architectural complexity against filtering precision, domain isolation, and forwarding intelligence.",
+    "whyItMatters": "A master comparative understanding of connecting hardware allows network architects to select the right device for every tier of an enterprise network, ensuring optimal performance, security, and return on investment.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "OSI Layer Mapping",
+        "meaning": "Aligning device operations with the 7-layer reference model"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Addressing Mechanisms",
+        "meaning": "Raw electrical bits vs 48-bit MAC addresses vs 32-bit IP addresses"
+      },
+      {
+        "concept": "Domain Management",
+        "meaning": "Control of collision boundaries and broadcast containment"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Reproduce the Master Comparison Table across all 6 networking devices.",
+      "Compare devices based on operating layer, main function, addressing used, and domain behavior.",
+      "Evaluate the main advantage versus the main limitation of each networking device.",
+      "Synthesize selection criteria for real-world campus and enterprise networking designs."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layers 1 through 7 (Complete Comparison Matrix)",
+      "standard": "IEEE 802.3 / IEEE 802.1D / IETF RFCs",
+      "type": "Master Comparative Analysis",
       "prerequisites": [
-        "u2-dll-intro"
+        "network-devices",
+        "u2-device-working-principles"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "repeaters",
+        "hubs",
+        "bridges",
+        "switches",
+        "routers",
+        "gateways"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "all-networking-devices"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Curriculum review, university finals, network architecture design, certification exam prep"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
+    "imageCaption": "Figure: Comparison of Networking Devices: Operating Layer, Forwarding Decision, and Filtering Capabilities.",
     "sections": {
-      "overview": "<table class=\"wiki-table\"><thead><tr><th>Device</th><th>OSI Layer</th><th>Data Unit</th><th>Addressing Used</th><th>Separates Collision Domains?</th><th>Separates Broadcast Domains?</th></tr></thead><tbody><tr><td><strong>Repeater</strong></td><td>Layer 1 (Physical)</td><td>Bits</td><td>None</td><td>No</td><td>No</td></tr><tr><td><strong>Hub</strong></td><td>Layer 1 (Physical)</td><td>Bits</td><td>None</td><td>No</td><td>No</td></tr><tr><td><strong>Bridge</strong></td><td>Layer 2 (Data Link)</td><td>Frames</td><td>MAC Address</td><td>Yes</td><td>No</td></tr><tr><td><strong>Switch</strong></td><td>Layer 2 (Data Link)</td><td>Frames</td><td>MAC Address</td><td>Yes (per port)</td><td>No (unless VLANs)</td></tr><tr><td><strong>Router</strong></td><td>Layer 3 (Network)</td><td>Packets</td><td>IP Address</td><td>Yes</td><td>Yes</td></tr><tr><td><strong>Gateway</strong></td><td>Layers 4–7 (App)</td><td>Messages</td><td>Protocol Specific</td><td>Yes</td><td>Yes</td></tr></tbody></table>",
-      "eli10": "In simple words: Master comparison table comparing Repeaters, Hubs, Bridges, Switches, Routers, and Gateways.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of Comparison of Networking Devices?<br><br><strong>Answer:</strong> Master matrix contrasting operating OSI layers, PDU data units, addressing schemes, collision domain separation, and broadcast domain separation across all networking devices.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "overview": "\n      <p class=\"lead\">The following master tables summarize the major technical, architectural, and operational differences between all primary networking devices as detailed in the official curriculum.</p>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Master Comparison Table 1: Layer, Function & Addressing (From Syllabus Page 11)</h4>\n      <div class=\"overflow-x-auto my-3\">\n        <table class=\"wiki-table text-xs\">\n          <thead>\n            <tr class=\"bg-slate-100 dark:bg-slate-800\">\n              <th>Device</th>\n              <th>OSI Layer</th>\n              <th>Main Function</th>\n              <th>Address or Signal Used</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr>\n              <td><strong>Repeater</strong></td>\n              <td>Physical (L1)</td>\n              <td>Regenerates and retimes weak/attenuated signals</td>\n              <td>Raw electrical / optical signals</td>\n            </tr>\n            <tr>\n              <td><strong>Hub</strong></td>\n              <td>Physical (L1)</td>\n              <td>Repeats signals blindly to all other ports</td>\n              <td>Raw electrical / optical signals</td>\n            </tr>\n            <tr>\n              <td><strong>Bridge</strong></td>\n              <td>Data Link (L2)</td>\n              <td>Connects and filters LAN segments</td>\n              <td>48-bit MAC addresses</td>\n            </tr>\n            <tr>\n              <td><strong>Switch</strong></td>\n              <td>Mainly Data Link (L2)</td>\n              <td>Forwards frames between LAN devices at wire speed</td>\n              <td>48-bit MAC addresses</td>\n            </tr>\n            <tr>\n              <td><strong>Router</strong></td>\n              <td>Network (L3)</td>\n              <td>Connects and routes packets between different IP networks</td>\n              <td>32-bit IPv4 / 128-bit IPv6 addresses</td>\n            </tr>\n            <tr>\n              <td><strong>Gateway</strong></td>\n              <td>Depends on implementation (L4–L7)</td>\n              <td>Connects or translates between incompatible systems</td>\n              <td>Varies (Port numbers, URLs, data encodings)</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n\n      <div class=\"wiki-callout tip my-3\">\n        <div class=\"callout-header\"><i class=\"fa-solid fa-lightbulb\"></i> Crucial Exam Rule: Gateway Layer Flexibility</div>\n        <p class=\"text-xs\"><strong>A gateway is not restricted to one OSI layer.</strong> Its operating layer depends entirely on the type of gateway and the specific translation function it performs (e.g., L3 default gateway, L4 transport proxy, L7 API gateway).</p>\n      </div>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Master Comparison Table 2: Advantages vs. Limitations (From Syllabus Page 14)</h4>\n      <div class=\"overflow-x-auto my-3\">\n        <table class=\"wiki-table text-xs\">\n          <thead>\n            <tr class=\"bg-slate-100 dark:bg-slate-800\">\n              <th>Device</th>\n              <th>Main Advantage</th>\n              <th>Main Limitation</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr><td><strong>Repeater</strong></td><td>Extends physical signal transmission reach</td><td>Does not filter or block any traffic</td></tr>\n            <tr><td><strong>Hub</strong></td><td>Simple, inexpensive connectivity</td><td>Sends signals to all other ports (collisions)</td></tr>\n            <tr><td><strong>Bridge</strong></td><td>Connects and filters LAN segments</td><td>Limited port capacity compared with modern switches</td></tr>\n            <tr><td><strong>Switch</strong></td><td>Efficient wire-speed LAN frame forwarding</td><td>Requires suitable configuration for advanced features</td></tr>\n            <tr><td><strong>Router</strong></td><td>Connects different IP networks & blocks broadcast storms</td><td>More complex configuration and routing latency</td></tr>\n            <tr><td><strong>Gateway</strong></td><td>Enables communication between different systems</td><td>Protocol translation can add complexity and delay</td></tr>\n          </tbody>\n        </table>\n      </div>\n    ",
+      "eli10": "If you want to reach farther: use a Repeater. If you want everyone to hear: use a Hub. If you want to connect two rooms: use a Bridge. If you want everyone to have private direct lines: use a Switch. If you want to talk to another school: use a Router. If you want to talk to an alien speaking Martian: use a Gateway.",
+      "analogy": "Like tools in transportation: repeaters are gas refuelers; hubs are public buses; bridges are river ferries; switches are express multi-lane highways; routers are airports; and gateways are international customs processing centers.",
+      "howItWorks": "\n      <p class=\"text-xs leading-relaxed\">Synthesis of architectural transitions:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li><strong>From Hubs to Switches:</strong> Transitioned local networks from shared collision buses (half-duplex) to dedicated microsegmentation (full-duplex).</li>\n        <li><strong>From Bridges to Routers:</strong> Transitioned internetworking from flat bridged broadcast domains to hierarchical scalable IP routed autonomous systems.</li>\n      </ul>\n    ",
+      "technicalDetails": "\n      <p class=\"text-xs leading-relaxed\">Multilayer Convergence:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li>Modern high-end enterprise hardware frequently blurs traditional device boundaries: <strong>Layer 3 Switches</strong> perform both L2 switching and L3 routing; <strong>Next-Generation Firewalls (NGFW)</strong> perform routing, switching, and L7 application gateway inspection inside a single chassis.</li>\n      </ul>\n    ",
+      "workedExamples": [
+        {
+          "title": "Example: Comprehensive Comparative Scenario Analysis",
+          "difficulty": "Intermediate",
+          "problem": "Classify which device matches each description:\n1. Operates at Layer 2 and maintains a dynamic CAM table.\n2. Operates at Layer 1 and blind-broadcasts all signals to all ports.\n3. Operates across Layers 4–7 to translate XML payloads to JSON.\n4. Connects distinct IP subnets and maintains dynamic BGP routing tables.",
+          "solution": "1. **Switch** (Layer 2 CAM table forwarding).\n2. **Hub** (Layer 1 blind broadcast).\n3. **Application Gateway** (Layer 4–7 payload translation).\n4. **Router** (Layer 3 IP routing table path selection)."
+        }
+      ],
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Device Family</th><th>Sweet Spot Application</th><th>Anti-Pattern / Do Not Use When</th></tr></thead>\n        <tbody>\n          <tr><td><strong>Hubs & Repeaters</strong></td><td>Simple test labs and signal boosting.</td><td>Do not use in modern production enterprise LANs.</td></tr>\n          <tr><td><strong>Switches</strong></td><td>High-density campus access and data centers.</td><td>Cannot connect separate IP networks without routing.</td></tr>\n          <tr><td><strong>Routers</strong></td><td>Inter-VLAN, WAN, and Internet boundary routing.</td><td>Do not use for local host-to-host desktop connectivity.</td></tr>\n          <tr><td><strong>Gateways</strong></td><td>Legacy integration and cloud API mediation.</td><td>Do not use when standard direct IP routing is sufficient.</td></tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Enterprise Network Architecture Blueprints.",
+        "Cisco CCNA / CompTIA Network+ Certification Exams.",
+        "University Computer Science Final Examinations."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of Comparison of Networking Devices?",
+          "question": "Which networking device is correctly matched with its primary limitation?",
           "options": [
-            "Master matrix contrasting operating OSI layers, PDU data uni...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "Switch — cannot operate in full duplex",
+            "Hub — sends signals to all other ports and shares bandwidth",
+            "Router — cannot connect different IP networks",
+            "Repeater — requires complex IP configuration"
           ],
-          "correct": 0,
-          "explanation": "The primary role is: Master matrix contrasting operating OSI layers, PDU data units, addressing schemes, collision domain separation, and broadcast domain separation across all networking devices."
+          "correct": 1,
+          "explanation": "A hub blindly repeats incoming signals out all other ports, causing signal collisions and wasting bandwidth."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, Chapter 15.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "William Stallings, Data and Computer Communications, Chapter 15.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
-      "imageCaption": "Figure: Comparison of Networking Devices: Operating Layer, Forwarding Decision, and Filtering Capabilities."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ethernet-broadcast-collision.svg",
-    "imageCaption": "Figure: Comparison of Networking Devices: Operating Layer, Forwarding Decision, and Filtering Capabilities."
+      ]
+    }
   },
   "u2-device-osi-layers": {
     "id": "u2-device-osi-layers",
     "title": "OSI Layers at Which Networking Devices Operate",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "level": "Beginner",
-    "category": "datalink",
+    "level": "Intermediate",
+    "category": "devices",
     "difficulty": "Core",
-    "readingTime": "15–20 min",
-    "standard": "ISO/IEC 7498-1",
-    "oneLiner": "Clear visual mapping connecting physical hardware devices to their respective OSI layer levels.",
-    "quickAnswer": "Layer 1 (Physical): Repeaters, Hubs, Transceivers. Layer 2 (Data Link): Bridges, Switches, Network Interface Cards (NICs). Layer 3 (Network): Routers, Layer 3 Switches. Layers 4–7 (Upper Layers): Application Gateways, Firewalls, Web Application Proxies.",
-    "whyItMatters": "Anchors theoretical 7-layer OSI models to actual physical network hardware deployed in server rooms.",
+    "readingTime": "20–25 min",
+    "standard": "Forouzan Ch. 15 / Tanenbaum Ch. 1",
+    "oneLiner": "The definitive 7-layer mapping of connecting devices across the OSI Reference Model with real-world network architectures.",
+    "quickAnswer": "Networking devices are mapped directly to specific layers of the OSI model based on the highest protocol header they inspect: Repeaters and Hubs operate at Layer 1 (Physical); Bridges and standard Switches operate at Layer 2 (Data Link); Routers and Layer 3 Switches operate at Layer 3 (Network); Layer 4 Switches operate at Layer 4 (Transport); and Protocol/Application Gateways operate across Layers 5, 6, and 7 (Session, Presentation, Application). Real-world networks combine these devices in hierarchical tiers.",
+    "whyItMatters": "Understanding the exact OSI layer of each connecting device enables network engineers to troubleshoot network faults systematically: Layer 1 cable issues vs Layer 2 MAC loops vs Layer 3 IP routing failures vs Layer 7 gateway proxy errors.",
     "prerequisitesList": [
       {
-        "concept": "OSI Layer 2",
-        "meaning": "Data Link Layer framing and link control"
+        "concept": "OSI Reference Model",
+        "meaning": "The 7-layer theoretical networking framework created by ISO"
       },
       {
-        "concept": "Node-to-Node Delivery",
-        "meaning": "Transfer of frames across a single physical link"
+        "concept": "Encapsulation & Decapsulation",
+        "meaning": "Wrapping data with layer-specific headers and stripping them upon reception"
+      },
+      {
+        "concept": "PDU (Protocol Data Unit)",
+        "meaning": "Bits (L1), Frames (L2), Packets (L3), Segments (L4), Data (L5–L7)"
       }
     ],
     "learningObjectives": [
-      "Understand the theoretical foundations and protocol mechanisms.",
-      "Analyze the operational workflow with step-by-step traces.",
-      "Evaluate performance trade-offs, advantages, and limitations."
+      "Map all 6 primary networking devices to their respective OSI layers.",
+      "State the definitive device-to-layer correspondence rules.",
+      "Describe the 3 real-world network deployment examples: Home Network, College Computer Lab, and Large Enterprise Network.",
+      "Synthesize how layered devices collaborate in multi-tier enterprise network topologies."
     ],
     "infobox": {
-      "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802 / ISO 7498-1",
-      "type": "Core Protocol Concept",
+      "layer": "Layers 1 through 7 (Complete Architectural Hierarchy)",
+      "standard": "ISO/IEC 7498-1 / IEEE 802 / IETF",
+      "type": "OSI Hierarchy & Real-World Deployments",
       "prerequisites": [
-        "u2-dll-intro"
+        "network-devices",
+        "u2-comparison-networking-devices"
       ],
       "relatedConcepts": [
-        "framing",
-        "mac-address",
-        "error-detection"
+        "pdu",
+        "encapsulation",
+        "enterprise-topology",
+        "home-gateway"
       ],
-      "compareWith": [],
+      "compareWith": [
+        "tcp-ip-model"
+      ],
       "primaryUses": [
-        "Local Area Networks, Ethernet, Wi-Fi, Link Control"
+        "Systematic network troubleshooting, enterprise architecture design, university examinations"
       ]
     },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8d/OSI_Model_v1.svg",
+    "imageCaption": "Figure: OSI Model Layers at Which Networking Devices Operate (L1 Repeater/Hub, L2 Switch/Bridge, L3 Router, L7 Gateway).",
     "sections": {
-      "overview": "<div class=\"wiki-img-box my-4 text-center\"><img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Network_device_types.svg/600px-Network_device_types.svg.png\" alt=\"Network Device Types\" class=\"mx-auto rounded-lg shadow border border-gray-200 dark:border-gray-700 max-h-80 object-contain\" onerror=\"this.style.display='none'\"><p class=\"text-xs text-gray-500 mt-1 italic\">Figure: Visual mapping of networking devices to their respective OSI operational layers.</p></div>",
-      "eli10": "In simple words: Clear visual mapping connecting physical hardware devices to their respective OSI layer levels.",
-      "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
-      "diagram": "",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> What is the core principle of OSI Layers at Which Networking Devices Operate?<br><br><strong>Answer:</strong> Layer 1 (Physical): Repeaters, Hubs, Transceivers. Layer 2 (Data Link): Bridges, Switches, Network Interface Cards (NICs). Layer 3 (Network): Routers, Layer 3 Switches. Layers 4–7 (Upper Layers): Application Gateways, Firewalls, Web Application Proxies.",
-        "level2": "<strong>Analysis:</strong> Trace the protocol sequence during typical transmission conditions to observe how control signals and data frames interact.",
-        "level3": "<strong>Edge Case:</strong> What happens if an error or collision occurs? The protocol detects the anomaly and executes its recovery or backoff routine."
-      },
-      "advantagesLimitations": "\n        <table class=\"wiki-table\">\n          <thead><tr><th>Aspect</th><th>Key Advantage</th><th>Trade-Off / Limitation</th></tr></thead>\n          <tbody>\n            <tr><td><strong>Efficiency</strong></td><td>Optimized for local link performance</td><td>Adds header and control overhead</td></tr>\n            <tr><td><strong>Reliability</strong></td><td>Ensures bounded delivery behavior</td><td>Requires state tracking at communicating nodes</td></tr>\n          </tbody>\n        </table>",
+      "overview": "\n      <p class=\"lead\">Networking devices are intrinsically associated with specific operational layers of the <strong>OSI (Open Systems Interconnection) 7-Layer Reference Model</strong> based on the depth of protocol headers they inspect and process.</p>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Definitive OSI Layer Mapping Table (From Syllabus Page 13)</h4>\n      <div class=\"overflow-x-auto my-3\">\n        <table class=\"wiki-table text-xs\">\n          <thead>\n            <tr class=\"bg-slate-100 dark:bg-slate-800\">\n              <th>OSI Layer Name</th>\n              <th>Layer #</th>\n              <th>Protocol Data Unit</th>\n              <th>Related Networking Devices</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr>\n              <td><strong>Application</strong></td>\n              <td>Layer 7</td>\n              <td>Messages / Data</td>\n              <td>Application gateways, application proxies, WAFs</td>\n            </tr>\n            <tr>\n              <td><strong>Presentation</strong></td>\n              <td>Layer 6</td>\n              <td>Formatted Data</td>\n              <td>Gateways performing presentation or data-format translation (e.g., encryption/compression)</td>\n            </tr>\n            <tr>\n              <td><strong>Session</strong></td>\n              <td>Layer 5</td>\n              <td>Session Data</td>\n              <td>Session-level gateways, RPC/SOCKS gateways</td>\n            </tr>\n            <tr>\n              <td><strong>Transport</strong></td>\n              <td>Layer 4</td>\n              <td>Segments / Datagrams</td>\n              <td>Layer 4 switches (port-based load balancers), stateful firewalls</td>\n            </tr>\n            <tr>\n              <td><strong>Network</strong></td>\n              <td>Layer 3</td>\n              <td>Packets</td>\n              <td><strong>Routers</strong>, Layer 3 switches</td>\n            </tr>\n            <tr>\n              <td><strong>Data Link</strong></td>\n              <td>Layer 2</td>\n              <td>Frames</td>\n              <td><strong>Bridges</strong>, Layer 2 switches</td>\n            </tr>\n            <tr>\n              <td><strong>Physical</strong></td>\n              <td>Layer 1</td>\n              <td>Bits</td>\n              <td><strong>Repeaters</strong>, hubs</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n\n      <div class=\"wiki-callout tip my-3\">\n        <div class=\"callout-header\"><i class=\"fa-solid fa-bookmark\"></i> Core Principles to Memorize (From Syllabus)</div>\n        <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n          <li><strong>Repeater and Hub &rarr; Physical Layer (Layer 1)</strong></li>\n          <li><strong>Bridge and Traditional Switch &rarr; Data Link Layer (Layer 2)</strong></li>\n          <li><strong>Router &rarr; Network Layer (Layer 3)</strong></li>\n          <li><strong>Gateway &rarr; Operates at different layers (Layers 4 to 7) depending on its purpose</strong></li>\n        </ul>\n      </div>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Real-World Deployment Examples (From Syllabus Pages 13–14)</h4>\n      \n      <div class=\"space-y-3 my-3 text-xs\">\n        <!-- Example 1: Home Network -->\n        <div class=\"p-3.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xs\">\n          <strong class=\"text-blue-700 dark:text-blue-400 text-sm block mb-1 flex items-center gap-1.5\">\n            <i class=\"fa-solid fa-house\"></i> Example 1: Home Network Architecture\n          </strong>\n          <p class=\"text-slate-600 dark:text-slate-300 leading-relaxed font-sans\">\n            A typical modern home network integrates multiple device functions inside a single all-in-one residential gateway:\n            <br>&bull; A <strong>Wireless Router</strong> connecting the private home network to the Internet ISP via optical fiber or cable modem.\n            <br>&bull; A built-in <strong>4-Port Ethernet Switch</strong> connecting smart TVs, gaming consoles, and desktop PCs with dedicated Gigabit wires.\n            <br>&bull; A built-in <strong>Wi-Fi Access Point</strong> connecting smartphones, laptops, and smart home IoT sensors.\n            <br>&bull; A <strong>NAT / Default Gateway</strong> translating private IPs (<code>192.168.1.0/24</code>) to a single public IP.\n          </p>\n        </div>\n\n        <!-- Example 2: College Lab -->\n        <div class=\"p-3.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xs\">\n          <strong class=\"text-emerald-700 dark:text-emerald-400 text-sm block mb-1 flex items-center gap-1.5\">\n            <i class=\"fa-solid fa-graduation-cap\"></i> Example 2: College Computer Laboratory\n          </strong>\n          <p class=\"text-slate-600 dark:text-slate-300 leading-relaxed font-sans\">\n            A university computer lab connects 60 to 120 workstations:\n            <br>&bull; <strong>Managed Ethernet Switches</strong> (24-port / 48-port) connect all lab computers, providing dedicated full-duplex wire speed and isolating student workstations into separate collision domains.\n            <br>&bull; A <strong>Departmental Router</strong> connects the lab network to the campus core network, internet gateway, and central college servers while blocking local broadcast traffic.\n          </p>\n        </div>\n\n        <!-- Example 3: Large Enterprise Network -->\n        <div class=\"p-3.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xs\">\n          <strong class=\"text-purple-700 dark:text-purple-400 text-sm block mb-1 flex items-center gap-1.5\">\n            <i class=\"fa-solid fa-building\"></i> Example 3: Large Enterprise Network\n          </strong>\n          <p class=\"text-slate-600 dark:text-slate-300 leading-relaxed font-sans\">\n            A large multi-building corporation deploys a structured 3-tier hierarchical architecture:\n            <br>&bull; <strong>Access Layer Switches:</strong> Connect employee desktop PCs, VoIP phones, and Wi-Fi access points.\n            <br>&bull; <strong>Distribution Layer 3 Switches:</strong> Route traffic between different departmental VLANs at hardware wire speed.\n            <br>&bull; <strong>Core Routers:</strong> High-bandwidth backbone routers connecting remote branch offices, disaster recovery data centers, and external internet ISPs.\n            <br>&bull; <strong>Application Gateways & Proxies:</strong> Secure web gateways, reverse proxies, and VPN concentrators authenticating remote workers and filtering malicious application payloads.\n          </p>\n        </div>\n      </div>\n    ",
+      "eli10": "Just like a school has students (bits), teachers (frames), principals (packets), and the school board (gateways), each network device handles information at its own grade level in the OSI school.",
+      "analogy": "Like traveling internationally: at the physical layer, the road is paved (L1); at the data link layer, your car stays in its lane (L2); at the network layer, highway signs guide you between cities (L3); and at the application gateway, customs translates your language and inspects your passport (L7).",
+      "howItWorks": "\n      <p class=\"text-xs leading-relaxed\">Systematic OSI Troubleshooting Methodology:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li><strong>Step 1 (Physical):</strong> Check link LEDs and cables (Repeater/Hub layer).</li>\n        <li><strong>Step 2 (Data Link):</strong> Check MAC address tables, port duplex settings, and STP blocked ports (Switch/Bridge layer).</li>\n        <li><strong>Step 3 (Network):</strong> Verify IP addresses, subnet masks, default gateways, and ping next-hop routers (Router layer).</li>\n        <li><strong>Step 4–7 (Application):</strong> Check proxy settings, DNS resolution, and TLS certificates (Gateway layer).</li>\n      </ul>\n    ",
+      "technicalDetails": "\n      <p class=\"text-xs leading-relaxed\">Cross-Layer Hardware Acceleration:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li>Modern data center switches implement <strong>ASIC pipeline stages</strong> that simultaneously inspect Layer 2 MAC addresses, Layer 3 IP headers, and Layer 4 TCP/UDP port numbers in a single clock cycle without software CPU intervention.</li>\n      </ul>\n    ",
+      "workedExamples": [
+        {
+          "title": "Example: Real-World Enterprise Device Selection",
+          "difficulty": "Intermediate",
+          "problem": "An IT architect is designing a network for a 5-story corporate building with 500 employees. Which devices should be placed at the Access, Distribution, and Core/Perimeter tiers?",
+          "solution": "- **Access Tier (Floors 1–5):** 24-port/48-port Managed PoE Layer 2 Switches to connect desktop computers, IP phones, and Wi-Fi access points with dedicated collision-free bandwidth.\n- **Distribution Tier:** High-performance Layer 3 Switches to aggregate access switches and route inter-VLAN traffic at wire speed.\n- **Core / Perimeter Tier:** Redundant Core Routers and Next-Generation Firewalls (acting as Security Gateways) to connect to ISP internet links, run BGP routing, and inspect application traffic."
+        }
+      ],
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Network Tier</th><th>Devices Used</th><th>Core Architectural Responsibility</th></tr></thead>\n        <tbody>\n          <tr><td><strong>Access Tier</strong></td><td>L2 Switches, APs</td><td>Workstation connectivity, port security, PoE delivery.</td></tr>\n          <tr><td><strong>Distribution Tier</strong></td><td>L3 Switches, Routers</td><td>Inter-VLAN routing, policy enforcement, broadcast isolation.</td></tr>\n          <tr><td><strong>Core Tier</strong></td><td>High-Speed Core Routers</td><td>Fast packet transport across backbone without packet filtering.</td></tr>\n          <tr><td><strong>Perimeter Tier</strong></td><td>Edge Routers, Gateways</td><td>ISP connectivity, NAT translation, firewalling, and proxy inspection.</td></tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Ethernet (IEEE 802.3) switches and network adapters.",
-        "Wi-Fi (IEEE 802.11) wireless access points and clients.",
-        "Data link protocol implementations in router operating systems."
+        "Campus Network Hierarchical Design (Cisco 3-tier architecture).",
+        "Cloud Data Center Spine-and-Leaf Clos Network fabrics.",
+        "Telecommunication and Internet Service Provider points of presence (PoP)."
       ],
       "quiz": [
         {
-          "question": "What is the primary function of OSI Layers at Which Networking Devices Operate?",
+          "question": "Which of the following networking devices operates across Layers 4 through 7 of the OSI Reference Model?",
           "options": [
-            "Layer 1 (Physical): Repeaters, Hubs, Transceivers. Layer 2 (...",
-            "Routing packets across the global Internet",
-            "Resolving domain names to IP addresses",
-            "Encrypting application payloads"
+            "Hub",
+            "Switch",
+            "Router",
+            "Gateway"
+          ],
+          "correct": 3,
+          "explanation": "A gateway operates at the upper layers (Transport, Session, Presentation, Application) to translate protocols and data formats."
+        },
+        {
+          "question": "Which pair of devices operates strictly at Layer 1 (Physical Layer) of the OSI model?",
+          "options": [
+            "Repeater and Hub",
+            "Bridge and Switch",
+            "Router and Gateway",
+            "Switch and Hub"
           ],
           "correct": 0,
-          "explanation": "The primary role is: Layer 1 (Physical): Repeaters, Hubs, Transceivers. Layer 2 (Data Link): Bridges, Switches, Network Interface Cards (NICs). Layer 3 (Network): Routers, Layer 3 Switches. Layers 4–7 (Upper Layers): Application Gateways, Firewalls, Web Application Proxies."
+          "explanation": "Repeaters and hubs operate exclusively at Layer 1 (Physical Layer), repeating and regenerating raw physical signals."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 11–12.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, Chapter 15: Connecting Devices and Virtual LANs.",
           "url": ""
         },
         {
-          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 3–4.",
+          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, Chapter 1: The Reference Models.",
           "url": ""
         }
-      ],
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8d/OSI_Model_v1.svg",
-      "imageCaption": "Figure: OSI Model Layers at Which Networking Devices Operate (L1 Repeater/Hub, L2 Switch/Bridge, L3 Router, L7 Gateway)."
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8d/OSI_Model_v1.svg",
-    "imageCaption": "Figure: OSI Model Layers at Which Networking Devices Operate (L1 Repeater/Hub, L2 Switch/Bridge, L3 Router, L7 Gateway)."
+      ]
+    }
   },
   "u2-definitions-terminology": {
     "id": "u2-definitions-terminology",
@@ -6648,7 +7128,7 @@ var TOPICS_U2_SYLLABUS = {
       ]
     },
     "sections": {
-      "overview": "\n    <p>This section provides comprehensive worked numerical problems covering sequence number arithmetic, window sizing, propagation-to-transmission ratios ($a$), and channel utilization efficiencies across all Data Link Layer protocols, directly aligned with <strong>Forouzan Chapter 11</strong> and university examination patterns.</p>\n    \n    <div class=\"space-y-6 my-6\">\n      <!-- Problem 1 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 1: Sequence Number Calculation ($m = 3$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A protocol uses a 3-bit sequence number. Find the total number of sequence numbers and list them.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p><strong>Formula:</strong> $N = 2^m$</p>\n          <p>Given: $m = 3$ bits</p>\n          <p>Calculation: $N = 2^3 = 8$ sequence numbers.</p>\n          <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 8 sequence numbers. The valid range is {0, 1, 2, 3, 4, 5, 6, 7}.</p>\n        </div>\n      </div>\n\n      <!-- Problem 2 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 2: Go-Back-N Window Sizing ($m = 4$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A Go-Back-N ARQ protocol uses a 4-bit sequence number. Find the maximum sender window size and receiver window size.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>Given: $m = 4$ bits</p>\n          <p>Sender Window: $W_s = 2^m - 1 = 2^4 - 1 = 16 - 1 = 15$</p>\n          <p>Receiver Window: $W_r = 1$ (always 1 in Go-Back-N)</p>\n          <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: Sender Window = 15 frames, Receiver Window = 1 frame.</p>\n        </div>\n      </div>\n\n      <!-- Problem 3 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 3: Selective Repeat Window Sizing ($m = 4$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A Selective Repeat ARQ protocol uses a 4-bit sequence number. Find the maximum sender and receiver window sizes.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>Given: $m = 4$ bits</p>\n          <p>Sender Window: $W_s = 2^{m-1} = 2^{4-1} = 2^3 = 8$</p>\n          <p>Receiver Window: $W_r = 2^{m-1} = 2^{4-1} = 2^3 = 8$</p>\n          <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: Sender Window = 8 frames, Receiver Window = 8 frames.</p>\n        </div>\n      </div>\n\n      <!-- Problem 4 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 4: Window Comparison with $m = 3$</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> If $m = 3$ bits, compare the maximum sender and receiver window sizes for Go-Back-N ARQ and Selective Repeat ARQ.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>For Go-Back-N: $W_s = 2^3 - 1 = 7$, $W_r = 1$.</p>\n          <p>For Selective Repeat: $W_s = 2^{3-1} = 4$, $W_r = 2^{3-1} = 4$.</p>\n          <table class=\"wiki-table mt-2\">\n            <thead><tr><th>Protocol</th><th>Sender Window ($W_s$)</th><th>Receiver Window ($W_r$)</th></tr></thead>\n            <tbody>\n              <tr><td>Go-Back-N ARQ</td><td>7</td><td>1</td></tr>\n              <tr><td>Selective Repeat ARQ</td><td>4</td><td>4</td></tr>\n            </tbody>\n          </table>\n        </div>\n      </div>\n\n      <!-- Problem 5 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 5: Master ARQ Comparison ($m = 5$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A communication link uses a 5-bit sequence number ($m = 5$). Determine the sender and receiver window sizes across Stop-and-Wait ARQ, Go-Back-N ARQ, and Selective Repeat ARQ.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>Total sequence numbers available: $2^5 = 32$ (numbered 0 to 31).</p>\n          <p>• <strong>Stop-and-Wait ARQ:</strong> $W_s = 1$, $W_r = 1$.</p>\n          <p>• <strong>Go-Back-N ARQ:</strong> $W_s = 2^5 - 1 = 31$, $W_r = 1$.</p>\n          <p>• <strong>Selective Repeat ARQ:</strong> $W_s = 2^{5-1} = 16$, $W_r = 2^{5-1} = 16$.</p>\n        </div>\n      </div>\n    </div>\n  \n    <!-- Problem 6: Equal Bandwidth Allocation (FDMA) -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 6: Equal Bandwidth Allocation (FDMA)</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 3 PDF):</strong> A channel has a bandwidth of 120 MHz and is shared equally among six stations using static allocation. Find the bandwidth allocated to each station.</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Given:</strong> Total bandwidth $B_{\\text{total}} = 120\\text{ MHz}$, Number of stations $N = 6$.</p>\n        <p><strong>Formula:</strong> $B_{\\text{station}} = \\frac{B_{\\text{total}}}{N}$</p>\n        <p><strong>Calculation:</strong> $B_{\\text{station}} = \\frac{120}{6} = 20\\text{ MHz}$.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 20 MHz per station.</p>\n      </div>\n    </div>\n\n    <!-- Problem 7: Bandwidth Utilization & Waste -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 7: Bandwidth Utilization & Inactive Station Waste</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 3 PDF):</strong> A 100 MHz channel is divided equally among five stations using static allocation. Only three stations are actively using their allocated bandwidth. Find the allocated bandwidth that is currently unused.</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Step 1:</strong> Bandwidth per station = $\\frac{100\\text{ MHz}}{5} = 20\\text{ MHz}$.</p>\n        <p><strong>Step 2:</strong> Inactive stations = $5 - 3 = 2$ stations.</p>\n        <p><strong>Step 3:</strong> Unused allocated bandwidth = $2 \\times 20\\text{ MHz} = 40\\text{ MHz}$.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 40 MHz of allocated bandwidth sits completely unused.</p>\n      </div>\n    </div>\n\n    <!-- Problem 8: TDMA Slot Allocation -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 8: TDMA Time Slot Allocation</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 3 PDF):</strong> A TDMA system has 8 time slots in each frame. If 4 stations share the slots equally, how many slots does each station receive?</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Given:</strong> Total slots per frame = 8, Number of stations = 4.</p>\n        <p><strong>Calculation:</strong> $\\frac{8}{4} = 2$ slots per station.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 2 slots per station in each repeating frame.</p>\n      </div>\n    </div>\n  \n    <!-- Problem 9: Pure ALOHA Throughput Calculation -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 9: Pure ALOHA Throughput Calculation</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 4 PDF):</strong> Calculate the throughput of a Pure ALOHA system when the offered load is $G = 0.5$.</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Given:</strong> $G = 0.5$.</p>\n        <p><strong>Formula:</strong> $S = G e^{-2G}$</p>\n        <p><strong>Calculation:</strong> $S = 0.5 \\cdot e^{-2(0.5)} = 0.5 \\cdot e^{-1} = 0.5 \\times 0.367879 = 0.1839$.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 18.39% (or 18.4%) throughput.</p>\n      </div>\n    </div>\n\n    <!-- Problem 10: Slotted ALOHA Throughput Calculation -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 10: Slotted ALOHA Throughput Calculation</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 4 PDF):</strong> Calculate the throughput of Slotted ALOHA when the offered load is $G = 1.0$.</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Given:</strong> $G = 1.0$.</p>\n        <p><strong>Formula:</strong> $S = G e^{-G}$</p>\n        <p><strong>Calculation:</strong> $S = 1.0 \\cdot e^{-1} = 0.367879 = 36.79\\%$.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 36.79% (or 36.8%) throughput.</p>\n      </div>\n    </div>\n\n    <!-- Problem 11: Vulnerable Time Comparison -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 11: ALOHA Vulnerable Time Comparison</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 4 PDF):</strong> A network uses frames that require 2 milliseconds to transmit ($T_{fr} = 2\\text{ ms}$). Find the vulnerable time for Pure ALOHA and Slotted ALOHA.</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>For Pure ALOHA:</strong> $\\text{Vulnerable Time} = 2 T_{fr} = 2 \\times 2\\text{ ms} = 4\\text{ ms}$.</p>\n        <p><strong>For Slotted ALOHA:</strong> $\\text{Vulnerable Time} = T_{fr} = 2\\text{ ms}$.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: Pure ALOHA = 4 ms; Slotted ALOHA = 2 ms.</p>\n      </div>\n    </div>\n\n    <!-- Problem 12: Binary Exponential Backoff -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 12: Binary Exponential Backoff Range</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 4 PDF):</strong> A station experiences three collisions ($K = 3$). Find the possible random values of $R$ in the binary exponential backoff algorithm.</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Given:</strong> $K = 3$.</p>\n        <p><strong>Formula:</strong> $0 \\le R \\le 2^K - 1 = 2^3 - 1 = 8 - 1 = 7$.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: $R \\in \\{0, 1, 2, 3, 4, 5, 6, 7\\}$.</p>\n      </div>\n    </div>\n  \n    <!-- Numerical Problem 13: Bit-Map Protocol Size -->\n    <div class=\"p-4 mb-4 rounded-xl border border-blue-200 dark:border-blue-800 bg-white dark:bg-slate-800 shadow-sm\">\n      <div class=\"flex items-center justify-between mb-2\">\n        <span class=\"text-xs font-bold px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-blue-300\">\n          Numerical Problem 13 &bull; Topic 5 (Bit-Map Size)\n        </span>\n        <span class=\"text-xs text-slate-400 font-mono\">PDF Section 10</span>\n      </div>\n      <p class=\"text-xs text-slate-800 dark:text-slate-200 font-semibold mb-2\">\n        <strong>Problem Statement:</strong> A network contains 20 stations. How many reservation bits are required in a basic bit-map protocol?\n      </p>\n      <div class=\"p-3 bg-slate-50 dark:bg-slate-900 rounded-lg text-xs font-mono space-y-1.5 text-slate-700 dark:text-slate-300\">\n        <div><strong>Given:</strong> Number of stations $N = 20$.</div>\n        <div><strong>Formula:</strong> $\\text{Bitmap Size} = N$</div>\n        <div><strong>Calculation:</strong> $\\text{Bitmap Size} = 20 \\text{ bits}$.</div>\n        <div class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">\n          &there4; Exactly 20 reservation bits are required in the contention period preceding each data phase.\n        </div>\n      </div>\n    </div>\n\n    <!-- Numerical Problem 14: Reservation Efficiency -->\n    <div class=\"p-4 mb-4 rounded-xl border border-emerald-200 dark:border-emerald-800 bg-white dark:bg-slate-800 shadow-sm\">\n      <div class=\"flex items-center justify-between mb-2\">\n        <span class=\"text-xs font-bold px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300\">\n          Numerical Problem 14 &bull; Topic 5 (Reservation Efficiency)\n        </span>\n        <span class=\"text-xs text-slate-400 font-mono\">PDF Section 10</span>\n      </div>\n      <p class=\"text-xs text-slate-800 dark:text-slate-200 font-semibold mb-2\">\n        <strong>Problem Statement:</strong> A reservation frame contains 10 bits, and 4 stations reserve access. If each data transmission uses 100 bits, calculate the total number of bits sent and the channel efficiency, ignoring other overhead.\n      </p>\n      <div class=\"p-3 bg-slate-50 dark:bg-slate-900 rounded-lg text-xs font-mono space-y-1.5 text-slate-700 dark:text-slate-300\">\n        <div><strong>1. Reservation Overhead:</strong> $10 \\text{ bits}$.</div>\n        <div><strong>2. Total Data Bits Sent:</strong> $4 \\times 100 = 400 \\text{ bits}$.</div>\n        <div><strong>3. Total Bits Sent:</strong> $\\text{Data bits} + \\text{Reservation bits} = 400 + 10 = 410 \\text{ bits}$.</div>\n        <div><strong>4. Channel Efficiency:</strong> $\\eta = \\frac{\\text{Data Bits}}{\\text{Total Bits}} = \\frac{400}{410} \\approx 97.56\\%$.</div>\n        <div class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">\n          &there4; Total bits sent = 410 bits; Channel efficiency = 97.56%.\n        </div>\n      </div>\n    </div>\n\n    <!-- Numerical Problem 15: Binary Address Length -->\n    <div class=\"p-4 mb-4 rounded-xl border border-purple-200 dark:border-purple-800 bg-white dark:bg-slate-800 shadow-sm\">\n      <div class=\"flex items-center justify-between mb-2\">\n        <span class=\"text-xs font-bold px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-950 text-purple-800 dark:text-purple-300\">\n          Numerical Problem 15 &bull; Topic 5 (Binary Countdown Address Length)\n        </span>\n        <span class=\"text-xs text-slate-400 font-mono\">PDF Section 10</span>\n      </div>\n      <p class=\"text-xs text-slate-800 dark:text-slate-200 font-semibold mb-2\">\n        <strong>Problem Statement:</strong> What is the minimum number of bits needed to uniquely represent 32 stations in a binary countdown network?\n      </p>\n      <div class=\"p-3 bg-slate-50 dark:bg-slate-900 rounded-lg text-xs font-mono space-y-1.5 text-slate-700 dark:text-slate-300\">\n        <div><strong>Given:</strong> Number of stations $N = 32$.</div>\n        <div><strong>Condition:</strong> $2^m \\ge N$</div>\n        <div><strong>Calculation:</strong> $2^m \\ge 32 \\implies 2^5 = 32 \\implies m = 5$.</div>\n        <div class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">\n          &there4; Exactly 5 bits are required to represent each station's address.\n        </div>\n      </div>\n    </div>\n\n    <!-- Numerical Problem 16: Token Circulation Time -->\n    <div class=\"p-4 mb-4 rounded-xl border border-amber-200 dark:border-amber-800 bg-white dark:bg-slate-800 shadow-sm\">\n      <div class=\"flex items-center justify-between mb-2\">\n        <span class=\"text-xs font-bold px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300\">\n          Numerical Problem 16 &bull; Topic 5 (Token Circulation Time)\n        </span>\n        <span class=\"text-xs text-slate-400 font-mono\">PDF Section 10</span>\n      </div>\n      <p class=\"text-xs text-slate-800 dark:text-slate-200 font-semibold mb-2\">\n        <strong>Problem Statement:</strong> A token takes 2 ms to move from one station to the next. There are 8 stations. Ignoring data-transmission time, how long does one complete token circulation take?\n      </p>\n      <div class=\"p-3 bg-slate-50 dark:bg-slate-900 rounded-lg text-xs font-mono space-y-1.5 text-slate-700 dark:text-slate-300\">\n        <div><strong>Given:</strong> $N = 8$ stations, $T_{\\text{hop}} = 2 \\text{ ms}$.</div>\n        <div><strong>Formula:</strong> $T = N \\times T_{\\text{hop}}$</div>\n        <div><strong>Calculation:</strong> $T = 8 \\times 2 = 16 \\text{ ms}$.</div>\n        <div class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">\n          &there4; One complete idle token circulation takes exactly 16 ms.\n        </div>\n      </div>\n    </div>\n  \n    <!-- Numerical Problem 17: MAC Address Size -->\n    <div class=\"p-4 mb-4 rounded-xl border border-blue-200 dark:border-blue-800 bg-white dark:bg-slate-800 shadow-sm\">\n      <div class=\"flex items-center justify-between mb-2\">\n        <span class=\"text-xs font-bold px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-blue-300\">\n          Numerical Problem 17 &bull; Topic 6 (MAC Address Size)\n        </span>\n        <span class=\"text-xs text-slate-400 font-mono\">PDF Section 14</span>\n      </div>\n      <p class=\"text-xs text-slate-800 dark:text-slate-200 font-semibold mb-2\">\n        <strong>Problem Statement:</strong> Calculate the number of bits in a 6-byte MAC address.\n      </p>\n      <div class=\"p-3 bg-slate-50 dark:bg-slate-900 rounded-lg text-xs font-mono space-y-1 text-slate-700 dark:text-slate-300\">\n        <div><strong>Calculation:</strong> $6 \\text{ bytes} \\times 8 \\text{ bits/byte} = 48 \\text{ bits}$.</div>\n        <div class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">\n          &there4; An Ethernet MAC address contains exactly 48 bits (12 hexadecimal digits).\n        </div>\n      </div>\n    </div>\n\n    <!-- Numerical Problem 18: Minimum Ethernet Payload -->\n    <div class=\"p-4 mb-4 rounded-xl border border-emerald-200 dark:border-emerald-800 bg-white dark:bg-slate-800 shadow-sm\">\n      <div class=\"flex items-center justify-between mb-2\">\n        <span class=\"text-xs font-bold px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300\">\n          Numerical Problem 18 &bull; Topic 6 (Minimum Ethernet Payload)\n        </span>\n        <span class=\"text-xs text-slate-400 font-mono\">PDF Section 14</span>\n      </div>\n      <p class=\"text-xs text-slate-800 dark:text-slate-200 font-semibold mb-2\">\n        <strong>Problem Statement:</strong> Calculate the minimum data field size if the minimum Ethernet frame is 64 bytes.\n      </p>\n      <div class=\"p-3 bg-slate-50 dark:bg-slate-900 rounded-lg text-xs font-mono space-y-1 text-slate-700 dark:text-slate-300\">\n        <div><strong>Fixed Fields Overhead:</strong> $6 (\\text{DA}) + 6 (\\text{SA}) + 2 (\\text{Length/Type}) + 4 (\\text{CRC}) = 18 \\text{ bytes}$.</div>\n        <div><strong>Minimum Data Payload:</strong> $64 - 18 = 46 \\text{ bytes}$.</div>\n        <div class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">\n          &there4; Minimum payload is 46 bytes. If upper-layer data is smaller, padding is appended.\n        </div>\n      </div>\n    </div>\n\n    <!-- Numerical Problem 19: Maximum Ethernet Payload -->\n    <div class=\"p-4 mb-4 rounded-xl border border-purple-200 dark:border-purple-800 bg-white dark:bg-slate-800 shadow-sm\">\n      <div class=\"flex items-center justify-between mb-2\">\n        <span class=\"text-xs font-bold px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-950 text-purple-800 dark:text-purple-300\">\n          Numerical Problem 19 &bull; Topic 6 (Maximum Ethernet Payload)\n        </span>\n        <span class=\"text-xs text-slate-400 font-mono\">PDF Section 14</span>\n      </div>\n      <p class=\"text-xs text-slate-800 dark:text-slate-200 font-semibold mb-2\">\n        <strong>Problem Statement:</strong> Calculate the maximum data field size if the maximum Ethernet frame is 1518 bytes.\n      </p>\n      <div class=\"p-3 bg-slate-50 dark:bg-slate-900 rounded-lg text-xs font-mono space-y-1 text-slate-700 dark:text-slate-300\">\n        <div><strong>Fixed Fields Overhead:</strong> $18 \\text{ bytes}$.</div>\n        <div><strong>Maximum Data Payload:</strong> $1518 - 18 = 1500 \\text{ bytes}$.</div>\n        <div class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">\n          &there4; Maximum payload is 1500 bytes (standard IP MTU).\n        </div>\n      </div>\n    </div>\n\n    <!-- Numerical Problem 20: Backoff Time Calculation -->\n    <div class=\"p-4 mb-4 rounded-xl border border-amber-200 dark:border-amber-800 bg-white dark:bg-slate-800 shadow-sm\">\n      <div class=\"flex items-center justify-between mb-2\">\n        <span class=\"text-xs font-bold px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300\">\n          Numerical Problem 20 &bull; Topic 6 (Backoff Time Calculation)\n        </span>\n        <span class=\"text-xs text-slate-400 font-mono\">PDF Section 14</span>\n      </div>\n      <p class=\"text-xs text-slate-800 dark:text-slate-200 font-semibold mb-2\">\n        <strong>Problem Statement:</strong> A station selects a random number $R = 3$. Calculate the waiting time for traditional 10 Mbps Ethernet.\n      </p>\n      <div class=\"p-3 bg-slate-50 dark:bg-slate-900 rounded-lg text-xs font-mono space-y-1 text-slate-700 dark:text-slate-300\">\n        <div><strong>Given:</strong> $T_{\\text{slot}} = 51.2\\ \\mu\\text{s}$, $R = 3$.</div>\n        <div><strong>Formula:</strong> $T_B = R \\times T_{\\text{slot}}$</div>\n        <div><strong>Calculation:</strong> $T_B = 3 \\times 51.2 = 153.6\\ \\mu\\text{s}$.</div>\n        <div class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">\n          &there4; Waiting time is 153.6 microseconds.\n        </div>\n      </div>\n    </div>\n\n    <!-- Numerical Problem 21: Ethernet Frame Size in Bits -->\n    <div class=\"p-4 mb-4 rounded-xl border border-indigo-200 dark:border-indigo-800 bg-white dark:bg-slate-800 shadow-sm\">\n      <div class=\"flex items-center justify-between mb-2\">\n        <span class=\"text-xs font-bold px-2 py-0.5 rounded bg-indigo-100 dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300\">\n          Numerical Problem 21 &bull; Topic 6 (Frame Size in Bits)\n        </span>\n        <span class=\"text-xs text-slate-400 font-mono\">PDF Section 14</span>\n      </div>\n      <p class=\"text-xs text-slate-800 dark:text-slate-200 font-semibold mb-2\">\n        <strong>Problem Statement:</strong> Convert the maximum Ethernet frame length of 1518 bytes into bits.\n      </p>\n      <div class=\"p-3 bg-slate-50 dark:bg-slate-900 rounded-lg text-xs font-mono space-y-1 text-slate-700 dark:text-slate-300\">\n        <div><strong>Calculation:</strong> $1518 \\times 8 = 12,144 \\text{ bits}$.</div>\n        <div class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">\n          &there4; The maximum standard Ethernet frame contains exactly 12,144 bits.\n        </div>\n      </div>\n    </div>\n\n    <!-- Numerical Problem 22: Ethernet Transmission Time -->\n    <div class=\"p-4 mb-4 rounded-xl border border-cyan-200 dark:border-cyan-800 bg-white dark:bg-slate-800 shadow-sm\">\n      <div class=\"flex items-center justify-between mb-2\">\n        <span class=\"text-xs font-bold px-2 py-0.5 rounded bg-cyan-100 dark:bg-cyan-950 text-cyan-800 dark:text-cyan-300\">\n          Numerical Problem 22 &bull; Topic 6 (Frame Transmission Time)\n        </span>\n        <span class=\"text-xs text-slate-400 font-mono\">PDF Section 14</span>\n      </div>\n      <p class=\"text-xs text-slate-800 dark:text-slate-200 font-semibold mb-2\">\n        <strong>Problem Statement:</strong> Calculate the time required to transmit a 64-byte Ethernet frame at 10 Mbps. Ignore preamble and SFD.\n      </p>\n      <div class=\"p-3 bg-slate-50 dark:bg-slate-900 rounded-lg text-xs font-mono space-y-1 text-slate-700 dark:text-slate-300\">\n        <div><strong>Given:</strong> $L = 64 \\times 8 = 512 \\text{ bits}$, $R = 10,000,000 \\text{ bps}$.</div>\n        <div><strong>Formula:</strong> $T = \\frac{L}{R}$</div>\n        <div><strong>Calculation:</strong> $T = \\frac{512}{10,000,000} = 51.2 \\times 10^{-6} \\text{ s} = 51.2\\ \\mu\\text{s}$.</div>\n        <div class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">\n          &there4; Transmission time is 51.2 microseconds (the Ethernet slot time).\n        </div>\n      </div>\n    </div>\n  ",
+      "overview": "\n    <p>This section provides comprehensive worked numerical problems covering sequence number arithmetic, window sizing, propagation-to-transmission ratios ($a$), and channel utilization efficiencies across all Data Link Layer protocols, directly aligned with <strong>Forouzan Chapter 11</strong> and university examination patterns.</p>\n    \n    <div class=\"space-y-6 my-6\">\n      <!-- Problem 1 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 1: Sequence Number Calculation ($m = 3$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A protocol uses a 3-bit sequence number. Find the total number of sequence numbers and list them.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p><strong>Formula:</strong> $N = 2^m$</p>\n          <p>Given: $m = 3$ bits</p>\n          <p>Calculation: $N = 2^3 = 8$ sequence numbers.</p>\n          <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 8 sequence numbers. The valid range is {0, 1, 2, 3, 4, 5, 6, 7}.</p>\n        </div>\n      </div>\n\n      <!-- Problem 2 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 2: Go-Back-N Window Sizing ($m = 4$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A Go-Back-N ARQ protocol uses a 4-bit sequence number. Find the maximum sender window size and receiver window size.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>Given: $m = 4$ bits</p>\n          <p>Sender Window: $W_s = 2^m - 1 = 2^4 - 1 = 16 - 1 = 15$</p>\n          <p>Receiver Window: $W_r = 1$ (always 1 in Go-Back-N)</p>\n          <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: Sender Window = 15 frames, Receiver Window = 1 frame.</p>\n        </div>\n      </div>\n\n      <!-- Problem 3 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 3: Selective Repeat Window Sizing ($m = 4$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A Selective Repeat ARQ protocol uses a 4-bit sequence number. Find the maximum sender and receiver window sizes.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>Given: $m = 4$ bits</p>\n          <p>Sender Window: $W_s = 2^{m-1} = 2^{4-1} = 2^3 = 8$</p>\n          <p>Receiver Window: $W_r = 2^{m-1} = 2^{4-1} = 2^3 = 8$</p>\n          <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: Sender Window = 8 frames, Receiver Window = 8 frames.</p>\n        </div>\n      </div>\n\n      <!-- Problem 4 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 4: Window Comparison with $m = 3$</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> If $m = 3$ bits, compare the maximum sender and receiver window sizes for Go-Back-N ARQ and Selective Repeat ARQ.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>For Go-Back-N: $W_s = 2^3 - 1 = 7$, $W_r = 1$.</p>\n          <p>For Selective Repeat: $W_s = 2^{3-1} = 4$, $W_r = 2^{3-1} = 4$.</p>\n          <table class=\"wiki-table mt-2\">\n            <thead><tr><th>Protocol</th><th>Sender Window ($W_s$)</th><th>Receiver Window ($W_r$)</th></tr></thead>\n            <tbody>\n              <tr><td>Go-Back-N ARQ</td><td>7</td><td>1</td></tr>\n              <tr><td>Selective Repeat ARQ</td><td>4</td><td>4</td></tr>\n            </tbody>\n          </table>\n        </div>\n      </div>\n\n      <!-- Problem 5 -->\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm\">\n        <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 5: Master ARQ Comparison ($m = 5$)</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question:</strong> A communication link uses a 5-bit sequence number ($m = 5$). Determine the sender and receiver window sizes across Stop-and-Wait ARQ, Go-Back-N ARQ, and Selective Repeat ARQ.</p>\n        <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n          <p>Total sequence numbers available: $2^5 = 32$ (numbered 0 to 31).</p>\n          <p>• <strong>Stop-and-Wait ARQ:</strong> $W_s = 1$, $W_r = 1$.</p>\n          <p>• <strong>Go-Back-N ARQ:</strong> $W_s = 2^5 - 1 = 31$, $W_r = 1$.</p>\n          <p>• <strong>Selective Repeat ARQ:</strong> $W_s = 2^{5-1} = 16$, $W_r = 2^{5-1} = 16$.</p>\n        </div>\n      </div>\n    </div>\n  \n    <!-- Problem 6: Equal Bandwidth Allocation (FDMA) -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 6: Equal Bandwidth Allocation (FDMA)</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 3 PDF):</strong> A channel has a bandwidth of 120 MHz and is shared equally among six stations using static allocation. Find the bandwidth allocated to each station.</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Given:</strong> Total bandwidth $B_{\\text{total}} = 120\\text{ MHz}$, Number of stations $N = 6$.</p>\n        <p><strong>Formula:</strong> $B_{\\text{station}} = \\frac{B_{\\text{total}}}{N}$</p>\n        <p><strong>Calculation:</strong> $B_{\\text{station}} = \\frac{120}{6} = 20\\text{ MHz}$.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 20 MHz per station.</p>\n      </div>\n    </div>\n\n    <!-- Problem 7: Bandwidth Utilization & Waste -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 7: Bandwidth Utilization & Inactive Station Waste</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 3 PDF):</strong> A 100 MHz channel is divided equally among five stations using static allocation. Only three stations are actively using their allocated bandwidth. Find the allocated bandwidth that is currently unused.</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Step 1:</strong> Bandwidth per station = $\\frac{100\\text{ MHz}}{5} = 20\\text{ MHz}$.</p>\n        <p><strong>Step 2:</strong> Inactive stations = $5 - 3 = 2$ stations.</p>\n        <p><strong>Step 3:</strong> Unused allocated bandwidth = $2 \\times 20\\text{ MHz} = 40\\text{ MHz}$.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 40 MHz of allocated bandwidth sits completely unused.</p>\n      </div>\n    </div>\n\n    <!-- Problem 8: TDMA Slot Allocation -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 8: TDMA Time Slot Allocation</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 3 PDF):</strong> A TDMA system has 8 time slots in each frame. If 4 stations share the slots equally, how many slots does each station receive?</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Given:</strong> Total slots per frame = 8, Number of stations = 4.</p>\n        <p><strong>Calculation:</strong> $\\frac{8}{4} = 2$ slots per station.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 2 slots per station in each repeating frame.</p>\n      </div>\n    </div>\n  \n    <!-- Problem 9: Pure ALOHA Throughput Calculation -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 9: Pure ALOHA Throughput Calculation</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 4 PDF):</strong> Calculate the throughput of a Pure ALOHA system when the offered load is $G = 0.5$.</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Given:</strong> $G = 0.5$.</p>\n        <p><strong>Formula:</strong> $S = G e^{-2G}$</p>\n        <p><strong>Calculation:</strong> $S = 0.5 \\cdot e^{-2(0.5)} = 0.5 \\cdot e^{-1} = 0.5 \\times 0.367879 = 0.1839$.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 18.39% (or 18.4%) throughput.</p>\n      </div>\n    </div>\n\n    <!-- Problem 10: Slotted ALOHA Throughput Calculation -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 10: Slotted ALOHA Throughput Calculation</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 4 PDF):</strong> Calculate the throughput of Slotted ALOHA when the offered load is $G = 1.0$.</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Given:</strong> $G = 1.0$.</p>\n        <p><strong>Formula:</strong> $S = G e^{-G}$</p>\n        <p><strong>Calculation:</strong> $S = 1.0 \\cdot e^{-1} = 0.367879 = 36.79\\%$.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: 36.79% (or 36.8%) throughput.</p>\n      </div>\n    </div>\n\n    <!-- Problem 11: Vulnerable Time Comparison -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 11: ALOHA Vulnerable Time Comparison</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 4 PDF):</strong> A network uses frames that require 2 milliseconds to transmit ($T_{fr} = 2\\text{ ms}$). Find the vulnerable time for Pure ALOHA and Slotted ALOHA.</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>For Pure ALOHA:</strong> $\\text{Vulnerable Time} = 2 T_{fr} = 2 \\times 2\\text{ ms} = 4\\text{ ms}$.</p>\n        <p><strong>For Slotted ALOHA:</strong> $\\text{Vulnerable Time} = T_{fr} = 2\\text{ ms}$.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: Pure ALOHA = 4 ms; Slotted ALOHA = 2 ms.</p>\n      </div>\n    </div>\n\n    <!-- Problem 12: Binary Exponential Backoff -->\n    <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-900 shadow-sm mt-4\">\n      <h4 class=\"font-bold text-sm text-blue-700 dark:text-blue-400 mb-1\">Problem 12: Binary Exponential Backoff Range</h4>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300\"><strong>Question (From Topic 4 PDF):</strong> A station experiences three collisions ($K = 3$). Find the possible random values of $R$ in the binary exponential backoff algorithm.</p>\n      <div class=\"mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded font-mono text-xs text-gray-800 dark:text-gray-200\">\n        <p><strong>Given:</strong> $K = 3$.</p>\n        <p><strong>Formula:</strong> $0 \\le R \\le 2^K - 1 = 2^3 - 1 = 8 - 1 = 7$.</p>\n        <p class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">Answer: $R \\in \\{0, 1, 2, 3, 4, 5, 6, 7\\}$.</p>\n      </div>\n    </div>\n  \n    <!-- Numerical Problem 13: Bit-Map Protocol Size -->\n    <div class=\"p-4 mb-4 rounded-xl border border-blue-200 dark:border-blue-800 bg-white dark:bg-slate-800 shadow-sm\">\n      <div class=\"flex items-center justify-between mb-2\">\n        <span class=\"text-xs font-bold px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-blue-300\">\n          Numerical Problem 13 &bull; Topic 5 (Bit-Map Size)\n        </span>\n        <span class=\"text-xs text-slate-400 font-mono\">PDF Section 10</span>\n      </div>\n      <p class=\"text-xs text-slate-800 dark:text-slate-200 font-semibold mb-2\">\n        <strong>Problem Statement:</strong> A network contains 20 stations. How many reservation bits are required in a basic bit-map protocol?\n      </p>\n      <div class=\"p-3 bg-slate-50 dark:bg-slate-900 rounded-lg text-xs font-mono space-y-1.5 text-slate-700 dark:text-slate-300\">\n        <div><strong>Given:</strong> Number of stations $N = 20$.</div>\n        <div><strong>Formula:</strong> $\\text{Bitmap Size} = N$</div>\n        <div><strong>Calculation:</strong> $\\text{Bitmap Size} = 20 \\text{ bits}$.</div>\n        <div class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">\n          &there4; Exactly 20 reservation bits are required in the contention period preceding each data phase.\n        </div>\n      </div>\n    </div>\n\n    <!-- Numerical Problem 14: Reservation Efficiency -->\n    <div class=\"p-4 mb-4 rounded-xl border border-emerald-200 dark:border-emerald-800 bg-white dark:bg-slate-800 shadow-sm\">\n      <div class=\"flex items-center justify-between mb-2\">\n        <span class=\"text-xs font-bold px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300\">\n          Numerical Problem 14 &bull; Topic 5 (Reservation Efficiency)\n        </span>\n        <span class=\"text-xs text-slate-400 font-mono\">PDF Section 10</span>\n      </div>\n      <p class=\"text-xs text-slate-800 dark:text-slate-200 font-semibold mb-2\">\n        <strong>Problem Statement:</strong> A reservation frame contains 10 bits, and 4 stations reserve access. If each data transmission uses 100 bits, calculate the total number of bits sent and the channel efficiency, ignoring other overhead.\n      </p>\n      <div class=\"p-3 bg-slate-50 dark:bg-slate-900 rounded-lg text-xs font-mono space-y-1.5 text-slate-700 dark:text-slate-300\">\n        <div><strong>1. Reservation Overhead:</strong> $10 \\text{ bits}$.</div>\n        <div><strong>2. Total Data Bits Sent:</strong> $4 \\times 100 = 400 \\text{ bits}$.</div>\n        <div><strong>3. Total Bits Sent:</strong> $\\text{Data bits} + \\text{Reservation bits} = 400 + 10 = 410 \\text{ bits}$.</div>\n        <div><strong>4. Channel Efficiency:</strong> $\\eta = \\frac{\\text{Data Bits}}{\\text{Total Bits}} = \\frac{400}{410} \\approx 97.56\\%$.</div>\n        <div class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">\n          &there4; Total bits sent = 410 bits; Channel efficiency = 97.56%.\n        </div>\n      </div>\n    </div>\n\n    <!-- Numerical Problem 15: Binary Address Length -->\n    <div class=\"p-4 mb-4 rounded-xl border border-purple-200 dark:border-purple-800 bg-white dark:bg-slate-800 shadow-sm\">\n      <div class=\"flex items-center justify-between mb-2\">\n        <span class=\"text-xs font-bold px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-950 text-purple-800 dark:text-purple-300\">\n          Numerical Problem 15 &bull; Topic 5 (Binary Countdown Address Length)\n        </span>\n        <span class=\"text-xs text-slate-400 font-mono\">PDF Section 10</span>\n      </div>\n      <p class=\"text-xs text-slate-800 dark:text-slate-200 font-semibold mb-2\">\n        <strong>Problem Statement:</strong> What is the minimum number of bits needed to uniquely represent 32 stations in a binary countdown network?\n      </p>\n      <div class=\"p-3 bg-slate-50 dark:bg-slate-900 rounded-lg text-xs font-mono space-y-1.5 text-slate-700 dark:text-slate-300\">\n        <div><strong>Given:</strong> Number of stations $N = 32$.</div>\n        <div><strong>Condition:</strong> $2^m \\ge N$</div>\n        <div><strong>Calculation:</strong> $2^m \\ge 32 \\implies 2^5 = 32 \\implies m = 5$.</div>\n        <div class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">\n          &there4; Exactly 5 bits are required to represent each station's address.\n        </div>\n      </div>\n    </div>\n\n    <!-- Numerical Problem 16: Token Circulation Time -->\n    <div class=\"p-4 mb-4 rounded-xl border border-amber-200 dark:border-amber-800 bg-white dark:bg-slate-800 shadow-sm\">\n      <div class=\"flex items-center justify-between mb-2\">\n        <span class=\"text-xs font-bold px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300\">\n          Numerical Problem 16 &bull; Topic 5 (Token Circulation Time)\n        </span>\n        <span class=\"text-xs text-slate-400 font-mono\">PDF Section 10</span>\n      </div>\n      <p class=\"text-xs text-slate-800 dark:text-slate-200 font-semibold mb-2\">\n        <strong>Problem Statement:</strong> A token takes 2 ms to move from one station to the next. There are 8 stations. Ignoring data-transmission time, how long does one complete token circulation take?\n      </p>\n      <div class=\"p-3 bg-slate-50 dark:bg-slate-900 rounded-lg text-xs font-mono space-y-1.5 text-slate-700 dark:text-slate-300\">\n        <div><strong>Given:</strong> $N = 8$ stations, $T_{\\text{hop}} = 2 \\text{ ms}$.</div>\n        <div><strong>Formula:</strong> $T = N \\times T_{\\text{hop}}$</div>\n        <div><strong>Calculation:</strong> $T = 8 \\times 2 = 16 \\text{ ms}$.</div>\n        <div class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">\n          &there4; One complete idle token circulation takes exactly 16 ms.\n        </div>\n      </div>\n    </div>\n  \n    <!-- Numerical Problem 17: MAC Address Size -->\n    <div class=\"p-4 mb-4 rounded-xl border border-blue-200 dark:border-blue-800 bg-white dark:bg-slate-800 shadow-sm\">\n      <div class=\"flex items-center justify-between mb-2\">\n        <span class=\"text-xs font-bold px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-blue-300\">\n          Numerical Problem 17 &bull; Topic 6 (MAC Address Size)\n        </span>\n        <span class=\"text-xs text-slate-400 font-mono\">PDF Section 14</span>\n      </div>\n      <p class=\"text-xs text-slate-800 dark:text-slate-200 font-semibold mb-2\">\n        <strong>Problem Statement:</strong> Calculate the number of bits in a 6-byte MAC address.\n      </p>\n      <div class=\"p-3 bg-slate-50 dark:bg-slate-900 rounded-lg text-xs font-mono space-y-1 text-slate-700 dark:text-slate-300\">\n        <div><strong>Calculation:</strong> $6 \\text{ bytes} \\times 8 \\text{ bits/byte} = 48 \\text{ bits}$.</div>\n        <div class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">\n          &there4; An Ethernet MAC address contains exactly 48 bits (12 hexadecimal digits).\n        </div>\n      </div>\n    </div>\n\n    <!-- Numerical Problem 18: Minimum Ethernet Payload -->\n    <div class=\"p-4 mb-4 rounded-xl border border-emerald-200 dark:border-emerald-800 bg-white dark:bg-slate-800 shadow-sm\">\n      <div class=\"flex items-center justify-between mb-2\">\n        <span class=\"text-xs font-bold px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300\">\n          Numerical Problem 18 &bull; Topic 6 (Minimum Ethernet Payload)\n        </span>\n        <span class=\"text-xs text-slate-400 font-mono\">PDF Section 14</span>\n      </div>\n      <p class=\"text-xs text-slate-800 dark:text-slate-200 font-semibold mb-2\">\n        <strong>Problem Statement:</strong> Calculate the minimum data field size if the minimum Ethernet frame is 64 bytes.\n      </p>\n      <div class=\"p-3 bg-slate-50 dark:bg-slate-900 rounded-lg text-xs font-mono space-y-1 text-slate-700 dark:text-slate-300\">\n        <div><strong>Fixed Fields Overhead:</strong> $6 (\\text{DA}) + 6 (\\text{SA}) + 2 (\\text{Length/Type}) + 4 (\\text{CRC}) = 18 \\text{ bytes}$.</div>\n        <div><strong>Minimum Data Payload:</strong> $64 - 18 = 46 \\text{ bytes}$.</div>\n        <div class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">\n          &there4; Minimum payload is 46 bytes. If upper-layer data is smaller, padding is appended.\n        </div>\n      </div>\n    </div>\n\n    <!-- Numerical Problem 19: Maximum Ethernet Payload -->\n    <div class=\"p-4 mb-4 rounded-xl border border-purple-200 dark:border-purple-800 bg-white dark:bg-slate-800 shadow-sm\">\n      <div class=\"flex items-center justify-between mb-2\">\n        <span class=\"text-xs font-bold px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-950 text-purple-800 dark:text-purple-300\">\n          Numerical Problem 19 &bull; Topic 6 (Maximum Ethernet Payload)\n        </span>\n        <span class=\"text-xs text-slate-400 font-mono\">PDF Section 14</span>\n      </div>\n      <p class=\"text-xs text-slate-800 dark:text-slate-200 font-semibold mb-2\">\n        <strong>Problem Statement:</strong> Calculate the maximum data field size if the maximum Ethernet frame is 1518 bytes.\n      </p>\n      <div class=\"p-3 bg-slate-50 dark:bg-slate-900 rounded-lg text-xs font-mono space-y-1 text-slate-700 dark:text-slate-300\">\n        <div><strong>Fixed Fields Overhead:</strong> $18 \\text{ bytes}$.</div>\n        <div><strong>Maximum Data Payload:</strong> $1518 - 18 = 1500 \\text{ bytes}$.</div>\n        <div class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">\n          &there4; Maximum payload is 1500 bytes (standard IP MTU).\n        </div>\n      </div>\n    </div>\n\n    <!-- Numerical Problem 20: Backoff Time Calculation -->\n    <div class=\"p-4 mb-4 rounded-xl border border-amber-200 dark:border-amber-800 bg-white dark:bg-slate-800 shadow-sm\">\n      <div class=\"flex items-center justify-between mb-2\">\n        <span class=\"text-xs font-bold px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300\">\n          Numerical Problem 20 &bull; Topic 6 (Backoff Time Calculation)\n        </span>\n        <span class=\"text-xs text-slate-400 font-mono\">PDF Section 14</span>\n      </div>\n      <p class=\"text-xs text-slate-800 dark:text-slate-200 font-semibold mb-2\">\n        <strong>Problem Statement:</strong> A station selects a random number $R = 3$. Calculate the waiting time for traditional 10 Mbps Ethernet.\n      </p>\n      <div class=\"p-3 bg-slate-50 dark:bg-slate-900 rounded-lg text-xs font-mono space-y-1 text-slate-700 dark:text-slate-300\">\n        <div><strong>Given:</strong> $T_{\\text{slot}} = 51.2\\ \\mu\\text{s}$, $R = 3$.</div>\n        <div><strong>Formula:</strong> $T_B = R \\times T_{\\text{slot}}$</div>\n        <div><strong>Calculation:</strong> $T_B = 3 \\times 51.2 = 153.6\\ \\mu\\text{s}$.</div>\n        <div class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">\n          &there4; Waiting time is 153.6 microseconds.\n        </div>\n      </div>\n    </div>\n\n    <!-- Numerical Problem 21: Ethernet Frame Size in Bits -->\n    <div class=\"p-4 mb-4 rounded-xl border border-indigo-200 dark:border-indigo-800 bg-white dark:bg-slate-800 shadow-sm\">\n      <div class=\"flex items-center justify-between mb-2\">\n        <span class=\"text-xs font-bold px-2 py-0.5 rounded bg-indigo-100 dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300\">\n          Numerical Problem 21 &bull; Topic 6 (Frame Size in Bits)\n        </span>\n        <span class=\"text-xs text-slate-400 font-mono\">PDF Section 14</span>\n      </div>\n      <p class=\"text-xs text-slate-800 dark:text-slate-200 font-semibold mb-2\">\n        <strong>Problem Statement:</strong> Convert the maximum Ethernet frame length of 1518 bytes into bits.\n      </p>\n      <div class=\"p-3 bg-slate-50 dark:bg-slate-900 rounded-lg text-xs font-mono space-y-1 text-slate-700 dark:text-slate-300\">\n        <div><strong>Calculation:</strong> $1518 \\times 8 = 12,144 \\text{ bits}$.</div>\n        <div class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">\n          &there4; The maximum standard Ethernet frame contains exactly 12,144 bits.\n        </div>\n      </div>\n    </div>\n\n    <!-- Numerical Problem 22: Ethernet Transmission Time -->\n    <div class=\"p-4 mb-4 rounded-xl border border-cyan-200 dark:border-cyan-800 bg-white dark:bg-slate-800 shadow-sm\">\n      <div class=\"flex items-center justify-between mb-2\">\n        <span class=\"text-xs font-bold px-2 py-0.5 rounded bg-cyan-100 dark:bg-cyan-950 text-cyan-800 dark:text-cyan-300\">\n          Numerical Problem 22 &bull; Topic 6 (Frame Transmission Time)\n        </span>\n        <span class=\"text-xs text-slate-400 font-mono\">PDF Section 14</span>\n      </div>\n      <p class=\"text-xs text-slate-800 dark:text-slate-200 font-semibold mb-2\">\n        <strong>Problem Statement:</strong> Calculate the time required to transmit a 64-byte Ethernet frame at 10 Mbps. Ignore preamble and SFD.\n      </p>\n      <div class=\"p-3 bg-slate-50 dark:bg-slate-900 rounded-lg text-xs font-mono space-y-1 text-slate-700 dark:text-slate-300\">\n        <div><strong>Given:</strong> $L = 64 \\times 8 = 512 \\text{ bits}$, $R = 10,000,000 \\text{ bps}$.</div>\n        <div><strong>Formula:</strong> $T = \\frac{L}{R}$</div>\n        <div><strong>Calculation:</strong> $T = \\frac{512}{10,000,000} = 51.2 \\times 10^{-6} \\text{ s} = 51.2\\ \\mu\\text{s}$.</div>\n        <div class=\"text-emerald-600 dark:text-emerald-400 font-bold mt-1\">\n          &there4; Transmission time is 51.2 microseconds (the Ethernet slot time).\n        </div>\n      </div>\n    </div>\n  \n\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Problem 23: Calculate PIFS in IEEE 802.11 (PDF Section 15 / Num 1)</p>\n          <p class=\"text-xs text-slate-600 dark:text-slate-300 mt-1\"><strong>Problem:</strong> Calculate PIFS if SIFS is 10 &mu;s and Slot Time is 20 &mu;s.</p>\n          <div class=\"text-xs text-slate-700 dark:text-slate-300 mt-2 font-mono bg-white dark:bg-slate-900 p-2 rounded border border-slate-200 dark:border-slate-800\">\n            <p>Formula: PIFS = SIFS + SlotTime</p>\n            <p>PIFS = 10 &mu;s + 20 &mu;s = 30 &mu;s</p>\n            <p class=\"font-bold text-emerald-600\">Answer: PIFS = 30 &mu;s</p>\n          </div>\n        </div>\n\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Problem 24: Calculate DIFS in IEEE 802.11 (PDF Section 15 / Num 2)</p>\n          <p class=\"text-xs text-slate-600 dark:text-slate-300 mt-1\"><strong>Problem:</strong> Calculate DIFS if SIFS is 10 &mu;s and Slot Time is 20 &mu;s.</p>\n          <div class=\"text-xs text-slate-700 dark:text-slate-300 mt-2 font-mono bg-white dark:bg-slate-900 p-2 rounded border border-slate-200 dark:border-slate-800\">\n            <p>Formula: DIFS = SIFS + 2(SlotTime)</p>\n            <p>DIFS = 10 &mu;s + 2(20 &mu;s) = 10 + 40 = 50 &mu;s</p>\n            <p class=\"font-bold text-emerald-600\">Answer: DIFS = 50 &mu;s</p>\n          </div>\n        </div>\n\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Problem 25: Calculate Total RTS/CTS Exchange Time (PDF Section 15 / Num 3)</p>\n          <p class=\"text-xs text-slate-600 dark:text-slate-300 mt-1\"><strong>Problem:</strong> An IEEE 802.11 transmission consists of: RTS = 40 &mu;s, CTS = 30 &mu;s, DATA = 500 &mu;s, ACK = 30 &mu;s, and SIFS = 10 &mu;s. Calculate the total exchange time, ignoring DIFS and backoff.</p>\n          <div class=\"text-xs text-slate-700 dark:text-slate-300 mt-2 font-mono bg-white dark:bg-slate-900 p-2 rounded border border-slate-200 dark:border-slate-800\">\n            <p>Formula: T = RTS + CTS + DATA + ACK + 3(SIFS)</p>\n            <p>T = 40 + 30 + 500 + 30 + 3(10) = 600 &mu;s</p>\n            <p class=\"font-bold text-emerald-600\">Answer: T = 600 &mu;s</p>\n          </div>\n        </div>\n\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Problem 26: Frame Control Field Bit Count (PDF Section 15 / Num 4)</p>\n          <p class=\"text-xs text-slate-600 dark:text-slate-300 mt-1\"><strong>Problem:</strong> An IEEE 802.11 Frame Control field is 2 bytes. Calculate its size in bits.</p>\n          <div class=\"text-xs text-slate-700 dark:text-slate-300 mt-2 font-mono bg-white dark:bg-slate-900 p-2 rounded border border-slate-200 dark:border-slate-800\">\n            <p>Calculation: 2 bytes &times; 8 bits/byte = 16 bits</p>\n            <p class=\"font-bold text-emerald-600\">Answer: 16 bits</p>\n          </div>\n        </div>\n\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Problem 27: Frame Check Sequence (FCS) Bit Count (PDF Section 15 / Num 5)</p>\n          <p class=\"text-xs text-slate-600 dark:text-slate-300 mt-1\"><strong>Problem:</strong> The IEEE 802.11 FCS field contains 4 bytes. Calculate its size in bits.</p>\n          <div class=\"text-xs text-slate-700 dark:text-slate-300 mt-2 font-mono bg-white dark:bg-slate-900 p-2 rounded border border-slate-200 dark:border-slate-800\">\n            <p>Calculation: 4 bytes &times; 8 bits/byte = 32 bits</p>\n            <p class=\"font-bold text-emerald-600\">Answer: 32 bits (CRC-32)</p>\n          </div>\n        </div>\n\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Problem 28: MAC Address Learning & Unknown Destination Flooding (Switching)</p>\n          <p class=\"text-xs text-slate-600 dark:text-slate-300 mt-1\"><strong>Problem:</strong> A 3-port switch has empty tables. A frame arrives on Port 1 with Source MAC A and Destination MAC B. (1) What does the switch learn? (2) Through which ports is the frame transmitted?</p>\n          <div class=\"text-xs text-slate-700 dark:text-slate-300 mt-2 font-mono bg-white dark:bg-slate-900 p-2 rounded border border-slate-200 dark:border-slate-800\">\n            <p>1. The switch inspects Source MAC A and updates table: Table[A] = Port 1 with aging timer = 300s.</p>\n            <p>2. The switch queries its forwarding database for Destination MAC B. B is unknown.</p>\n            <p class=\"font-bold text-emerald-600\">Answer: Switch learns A &rarr; Port 1, and FLOODS the frame out Port 2 and Port 3 (all active ports except arrival Port 1).</p>\n          </div>\n        </div>\n\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Problem 29: Known Destination Unicast Forwarding (Switching)</p>\n          <p class=\"text-xs text-slate-600 dark:text-slate-300 mt-1\"><strong>Problem:</strong> A switch has the forwarding table: [A: Port 1, B: Port 2, C: Port 3]. A frame arrives on Port 1 with Destination MAC B. Describe the switch forwarding decision.</p>\n          <div class=\"text-xs text-slate-700 dark:text-slate-300 mt-2 font-mono bg-white dark:bg-slate-900 p-2 rounded border border-slate-200 dark:border-slate-800\">\n            <p>Lookup: Destination MAC B &rarr; Port 2.</p>\n            <p>Verification: Destination Port (2) &ne; Arrival Port (1).</p>\n            <p class=\"font-bold text-emerald-600\">Answer: Selectively forwards frame exclusively out Port 2. No other ports receive traffic.</p>\n          </div>\n        </div>\n\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Problem 30: Local Segment Filtering on Ingress Port (Switching)</p>\n          <p class=\"text-xs text-slate-600 dark:text-slate-300 mt-1\"><strong>Problem:</strong> A switch forwarding table contains: [A: Port 1, B: Port 2, C: Port 2]. A frame arrives on Port 2 with Destination MAC C. Describe the switch action.</p>\n          <div class=\"text-xs text-slate-700 dark:text-slate-300 mt-2 font-mono bg-white dark:bg-slate-900 p-2 rounded border border-slate-200 dark:border-slate-800\">\n            <p>Lookup: Destination MAC C &rarr; Port 2.</p>\n            <p>Verification: Destination Port (2) == Arrival Port (2).</p>\n            <p class=\"font-bold text-emerald-600\">Answer: The switch FILTERS (drops) the frame. Station C already received the transmission directly over the shared local segment.</p>\n          </div>\n        </div>\n\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Problem 31: Dynamic Unknown Destination with Multiple Segment Ports (Switching)</p>\n          <p class=\"text-xs text-slate-600 dark:text-slate-300 mt-1\"><strong>Problem:</strong> A frame arrives on Port 3 with Source MAC X and Destination MAC D. The switch table contains: [A: Port 1, B: Port 2, C: Port 2]. Host D is not in the table. Detail the switch operations.</p>\n          <div class=\"text-xs text-slate-700 dark:text-slate-300 mt-2 font-mono bg-white dark:bg-slate-900 p-2 rounded border border-slate-200 dark:border-slate-800\">\n            <p>1. Learning: Table[X] = Port 3 (new entry recorded with refresh timer).</p>\n            <p>2. Forwarding lookup: Destination D is unmapped.</p>\n            <p class=\"font-bold text-emerald-600\">Answer: Floods frame out Port 1 and Port 2. Does NOT reflect back out Port 3.</p>\n          </div>\n        </div>\n\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Problem 32: Choosing the Correct Device for Connecting Different IP Networks (Networking Devices)</p>\n          <p class=\"text-xs text-slate-600 dark:text-slate-300 mt-1\"><strong>Problem:</strong> A company wants to connect two different IP subnets: Subnet A (10.0.1.0/24) and Subnet B (10.0.2.0/24). Which networking device should be used and why?</p>\n          <div class=\"text-xs text-slate-700 dark:text-slate-300 mt-2 font-mono bg-white dark:bg-slate-900 p-2 rounded border border-slate-200 dark:border-slate-800\">\n            <p>Analysis: Interconnecting distinct logical IP subnets requires Network Layer (Layer 3) routing.</p>\n            <p class=\"font-bold text-emerald-600\">Answer: Router. Routers operate at Layer 3, examine destination IP addresses against routing tables, and forward packets across distinct network boundaries while blocking Layer 2 broadcasts.</p>\n          </div>\n        </div>\n\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Problem 33: Extending a Weak Signal Over a Long Cable (Networking Devices)</p>\n          <p class=\"text-xs text-slate-600 dark:text-slate-300 mt-1\"><strong>Problem:</strong> A digital signal becomes weak and distorted due to attenuation when travelling over a long 150m copper cable. Which device can regenerate the signal and why?</p>\n          <div class=\"text-xs text-slate-700 dark:text-slate-300 mt-2 font-mono bg-white dark:bg-slate-900 p-2 rounded border border-slate-200 dark:border-slate-800\">\n            <p>Analysis: Digital signals attenuate and disperse over extended distances. An amplifier amplifies noise along with signal; a digital regenerator eliminates accumulated noise.</p>\n            <p class=\"font-bold text-emerald-600\">Answer: Repeater. Operates at Layer 1 (Physical Layer) to detect incoming bits, reconstruct original clean square-wave digital pulses, and retransmit at full signal strength.</p>\n          </div>\n        </div>\n\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Problem 34: Connecting 30 Computers in a High-Speed LAN (Networking Devices)</p>\n          <p class=\"text-xs text-slate-600 dark:text-slate-300 mt-1\"><strong>Problem:</strong> A computer laboratory has 30 computers that need to communicate within the same Local Area Network with dedicated bandwidth and zero collisions. Which device is suitable?</p>\n          <div class=\"text-xs text-slate-700 dark:text-slate-300 mt-2 font-mono bg-white dark:bg-slate-900 p-2 rounded border border-slate-200 dark:border-slate-800\">\n            <p>Analysis: Connecting 30 hosts to a hub creates a single shared collision domain where hosts compete for bandwidth and can collide. A switch provides microsegmentation.</p>\n            <p class=\"font-bold text-emerald-600\">Answer: Ethernet Switch. An L2 switch provides dedicated collision domains per port and full-duplex operation, allowing all 30 hosts to communicate concurrently without collisions at full wire speed.</p>\n          </div>\n        </div>\n\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Problem 35: Understanding Hub Signal Distribution Behavior (Networking Devices)</p>\n          <p class=\"text-xs text-slate-600 dark:text-slate-300 mt-1\"><strong>Problem:</strong> A 5-port hub connects five computers (A, B, C, D, E). If Computer A sends a frame intended for Computer C, how does the hub distribute it, and what happens at the receivers?</p>\n          <div class=\"text-xs text-slate-700 dark:text-slate-300 mt-2 font-mono bg-white dark:bg-slate-900 p-2 rounded border border-slate-200 dark:border-slate-800\">\n            <p>Operation: A hub is an unmanaged Layer 1 multiport repeater with no MAC address awareness.</p>\n            <p class=\"font-bold text-emerald-600\">Answer: The hub retransmits the bits out all other ports (B, C, D, E). Hosts B, D, and E examine destination MAC, detect a mismatch, and drop the frame; Host C accepts and processes the frame.</p>\n          </div>\n        </div>\n\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Problem 36: Identifying the Purpose of a Default Gateway (Networking Devices)</p>\n          <p class=\"text-xs text-slate-600 dark:text-slate-300 mt-1\"><strong>Problem:</strong> A computer has IP address 192.168.1.10/24 and default gateway 192.168.1.1. What is the operational purpose of the default gateway when the computer connects to an external web server?</p>\n          <div class=\"text-xs text-slate-700 dark:text-slate-300 mt-2 font-mono bg-white dark:bg-slate-900 p-2 rounded border border-slate-200 dark:border-slate-800\">\n            <p>Routing Logic: Host checks if destination IP is in 192.168.1.0/24. Since the web server is remote, direct delivery is impossible.</p>\n            <p class=\"font-bold text-emerald-600\">Answer: The default gateway acts as the local exit point and next-hop router. The host encapsulates the packet in a frame addressed to the gateway's MAC address, and the gateway routes the packet to remote networks.</p>\n          </div>\n        </div>\n",
       "eli10": "In simple words: Step-by-step solved numerical problems on CSMA/CD minimum frame size, sliding window utilization, and ALOHA throughput.",
       "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
       "diagram": "",
@@ -6828,7 +7308,7 @@ var TOPICS_U2_SYLLABUS = {
       ]
     },
     "sections": {
-      "overview": "\n    <p>Comprehensive repository of 15 university exam short-answer questions with concise model answers covering Data Link Layer protocols, flow control, and error recovery.</p>\n    <div class=\"space-y-4 my-6\">\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q1. What is a Data Link Layer protocol?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A set of formal rules governing how data frames are transmitted, verified, and managed between two directly connected stations across a physical medium.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q2. What is a noiseless channel?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An idealized theoretical communication channel in which frames are never damaged, corrupted, lost, or duplicated during transit.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q3. What is a noisy channel?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A realistic physical communication channel subject to thermal noise, attenuation, and interference where frames and ACKs can be corrupted, lost, or delayed.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q4. What is the Simplest Protocol?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An elementary unidirectional protocol for noiseless channels that provides neither flow control nor error control, assuming the receiver has infinite processing capacity.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q5. What is the Stop-and-Wait Protocol?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A noiseless channel protocol where the sender transmits one frame and halts until an explicit acknowledgement (ACK) arrives, preventing receiver buffer overflow.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q6. What does ARQ stand for and what is its purpose?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Automatic Repeat reQuest. It is an error-control mechanism that uses acknowledgements, sequence numbers, and retransmission timers to automatically resend lost or corrupted frames.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q7. What is an Acknowledgement (ACK)?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A control frame dispatched by the receiver informing the sender that a data frame was received correctly or indicating the sequence number of the next frame expected.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q8. What is a Negative Acknowledgement (NAK)?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A control frame sent by the receiver explicitly requesting the immediate retransmission of a specific missing or damaged frame without waiting for timer timeout.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q9. Why are sequence numbers necessary in Stop-and-Wait ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">To enable the receiver to recognize and safely discard duplicate frames resulting from lost or delayed acknowledgements.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q10. What is pipelining in data communication?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The technique of transmitting multiple data frames before waiting for an acknowledgement, keeping the transmission channel full and maximizing throughput.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q11. What is the sender window size in Go-Back-N ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">$W_s = 2^m - 1$, where $m$ is the number of bits in the sequence number field.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q12. What is the receiver window size in Go-Back-N ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">$W_r = 1$. The receiver only ever accepts the single next-expected in-order frame.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q13. What is the window size in Selective Repeat ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">$W_s = W_r = 2^{m-1}$ (half of the total sequence number space).</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q14. What is a Cumulative Acknowledgement?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An ACK containing number $n$ that simultaneously confirms successful receipt of all frames up to sequence number $n-1$.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q15. What is Piggybacking?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The technique of attaching acknowledgement numbers into the header of outgoing reverse data frames, conserving bandwidth and eliminating separate ACK frames.</p>\n      </div>\n    </div>\n  \n    <!-- Topic 3 Short Questions -->\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q16. What is the MAC sublayer?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The lower sublayer of the Data Link Layer in the IEEE 802 architecture responsible for controlling and coordinating device access to a shared transmission medium.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q17. State any four functions of the MAC sublayer.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">1. Physical addressing (MAC addresses). 2. Medium access control. 3. Frame handling and delimiting. 4. Collision handling and backoff recovery.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q18. What is the channel allocation problem?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The problem of deciding how limited communication channel resources or frequency bandwidth should be shared efficiently among multiple competing devices.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q19. Why is channel allocation necessary?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Because the channel has limited bandwidth, stations generate unpredictable bursty traffic, and simultaneous uncoordinated transmissions result in destructive packet collisions.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q20. Define static channel allocation.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A method where available channel resources (frequency or time) are divided and assigned to stations in advance, remaining reserved regardless of whether a station transmits.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q21. Define dynamic channel allocation.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A method where communication channel resources are assigned on demand according to the real-time transmission requirements of active stations.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q22. What is FDMA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Frequency Division Multiple Access: a channelization technique where the total bandwidth is divided into separate frequency bands assigned to stations for simultaneous transmission.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q23. What is TDMA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Time Division Multiple Access: a channelization technique where the entire bandwidth is shared in the time domain, with time divided into repeating frames and assigned time slots.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q24. Differentiate between LLC and MAC.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">LLC is the upper sublayer providing flow and error control independent of physical media; MAC is the lower sublayer controlling hardware access to the shared medium and handling physical addressing.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q25. State two advantages of dynamic allocation.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">1. Drastically higher bandwidth utilization for bursty traffic. 2. Active stations can utilize the full channel capacity while zero bandwidth is wasted on inactive stations.</p>\n    </div>\n  \n    <!-- Topic 4 Short Questions -->\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q26. Define multiple access protocol.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A set of protocol rules allowing multiple independent stations to share a common communication medium without collisions destroying data.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q27. What is random access?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A multiple-access method in which all stations have equal access rights and compete (contend) for the shared channel without a central controller.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q28. Define Pure ALOHA.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A random access protocol where stations transmit frames whenever data is ready, without prior sensing or time slot boundaries.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q29. What is Slotted ALOHA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An improved version of Pure ALOHA where channel time is divided into discrete slots and stations may transmit only at the beginning of a time slot.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q30. Define vulnerable time.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The continuous time duration during which another station's transmission will collide with and destroy the frame under consideration.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q31. What is CSMA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Carrier Sense Multiple Access: a protocol based on 'listen before you transmit', sensing carrier activity before sending a frame.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q32. List the three persistence methods of CSMA.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">1. 1-Persistent CSMA. 2. Non-Persistent CSMA. 3. p-Persistent CSMA.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q33. What is 1-persistent CSMA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A method where a station continuously senses a busy channel and transmits immediately with probability 1 as soon as the channel becomes idle.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q34. What is nonpersistent CSMA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A method where a station finding the channel busy halts sensing, waits for a random period of time, and senses again later.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q35. What is p-persistent CSMA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A slotted method where an idle channel triggers transmission with probability $p$ and deferral to the next time slot with probability $1-p$.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q36. Define CSMA/CD.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Carrier Sense Multiple Access with Collision Detection: a protocol where a station monitors the medium while transmitting, stopping immediately upon collision.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q37. What is a jamming signal?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A 32–48 bit pattern sent immediately upon collision detection to guarantee all other stations on the cable observe the collision.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q38. What is binary exponential backoff?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An algorithm that selects a random wait time $R \\in [0, 2^K - 1]$ after collision $K$, exponentially widening the delay range to prevent repeated collisions.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q39. Define CSMA/CA.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Carrier Sense Multiple Access with Collision Avoidance: a wireless protocol that avoids collisions before transmission using IFS, contention windows, and ACKs.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q40. List the three strategies used by CSMA/CA.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">1. Interframe Space (IFS). 2. Contention Window (random backoff). 3. Acknowledgements (ACK).</p>\n    </div>\n  \n    <div class=\"mt-6 pt-4 border-t border-slate-200 dark:border-slate-700\">\n      <h3 class=\"text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-3\">\n        Topic 5 – Collision-Free Protocols Short-Answer Questions (PDF Section 14, 2 Marks Each)\n      </h3>\n      <div class=\"space-y-3 text-xs\">\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q41. Define a collision-free protocol.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A collision-free protocol is a medium-access control method designed to prevent simultaneous conflicting transmissions by coordinating which station can transmit and when.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q42. What is the bit-map protocol?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> The bit-map protocol is a reservation-based access method in which each station has a dedicated reservation bit in a contention period; reserving stations transmit in ascending order.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q43. What is a reservation bit?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A reservation bit is a single bit asserted by a station (1 = request, 0 = no request) during the reservation phase to request a future data transmission slot.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q44. Define binary countdown.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> Binary countdown is a collision-free access method where contending stations transmit their unique binary addresses bit-by-bit from MSB to LSB; the highest-priority address wins channel access.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q45. What is a token?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A token is a special compact control frame that circulates among stations in a network, conferring exclusive permission to transmit data to the station currently holding it.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q46. What is token passing?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> Token passing is a controlled-access method where stations are organized in a logical ring, and permission to transmit is passed sequentially from predecessor to successor via a token.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q47. Define logical ring.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A logical ring is a cyclic arrangement of stations in which each station has a strictly defined predecessor (previous station) and successor (next station) for token handoff.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q48. What is polling?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> Polling is a centralized controlled-access method where one primary device controls medium access by querying secondary devices one by one to determine if they have data to send.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q49. Differentiate between primary and secondary stations in polling.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> The <strong>primary station</strong> controls the channel and initiates all communication. <strong>Secondary stations</strong> are client devices that can only transmit or receive when explicitly instructed by the primary.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q50. What is the purpose of a reservation frame?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A reservation frame contains minislots for each station, allowing nodes to book upcoming transmission slots and establish an orderly, collision-free data transmission sequence.</p>\n        </div>\n      </div>\n    </div>\n  \n    <div class=\"mt-6 pt-4 border-t border-slate-200 dark:border-slate-700\">\n      <h3 class=\"text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-3\">\n        Topic 6 – Ethernet MAC Sublayer Protocol Short-Answer Questions (PDF Section 15, 2 Marks Each)\n      </h3>\n      <div class=\"space-y-3 text-xs\">\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q51. Define Ethernet.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> Ethernet is a standardized local area network technology defined by IEEE 802.3 that specifies physical wiring, 48-bit MAC addressing, and frame transmission.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q52. What is IEEE 802.3?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> IEEE 802.3 is the international standard family that defines the physical layer and MAC sublayer specifications for wired Ethernet networks.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q53. What is a MAC address?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A MAC address is a 48-bit physical hardware identifier burned into a network interface card (NIC) to identify a device on a local network.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q54. What is the size of an Ethernet MAC address?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> An Ethernet MAC address is 48 bits (6 bytes), typically represented as 12 hexadecimal digits separated by colons.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q55. Define unicast address.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A unicast address identifies a single destination station for one-to-one communication. The least significant bit of its first byte is 0.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q56. Define multicast address.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A multicast address identifies a specific group of destination stations for one-to-many communication. The least significant bit of its first byte is 1.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q57. What is the Ethernet broadcast address?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> The Ethernet broadcast address is <code>FF:FF:FF:FF:FF:FF</code> (all 48 bits are 1), which delivers a frame to all stations on the local network.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q58. What is the purpose of the preamble?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> The preamble consists of 7 bytes of alternating 1s and 0s that alert the receiver that a frame is arriving and synchronize receiver clock timing.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q59. What is the Start Frame Delimiter (SFD)?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> The SFD is a 1-byte field with the pattern <code>10101011</code>; its final two 1s mark the end of synchronization and the exact beginning of the frame header.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q60. What is CRC?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> Cyclic Redundancy Check (CRC) is a 4-byte Frame Check Sequence (CRC-32) appended to the frame to allow the receiving station to detect bit corruption.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q61. Define CSMA/CD.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> CSMA/CD (Carrier Sense Multiple Access with Collision Detection) is the traditional half-duplex Ethernet protocol where stations listen before and during transmission to detect collisions.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q62. What is a jamming signal?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A jamming signal is a 32 to 48 bit signal sent by a station immediately upon detecting a collision to ensure all stations detect the conflict and discard partial frames.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q63. What is slot time?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> Slot time is the time required to transmit 512 bits in traditional 10 Mbps Ethernet ($51.2\\ \\mu\\text{s}$), representing the worst-case round-trip collision detection window.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q64. Define binary exponential backoff.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> An algorithm where a station selects a random retransmission delay from a range ($0 \\le R \\le 2^K - 1$) that doubles after each successive collision to resolve contention.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q65. What is Fast Ethernet?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> Fast Ethernet (IEEE 802.3u) is an Ethernet generation that operates at 100 Mbps over twisted-pair (100Base-TX) or fiber (100Base-FX) and introduced Autonegotiation.</p>\n        </div>\n      </div>\n    </div>\n  \n\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q66. What is a Wireless LAN (WLAN)?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A Wireless LAN is a local computer network that connects devices within a limited geographic area using radio frequency waves instead of physical cables, defined by the IEEE 802.11 standard.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q67. Which OSI layers are covered by the IEEE 802.11 standard?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> IEEE 802.11 covers the Physical Layer (radio transmission, modulation) and the Data Link Layer (specifically the Medium Access Control sublayer and Logical Link Control interface).</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q68. What is a Basic Service Set (BSS)?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A BSS is the fundamental building block of a wireless LAN. It consists of stationary or mobile wireless stations operating within a local radio coverage area, configured either in Ad Hoc mode or Infrastructure mode.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q69. Differentiate between Ad Hoc and Infrastructure BSS.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> An Ad Hoc network (IBSS) is a temporary peer-to-peer network without an Access Point; an Infrastructure network requires a central Access Point (AP) through which all station communication is relayed.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q70. What is an Extended Service Set (ESS)?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> An ESS is formed by connecting two or more Infrastructure BSSs via a wired Distribution System (DS) backbone, allowing seamless station mobility across a wide campus.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q71. Name the three levels of station mobility in IEEE 802.11.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> 1) No-Transition Mobility (stationary or moves only within one BSS); 2) BSS-Transition Mobility (roams between BSSs within the same ESS); 3) ESS-Transition Mobility (moves from one ESS to another).</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q72. What is the Hidden Station Problem?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> It occurs when two stations are out of radio range of each other, but both can communicate with a central AP. When both transmit simultaneously, their frames collide destructively at the AP.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q73. How does RTS/CTS resolve the hidden station problem?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> The sender transmits an RTS; the AP replies with a broadcast CTS containing the reservation duration. The hidden station hears the CTS and sets its NAV timer to defer transmission.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q74. What is the Exposed Station Problem?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> It occurs when a station hears an ongoing transmission to another destination, erroneously assumes the medium is busy, and unnecessarily defers its own transmission to an independent receiver.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q75. Why cannot CSMA/CD be used in Wireless LANs?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> 1) Transceiver blindness (local TX power is up to 100 dB stronger than incoming signals); 2) Collisions occur at the receiver, not at the sender (hidden stations); 3) Rapid signal attenuation.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q76. Differentiate between DCF and PCF.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> DCF is mandatory, distributed, contention-based access using CSMA/CA for best-effort data. PCF is optional, centralized, contention-free access using AP polling for real-time traffic.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q77. What is the priority order of IEEE 802.11 Interframe Spaces?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> SIFS (Short IFS, highest priority) &lt; PIFS (PCF IFS) &lt; DIFS (DCF IFS) &lt; EIFS (Extended IFS, lowest priority).</p>\n        </div>\n",
+      "overview": "\n    <p>Comprehensive repository of 15 university exam short-answer questions with concise model answers covering Data Link Layer protocols, flow control, and error recovery.</p>\n    <div class=\"space-y-4 my-6\">\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q1. What is a Data Link Layer protocol?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A set of formal rules governing how data frames are transmitted, verified, and managed between two directly connected stations across a physical medium.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q2. What is a noiseless channel?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An idealized theoretical communication channel in which frames are never damaged, corrupted, lost, or duplicated during transit.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q3. What is a noisy channel?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A realistic physical communication channel subject to thermal noise, attenuation, and interference where frames and ACKs can be corrupted, lost, or delayed.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q4. What is the Simplest Protocol?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An elementary unidirectional protocol for noiseless channels that provides neither flow control nor error control, assuming the receiver has infinite processing capacity.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q5. What is the Stop-and-Wait Protocol?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A noiseless channel protocol where the sender transmits one frame and halts until an explicit acknowledgement (ACK) arrives, preventing receiver buffer overflow.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q6. What does ARQ stand for and what is its purpose?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Automatic Repeat reQuest. It is an error-control mechanism that uses acknowledgements, sequence numbers, and retransmission timers to automatically resend lost or corrupted frames.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q7. What is an Acknowledgement (ACK)?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A control frame dispatched by the receiver informing the sender that a data frame was received correctly or indicating the sequence number of the next frame expected.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q8. What is a Negative Acknowledgement (NAK)?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A control frame sent by the receiver explicitly requesting the immediate retransmission of a specific missing or damaged frame without waiting for timer timeout.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q9. Why are sequence numbers necessary in Stop-and-Wait ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">To enable the receiver to recognize and safely discard duplicate frames resulting from lost or delayed acknowledgements.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q10. What is pipelining in data communication?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The technique of transmitting multiple data frames before waiting for an acknowledgement, keeping the transmission channel full and maximizing throughput.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q11. What is the sender window size in Go-Back-N ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">$W_s = 2^m - 1$, where $m$ is the number of bits in the sequence number field.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q12. What is the receiver window size in Go-Back-N ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">$W_r = 1$. The receiver only ever accepts the single next-expected in-order frame.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q13. What is the window size in Selective Repeat ARQ?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">$W_s = W_r = 2^{m-1}$ (half of the total sequence number space).</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q14. What is a Cumulative Acknowledgement?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An ACK containing number $n$ that simultaneously confirms successful receipt of all frames up to sequence number $n-1$.</p>\n      </div>\n      <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n        <p class=\"font-bold text-xs text-gfg-green\">Q15. What is Piggybacking?</p>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The technique of attaching acknowledgement numbers into the header of outgoing reverse data frames, conserving bandwidth and eliminating separate ACK frames.</p>\n      </div>\n    </div>\n  \n    <!-- Topic 3 Short Questions -->\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q16. What is the MAC sublayer?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The lower sublayer of the Data Link Layer in the IEEE 802 architecture responsible for controlling and coordinating device access to a shared transmission medium.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q17. State any four functions of the MAC sublayer.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">1. Physical addressing (MAC addresses). 2. Medium access control. 3. Frame handling and delimiting. 4. Collision handling and backoff recovery.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q18. What is the channel allocation problem?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The problem of deciding how limited communication channel resources or frequency bandwidth should be shared efficiently among multiple competing devices.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q19. Why is channel allocation necessary?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Because the channel has limited bandwidth, stations generate unpredictable bursty traffic, and simultaneous uncoordinated transmissions result in destructive packet collisions.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q20. Define static channel allocation.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A method where available channel resources (frequency or time) are divided and assigned to stations in advance, remaining reserved regardless of whether a station transmits.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q21. Define dynamic channel allocation.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A method where communication channel resources are assigned on demand according to the real-time transmission requirements of active stations.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q22. What is FDMA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Frequency Division Multiple Access: a channelization technique where the total bandwidth is divided into separate frequency bands assigned to stations for simultaneous transmission.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q23. What is TDMA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Time Division Multiple Access: a channelization technique where the entire bandwidth is shared in the time domain, with time divided into repeating frames and assigned time slots.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q24. Differentiate between LLC and MAC.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">LLC is the upper sublayer providing flow and error control independent of physical media; MAC is the lower sublayer controlling hardware access to the shared medium and handling physical addressing.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q25. State two advantages of dynamic allocation.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">1. Drastically higher bandwidth utilization for bursty traffic. 2. Active stations can utilize the full channel capacity while zero bandwidth is wasted on inactive stations.</p>\n    </div>\n  \n    <!-- Topic 4 Short Questions -->\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q26. Define multiple access protocol.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A set of protocol rules allowing multiple independent stations to share a common communication medium without collisions destroying data.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q27. What is random access?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A multiple-access method in which all stations have equal access rights and compete (contend) for the shared channel without a central controller.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q28. Define Pure ALOHA.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A random access protocol where stations transmit frames whenever data is ready, without prior sensing or time slot boundaries.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q29. What is Slotted ALOHA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An improved version of Pure ALOHA where channel time is divided into discrete slots and stations may transmit only at the beginning of a time slot.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q30. Define vulnerable time.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">The continuous time duration during which another station's transmission will collide with and destroy the frame under consideration.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q31. What is CSMA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Carrier Sense Multiple Access: a protocol based on 'listen before you transmit', sensing carrier activity before sending a frame.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q32. List the three persistence methods of CSMA.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">1. 1-Persistent CSMA. 2. Non-Persistent CSMA. 3. p-Persistent CSMA.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q33. What is 1-persistent CSMA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A method where a station continuously senses a busy channel and transmits immediately with probability 1 as soon as the channel becomes idle.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q34. What is nonpersistent CSMA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A method where a station finding the channel busy halts sensing, waits for a random period of time, and senses again later.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q35. What is p-persistent CSMA?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A slotted method where an idle channel triggers transmission with probability $p$ and deferral to the next time slot with probability $1-p$.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q36. Define CSMA/CD.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Carrier Sense Multiple Access with Collision Detection: a protocol where a station monitors the medium while transmitting, stopping immediately upon collision.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q37. What is a jamming signal?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">A 32–48 bit pattern sent immediately upon collision detection to guarantee all other stations on the cable observe the collision.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q38. What is binary exponential backoff?</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">An algorithm that selects a random wait time $R \\in [0, 2^K - 1]$ after collision $K$, exponentially widening the delay range to prevent repeated collisions.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q39. Define CSMA/CA.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">Carrier Sense Multiple Access with Collision Avoidance: a wireless protocol that avoids collisions before transmission using IFS, contention windows, and ACKs.</p>\n    </div>\n    <div class=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700\">\n      <p class=\"font-bold text-xs text-gfg-green\">Q40. List the three strategies used by CSMA/CA.</p>\n      <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-1\">1. Interframe Space (IFS). 2. Contention Window (random backoff). 3. Acknowledgements (ACK).</p>\n    </div>\n  \n    <div class=\"mt-6 pt-4 border-t border-slate-200 dark:border-slate-700\">\n      <h3 class=\"text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-3\">\n        Topic 5 – Collision-Free Protocols Short-Answer Questions (PDF Section 14, 2 Marks Each)\n      </h3>\n      <div class=\"space-y-3 text-xs\">\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q41. Define a collision-free protocol.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A collision-free protocol is a medium-access control method designed to prevent simultaneous conflicting transmissions by coordinating which station can transmit and when.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q42. What is the bit-map protocol?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> The bit-map protocol is a reservation-based access method in which each station has a dedicated reservation bit in a contention period; reserving stations transmit in ascending order.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q43. What is a reservation bit?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A reservation bit is a single bit asserted by a station (1 = request, 0 = no request) during the reservation phase to request a future data transmission slot.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q44. Define binary countdown.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> Binary countdown is a collision-free access method where contending stations transmit their unique binary addresses bit-by-bit from MSB to LSB; the highest-priority address wins channel access.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q45. What is a token?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A token is a special compact control frame that circulates among stations in a network, conferring exclusive permission to transmit data to the station currently holding it.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q46. What is token passing?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> Token passing is a controlled-access method where stations are organized in a logical ring, and permission to transmit is passed sequentially from predecessor to successor via a token.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q47. Define logical ring.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A logical ring is a cyclic arrangement of stations in which each station has a strictly defined predecessor (previous station) and successor (next station) for token handoff.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q48. What is polling?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> Polling is a centralized controlled-access method where one primary device controls medium access by querying secondary devices one by one to determine if they have data to send.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q49. Differentiate between primary and secondary stations in polling.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> The <strong>primary station</strong> controls the channel and initiates all communication. <strong>Secondary stations</strong> are client devices that can only transmit or receive when explicitly instructed by the primary.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q50. What is the purpose of a reservation frame?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A reservation frame contains minislots for each station, allowing nodes to book upcoming transmission slots and establish an orderly, collision-free data transmission sequence.</p>\n        </div>\n      </div>\n    </div>\n  \n    <div class=\"mt-6 pt-4 border-t border-slate-200 dark:border-slate-700\">\n      <h3 class=\"text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-3\">\n        Topic 6 – Ethernet MAC Sublayer Protocol Short-Answer Questions (PDF Section 15, 2 Marks Each)\n      </h3>\n      <div class=\"space-y-3 text-xs\">\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q51. Define Ethernet.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> Ethernet is a standardized local area network technology defined by IEEE 802.3 that specifies physical wiring, 48-bit MAC addressing, and frame transmission.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q52. What is IEEE 802.3?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> IEEE 802.3 is the international standard family that defines the physical layer and MAC sublayer specifications for wired Ethernet networks.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q53. What is a MAC address?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A MAC address is a 48-bit physical hardware identifier burned into a network interface card (NIC) to identify a device on a local network.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q54. What is the size of an Ethernet MAC address?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> An Ethernet MAC address is 48 bits (6 bytes), typically represented as 12 hexadecimal digits separated by colons.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q55. Define unicast address.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A unicast address identifies a single destination station for one-to-one communication. The least significant bit of its first byte is 0.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q56. Define multicast address.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A multicast address identifies a specific group of destination stations for one-to-many communication. The least significant bit of its first byte is 1.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q57. What is the Ethernet broadcast address?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> The Ethernet broadcast address is <code>FF:FF:FF:FF:FF:FF</code> (all 48 bits are 1), which delivers a frame to all stations on the local network.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q58. What is the purpose of the preamble?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> The preamble consists of 7 bytes of alternating 1s and 0s that alert the receiver that a frame is arriving and synchronize receiver clock timing.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q59. What is the Start Frame Delimiter (SFD)?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> The SFD is a 1-byte field with the pattern <code>10101011</code>; its final two 1s mark the end of synchronization and the exact beginning of the frame header.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q60. What is CRC?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> Cyclic Redundancy Check (CRC) is a 4-byte Frame Check Sequence (CRC-32) appended to the frame to allow the receiving station to detect bit corruption.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q61. Define CSMA/CD.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> CSMA/CD (Carrier Sense Multiple Access with Collision Detection) is the traditional half-duplex Ethernet protocol where stations listen before and during transmission to detect collisions.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q62. What is a jamming signal?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A jamming signal is a 32 to 48 bit signal sent by a station immediately upon detecting a collision to ensure all stations detect the conflict and discard partial frames.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q63. What is slot time?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> Slot time is the time required to transmit 512 bits in traditional 10 Mbps Ethernet ($51.2\\ \\mu\\text{s}$), representing the worst-case round-trip collision detection window.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q64. Define binary exponential backoff.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> An algorithm where a station selects a random retransmission delay from a range ($0 \\le R \\le 2^K - 1$) that doubles after each successive collision to resolve contention.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q65. What is Fast Ethernet?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> Fast Ethernet (IEEE 802.3u) is an Ethernet generation that operates at 100 Mbps over twisted-pair (100Base-TX) or fiber (100Base-FX) and introduced Autonegotiation.</p>\n        </div>\n      </div>\n    </div>\n  \n\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q66. What is a Wireless LAN (WLAN)?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A Wireless LAN is a local computer network that connects devices within a limited geographic area using radio frequency waves instead of physical cables, defined by the IEEE 802.11 standard.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q67. Which OSI layers are covered by the IEEE 802.11 standard?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> IEEE 802.11 covers the Physical Layer (radio transmission, modulation) and the Data Link Layer (specifically the Medium Access Control sublayer and Logical Link Control interface).</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q68. What is a Basic Service Set (BSS)?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A BSS is the fundamental building block of a wireless LAN. It consists of stationary or mobile wireless stations operating within a local radio coverage area, configured either in Ad Hoc mode or Infrastructure mode.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q69. Differentiate between Ad Hoc and Infrastructure BSS.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> An Ad Hoc network (IBSS) is a temporary peer-to-peer network without an Access Point; an Infrastructure network requires a central Access Point (AP) through which all station communication is relayed.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q70. What is an Extended Service Set (ESS)?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> An ESS is formed by connecting two or more Infrastructure BSSs via a wired Distribution System (DS) backbone, allowing seamless station mobility across a wide campus.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q71. Name the three levels of station mobility in IEEE 802.11.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> 1) No-Transition Mobility (stationary or moves only within one BSS); 2) BSS-Transition Mobility (roams between BSSs within the same ESS); 3) ESS-Transition Mobility (moves from one ESS to another).</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q72. What is the Hidden Station Problem?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> It occurs when two stations are out of radio range of each other, but both can communicate with a central AP. When both transmit simultaneously, their frames collide destructively at the AP.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q73. How does RTS/CTS resolve the hidden station problem?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> The sender transmits an RTS; the AP replies with a broadcast CTS containing the reservation duration. The hidden station hears the CTS and sets its NAV timer to defer transmission.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q74. What is the Exposed Station Problem?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> It occurs when a station hears an ongoing transmission to another destination, erroneously assumes the medium is busy, and unnecessarily defers its own transmission to an independent receiver.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q75. Why cannot CSMA/CD be used in Wireless LANs?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> 1) Transceiver blindness (local TX power is up to 100 dB stronger than incoming signals); 2) Collisions occur at the receiver, not at the sender (hidden stations); 3) Rapid signal attenuation.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q76. Differentiate between DCF and PCF.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> DCF is mandatory, distributed, contention-based access using CSMA/CA for best-effort data. PCF is optional, centralized, contention-free access using AP polling for real-time traffic.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q77. What is the priority order of IEEE 802.11 Interframe Spaces?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> SIFS (Short IFS, highest priority) &lt; PIFS (PCF IFS) &lt; DIFS (DCF IFS) &lt; EIFS (Extended IFS, lowest priority).</p>\n        </div>\n\n\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q78. Define the IEEE 802.11 MAC Sublayer.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> The IEEE 802.11 MAC Sublayer is the lower sublayer of the Data Link Layer that manages access to the wireless communication channel, framing, addressing, and reliable frame delivery.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q79. Expand DCF and state its function.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> Distributed Coordination Function. It is a distributed, contention-based channel access mechanism that uses CSMA/CA to coordinate transmissions without a central master.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q80. Expand PCF and state its function.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> Point Coordination Function. It is an optional centralized access mechanism where an Access Point acts as the Point Coordinator to poll stations during a Contention-Free Period.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q81. What is CSMA/CA?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> Carrier Sense Multiple Access with Collision Avoidance is a channel access protocol used in wireless LANs that proactively minimizes collision probability through channel sensing, waiting intervals, and random backoff.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q82. Define RTS.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> Request To Send. A 20-byte control frame sent by a wireless station to request exclusive permission to transmit data and reserve the channel.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q83. Define CTS.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> Clear To Send. A 14-byte control frame returned by the receiving station in response to an RTS, granting permission to proceed and notifying hidden stations.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q84. What is the Network Allocation Vector (NAV)?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> NAV is a virtual carrier-sensing timer maintained inside a station's MAC sublayer that indicates how long the wireless channel is reserved by other active stations.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q85. Define SIFS.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> Short Interframe Space. The shortest waiting interval in 802.11, used for immediate responses like ACK and CTS to maintain atomic, uninterruptible transactions.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q86. What is DIFS?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> DCF Interframe Space. The standard waiting period used by stations operating under normal DCF access before initiating or resuming contention backoff.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q87. What is PIFS?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> PCF Interframe Space. An intermediate waiting interval used strictly by the AP Point Coordinator to gain priority access over normal DCF stations.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q88. What is EIFS?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> Extended Interframe Space. A longer waiting interval enforced when a station receives an unreadable or CRC-corrupted frame to allow other stations to complete acknowledgements.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q89. What is a Frame Control field?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A 2-byte (16-bit) header field that identifies the protocol version, frame type, subtype, distribution flags (To DS / From DS), and control flags.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q90. What is the purpose of an ACK frame?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> In wireless networking, senders cannot detect collisions during transmission. An explicit Layer 2 ACK frame confirms successful, error-free reception.</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q91. List the three categories of IEEE 802.11 frames.</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> 1) Management Frames (Beacon, Probe, Association); 2) Control Frames (RTS, CTS, ACK); 3) Data Frames (Data, QoS Data).</p>\n        </div>\n        <div class=\"p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-800 dark:text-slate-200\">Q92. What is the purpose of the Sequence Control field?</p>\n          <p class=\"text-slate-600 dark:text-slate-300 mt-1\"><strong>Ans:</strong> A 2-byte field containing a 4-bit Fragment Number and a 12-bit Sequence Number, used for reassembling frame fragments and filtering duplicate transmissions.</p>\n        </div>\n\n  <div class=\"faq-item p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 shadow-xs mb-2\">\n    <div class=\"faq-question font-bold text-xs text-blue-700 dark:text-blue-400\">Q93. Define a bridge.</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 mt-1\">A bridge is a Data Link Layer (Layer 2) networking device that connects two or more LAN segments and forwards frames between them using MAC addresses, dividing a network into smaller collision domains.</div>\n  </div>\n  <div class=\"faq-item p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 shadow-xs mb-2\">\n    <div class=\"faq-question font-bold text-xs text-blue-700 dark:text-blue-400\">Q94. What is a transparent bridge?</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 mt-1\">A transparent bridge is an IEEE 802.1D bridge that automatically learns device locations and forwards frames without connected computers having any awareness of the bridge's presence.</div>\n  </div>\n  <div class=\"faq-item p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 shadow-xs mb-2\">\n    <div class=\"faq-question font-bold text-xs text-blue-700 dark:text-blue-400\">Q95. What is a learning bridge?</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 mt-1\">A learning bridge is a bridge that automatically builds and updates its forwarding table by inspecting the source MAC addresses of incoming frames without requiring manual administrator configuration.</div>\n  </div>\n  <div class=\"faq-item p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 shadow-xs mb-2\">\n    <div class=\"faq-question font-bold text-xs text-blue-700 dark:text-blue-400\">Q96. Explain MAC address learning.</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 mt-1\">When a frame arrives on a port, the bridge reads the source MAC address and associates it with that port in its forwarding database, resetting the aging timer to keep track of dynamic host locations.</div>\n  </div>\n  <div class=\"faq-item p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 shadow-xs mb-2\">\n    <div class=\"faq-question font-bold text-xs text-blue-700 dark:text-blue-400\">Q97. What is a forwarding table?</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 mt-1\">A forwarding table (also called a Forwarding Database or CAM table) is an internal database maintained by a bridge or switch that maps hardware MAC addresses to specific physical switch ports.</div>\n  </div>\n  <div class=\"faq-item p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 shadow-xs mb-2\">\n    <div class=\"faq-question font-bold text-xs text-blue-700 dark:text-blue-400\">Q98. Differentiate forwarding and filtering.</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 mt-1\">Forwarding transmits a frame out through the specific port leading to its destination on another segment. Filtering prevents/discards a frame when its destination resides on the very same segment as the sender.</div>\n  </div>\n  <div class=\"faq-item p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 shadow-xs mb-2\">\n    <div class=\"faq-question font-bold text-xs text-blue-700 dark:text-blue-400\">Q99. What is flooding in bridges?</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 mt-1\">Flooding is the process of copying and transmitting an incoming frame out through all active ports except the port on which it arrived, used when the destination MAC is unknown or broadcast.</div>\n  </div>\n  <div class=\"faq-item p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 shadow-xs mb-2\">\n    <div class=\"faq-question font-bold text-xs text-blue-700 dark:text-blue-400\">Q100. Define Spanning Tree Protocol (STP).</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 mt-1\">STP (IEEE 802.1D) is a Layer 2 protocol designed to prevent catastrophic switching loops and broadcast storms in networks with redundant connections by placing redundant paths into a blocked state.</div>\n  </div>\n  <div class=\"faq-item p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 shadow-xs mb-2\">\n    <div class=\"faq-question font-bold text-xs text-blue-700 dark:text-blue-400\">Q101. What is a Root Bridge?</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 mt-1\">A Root Bridge is the central reference bridge in an STP topology, elected by switches because it has the lowest Bridge ID (Priority + MAC address). All its active ports are Designated Ports.</div>\n  </div>\n  <div class=\"faq-item p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 shadow-xs mb-2\">\n    <div class=\"faq-question font-bold text-xs text-blue-700 dark:text-blue-400\">Q102. What is a MAC address aging timer?</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 mt-1\">An aging timer (typically 300 seconds) is a countdown mechanism in switches that automatically removes inactive learned MAC address entries from the forwarding table after a period of inactivity.</div>\n  </div>\n\n  <div class=\"faq-item p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 shadow-xs mb-2\">\n    <div class=\"faq-question font-bold text-xs text-blue-700 dark:text-blue-400\">Q103. Define a repeater.</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 mt-1\">A repeater is a Physical Layer (Layer 1) device that receives a weak or degraded signal, cleans and regenerates it, and retransmits it to extend the communication distance.</div>\n  </div>\n  <div class=\"faq-item p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 shadow-xs mb-2\">\n    <div class=\"faq-question font-bold text-xs text-blue-700 dark:text-blue-400\">Q104. What is a hub?</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 mt-1\">A hub is a multiport physical layer device that connects multiple computers in a LAN by blindly repeating all incoming signals out through all its other ports.</div>\n  </div>\n  <div class=\"faq-item p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 shadow-xs mb-2\">\n    <div class=\"faq-question font-bold text-xs text-blue-700 dark:text-blue-400\">Q105. Explain the working of a bridge.</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 mt-1\">A bridge operates at Layer 2, reads source MAC addresses to dynamically build a forwarding table, forwards frames to destination segments, and filters frames whose destination is on the incoming segment.</div>\n  </div>\n  <div class=\"faq-item p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 shadow-xs mb-2\">\n    <div class=\"faq-question font-bold text-xs text-blue-700 dark:text-blue-400\">Q106. Define a network switch.</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 mt-1\">A switch is a high-performance Layer 2 multiport bridge that connects devices in a LAN and forwards frames using MAC addresses at wire speed, providing a dedicated collision domain per port.</div>\n  </div>\n  <div class=\"faq-item p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 shadow-xs mb-2\">\n    <div class=\"faq-question font-bold text-xs text-blue-700 dark:text-blue-400\">Q107. What is a router?</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 mt-1\">A router is a Network Layer (Layer 3) device that connects different IP networks, maintains routing tables, selects optimal paths, and forwards packets between networks using IP addresses.</div>\n  </div>\n  <div class=\"faq-item p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 shadow-xs mb-2\">\n    <div class=\"faq-question font-bold text-xs text-blue-700 dark:text-blue-400\">Q108. Define a gateway.</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 mt-1\">A gateway is a multi-layer device or software system that connects networks utilizing completely different protocols, architectures, or data communication formats, performing active translation.</div>\n  </div>\n  <div class=\"faq-item p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 shadow-xs mb-2\">\n    <div class=\"faq-question font-bold text-xs text-blue-700 dark:text-blue-400\">Q109. Which OSI layer does a repeater operate at?</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 mt-1\">A repeater operates at the Physical Layer (Layer 1) of the OSI Reference Model, operating purely on physical signals and bits without inspecting headers.</div>\n  </div>\n  <div class=\"faq-item p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 shadow-xs mb-2\">\n    <div class=\"faq-question font-bold text-xs text-blue-700 dark:text-blue-400\">Q110. What is a collision domain?</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 mt-1\">A collision domain is a network segment where simultaneous frame transmissions from multiple devices interfere and collide with each other on a shared communication medium.</div>\n  </div>\n  <div class=\"faq-item p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 shadow-xs mb-2\">\n    <div class=\"faq-question font-bold text-xs text-blue-700 dark:text-blue-400\">Q111. What is a broadcast domain?</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 mt-1\">A broadcast domain is the complete set of all connected network devices that receive a Layer 2 broadcast frame (FF:FF:FF:FF:FF:FF). Routers separate broadcast domains.</div>\n  </div>\n  <div class=\"faq-item p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 shadow-xs mb-2\">\n    <div class=\"faq-question font-bold text-xs text-blue-700 dark:text-blue-400\">Q112. What is the function of a default gateway?</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 mt-1\">A default gateway is the local Layer 3 router interface that an end host uses as its next hop to reach destinations outside its local IP subnet.</div>\n  </div>\n",
       "eli10": "In simple words: The 12 short-answer questions straight from syllabus PDF Section 10 with concise model answers.",
       "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
       "diagram": "",
@@ -6918,7 +7398,7 @@ var TOPICS_U2_SYLLABUS = {
       ]
     },
     "sections": {
-      "overview": "<p>Structured long-form answers for the 8 core examination essay questions specified in PDF Section 10.</p>\n    <!-- Topic 3 Long Exam Questions -->\n    <div class=\"space-y-4 mt-6 border-t border-gray-200 dark:border-gray-700 pt-6\">\n      <h3 class=\"text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider\">Topic 3 – MAC Sublayer Long-Answer University Questions</h3>\n      \n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q1. Explain the MAC sublayer and its functions in detail.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The Medium Access Control (MAC) sublayer is the lower portion of the Data Link Layer in the IEEE 802 architecture. It sits directly above the Physical Layer and abstracts medium-specific transmission rules. Its core functions include: (1) Physical Addressing using 48-bit MAC addresses, (2) Medium Access Control to arbitrate transmission access, (3) Frame Delimiting and Formatting, (4) Collision Handling (detection, jam signaling, and exponential backoff), (5) Transmission Coordination across multi-station broadcast channels, and (6) Access Management enforcing priority and fairness.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q2. Explain the channel allocation problem and its primary objectives.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The channel allocation problem addresses how a shared broadcast medium with limited bandwidth is partitioned among multiple competing stations. Because computers generate bursty, asymmetric traffic and may attempt simultaneous transmissions, uncoordinated access causes signal collisions. The primary objectives are: High efficiency, Fairness, Low delay, Collision reduction, Maximum throughput, and Elimination of idle resource waste.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q3. Describe static channel allocation with suitable examples.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Static channel allocation divides available resources in advance into fixed portions assigned to stations. For example, if a 100 MHz channel is shared by 5 stations (A, B, C, D, E), each station receives 20 MHz. The fatal drawback is resource waste: if Station A is inactive, its 20 MHz sits empty, while active stations cannot exceed their 20 MHz slice.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q4. Explain FDMA and TDMA with comparative diagrams and principles.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          FDMA divides the frequency domain into non-overlapping bands with guard bands; stations transmit simultaneously and continuously on different carrier frequencies. TDMA divides the time domain into repeating frames and slots; all stations share the entire frequency band but transmit sequentially one station per time slot, requiring microsecond clock synchronization and guard times.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q5. Explain dynamic channel allocation with an illustrative example.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Dynamic channel allocation assigns resources on demand based on real-time traffic. Consider 5 computers where A, C, and E have data while B and D are idle. Instead of reserving 20% for B and D, dynamic allocation grants the full channel capacity to A, C, and E. Resources are released immediately when transmissions finish.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q6. Compare static and dynamic channel allocation across key technical parameters.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Static allocation features predetermined assignment, advance setup, lower flexibility, wasted idle resources, and suitability for predictable voice traffic. Dynamic allocation features demand-based assignment, runtime access, high flexibility, reusable idle capacity, and optimal efficiency for bursty computer data traffic.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q7. Explain the relationship between LLC, MAC, and the Physical Layer.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The Network Layer passes IP datagrams to the LLC sublayer. LLC encapsulates packets into LLC PDUs, identifies the network protocol via SAPs, and manages flow/error control. LLC passes the data to the MAC sublayer, which appends 48-bit MAC addresses and FCS trailers and executes medium access arbitration. Finally, MAC streams frames down to the Physical Layer transceiver for signal modulation onto the wire or radio medium.\n        </p>\n      </div>\n    </div>\n  \n    <!-- Topic 4 Long Exam Questions -->\n    <div class=\"space-y-4 mt-6 border-t border-gray-200 dark:border-gray-700 pt-6\">\n      <h3 class=\"text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider\">Topic 4 – Multiple Access Protocols Long-Answer University Questions</h3>\n      \n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q8. Explain the working principle of Pure ALOHA with a diagram and derive its vulnerable time.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Pure ALOHA allows stations to transmit whenever data is ready. A frame sent at time $t$ collides if another station starts between $t - T_{fr}$ and $t + T_{fr}$. Thus, the vulnerable time is $2T_{fr}$. The throughput equation is $S = G e^{-2G}$. Differentiating with respect to $G$ yields maximum throughput $S_{\\text{max}} = 1/(2e) \\approx 18.4\\%$ at $G = 0.5$.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q9. Explain Slotted ALOHA and derive its throughput formula.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Slotted ALOHA synchronizes time into discrete slots of duration $T_{fr}$. Stations can only transmit at slot boundaries. Collisions can only occur if two or more stations choose the exact same slot, reducing vulnerable time to $T_{fr}$. The throughput equation is $S = G e^{-G}$. Maximizing gives $S_{\\text{max}} = 1/e \\approx 36.8\\%$ at $G = 1.0$, exactly doubling Pure ALOHA's capacity.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q10. Compare 1-persistent, nonpersistent, and p-persistent CSMA.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          1-Persistent senses continuously and transmits immediately with $P=1$ upon idle; has low delay at light traffic but 100% collision risk when multiple stations wait for a busy channel to clear. Non-Persistent waits a random time upon sensing a busy channel, greatly reducing collisions under heavy load but increasing delay and idle time. p-Persistent uses a slotted channel and transmits with probability $p$, offering tunable optimization between delay and collision risk.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q11. Explain CSMA/CD with an operational flowchart and detail the Binary Exponential Backoff algorithm.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          In CSMA/CD, a station senses the channel, begins transmitting, and monitors for collisions. Upon collision detection, it stops immediately, transmits a 48-bit jam signal, increments collision count $K$, and picks a random delay $R \\in [0, 2^K - 1]$. The backoff time is $T_B = R \\times T_{\\text{slot}}$. This prevents recurring collisions and adapts to network congestion.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q12. Explain CSMA/CA and its three strategies: IFS, Contention Window, and Acknowledgements.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Because wireless nodes cannot listen while transmitting, CSMA/CA avoids collisions prior to transmission. (1) IFS: Mandatory delay after channel idle to prioritize traffic. (2) Contention Window: Random backoff countdown that pauses if the channel becomes busy. (3) Acknowledgements: Receiver sends positive ACK upon successful CRC verification; missing ACK triggers retransmission.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q13. Differentiate between CSMA/CD and CSMA/CA across all architectural features.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          CSMA/CD detects collisions during transmission, is used in wired Ethernet, transmits jam signals, and executes backoff after collision. CSMA/CA avoids collisions before transmission, is used in wireless Wi-Fi, requires mandatory ACKs, and executes backoff before transmission during an IFS-controlled contention window.\n        </p>\n      </div>\n    </div>\n  \n    <div class=\"mt-6 pt-4 border-t border-slate-200 dark:border-slate-700\">\n      <h3 class=\"text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-3\">\n        Topic 5 – Collision-Free Protocols Medium &amp; Long-Answer Questions (PDF Section 14)\n      </h3>\n      <div class=\"space-y-4 text-xs\">\n        <!-- Q14: Bit-Map Protocol Working -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q14 (5 Marks). Explain the working of the bit-map protocol with a suitable example.\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer:</strong> The Bit-Map Protocol operates in two alternating phases: (1) Reservation Phase, and (2) Data Transmission Phase.</p>\n            <ul class=\"list-disc pl-4 space-y-0.5\">\n              <li><strong>Reservation Phase:</strong> Time is divided into N minislots for N stations. If Station <em>i</em> has a frame, it sets bit <em>i</em> to 1; otherwise 0.</li>\n              <li><strong>Data Phase:</strong> Reserving stations transmit their full frames in ascending numerical sequence without collision.</li>\n              <li><strong>Example:</strong> In a 5-station network (Stations 0–4), suppose Stations 0, 2, and 4 want to transmit. The reservation bitmap becomes <code>1 0 1 0 1</code>. Stations 0, 2, and 4 transmit sequentially while Stations 1 and 3 stay silent.</li>\n              <li><strong>Overhead:</strong> $\\text{Bitmap Size} = N \\text{ bits}$ per epoch. Efficiency under high load = $d / (d+1)$.</li>\n            </ul>\n          </div>\n        </div>\n\n        <!-- Q15: Binary Countdown Working -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q15 (5 Marks). Explain the working of binary countdown with an illustrative example.\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer:</strong> Binary countdown uses bit-by-bit address competition over an OR-channel where logical 1 dominates logical 0.</p>\n            <ul class=\"list-disc pl-4 space-y-0.5\">\n              <li>Each station has an $m$-bit address ($2^m \\ge N$). Stations transmit their address bits simultaneously from MSB to LSB.</li>\n              <li>If a station transmits a 0 but senses a 1 on the channel, it drops out immediately.</li>\n              <li><strong>Example:</strong> Stations A (101), B (110), C (011), D (100) contend. At Bit 1: C transmits 0, senses 1 &rarr; drops out. At Bit 2: A transmits 0, senses 1 &rarr; drops out. At Bit 3: B (110) and D (100) send 0. Final winner is Station B (110 = 6), which transmits its data frame without collision.</li>\n              <li>Arbitration overhead is only $\\lceil \\log_2 N \\rceil$ bits.</li>\n            </ul>\n          </div>\n        </div>\n\n        <!-- Q16: Token Passing Protocol -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q16 (5 Marks). Describe the working of token passing and explain the 4 physical ring topologies.\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer:</strong> Token passing organizes stations in a logical ring where a special control frame (token) circulates sequentially.</p>\n            <ul class=\"list-disc pl-4 space-y-0.5\">\n              <li>A station waits for the token, captures it, transmits data up to a Token Holding Timer (THT), and then releases the token to its successor.</li>\n              <li><strong>4 Physical Topologies (Forouzan Fig 12.16):</strong>\n                <ol class=\"list-decimal pl-4 mt-0.5\">\n                  <li><strong>Physical Ring:</strong> Point-to-point simplex loop (IEEE 802.5 Token Ring).</li>\n                  <li><strong>Dual Ring:</strong> Counter-rotating secondary ring for automatic loopback healing (FDDI).</li>\n                  <li><strong>Bus Ring:</strong> Shared linear coaxial bus with logical software ring pointers (IEEE 802.4).</li>\n                  <li><strong>Star Ring:</strong> Physical star connected to a central Multistation Access Unit (MAU) with bypass relays.</li>\n                </ol>\n              </li>\n            </ul>\n          </div>\n        </div>\n\n        <!-- Q17: Polling Protocol (Poll & Select) -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q17 (5 Marks). Explain the polling protocol and detail its two primary functions (Poll and Select).\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer:</strong> Polling is a centralized controlled-access method where one Primary station controls channel access for all Secondary stations.</p>\n            <ul class=\"list-disc pl-4 space-y-0.5\">\n              <li><strong>Poll Function (Data Inbound):</strong> Primary asks secondary if it has data. Secondary responds with Data frame (or NAK if empty). Primary returns ACK.</li>\n              <li><strong>Select Function (Data Outbound):</strong> Primary sends Select (SEL) frame to verify secondary buffer availability. Secondary returns ACK. Primary sends data frame. Secondary returns ACK.</li>\n              <li><strong>Limitations:</strong> Primary station is a processing bottleneck and Single Point of Failure (SPOF). Polling frames create high overhead under light loads.</li>\n            </ul>\n          </div>\n        </div>\n\n        <!-- Q18: Comprehensive Comparison -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q18 (10–13 Marks). Comprehensively compare Random Access protocols with Controlled-Access / Collision-Free protocols.\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer Structure:</strong></p>\n            <ul class=\"list-disc pl-4 space-y-0.5\">\n              <li><strong>Philosophy:</strong> Random access stations contend freely (ALOHA, CSMA); collision-free stations coordinate access (Token Passing, Polling, Reservation).</li>\n              <li><strong>Collisions:</strong> Possible in random access; completely eliminated during normal operational data transfer in collision-free.</li>\n              <li><strong>Predictability:</strong> Random access delay has high variance and is non-deterministic; collision-free delay is strictly bounded ($T_{\\text{max}} = N \\times \\text{THT}$).</li>\n              <li><strong>Heavy Traffic Behavior:</strong> Random access collapses due to repeated collisions ($S \\to 0$); collision-free throughput reaches its peak near 100%.</li>\n              <li><strong>Light Traffic Behavior:</strong> Random access transmits immediately with zero latency; collision-free wastes time waiting for tokens or reservation epochs.</li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n  \n    <div class=\"mt-6 pt-4 border-t border-slate-200 dark:border-slate-700\">\n      <h3 class=\"text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-3\">\n        Topic 6 – Ethernet MAC Sublayer Protocol Medium &amp; Long-Answer Questions (PDF Section 15)\n      </h3>\n      <div class=\"space-y-4 text-xs\">\n        <!-- Q19: Ethernet Architecture -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q19 (5 Marks). Explain Ethernet architecture and distinguish between the LLC and MAC sublayers.\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer:</strong> Ethernet spans Physical Layer and Data Link Layer. In the IEEE 802 model, the Data Link Layer is divided into:</p>\n            <ul class=\"list-disc pl-4 space-y-0.5\">\n              <li><strong>LLC Sublayer (IEEE 802.2):</strong> Upper sublayer that interfaces with the Network Layer (IP). Identifies upper-layer protocols and provides uniform service independent of the physical transmission medium.</li>\n              <li><strong>MAC Sublayer (IEEE 802.3):</strong> Lower sublayer that interfaces with the Physical Layer. Adds 48-bit source and destination physical MAC addresses, builds frames, implements CSMA/CD medium arbitration, and computes CRC-32 for error detection.</li>\n            </ul>\n          </div>\n        </div>\n\n        <!-- Q20: Types of MAC Addresses -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q20 (5 Marks). Explain the three types of Ethernet MAC addresses with classification examples.\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer:</strong> Ethernet defines three destination address types:</p>\n            <ul class=\"list-disc pl-4 space-y-0.5\">\n              <li><strong>Unicast:</strong> Identifies one destination (one-to-one). The least significant bit (LSB) of the first byte is <code>0</code>. Example: <code>4A:30:10:21:10:1A</code> ($4A_{16} = 01001010_2$, LSB is 0).</li>\n              <li><strong>Multicast:</strong> Identifies a group of destinations (one-to-many). The LSB of the first byte is <code>1</code>. Example: <code>47:20:1B:2E:08:EE</code> ($47_{16} = 01000111_2$, LSB is 1).</li>\n              <li><strong>Broadcast:</strong> Delivers to all local stations (one-to-all). All 48 bits are 1: <code>FF:FF:FF:FF:FF:FF</code>.</li>\n            </ul>\n          </div>\n        </div>\n\n        <!-- Q21: Frame Format -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q21 (5 Marks). Draw and explain the Ethernet frame format with all seven fields.\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer:</strong> An IEEE 802.3 Ethernet frame has 7 fields:</p>\n            <ol class=\"list-decimal pl-4 space-y-0.5\">\n              <li><strong>Preamble (7 Bytes):</strong> 56 bits of alternating 10101010... for clock synchronization.</li>\n              <li><strong>SFD (1 Byte):</strong> Binary 10101011 marking the start of the frame.</li>\n              <li><strong>Destination Address (6 Bytes):</strong> 48-bit recipient MAC address.</li>\n              <li><strong>Source Address (6 Bytes):</strong> 48-bit sender MAC address.</li>\n              <li><strong>Length/Type (2 Bytes):</strong> Length ($\\le 1500$) or EtherType ($\\ge 0x0600$, e.g. 0x0800 for IPv4).</li>\n              <li><strong>Data and Padding (46–1500 Bytes):</strong> Network-layer payload. Padded if $< 46$ bytes.</li>\n              <li><strong>CRC (4 Bytes):</strong> CRC-32 Frame Check Sequence for error detection.</li>\n            </ol>\n          </div>\n        </div>\n\n        <!-- Q22: Minimum and Maximum Frame Sizes -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q22 (5 Marks). Explain the derivation of minimum (64 bytes) and maximum (1518 bytes) Ethernet frame sizes.\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer:</strong></p>\n            <ul class=\"list-disc pl-4 space-y-0.5\">\n              <li><strong>Minimum Frame Size (64 Bytes / 512 bits):</strong> Required so that a transmitting station is still sending when a worst-case collision echo returns ($T_{\\text{frame}} \\ge 2 T_p$). Fixed overhead = $6 + 6 + 2 + 4 = 18$ bytes $\\implies$ Minimum data = $64 - 18 = 46$ bytes.</li>\n              <li><strong>Maximum Frame Size (1518 Bytes):</strong> Historically limited switch buffer memory requirements and prevented one node from monopolizing the shared medium. Maximum payload = $1518 - 18 = 1500$ bytes (standard MTU).</li>\n            </ul>\n          </div>\n        </div>\n\n        <!-- Q23: Binary Exponential Backoff -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q23 (5 Marks). Describe the Binary Exponential Backoff algorithm and its formula.\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer:</strong> After a collision, a station waits $T_B = R \\times T_{\\text{slot}}$, where $T_{\\text{slot}} = 51.2\\ \\mu\\text{s}$ at 10 Mbps.</p>\n            <ul class=\"list-disc pl-4 space-y-0.5\">\n              <li>$R$ is chosen randomly: $0 \\le R \\le 2^K - 1$, where $K$ is the collision attempt number.</li>\n              <li>At $K=1$, $R \\in \\{0, 1\\}$. At $K=2$, $R \\in \\{0, 1, 2, 3\\}$. At $K=3$, $R \\in \\{0, 1, \\dots, 7\\}$.</li>\n              <li>The exponent $K$ is capped at 10 ($R \\le 1023$). If collisions exceed 16 ($K > 16$), transmission is aborted.</li>\n            </ul>\n          </div>\n        </div>\n\n        <!-- Q24: Half-Duplex vs Full-Duplex -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q24 (5 Marks). Compare Half-Duplex and Full-Duplex Ethernet. Why is CSMA/CD obsolete in modern networks?\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer:</strong> Half-duplex shares a medium where stations transmit or receive alternately; collisions occur and CSMA/CD is required. Full-duplex uses dedicated point-to-point switched links with separate transmit and receive wire pairs/fibers. Because data flows simultaneously in both directions without interference, collisions are physically impossible. Modern switched networks operate in full-duplex, making CSMA/CD obsolete.</p>\n          </div>\n        </div>\n\n        <!-- Q25: Comprehensive Evolution (10–13 Marks) -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q25 (10–13 Marks). Comprehensively discuss the evolution of Ethernet across Standard, Fast, Gigabit, and Ten-Gigabit generations.\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer Structure:</strong></p>\n            <ul class=\"list-disc pl-4 space-y-0.5\">\n              <li><strong>Standard Ethernet (10 Mbps, 802.3):</strong> Coax bus (10Base5, 10Base2) and star UTP (10Base-T). CSMA/CD half-duplex access with slot time $51.2\\ \\mu\\text{s}$.</li>\n              <li><strong>Fast Ethernet (100 Mbps, 802.3u):</strong> 100Base-TX (Cat5 2-pair), 100Base-FX (fiber). Retained 48-bit MAC and 64-1518B framing; introduced Autonegotiation.</li>\n              <li><strong>Gigabit Ethernet (1 Gbps, 802.3z/ab):</strong> 1000Base-T (Cat5e 4-pair 4D-PAM5) and 1000Base-SX/LX fiber. Switched architecture eliminated collision limits.</li>\n              <li><strong>Ten-Gigabit Ethernet (10 Gbps, 802.3ae):</strong> 10GBase-S/L/E fiber backbones. Operates in full-duplex mode only, permanently retiring CSMA/CD.</li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n  \n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q14. Explain Standard Ethernet Architecture, 1-Persistent CSMA/CD Operation, and Slot Time. [10 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Standard Ethernet (IEEE 802.3) operates at 10 Mbps over shared coaxial or twisted-pair media using 1-persistent CSMA/CD. A station continuously monitors the medium; if idle, it transmits immediately with probability 1. If busy, it waits until idle and immediately transmits. If collision occurs, it transmits a 32-bit jam signal and executes Binary Exponential Backoff. Slot time ($2\\tau = 51.2\\,\\mu\\text{s} = 512$ bit times) dictates minimum frame size ($64$ bytes) to ensure collisions are detected before transmission completes.\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q15. Explain Ethernet MAC Addressing and DIX Ethernet II vs. IEEE 802.3 Frame Formats. [8 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Ethernet MAC addresses are 48 bits (6 octets) represented in hexadecimal notation. The first 3 octets (24 bits) form the Organizationally Unique Identifier (OUI) assigned by IEEE; the last 3 octets form the Network Interface Controller (NIC) serial number assigned by manufacturer. Bit 0 of the first octet indicates Unicast (0) or Multicast/Broadcast (1). DIX Ethernet II frame uses a 2-byte EtherType field (e.g., 0x0800 for IPv4, 0x0806 for ARP). IEEE 802.3 frame uses a 2-byte Length field followed by an 802.2 LLC header. Values &ge; 1536 (0x0600) indicate EtherType; values &le; 1500 indicate Length.\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q16. Explain the Binary Exponential Backoff Algorithm with worked numerical examples. [8 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          After the $n$-th collision, the station picks a random integer $k$ from range $[0, 2^k - 1]$ where $k = \\min(n, 10)$. The wait time is $T_{\\text{wait}} = k \\times \\text{Slot Time} = k \\times 51.2\\,\\mu\\text{s}$. After collision 1: $k \\in [0, 1]$. After collision 2: $k \\in [0, 3]$. After collision 10: $k \\in [0, 1023]$. If collision count reaches 16 ($n = 16$), the transmission is aborted as link failure. This dynamically resolves heavy network contention.\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q17. Trace the Evolution of Ethernet from Standard to 10-Gigabit Ethernet. [10 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Ethernet evolved through four key generations: 1) Standard Ethernet (10 Mbps, 802.3) using shared bus/hub and CSMA/CD; 2) Fast Ethernet (100 Mbps, 802.3u) over Cat5 100Base-TX with autonegotiation; 3) Gigabit Ethernet (1 Gbps, 802.3ab/z) with full-duplex switches and carrier extension/bursting for half-duplex; 4) 10-Gigabit Ethernet (10 Gbps, 802.3ae) operating strictly in full-duplex mode over fiber/Cat6a, permanently retiring CSMA/CD.\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q18. Explain the Architecture of IEEE 802.11 Wireless LAN (BSS, ESS, AP & DS). [10 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The Basic Service Set (BSS) is the building block of 802.11, configured either as an Independent BSS (Ad Hoc, peer-to-peer without AP) or an Infrastructure BSS (coordinated by a central Access Point). An Extended Service Set (ESS) integrates two or more Infrastructure BSSs via a wired Distribution System (DS) backbone, enabling seamless campus-wide coverage. IEEE 802.11 defines three mobility classes: No-Transition (stationary), BSS-Transition (roaming across APs in the same ESS without losing IP identity), and ESS-Transition (moving between independent ESSs).\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q19. Explain the Hidden Station Problem and the 4-Way RTS/CTS Handshake Solution. [10 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The Hidden Station Problem occurs when two stations (B and C) are outside each other's radio coverage, but both communicate with central AP A. Both sense the channel idle, transmit simultaneously, and collide destructively at A. To resolve this, IEEE 802.11 uses the RTS/CTS handshake: Station B sends a Request To Send (RTS) with a duration reservation; AP A replies with a broadcast Clear To Send (CTS); Station C hears the CTS and programs its Network Allocation Vector (NAV) timer to defer, allowing Station B to transmit its DATA and receive an ACK collision-free.\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q20. Explain the Exposed Station Problem and compare it with the Hidden Station Problem. [8 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The Exposed Station Problem occurs when Station C hears Station A transmitting to Station B, mistakenly assumes the channel is busy, and defers transmitting to Station D. Because D is out of range of A, and B is out of range of C, both transmissions could have occurred concurrently without interference. Hidden stations cause packet collisions due to under-sensing (resolved by RTS/CTS); exposed stations cause throughput waste and bandwidth starvation due to over-sensing (mitigated by BSS coloring and directional beamforming).\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q21. Why is CSMA/CD impossible in Wireless LANs? Explain CSMA/CA Operation. [8 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          CSMA/CD cannot be used because: 1) Transceiver dynamic range blindness (outgoing signal is up to 100 dB stronger than incoming signals, blinding the receiver to collisions); 2) Hidden stations (collisions occur at the receiver, not at the sender); 3) Rapid inverse-square/fourth-power signal attenuation. CSMA/CA avoids collisions prior to transmission via: DIFS idle sensing, Contention Window pseudo-random backoff, RTS/CTS virtual carrier sensing (NAV), and explicit Layer 2 ACKs after SIFS.\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q22. Compare Distributed Coordination Function (DCF) and Point Coordination Function (PCF). [8 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          DCF is mandatory, decentralized, contention-based CSMA/CA access with DIFS interframe spaces, serving asynchronous best-effort data (web/email) across both Ad Hoc and Infrastructure modes. PCF is optional, centralized, contention-free polling operated by the AP Point Coordinator with higher-priority PIFS interframe spaces, serving time-bounded delay-critical traffic (VoIP/video) within Infrastructure mode. Superframes alternate between Contention-Free Periods (CFP) under PCF and Contention Periods (CP) under DCF.\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q23. Detail the Advantages, Disadvantages, and Characteristics of Wireless LANs. [8 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          WLAN characteristics include station mobility, unguided broadcast media, limited coverage cells, multipath fading, path loss ($1/d^2$), shared medium contention, and open security boundaries. Advantages include host mobility, quick and flexible installation, scalability, and long-term cable maintenance savings. Disadvantages include RF interference in the crowded 2.4 GHz ISM band, limited transmission range, security vulnerabilities (requiring WPA3 encryption), shared channel bandwidth degradation, higher bit error rates, and mobile battery drain.\n        </p>\n      </div>\n",
+      "overview": "<p>Structured long-form answers for the 8 core examination essay questions specified in PDF Section 10.</p>\n    <!-- Topic 3 Long Exam Questions -->\n    <div class=\"space-y-4 mt-6 border-t border-gray-200 dark:border-gray-700 pt-6\">\n      <h3 class=\"text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider\">Topic 3 – MAC Sublayer Long-Answer University Questions</h3>\n      \n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q1. Explain the MAC sublayer and its functions in detail.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The Medium Access Control (MAC) sublayer is the lower portion of the Data Link Layer in the IEEE 802 architecture. It sits directly above the Physical Layer and abstracts medium-specific transmission rules. Its core functions include: (1) Physical Addressing using 48-bit MAC addresses, (2) Medium Access Control to arbitrate transmission access, (3) Frame Delimiting and Formatting, (4) Collision Handling (detection, jam signaling, and exponential backoff), (5) Transmission Coordination across multi-station broadcast channels, and (6) Access Management enforcing priority and fairness.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q2. Explain the channel allocation problem and its primary objectives.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The channel allocation problem addresses how a shared broadcast medium with limited bandwidth is partitioned among multiple competing stations. Because computers generate bursty, asymmetric traffic and may attempt simultaneous transmissions, uncoordinated access causes signal collisions. The primary objectives are: High efficiency, Fairness, Low delay, Collision reduction, Maximum throughput, and Elimination of idle resource waste.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q3. Describe static channel allocation with suitable examples.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Static channel allocation divides available resources in advance into fixed portions assigned to stations. For example, if a 100 MHz channel is shared by 5 stations (A, B, C, D, E), each station receives 20 MHz. The fatal drawback is resource waste: if Station A is inactive, its 20 MHz sits empty, while active stations cannot exceed their 20 MHz slice.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q4. Explain FDMA and TDMA with comparative diagrams and principles.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          FDMA divides the frequency domain into non-overlapping bands with guard bands; stations transmit simultaneously and continuously on different carrier frequencies. TDMA divides the time domain into repeating frames and slots; all stations share the entire frequency band but transmit sequentially one station per time slot, requiring microsecond clock synchronization and guard times.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q5. Explain dynamic channel allocation with an illustrative example.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Dynamic channel allocation assigns resources on demand based on real-time traffic. Consider 5 computers where A, C, and E have data while B and D are idle. Instead of reserving 20% for B and D, dynamic allocation grants the full channel capacity to A, C, and E. Resources are released immediately when transmissions finish.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q6. Compare static and dynamic channel allocation across key technical parameters.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Static allocation features predetermined assignment, advance setup, lower flexibility, wasted idle resources, and suitability for predictable voice traffic. Dynamic allocation features demand-based assignment, runtime access, high flexibility, reusable idle capacity, and optimal efficiency for bursty computer data traffic.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q7. Explain the relationship between LLC, MAC, and the Physical Layer.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The Network Layer passes IP datagrams to the LLC sublayer. LLC encapsulates packets into LLC PDUs, identifies the network protocol via SAPs, and manages flow/error control. LLC passes the data to the MAC sublayer, which appends 48-bit MAC addresses and FCS trailers and executes medium access arbitration. Finally, MAC streams frames down to the Physical Layer transceiver for signal modulation onto the wire or radio medium.\n        </p>\n      </div>\n    </div>\n  \n    <!-- Topic 4 Long Exam Questions -->\n    <div class=\"space-y-4 mt-6 border-t border-gray-200 dark:border-gray-700 pt-6\">\n      <h3 class=\"text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider\">Topic 4 – Multiple Access Protocols Long-Answer University Questions</h3>\n      \n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q8. Explain the working principle of Pure ALOHA with a diagram and derive its vulnerable time.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Pure ALOHA allows stations to transmit whenever data is ready. A frame sent at time $t$ collides if another station starts between $t - T_{fr}$ and $t + T_{fr}$. Thus, the vulnerable time is $2T_{fr}$. The throughput equation is $S = G e^{-2G}$. Differentiating with respect to $G$ yields maximum throughput $S_{\\text{max}} = 1/(2e) \\approx 18.4\\%$ at $G = 0.5$.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q9. Explain Slotted ALOHA and derive its throughput formula.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Slotted ALOHA synchronizes time into discrete slots of duration $T_{fr}$. Stations can only transmit at slot boundaries. Collisions can only occur if two or more stations choose the exact same slot, reducing vulnerable time to $T_{fr}$. The throughput equation is $S = G e^{-G}$. Maximizing gives $S_{\\text{max}} = 1/e \\approx 36.8\\%$ at $G = 1.0$, exactly doubling Pure ALOHA's capacity.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q10. Compare 1-persistent, nonpersistent, and p-persistent CSMA.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          1-Persistent senses continuously and transmits immediately with $P=1$ upon idle; has low delay at light traffic but 100% collision risk when multiple stations wait for a busy channel to clear. Non-Persistent waits a random time upon sensing a busy channel, greatly reducing collisions under heavy load but increasing delay and idle time. p-Persistent uses a slotted channel and transmits with probability $p$, offering tunable optimization between delay and collision risk.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q11. Explain CSMA/CD with an operational flowchart and detail the Binary Exponential Backoff algorithm.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          In CSMA/CD, a station senses the channel, begins transmitting, and monitors for collisions. Upon collision detection, it stops immediately, transmits a 48-bit jam signal, increments collision count $K$, and picks a random delay $R \\in [0, 2^K - 1]$. The backoff time is $T_B = R \\times T_{\\text{slot}}$. This prevents recurring collisions and adapts to network congestion.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q12. Explain CSMA/CA and its three strategies: IFS, Contention Window, and Acknowledgements.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Because wireless nodes cannot listen while transmitting, CSMA/CA avoids collisions prior to transmission. (1) IFS: Mandatory delay after channel idle to prioritize traffic. (2) Contention Window: Random backoff countdown that pauses if the channel becomes busy. (3) Acknowledgements: Receiver sends positive ACK upon successful CRC verification; missing ACK triggers retransmission.\n        </p>\n      </div>\n\n      <div class=\"p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm\">\n        <h4 class=\"font-bold text-xs text-blue-600 dark:text-blue-400\">Q13. Differentiate between CSMA/CD and CSMA/CA across all architectural features.</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          CSMA/CD detects collisions during transmission, is used in wired Ethernet, transmits jam signals, and executes backoff after collision. CSMA/CA avoids collisions before transmission, is used in wireless Wi-Fi, requires mandatory ACKs, and executes backoff before transmission during an IFS-controlled contention window.\n        </p>\n      </div>\n    </div>\n  \n    <div class=\"mt-6 pt-4 border-t border-slate-200 dark:border-slate-700\">\n      <h3 class=\"text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-3\">\n        Topic 5 – Collision-Free Protocols Medium &amp; Long-Answer Questions (PDF Section 14)\n      </h3>\n      <div class=\"space-y-4 text-xs\">\n        <!-- Q14: Bit-Map Protocol Working -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q14 (5 Marks). Explain the working of the bit-map protocol with a suitable example.\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer:</strong> The Bit-Map Protocol operates in two alternating phases: (1) Reservation Phase, and (2) Data Transmission Phase.</p>\n            <ul class=\"list-disc pl-4 space-y-0.5\">\n              <li><strong>Reservation Phase:</strong> Time is divided into N minislots for N stations. If Station <em>i</em> has a frame, it sets bit <em>i</em> to 1; otherwise 0.</li>\n              <li><strong>Data Phase:</strong> Reserving stations transmit their full frames in ascending numerical sequence without collision.</li>\n              <li><strong>Example:</strong> In a 5-station network (Stations 0–4), suppose Stations 0, 2, and 4 want to transmit. The reservation bitmap becomes <code>1 0 1 0 1</code>. Stations 0, 2, and 4 transmit sequentially while Stations 1 and 3 stay silent.</li>\n              <li><strong>Overhead:</strong> $\\text{Bitmap Size} = N \\text{ bits}$ per epoch. Efficiency under high load = $d / (d+1)$.</li>\n            </ul>\n          </div>\n        </div>\n\n        <!-- Q15: Binary Countdown Working -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q15 (5 Marks). Explain the working of binary countdown with an illustrative example.\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer:</strong> Binary countdown uses bit-by-bit address competition over an OR-channel where logical 1 dominates logical 0.</p>\n            <ul class=\"list-disc pl-4 space-y-0.5\">\n              <li>Each station has an $m$-bit address ($2^m \\ge N$). Stations transmit their address bits simultaneously from MSB to LSB.</li>\n              <li>If a station transmits a 0 but senses a 1 on the channel, it drops out immediately.</li>\n              <li><strong>Example:</strong> Stations A (101), B (110), C (011), D (100) contend. At Bit 1: C transmits 0, senses 1 &rarr; drops out. At Bit 2: A transmits 0, senses 1 &rarr; drops out. At Bit 3: B (110) and D (100) send 0. Final winner is Station B (110 = 6), which transmits its data frame without collision.</li>\n              <li>Arbitration overhead is only $\\lceil \\log_2 N \\rceil$ bits.</li>\n            </ul>\n          </div>\n        </div>\n\n        <!-- Q16: Token Passing Protocol -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q16 (5 Marks). Describe the working of token passing and explain the 4 physical ring topologies.\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer:</strong> Token passing organizes stations in a logical ring where a special control frame (token) circulates sequentially.</p>\n            <ul class=\"list-disc pl-4 space-y-0.5\">\n              <li>A station waits for the token, captures it, transmits data up to a Token Holding Timer (THT), and then releases the token to its successor.</li>\n              <li><strong>4 Physical Topologies (Forouzan Fig 12.16):</strong>\n                <ol class=\"list-decimal pl-4 mt-0.5\">\n                  <li><strong>Physical Ring:</strong> Point-to-point simplex loop (IEEE 802.5 Token Ring).</li>\n                  <li><strong>Dual Ring:</strong> Counter-rotating secondary ring for automatic loopback healing (FDDI).</li>\n                  <li><strong>Bus Ring:</strong> Shared linear coaxial bus with logical software ring pointers (IEEE 802.4).</li>\n                  <li><strong>Star Ring:</strong> Physical star connected to a central Multistation Access Unit (MAU) with bypass relays.</li>\n                </ol>\n              </li>\n            </ul>\n          </div>\n        </div>\n\n        <!-- Q17: Polling Protocol (Poll & Select) -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q17 (5 Marks). Explain the polling protocol and detail its two primary functions (Poll and Select).\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer:</strong> Polling is a centralized controlled-access method where one Primary station controls channel access for all Secondary stations.</p>\n            <ul class=\"list-disc pl-4 space-y-0.5\">\n              <li><strong>Poll Function (Data Inbound):</strong> Primary asks secondary if it has data. Secondary responds with Data frame (or NAK if empty). Primary returns ACK.</li>\n              <li><strong>Select Function (Data Outbound):</strong> Primary sends Select (SEL) frame to verify secondary buffer availability. Secondary returns ACK. Primary sends data frame. Secondary returns ACK.</li>\n              <li><strong>Limitations:</strong> Primary station is a processing bottleneck and Single Point of Failure (SPOF). Polling frames create high overhead under light loads.</li>\n            </ul>\n          </div>\n        </div>\n\n        <!-- Q18: Comprehensive Comparison -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q18 (10–13 Marks). Comprehensively compare Random Access protocols with Controlled-Access / Collision-Free protocols.\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer Structure:</strong></p>\n            <ul class=\"list-disc pl-4 space-y-0.5\">\n              <li><strong>Philosophy:</strong> Random access stations contend freely (ALOHA, CSMA); collision-free stations coordinate access (Token Passing, Polling, Reservation).</li>\n              <li><strong>Collisions:</strong> Possible in random access; completely eliminated during normal operational data transfer in collision-free.</li>\n              <li><strong>Predictability:</strong> Random access delay has high variance and is non-deterministic; collision-free delay is strictly bounded ($T_{\\text{max}} = N \\times \\text{THT}$).</li>\n              <li><strong>Heavy Traffic Behavior:</strong> Random access collapses due to repeated collisions ($S \\to 0$); collision-free throughput reaches its peak near 100%.</li>\n              <li><strong>Light Traffic Behavior:</strong> Random access transmits immediately with zero latency; collision-free wastes time waiting for tokens or reservation epochs.</li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n  \n    <div class=\"mt-6 pt-4 border-t border-slate-200 dark:border-slate-700\">\n      <h3 class=\"text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-3\">\n        Topic 6 – Ethernet MAC Sublayer Protocol Medium &amp; Long-Answer Questions (PDF Section 15)\n      </h3>\n      <div class=\"space-y-4 text-xs\">\n        <!-- Q19: Ethernet Architecture -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q19 (5 Marks). Explain Ethernet architecture and distinguish between the LLC and MAC sublayers.\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer:</strong> Ethernet spans Physical Layer and Data Link Layer. In the IEEE 802 model, the Data Link Layer is divided into:</p>\n            <ul class=\"list-disc pl-4 space-y-0.5\">\n              <li><strong>LLC Sublayer (IEEE 802.2):</strong> Upper sublayer that interfaces with the Network Layer (IP). Identifies upper-layer protocols and provides uniform service independent of the physical transmission medium.</li>\n              <li><strong>MAC Sublayer (IEEE 802.3):</strong> Lower sublayer that interfaces with the Physical Layer. Adds 48-bit source and destination physical MAC addresses, builds frames, implements CSMA/CD medium arbitration, and computes CRC-32 for error detection.</li>\n            </ul>\n          </div>\n        </div>\n\n        <!-- Q20: Types of MAC Addresses -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q20 (5 Marks). Explain the three types of Ethernet MAC addresses with classification examples.\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer:</strong> Ethernet defines three destination address types:</p>\n            <ul class=\"list-disc pl-4 space-y-0.5\">\n              <li><strong>Unicast:</strong> Identifies one destination (one-to-one). The least significant bit (LSB) of the first byte is <code>0</code>. Example: <code>4A:30:10:21:10:1A</code> ($4A_{16} = 01001010_2$, LSB is 0).</li>\n              <li><strong>Multicast:</strong> Identifies a group of destinations (one-to-many). The LSB of the first byte is <code>1</code>. Example: <code>47:20:1B:2E:08:EE</code> ($47_{16} = 01000111_2$, LSB is 1).</li>\n              <li><strong>Broadcast:</strong> Delivers to all local stations (one-to-all). All 48 bits are 1: <code>FF:FF:FF:FF:FF:FF</code>.</li>\n            </ul>\n          </div>\n        </div>\n\n        <!-- Q21: Frame Format -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q21 (5 Marks). Draw and explain the Ethernet frame format with all seven fields.\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer:</strong> An IEEE 802.3 Ethernet frame has 7 fields:</p>\n            <ol class=\"list-decimal pl-4 space-y-0.5\">\n              <li><strong>Preamble (7 Bytes):</strong> 56 bits of alternating 10101010... for clock synchronization.</li>\n              <li><strong>SFD (1 Byte):</strong> Binary 10101011 marking the start of the frame.</li>\n              <li><strong>Destination Address (6 Bytes):</strong> 48-bit recipient MAC address.</li>\n              <li><strong>Source Address (6 Bytes):</strong> 48-bit sender MAC address.</li>\n              <li><strong>Length/Type (2 Bytes):</strong> Length ($\\le 1500$) or EtherType ($\\ge 0x0600$, e.g. 0x0800 for IPv4).</li>\n              <li><strong>Data and Padding (46–1500 Bytes):</strong> Network-layer payload. Padded if $< 46$ bytes.</li>\n              <li><strong>CRC (4 Bytes):</strong> CRC-32 Frame Check Sequence for error detection.</li>\n            </ol>\n          </div>\n        </div>\n\n        <!-- Q22: Minimum and Maximum Frame Sizes -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q22 (5 Marks). Explain the derivation of minimum (64 bytes) and maximum (1518 bytes) Ethernet frame sizes.\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer:</strong></p>\n            <ul class=\"list-disc pl-4 space-y-0.5\">\n              <li><strong>Minimum Frame Size (64 Bytes / 512 bits):</strong> Required so that a transmitting station is still sending when a worst-case collision echo returns ($T_{\\text{frame}} \\ge 2 T_p$). Fixed overhead = $6 + 6 + 2 + 4 = 18$ bytes $\\implies$ Minimum data = $64 - 18 = 46$ bytes.</li>\n              <li><strong>Maximum Frame Size (1518 Bytes):</strong> Historically limited switch buffer memory requirements and prevented one node from monopolizing the shared medium. Maximum payload = $1518 - 18 = 1500$ bytes (standard MTU).</li>\n            </ul>\n          </div>\n        </div>\n\n        <!-- Q23: Binary Exponential Backoff -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q23 (5 Marks). Describe the Binary Exponential Backoff algorithm and its formula.\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer:</strong> After a collision, a station waits $T_B = R \\times T_{\\text{slot}}$, where $T_{\\text{slot}} = 51.2\\ \\mu\\text{s}$ at 10 Mbps.</p>\n            <ul class=\"list-disc pl-4 space-y-0.5\">\n              <li>$R$ is chosen randomly: $0 \\le R \\le 2^K - 1$, where $K$ is the collision attempt number.</li>\n              <li>At $K=1$, $R \\in \\{0, 1\\}$. At $K=2$, $R \\in \\{0, 1, 2, 3\\}$. At $K=3$, $R \\in \\{0, 1, \\dots, 7\\}$.</li>\n              <li>The exponent $K$ is capped at 10 ($R \\le 1023$). If collisions exceed 16 ($K > 16$), transmission is aborted.</li>\n            </ul>\n          </div>\n        </div>\n\n        <!-- Q24: Half-Duplex vs Full-Duplex -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q24 (5 Marks). Compare Half-Duplex and Full-Duplex Ethernet. Why is CSMA/CD obsolete in modern networks?\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer:</strong> Half-duplex shares a medium where stations transmit or receive alternately; collisions occur and CSMA/CD is required. Full-duplex uses dedicated point-to-point switched links with separate transmit and receive wire pairs/fibers. Because data flows simultaneously in both directions without interference, collisions are physically impossible. Modern switched networks operate in full-duplex, making CSMA/CD obsolete.</p>\n          </div>\n        </div>\n\n        <!-- Q25: Comprehensive Evolution (10–13 Marks) -->\n        <div class=\"p-3.5 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n          <p class=\"font-bold text-slate-900 dark:text-white mb-1.5\">\n            Q25 (10–13 Marks). Comprehensively discuss the evolution of Ethernet across Standard, Fast, Gigabit, and Ten-Gigabit generations.\n          </p>\n          <div class=\"text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed\">\n            <p><strong>Answer Structure:</strong></p>\n            <ul class=\"list-disc pl-4 space-y-0.5\">\n              <li><strong>Standard Ethernet (10 Mbps, 802.3):</strong> Coax bus (10Base5, 10Base2) and star UTP (10Base-T). CSMA/CD half-duplex access with slot time $51.2\\ \\mu\\text{s}$.</li>\n              <li><strong>Fast Ethernet (100 Mbps, 802.3u):</strong> 100Base-TX (Cat5 2-pair), 100Base-FX (fiber). Retained 48-bit MAC and 64-1518B framing; introduced Autonegotiation.</li>\n              <li><strong>Gigabit Ethernet (1 Gbps, 802.3z/ab):</strong> 1000Base-T (Cat5e 4-pair 4D-PAM5) and 1000Base-SX/LX fiber. Switched architecture eliminated collision limits.</li>\n              <li><strong>Ten-Gigabit Ethernet (10 Gbps, 802.3ae):</strong> 10GBase-S/L/E fiber backbones. Operates in full-duplex mode only, permanently retiring CSMA/CD.</li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n  \n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q14. Explain Standard Ethernet Architecture, 1-Persistent CSMA/CD Operation, and Slot Time. [10 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Standard Ethernet (IEEE 802.3) operates at 10 Mbps over shared coaxial or twisted-pair media using 1-persistent CSMA/CD. A station continuously monitors the medium; if idle, it transmits immediately with probability 1. If busy, it waits until idle and immediately transmits. If collision occurs, it transmits a 32-bit jam signal and executes Binary Exponential Backoff. Slot time ($2\\tau = 51.2\\,\\mu\\text{s} = 512$ bit times) dictates minimum frame size ($64$ bytes) to ensure collisions are detected before transmission completes.\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q15. Explain Ethernet MAC Addressing and DIX Ethernet II vs. IEEE 802.3 Frame Formats. [8 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Ethernet MAC addresses are 48 bits (6 octets) represented in hexadecimal notation. The first 3 octets (24 bits) form the Organizationally Unique Identifier (OUI) assigned by IEEE; the last 3 octets form the Network Interface Controller (NIC) serial number assigned by manufacturer. Bit 0 of the first octet indicates Unicast (0) or Multicast/Broadcast (1). DIX Ethernet II frame uses a 2-byte EtherType field (e.g., 0x0800 for IPv4, 0x0806 for ARP). IEEE 802.3 frame uses a 2-byte Length field followed by an 802.2 LLC header. Values &ge; 1536 (0x0600) indicate EtherType; values &le; 1500 indicate Length.\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q16. Explain the Binary Exponential Backoff Algorithm with worked numerical examples. [8 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          After the $n$-th collision, the station picks a random integer $k$ from range $[0, 2^k - 1]$ where $k = \\min(n, 10)$. The wait time is $T_{\\text{wait}} = k \\times \\text{Slot Time} = k \\times 51.2\\,\\mu\\text{s}$. After collision 1: $k \\in [0, 1]$. After collision 2: $k \\in [0, 3]$. After collision 10: $k \\in [0, 1023]$. If collision count reaches 16 ($n = 16$), the transmission is aborted as link failure. This dynamically resolves heavy network contention.\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q17. Trace the Evolution of Ethernet from Standard to 10-Gigabit Ethernet. [10 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Ethernet evolved through four key generations: 1) Standard Ethernet (10 Mbps, 802.3) using shared bus/hub and CSMA/CD; 2) Fast Ethernet (100 Mbps, 802.3u) over Cat5 100Base-TX with autonegotiation; 3) Gigabit Ethernet (1 Gbps, 802.3ab/z) with full-duplex switches and carrier extension/bursting for half-duplex; 4) 10-Gigabit Ethernet (10 Gbps, 802.3ae) operating strictly in full-duplex mode over fiber/Cat6a, permanently retiring CSMA/CD.\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q18. Explain the Architecture of IEEE 802.11 Wireless LAN (BSS, ESS, AP & DS). [10 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The Basic Service Set (BSS) is the building block of 802.11, configured either as an Independent BSS (Ad Hoc, peer-to-peer without AP) or an Infrastructure BSS (coordinated by a central Access Point). An Extended Service Set (ESS) integrates two or more Infrastructure BSSs via a wired Distribution System (DS) backbone, enabling seamless campus-wide coverage. IEEE 802.11 defines three mobility classes: No-Transition (stationary), BSS-Transition (roaming across APs in the same ESS without losing IP identity), and ESS-Transition (moving between independent ESSs).\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q19. Explain the Hidden Station Problem and the 4-Way RTS/CTS Handshake Solution. [10 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The Hidden Station Problem occurs when two stations (B and C) are outside each other's radio coverage, but both communicate with central AP A. Both sense the channel idle, transmit simultaneously, and collide destructively at A. To resolve this, IEEE 802.11 uses the RTS/CTS handshake: Station B sends a Request To Send (RTS) with a duration reservation; AP A replies with a broadcast Clear To Send (CTS); Station C hears the CTS and programs its Network Allocation Vector (NAV) timer to defer, allowing Station B to transmit its DATA and receive an ACK collision-free.\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q20. Explain the Exposed Station Problem and compare it with the Hidden Station Problem. [8 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The Exposed Station Problem occurs when Station C hears Station A transmitting to Station B, mistakenly assumes the channel is busy, and defers transmitting to Station D. Because D is out of range of A, and B is out of range of C, both transmissions could have occurred concurrently without interference. Hidden stations cause packet collisions due to under-sensing (resolved by RTS/CTS); exposed stations cause throughput waste and bandwidth starvation due to over-sensing (mitigated by BSS coloring and directional beamforming).\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q21. Why is CSMA/CD impossible in Wireless LANs? Explain CSMA/CA Operation. [8 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          CSMA/CD cannot be used because: 1) Transceiver dynamic range blindness (outgoing signal is up to 100 dB stronger than incoming signals, blinding the receiver to collisions); 2) Hidden stations (collisions occur at the receiver, not at the sender); 3) Rapid inverse-square/fourth-power signal attenuation. CSMA/CA avoids collisions prior to transmission via: DIFS idle sensing, Contention Window pseudo-random backoff, RTS/CTS virtual carrier sensing (NAV), and explicit Layer 2 ACKs after SIFS.\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q22. Compare Distributed Coordination Function (DCF) and Point Coordination Function (PCF). [8 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          DCF is mandatory, decentralized, contention-based CSMA/CA access with DIFS interframe spaces, serving asynchronous best-effort data (web/email) across both Ad Hoc and Infrastructure modes. PCF is optional, centralized, contention-free polling operated by the AP Point Coordinator with higher-priority PIFS interframe spaces, serving time-bounded delay-critical traffic (VoIP/video) within Infrastructure mode. Superframes alternate between Contention-Free Periods (CFP) under PCF and Contention Periods (CP) under DCF.\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q23. Detail the Advantages, Disadvantages, and Characteristics of Wireless LANs. [8 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          WLAN characteristics include station mobility, unguided broadcast media, limited coverage cells, multipath fading, path loss ($1/d^2$), shared medium contention, and open security boundaries. Advantages include host mobility, quick and flexible installation, scalability, and long-term cable maintenance savings. Disadvantages include RF interference in the crowded 2.4 GHz ISM band, limited transmission range, security vulnerabilities (requiring WPA3 encryption), shared channel bandwidth degradation, higher bit error rates, and mobile battery drain.\n        </p>\n      </div>\n\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q24. Explain the IEEE 802.11 MAC Architecture in Detail (DCF and PCF). [10 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The IEEE 802.11 MAC sublayer is structured into two functional layers: 1) Distributed Coordination Function (DCF), the mandatory foundation using CSMA/CA, DIFS intervals, and backoff for asynchronous best-effort traffic; and 2) Point Coordination Function (PCF), an optional centralized polling protocol sitting on top of DCF where the AP acts as Point Coordinator using PIFS intervals. Time is divided into Superframes with Contention-Free Periods (CFP) under PCF and Contention Periods (CP) under DCF.\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q25. Explain CSMA/CA and its Complete Working with a Flowchart. [10 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          CSMA/CA avoids collisions through 6 cooperating mechanisms: 1) Physical carrier sensing (CCA energy detection); 2) Virtual carrier sensing (NAV countdown); 3) DIFS idle wait; 4) Pseudo-random backoff selection $[0, CW]$; 5) Idle countdown with timer freezing during busy bursts; 6) Transmission and immediate SIFS ACK confirmation. If no ACK arrives before timeout, $CW$ doubles exponentially ($CW = 2(CW+1)-1$) and retransmission begins.\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q26. Explain the RTS/CTS Handshake and the Role of NAV in Hidden Station Resolution. [10 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          The 4-way RTS/CTS handshake ($RTS \\to CTS \\to DATA \\to ACK$) solves hidden terminal collisions. Sender transmits RTS with duration field. Receiver broadcasts CTS. Hidden stations out of sender range hear the CTS and update their internal Network Allocation Vector (NAV) timers. All stations remain silent while NAV > 0, permitting collision-free transmission of large payload frames.\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q27. Explain all Four Types of Interframe Spaces with their Priority Relationship. [10 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Interframe Spaces enforce priority: SIFS (shortest, highest priority for ACK/CTS) < PIFS (Point Coordinator polling priority, $PIFS = SIFS + SlotTime$) < DIFS (standard DCF contention, $DIFS = SIFS + 2(SlotTime)$) < EIFS (extended wait for corrupted frame recovery). Shorter intervals grant preemptive transmission opportunities.\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q28. Draw and Explain the IEEE 802.11 MAC Frame Format in Detail. [13 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          General frame format has 9 fields: Frame Control (2B), Duration/ID (2B), Address 1 (6B, RA), Address 2 (6B, TA), Address 3 (6B, filtering), Sequence Control (2B, 4b Frag + 12b Seq Num), Address 4 (6B optional for WDS), Frame Body (0-2312B), and FCS (4B CRC-32). Draw the complete byte layout and detail all fields.\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q29. Explain the Three Categories of IEEE 802.11 Frames with Examples. [8 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          1) Management Frames (Type 00): Manage network association (Beacon, Probe Request/Response, Authentication, Association Request/Response, Disassociation); 2) Control Frames (Type 01): Arbitrate medium access (RTS, CTS, ACK, PS-Poll, Block ACK, CF-End); 3) Data Frames (Type 10): Transport payload data (Data, QoS Data, Null Data).\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q30. Explain the Four Address Fields and their Interpretation Based on To DS and From DS. [10 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          Address meanings depend on To DS / From DS bits: 0 0 = Within BSS (Addr1=DA, Addr2=SA, Addr3=BSSID); 1 0 = Station to AP / To DS (Addr1=BSSID, Addr2=SA, Addr3=DA); 0 1 = AP to Station / From DS (Addr1=DA, Addr2=BSSID, Addr3=SA); 1 1 = Wireless Bridge WDS (Addr1=RA, Addr2=TA, Addr3=DA, Addr4=SA).\n        </p>\n      </div>\n\n      <div class=\"border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50/50 dark:bg-gray-800/50 mb-4\">\n        <h4 class=\"font-bold text-sm text-gray-900 dark:text-white\">Q31. Explain the Functions of all Subfields in the IEEE 802.11 Frame Control Field. [10 Marks]</h4>\n        <p class=\"text-xs text-gray-700 dark:text-gray-300 mt-2 leading-relaxed\">\n          16-bit Frame Control field comprises: Protocol Version (2b), Type (2b), Subtype (4b), To DS (1b), From DS (1b), More Fragments (1b), Retry (1b), Power Management (1b), More Data (1b), Protected Frame (1b), and Order (1b). Detail each subfield's role in wireless protocol management.\n        </p>\n      </div>\n\n  <div class=\"faq-item p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-xs mb-3\">\n    <div class=\"faq-question font-bold text-sm text-purple-700 dark:text-purple-400 mb-1\">Q32. Explain the working of a transparent bridge with a neat architectural diagram.</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 space-y-2\">\n      <p>A transparent bridge connects multiple LAN segments at Layer 2 without requiring end stations to be configured or even know of the bridge's presence. It operates via three synchronized processes: (1) <strong>Learning:</strong> Inspects the source MAC address of every arriving frame and records its incoming port in the forwarding table. (2) <strong>Forwarding:</strong> Reads destination MAC; if in table on a different port, transmits out that port. (3) <strong>Filtering:</strong> If destination MAC is on the same port as arrival, drops the frame. Unknown and broadcast frames are flooded to all ports except incoming.</p>\n    </div>\n  </div>\n  <div class=\"faq-item p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-xs mb-3\">\n    <div class=\"faq-question font-bold text-sm text-purple-700 dark:text-purple-400 mb-1\">Q33. Describe the learning bridge algorithm with a concrete multi-segment example.</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 space-y-2\">\n      <p>When a frame arrives on port P: (1) S = Source MAC, D = Destination MAC. (2) Set ForwardingTable[S] = P, reset aging timer. (3) Query D in table: If D on port Q != P &rarr; Forward out Q. If D on port P &rarr; Filter (drop). If D unknown or broadcast &rarr; Flood out all ports except P. Example: Bridge connects P1 (Station A), P2 (Station B), P3 (Station C). A sends to B &rarr; Bridge learns A on P1; B not in table &rarr; Floods to P2, P3. B replies to A &rarr; Bridge learns B on P2; A is in table on P1 &rarr; Forwards directly out P1 only.</p>\n    </div>\n  </div>\n  <div class=\"faq-item p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-xs mb-3\">\n    <div class=\"faq-question font-bold text-sm text-purple-700 dark:text-purple-400 mb-1\">Q34. Explain Forwarding, Filtering, and Flooding decisions in Layer 2 switches.</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 space-y-2\">\n      <p>Forwarding transmits an incoming frame through a specific port when destination MAC is known on a different port. Filtering drops the frame when destination MAC is associated with the ingress port, conserving network bandwidth. Flooding replicates the frame across all ports except ingress when destination MAC is unknown or broadcast.</p>\n    </div>\n  </div>\n  <div class=\"faq-item p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-xs mb-3\">\n    <div class=\"faq-question font-bold text-sm text-purple-700 dark:text-purple-400 mb-1\">Q35. Explain the working and importance of Spanning Tree Protocol (STP).</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 space-y-2\">\n      <p>STP (IEEE 802.1D) prevents Layer 2 switching loops that cause broadcast storms, duplicate frames, and MAC table thrashing (because Ethernet frames lack a TTL field). It operates by electing a Root Bridge (lowest Bridge ID), finding shortest path Root Ports on all other switches, selecting Designated Ports per segment, and placing redundant links into a Blocked state. If a link fails, blocked ports dynamically transition to forwarding.</p>\n    </div>\n  </div>\n  <div class=\"faq-item p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-xs mb-3\">\n    <div class=\"faq-question font-bold text-sm text-purple-700 dark:text-purple-400 mb-1\">Q36. Compare bridges and switches across architectural, performance, and operational dimensions.</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 space-y-2\">\n      <p>A bridge is typically a software-based device with 2 to 4 ports connecting LAN segments, introducing 100-500 &mu;s latency. A switch is a hardware ASIC-based multiport bridge with 24 to 48+ ports, offering sub-microsecond cut-through forwarding, dedicated microsegmentation per port, and wire-speed full-duplex operation.</p>\n    </div>\n  </div>\n  <div class=\"faq-item p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-xs mb-3\">\n    <div class=\"faq-question font-bold text-sm text-purple-700 dark:text-purple-400 mb-1\">Q37. Explain how switches build and maintain MAC address tables, including aging timers.</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 space-y-2\">\n      <p>Switches inspect the Source MAC of arriving frames, mapping MAC addresses to ingress ports in their CAM table. Every entry is initialized with an aging timer (default: 300s). Inactive entries are purged upon timer expiration. If a device moves to a new port, its next transmission immediately updates the table to the new port.</p>\n    </div>\n  </div>\n\n  <div class=\"faq-item p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-xs mb-3\">\n    <div class=\"faq-question font-bold text-sm text-purple-700 dark:text-purple-400 mb-1\">Q38. Explain the working principles and operating layers of the six primary networking devices.</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 space-y-2\">\n      <p>(1) <strong>Repeater (L1):</strong> Overcomes cable attenuation by regenerating and retiming electrical/optical signals without inspecting addresses. (2) <strong>Hub (L1):</strong> Multiport repeater that broadcasts all incoming signals out through all other ports. (3) <strong>Bridge (L2):</strong> Connects LAN segments, builds a dynamic forwarding table via source MACs, forwards inter-segment frames, and filters intra-segment traffic. (4) <strong>Switch (L2):</strong> High-performance multiport bridge with dedicated hardware ASICs providing microsegmented wire-speed forwarding. (5) <strong>Router (L3):</strong> Connects different IP subnets, determines optimal paths via routing tables, and breaks broadcast domains. (6) <strong>Gateway (L4–L7):</strong> Multi-layer translator enabling communication between incompatible protocol suites and architectures.</p>\n    </div>\n  </div>\n  <div class=\"faq-item p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-xs mb-3\">\n    <div class=\"faq-question font-bold text-sm text-purple-700 dark:text-purple-400 mb-1\">Q39. Differentiate comprehensively between Collision Domains and Broadcast Domains.</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 space-y-2\">\n      <p>A <strong>collision domain</strong> is a physical segment where simultaneous transmissions cause collisions. Hubs share 1 collision domain; bridges and switches separate collision domains per port (microsegmentation); routers separate collision domains per interface. A <strong>broadcast domain</strong> is the group of devices that receive a Layer 2 broadcast frame. Hubs, bridges, and switches maintain 1 shared broadcast domain per VLAN; routers break and separate broadcast domains across all interfaces.</p>\n    </div>\n  </div>\n  <div class=\"faq-item p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-xs mb-3\">\n    <div class=\"faq-question font-bold text-sm text-purple-700 dark:text-purple-400 mb-1\">Q40. Compare Hubs, Switches, and Routers across architecture, addressing, performance, and domains.</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 space-y-2\">\n      <p>A <strong>Hub</strong> operates at Layer 1 using raw signals, creates 1 collision domain and 1 broadcast domain, and runs in half-duplex. A <strong>Switch</strong> operates at Layer 2 using 48-bit MAC addresses, creates a separate collision domain for every port, provides full-duplex wire speed, but maintains a single broadcast domain per VLAN. A <strong>Router</strong> operates at Layer 3 using logical IP addresses, routes packets between different networks, and separates both collision and broadcast domains.</p>\n    </div>\n  </div>\n  <div class=\"faq-item p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-xs mb-3\">\n    <div class=\"faq-question font-bold text-sm text-purple-700 dark:text-purple-400 mb-1\">Q41. Explain the roles of networking devices in real-world Home, College Lab, and Enterprise networks.</div>\n    <div class=\"faq-answer text-xs text-gray-600 dark:text-gray-300 space-y-2\">\n      <p><strong>Home Network:</strong> Uses an integrated wireless router combining routing, a 4-port Gigabit switch, Wi-Fi AP, and NAT/DHCP gateway. <strong>College Lab:</strong> Uses managed 24/48-port Ethernet switches for desktop microsegmentation connected to a departmental router providing campus and Internet access. <strong>Enterprise Network:</strong> Employs a 3-tier hierarchy: Layer 2 Access Switches at desks, Layer 3 Distribution Switches for inter-VLAN routing, Core Routers for WAN backbone transport, and Perimeter Application Gateways/Firewalls for security.</p>\n    </div>\n  </div>\n",
       "eli10": "In simple words: The 8 major essay questions from PDF Section 10 with structured headings and diagrams.",
       "analogy": "Think of this mechanism as an essential traffic rule ensuring data moves across physical wires without errors or collisions.",
       "diagram": "",
@@ -7883,6 +8363,501 @@ var TOPICS_U2_SYLLABUS = {
           ],
           "correct": 1,
           "explanation": "The priority hierarchy is SIFS (Shortest) < PIFS (PCF) < DIFS (DCF) < EIFS (Extended)."
+        },
+        {
+          "question": "Which IEEE standard defines Wireless LAN MAC?",
+          "options": [
+            "IEEE 802.3",
+            "IEEE 802.11",
+            "IEEE 802.5",
+            "IEEE 802.1"
+          ],
+          "correct": 1,
+          "explanation": "IEEE 802.11 is the international standard governing Wireless LAN MAC and PHY layers."
+        },
+        {
+          "question": "Which is the fundamental, mandatory access mechanism in IEEE 802.11?",
+          "options": [
+            "Point Coordination Function (PCF)",
+            "Distributed Coordination Function (DCF)",
+            "CSMA/CD",
+            "Token passing"
+          ],
+          "correct": 1,
+          "explanation": "DCF is the mandatory fundamental medium access mechanism in all 802.11 devices, while PCF is optional."
+        },
+        {
+          "question": "What does CSMA/CA stand for?",
+          "options": [
+            "Carrier Sense Multiple Access with Collision Avoidance",
+            "Carrier Signal Multiple Access with Collision Access",
+            "Collision Sense Multiple Access with Collision Avoidance",
+            "Carrier Sense Management Access"
+          ],
+          "correct": 0,
+          "explanation": "CSMA/CA stands for Carrier Sense Multiple Access with Collision Avoidance."
+        },
+        {
+          "question": "Which frame requests permission to transmit data in an IEEE 802.11 handshake?",
+          "options": [
+            "CTS",
+            "ACK",
+            "RTS",
+            "Beacon"
+          ],
+          "correct": 2,
+          "explanation": "RTS (Request To Send) is the 20-byte control frame that requests medium access permission."
+        },
+        {
+          "question": "Which frame responds to an RTS frame?",
+          "options": [
+            "ACK",
+            "CTS",
+            "DATA",
+            "Beacon"
+          ],
+          "correct": 1,
+          "explanation": "The receiving station replies to a valid RTS with a CTS (Clear To Send) frame after SIFS."
+        },
+        {
+          "question": "What does NAV represent in IEEE 802.11?",
+          "options": [
+            "Network address value",
+            "Network Allocation Vector",
+            "Network access variable",
+            "Node allocation value"
+          ],
+          "correct": 1,
+          "explanation": "NAV stands for Network Allocation Vector, a virtual carrier-sensing countdown timer."
+        },
+        {
+          "question": "Which interframe space is the shortest commonly discussed in legacy 802.11?",
+          "options": [
+            "DIFS",
+            "PIFS",
+            "EIFS",
+            "SIFS"
+          ],
+          "correct": 3,
+          "explanation": "SIFS (Short Interframe Space) is the shortest interval, giving highest priority to ACK and CTS frames."
+        },
+        {
+          "question": "Which IFS is associated with Point Coordinator (PCF) access?",
+          "options": [
+            "SIFS",
+            "PIFS",
+            "DIFS",
+            "EIFS"
+          ],
+          "correct": 1,
+          "explanation": "PIFS (Point Coordination IFS) is used by the Point Coordinator to gain priority over DCF."
+        },
+        {
+          "question": "Which IFS is used by stations for normal DCF contention access?",
+          "options": [
+            "SIFS",
+            "PIFS",
+            "DIFS",
+            "EIFS"
+          ],
+          "correct": 2,
+          "explanation": "DIFS (DCF Interframe Space) is the standard waiting period before normal contention backoff."
+        },
+        {
+          "question": "How many bits are in the IEEE 802.11 Frame Control field?",
+          "options": [
+            "8 bits",
+            "16 bits",
+            "24 bits",
+            "32 bits"
+          ],
+          "correct": 1,
+          "explanation": "The Frame Control field contains 2 bytes, which equals exactly 16 bits."
+        },
+        {
+          "question": "How many major IEEE 802.11 MAC frame categories are there?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correct": 1,
+          "explanation": "There are 3 major frame categories: Management frames, Control frames, and Data frames."
+        },
+        {
+          "question": "Which frame announces the presence and characteristics of a wireless network?",
+          "options": [
+            "RTS",
+            "ACK",
+            "Beacon",
+            "CTS"
+          ],
+          "correct": 2,
+          "explanation": "Beacon frames are periodic management frames broadcast by Access Points to announce SSID and capabilities."
+        },
+        {
+          "question": "Which field helps detect frame transmission errors at the MAC layer?",
+          "options": [
+            "Duration",
+            "Sequence Control",
+            "FCS",
+            "Address 1"
+          ],
+          "correct": 2,
+          "explanation": "The Frame Check Sequence (FCS) contains a 4-byte CRC-32 checksum to detect bit corruption."
+        },
+        {
+          "question": "What is the size of the Sequence Control field?",
+          "options": [
+            "1 byte",
+            "2 bytes",
+            "4 bytes",
+            "6 bytes"
+          ],
+          "correct": 1,
+          "explanation": "The Sequence Control field is 2 bytes (16 bits), comprising a 4-bit Fragment Number and 12-bit Sequence Number."
+        },
+        {
+          "question": "How many address fields can an IEEE 802.11 frame contain?",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "Up to 4"
+          ],
+          "correct": 3,
+          "explanation": "An IEEE 802.11 frame can contain up to 4 address fields (Address 1, 2, 3, and optional Address 4 for mesh bridges)."
+        },
+        {
+          "question": "At which OSI layer does a traditional Ethernet bridge operate?",
+          "options": [
+            "Physical Layer",
+            "Data Link Layer",
+            "Network Layer",
+            "Transport Layer"
+          ],
+          "correct": 1,
+          "explanation": "A traditional Ethernet bridge operates at the Data Link Layer (Layer 2) of the OSI Reference Model."
+        },
+        {
+          "question": "Which address does a learning bridge use to build its forwarding table?",
+          "options": [
+            "Destination IP address",
+            "Source MAC address",
+            "Destination IP address and port",
+            "Source port number"
+          ],
+          "correct": 1,
+          "explanation": "A learning bridge inspects the Source MAC address of arriving frames to identify which device resides on which port."
+        },
+        {
+          "question": "What happens when a switch receives a frame with an unknown unicast destination?",
+          "options": [
+            "It drops it immediately",
+            "It sends it only to the incoming port",
+            "It floods relevant ports except the incoming port",
+            "It sends it to the router only"
+          ],
+          "correct": 2,
+          "explanation": "When the unicast destination is unknown, the switch floods the frame out all active ports except the incoming arrival port."
+        },
+        {
+          "question": "What is the main purpose of the Spanning Tree Protocol (STP)?",
+          "options": [
+            "Assign IP addresses to host stations",
+            "Prevent Layer 2 switching loops and broadcast storms",
+            "Encrypt Ethernet frame payloads",
+            "Increase maximum copper cable length"
+          ],
+          "correct": 1,
+          "explanation": "STP prevents Layer 2 switching loops and broadcast storms by placing redundant paths into a blocked state."
+        },
+        {
+          "question": "What does a switch do if the destination MAC address is learned on the incoming port?",
+          "options": [
+            "Floods the frame",
+            "Filters (drops) the frame",
+            "Sends it to every port",
+            "Changes the source MAC address"
+          ],
+          "correct": 1,
+          "explanation": "The switch filters (drops) the frame because the recipient has already received it directly over the local shared wire."
+        },
+        {
+          "question": "What does a switch's MAC address table map?",
+          "options": [
+            "IP addresses to routers",
+            "MAC addresses to switch ports",
+            "Port numbers to IP networks",
+            "Domain names to IP addresses"
+          ],
+          "correct": 1,
+          "explanation": "A MAC address table (CAM table) maps hardware MAC addresses to specific switch physical ports."
+        },
+        {
+          "question": "Why do Layer 2 Ethernet switching loops cause fatal network broadcast storms?",
+          "options": [
+            "Ethernet frames have no Time-to-Live (TTL) field to terminate loops",
+            "Switches automatically invert binary bits",
+            "Collision detection is disabled in fiber cables",
+            "IP routers refuse to accept Ethernet frames"
+          ],
+          "correct": 0,
+          "explanation": "Standard Layer 2 Ethernet headers contain no TTL field, meaning looping frames circulate indefinitely until bandwidth is 100% saturated."
+        },
+        {
+          "question": "Which port role on an STP non-root switch provides the lowest path cost back to the Root Bridge?",
+          "options": [
+            "Designated Port",
+            "Root Port",
+            "Alternate Port",
+            "Backup Port"
+          ],
+          "correct": 1,
+          "explanation": "The Root Port on a non-root switch is the single interface that offers the lowest cumulative path cost to reach the Root Bridge."
+        },
+        {
+          "question": "What is the default MAC address aging timer in most commercial Ethernet switches?",
+          "options": [
+            "10 seconds",
+            "60 seconds",
+            "300 seconds (5 minutes)",
+            "3600 seconds (1 hour)"
+          ],
+          "correct": 2,
+          "explanation": "The standard default MAC address aging timer in IEEE 802.1D and Cisco switches is 300 seconds (5 minutes)."
+        },
+        {
+          "question": "In what state does an STP blocked port operate regarding user data frames?",
+          "options": [
+            "It transmits user data at half speed",
+            "It drops all user data frames but continues receiving BPDUs",
+            "It converts frames into IP packets",
+            "It forwards frames only to the Root Bridge"
+          ],
+          "correct": 1,
+          "explanation": "A blocked port discards all user data frames to break the loop, but keeps listening to BPDUs to detect link failures."
+        },
+        {
+          "question": "What special control frame is exchanged by bridges every 2 seconds to maintain the Spanning Tree?",
+          "options": [
+            "ARP Request",
+            "ICMP Echo",
+            "Bridge Protocol Data Unit (BPDU)",
+            "RTS/CTS Frame"
+          ],
+          "correct": 2,
+          "explanation": "Bridges exchange Bridge Protocol Data Units (BPDUs) every 2 seconds (Hello Timer) to build and maintain the loop-free spanning tree."
+        },
+        {
+          "question": "How does a modern Ethernet switch forward frames compared to a legacy bridge?",
+          "options": [
+            "In software using CPU interrupts",
+            "In hardware at wire speed using dedicated ASICs",
+            "By routing IP packets through software kernels",
+            "By broadcasting all frames as optical pulses"
+          ],
+          "correct": 1,
+          "explanation": "Modern switches use Application-Specific Integrated Circuits (ASICs) and crossbar matrix fabrics to forward frames at hardware wire speed."
+        },
+        {
+          "question": "What is microsegmentation in an Ethernet switch?",
+          "options": [
+            "Dividing frames into 64-byte fragments",
+            "Each switch port forming an independent, isolated collision domain",
+            "Connecting multiple hubs to a single port",
+            "Reducing MAC address length from 48 to 24 bits"
+          ],
+          "correct": 1,
+          "explanation": "Microsegmentation means dedicating each switch port as an isolated collision domain, enabling full-duplex transmission without collisions."
+        },
+        {
+          "question": "What is the consequence of a CAM Table Overflow (MAC flooding) attack against a switch?",
+          "options": [
+            "The switch shuts down all ports permanently",
+            "The switch table fills up, causing it to fail open and flood all frames like a hub",
+            "The switch upgrades all links to 100 Gbps",
+            "The switch reboots into recovery mode"
+          ],
+          "correct": 1,
+          "explanation": "When an attacker overflows the CAM table with thousands of fake MACs, the switch cannot learn new addresses and floods all incoming traffic out all ports, allowing packet sniffing."
+        },
+        {
+          "question": "In an STP topology, which ports are always in the Forwarding state on the Root Bridge?",
+          "options": [
+            "Root Ports",
+            "Designated Ports",
+            "Alternate Ports",
+            "Blocked Ports"
+          ],
+          "correct": 1,
+          "explanation": "All active ports on the Root Bridge are Designated Ports, and Designated Ports are always in the Forwarding state."
+        },
+        {
+          "question": "At which layer of the OSI Reference Model does a network repeater operate?",
+          "options": [
+            "Physical Layer (Layer 1)",
+            "Data Link Layer (Layer 2)",
+            "Network Layer (Layer 3)",
+            "Transport Layer (Layer 4)"
+          ],
+          "correct": 0,
+          "explanation": "A repeater operates at Layer 1 (Physical Layer), regenerating electrical or optical signals to overcome attenuation."
+        },
+        {
+          "question": "How does a passive hub differ from an active hub?",
+          "options": [
+            "A passive hub routes IP packets while an active hub routes frames",
+            "A passive hub does not regenerate or amplify signals and requires no power, while an active hub regenerates signals and requires power",
+            "A passive hub operates at Layer 3 while an active hub operates at Layer 2",
+            "A passive hub supports full duplex while an active hub supports half duplex"
+          ],
+          "correct": 1,
+          "explanation": "A passive hub merely serves as a physical connection point without signal regeneration, whereas an active hub amplifies signals and requires electrical power."
+        },
+        {
+          "question": "How many collision domains are formed by a single 8-port Ethernet hub?",
+          "options": [
+            "1 collision domain",
+            "4 collision domains",
+            "8 collision domains",
+            "16 collision domains"
+          ],
+          "correct": 0,
+          "explanation": "All ports on a hub share a single internal bus, forming exactly ONE shared collision domain."
+        },
+        {
+          "question": "Which networking device separates collision domains while maintaining a single broadcast domain by default?",
+          "options": [
+            "Repeater",
+            "Hub",
+            "Layer 2 Switch",
+            "Router"
+          ],
+          "correct": 2,
+          "explanation": "A Layer 2 switch isolates collision domains on each port (microsegmentation), but broadcasts flood to all ports within the same VLAN."
+        },
+        {
+          "question": "Which networking device operates at Layer 3 and connects different IP networks?",
+          "options": [
+            "Bridge",
+            "Hub",
+            "Router",
+            "Repeater"
+          ],
+          "correct": 2,
+          "explanation": "A router operates at Layer 3 (Network Layer) and connects different IP subnets using logical IP routing tables."
+        },
+        {
+          "question": "What is the primary function of a Default Gateway configured on an end host?",
+          "options": [
+            "Assigning MAC addresses to new network adapters",
+            "Providing the next-hop router address for traffic destined outside the local subnet",
+            "Encrypting local Wi-Fi passwords",
+            "Filtering physical electrical noise on the copper cable"
+          ],
+          "correct": 1,
+          "explanation": "The default gateway is the local router interface used by hosts to exit their local subnet and reach external IP networks."
+        },
+        {
+          "question": "Why is a gateway not restricted to a single OSI layer?",
+          "options": [
+            "Because gateways do not follow any standards",
+            "Because gateways can operate across Layers 4 through 7 depending on the required protocol and format translation",
+            "Because gateways only operate at the Physical Layer",
+            "Because gateways are purely software virtual machines"
+          ],
+          "correct": 1,
+          "explanation": "Gateways perform translation across Transport, Session, Presentation, and Application layers depending on their architectural purpose."
+        },
+        {
+          "question": "What happens when an Ethernet switch receives a frame destined for an address present in its CAM table on a different port?",
+          "options": [
+            "It floods the frame to all ports",
+            "It filters and drops the frame",
+            "It forwards the frame exclusively out that destination port",
+            "It converts the frame to an IP packet"
+          ],
+          "correct": 2,
+          "explanation": "When the destination MAC is known on another port, the switch forwards the frame directly and exclusively through that target port."
+        },
+        {
+          "question": "How many broadcast domains are created by a router with 4 active routed interfaces?",
+          "options": [
+            "1 broadcast domain",
+            "2 broadcast domains",
+            "4 broadcast domains",
+            "16 broadcast domains"
+          ],
+          "correct": 2,
+          "explanation": "Routers break and separate broadcast domains across all interfaces. A router with 4 active routed interfaces creates 4 separate broadcast domains."
+        },
+        {
+          "question": "Which type of switch allows remote configuration of VLANs, STP, and SNMP monitoring?",
+          "options": [
+            "Unmanaged switch",
+            "Passive switch",
+            "Managed switch",
+            "Repeater hub"
+          ],
+          "correct": 2,
+          "explanation": "A managed switch provides comprehensive administrative configuration for VLANs, Spanning Tree, QoS, and SNMP monitoring."
+        },
+        {
+          "question": "What is the primary role of a Core Router in an enterprise or ISP network?",
+          "options": [
+            "Connecting individual desktop PCs with PoE",
+            "Routing massive volumes of backbone traffic at high speed within the network interior",
+            "Providing Wi-Fi access in meeting rooms",
+            "Translating ASCII text to EBCDIC"
+          ],
+          "correct": 1,
+          "explanation": "Core routers are high-capacity backbone routers deployed within the interior of large networks to forward massive traffic volumes between distribution networks."
+        },
+        {
+          "question": "What is the maximum recommended cable distance for standard Category 5e/6 copper Ethernet before requiring a repeater or switch?",
+          "options": [
+            "10 meters",
+            "50 meters",
+            "100 meters",
+            "500 meters"
+          ],
+          "correct": 2,
+          "explanation": "Standard copper twisted-pair Ethernet (10BASE-T through 1000BASE-T) has a maximum physical segment limit of 100 meters (328 feet) due to signal attenuation."
+        },
+        {
+          "question": "Which of the following devices operates at Layer 4 and performs port-based traffic distribution?",
+          "options": [
+            "Passive Hub",
+            "Layer 4 Switch / Load Balancer",
+            "Repeater",
+            "Layer 1 Transceiver"
+          ],
+          "correct": 1,
+          "explanation": "Layer 4 switches inspect TCP/UDP port numbers at the Transport Layer to balance application traffic across server pools."
+        },
+        {
+          "question": "What is an Application Gateway (Proxy)?",
+          "options": [
+            "A hardware hub repeating electrical pulses",
+            "A Layer 7 system that translates or inspects protocols at the application level",
+            "A fiber optic cable connector",
+            "A MAC address table in RAM"
+          ],
+          "correct": 1,
+          "explanation": "An Application Gateway operates at Layer 7 (Application Layer) to translate, inspect, or proxy application-specific protocols (e.g., SIP VoIP gateways, WAFs)."
+        },
+        {
+          "question": "If a network contains 1 Router (2 interfaces), 2 Switches (each with 10 PCs), and 1 Hub (with 5 PCs connected to one switch port), how many broadcast domains exist?",
+          "options": [
+            "1 broadcast domain",
+            "2 broadcast domains",
+            "25 broadcast domains",
+            "27 broadcast domains"
+          ],
+          "correct": 1,
+          "explanation": "Broadcast domains are separated only by routers. With 2 active router interfaces, the network contains exactly 2 broadcast domains regardless of the number of switches and hubs."
         }
       ],
       "references": [
@@ -8461,170 +9436,254 @@ var TOPICS_U2_SYLLABUS = {
         }
       ],
       "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800 text-xs\">\n            <h4 class=\"font-bold text-emerald-800 dark:text-emerald-300 mb-1\">Advantages of Wireless LANs</h4>\n            <ul class=\"space-y-1 text-slate-700 dark:text-slate-300\">\n              <li>&bull; <strong>Mobility:</strong> Users roam freely without breaking active TCP/IP sessions.</li>\n              <li>&bull; <strong>Rapid Deployment:</strong> New stations connect instantly without pulling cables.</li>\n              <li>&bull; <strong>Scalability:</strong> Additional clients require zero physical rewiring.</li>\n              <li>&bull; <strong>Reduced Infrastructure Cost:</strong> Eliminates recurring cable maintenance and renovation disruption.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/30 rounded-lg border border-rose-200 dark:border-rose-800 text-xs\">\n            <h4 class=\"font-bold text-rose-800 dark:text-rose-300 mb-1\">Limitations of Wireless LANs</h4>\n            <ul class=\"space-y-1 text-slate-700 dark:text-slate-300\">\n              <li>&bull; <strong>Shared Channel Capacity:</strong> Bandwidth diminishes as client count increases.</li>\n              <li>&bull; <strong>Susceptible to Interference:</strong> 2.4 GHz band crowded by Bluetooth and microwaves.</li>\n              <li>&bull; <strong>Higher Latency & Jitter:</strong> Contention and retransmissions introduce non-deterministic delays.</li>\n              <li>&bull; <strong>Security Perimeter:</strong> RF boundary cannot be physically cordoned off.</li>\n            </ul>\n          </div>\n        </div>\n      ",
-      "whereUsed": "Campus Wi-Fi networks, enterprise agile offices, smart warehouses, home automation, and public hotspots.",
-      "references": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14; Andrew S. Tanenbaum, Computer Networks (5th Ed.), Chapter 4."
-    }
-  },
-  "wifi-mac-sublayer": {
-    "id": "wifi-mac-sublayer",
-    "title": "IEEE 802.11 MAC Sublayer Protocol",
-    "unit": "Unit 2 – Data Link Layer",
-    "unitId": "unit2",
-    "topicNumber": 8,
-    "subtopicNumber": 0,
-    "whyItMatters": "IEEE 802.11 Wi-Fi is the ubiquitous wireless standard globally. Its MAC architecture balances contention-based distributed access with centralized polling.",
-    "prerequisitesList": [
-      {
-        "concept": "Wireless LAN Protocols",
-        "meaning": "Hidden terminals and radio propagation"
-      },
-      {
-        "concept": "CSMA/CA",
-        "meaning": "Collision avoidance with interframe spaces"
-      }
-    ],
-    "learningObjectives": [
-      "Distinguish between Distributed Coordination Function (DCF) and Point Coordination Function (PCF).",
-      "Explain the role of Interframe Spaces (SIFS, PIFS, DIFS).",
-      "Trace the complete CSMA/CA handshake with RTS, CTS, Data, ACK, and NAV."
-    ],
-    "infobox": {
-      "layer": "Layer 2 (MAC Sublayer)",
-      "standard": "IEEE 802.11-2020 / Wi-Fi 6 & 7",
-      "type": "Industry Wireless Protocol",
-      "prerequisites": [
-        "wireless-lan-protocols"
-      ],
-      "relatedConcepts": [
-        "u2-ieee-802-11-dcf",
-        "u2-ieee-802-11-pcf",
-        "u2-rts-cts-mechanism"
-      ],
-      "compareWith": [
-        "ethernet"
-      ],
-      "primaryUses": [
-        "Wi-Fi routers, smartphones, laptops, IoT endpoints"
-      ]
-    },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/53/802.11_MAC_Frame.svg",
-    "imageCaption": "Figure: Complete IEEE 802.11 MAC Frame Architecture showing 4 Address Fields and Frame Control (Behrouz A. Forouzan).",
-    "sections": {
-      "overview": "\n      <p>The <strong>IEEE 802.11 MAC Sublayer Protocol</strong> defines how Wi-Fi devices share radio channels. It operates two distinct coordination functions:</p>\n      <ul class=\"wiki-bullet-list\">\n        <li><strong>Distributed Coordination Function (DCF):</strong> Mandatory contention-based protocol using CSMA/CA with exponential backoff and optional RTS/CTS.</li>\n        <li><strong>Point Coordination Function (PCF):</strong> Optional centralized contention-free polling service managed by the Access Point (AP) for delay-sensitive traffic.</li>\n      </ul>\n    ",
-      "eli10": "Wi-Fi DCF is like a dinner table where everyone waits for a brief pause before speaking, but rolls a secret die to wait a few seconds so two people don't talk at the exact same moment. PCF is like a dinner where the host points to each person in turn and asks 'Do you want to speak?'.",
-      "analogy": "Like an orderly press conference where reporters either raise hands and wait for quiet pauses (DCF) or the press secretary calls on specific reporters one by one (PCF).",
-      "howItWorks": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">CSMA/CA Protocol Timeline & IFS</h3>\n      <p>Stations must observe rigorous Interframe Spaces (IFS) to prioritize traffic:</p>\n      <ul class=\"wiki-bullet-list\">\n        <li><strong>SIFS (Short IFS):</strong> Shortest wait; used for highest priority responses (ACK, CTS).</li>\n        <li><strong>PIFS (PCF IFS):</strong> Intermediate wait; used by Access Point during PCF polling.</li>\n        <li><strong>DIFS (DCF IFS):</strong> Longest mandatory quiet period before any station can begin contention backoff.</li>\n      </ul>\n    ",
-      "diagram": "",
-      "technicalDetails": "\n      <p>The 802.11 frame format includes 4 distinct address fields (Source MAC, Destination MAC, BSSID/AP MAC, and optional Ad-Hoc relay MAC), frame control flags, sequence control, and FCS trailer.</p>\n    ",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> Why is SIFS shorter than DIFS in 802.11?<br><br><strong>Answer:</strong> SIFS is assigned to ongoing handshakes (CTS and ACK). Because SIFS < DIFS, a station waiting to send an ACK transmits before any contending station can complete its DIFS wait, guaranteeing that active transactions are never interrupted by collisions.",
-        "level2": "<strong>Problem:</strong> Trace the 802.11 RTS/CTS exchange.<br><br><strong>Answer:</strong> Sender senses channel idle for DIFS &rarr; transmits RTS with duration $D$ &rarr; Receiver waits SIFS &rarr; replies CTS with updated duration &rarr; Sender waits SIFS &rarr; transmits DATA &rarr; Receiver waits SIFS &rarr; transmits ACK. Surrounding stations set NAV timer to $D$ and remain silent.",
-        "level3": "<strong>Analysis:</strong> Compare DCF vs. PCF.<br><br><strong>Answer:</strong> DCF is asynchronous, distributed, contention-based, and best effort. PCF is synchronous, centralized, contention-free, and suitable for real-time voice/video QoS."
-      },
-      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Function</th><th>Type</th><th>Primary Use</th></tr></thead>\n        <tbody>\n          <tr><td>DCF</td><td>Contention (CSMA/CA)</td><td>Standard data browsing, file downloads.</td></tr>\n          <tr><td>PCF</td><td>Contention-free (Polling)</td><td>VoIP, real-time streaming (rarely implemented).</td></tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Wi-Fi 4 (802.11n), Wi-Fi 5 (802.11ac), Wi-Fi 6/6E (802.11ax), Wi-Fi 7 (802.11be)"
-      ],
-      "quiz": [
-        {
-          "question": "Which Interframe Space (IFS) is the shortest and has the highest transmission priority in IEEE 802.11?",
-          "options": [
-            "SIFS",
-            "PIFS",
-            "DIFS",
-            "EIFS"
-          ],
-          "correct": 0,
-          "explanation": "SIFS (Short Interframe Space) is the shortest IFS, reserved for high-priority ACKs and CTS frames."
-        }
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
       ],
       "references": [
         {
-          "cite": "IEEE Std 802.11-2020 / Behrouz A. Forouzan Chapter 14.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
           "url": ""
         }
       ]
-    }
-  },
-  "dll-switching": {
-    "id": "dll-switching",
-    "title": "Data Link Layer Switching & Spanning Tree",
-    "unit": "Unit 2 – Data Link Layer",
-    "unitId": "unit2",
-    "topicNumber": 9,
-    "subtopicNumber": 0,
-    "whyItMatters": "Modern local networks rely on Layer 2 switches to break large collision domains into isolated micro-segments, while Spanning Tree Protocol (STP) eliminates catastrophic broadcast radiation loops.",
+    },
+    "infobox": {
+      "layer": "Layer 2 (Data Link Layer / MAC Sublayer)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "Wireless Local Area Network Standard",
+      "prerequisites": [
+        "u2-dll-intro",
+        "u2-mac-sublayer-intro"
+      ],
+      "relatedConcepts": [
+        "u2-wireless-characteristics",
+        "u2-wireless-lan-architecture",
+        "wifi-mac-sublayer"
+      ],
+      "compareWith": [
+        "ethernet",
+        "u2-comparison-multiple-access"
+      ],
+      "primaryUses": [
+        "Campus Wi-Fi, enterprise agile workplaces, home broadband, public hotspots"
+      ]
+    },
     "prerequisitesList": [
       {
-        "concept": "MAC Addressing",
-        "meaning": "48-bit hardware station addresses"
+        "concept": "Data Link Layer Fundamentals",
+        "meaning": "Framing, physical addressing, and error detection principles"
       },
       {
-        "concept": "Ethernet Framing",
-        "meaning": "Destination and source address fields"
+        "concept": "MAC Sublayer Architecture",
+        "meaning": "Position of IEEE 802 Media Access Control above the Physical Layer"
       }
     ],
     "learningObjectives": [
-      "Understand the operation of learning bridges and transparent switches.",
-      "Explain the three bridge forwarding actions: Forward, Filter, Flood.",
-      "Master the Spanning Tree Protocol (IEEE 802.1D) algorithm."
+      "Define Wireless Local Area Networks (WLAN) and understand the scope of the IEEE 802.11 standard.",
+      "Analyze the fundamental differences between Wired Ethernet (802.3) and Wireless LAN (802.11).",
+      "Trace the end-to-end packet transmission workflow across the 802.11 MAC and Physical layers."
+    ]
+  },
+  "wifi-mac-sublayer": {
+    "id": "wifi-mac-sublayer",
+    "title": "Introduction to IEEE 802.11 MAC Sublayer",
+    "unit": "Unit 2 - Data Link Layer",
+    "level": "Foundational",
+    "standard": "IEEE 802.11 / Forouzan Ch. 14 / Tanenbaum Ch. 4",
+    "oneLiner": "Foundational architecture, scope, and responsibilities of the IEEE 802.11 Medium Access Control sublayer.",
+    "quickAnswer": "The IEEE 802.11 MAC sublayer is the lower sublayer of the Data Link Layer that manages access to the shared wireless radio channel, frame construction, physical addressing, collision avoidance via CSMA/CA, positive ACKs, power management, and link-layer security.",
+    "whyItMatters": "Unlike wired networks where nodes can transmit simultaneously via full-duplex switches, wireless networks share an unguided radio medium where transmitted energy blinds local receivers. The 802.11 MAC sublayer resolves this fundamental physical dilemma.",
+    "sections": {
+      "overview": "\n        <p>The <strong>IEEE 802.11 MAC Sublayer</strong> is the lower sublayer of the Data Link Layer defined by the Institute of Electrical and Electronics Engineers (IEEE) for Wireless Local Area Networks (WLANs).</p>\n        <p>According to <em>Behrouz A. Forouzan (Chapter 14)</em>, the Data Link Layer in IEEE 802.11 is divided into two distinct sublayers:</p>\n        <ul class=\"wiki-bullet-list\">\n          <li><strong>Logical Link Control (LLC - IEEE 802.2):</strong> Provides a standardized, uniform interface to Layer 3 (Network Layer), performing multiplexing and flow control independently of the underlying radio hardware.</li>\n          <li><strong>Medium Access Control (MAC - IEEE 802.11):</strong> Directly interfaces with the Physical Layer to control how wireless stations access and share the broadcast communication spectrum.</li>\n        </ul>\n\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Eight Core Responsibilities of the 802.11 MAC Sublayer</h3>\n        <ol class=\"wiki-ordered-list\">\n          <li><strong>Medium Access Control:</strong> Governs exactly when and how a wireless station is authorized to emit RF energy onto the shared channel.</li>\n          <li><strong>Framing:</strong> Encapsulates network layer packets into standardized 802.11 MAC frames with headers, addresses, and sequence numbers.</li>\n          <li><strong>Physical Addressing:</strong> Uses 48-bit IEEE MAC addresses to uniquely identify wireless stations, Access Points, and Distribution System endpoints.</li>\n          <li><strong>Collision Avoidance:</strong> Employs CSMA/CA with random backoff and virtual sensing (NAV) to prevent simultaneous transmissions before they occur.</li>\n          <li><strong>Positive Acknowledgement (ACK):</strong> Enforces explicit Layer 2 ACK frame transmission for all unicast frames to confirm successful delivery.</li>\n          <li><strong>Retransmission & ARQ:</strong> Automatically initiates retransmissions using an exponential retry countdown when expected ACKs fail to arrive.</li>\n          <li><strong>Power Management:</strong> Coordinates sleep cycles for battery-constrained mobile stations using Traffic Indication Maps (TIM).</li>\n          <li><strong>Security Support:</strong> Provides hardware-accelerated encryption and integrity protection via WPA2/WPA3 protocols.</li>\n        </ol>\n\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mt-4 mb-2\">Comparative Analysis: IEEE 802.11 MAC vs. Ethernet (IEEE 802.3) MAC</h3>\n        <table class=\"wiki-table\">\n          <thead>\n            <tr><th>Comparison Parameter</th><th>Ethernet MAC (IEEE 802.3)</th><th>Wireless LAN MAC (IEEE 802.11)</th></tr>\n          </thead>\n          <tbody>\n            <tr><td><strong>Network Medium</strong></td><td>Guided physical cables (Twisted-pair copper Cat6, Fiber).</td><td>Unguided atmospheric radio frequency waves (2.4, 5, 6 GHz).</td></tr>\n            <tr><td><strong>Channel Access Technique</strong></td><td><strong>CSMA/CD:</strong> Collision Detection (listens while transmitting).</td><td><strong>CSMA/CA:</strong> Collision Avoidance (listens before transmitting).</td></tr>\n            <tr><td><strong>Collision Feasibility</strong></td><td>Collisions easily detected via voltage shift on copper wire.</td><td>Collision detection is physically impossible (transceiver blindness).</td></tr>\n            <tr><td><strong>Address Fields</strong></td><td>Fixed 2 MAC addresses (Destination MAC, Source MAC).</td><td>Up to <strong>4 MAC addresses</strong> (DA, SA, RA, TA, BSSID).</td></tr>\n            <tr><td><strong>Layer 2 Acknowledgements</strong></td><td>No Layer 2 ACKs for unicast frames (unacknowledged service).</td><td><strong>Mandatory Layer 2 ACK</strong> frame returned after SIFS for every unicast frame.</td></tr>\n            <tr><td><strong>Frame Types</strong></td><td>Single unified Ethernet frame format.</td><td>3 distinct frame categories: <strong>Management, Control, Data</strong>.</td></tr>\n            <tr><td><strong>Handshake Support</strong></td><td>Does not use RTS/CTS control handshakes.</td><td>Supports 4-way <strong>RTS/CTS</strong> handshake to eliminate hidden stations.</td></tr>\n          </tbody>\n        </table>\n      ",
+      "howItWorks": "\n        <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Architectural Workflow of the MAC Sublayer</h3>\n        <ol class=\"wiki-ordered-list\">\n          <li><strong>Downlink Transmission:</strong> LLC passes an IP packet to the MAC sublayer &rarr; MAC appends Frame Control, Duration, Addresses, and Sequence Control &rarr; computes 32-bit CRC &rarr; executes CSMA/CA channel contention &rarr; delivers frame to Physical Layer for OFDM modulation.</li>\n          <li><strong>Uplink Reception:</strong> Physical Layer demodulates RF bitstream &rarr; passes frame to MAC sublayer &rarr; MAC calculates FCS checksum &rarr; if valid, extracts destination address &rarr; checks if frame is destined for this station &rarr; returns an ACK after SIFS &rarr; strips MAC header and passes payload to LLC.</li>\n        </ol>\n      ",
+      "technicalDetails": "\n        <div class=\"p-3 bg-blue-50 dark:bg-blue-950/40 rounded-lg border border-blue-200 dark:border-blue-800 text-xs\">\n          <h4 class=\"font-bold text-blue-800 dark:text-blue-300 mb-1\">Standard Scope</h4>\n          <p class=\"text-slate-700 dark:text-slate-300\">The original IEEE 802.11 specification was published in 1997. It defined MAC layer operations running identically across various PHY layers: Frequency Hopping Spread Spectrum (FHSS), Direct Sequence Spread Spectrum (DSSS), and Infrared (IR).</p>\n        </div>\n      ",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/WLAN_overview.svg/800px-WLAN_overview.svg.png",
+      "imageCaption": "Figure 14.9: Position and role of the IEEE 802.11 MAC Sublayer in the local network communication stack.",
+      "workedExamples": [
+        {
+          "title": "Worked Example 1: Comparing Wired vs Wireless MAC Addressing Overhead",
+          "difficulty": "Easy",
+          "problem": "An Ethernet II frame has a header overhead of 14 bytes (6B DA + 6B SA + 2B EtherType). An IEEE 802.11 data frame operating through an Access Point uses 3 address fields (6B each), a 2B Frame Control, 2B Duration, and 2B Sequence Control. Calculate the header overhead difference.",
+          "solution": "\n            <p><strong>Step 1: Calculate Ethernet Header Overhead:</strong></p>\n            <p>$$\\text{Header}_{\\text{Ethernet}} = 6 + 6 + 2 = 14\\text{ bytes}$$</p>\n            <p><strong>Step 2: Calculate 802.11 Header Overhead:</strong></p>\n            <p>$$\\text{Header}_{802.11} = 2\\,(\\text{FC}) + 2\\,(\\text{Duration}) + 3 \\times 6\\,(\\text{Addresses}) + 2\\,(\\text{SeqCtrl}) = 2 + 2 + 18 + 2 = 24\\text{ bytes}$$</p>\n            <p><strong>Step 3: Difference:</strong></p>\n            <p>$$\\Delta = 24\\text{ bytes} - 14\\text{ bytes} = 10\\text{ bytes additional overhead}$$</p>\n            <p><strong>Conclusion:</strong> The 802.11 wireless MAC header is 71% larger than Ethernet due to wireless coordination, virtual sensing durations, and BSSID routing.</p>\n          "
+        }
+      ],
+      "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800 text-xs\">\n            <h4 class=\"font-bold text-emerald-800 dark:text-emerald-300 mb-1\">Advantages</h4>\n            <ul class=\"space-y-1 text-slate-700 dark:text-slate-300\">\n              <li>&bull; Coordinates multi-station shared access without physical cables.</li>\n              <li>&bull; Mitigates collisions via CSMA/CA and backoff.</li>\n              <li>&bull; Enhances reliability with positive link-layer ACKs.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/30 rounded-lg border border-rose-200 dark:border-rose-800 text-xs\">\n            <h4 class=\"font-bold text-rose-800 dark:text-rose-300 mb-1\">Limitations</h4>\n            <ul class=\"space-y-1 text-slate-700 dark:text-slate-300\">\n              <li>&bull; Substantial MAC control frame overhead (RTS, CTS, ACK).</li>\n              <li>&bull; Hidden and exposed station performance penalties.</li>\n              <li>&bull; Non-deterministic latency under heavy contention.</li>\n            </ul>\n          </div>\n        </div>\n      ",
+      "whereUsed": [
+        "Enterprise campus Wi-Fi networks",
+        "Smartphones, laptops, and mobile wireless clients",
+        "Wireless mesh nodes and residential access points"
+      ],
+      "references": [
+        {
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking (5th Ed.), Chapter 14: Wireless LANs.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE 802.11-2020 Standard for Information Technology—Telecommunications and Information Exchange Between Systems.",
+          "url": ""
+        }
+      ]
+    },
+    "infobox": {
+      "layer": "Layer 2 (MAC Sublayer)",
+      "standard": "IEEE 802.11 / Forouzan Chapter 14",
+      "type": "MAC Sublayer Architecture",
+      "prerequisites": [
+        "wireless-lan-protocols",
+        "u2-mac-sublayer-intro"
+      ],
+      "relatedConcepts": [
+        "u2-ieee-802-11-architecture",
+        "u2-ieee-802-11-frame-formats"
+      ],
+      "compareWith": [
+        "ethernet",
+        "u2-ethernet-mac-protocol"
+      ],
+      "primaryUses": [
+        "Wireless network interface cards, Access Point controller firmware, Wi-Fi drivers"
+      ]
+    },
+    "prerequisitesList": [
+      {
+        "concept": "Data Link Layer Architecture",
+        "meaning": "Division of Layer 2 into LLC and MAC sublayers"
+      },
+      {
+        "concept": "Wireless LAN Fundamentals",
+        "meaning": "Radio frequencies, BSS, and Access Point coordination"
+      }
+    ],
+    "learningObjectives": [
+      "Define the IEEE 802.11 MAC Sublayer and understand its position within the OSI model.",
+      "Detail the 8 primary responsibilities of the wireless MAC sublayer.",
+      "Compare Ethernet MAC (802.3) and Wireless MAC (802.11) across framing, addressing, and collision handling."
+    ]
+  },
+  "dll-switching": {
+    "id": "dll-switching",
+    "title": "Introduction to Data Link Layer Switching",
+    "unit": "Unit 2 – Data Link Layer",
+    "unitId": "unit2",
+    "level": "Beginner",
+    "category": "switching",
+    "difficulty": "Core",
+    "readingTime": "20–25 min",
+    "standard": "Forouzan Ch. 15 / IEEE 802.1D",
+    "oneLiner": "Forwarding Ethernet frames between LAN stations based on destination MAC addresses to create dedicated collision domains.",
+    "quickAnswer": "Data Link Layer Switching is the process of forwarding data frames between stations in a Local Area Network (LAN) using their MAC addresses. Operating at Layer 2, a network switch examines the destination MAC address of incoming frames and forwards each frame only out the port that leads directly to the recipient, eliminating unnecessary traffic and providing dedicated collision-free bandwidth.",
+    "whyItMatters": "In legacy shared networks with repeaters or hubs, every transmission was broadcast to every connected machine, wasting cable bandwidth and causing severe signal collisions. Switching solves this fundamental limitation by microsegmenting the LAN into independent collision domains, unlocking wire-speed full-duplex communication.",
+    "prerequisitesList": [
+      {
+        "concept": "MAC Address",
+        "meaning": "48-bit burned-in physical address identifying network interface cards (NICs)"
+      },
+      {
+        "concept": "Collision Domain",
+        "meaning": "Network segment where simultaneous transmissions cause frame collisions"
+      },
+      {
+        "concept": "Unicast vs Broadcast",
+        "meaning": "One-to-one frame delivery versus one-to-all station delivery"
+      }
+    ],
+    "learningObjectives": [
+      "Define Data Link Layer switching and identify its primary layer of operation.",
+      "Explain why switching is required in modern high-density Local Area Networks.",
+      "Describe the 4-computer switch scenario (Computer A, B, C, D) and trace frame forwarding.",
+      "Contrast shared medium broadcast behavior with switched unicast frame delivery.",
+      "Evaluate the performance benefits of collision domain microsegmentation."
     ],
     "infobox": {
       "layer": "Layer 2 (Data Link Layer)",
-      "standard": "IEEE 802.1D (STP) / IEEE 802.1w (RSTP)",
-      "type": "Link Layer Switching Architecture",
+      "standard": "IEEE 802.1D / IEEE 802.3",
+      "type": "Switching & Forwarding",
       "prerequisites": [
-        "ethernet",
-        "mac-address"
+        "mac-address",
+        "ethernet-mac-sublayer"
       ],
       "relatedConcepts": [
-        "u2-learning-bridges",
-        "u2-spanning-tree-protocol",
-        "vlan"
+        "bridges",
+        "learning-bridges",
+        "forwarding-table",
+        "spanning-tree"
       ],
       "compareWith": [
-        "u2-bridges-vs-switches"
+        "network-layer-routing",
+        "hub-broadcasting"
       ],
       "primaryUses": [
-        "Enterprise LAN switches, campus networks, datacenter switching fabrics"
+        "Enterprise Local Area Networks, Campus Networks, Data Center Fabrics, Home Wi-Fi Router Switches"
       ]
     },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Spanning_tree_protocol_at_work_1.svg",
-    "imageCaption": "Figure: Spanning Tree Protocol (STP) Active Topology Pruning Redundant Loops into a Tree.",
+    "imageUrl": "https://images.openai.com/static-rsc-4/1_HGKh9T4tgrmMR2lqvPJnpUIpnJv8ShNgWMFr53dP3z_hMkMowIegvhR5vJdCdip6AEYKh0_BHZwVTbS0n31yP1KTHfProi8HyQX5X1vJaY0Sj0UHz6z4xQ2OouIeKWcaTGbOPR9r8APc6bmOj4-EPhRjInFZPHtgRf9AXUY8rGs2i74o8sBTkupVooap7r?purpose=fullsize",
+    "imageCaption": "Figure: Data Link Layer Switching & Multi-Port Ethernet Frame Forwarding (Host A to Host C).",
     "sections": {
-      "overview": "\n      <p><strong>Data Link Layer Switching</strong> connects multiple LAN segments at Layer 2. A switch inspects incoming frames, inspects their MAC addresses, and forwards frames strictly to the designated output port rather than broadcasting them indiscriminately.</p>\n      <p>To operate autonomously, switches build an internal <strong>MAC Address Table (Forwarding Database)</strong> via backward learning, and execute the <strong>Spanning Tree Protocol (STP - IEEE 802.1D)</strong> to disable redundant physical loops that would cause broadcast radiation storms.</p>\n    ",
-      "eli10": "Imagine a school receptionist. Whenever a student brings a note, the receptionist notes down what classroom that student came from. Soon, the receptionist knows exactly which door leads to which student, and can deliver notes directly without having to yell over the school intercom every time!",
-      "analogy": "Like a smart postal sorting office sorting envelopes into specific postal delivery trucks rather than sending every letter to every city in the country.",
-      "howItWorks": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">The Three Switch Forwarding Actions</h3>\n      <ol class=\"wiki-ordered-list\">\n        <li><strong>Filtering:</strong> If the destination MAC is learned to be on the exact same port the frame arrived on, the frame is dropped (filtered).</li>\n        <li><strong>Forwarding:</strong> If the destination MAC is in the table on a different port, the frame is transmitted solely out that specific port.</li>\n        <li><strong>Flooding:</strong> If the destination MAC is unknown or is the broadcast address (FF:FF:FF:FF:FF:FF), the frame is transmitted out all ports except the arrival port.</li>\n      </ol>\n    ",
-      "diagram": "",
-      "technicalDetails": "\n      <p>STP elects a <strong>Root Bridge</strong> (lowest Bridge ID = Priority + MAC), computes shortest root paths, and places redundant ports into a <strong>Blocking State</strong>, preventing bridge loops while maintaining automatic failover redundancy.</p>\n    ",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> How does a transparent switch learn MAC addresses?<br><br><strong>Answer:</strong> By inspecting the <em>Source MAC address</em> of every arriving frame and recording the incoming physical port number and a timestamp in its MAC address table (CAM table).",
-        "level2": "<strong>Problem:</strong> What is a broadcast storm and how does STP prevent it?<br><br><strong>Answer:</strong> When switches have physical loops, broadcast frames circulate infinitely in both directions, multiplying exponentially until switch CPUs crash and network bandwidth is 100% saturated. STP calculates a loop-free spanning tree and blocks redundant links.",
-        "level3": "<strong>Analysis:</strong> Contrast a Bridge and a Switch.<br><br><strong>Answer:</strong> A traditional bridge is software-based with few ports (2 to 4). A modern switch is hardware-based using custom ASIC chips, provides high port density (24 to 48 ports), and performs wire-speed simultaneous parallel switching."
-      },
-      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Action</th><th>Condition</th><th>Outcome</th></tr></thead>\n        <tbody>\n          <tr><td>Forward</td><td>Destination MAC found in table on Port $Y$ ($Y \\neq X$)</td><td>Frame sent solely out Port $Y$.</td></tr>\n          <tr><td>Filter</td><td>Destination MAC found on Port $X$ (same port)</td><td>Frame dropped safely; no action needed.</td></tr>\n          <tr><td>Flood</td><td>Destination MAC unknown or Broadcast</td><td>Frame sent out all ports except arrival port.</td></tr>\n        </tbody>\n      </table>\n    ",
+      "overview": "\n      <p class=\"lead\"><strong>Data Link Layer Switching</strong> is the process of forwarding data frames between interconnected devices in a Local Area Network (LAN) using their hardware <strong>MAC (Media Access Control) addresses</strong>.</p>\n      \n      <p>A network switch operates primarily at the <strong>Data Link Layer (Layer 2)</strong> of the OSI Reference Model. When an Ethernet frame arrives on any switch port, the switch inspects its header, reads the <strong>48-bit destination MAC address</strong>, queries its internal forwarding database (FDB), and directs the frame exclusively out the specific port leading to the destination station.</p>\n\n      <div class=\"wiki-callout tip my-4\">\n        <div class=\"callout-header\"><i class=\"fa-solid fa-lightbulb\"></i> Why is Switching Needed?</div>\n        <p>In a network containing dozens or hundreds of devices, transmitting every frame to every single computer creates massive network congestion, wastes processing cycles on non-target network interfaces, and poses serious eavesdropping security risks. <strong>Switching completely resolves this problem</strong> by selectively forwarding frames only to the required destination port whenever the destination location is known.</p>\n      </div>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">Concrete Illustrative Example: 4 Connected Computers</h4>\n      <p>Suppose four workstations are connected to a 4-port Ethernet switch:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li><strong>Computer A</strong> connected to Port 1</li>\n        <li><strong>Computer B</strong> connected to Port 2</li>\n        <li><strong>Computer C</strong> connected to Port 3</li>\n        <li><strong>Computer D</strong> connected to Port 4</li>\n      </ul>\n      <p class=\"mt-2 text-xs leading-relaxed\">\n        When <strong>Computer A</strong> transmits an Ethernet frame addressed to <strong>Computer C</strong>:\n        <br>1. The switch receives the frame on Port 1.\n        <br>2. It reads the destination MAC address corresponding to Computer C.\n        <br>3. It looks up its MAC address table, identifies that Computer C resides on Port 3, and forwards the frame <strong>through Port 3 only</strong>.\n        <br>4. Computers B and D on Ports 2 and 4 receive zero traffic, meaning they can simultaneously exchange data without interference!\n      </p>\n    ",
+      "eli10": "Imagine a post office with private delivery mailboxes. Instead of shouting every letter through a megaphone to the whole town (like a hub does), the switch reads the recipient's name and places the letter directly into their private mailbox.",
+      "analogy": "A switch acts like a skilled telephone switchboard operator who plugs the caller's cord directly into the callee's jack, creating a private direct conversation line without broadcasting voice to every house in town.",
+      "howItWorks": "\n      <ol class=\"list-decimal pl-5 space-y-2 text-xs\">\n        <li><strong>Frame Arrival:</strong> An Ethernet frame enters a switch interface port. The physical layer PHY serializes the bits into the port buffer.</li>\n        <li><strong>Preamble Stripping & Checksum Verification:</strong> The switch synchronizes using the preamble/SFD and validates the Frame Check Sequence (CRC-32) trailer to ensure transmission integrity. Damaged frames are dropped.</li>\n        <li><strong>Source Address Learning:</strong> The switch inspects the 48-bit Source MAC address and maps it to the receiving port inside its Content Addressable Memory (CAM) table, resetting the aging timer.</li>\n        <li><strong>Destination Lookup & Decision:</strong> The switch reads the Destination MAC:\n          <ul class=\"list-disc pl-5 mt-1 space-y-1\">\n            <li>If the destination resides on a <em>different port</em>, the frame is switched directly to that egress port (Unicast Forwarding).</li>\n            <li>If the destination is on the <em>same port</em> as the ingress, the frame is dropped (Filtering).</li>\n            <li>If the destination is <em>unknown or broadcast</em>, the frame is copied to all active ports except the arrival port (Flooding).</li>\n          </ul>\n        </li>\n      </ol>\n    ",
+      "technicalDetails": "\n      <p class=\"text-xs leading-relaxed\">Data Link Layer switches employ specialized hardware architectures to achieve high throughput and microsecond latency:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li><strong>ASIC (Application-Specific Integrated Circuit):</strong> Unlike software-based bridges, modern switches execute MAC table lookups and matrix crossbar switching using dedicated silicon hardware at line rate.</li>\n        <li><strong>TCAM (Ternary Content Addressable Memory):</strong> Enables single-clock-cycle table lookups for $O(1)$ search complexity regardless of table size.</li>\n        <li><strong>Switching Methods:</strong>\n          <ul class=\"list-disc pl-5 mt-1\">\n            <li><em>Store-and-Forward:</em> Buffers the entire frame and verifies the FCS CRC before forwarding. Eliminates error propagation.</li>\n            <li><em>Cut-Through:</em> Reads only the first 6 bytes (destination MAC) and begins transmission immediately, achieving sub-microsecond latency.</li>\n            <li><em>Fragment-Free:</em> Reads the first 64 bytes (collision window) to filter runt frames before forwarding.</li>\n          </ul>\n        </li>\n      </ul>\n    ",
+      "workedExamples": [
+        {
+          "title": "Example 1: Basic Unicast Forwarding Across Switch Ports",
+          "difficulty": "Beginner",
+          "problem": "In an 8-port switch, Station A (Port 1) sends a 1500-byte frame to Station B (Port 4). The switch table contains Station B on Port 4. Which ports receive the frame?",
+          "solution": "The switch inspects the destination MAC, finds an exact match for Port 4 in its CAM table, and forwards the frame exclusively through Port 4. Ports 2, 3, 5, 6, 7, and 8 receive zero bits. This isolates collision domains and allows concurrent traffic on other ports."
+        },
+        {
+          "title": "Example 2: Throughput Gain from Microsegmentation",
+          "difficulty": "Intermediate",
+          "problem": "A legacy 100 Mbps hub connects 10 workstations. A modern 100 Mbps full-duplex switch replaces it. Compare the total aggregate theoretical network capacity.",
+          "solution": "With a shared hub, all 10 stations share a single 100 Mbps half-duplex collision domain (aggregate capacity = 100 Mbps). With a 10-port full-duplex switch, each station enjoys a dedicated 100 Mbps send + 100 Mbps receive link (200 Mbps full-duplex). Total aggregate theoretical throughput across 5 concurrent conversations = 5 × 200 Mbps = 1,000 Mbps (1 Gbps) — a 10x capacity multiplier!"
+        }
+      ],
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Advantage</th><th>Disadvantage / Limitation</th></tr></thead>\n        <tbody>\n          <tr><td><strong>Dedicated Bandwidth:</strong> Eliminates shared collisions; every port is an isolated collision domain.</td><td><strong>Cost:</strong> Switch hardware is more expensive than basic hubs or repeaters.</td></tr>\n          <tr><td><strong>Full-Duplex Mode:</strong> Stations can transmit and receive simultaneously at 200% wire speed.</td><td><strong>Broadcast Domain Exposure:</strong> Does not stop Layer 2 broadcast storms without VLANs or routers.</td></tr>\n          <tr><td><strong>Plug-and-Play Transparency:</strong> Stations require zero special software configuration to connect.</td><td><strong>Bridging Loops:</strong> Redundant links create catastrophic broadcast loops if STP is not enabled.</td></tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Cisco Catalyst switches",
-        "Enterprise campus backbones",
-        "Cloud datacenter Top-of-Rack (ToR) switches"
+        "Enterprise Campus Networks: Cisco Catalyst and Arista campus core and edge switches.",
+        "Cloud Data Centers: High-bandwidth spine-and-leaf switches handling 100G/400G Ethernet.",
+        "Residential Gateways: Integrated 4-port Gigabit Ethernet LAN switches inside Wi-Fi routers."
       ],
       "quiz": [
         {
-          "question": "Which field in an Ethernet frame does a switch inspect to populate its MAC address forwarding table?",
+          "question": "At which layer of the OSI model does a standard network switch primarily operate?",
           "options": [
-            "Source MAC Address",
-            "Destination MAC Address",
-            "EtherType field",
-            "FCS CRC trailer"
+            "Physical Layer (Layer 1)",
+            "Data Link Layer (Layer 2)",
+            "Network Layer (Layer 3)",
+            "Transport Layer (Layer 4)"
           ],
-          "correct": 0,
-          "explanation": "Switches perform backward learning by inspecting the Source MAC address of incoming frames."
+          "correct": 1,
+          "explanation": "Standard Ethernet switches operate at Data Link Layer (Layer 2), inspecting and switching frames based on 48-bit MAC addresses."
+        },
+        {
+          "question": "Why does an Ethernet switch forward unicast frames only to the specific destination port?",
+          "options": [
+            "To encrypt the data payload",
+            "To eliminate unnecessary traffic and isolate collision domains",
+            "To assign dynamic IP addresses",
+            "To prevent TCP SYN flood attacks"
+          ],
+          "correct": 1,
+          "explanation": "Forwarding only to the target port prevents wasting bandwidth on unrelated segments and creates separate, isolated collision domains."
         }
       ],
       "references": [
         {
-          "cite": "IEEE Std 802.1D / Tanenbaum Chapter 4.8 / Forouzan Chapter 15.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 15: Connecting LANs.",
+          "url": ""
+        },
+        {
+          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 4: Data Link Layer Switching.",
+          "url": ""
+        },
+        {
+          "cite": "IEEE Std 802.1D: Media Access Control (MAC) Bridges.",
           "url": ""
         }
       ]
@@ -8632,83 +9691,119 @@ var TOPICS_U2_SYLLABUS = {
   },
   "network-devices": {
     "id": "network-devices",
-    "title": "Networking Devices & Operational Layers",
+    "title": "Introduction to Networking Devices",
     "unit": "Unit 2 – Data Link Layer",
     "unitId": "unit2",
-    "topicNumber": 10,
-    "subtopicNumber": 0,
-    "whyItMatters": "Understanding the exact OSI layer at which network hardware operates—Repeaters, Hubs, Bridges, Switches, Routers, and Gateways—is the single most foundational concept in networking engineering.",
+    "level": "Beginner",
+    "category": "devices",
+    "difficulty": "Core",
+    "readingTime": "20–25 min",
+    "standard": "Forouzan Ch. 15 / Tanenbaum Ch. 1 & 4",
+    "oneLiner": "Hardware connecting components that enable data transmission, internetworking, and domain management across the OSI stack.",
+    "quickAnswer": "Networking devices are dedicated hardware components used to connect computers, servers, and peripherals, transmit digital signals, and enable communication within local networks, across separate enterprise subnets, and to the global Internet. Each device functions at a specific layer of the OSI model: repeaters and hubs regenerate signals at Layer 1; bridges and switches forward frames via MAC addresses at Layer 2; routers direct packets via IP addresses at Layer 3; and gateways translate protocols across Layers 4 through 7.",
+    "whyItMatters": "Without connecting devices, modern computer networks would be restricted to isolated point-to-point cables. Networking devices create scalable topologies, eliminate signal attenuation, microsegment bandwidth, and establish global internetworking.",
     "prerequisitesList": [
       {
         "concept": "OSI 7-Layer Model",
-        "meaning": "Physical, Data Link, Network, Transport, and Application layers"
+        "meaning": "Theoretical reference model standardizing network communication into 7 modular tiers"
       },
       {
-        "concept": "Collision vs Broadcast Domains",
-        "meaning": "Boundary management between network segments"
+        "concept": "Signal Attenuation",
+        "meaning": "Loss of signal strength and integrity over long physical cable distances"
+      },
+      {
+        "concept": "Collision & Broadcast Domains",
+        "meaning": "Boundaries of signal interference versus broadcast packet reach"
       }
     ],
     "learningObjectives": [
-      "Identify the operational layer of Repeaters, Hubs, Bridges, Switches, Routers, and Gateways.",
-      "Differentiate between collision domains and broadcast domains.",
-      "Master the comparative device functionality matrix."
+      "Define networking devices and explain their fundamental role in computer communication.",
+      "Enumerate the six primary connecting devices: Repeater, Hub, Bridge, Switch, Router, Gateway.",
+      "Map each networking device to its primary operating layer in the OSI Reference Model.",
+      "Explain the distinction between physical signal repeating, Layer 2 frame forwarding, Layer 3 packet routing, and multi-layer protocol translation."
     ],
     "infobox": {
-      "layer": "Layers 1, 2, 3 & 7",
-      "standard": "IEEE 802 / IETF Internet Standards",
-      "type": "Hardware Architecture Hub",
+      "layer": "Layers 1 through 7 (Cross-Layer Architecture)",
+      "standard": "IEEE 802 / IETF / ISO 7498-1",
+      "type": "Hardware Architecture & Internetworking",
       "prerequisites": [
-        "u2-dll-intro",
-        "dll-switching"
+        "osi-model",
+        "mac-address",
+        "ip-addressing"
       ],
       "relatedConcepts": [
-        "u2-networking-device-repeaters",
-        "u2-networking-device-switches",
-        "u2-networking-device-routers"
+        "repeaters",
+        "hubs",
+        "bridges",
+        "switches",
+        "routers",
+        "gateways"
       ],
       "compareWith": [
-        "u2-comparison-networking-devices"
+        "transmission-media",
+        "network-cables"
       ],
       "primaryUses": [
-        "Campus cabling, routing topology design, CCNA certification"
+        "LAN/WAN Infrastructure, Enterprise Campus Networks, Data Centers, Home Internet Access"
       ]
     },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Router_on_a_stick.png",
-    "imageCaption": "Figure: Multi-Layer Networking Device Interconnection: Layer 2 Switches with Layer 3 Routers.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Ethernet-broadcast-collision_%28hub%29.svg",
+    "imageCaption": "Figure: Networking Devices Across OSI Layers: Repeaters/Hubs (L1), Bridges/Switches (L2), Routers (L3), Gateways (L7).",
     "sections": {
-      "overview": "\n      <p>Networking devices connect communicating endpoints across physical, link, and network boundaries. Each device functions at a specific layer of the OSI reference model, dictating its intelligence, addressing scheme, and domain boundaries.</p>\n    ",
-      "eli10": "Think of mail delivery: A Hub is a loudspeaker that echoes your voice down the hall (Layer 1). A Switch is an office clerk who passes envelopes to the right desk in the building (Layer 2). A Router is a delivery truck that drives letters across highways to other cities (Layer 3).",
-      "analogy": "Graduating levels of diplomatic communication: physical wire cables &rarr; local town courier &rarr; interstate postal service &rarr; international embassy translator.",
-      "howItWorks": "\n      <h3 class=\"text-base font-bold text-gray-900 dark:text-white mb-2\">Master Device & Layer Mapping Matrix</h3>\n      <table class=\"wiki-table\">\n        <thead>\n          <tr>\n            <th>Device</th>\n            <th>OSI Operating Layer</th>\n            <th>Data Unit</th>\n            <th>Addressing Used</th>\n            <th>Collision Domain</th>\n            <th>Broadcast Domain</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td><strong>Repeater</strong></td>\n            <td>Layer 1 (Physical)</td>\n            <td>Bits</td>\n            <td>None</td>\n            <td>Extends 1 domain</td>\n            <td>1 domain</td>\n          </tr>\n          <tr>\n            <td><strong>Hub</strong></td>\n            <td>Layer 1 (Physical)</td>\n            <td>Bits</td>\n            <td>None</td>\n            <td>Single shared domain</td>\n            <td>1 domain</td>\n          </tr>\n          <tr>\n            <td><strong>Bridge</strong></td>\n            <td>Layer 2 (Data Link)</td>\n            <td>Frame</td>\n            <td>MAC Address</td>\n            <td>Separates domains per port</td>\n            <td>1 domain</td>\n          </tr>\n          <tr>\n            <td><strong>Switch</strong></td>\n            <td>Layer 2 (Data Link)</td>\n            <td>Frame</td>\n            <td>MAC Address</td>\n            <td>Separates domains per port</td>\n            <td>1 domain (unless VLANs)</td>\n          </tr>\n          <tr>\n            <td><strong>Router</strong></td>\n            <td>Layer 3 (Network)</td>\n            <td>Packet</td>\n            <td>IP Address</td>\n            <td>Separates domains per port</td>\n            <td>Separates domains per port</td>\n          </tr>\n          <tr>\n            <td><strong>Gateway</strong></td>\n            <td>Layers 4–7 (App)</td>\n            <td>Message</td>\n            <td>Protocol Specific</td>\n            <td>Isolated</td>\n            <td>Isolated</td>\n          </tr>\n        </tbody>\n      </table>\n    ",
-      "diagram": "",
-      "technicalDetails": "\n      <p>Collision domains are bounded by Layer 2 devices (Switches/Bridges) and Layer 3 devices (Routers). Broadcast domains are strictly bounded by Layer 3 devices (Routers) and Layer 2 VLAN boundaries.</p>\n    ",
-      "workedExamples": {
-        "level1": "<strong>Question:</strong> How many collision domains and broadcast domains does a 24-port Layer 2 switch have?<br><br><strong>Answer:</strong> A 24-port switch creates <strong>24 separate collision domains</strong> (1 per port) and <strong>1 single broadcast domain</strong>.",
-        "level2": "<strong>Problem:</strong> How many collision domains and broadcast domains does a router with 4 Ethernet interfaces have?<br><br><strong>Answer:</strong> A router with 4 interfaces creates <strong>4 separate collision domains</strong> and <strong>4 separate broadcast domains</strong>.",
-        "level3": "<strong>Analysis:</strong> Why does a Hub create a single collision domain whereas a Switch separates collision domains?<br><br><strong>Answer:</strong> A Hub is a dumb Layer 1 multiport repeater that electrically replicates incoming bits onto all other ports simultaneously. A Switch is a Layer 2 device that buffers frames in memory and switches them independently between ports, so stations on different ports can transmit concurrently without colliding."
-      },
-      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Device</th><th>Primary Function</th><th>Limitation</th></tr></thead>\n        <tbody>\n          <tr><td>Hub / Repeater</td><td>Signal regeneration and cabling fanout.</td><td>Shares collisions across all connected nodes.</td></tr>\n          <tr><td>Switch</td><td>High-speed micro-segmentation and frame forwarding.</td><td>Floods broadcasts across all ports.</td></tr>\n          <tr><td>Router</td><td>Logical IP path selection and network isolation.</td><td>Slower per-packet routing lookup than switching.</td></tr>\n        </tbody>\n      </table>\n    ",
+      "overview": "\n      <p class=\"lead\"><strong>Networking devices</strong> are hardware components used to connect computers, servers, mobile terminals, and peripheral devices, transmit digital signals, and enable communication across different segments of a network.</p>\n\n      <p>In modern computer networks, connecting devices serve three paramount architectural functions:</p>\n      <ul class=\"list-disc pl-5 space-y-1.5 text-xs\">\n        <li><strong>Local Communication:</strong> Connecting workstations within a Local Area Network (LAN) to share file storage, printers, and compute resources.</li>\n        <li><strong>Inter-Network Connectivity:</strong> Bridging disparate subnets and wide area connections across branch offices and corporate campuses.</li>\n        <li><strong>Internet Access:</strong> Directing traffic across Internet Service Provider (ISP) boundaries to access web servers, cloud services, and external endpoints.</li>\n      </ul>\n\n      <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200 mt-4 mb-2\">The Six Primary Networking Devices</h4>\n      <p class=\"text-xs\">Each connecting device performs a dedicated operational task within the network architecture:</p>\n      <div class=\"grid grid-cols-1 md:grid-cols-3 gap-2.5 my-3 text-xs\">\n        <div class=\"p-2.5 rounded-lg bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800\">\n          <strong class=\"text-amber-800 dark:text-amber-300 block mb-1\">1. Repeater (Layer 1)</strong>\n          <span class=\"text-[11px] text-slate-600 dark:text-slate-400\">Regenerates and retimes weak physical electrical/optical signals to extend transmission distance.</span>\n        </div>\n        <div class=\"p-2.5 rounded-lg bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800\">\n          <strong class=\"text-red-800 dark:text-red-300 block mb-1\">2. Hub (Layer 1)</strong>\n          <span class=\"text-[11px] text-slate-600 dark:text-slate-400\">A multiport repeater that blindly broadcasts incoming signals out to all other connected ports.</span>\n        </div>\n        <div class=\"p-2.5 rounded-lg bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800\">\n          <strong class=\"text-blue-800 dark:text-blue-300 block mb-1\">3. Bridge (Layer 2)</strong>\n          <span class=\"text-[11px] text-slate-600 dark:text-slate-400\">Connects 2–4 LAN segments, forwards frames via MAC addresses, and isolates collision domains.</span>\n        </div>\n        <div class=\"p-2.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800\">\n          <strong class=\"text-emerald-800 dark:text-emerald-300 block mb-1\">4. Switch (Layer 2)</strong>\n          <span class=\"text-[11px] text-slate-600 dark:text-slate-400\">A high-performance multiport bridge with dedicated hardware ASICs providing microsegmented wire-speed forwarding.</span>\n        </div>\n        <div class=\"p-2.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800\">\n          <strong class=\"text-indigo-800 dark:text-indigo-300 block mb-1\">5. Router (Layer 3)</strong>\n          <span class=\"text-[11px] text-slate-600 dark:text-slate-400\">Connects distinct IP networks, determines optimal routing paths, and bounds broadcast domains.</span>\n        </div>\n        <div class=\"p-2.5 rounded-lg bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800\">\n          <strong class=\"text-purple-800 dark:text-purple-300 block mb-1\">6. Gateway (L4–L7)</strong>\n          <span class=\"text-[11px] text-slate-600 dark:text-slate-400\">A multi-layer translator converting data formats, architectures, or protocols between incompatible network systems.</span>\n        </div>\n      </div>\n    ",
+      "eli10": "Think of a highway system: a repeater is like a roadside fuel station keeping cars running; a hub is a town square where everyone hears everyone shout; a switch is an automated toll road with private direct lanes; a router is a highway interchange between different states; and a gateway is international customs translating foreign passports.",
+      "analogy": "Like communication tools in an international conference: repeaters are audio microphones; hubs are megaphones; switches are private telephone lines; routers are mail delivery vans between cities; and gateways are multi-language diplomatic interpreters.",
+      "howItWorks": "\n      <p class=\"text-xs leading-relaxed\">The modular hierarchy of networking devices relies on progressive protocol inspection:</p>\n      <ol class=\"list-decimal pl-5 space-y-1.5 text-xs\">\n        <li><strong>Physical Layer Devices (Repeaters, Hubs):</strong> Do not inspect any headers. They treat transmissions purely as raw electrical voltages, radio waves, or light pulses. They lack intelligence to read MAC or IP addresses.</li>\n        <li><strong>Data Link Layer Devices (Bridges, Switches):</strong> Reassemble bitstreams into discrete Ethernet frames. They inspect the 48-bit hardware Source and Destination MAC addresses in the Layer 2 header to filter local traffic and direct unicast frames.</li>\n        <li><strong>Network Layer Devices (Routers):</strong> Strip the Layer 2 frame header to reveal the Layer 3 IP packet. They inspect the 32-bit (IPv4) or 128-bit (IPv6) logical destination IP address, consult routing tables, decrement TTL, and encapsulate the packet into a new Layer 2 frame for the next hop.</li>\n        <li><strong>Upper-Layer Gateways:</strong> Reconstruct full application-level data to translate between divergent protocol syntaxes (e.g., SIP to H.323, or IPv4 NAT64 to IPv6).</li>\n      </ol>\n    ",
+      "technicalDetails": "\n      <p class=\"text-xs leading-relaxed\">Comparative performance metrics across devices:</p>\n      <ul class=\"list-disc pl-5 space-y-1 text-xs\">\n        <li><strong>Throughput:</strong> Hubs offer shared half-duplex bandwidth (e.g., 100 Mbps shared by all ports). Switches offer non-blocking full-duplex backplanes (e.g., 48 Gbps wire-speed across 24 Gigabit ports).</li>\n        <li><strong>Latency:</strong> Repeaters introduce negligible bit-level propagation delay ($< 1\\;\\mu\\text{s}$). Store-and-forward switches and routers introduce packet queuing and lookup delay ($5\\text{--}50\\;\\mu\\text{s}$). Application gateways introduce milliseconds of parsing and translation overhead.</li>\n      </ul>\n    ",
+      "workedExamples": [
+        {
+          "title": "Example: Matching Requirements to Network Devices",
+          "difficulty": "Beginner",
+          "problem": "Identify which networking device is required in each scenario:\n1. Extending an Ethernet cable run beyond 100 meters without changing the LAN.\n2. Connecting 20 office PCs so they do not collide with each other.\n3. Connecting the corporate office network to the Internet ISP.\n4. Translating a legacy serial industrial Modbus network to modern IP Ethernet.",
+          "solution": "1. Scenario 1 requires a **Repeater** (or switch) to regenerate the degraded electrical signals.\n2. Scenario 2 requires an **Ethernet Switch** to provide microsegmentation and dedicated collision domains.\n3. Scenario 3 requires a **Router** to route packets between private IP and public ISP networks.\n4. Scenario 4 requires an **Industrial Gateway** to perform protocol and data format translation."
+        }
+      ],
+      "advantagesLimitations": "\n      <table class=\"wiki-table\">\n        <thead><tr><th>Networking Device Class</th><th>Primary Architectural Strength</th><th>Primary Architectural Constraint</th></tr></thead>\n        <tbody>\n          <tr><td><strong>L1 (Repeaters, Hubs)</strong></td><td>Zero configuration; lowest cost; minimal hardware delay.</td><td>Blind repetition propagates noise, collisions, and security risks.</td></tr>\n          <tr><td><strong>L2 (Bridges, Switches)</strong></td><td>Eliminates collisions; wire-speed dedicated bandwidth.</td><td>Does not separate broadcast domains without VLANs.</td></tr>\n          <tr><td><strong>L3 (Routers)</strong></td><td>Connects disparate networks; blocks broadcast storms; path optimization.</td><td>More expensive; requires IP subnet planning; packet lookup delay.</td></tr>\n          <tr><td><strong>L4–L7 (Gateways)</strong></td><td>Enables communication between totally incompatible architectures.</td><td>High computational overhead and protocol translation latency.</td></tr>\n        </tbody>\n      </table>\n    ",
       "whereUsed": [
-        "Campus LAN infrastructure",
-        "Home Wi-Fi gateway routers",
-        "Internet Service Provider core routing backbones"
+        "Enterprise Data Centers: Multi-tier switching fabrics and spine-and-leaf core routers.",
+        "Campus LANs: PoE access switches connecting PCs, Wi-Fi 6 access points, and IP security cameras.",
+        "Home & Small Office: All-in-one wireless routers combining router, switch, access point, and NAT gateway."
       ],
       "quiz": [
         {
-          "question": "Which of the following networking devices breaks both collision domains AND broadcast domains?",
+          "question": "Which networking device is responsible for interconnecting different IP networks using logical addresses?",
           "options": [
-            "Router",
-            "Switch",
             "Hub",
+            "Switch",
+            "Router",
             "Repeater"
           ],
-          "correct": 0,
-          "explanation": "Routers operate at Layer 3 (Network Layer) and break both collision domains and broadcast domains at every interface."
+          "correct": 2,
+          "explanation": "A router operates at the Network Layer (Layer 3) and uses logical IP addresses to forward packets across different networks."
+        },
+        {
+          "question": "What is the primary difference between a hub and an Ethernet switch?",
+          "options": [
+            "A hub routes IP packets while a switch routes frames",
+            "A hub repeats signals blindly to all ports while a switch forwards frames selectively based on MAC addresses",
+            "A hub operates on fiber optic cables while a switch only operates on copper",
+            "A hub provides full-duplex communication while a switch provides half-duplex"
+          ],
+          "correct": 1,
+          "explanation": "A hub is a Layer 1 broadcast device that repeats incoming signals to all ports, whereas a switch is a Layer 2 intelligent device that forwards frames only to the target MAC address port."
         }
       ],
       "references": [
         {
-          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Ed., Chapter 15.",
+          "cite": "Behrouz A. Forouzan, Data Communications and Networking, 4th Edition, Chapter 15: Connecting Devices.",
+          "url": ""
+        },
+        {
+          "cite": "Andrew S. Tanenbaum & David J. Wetherall, Computer Networks, 6th Edition, Chapter 1 & 4.",
+          "url": ""
+        },
+        {
+          "cite": "Cisco Certified Network Associate (CCNA) Study Guide: Network Fundamentals.",
           "url": ""
         }
       ]
@@ -8920,6 +10015,19 @@ var TOPICS_U2_SYLLABUS = {
   }
 };
 
-if (typeof window !== 'undefined') window.TOPICS_U2_SYLLABUS = TOPICS_U2_SYLLABUS;
-if (typeof global !== 'undefined') global.TOPICS_U2_SYLLABUS = TOPICS_U2_SYLLABUS;
-if (typeof module !== 'undefined' && module.exports) module.exports = TOPICS_U2_SYLLABUS;
+if (typeof window !== 'undefined') {
+  window.TOPICS_U2_SYLLABUS = TOPICS_U2_SYLLABUS;
+  if (window.TOPIC_REPOSITORY) {
+    Object.assign(window.TOPIC_REPOSITORY, TOPICS_U2_SYLLABUS);
+  }
+}
+if (typeof global !== 'undefined') {
+  global.TOPICS_U2_SYLLABUS = TOPICS_U2_SYLLABUS;
+  if (global.TOPIC_REPOSITORY) {
+    Object.assign(global.TOPIC_REPOSITORY, TOPICS_U2_SYLLABUS);
+  }
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = TOPICS_U2_SYLLABUS;
+}
