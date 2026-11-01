@@ -123,3 +123,4 @@ if (!found) {
 
 fs.writeFileSync(filePath, code, 'utf8');
 console.log("Successfully enriched u2-numerical-problems with Problems 28 to 36!");
+
