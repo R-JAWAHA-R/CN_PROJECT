@@ -546,7 +546,7 @@ var TOPICS_U2 = {
     },
     "prevTopicId": "bit-stuffing",
     "nextTopicId": "parity",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/02/CRC8-gen.gif",
+    "imageUrl": "assets/images/topic1/error-control-taxonomy.svg",
     "imageCaption": "Figure: Error Detection Techniques: Parity Check, Checksum, and Cyclic Redundancy Check (CRC)."
   },
   "parity": {
@@ -652,7 +652,7 @@ var TOPICS_U2 = {
     },
     "prevTopicId": "error-detection",
     "nextTopicId": "checksum",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Hamming%287%2C4%29.svg",
+    "imageUrl": "assets/images/topic1/parity-generation-checking.svg",
     "imageCaption": "Figure: Simple Parity & Two-Dimensional Parity Check Architecture."
   },
   "checksum": {
@@ -759,7 +759,7 @@ var TOPICS_U2 = {
     },
     "prevTopicId": "parity",
     "nextTopicId": "hamming-code",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/02/CRC8-gen.gif",
+    "imageUrl": "assets/images/topic1/internet-checksum-calculation.svg",
     "imageCaption": "Figure: Internet Checksum 16-bit 1's Complement Addition Architecture."
   },
   "hamming-code": {
@@ -910,7 +910,7 @@ var TOPICS_U2 = {
     },
     "prevTopicId": "checksum",
     "nextTopicId": "crc",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Hamming%287%2C4%29.svg",
+    "imageUrl": "assets/images/topic1/hamming-code-7-4-matrix.svg",
     "imageCaption": "Figure: Hamming(7,4) Single Error Correction, Double Error Detection (SECDED) Venn Diagram."
   },
   "crc": {
@@ -1061,7 +1061,7 @@ var TOPICS_U2 = {
     },
     "prevTopicId": "hamming-code",
     "nextTopicId": "flow-control",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/02/CRC8-gen.gif",
+    "imageUrl": "assets/images/topic1/crc-modulo-2-division.svg",
     "imageCaption": "Figure: Cyclic Redundancy Check (CRC) Polynomial Division Hardware Architecture with Linear Feedback Shift Registers."
   },
   "flow-control": {
@@ -1383,7 +1383,7 @@ var TOPICS_U2 = {
     },
     "prevTopicId": "stop-and-wait",
     "nextTopicId": "go-back-n",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/54/Selective_repeat_transmit_window_example.png",
+    "imageUrl": "assets/images/topic2/sliding-window-frame-sequence.svg",
     "imageCaption": "Figure: General Sliding Window Protocol Architecture: Send Window, Receive Window, and Buffer Slots."
   },
   "go-back-n": {
@@ -2078,6 +2078,7 @@ var TOPICS_U2 = {
     "imageCaption": "Figure: Virtual LANs (IEEE 802.1Q): Logical Network Segmentation within Physical Switches."
   }
 };
+
 if (typeof window !== "undefined") window.TOPICS_U2 = TOPICS_U2;
 if (typeof global !== "undefined") global.TOPICS_U2 = TOPICS_U2;
 if (typeof module !== "undefined" && module.exports) {
