@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <marker id="arrG" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#059669"/></marker>
+    <marker id="arrR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#DC2626"/></marker>
+    <marker id="arrB" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#2563EB"/></marker>
+  </defs>
+  <style>
+    text { font-family: 'Segoe UI', Arial, sans-serif; }
+    .title { font-size: 18px; font-weight: 700; fill: #1E293B; }
+    .subtitle { font-size: 13px; font-weight: 600; fill: #475569; }
+    .label { font-size: 11px; fill: #334155; }
+    .small { font-size: 10px; fill: #64748B; }
+    .node { stroke-width: 2; }
+  </style>
+  <rect width="800" height="500" fill="#FFFFFF" rx="8"/>
+  <text x="400" y="32" text-anchor="middle" class="title">Traffic-Aware Routing</text>
+  <text x="400" y="52" text-anchor="middle" class="small">Routes chosen dynamically based on current traffic load</text>
+
+  <!-- Source Node -->
+  <rect x="40" y="195" width="80" height="45" rx="8" fill="#DBEAFE" stroke="#2563EB" class="node"/>
+  <text x="80" y="215" text-anchor="middle" class="label" font-weight="600">Source</text>
+  <text x="80" y="230" text-anchor="middle" class="small" fill="#2563EB">Host A</text>
+
+  <!-- Destination Node -->
+  <rect x="680" y="195" width="80" height="45" rx="8" fill="#D1FAE5" stroke="#059669" class="node"/>
+  <text x="720" y="215" text-anchor="middle" class="label" font-weight="600">Destination</text>
+  <text x="720" y="230" text-anchor="middle" class="small" fill="#059669">Host B</text>
+
+  <!-- PATH 1 (Top - Congested) -->
+  <rect x="225" y="68" width="350" height="80" rx="8" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="400" y="85" text-anchor="middle" class="small" fill="#DC2626" font-weight="600">PATH 1 — Congested Route (High Traffic)</text>
+
+  <!-- Router R1 top -->
+  <circle cx="260" cy="120" r="22" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
+  <text x="260" y="124" text-anchor="middle" class="label" fill="#DC2626" font-weight="600">R1</text>
+
+  <!-- Router R2 top -->
+  <circle cx="400" cy="120" r="22" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
+  <text x="400" y="124" text-anchor="middle" class="label" fill="#DC2626" font-weight="600">R2</text>
+
+  <!-- Router R3 top -->
+  <circle cx="540" cy="120" r="22" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
+  <text x="540" y="124" text-anchor="middle" class="label" fill="#DC2626" font-weight="600">R3</text>
+
+  <!-- Congested links (thick red) -->
+  <line x1="120" y1="200" x2="240" y2="130" stroke="#DC2626" stroke-width="5" opacity="0.6"/>
+  <line x1="282" y1="120" x2="378" y2="120" stroke="#DC2626" stroke-width="5" opacity="0.6"/>
+  <line x1="422" y1="120" x2="518" y2="120" stroke="#DC2626" stroke-width="5" opacity="0.6"/>
+  <line x1="560" y1="130" x2="680" y2="200" stroke="#DC2626" stroke-width="5" opacity="0.6"/>
+
+  <!-- Traffic indicators on congested path -->
+  <rect x="300" y="105" width="14" height="9" rx="1" fill="#F87171" opacity="0.7"/>
+  <rect x="318" y="105" width="14" height="9" rx="1" fill="#F87171" opacity="0.7"/>
+  <rect x="336" y="105" width="14" height="9" rx="1" fill="#F87171" opacity="0.7"/>
+  <rect x="300" y="118" width="14" height="9" rx="1" fill="#F87171" opacity="0.7"/>
+  <rect x="318" y="118" width="14" height="9" rx="1" fill="#F87171" opacity="0.7"/>
+  <rect x="336" y="118" width="14" height="9" rx="1" fill="#F87171" opacity="0.7"/>
+  <rect x="440" y="110" width="14" height="9" rx="1" fill="#F87171" opacity="0.7"/>
+  <rect x="458" y="110" width="14" height="9" rx="1" fill="#F87171" opacity="0.7"/>
+  <rect x="476" y="110" width="14" height="9" rx="1" fill="#F87171" opacity="0.7"/>
+  <rect x="494" y="110" width="14" height="9" rx="1" fill="#F87171" opacity="0.7"/>
+
+  <!-- Load labels -->
+  <text x="330" y="100" text-anchor="middle" class="small" fill="#DC2626">Load: 92%</text>
+  <text x="470" y="103" text-anchor="middle" class="small" fill="#DC2626">Load: 87%</text>
+
+  <!-- Big X on congested path -->
+  <text x="400" y="148" text-anchor="middle" font-size="20" fill="#DC2626" font-weight="700">✗ AVOID</text>
+
+  <!-- PATH 2 (Bottom - Light traffic, chosen) -->
+  <rect x="225" y="285" width="350" height="80" rx="8" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="400" y="302" text-anchor="middle" class="small" fill="#059669" font-weight="600">PATH 2 — Light Route (Low Traffic) ✓ SELECTED</text>
+
+  <!-- Router R4 bottom -->
+  <circle cx="260" cy="330" r="22" fill="#D1FAE5" stroke="#059669" stroke-width="2"/>
+  <text x="260" y="334" text-anchor="middle" class="label" fill="#059669" font-weight="600">R4</text>
+
+  <!-- Router R5 bottom -->
+  <circle cx="400" cy="330" r="22" fill="#D1FAE5" stroke="#059669" stroke-width="2"/>
+  <text x="400" y="334" text-anchor="middle" class="label" fill="#059669" font-weight="600">R5</text>
+
+  <!-- Router R6 bottom -->
+  <circle cx="540" cy="330" r="22" fill="#D1FAE5" stroke="#059669" stroke-width="2"/>
+  <text x="540" y="334" text-anchor="middle" class="label" fill="#059669" font-weight="600">R6</text>
+
+  <!-- Light traffic links (green, thin) -->
+  <line x1="120" y1="235" x2="240" y2="320" stroke="#059669" stroke-width="3" marker-end="url(#arrG)"/>
+  <line x1="282" y1="330" x2="378" y2="330" stroke="#059669" stroke-width="3" marker-end="url(#arrG)"/>
+  <line x1="422" y1="330" x2="518" y2="330" stroke="#059669" stroke-width="3" marker-end="url(#arrG)"/>
+  <line x1="560" y1="320" x2="680" y2="235" stroke="#059669" stroke-width="3" marker-end="url(#arrG)"/>
+
+  <!-- Light traffic packets -->
+  <rect x="320" y="323" width="14" height="10" rx="2" fill="#10B981"/>
+  <rect x="460" y="323" width="14" height="10" rx="2" fill="#10B981"/>
+
+  <!-- Load labels bottom -->
+  <text x="330" y="355" text-anchor="middle" class="small" fill="#059669">Load: 23%</text>
+  <text x="470" y="355" text-anchor="middle" class="small" fill="#059669">Load: 18%</text>
+
+  <!-- Routing Decision Box -->
+  <rect x="230" y="400" width="340" height="80" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5"/>
+  <text x="400" y="420" text-anchor="middle" class="label" font-weight="700" fill="#2563EB">📊 Traffic-Aware Routing Decision</text>
+  <text x="400" y="438" text-anchor="middle" class="small">Router monitors link utilization in real-time</text>
+  <text x="400" y="453" text-anchor="middle" class="small">Routing table updated with current traffic metrics</text>
+  <text x="400" y="468" text-anchor="middle" class="small" fill="#059669" font-weight="600">→ Selects path with lowest current load</text>
+
+  <!-- Decision arrow -->
+  <path d="M80,240 L80,440 L228,440" fill="none" stroke="#2563EB" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrB)"/>
+  <text x="80" y="350" text-anchor="middle" class="small" fill="#2563EB" transform="rotate(-90,80,350)">Query load info</text>
+</svg>

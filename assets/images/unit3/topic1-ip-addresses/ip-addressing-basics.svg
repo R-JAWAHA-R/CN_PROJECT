@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 20px; font-weight: bold; fill: #1e293b; }
+      .subtitle { font-size: 13px; fill: #475569; }
+      .device-label { font-size: 11px; fill: #1e293b; font-weight: 600; }
+      .ip-label { font-size: 10.5px; fill: #ffffff; font-weight: bold; }
+      .section-label { font-size: 13px; fill: #1e293b; font-weight: 600; }
+      .bit-label { font-size: 11px; fill: #ffffff; font-weight: bold; }
+      .note { font-size: 11px; fill: #64748b; }
+      .legend-text { font-size: 11px; fill: #334155; }
+    </style>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Title -->
+  <text x="400" y="35" text-anchor="middle" class="title">IP Addressing Basics</text>
+  <text x="400" y="55" text-anchor="middle" class="subtitle">Every device on a network is identified by a unique IP address</text>
+
+  <!-- Network Cloud -->
+  <ellipse cx="400" cy="195" rx="280" ry="100" fill="#eff6ff" stroke="#3B82F6" stroke-width="2" stroke-dasharray="8,4" opacity="0.7"/>
+  <text x="400" y="115" text-anchor="middle" font-size="14" fill="#2563EB" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">Network: 192.168.1.0/24</text>
+
+  <!-- Router -->
+  <rect x="365" y="160" width="70" height="40" rx="6" fill="#2563EB" filter="url(#shadow)"/>
+  <text x="400" y="175" text-anchor="middle" class="ip-label" font-size="9">ROUTER</text>
+  <text x="400" y="190" text-anchor="middle" class="ip-label" font-size="9">192.168.1.1</text>
+
+  <!-- PC1 -->
+  <rect x="180" y="205" width="80" height="35" rx="5" fill="#059669" filter="url(#shadow)"/>
+  <text x="220" y="220" text-anchor="middle" class="ip-label" font-size="9">💻 PC 1</text>
+  <text x="220" y="233" text-anchor="middle" class="ip-label" font-size="8.5">192.168.1.10</text>
+  <line x1="260" y1="222" x2="365" y2="185" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <!-- PC2 -->
+  <rect x="520" y="205" width="80" height="35" rx="5" fill="#059669" filter="url(#shadow)"/>
+  <text x="560" y="220" text-anchor="middle" class="ip-label" font-size="9">💻 PC 2</text>
+  <text x="560" y="233" text-anchor="middle" class="ip-label" font-size="8.5">192.168.1.20</text>
+  <line x1="520" y1="222" x2="435" y2="185" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <!-- Server -->
+  <rect x="290" y="240" width="80" height="35" rx="5" fill="#EA580C" filter="url(#shadow)"/>
+  <text x="330" y="255" text-anchor="middle" class="ip-label" font-size="9">🖥 Server</text>
+  <text x="330" y="268" text-anchor="middle" class="ip-label" font-size="8.5">192.168.1.50</text>
+  <line x1="330" y1="240" x2="390" y2="200" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <!-- Printer -->
+  <rect x="430" y="240" width="80" height="35" rx="5" fill="#7c3aed" filter="url(#shadow)"/>
+  <text x="470" y="255" text-anchor="middle" class="ip-label" font-size="9">🖨 Printer</text>
+  <text x="470" y="268" text-anchor="middle" class="ip-label" font-size="8.5">192.168.1.55</text>
+  <line x1="470" y1="240" x2="420" y2="200" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <!-- Divider -->
+  <line x1="50" y1="315" x2="750" y2="315" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- IP Address Structure Section -->
+  <text x="400" y="345" text-anchor="middle" class="section-label" font-size="15">IP Address Structure: Network ID + Host ID</text>
+
+  <!-- Example IP: 192.168.1.100 in binary breakdown -->
+  <text x="400" y="370" text-anchor="middle" class="subtitle">Example: 192.168.1.100 with Subnet Mask 255.255.255.0 (/24)</text>
+
+  <!-- Network ID portion -->
+  <rect x="100" y="385" width="150" height="40" rx="4" fill="#2563EB"/>
+  <text x="175" y="400" text-anchor="middle" class="bit-label">192</text>
+  <text x="175" y="416" text-anchor="middle" font-size="9" fill="#bfdbfe" font-family="'Segoe UI', Arial, sans-serif">8 bits</text>
+
+  <rect x="255" y="385" width="150" height="40" rx="4" fill="#3B82F6"/>
+  <text x="330" y="400" text-anchor="middle" class="bit-label">168</text>
+  <text x="330" y="416" text-anchor="middle" font-size="9" fill="#bfdbfe" font-family="'Segoe UI', Arial, sans-serif">8 bits</text>
+
+  <rect x="410" y="385" width="150" height="40" rx="4" fill="#60A5FA"/>
+  <text x="485" y="400" text-anchor="middle" class="bit-label">1</text>
+  <text x="485" y="416" text-anchor="middle" font-size="9" fill="#1e3a5f" font-family="'Segoe UI', Arial, sans-serif">8 bits</text>
+
+  <!-- Host ID portion -->
+  <rect x="565" y="385" width="150" height="40" rx="4" fill="#F97316"/>
+  <text x="640" y="400" text-anchor="middle" class="bit-label">100</text>
+  <text x="640" y="416" text-anchor="middle" font-size="9" fill="#fff7ed" font-family="'Segoe UI', Arial, sans-serif">8 bits</text>
+
+  <!-- Brackets -->
+  <!-- Network ID bracket -->
+  <path d="M100,435 L100,445 L485,445 L485,435" fill="none" stroke="#2563EB" stroke-width="2"/>
+  <text x="292" y="462" text-anchor="middle" font-size="13" fill="#2563EB" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">Network ID (24 bits)</text>
+
+  <!-- Host ID bracket -->
+  <path d="M565,435 L565,445 L715,445 L715,435" fill="none" stroke="#F97316" stroke-width="2"/>
+  <text x="640" y="462" text-anchor="middle" font-size="13" fill="#EA580C" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">Host ID (8 bits)</text>
+
+  <!-- Dots between octets -->
+  <text x="252" y="408" text-anchor="middle" font-size="18" fill="#1e293b" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">.</text>
+  <text x="407" y="408" text-anchor="middle" font-size="18" fill="#1e293b" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">.</text>
+  <text x="562" y="408" text-anchor="middle" font-size="18" fill="#1e293b" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">.</text>
+
+  <!-- Bottom note -->
+  <text x="400" y="490" text-anchor="middle" class="note">The Network ID identifies the network, while the Host ID identifies a specific device on that network.</text>
+</svg>

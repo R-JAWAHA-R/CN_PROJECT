@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 20px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 13px; fill: #475569; }
+      .col-h { font-size: 14px; font-weight: bold; fill: #ffffff; text-anchor: middle; }
+      .prop { font-size: 11.5px; font-weight: bold; fill: #1e293b; }
+      .v4-val { font-size: 11px; fill: #1e40af; }
+      .v6-val { font-size: 11px; fill: #065f46; }
+    </style>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="400" y="35" text-anchor="middle" class="title">Comprehensive Comparison: IPv4 vs. IPv6</text>
+  <text x="400" y="55" text-anchor="middle" class="sub">Key Architectural Differences, Capabilities, and Design Evolutions</text>
+
+  <!-- Table Container -->
+  <g transform="translate(40, 75)" filter="url(#shadow)">
+    <!-- Header -->
+    <rect x="0" y="0" width="180" height="36" rx="6 0 0 0" fill="#334155"/>
+    <text x="90" y="23" class="col-h">Feature / Property</text>
+
+    <rect x="180" y="0" width="270" height="36" fill="#2563eb"/>
+    <text x="315" y="23" class="col-h">IPv4 (RFC 791)</text>
+
+    <rect x="450" y="0" width="270" height="36" rx="0 6 0 0" fill="#059669"/>
+    <text x="585" y="23" class="col-h">IPv6 (RFC 8200)</text>
+
+    <!-- Rows -->
+    <!-- Row 1: Address Size -->
+    <g transform="translate(0, 36)">
+      <rect x="0" y="0" width="720" height="36" fill="#ffffff"/>
+      <text x="15" y="22" class="prop">Address Length</text>
+      <text x="195" y="22" class="v4-val">32 bits (4 bytes)</text>
+      <text x="465" y="22" class="v6-val">128 bits (16 bytes)</text>
+    </g>
+
+    <!-- Row 2: Address Space -->
+    <g transform="translate(0, 72)">
+      <rect x="0" y="0" width="720" height="36" fill="#f8fafc"/>
+      <text x="15" y="22" class="prop">Total Address Space</text>
+      <text x="195" y="22" class="v4-val">~4.29 × 10⁹ (~4.3 Billion)</text>
+      <text x="465" y="22" class="v6-val">~3.4 × 10³⁸ (Undecillion)</text>
+    </g>
+
+    <!-- Row 3: Notation -->
+    <g transform="translate(0, 108)">
+      <rect x="0" y="0" width="720" height="36" fill="#ffffff"/>
+      <text x="15" y="22" class="prop">Notation Format</text>
+      <text x="195" y="22" class="v4-val">Dotted Decimal (192.168.1.1)</text>
+      <text x="465" y="22" class="v6-val">Hexadecimal with Colons (2001:db8::1)</text>
+    </g>
+
+    <!-- Row 4: Header Size -->
+    <g transform="translate(0, 144)">
+      <rect x="0" y="0" width="720" height="36" fill="#f8fafc"/>
+      <text x="15" y="22" class="prop">Header Size</text>
+      <text x="195" y="22" class="v4-val">Variable (20 to 60 bytes)</text>
+      <text x="465" y="22" class="v6-val">Fixed 40 bytes (Extension headers optional)</text>
+    </g>
+
+    <!-- Row 5: Checksum -->
+    <g transform="translate(0, 180)">
+      <rect x="0" y="0" width="720" height="36" fill="#ffffff"/>
+      <text x="15" y="22" class="prop">Header Checksum</text>
+      <text x="195" y="22" class="v4-val">Yes (Recomputed at every hop)</text>
+      <text x="465" y="22" class="v6-val">None (Streamlines forwarding)</text>
+    </g>
+
+    <!-- Row 6: Configuration -->
+    <g transform="translate(0, 216)">
+      <rect x="0" y="0" width="720" height="36" fill="#f8fafc"/>
+      <text x="15" y="22" class="prop">Auto-configuration</text>
+      <text x="195" y="22" class="v4-val">Manual or DHCP</text>
+      <text x="465" y="22" class="v6-val">SLAAC (Stateless) &amp; DHCPv6</text>
+    </g>
+
+    <!-- Row 7: Security -->
+    <g transform="translate(0, 252)">
+      <rect x="0" y="0" width="720" height="36" fill="#ffffff"/>
+      <text x="15" y="22" class="prop">IPsec Security</text>
+      <text x="195" y="22" class="v4-val">Optional add-on</text>
+      <text x="465" y="22" class="v6-val">Built-in architectural support</text>
+    </g>
+
+    <!-- Row 8: Addressing Types -->
+    <g transform="translate(0, 288)">
+      <rect x="0" y="0" width="720" height="36" fill="#f8fafc"/>
+      <text x="15" y="22" class="prop">Addressing Modes</text>
+      <text x="195" y="22" class="v4-val">Unicast, Multicast, Broadcast</text>
+      <text x="465" y="22" class="v6-val">Unicast, Multicast, Anycast (No Broadcast)</text>
+    </g>
+
+    <!-- Row 9: Fragmentation -->
+    <g transform="translate(0, 324)">
+      <rect x="0" y="0" width="720" height="36" rx="0 0 6 6" fill="#ffffff"/>
+      <text x="15" y="22" class="prop">Fragmentation</text>
+      <text x="195" y="22" class="v4-val">Performed by Source &amp; Routers</text>
+      <text x="465" y="22" class="v6-val">Performed ONLY by Sending Host</text>
+    </g>
+  </g>
+
+  <!-- Dual Stack transition note -->
+  <text x="400" y="468" text-anchor="middle" font-size="12" fill="#475569">Coexistence mechanisms: Dual-Stack (run both), Tunneling (6in4), and Translation (NAT64).</text>
+</svg>

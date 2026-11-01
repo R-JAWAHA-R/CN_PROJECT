@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 20px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 13px; fill: #475569; }
+      .step-t { font-size: 11px; font-weight: bold; fill: #ffffff; text-anchor: middle; }
+      .state { font-size: 11px; font-weight: bold; fill: #1e293b; }
+    </style>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="400" y="38" text-anchor="middle" class="title">The Count-to-Infinity Problem in Distance Vector</text>
+  <text x="400" y="58" text-anchor="middle" class="sub">How Bad News Propagates Slowly Due to Mutual Routing Loops</text>
+
+  <!-- Topology Diagram -->
+  <g transform="translate(180, 85)" filter="url(#shadow)">
+    <rect width="440" height="65" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <text x="220" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="#475569">Network Topology: Link A-B Fails!</text>
+    
+    <!-- Router A (Down) -->
+    <circle cx="50" cy="42" r="18" fill="#dc2626"/>
+    <text x="50" y="46" text-anchor="middle" font-size="11" font-weight="bold" fill="#ffffff">A</text>
+
+    <!-- Failed Link -->
+    <line x1="70" y1="42" x2="190" y2="42" stroke="#dc2626" stroke-width="3" stroke-dasharray="6,4"/>
+    <text x="130" y="36" text-anchor="middle" font-size="14" font-weight="bold" fill="#dc2626">✕ LINK DOWN</text>
+
+    <!-- Router B -->
+    <circle cx="220" cy="42" r="18" fill="#2563eb"/>
+    <text x="220" y="46" text-anchor="middle" font-size="11" font-weight="bold" fill="#ffffff">B</text>
+
+    <!-- Working Link -->
+    <line x1="240" y1="42" x2="370" y2="42" stroke="#059669" stroke-width="3"/>
+    <text x="305" y="36" text-anchor="middle" font-size="10" font-weight="bold" fill="#059669">cost = 1</text>
+
+    <!-- Router C -->
+    <circle cx="390" cy="42" r="18" fill="#2563eb"/>
+    <text x="390" y="46" text-anchor="middle" font-size="11" font-weight="bold" fill="#ffffff">C</text>
+  </g>
+
+  <!-- Step By Step Counting Evolution -->
+  <g transform="translate(60, 165)" filter="url(#shadow)">
+    <rect width="680" height="205" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect width="680" height="30" rx="8 8 0 0" fill="#1e293b"/>
+    <text x="80" y="20" class="step-t">Timeline / Round</text>
+    <text x="220" y="20" class="step-t">Router B Belief (to A)</text>
+    <text x="380" y="20" class="step-t">Router C Belief (to A)</text>
+    <text x="550" y="20" class="step-t">System Diagnosis</text>
+
+    <!-- Initial State -->
+    <g transform="translate(0, 32)">
+      <rect width="680" height="32" fill="#eff6ff"/>
+      <text x="40" y="21" class="state" fill="#1e40af">Initial (Normal)</text>
+      <text x="220" y="21" class="state" text-anchor="middle">Cost = 1, via A</text>
+      <text x="380" y="21" class="state" text-anchor="middle">Cost = 2, via B</text>
+      <text x="550" y="21" font-size="11" fill="#059669" text-anchor="middle">✓ Optimal paths</text>
+    </g>
+
+    <!-- Round 1: Link fails -->
+    <g transform="translate(0, 66)">
+      <rect width="680" height="32" fill="#ffffff"/>
+      <text x="40" y="21" class="state" fill="#dc2626">Round 1 (Failure)</text>
+      <text x="220" y="21" class="state" text-anchor="middle" fill="#dc2626">Thinks: C knows path (cost 2) ➔ 1+2 = 3</text>
+      <text x="380" y="21" class="state" text-anchor="middle">Still has Cost = 2 via B</text>
+      <text x="550" y="21" font-size="11" fill="#ea580c" text-anchor="middle">⚠ Loop created! B ➔ C ➔ B</text>
+    </g>
+
+    <!-- Round 2 -->
+    <g transform="translate(0, 100)">
+      <rect width="680" height="32" fill="#fff7ed"/>
+      <text x="40" y="21" class="state">Round 2</text>
+      <text x="220" y="21" class="state" text-anchor="middle">Cost = 3, via C</text>
+      <text x="380" y="21" class="state" text-anchor="middle" fill="#ea580c">Receives B's update ➔ 1+3 = 4</text>
+      <text x="550" y="21" font-size="11" fill="#dc2626" text-anchor="middle">Counting up...</text>
+    </g>
+
+    <!-- Round 3 -->
+    <g transform="translate(0, 134)">
+      <rect width="680" height="32" fill="#ffffff"/>
+      <text x="40" y="21" class="state">Round 3</text>
+      <text x="220" y="21" class="state" text-anchor="middle" fill="#ea580c">Receives C's update ➔ 1+4 = 5</text>
+      <text x="380" y="21" class="state" text-anchor="middle">Receives B's update ➔ 1+5 = 6</text>
+      <text x="550" y="21" font-size="11" fill="#dc2626" text-anchor="middle">Still bouncing back and forth</text>
+    </g>
+
+    <!-- Convergence at Infinity -->
+    <g transform="translate(0, 168)">
+      <rect width="680" height="34" rx="0 0 8 8" fill="#fee2e2"/>
+      <text x="40" y="21" class="state" fill="#991b1b">Round 16 (Infinity)</text>
+      <text x="220" y="21" class="state" text-anchor="middle" fill="#991b1b">Cost = 16 (Unreachable)</text>
+      <text x="380" y="21" class="state" text-anchor="middle" fill="#991b1b">Cost = 16 (Unreachable)</text>
+      <text x="550" y="21" font-size="11" font-weight="bold" fill="#991b1b" text-anchor="middle">Finally dropped at RIP metric 16</text>
+    </g>
+  </g>
+
+  <!-- Core Cause note -->
+  <g transform="translate(60, 385)">
+    <rect width="680" height="75" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" filter="url(#shadow)"/>
+    <text x="20" y="25" font-size="13" font-weight="bold" fill="#1e293b">Root Cause of the Anomaly:</text>
+    <text x="20" y="48" font-size="11.5" fill="#334155">Router C's advertised path of cost 2 went <tspan font-weight="bold">THROUGH Router B</tspan>. When A failed, B did not know C's route was dependent on B itself! They exchanged mutual misinformation until reaching the protocol infinity ceiling.</text>
+  </g>
+</svg>

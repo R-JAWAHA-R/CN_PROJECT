@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <marker id="spArrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#059669"/>
+    </marker>
+    <filter id="spShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.13"/>
+    </filter>
+    <style>
+      .title { font: bold 20px 'Segoe UI', Arial, sans-serif; fill: #1E293B; }
+      .sub { font: 14px 'Segoe UI', Arial, sans-serif; fill: #64748B; }
+      .nlbl { font: bold 16px 'Segoe UI', Arial, sans-serif; fill: #fff; text-anchor: middle; dominant-baseline: central; }
+      .edgeW { font: bold 12px 'Segoe UI', Arial, sans-serif; fill: #059669; text-anchor: middle; }
+      .distLabel { font: bold 12px 'Segoe UI', Arial, sans-serif; fill: #1E40AF; text-anchor: middle; }
+      .info { font: 13px 'Segoe UI', Arial, sans-serif; fill: #475569; }
+      .pathText { font: 12px 'Segoe UI', Arial, sans-serif; fill: #334155; }
+    </style>
+  </defs>
+
+  <rect width="800" height="500" fill="#FAFBFC" rx="8"/>
+
+  <text x="400" y="35" class="title" text-anchor="middle">Dijkstra's Shortest Path Tree — Final Result</text>
+  <text x="400" y="55" class="sub" text-anchor="middle">Shortest paths from source A to all other nodes — tree edges shown in green</text>
+
+  <!-- Non-tree edges (faded dashed) -->
+  <line x1="150" y1="200" x2="350" y2="310" stroke="#E2E8F0" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <line x1="150" y1="200" x2="150" y2="380" stroke="#E2E8F0" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <line x1="350" y1="130" x2="580" y2="130" stroke="#E2E8F0" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <line x1="350" y1="310" x2="580" y2="130" stroke="#E2E8F0" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <line x1="150" y1="380" x2="580" y2="380" stroke="#E2E8F0" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <line x1="580" y1="130" x2="580" y2="380" stroke="#E2E8F0" stroke-width="1.5" stroke-dasharray="5,4"/>
+
+  <!-- Shortest path tree edges (green, thick, with arrows) -->
+  <!-- A→B (weight 2) -->
+  <line x1="172" y1="192" x2="326" y2="135" stroke="#059669" stroke-width="3.5" marker-end="url(#spArrow)"/>
+  <rect x="232" y="148" width="28" height="20" rx="4" fill="#D1FAE5"/>
+  <text x="246" y="162" class="edgeW">2</text>
+
+  <!-- B→C (weight 1, total 3) -->
+  <line x1="350" y1="154" x2="350" y2="286" stroke="#059669" stroke-width="3.5" marker-end="url(#spArrow)"/>
+  <rect x="357" y="210" width="28" height="20" rx="4" fill="#D1FAE5"/>
+  <text x="371" y="224" class="edgeW">1</text>
+
+  <!-- C→D (weight 3, total 6) -->
+  <line x1="328" y1="318" x2="172" y2="374" stroke="#059669" stroke-width="3.5" marker-end="url(#spArrow)"/>
+  <rect x="232" y="338" width="28" height="20" rx="4" fill="#D1FAE5"/>
+  <text x="246" y="352" class="edgeW">3</text>
+
+  <!-- C→F (weight 2, total 5) -->
+  <line x1="372" y1="316" x2="556" y2="374" stroke="#059669" stroke-width="3.5" marker-end="url(#spArrow)"/>
+  <rect x="448" y="338" width="28" height="20" rx="4" fill="#D1FAE5"/>
+  <text x="462" y="352" class="edgeW">2</text>
+
+  <!-- B→E (weight 5, total 7) — or via F: F→E (3, total 8). Use B→E = 7 -->
+  <line x1="374" y1="128" x2="556" y2="130" stroke="#059669" stroke-width="3.5" marker-end="url(#spArrow)"/>
+  <rect x="450" y="108" width="28" height="20" rx="4" fill="#D1FAE5"/>
+  <text x="464" y="122" class="edgeW">5</text>
+
+  <!-- Nodes with distance labels -->
+  <!-- A (source) -->
+  <circle cx="150" cy="200" r="28" fill="#EA580C" stroke="#C2410C" stroke-width="2.5" filter="url(#spShadow)"/>
+  <text x="150" y="200" class="nlbl" style="font-size:18px">A</text>
+  <rect x="120" y="164" width="60" height="22" rx="5" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <text x="150" y="179" class="distLabel">d = 0</text>
+  <text x="150" y="240" style="font:bold 11px 'Segoe UI',sans-serif; fill:#EA580C; text-anchor:middle;">SOURCE</text>
+
+  <!-- B -->
+  <circle cx="350" cy="130" r="26" fill="#059669" filter="url(#spShadow)"/>
+  <text x="350" y="130" class="nlbl">B</text>
+  <rect x="320" y="94" width="60" height="22" rx="5" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <text x="350" y="109" class="distLabel">d = 2</text>
+
+  <!-- C -->
+  <circle cx="350" cy="310" r="26" fill="#059669" filter="url(#spShadow)"/>
+  <text x="350" y="310" class="nlbl">C</text>
+  <rect x="320" y="340" width="60" height="22" rx="5" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <text x="350" y="355" class="distLabel">d = 3</text>
+
+  <!-- D -->
+  <circle cx="150" cy="380" r="26" fill="#059669" filter="url(#spShadow)"/>
+  <text x="150" y="380" class="nlbl">D</text>
+  <rect x="120" y="410" width="60" height="22" rx="5" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <text x="150" y="425" class="distLabel">d = 6</text>
+
+  <!-- E -->
+  <circle cx="580" cy="130" r="26" fill="#059669" filter="url(#spShadow)"/>
+  <text x="580" y="130" class="nlbl">E</text>
+  <rect x="550" y="94" width="60" height="22" rx="5" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <text x="580" y="109" class="distLabel">d = 7</text>
+
+  <!-- F -->
+  <circle cx="580" cy="380" r="26" fill="#059669" filter="url(#spShadow)"/>
+  <text x="580" y="380" class="nlbl">F</text>
+  <rect x="550" y="410" width="60" height="22" rx="5" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <text x="580" y="425" class="distLabel">d = 5</text>
+
+  <!-- Path summary box -->
+  <rect x="630" y="170" width="155" height="200" rx="8" fill="#F0FDF4" stroke="#BBF7D0"/>
+  <text x="707" y="195" style="font:bold 14px 'Segoe UI',sans-serif; fill:#059669; text-anchor:middle;">Shortest Paths</text>
+  <line x1="640" y1="203" x2="775" y2="203" stroke="#BBF7D0"/>
+  <text x="650" y="225" class="pathText">A → B : 2</text>
+  <text x="650" y="247" class="pathText">A → B → C : 3</text>
+  <text x="650" y="269" class="pathText">A → B → C → F : 5</text>
+  <text x="650" y="291" class="pathText">A → B → C → D : 6</text>
+  <text x="650" y="313" class="pathText">A → B → E : 7</text>
+  <line x1="640" y1="325" x2="775" y2="325" stroke="#BBF7D0"/>
+  <text x="707" y="348" style="font:bold 12px 'Segoe UI',sans-serif; fill:#1E40AF; text-anchor:middle;">Total tree cost</text>
+  <text x="707" y="366" style="font:bold 16px 'Segoe UI',sans-serif; fill:#059669; text-anchor:middle;">23</text>
+
+  <!-- Legend -->
+  <rect x="30" y="455" width="740" height="38" rx="6" fill="#FFF7ED" stroke="#FDBA74"/>
+  <line x1="50" y1="474" x2="90" y2="474" stroke="#059669" stroke-width="3.5" marker-end="url(#spArrow)"/>
+  <text x="100" y="479" class="info">Shortest path tree edge</text>
+  <line x1="300" y1="474" x2="340" y2="474" stroke="#E2E8F0" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <text x="350" y="479" class="info">Non-tree edge</text>
+  <circle cx="510" cy="474" r="10" fill="#EA580C"/>
+  <text x="530" y="479" class="info">Source</text>
+  <circle cx="600" cy="474" r="10" fill="#059669"/>
+  <text x="620" y="479" class="info">Destination (in SPT)</text>
+</svg>

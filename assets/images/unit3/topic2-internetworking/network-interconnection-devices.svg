@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 550">
+  <defs>
+    <filter id="shadow2" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.1"/>
+    </filter>
+    <linearGradient id="layerGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#F1F5F9"/>
+    </linearGradient>
+  </defs>
+  <style>
+    text { font-family: 'Segoe UI', Arial, sans-serif; }
+    .title { font-size: 18px; font-weight: 700; fill: #1E293B; }
+    .subtitle { font-size: 11px; fill: #64748B; }
+    .layer-name { font-size: 13px; font-weight: 700; fill: white; }
+    .layer-num { font-size: 10px; fill: rgba(255,255,255,0.8); }
+    .device-name { font-size: 13px; font-weight: 700; }
+    .device-desc { font-size: 9.5px; fill: #64748B; }
+    .func { font-size: 10px; fill: #374151; }
+  </style>
+
+  <!-- Background -->
+  <rect width="850" height="550" fill="#FAFBFC" rx="8"/>
+  <rect x="1" y="1" width="848" height="548" fill="none" stroke="#E2E8F0" rx="8" stroke-width="1.5"/>
+
+  <!-- Title -->
+  <text x="425" y="32" text-anchor="middle" class="title">Network Interconnection Devices &amp; OSI Layer Mapping</text>
+  <text x="425" y="50" text-anchor="middle" class="subtitle">Devices operate at different layers of the OSI model, determining their capabilities</text>
+
+  <!-- OSI Layer Column (Left) -->
+  <text x="105" y="78" text-anchor="middle" font-size="12" font-weight="700" fill="#475569">OSI Layers</text>
+
+  <!-- Layer 7 - Application -->
+  <rect x="20" y="90" width="170" height="55" rx="6" fill="#7C3AED" filter="url(#shadow2)"/>
+  <text x="105" y="114" text-anchor="middle" class="layer-name">Application</text>
+  <text x="105" y="130" text-anchor="middle" class="layer-num">Layer 7</text>
+
+  <!-- Layer 6 - Presentation -->
+  <rect x="20" y="150" width="170" height="45" rx="6" fill="#8B5CF6" filter="url(#shadow2)" opacity="0.5"/>
+  <text x="105" y="177" text-anchor="middle" class="layer-name" opacity="0.7">Presentation (L6)</text>
+
+  <!-- Layer 5 - Session -->
+  <rect x="20" y="200" width="170" height="45" rx="6" fill="#A78BFA" filter="url(#shadow2)" opacity="0.5"/>
+  <text x="105" y="227" text-anchor="middle" class="layer-name" opacity="0.7">Session (L5)</text>
+
+  <!-- Layer 4 - Transport -->
+  <rect x="20" y="250" width="170" height="45" rx="6" fill="#06B6D4" filter="url(#shadow2)" opacity="0.5"/>
+  <text x="105" y="277" text-anchor="middle" class="layer-name" opacity="0.7">Transport (L4)</text>
+
+  <!-- Layer 3 - Network -->
+  <rect x="20" y="300" width="170" height="55" rx="6" fill="#059669" filter="url(#shadow2)"/>
+  <text x="105" y="324" text-anchor="middle" class="layer-name">Network</text>
+  <text x="105" y="340" text-anchor="middle" class="layer-num">Layer 3</text>
+
+  <!-- Layer 2 - Data Link -->
+  <rect x="20" y="360" width="170" height="55" rx="6" fill="#2563EB" filter="url(#shadow2)"/>
+  <text x="105" y="384" text-anchor="middle" class="layer-name">Data Link</text>
+  <text x="105" y="400" text-anchor="middle" class="layer-num">Layer 2</text>
+
+  <!-- Layer 1 - Physical -->
+  <rect x="20" y="420" width="170" height="55" rx="6" fill="#EA580C" filter="url(#shadow2)"/>
+  <text x="105" y="444" text-anchor="middle" class="layer-name">Physical</text>
+  <text x="105" y="460" text-anchor="middle" class="layer-num">Layer 1</text>
+
+  <!-- Dashed connection lines -->
+  <line x1="190" y1="117" x2="260" y2="117" stroke="#7C3AED" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="190" y1="327" x2="260" y2="327" stroke="#059669" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="190" y1="387" x2="260" y2="387" stroke="#2563EB" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="190" y1="447" x2="260" y2="447" stroke="#EA580C" stroke-width="2" stroke-dasharray="5,3"/>
+
+  <!-- Device Column -->
+  <text x="540" y="78" text-anchor="middle" font-size="12" font-weight="700" fill="#475569">Interconnection Devices</text>
+
+  <!-- Gateway (Layer 7) -->
+  <rect x="260" y="88" width="560" height="100" rx="10" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1.5" filter="url(#shadow2)"/>
+  <!-- Gateway icon -->
+  <rect x="280" y="105" width="70" height="50" rx="8" fill="#7C3AED"/>
+  <text x="315" y="127" text-anchor="middle" fill="white" font-size="10" font-weight="700">GATE</text>
+  <text x="315" y="142" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="9">WAY</text>
+  <!-- Gateway text -->
+  <text x="370" y="110" class="device-name" fill="#7C3AED">Gateway (Protocol Converter)</text>
+  <text x="370" y="126" class="func">• Operates at ALL 7 layers of the OSI model</text>
+  <text x="370" y="140" class="func">• Translates between different protocol suites (e.g., TCP/IP ↔ OSI)</text>
+  <text x="370" y="154" class="func">• Full protocol conversion — connects completely different networks</text>
+  <text x="370" y="168" class="func">• Example: Email gateway, VoIP gateway, IoT gateway</text>
+  <rect x="740" y="105" width="60" height="24" rx="12" fill="#7C3AED"/>
+  <text x="770" y="121" text-anchor="middle" fill="white" font-size="9" font-weight="600">L1–L7</text>
+
+  <!-- Vertical arrow showing hierarchy -->
+  <line x1="248" y1="90" x2="248" y2="478" stroke="#CBD5E1" stroke-width="2"/>
+  <polygon points="243,90 248,80 253,90" fill="#CBD5E1"/>
+  <text x="246" y="497" text-anchor="middle" font-size="9" fill="#94A3B8">Increasing Complexity →</text>
+
+  <!-- Router (Layer 3) -->
+  <rect x="260" y="296" width="560" height="60" rx="10" fill="#ECFDF5" stroke="#059669" stroke-width="1.5" filter="url(#shadow2)"/>
+  <rect x="280" y="308" width="70" height="36" rx="8" fill="#059669"/>
+  <text x="315" y="331" text-anchor="middle" fill="white" font-size="11" font-weight="700">Router</text>
+  <text x="370" y="318" class="device-name" fill="#059669">Router (Packet Forwarding)</text>
+  <text x="370" y="332" class="func">• Routes packets based on IP addresses across different networks</text>
+  <text x="370" y="346" class="func">• Maintains routing tables • Connects different network types (LAN↔WAN)</text>
+  <rect x="740" y="308" width="60" height="24" rx="12" fill="#059669"/>
+  <text x="770" y="324" text-anchor="middle" fill="white" font-size="9" font-weight="600">L1–L3</text>
+
+  <!-- Bridge/Switch (Layer 2) -->
+  <rect x="260" y="362" width="560" height="60" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5" filter="url(#shadow2)"/>
+  <rect x="280" y="374" width="70" height="36" rx="8" fill="#2563EB"/>
+  <text x="315" y="391" text-anchor="middle" fill="white" font-size="10" font-weight="700">Bridge /</text>
+  <text x="315" y="403" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="9">Switch</text>
+  <text x="370" y="384" class="device-name" fill="#2563EB">Bridge / Switch (Frame Filtering)</text>
+  <text x="370" y="398" class="func">• Forwards frames using MAC addresses • Segments collision domains</text>
+  <text x="370" y="412" class="func">• Switch = multi-port bridge with higher performance</text>
+  <rect x="740" y="374" width="60" height="24" rx="12" fill="#2563EB"/>
+  <text x="770" y="390" text-anchor="middle" fill="white" font-size="9" font-weight="600">L1–L2</text>
+
+  <!-- Repeater/Hub (Layer 1) -->
+  <rect x="260" y="428" width="560" height="60" rx="10" fill="#FFF7ED" stroke="#EA580C" stroke-width="1.5" filter="url(#shadow2)"/>
+  <rect x="280" y="440" width="70" height="36" rx="8" fill="#EA580C"/>
+  <text x="315" y="457" text-anchor="middle" fill="white" font-size="10" font-weight="700">Repeater</text>
+  <text x="315" y="469" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="9">/ Hub</text>
+  <text x="370" y="450" class="device-name" fill="#EA580C">Repeater / Hub (Signal Regeneration)</text>
+  <text x="370" y="464" class="func">• Amplifies/regenerates signals • Extends cable distance</text>
+  <text x="370" y="478" class="func">• Hub = multi-port repeater • No intelligence — broadcasts to all ports</text>
+  <rect x="740" y="440" width="60" height="24" rx="12" fill="#EA580C"/>
+  <text x="770" y="456" text-anchor="middle" fill="white" font-size="9" font-weight="600">L1</text>
+
+  <!-- Complexity arrow label on right -->
+  <text x="830" y="265" text-anchor="middle" font-size="9" fill="#94A3B8" transform="rotate(90,830,265)">More Intelligent ↑</text>
+</svg>

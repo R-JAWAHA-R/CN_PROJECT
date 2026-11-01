@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 20px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 13px; fill: #475569; }
+      .area-t { font-size: 14px; font-weight: bold; fill: #1e40af; text-anchor: middle; }
+      .r-label { font-size: 10px; font-weight: bold; fill: #ffffff; text-anchor: middle; }
+    </style>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="400" y="35" text-anchor="middle" class="title">OSPF Hierarchical Routing: Area 0 Backbone &amp; Sub-Areas</text>
+  <text x="400" y="55" text-anchor="middle" class="sub">Restricting Link-State Flooding within Areas to Scale to Thousands of Routers</text>
+
+  <!-- Central Backbone: Area 0 -->
+  <g transform="translate(240, 85)" filter="url(#shadow)">
+    <rect width="320" height="150" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="160" y="28" class="area-t">Backbone Area 0 (0.0.0.0)</text>
+    <text x="160" y="46" text-anchor="middle" font-size="11" fill="#3b82f6">Core Transit Hub: All inter-area traffic must traverse Area 0</text>
+
+    <!-- Backbone Internal Router -->
+    <circle cx="160" cy="95" r="24" fill="#1e40af"/>
+    <text x="160" y="93" class="r-label">Backbone</text>
+    <text x="160" y="105" class="r-label">Router BR</text>
+
+    <!-- Area Border Routers (ABRs) on perimeters -->
+    <!-- Left ABR -->
+    <rect x="-18" y="70" width="45" height="50" rx="6" fill="#ea580c"/>
+    <text x="4" y="92" class="r-label">ABR 1</text>
+    <text x="4" y="105" text-anchor="middle" font-size="8" fill="#ffedd5">Area 0/1</text>
+
+    <!-- Right ABR -->
+    <rect x="295" y="70" width="45" height="50" rx="6" fill="#ea580c"/>
+    <text x="317" y="92" class="r-label">ABR 2</text>
+    <text x="317" y="105" text-anchor="middle" font-size="8" fill="#ffedd5">Area 0/2</text>
+
+    <!-- Bottom ASBR -->
+    <rect x="135" y="130" width="50" height="35" rx="6" fill="#7c3aed"/>
+    <text x="160" y="147" class="r-label">ASBR</text>
+    <text x="160" y="158" text-anchor="middle" font-size="7.5" fill="#ede9fe">BGP Gateway</text>
+  </g>
+
+  <!-- Left: Area 1 (Standard Area) -->
+  <g transform="translate(40, 270)" filter="url(#shadow)">
+    <rect width="210" height="135" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="1.8"/>
+    <text x="105" y="25" text-anchor="middle" font-size="13" font-weight="bold" fill="#047857">Area 1 (Standard)</text>
+    <text x="105" y="42" text-anchor="middle" font-size="10.5" fill="#059669">Local LSPs isolated within Area 1</text>
+
+    <circle cx="60" cy="85" r="20" fill="#059669"/>
+    <text x="60" y="88" class="r-label">R1</text>
+
+    <circle cx="150" cy="85" r="20" fill="#059669"/>
+    <text x="150" y="88" class="r-label">R2</text>
+    <line x1="80" y1="85" x2="130" y2="85" stroke="#10b981" stroke-width="2"/>
+  </g>
+
+  <!-- Right: Area 2 (Stub / Branch Area) -->
+  <g transform="translate(550, 270)" filter="url(#shadow)">
+    <rect width="210" height="135" rx="8" fill="#fdf4ff" stroke="#c026d3" stroke-width="1.8"/>
+    <text x="105" y="25" text-anchor="middle" font-size="13" font-weight="bold" fill="#86198f">Area 2 (Stub Area)</text>
+    <text x="105" y="42" text-anchor="middle" font-size="10.5" fill="#a21caf">Uses default route for external traffic</text>
+
+    <circle cx="60" cy="85" r="20" fill="#9333ea"/>
+    <text x="60" y="88" class="r-label">R3</text>
+
+    <circle cx="150" cy="85" r="20" fill="#9333ea"/>
+    <text x="150" y="88" class="r-label">R4</text>
+    <line x1="80" y1="85" x2="130" y2="85" stroke="#c026d3" stroke-width="2"/>
+  </g>
+
+  <!-- External Autonomous System (BGP) -->
+  <g transform="translate(300, 310)">
+    <rect width="200" height="95" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-dasharray="6,4"/>
+    <text x="100" y="24" text-anchor="middle" font-size="12" font-weight="bold" fill="#334155">External AS (Internet / BGP)</text>
+    <text x="100" y="44" text-anchor="middle" font-size="10" fill="#64748b">Injected via ASBR as Type 5 LSA</text>
+    <line x1="100" y1="0" x2="100" y2="-20" stroke="#7c3aed" stroke-width="2"/>
+  </g>
+
+  <!-- Connectors to ABRs -->
+  <line x1="145" y1="270" x2="230" y2="190" stroke="#ea580c" stroke-width="2"/>
+  <line x1="655" y1="270" x2="570" y2="190" stroke="#ea580c" stroke-width="2"/>
+
+  <!-- Router Roles Summary Legend -->
+  <g transform="translate(40, 430)">
+    <rect width="720" height="45" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="20" y="27" font-size="11.5" fill="#334155">
+      <tspan font-weight="bold" fill="#1e40af">IR:</tspan> Internal Router | 
+      <tspan font-weight="bold" fill="#ea580c">ABR:</tspan> Area Border Router (summarizes topology between areas) | 
+      <tspan font-weight="bold" fill="#7c3aed">ASBR:</tspan> Autonomous System Boundary Router | 
+      <tspan font-weight="bold" fill="#047857">Benefit:</tspan> SPF recalculation limited to affected area!
+    </text>
+  </g>
+</svg>
