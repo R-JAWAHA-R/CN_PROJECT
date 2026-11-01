@@ -1,0 +1,5 @@
+
+User-agent: *
+Allow: /
+
+Sitemap: https://r-jawaha-r.github.io/CN_PROJECT/sitemap.xml
