@@ -7,7 +7,7 @@
 const CleanDiagramEngine = {
   getDiagramHtml: function(topic) {
     if (!topic) return '';
-    const id = topic.id || '';
+    const id = typeof topic === 'string' ? topic : (topic.id || '');
 
     // --- Unit 3 – Network Layer Interactive Schematics ---
     if (id === 'ip-addressing' || id === 'u3-ip-addressing-basics') {
@@ -3367,49 +3367,216 @@ const CleanDiagramEngine = {
     `;
   },
 
-  // 3.11 Congestion Control: Leaky Bucket, Token Bucket & Load Shedding
+  // 3.11 Congestion Control: Specialized Diagrams for Topic 5 Subtopics
   renderCongestionControlDiagram: function(id) {
+    if (id === 'traffic-aware-routing') {
+      return `
+        <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+            <div>
+              <span class="text-[10px] font-black tracking-wider uppercase text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2.5 py-1 rounded">Congestion Avoidance</span>
+              <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">Traffic-Aware Dynamic Path Selection (Path 1 vs. Path 2)</h4>
+            </div>
+            <span class="text-xs font-mono text-slate-500">Real-Time Metric Rerouting</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs mb-3">
+            <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-rose-200 dark:border-rose-900/40">
+              <div class="flex items-center justify-between font-bold text-rose-700 dark:text-rose-400 mb-1">
+                <span>Path 1: A &rarr; B &rarr; D (Congested)</span>
+                <span class="px-1.5 py-0.5 rounded bg-rose-100 text-rose-700 text-[10px]">CHOKED</span>
+              </div>
+              <ul class="space-y-1 text-[11px] text-slate-600 dark:text-slate-300 mt-2 font-mono">
+                <li>• Estimated Latency: <strong class="text-rose-600">150 ms</strong></li>
+                <li>• Link Utilization: <strong class="text-rose-600">95% (Near Saturation)</strong></li>
+                <li>• Residual Bandwidth: <strong class="text-rose-600">5 Mbps</strong></li>
+              </ul>
+              <div class="mt-2 text-[10px] text-rose-700 bg-rose-50 dark:bg-rose-950/30 p-1.5 rounded">
+                &times; Heavy queuing delay and high buffer overflow drop risk.
+              </div>
+            </div>
+
+            <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-emerald-200 dark:border-emerald-900/40">
+              <div class="flex items-center justify-between font-bold text-emerald-700 dark:text-emerald-400 mb-1">
+                <span>Path 2: A &rarr; C &rarr; D (Alternate)</span>
+                <span class="px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700 text-[10px]">&check; SELECTED</span>
+              </div>
+              <ul class="space-y-1 text-[11px] text-slate-600 dark:text-slate-300 mt-2 font-mono">
+                <li>• Estimated Latency: <strong class="text-emerald-600">40 ms (3.75x Faster)</strong></li>
+                <li>• Link Utilization: <strong class="text-emerald-600">35% (Lightly Loaded)</strong></li>
+                <li>• Residual Bandwidth: <strong class="text-emerald-600">40 Mbps (8x Capacity)</strong></li>
+              </ul>
+              <div class="mt-2 text-[10px] text-emerald-700 bg-emerald-50 dark:bg-emerald-950/30 p-1.5 rounded">
+                &check; Smooth packet forwarding; bypasses congested link.
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-200 dark:border-blue-800/50 text-[11px] text-blue-900 dark:text-blue-300">
+            <strong>Key Mechanism:</strong> Dynamic link weight function $C(e) = C_0(e) + \alpha \cdot \frac{U(e)}{1 - U(e)}$ heavily penalizes links nearing 100% capacity, steering flows toward underutilized paths while damping avoids route flapping.
+          </div>
+        </div>
+      `;
+    }
+
+    if (id === 'admission-control') {
+      return `
+        <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+            <div>
+              <span class="text-[10px] font-black tracking-wider uppercase text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/60 px-2.5 py-1 rounded">Congestion Prevention</span>
+              <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">Flow Admission Control & Resource Reservation Gate</h4>
+            </div>
+            <span class="text-xs font-mono text-slate-500">Pre-Transmission Check</span>
+          </div>
+
+          <!-- Capacity Bar Visualization -->
+          <div class="p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 mb-3 text-xs">
+            <div class="flex justify-between font-bold mb-1.5 text-[11px]">
+              <span>100 Mbps Backbone Link Allocation:</span>
+              <span class="font-mono text-purple-600">Total = 100 Mbps</span>
+            </div>
+            <div class="w-full bg-slate-200 dark:bg-slate-700 h-5 rounded-full overflow-hidden flex">
+              <div class="bg-indigo-600 h-full text-[10px] text-white flex items-center justify-center font-bold" style="width: 70%;">Active: 70 Mbps</div>
+              <div class="bg-emerald-500 h-full text-[10px] text-white flex items-center justify-center font-bold" style="width: 20%;">Req 1: 20 Mbps</div>
+              <div class="bg-amber-400 h-full text-[10px] text-slate-900 flex items-center justify-center font-bold" style="width: 10%;">Free: 10M</div>
+            </div>
+            <div class="grid grid-cols-2 gap-2 mt-3 pt-2 border-t border-slate-100 dark:border-slate-700 text-[11px]">
+              <div class="p-2 rounded bg-emerald-50 dark:bg-emerald-950/30 text-emerald-800 dark:text-emerald-200">
+                <strong>&check; Request 1 (20 Mbps):</strong> 30 Mbps free &ge; 20 Mbps needed &rarr; <span class="font-bold underline">ACCEPTED</span>.
+              </div>
+              <div class="p-2 rounded bg-rose-50 dark:bg-rose-950/30 text-rose-800 dark:text-rose-200">
+                <strong>&times; Request 2 (25 Mbps):</strong> Only 10 Mbps free &lt; 25 Mbps needed &rarr; <span class="font-bold underline">REJECTED</span>.
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3 bg-purple-50 dark:bg-purple-950/30 rounded-lg border border-purple-200 dark:border-purple-800/50 text-[11px] text-purple-900 dark:text-purple-300">
+            <strong>Analogy & Purpose:</strong> Like a 50-seat classroom turning away a 10-person group once 48 seats are filled, admission control protects existing flows from packet drops and quality degradation.
+          </div>
+        </div>
+      `;
+    }
+
+    if (id === 'traffic-throttling') {
+      return `
+        <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+            <div>
+              <span class="text-[10px] font-black tracking-wider uppercase text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded">Rate Regulation</span>
+              <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">Traffic Shaping: Token Bucket vs. Leaky Bucket</h4>
+            </div>
+            <span class="text-xs font-mono text-slate-500">Pacing & Feedback (ECN)</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs mb-3">
+            <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-blue-200 dark:border-blue-900/40">
+              <div class="font-bold text-blue-700 dark:text-blue-300 mb-1 flex items-center justify-between">
+                <span>&bull; Token Bucket Algorithm</span>
+                <span class="text-[10px] bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded">Permits Bursts</span>
+              </div>
+              <ul class="space-y-1.5 text-[11px] text-slate-600 dark:text-slate-300 mt-2">
+                <li>• <strong>Token Pool:</strong> Tokens generate at constant rate $\rho$; bucket holds up to $\beta$.</li>
+                <li>• <strong>Bursts:</strong> Transmits at wire speed $C$ for duration $S = \frac{\beta}{C - \rho}$.</li>
+                <li>• <strong>Overflow:</strong> Discards idle tokens; packets stay safely in queue.</li>
+              </ul>
+            </div>
+
+            <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-indigo-200 dark:border-indigo-900/40">
+              <div class="font-bold text-indigo-700 dark:text-indigo-300 mb-1 flex items-center justify-between">
+                <span>&bull; Leaky Bucket Algorithm</span>
+                <span class="text-[10px] bg-indigo-100 text-indigo-800 px-1.5 py-0.5 rounded">Rigid Rate</span>
+              </div>
+              <ul class="space-y-1.5 text-[11px] text-slate-600 dark:text-slate-300 mt-2">
+                <li>• <strong>Smooth Output:</strong> Irregular packet arrivals enter FIFO queue.</li>
+                <li>• <strong>Fixed Leak:</strong> Emits packets at strictly constant uniform rate $r$.</li>
+                <li>• <strong>Overflow:</strong> Discards incoming packets if bucket queue fills up.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800/50 text-[11px] text-emerald-900 dark:text-emerald-300">
+            <strong>Closed-Loop Feedback:</strong> Modern routers set Explicit Congestion Notification (ECN RFC 3168) bits in IP headers, prompting senders to throttle rates <em>before</em> packets are dropped.
+          </div>
+        </div>
+      `;
+    }
+
+    if (id === 'load-shedding') {
+      return `
+        <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+            <div>
+              <span class="text-[10px] font-black tracking-wider uppercase text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/60 px-2.5 py-1 rounded">Emergency Relief</span>
+              <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">Router Buffer Overload & Selective Load Shedding</h4>
+            </div>
+            <span class="text-xs font-mono text-slate-500">Wine vs. Milk Policies</span>
+          </div>
+
+          <!-- Buffer Discard Calculation Card -->
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 mb-3 text-xs font-mono">
+            <div class="text-[11px] font-bold text-slate-700 dark:text-slate-200 mb-1">Syllabus Calculation: Buffer Capacity = 100 Packets</div>
+            <div class="grid grid-cols-3 gap-2 text-center text-[10px] my-2">
+              <div class="p-1.5 bg-slate-100 dark:bg-slate-700 rounded">Queued: <strong>90 pkts</strong></div>
+              <div class="p-1.5 bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-blue-200 rounded">Available: <strong>10 pkts</strong></div>
+              <div class="p-1.5 bg-rose-100 dark:bg-rose-950 text-rose-800 dark:text-rose-200 rounded">Arriving: <strong>30 pkts</strong></div>
+            </div>
+            <div class="p-2 rounded bg-rose-50 dark:bg-rose-950/40 text-rose-800 dark:text-rose-200 text-[11px]">
+              &rArr; 10 packets accepted into remaining buffer; <strong>20 packets must be discarded</strong>.
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+            <div class="p-3 bg-purple-50 dark:bg-purple-950/30 rounded-xl border border-purple-200 dark:border-purple-800">
+              <div class="font-bold text-purple-700 dark:text-purple-300 mb-1">&bull; Wine Policy (File Transfers)</div>
+              <p class="text-[11px] text-slate-600 dark:text-slate-300">
+                <em>"Old is better than new."</em> Discard newly arrived packets; preserve older packets that have already traversed multiple hops to protect invested network work.
+              </p>
+            </div>
+
+            <div class="p-3 bg-amber-50 dark:bg-amber-950/30 rounded-xl border border-amber-200 dark:border-amber-800">
+              <div class="font-bold text-amber-700 dark:text-amber-300 mb-1">&bull; Milk Policy (VoIP / Streaming)</div>
+              <p class="text-[11px] text-slate-600 dark:text-slate-300">
+                <em>"Fresh is better than stale."</em> Discard old buffered packets whose playback deadline has passed; forward fresh, newly arrived frames.
+              </p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Default / Master Overview
     return `
       <div class="clean-diagram-card bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
         <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
           <div>
-            <span class="text-[10px] font-black tracking-wider uppercase text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded">Congestion Approaches</span>
-            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">Traffic Shaping (Leaky vs Token Bucket) & Load Shedding Policies</h4>
+            <span class="text-[10px] font-black tracking-wider uppercase text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded">Master Overview</span>
+            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 mt-1">The Four Pillars of Congestion Control</h4>
           </div>
-          <span class="text-xs font-mono text-slate-500">Open-Loop vs Closed-Loop</span>
+          <span class="text-xs font-mono text-slate-500">Unit 3 &bull; Topic 5</span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-          <!-- Leaky vs Token Bucket -->
-          <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
-            <div class="font-bold text-emerald-700 dark:text-emerald-300 mb-2">Traffic Shaping Models</div>
-            <div class="space-y-2 text-[11px]">
-              <div class="p-2 rounded bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-200 font-mono">
-                🪣 Leaky Bucket: Rigid constant rate output regardless of burstiness. Excess dropped.
-              </div>
-              <div class="p-2 rounded bg-blue-50 dark:bg-blue-950/40 text-blue-800 dark:text-blue-200 font-mono">
-                🪙 Token Bucket: Accumulates tokens; allows regulated bursts up to bucket capacity.
-              </div>
-            </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 text-xs">
+          <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+            <div class="font-bold text-blue-600 mb-1">1. Traffic-Aware</div>
+            <p class="text-[10px] text-slate-500">Reroutes packets to less congested paths based on delay and link utilization.</p>
           </div>
-
-          <!-- Wine vs Milk Load Shedding -->
-          <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
-            <div class="font-bold text-purple-700 dark:text-purple-300 mb-2">Load Shedding Discard Policies</div>
-            <div class="space-y-2 text-[11px]">
-              <div class="p-2 rounded bg-purple-50 dark:bg-purple-950/40 text-purple-800 dark:text-purple-200">
-                🍷 <strong>Wine Policy (File Transfer):</strong> Discard newly arrived packets; preserve old packets already close to destination.
-              </div>
-              <div class="p-2 rounded bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-200">
-                🥛 <strong>Milk Policy (Streaming Video/Voice):</strong> Discard stale old packets; preserve fresh incoming packets.
-              </div>
-            </div>
+          <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+            <div class="font-bold text-purple-600 mb-1">2. Admission Control</div>
+            <p class="text-[10px] text-slate-500">Proactively accepts or rejects new flows to guarantee resources for active sessions.</p>
+          </div>
+          <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+            <div class="font-bold text-emerald-600 mb-1">3. Traffic Throttling</div>
+            <p class="text-[10px] text-slate-500">Shapes transmission speeds using Token Bucket and Leaky Bucket algorithms.</p>
+          </div>
+          <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+            <div class="font-bold text-rose-600 mb-1">4. Load Shedding</div>
+            <p class="text-[10px] text-slate-500">Deliberately drops selected packets (Wine/Milk) to prevent total network collapse.</p>
           </div>
         </div>
       </div>
     `;
-  },
-
+  }
 };
 
 if (typeof window !== 'undefined') {

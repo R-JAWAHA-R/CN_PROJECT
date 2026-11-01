@@ -2466,122 +2466,140 @@ const TOPICS_U3_EXT = {
   "traffic-aware-routing": {
     "id": "traffic-aware-routing",
     "title": "Traffic-Aware Routing",
-    "unit": "Unit 3 – Network Layer",
+    "unit": "Unit 3: Network Layer",
     "unitId": "unit3",
-    "level": "Level 1 — Core Topic",
-    "category": "network",
-    "difficulty": "Advanced",
-    "readingTime": "15 min read",
-    "standard": "Tanenbaum Ch 5.3.2 / Kurose & Ross Ch 5.2 / RFC 2676",
-    "oneLiner": "Dynamically shifting traffic away from congested links by incorporating queuing delays and link loads into routing metrics.",
-    "quickAnswer": "Traffic-Aware Routing is a congestion prevention approach where routing algorithms dynamically incorporate real-time traffic loads (queue lengths, latency, link utilization) into link weight metrics to steer packets around congested hotspots. To prevent catastrophic route oscillations (traffic thrashing back and forth), modern implementations use multi-path routing and metric smoothing.",
-    "whyItMatters": "Standard routing algorithms choose paths based strictly on static topology (bandwidth, hop count), oblivious to traffic jams. When thousands of users stream video, static paths become saturated while alternate links sit idle. Traffic-aware routing balances load dynamically across the entire network topology.",
+    "level": "Core Syllabus",
+    "category": "Congestion Control Approaches",
+    "difficulty": "Intermediate",
+    "readingTime": "12 min",
+    "standard": "IEEE / IETF RFC 2676 (QoS Routing)",
+    "oneLiner": "Dynamic routing approach that selects paths based on real-time traffic conditions, delay, and link utilization to avoid congested bottlenecks.",
+    "quickAnswer": "Traffic-Aware Routing shifts data packet paths dynamically away from heavily loaded, congested links toward underutilized alternative paths with lower delays and higher available bandwidth, rather than relying solely on static link weights or fixed hop counts.",
+    "whyItMatters": "In static routing, traffic piles up on the shortest hop path until queues overflow and packets drop, even while parallel paths sit idle. Traffic-aware routing balances network load, prevents hot-spot congestion, optimizes bandwidth utilization, and lowers average packet delivery latency.",
     "infobox": {
-      "prerequisites": [
-        "dijkstra"
-      ],
-      "relatedConcepts": [
-        "admission-control",
-        "traffic-throttling",
-        "load-shedding"
-      ],
-      "compareWith": [
-        "static-vs-traffic-aware-routing"
-      ],
+      "approachType": "Proactive / Dynamic Routing Adaptation",
+      "primaryGoal": "Route traffic through less congested, low-delay paths",
+      "metricsEvaluated": "Queue length, link utilization (%), RTT delay, available bandwidth",
+      "keyAnalogy": "GPS navigation (e.g., Google Maps) rerouting cars around highway traffic jams",
+      "protocolExamples": "MPLS-TE, SDN OpenFlow Controllers, OSPF-TE, Cisco EIGRP (composite metric)",
       "primaryUses": [
-        "Software-Defined WAN (SD-WAN) dynamic tunnel steering",
-        "Constraint-Based Shortest Path First (CSPF) in MPLS Traffic Engineering",
-        "Content Delivery Network (CDN) backbone link load balancing",
-        "Preventing bottleneck congestion in hyperscaler data center fabrics"
-      ],
-      "standardRfc": "RFC 2676 (QoS Routing in OSPF)"
+        "SD-WAN Multi-Cloud Routing",
+        "Data Center Traffic Engineering",
+        "ISP Backbone Latency Optimization"
+      ]
     },
-    "learningObjectives": [
-      "Understand why static metric routing causes hotspot congestion",
-      "Explain how queue delays and bandwidth utilization are factored into link weights",
-      "Describe the Route Oscillation (Traffic Thrashing) phenomenon",
-      "Analyze techniques to damp oscillations: multi-path routing and metric smoothing",
-      "Contrast open-loop traffic-aware routing with closed-loop throttling"
-    ],
     "prerequisitesList": [
       {
-        "concept": "Shortest Path Routing",
-        "meaning": "Understanding Dijkstra SPF and link weight assignment"
+        "concept": "Static vs. Dynamic Routing",
+        "meaning": "Understanding fixed Dijkstra hop weights vs adaptive runtime metric updates."
+      },
+      {
+        "concept": "Queuing Latency & Buffering",
+        "meaning": "How packet build-up in router memory causes queuing delay and packet loss."
+      },
+      {
+        "concept": "Bandwidth & Utilization",
+        "meaning": "The relationship between arrival rate, link capacity, and percentage saturation."
       }
     ],
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Traffic_policing_and_shaping.svg",
-    "imageCaption": "Figure 3.17: Traffic-Aware Dynamic Routing: Load-Sensitive Path Selection & Oscillation Prevention.",
+    "learningObjectives": [
+      "Define network congestion, its root causes, and its severe performance impacts.",
+      "Explain the fundamental difference between Flow Control and Congestion Control.",
+      "Describe how Traffic-Aware Routing monitors network load and selects optimal paths.",
+      "Analyze the worked numerical comparison of Path A vs. Path B from the PDF syllabus.",
+      "Identify the core techniques: Load-based, Delay-based, and Bandwidth-based routing.",
+      "Evaluate the trade-offs of traffic-aware routing, including route oscillation and monitoring overhead."
+    ],
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Routing_table_concept.svg/800px-Routing_table_concept.svg.png",
+    "imageCaption": "Figure 5.1: Traffic-Aware Routing dynamically balances flows across underutilized links to avoid congested choke points.",
     "sections": {
-      "overview": "\n        <p class=\"mb-3\">\n          Most fundamental routing protocols (such as standard OSPF or RIP) compute routes based on <strong>static metrics</strong> (such as hop count or fixed link bandwidth). While simple, this approach ignores real-time traffic loads. A link may be completely saturated with packets dropped due to buffer overflow, yet the static routing algorithm continues sending all traffic over it because it is theoretically the 'shortest' path.\n        </p>\n        <p class=\"mb-3\">\n          <strong>Traffic-Aware Routing</strong> makes link metrics dynamic functions of the link's current load:\n        </p>\n        <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded border border-emerald-200 dark:border-emerald-800 text-xs mb-3 font-mono text-center font-bold\">\n          Metric = Static Link Delay + (Queue Length / Line Capacity)\n        </div>\n        <p class=\"text-xs\">\n          As a link becomes congested, its reported cost increases, causing subsequent route calculations to naturally divert traffic onto alternate, uncongested paths.\n        </p>\n      ",
-      "howItWorks": "\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">1. The Route Oscillation Problem (Traffic Thrashing)</h3>\n        <p class=\"mb-3 text-xs\">\n          While traffic-aware routing sounds ideal, naive implementations suffer from severe <strong>route oscillations</strong>:\n        </p>\n        <div class=\"space-y-2 text-xs mb-4 font-mono\">\n          <div class=\"p-2.5 bg-slate-100 dark:bg-slate-800 rounded\">\n            1. All traffic is initially routed over Link A (the low-delay link).<br/>\n            2. Link A becomes congested, and its dynamic cost spikes to 100.<br/>\n            3. Link B is empty (cost 10). The next route calculation switches <strong>100% of the traffic</strong> from Link A to Link B!<br/>\n            4. Now Link B becomes saturated (cost 100), while Link A sits completely idle (cost 10).<br/>\n            5. In the next round, all traffic swings back to Link A!\n          </div>\n        </div>\n        <p class=\"text-xs mb-3\">\n          This thrashing leads to unstable packet delays, packet reordering, and routing instability.\n        </p>\n\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">2. Solutions to Prevent Route Oscillations</h3>\n        <ul class=\"list-disc pl-5 space-y-2 text-xs mb-4\">\n          <li><strong>Multi-Path Routing (ECMP & Flowlet Switching):</strong> Instead of shifting all traffic to the best link, routers split traffic across multiple paths proportional to capacity and load.</li>\n          <li><strong>Metric Smoothing (Exponential Moving Average):</strong> Rather than reacting to instantaneous queue spikes, link weights are averaged over time: (\text{Metric}_{new} = alpha cdot \text{Metric}_{old} + (1 - alpha) cdot \text{Load}_{current}).</li>\n          <li><strong>Asynchronous Update Timers:</strong> Routers run their recalculations at randomized, desynchronized intervals so they do not all switch paths simultaneously.</li>\n        </ul>\n      ",
-      "technicalDetails": "\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">3. Multi-Protocol Label Switching (MPLS-TE)</h3>\n        <p class=\"text-xs mb-3\">\n          Modern enterprise backbones deploy traffic-aware routing via <strong>MPLS Traffic Engineering (MPLS-TE)</strong>. In MPLS-TE, routers use OSPF-TE or IS-IS-TE extensions to advertise available link bandwidth alongside topology. A head-end router uses <strong>Constraint-Based Shortest Path First (CSPF)</strong> to establish explicit label-switched paths that avoid links exceeding a given utilization threshold (e.g. 70%).\n        </p>\n      ",
+      "overview": "\n      <h3>1. Introduction to Network Congestion</h3>\n      <p>\n        In computer networks, <strong>congestion</strong> occurs when the aggregate volume of data packets entering a network exceeds the physical capacity of routers and communication links to process, buffer, and transmit them efficiently.\n      </p>\n      <div class=\"p-4 my-3 bg-amber-50 dark:bg-amber-950/40 border-l-4 border-amber-500 rounded-r-lg\">\n        <h4 class=\"font-bold text-amber-800 dark:text-amber-200 text-sm mb-1\">Simple Road Analogy</h4>\n        <p class=\"text-xs text-amber-900 dark:text-amber-300\">\n          Think of a highway system with multiple lanes. When too many vehicles enter the highway simultaneously, average vehicle speeds drop, queues form behind toll gates and exits, and travel times spike. Similarly, when too many data packets enter a router, queues fill up, transmission delays soar, and packets get dropped.\n        </p>\n      </div>\n\n      <h4>Real-Life Scenario: Campus Network Overload</h4>\n      <p>\n        Consider a university campus dormitory where 100 students are connected to the same shared Internet gateway:\n      </p>\n      <ul class=\"list-disc pl-5 space-y-1 my-2 text-xs\">\n        <li>Some students are streaming high-definition 4K video.</li>\n        <li>Others are downloading massive software updates and game files.</li>\n        <li>Several are participating in live, interactive video conferencing sessions.</li>\n        <li>Others are gaming online and browsing the web.</li>\n      </ul>\n      <p>\n        If the combined bandwidth requirement exceeds the link's capacity, the router's queue overflows, leading to video buffering, sluggish browsing, packet loss, and connection instability.\n      </p>\n\n      <h4>Primary Causes of Network Congestion</h4>\n      <ol class=\"list-decimal pl-5 space-y-1.5 my-2 text-xs\">\n        <li><strong>Excessive Network Traffic:</strong> Too many simultaneous sending endpoints pumping data into shared pipes.</li>\n        <li><strong>Limited Bandwidth:</strong> Physical link capacities (e.g., a 10 Mbps bottleneck link between 1 Gbps LANs) cannot keep up with traffic bursts.</li>\n        <li><strong>Slow Router Processors:</strong> Routers with constrained CPU or memory architectures struggle to process packet headers and route lookups at line rate.</li>\n        <li><strong>Bursty Traffic Patterns:</strong> Data traffic is rarely smooth; sharp bursts (e.g., file transfers or web page loads) temporarily swamp buffer pools.</li>\n        <li><strong>Network Bottlenecks:</strong> Architectural mismatch where multiple high-speed links feed into a single low-capacity trunk.</li>\n        <li><strong>Poor Traffic Distribution:</strong> Static shortest-path routing sends all packets down a single \"optimal\" path while alternate, slightly longer routes sit idle.</li>\n      </ol>\n\n      <h4>Effects of Network Congestion</h4>\n      <div class=\"overflow-x-auto my-3\">\n        <table class=\"w-full text-xs text-left border border-slate-200 dark:border-slate-700\">\n          <thead class=\"bg-slate-100 dark:bg-slate-800 font-bold\">\n            <tr>\n              <th class=\"p-2 border\">Congestion Effect</th>\n              <th class=\"p-2 border\">Technical Consequence</th>\n            </tr>\n          </thead>\n          <tbody class=\"divide-y divide-slate-200 dark:divide-slate-700\">\n            <tr>\n              <td class=\"p-2 border font-semibold text-rose-600 dark:text-rose-400\">Increased Latency</td>\n              <td class=\"p-2 border\">Packets spend extended periods waiting in router queues (queuing delay dominates).</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold text-rose-600 dark:text-rose-400\">Packet Loss</td>\n              <td class=\"p-2 border\">When packet buffers fill completely, routers discard incoming packets (buffer overflow).</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold text-rose-600 dark:text-rose-400\">Reduced Goodput</td>\n              <td class=\"p-2 border\">Bandwidth is wasted transporting packets that are dropped downstream or retransmitted.</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold text-rose-600 dark:text-rose-400\">Retransmission Storms</td>\n              <td class=\"p-2 border\">TCP senders time out and retransmit dropped packets, compounding the network overload.</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold text-rose-600 dark:text-rose-400\">High Jitter</td>\n              <td class=\"p-2 border\">Fluctuating queue depths introduce wide variations in packet arrival intervals, ruining real-time audio/video.</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n\n      <h4>Congestion Control vs. Flow Control: The Critical Distinction</h4>\n      <p>\n        Students frequently confuse these two foundational concepts:\n      </p>\n      <div class=\"grid grid-cols-1 md:grid-cols-2 gap-3 my-3 text-xs\">\n        <div class=\"p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-200 dark:border-blue-800\">\n          <h5 class=\"font-bold text-blue-700 dark:text-blue-300 mb-1\">Flow Control (End-to-End)</h5>\n          <ul class=\"space-y-1 text-slate-600 dark:text-slate-300\">\n            <li>• <strong>Scope:</strong> Point-to-point between a single sender and single receiver.</li>\n            <li>• <strong>Objective:</strong> Prevents a fast sender from overwhelming a slow receiver's buffer.</li>\n            <li>• <strong>Mechanism:</strong> Sliding window advertisements (e.g., TCP Receiver Window <code>rwnd</code>).</li>\n            <li>• <strong>Perspective:</strong> Receiver capacity only.</li>\n          </ul>\n        </div>\n        <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800\">\n          <h5 class=\"font-bold text-emerald-700 dark:text-emerald-300 mb-1\">Congestion Control (Network-Wide)</h5>\n          <ul class=\"space-y-1 text-slate-600 dark:text-slate-300\">\n            <li>• <strong>Scope:</strong> Global across all intermediate routers, switches, and shared links.</li>\n            <li>• <strong>Objective:</strong> Prevents all senders combined from overloading shared network infrastructure.</li>\n            <li>• <strong>Mechanism:</strong> Traffic-aware routing, admission control, throttling, and load shedding.</li>\n            <li>• <strong>Perspective:</strong> Intermediate network capacity.</li>\n          </ul>\n        </div>\n      </div>\n    ",
+      "howItWorks": "\n      <h3>2. How Traffic-Aware Routing Operates</h3>\n      <p>\n        In traditional static routing (such as standard Dijkstra or RIP), link costs are fixed constants (e.g., $1$ per hop, or inversely proportional to link capacity). When traffic surges along the designated shortest path, the routing protocol continues to funnel all traffic down that path until congestion collapses throughput.\n      </p>\n      <p>\n        <strong>Traffic-Aware Routing</strong> incorporates real-time operational metrics into link cost calculations. Routes are dynamically computed so that paths with high utilization, long queues, or large packet delays appear \"more expensive\", directing subsequent traffic across lightly loaded parallel paths.\n      </p>\n\n      <h4>The 6-Step Operational Lifecycle</h4>\n      <div class=\"space-y-2 my-3 text-xs\">\n        <div class=\"p-2.5 bg-white dark:bg-slate-800 border rounded-lg flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-blue-100 text-blue-700 font-bold rounded\">Step 1</span>\n          <div>\n            <strong>Monitor Network Conditions:</strong> Routers continuously collect telemetry on outgoing links, measuring queue lengths, round-trip packet delays (RTT), packet loss ratios, and link bandwidth utilization.\n          </div>\n        </div>\n        <div class=\"p-2.5 bg-white dark:bg-slate-800 border rounded-lg flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-indigo-100 text-indigo-700 font-bold rounded\">Step 2</span>\n          <div>\n            <strong>Identify Congested Links:</strong> Links whose average queue depth or utilization exceeds configurable thresholds (e.g., $> 75\\%$) are flagged as congested.\n          </div>\n        </div>\n        <div class=\"p-2.5 bg-white dark:bg-slate-800 border rounded-lg flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-purple-100 text-purple-700 font-bold rounded\">Step 3</span>\n          <div>\n            <strong>Evaluate Alternative Routes:</strong> The routing engine computes alternative loop-free paths using dynamic composite cost metrics.\n          </div>\n        </div>\n        <div class=\"p-2.5 bg-white dark:bg-slate-800 border rounded-lg flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-amber-100 text-amber-700 font-bold rounded\">Step 4</span>\n          <div>\n            <strong>Select the Optimal Path:</strong> The route that minimizes end-to-end latency while avoiding congested links is selected.\n          </div>\n        </div>\n        <div class=\"p-2.5 bg-white dark:bg-slate-800 border rounded-lg flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-emerald-100 text-emerald-700 font-bold rounded\">Step 5</span>\n          <div>\n            <strong>Forward Packets:</strong> Traffic flows are switched to the newly chosen path smoothly (often using multipath or flow-hash preservation).\n          </div>\n        </div>\n        <div class=\"p-2.5 bg-white dark:bg-slate-800 border rounded-lg flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-rose-100 text-rose-700 font-bold rounded\">Step 6</span>\n          <div>\n            <strong>Continuous Feedback & Damping:</strong> Network monitoring continues. Filtering and hysteresis are applied to prevent route flapping between paths.\n          </div>\n        </div>\n      </div>\n\n      <h4>Numerical Example from Syllabus: Path A vs. Path B</h4>\n      <p>\n        Consider a source router $A$ needing to deliver traffic to destination $D$. Two distinct transit paths exist:\n      </p>\n      <ul class=\"list-disc pl-5 text-xs mb-2\">\n        <li><strong>Path 1:</strong> $A \\rightarrow B \\rightarrow D$ (Primary path)</li>\n        <li><strong>Path 2:</strong> $A \\rightarrow C \\rightarrow D$ (Alternative path)</li>\n      </ul>\n      <div class=\"overflow-x-auto my-2\">\n        <table class=\"w-full text-xs text-left border border-slate-200 dark:border-slate-700\">\n          <thead class=\"bg-slate-100 dark:bg-slate-800 font-bold\">\n            <tr>\n              <th class=\"p-2 border\">Evaluated Metric</th>\n              <th class=\"p-2 border\">Path 1 ($A-B-D$)</th>\n              <th class=\"p-2 border\">Path 2 ($A-C-D$)</th>\n              <th class=\"p-2 border\">Better Choice</th>\n            </tr>\n          </thead>\n          <tbody class=\"divide-y divide-slate-200 dark:divide-slate-700\">\n            <tr>\n              <td class=\"p-2 border font-medium\">Estimated End-to-End Delay</td>\n              <td class=\"p-2 border text-rose-600 font-mono\">150 ms</td>\n              <td class=\"p-2 border text-emerald-600 font-mono\">40 ms</td>\n              <td class=\"p-2 border font-bold text-emerald-600\">Path 2 (3.75x lower delay)</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-medium\">Current Link Utilization</td>\n              <td class=\"p-2 border text-rose-600 font-mono\">95% (Near Saturation)</td>\n              <td class=\"p-2 border text-emerald-600 font-mono\">35% (Lightly Loaded)</td>\n              <td class=\"p-2 border font-bold text-emerald-600\">Path 2 (Ample Headroom)</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-medium\">Available Residual Bandwidth</td>\n              <td class=\"p-2 border text-rose-600 font-mono\">5 Mbps</td>\n              <td class=\"p-2 border text-emerald-600 font-mono\">40 Mbps</td>\n              <td class=\"p-2 border font-bold text-emerald-600\">Path 2 (8x more capacity)</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n      <p class=\"text-xs text-slate-600 dark:text-slate-300 mt-2\">\n        <strong>Decision:</strong> Under a static metric, Path 1 might have been chosen because both have 2 hops. But Traffic-Aware Routing detects that Path 1 is choked ($95\\%$ utilization, $150\\text{ ms}$ delay), and reroutes incoming flows to <strong>Path 2</strong> ($35\\%$ utilization, $40\\text{ ms}$ delay), completely bypassing the bottleneck.\n      </p>\n    ",
+      "technicalDetails": "\n      <h3>3. Technical Variations and Mathematical Cost Functions</h3>\n      <p>\n        How is link cost formulated in a traffic-aware system? Rather than a fixed constant, link cost $C(e)$ is a dynamic function of physical link bandwidth and current traffic load.\n      </p>\n\n      <h4>Dynamic Link Weight Formulas</h4>\n      <p>\n        A widely studied mathematical model for dynamic link metric evaluation incorporates queuing delay:\n      </p>\n      <div class=\"p-3 my-2 bg-slate-100 dark:bg-slate-800 rounded font-mono text-xs\">\n        $$C(e) = C_0(e) + \\alpha \\cdot \\frac{U(e)}{1 - U(e)}$$\n      </div>\n      <p class=\"text-xs\">\n        where $C_0(e)$ is the base propagation delay, $U(e) = \\frac{\\lambda(e)}{\\mu(e)}$ is the link utilization ratio (arrival rate over service rate), and $\\alpha$ is a scaling sensitivity constant. As utilization $U(e) \\to 1$ ($100\\%$), the queuing penalty shoots to infinity, compelling routing algorithms to avoid that link.\n      </p>\n\n      <h4>The 4 Core Traffic-Aware Routing Techniques</h4>\n      <div class=\"grid grid-cols-1 sm:grid-cols-2 gap-3 my-3 text-xs\">\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded border\">\n          <div class=\"font-bold text-blue-600 mb-1\">1. Load-Based Routing</div>\n          <p class=\"text-slate-600 dark:text-slate-300\">\n            Directly monitors the instantaneous or moving-average volume of bits traversing a link. Flows are steered toward paths with the lowest total load.\n          </p>\n        </div>\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded border\">\n          <div class=\"font-bold text-indigo-600 mb-1\">2. Delay-Based Routing</div>\n          <p class=\"text-slate-600 dark:text-slate-300\">\n            Measures round-trip time (RTT) and queuing latency using timestamped probing packets. Paths with the shortest observed latency are prioritized.\n          </p>\n        </div>\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded border\">\n          <div class=\"font-bold text-purple-600 mb-1\">3. Bandwidth-Based Routing</div>\n          <p class=\"text-slate-600 dark:text-slate-300\">\n            Evaluates unallocated or residual bandwidth. Often used in Quality of Service Routing (QoSR) to find paths that satisfy minimum throughput guarantees.\n          </p>\n        </div>\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded border\">\n          <div class=\"font-bold text-emerald-600 mb-1\">4. Adaptive Multipath Routing</div>\n          <p class=\"text-slate-600 dark:text-slate-300\">\n            Splits traffic proportionally across multiple parallel paths (e.g., Equal-Cost or Weighted-Cost Multi-Path, ECMP/WCMP) based on current link capacities.\n          </p>\n        </div>\n      </div>\n\n      <h4>The Route Oscillation (Flapping) Problem & Remedies</h4>\n      <p class=\"text-xs\">\n        The primary operational danger in traffic-aware routing is <strong>route flapping</strong>:\n      </p>\n      <div class=\"p-3 my-2 bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800 rounded text-xs text-rose-800 dark:text-rose-200\">\n        <strong>The Oscillation Cycle:</strong><br/>\n        1. All routers see Path 1 is congested and Path 2 is empty $\\rightarrow$ All traffic shifts to Path 2.<br/>\n        2. Now Path 2 becomes choked and Path 1 empties out $\\rightarrow$ All traffic shifts back to Path 1.<br/>\n        3. Traffic ping-pongs violently back and forth, leading to out-of-order packets and instability.\n      </div>\n      <p class=\"text-xs\">\n        <strong>Mitigations:</strong> Modern networks prevent oscillations by:\n      </p>\n      <ul class=\"list-disc pl-5 text-xs space-y-1\">\n        <li><strong>Exponential Moving Average (EMA):</strong> Smoothing link load metrics over multi-minute windows so transient spikes do not trigger shifts.</li>\n        <li><strong>Hysteresis / Thresholds:</strong> Only rerouting if the alternative path is better by at least a substantial margin (e.g., $> 20\\%$ improvement).</li>\n        <li><strong>Multipath Splitting:</strong> Shifting only a fraction of new flows rather than migrating all existing traffic en masse.</li>\n      </ul>\n    ",
       "workedExamples": {
-        "level1": "\n          <strong>Dynamic Metric Calculation:</strong><br/>\n          A 1 Gbps link has a propagation delay of 5 ms.<br/>\n          • Idle state: Queue length = 0 packets ➔ Dynamic cost = 5 ms.<br/>\n          • Heavy traffic: Queue builds up to 10,000 packets (80 ms queuing delay) ➔ Dynamic cost = (5 + 80 = 85\text{ ms}).<br/>\n          • An alternate 100 Mbps link with a fixed 30 ms delay suddenly becomes the preferred lower-cost path!\n        ",
-        "level2": "\n          <strong>Exponential Moving Average (EMA) Smoothing:</strong><br/>\n          Historical smoothed cost = 20 ms. Current instantaneous load burst = 90 ms. Smoothing factor (alpha = 0.8).<br/>\n          (\text{Smoothed Cost} = (0.8 \times 20) + (0.2 \times 90) = 16 + 18 = mathbf{34\text{ ms}}).<br/>\n          The brief burst only moves the reported metric from 20 to 34 ms, preventing an immediate violent traffic swing.\n        ",
-        "level3": "\n          <strong>Flowlet Switching in Data Centers:</strong><br/>\n          To prevent TCP packet reordering when splitting traffic across multiple paths:<br/>\n          Routers detect 'flowlets'—bursts of packets belonging to the same TCP flow separated by an idle gap greater than path delay difference (e.g., > 50 µs).<br/>\n          Each flowlet is safely switched to the least congested path without causing out-of-order packet arrivals at the destination.\n        "
+        "level1": {
+          "title": "Level 1 (Intuitive): Basic Path Selection under Load",
+          "problem": "A router must forward traffic from host S to host D. Path 1 has an estimated delay of 120 ms with 85% link utilization. Path 2 has an estimated delay of 35 ms with 25% link utilization. Which path will Traffic-Aware Routing select, and why?",
+          "solution": "\n          <p><strong>Step 1: Compare delay and utilization metrics:</strong></p>\n          <ul>\n            <li>Path 1 Delay: $120\\text{ ms}$, Utilization: $85\\%$ (Heavy congestion risk)</li>\n            <li>Path 2 Delay: $35\\text{ ms}$, Utilization: $25\\%$ (Ample headroom)</li>\n          </ul>\n          <p><strong>Step 2: Decision:</strong></p>\n          <p>Traffic-Aware Routing selects <strong>Path 2</strong> because it offers both a substantially lower queuing latency ($35\\text{ ms}$ vs $120\\text{ ms}$) and low link utilization ($25\\%$ vs $85\\%$), preventing packet drops and buffering.</p>\n        "
+        },
+        "level2": {
+          "title": "Level 2 (Standard): Metric Calculation with Queuing Penalty",
+          "problem": "Two paths connect node X to Y. Path A has base propagation delay $C_0 = 10\\text{ ms}$ and utilization $U = 0.90$. Path B has base delay $C_0 = 25\\text{ ms}$ and utilization $U = 0.20$. Using the dynamic metric formula $C = C_0 + 5 \\cdot \\frac{U}{1 - U}$, compute the effective routing cost for each path and determine the selected route.",
+          "solution": "\n          <p><strong>Step 1: Compute cost for Path A:</strong></p>\n          $$C_A = 10 + 5 \\cdot \\frac{0.90}{1 - 0.90} = 10 + 5 \\cdot \\frac{0.90}{0.10} = 10 + 5 \\cdot 9 = 10 + 45 = 55\\text{ ms}$$\n          <p><strong>Step 2: Compute cost for Path B:</strong></p>\n          $$C_B = 25 + 5 \\cdot \\frac{0.20}{1 - 0.20} = 25 + 5 \\cdot \\frac{0.20}{0.80} = 25 + 5 \\cdot 0.25 = 25 + 1.25 = 26.25\\text{ ms}$$\n          <p><strong>Conclusion:</strong></p>\n          <p>Even though Path A has a lower physical base propagation delay ($10\\text{ ms}$ vs $25\\text{ ms}$), its high utilization imposes a massive queuing penalty ($45\\text{ ms}$). Path B yields an effective cost of $26.25\\text{ ms}$, which is less than half of Path A's cost of $55\\text{ ms}$. The router chooses <strong>Path B</strong>.</p>\n        "
+        },
+        "level3": {
+          "title": "Level 3 (Advanced): Preventing Route Oscillation with Threshold Damping",
+          "problem": "A network administrator configures a damping rule: traffic will only be migrated to an alternate path if the alternate path offers at least a 30% reduction in total cost ($C_{alt} < 0.70 \\cdot C_{curr}$). Current Path 1 has cost 50 ms. A telemetry update reports Path 2 has cost 38 ms. Will the router migrate traffic? At what cost on Path 2 would a route shift trigger?",
+          "solution": "\n          <p><strong>Step 1: Evaluate the threshold condition:</strong></p>\n          $$C_{threshold} = 0.70 \\cdot C_{curr} = 0.70 \\cdot 50\\text{ ms} = 35\\text{ ms}$$\n          <p><strong>Step 2: Compare Path 2's reported cost:</strong></p>\n          <p>Path 2 has a cost of $38\\text{ ms}$. Since $38\\text{ ms} > 35\\text{ ms}$, Path 2 is only $24\\%$ better, which fails the $30\\%$ improvement threshold.</p>\n          <p><strong>Result:</strong></p>\n          <p>The router will <strong>NOT</strong> migrate traffic, avoiding an unnecessary route shift. A migration will only trigger when Path 2's cost drops below <strong>35 ms</strong>.</p>\n        "
+        }
       },
-      "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 text-xs\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800\">\n            <h4 class=\"font-bold text-emerald-800 dark:text-emerald-300 mb-2\">Benefits</h4>\n            <ul class=\"space-y-1 list-disc pl-4 text-slate-700 dark:text-slate-300\">\n              <li>Maximizes aggregate network throughput and link utilization.</li>\n              <li>Automatically steers packets around localized congestion hotspots.</li>\n              <li>Significantly lowers median end-to-end packet latency.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/30 rounded-lg border border-rose-200 dark:border-rose-800\">\n            <h4 class=\"font-bold text-rose-800 dark:text-rose-300 mb-2\">Risks</h4>\n            <ul class=\"space-y-1 list-disc pl-4 text-slate-700 dark:text-slate-300\">\n              <li>Prone to violent route oscillations if not damped properly.</li>\n              <li>Out-of-order packet delivery can trigger spurious TCP retransmissions.</li>\n            </ul>\n          </div>\n        </div>\n      ",
+      "advantagesLimitations": "\n      <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 my-3 text-xs\">\n        <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded border border-emerald-200 dark:border-emerald-800\">\n          <h4 class=\"font-bold text-emerald-800 dark:text-emerald-200 mb-2\">Advantages of Traffic-Aware Routing</h4>\n          <ul class=\"space-y-1.5 text-slate-700 dark:text-slate-300\">\n            <li>✔ <strong>Eliminates Traffic Bottlenecks:</strong> Automatically diverts flows away from saturated links.</li>\n            <li>✔ <strong>Improves Network Utilization:</strong> Activates backup and alternate links that would otherwise idle.</li>\n            <li>✔ <strong>Minimizes Average Latency:</strong> Reduces queuing delay across the entire autonomous system.</li>\n            <li>✔ <strong>Reduces Packet Loss:</strong> Lowers the probability of router buffer overflow.</li>\n            <li>✔ <strong>Adapts to Traffic Bursts:</strong> Rapidly responds to unexpected traffic shifts.</li>\n          </ul>\n        </div>\n        <div class=\"p-3 bg-rose-50 dark:bg-rose-950/30 rounded border border-rose-200 dark:border-rose-800\">\n          <h4 class=\"font-bold text-rose-800 dark:text-rose-200 mb-2\">Disadvantages & Practical Challenges</h4>\n          <ul class=\"space-y-1.5 text-slate-700 dark:text-slate-300\">\n            <li>✘ <strong>Monitoring Overhead:</strong> Periodic telemetry exchanges consume control-plane bandwidth.</li>\n            <li>✘ <strong>Route Flapping / Oscillation:</strong> Rapid route changes can cause packets to arrive out of order.</li>\n            <li>✘ <strong>Computational Burden:</strong> Frequently recomputing Dijkstra or Bellman-Ford consumes router CPU cycles.</li>\n            <li>✘ <strong>Stale Information Lag:</strong> Decisions made on delayed telemetry can inadvertently route packets into newly formed congestion.</li>\n          </ul>\n        </div>\n      </div>\n    ",
       "whereUsed": [
-        "Software-Defined WAN (SD-WAN) systems (Cisco Viptela, Silver Peak)",
-        "Google B4 private global backbone network",
-        "Large-scale cloud data center fabrics (ECMP and flowlet switching)"
+        "Software-Defined WAN (SD-WAN): Steering enterprise cloud traffic across MPLS vs Broadband circuits based on live RTT and packet loss.",
+        "Cloud Data Center Interconnects (Google B4, Microsoft SWAN): Global SDN traffic engineering continuously re-optimizing WAN paths.",
+        "MPLS Traffic Engineering (MPLS-TE with RSVP): Core ISP backbones establishing Explicitly Routed Label Switched Paths.",
+        "Content Delivery Networks (CDNs): Akamai and Cloudflare dynamically steering DNS and Anycast routing to uncongested edge POPs."
       ],
-      "commonMistakes": "\n        <ul class=\"space-y-2 text-xs\">\n          <li><strong>Confusing traffic-aware routing with traffic throttling:</strong> Traffic-aware routing changes the path packets take; traffic throttling slows down the sender at the source.</li>\n          <li><strong>Ignoring packet reordering:</strong> Splitting packets of a single TCP connection across different delay paths causes packets to arrive out of order, crippling TCP performance.</li>\n        </ul>\n      ",
-      "compareWith": "static-vs-traffic-aware-routing",
+      "commonMistakes": "\n      <ul class=\"list-disc pl-5 text-xs space-y-1.5 text-slate-600 dark:text-slate-300\">\n        <li><strong>Confusing Congestion Control with Flow Control:</strong> Flow control is strictly sender-to-receiver (TCP sliding window); congestion control manages shared network links and intermediate router queues.</li>\n        <li><strong>Assuming Shortest Path is Always Fastest:</strong> A 1-hop link running at 99% utilization has vastly higher queuing delay than a 3-hop path running at 10% load.</li>\n        <li><strong>Ignoring Route Oscillation:</strong> Unconstrained dynamic routing leads to instability; commercial systems always employ dampening, moving averages, or flow-based pinning.</li>\n      </ul>\n    ",
+      "compareWith": "\n      <h4>Comparison: Static Routing vs. Traffic-Aware Routing</h4>\n      <div class=\"overflow-x-auto my-2\">\n        <table class=\"w-full text-xs text-left border border-slate-200 dark:border-slate-700\">\n          <thead class=\"bg-slate-100 dark:bg-slate-800 font-bold\">\n            <tr>\n              <th class=\"p-2 border\">Feature</th>\n              <th class=\"p-2 border\">Static / Traditional Routing</th>\n              <th class=\"p-2 border\">Traffic-Aware Routing</th>\n            </tr>\n          </thead>\n          <tbody class=\"divide-y divide-slate-200 dark:divide-slate-700\">\n            <tr>\n              <td class=\"p-2 border font-semibold\">Routing Metric</td>\n              <td class=\"p-2 border\">Fixed constants (Hop count, static link speed)</td>\n              <td class=\"p-2 border font-bold text-blue-600\">Dynamic (Delay, current utilization, queue depth)</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold\">Reaction to Overload</td>\n              <td class=\"p-2 border\">None; continues to pile packets onto congested link</td>\n              <td class=\"p-2 border font-bold text-emerald-600\">Reroutes flows to less congested alternative paths</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold\">Stability</td>\n              <td class=\"p-2 border\">Very high (routes never change unless topology breaks)</td>\n              <td class=\"p-2 border\">Requires dampening to avoid route flapping</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold\">Control Overhead</td>\n              <td class=\"p-2 border\">Minimal</td>\n              <td class=\"p-2 border\">Requires continuous telemetry monitoring and calculation</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    ",
       "quiz": [
         {
-          "question": "What is the primary objective of traffic-aware routing?",
+          "question": "What is the primary condition that causes network congestion?",
           "options": [
-            "To encrypt all user data packets",
-            "To incorporate current link loads and queuing delays into routing metrics to steer traffic away from congested hotspots",
-            "To ensure all packets follow the same physical cable",
-            "To increase router power consumption"
+            "A computer is powered off unexpectedly",
+            "Incoming traffic exceeds the available processing and transmission capacity of network resources",
+            "A router changes its MAC address",
+            "A packet header is encrypted"
           ],
           "answer": 1,
-          "explanation": "Traffic-aware routing factors real-time queuing delays and link utilization into routing metrics to divert packets away from congested links."
+          "explanation": "Network congestion occurs when incoming data volume exceeds the capacity of routers and transmission links to process and forward packets efficiently."
         },
         {
-          "question": "What major problem occurs if a traffic-aware algorithm shifts all traffic to an uncongested link immediately?",
+          "question": "Which of the following metrics does Traffic-Aware Routing consider when selecting a path?",
           "options": [
-            "Route oscillation (traffic thrashing back and forth between links)",
-            "Permanent cable damage",
-            "Router memory erasure",
-            "IP address depletion"
+            "Monitor screen brightness",
+            "Operating system version of the sender",
+            "Current network load, queue length, and available bandwidth",
+            "File extension of the payload"
           ],
-          "answer": 0,
-          "explanation": "Rapidly shifting all traffic causes the newly chosen link to become congested while the old link becomes empty, triggering continuous oscillations."
+          "answer": 2,
+          "explanation": "Traffic-Aware Routing takes real-time operational parameters into account, including link utilization, queuing delay, available bandwidth, and packet loss."
         },
         {
-          "question": "Which technique helps prevent route oscillations in traffic-aware routing?",
+          "question": "How does Flow Control fundamentally differ from Congestion Control?",
           "options": [
-            "Metric smoothing using exponential moving averages and multi-path routing",
-            "Disabling all routing tables",
-            "Using only 10 Mbps links",
-            "Setting hop count to 16"
+            "Flow control protects the receiver from being overwhelmed; Congestion control protects intermediate network resources",
+            "Flow control changes IP addresses; Congestion control changes MAC addresses",
+            "Flow control runs on routers; Congestion control runs only on switches",
+            "They are two identical terms for the exact same mechanism"
           ],
           "answer": 0,
-          "explanation": "Metric smoothing dampens rapid swings and multi-path routing spreads traffic smoothly across multiple available links."
+          "explanation": "Flow control is an end-to-end mechanism between a sender and receiver (e.g. TCP receive window), while congestion control manages traffic across shared intermediate network routers and links."
         },
         {
-          "question": "In MPLS networks, which protocol extension allows routers to establish explicit paths avoiding congested links?",
+          "question": "What is the primary operational danger of unconstrained Traffic-Aware Routing?",
           "options": [
-            "MPLS-TE (Traffic Engineering) using CSPF",
-            "RIPv1",
-            "ARP",
-            "DHCPv6"
+            "Infinite IP address exhaustion",
+            "Route oscillation (flapping) where traffic shifts back and forth between paths",
+            "Permanently reducing link bandwidth to 0 Mbps",
+            "Disabling all Ethernet interfaces"
           ],
-          "answer": 0,
-          "explanation": "MPLS Traffic Engineering (MPLS-TE) uses Constraint-Based Shortest Path First (CSPF) to route tunnels away from saturated links."
+          "answer": 1,
+          "explanation": "When routers shift traffic to an idle path, that path becomes congested, causing routers to shift traffic back. This periodic ping-pong effect is known as route oscillation or flapping."
         }
       ],
       "references": [
         {
-          "cite": "A.S. Tanenbaum & D.J. Wetherall, Computer Networks, 6th Ed., Ch. 5.3.2",
-          "url": ""
+          "cite": "RFC 2676: QoS Routing Mechanisms and OSPF Extensions, IETF.",
+          "url": "https://datatracker.ietf.org/doc/html/rfc2676"
         },
         {
-          "cite": "RFC 2676: QoS Routing Mechanisms and OSPF Extensions",
-          "url": "https://datatracker.ietf.org/doc/html/rfc2676"
+          "cite": "A.S. Tanenbaum & D.J. Wetherall, Computer Networks, 6th Edition, Chapter 5: Congestion Control Algorithms.",
+          "url": "https://www.pearson.com"
+        },
+        {
+          "cite": "Cisco Systems: Traffic Engineering and Quality of Service Architecture Guide.",
+          "url": "https://www.cisco.com"
         }
       ]
     },
@@ -2591,121 +2609,139 @@ const TOPICS_U3_EXT = {
   "admission-control": {
     "id": "admission-control",
     "title": "Admission Control",
-    "unit": "Unit 3 – Network Layer",
+    "unit": "Unit 3: Network Layer",
     "unitId": "unit3",
-    "level": "Level 1 — Core Topic",
-    "category": "network",
-    "difficulty": "Advanced",
-    "readingTime": "15 min read",
-    "standard": "Tanenbaum Ch 5.3.3 / Kurose & Ross Ch 3.7 / RFC 2211",
-    "oneLiner": "Open-loop congestion prevention refusing new connection setups when resources are saturated, paired with Leaky and Token Bucket traffic shaping.",
-    "quickAnswer": "Admission Control is an open-loop congestion prevention mechanism widely used in virtual-circuit and resource-reserved networks. Once congestion is signaled, routers refuse to establish new virtual circuits unless sufficient buffer capacity and link bandwidth exist along the entire path. Combined with Leaky Bucket and Token Bucket traffic shaping, it bounds network load deterministically.",
-    "whyItMatters": "Allowing unlimited traffic into a network causes congestion collapse, where routers spend all their time dropping packets and processing timeouts. Admission control operates like a telephone network busy signal: it is far better to reject a new connection outright than to admit it and degrade service for all existing users.",
+    "level": "Core Syllabus",
+    "category": "Congestion Control Approaches",
+    "difficulty": "Intermediate",
+    "readingTime": "11 min",
+    "standard": "IETF RFC 2205 (RSVP) / ITU-T Q.2931 (CAC)",
+    "oneLiner": "Congestion avoidance mechanism that checks resource availability before accepting or rejecting new traffic flows to preserve service guarantees.",
+    "quickAnswer": "Admission Control is a proactive congestion control technique where a network decides whether to accept or reject a newly requested connection or traffic flow based on whether sufficient bandwidth, buffer, and QoS capacity exist to support it without degrading existing active flows.",
+    "whyItMatters": "Allowing unlimited traffic into a network causes congestion collapse where all active users suffer packet drops and degraded quality. Admission Control establishes a hard gate at connection setup: it guarantees predictable Quality of Service (QoS) for admitted flows by turning away excess demand when the network is full.",
     "infobox": {
-      "prerequisites": [
-        "traffic-aware-routing"
-      ],
-      "relatedConcepts": [
-        "traffic-throttling",
-        "load-shedding"
-      ],
-      "compareWith": [
-        "leaky-bucket-vs-token-bucket"
-      ],
+      "approachType": "Proactive / Connection-Setup Congestion Avoidance",
+      "primaryGoal": "Prevent network overload by rejecting flows that exceed capacity",
+      "whenApplied": "At connection establishment / session initiation time",
+      "keyAnalogy": "Classroom or cinema hall with fixed seating refusing entry once at capacity",
+      "protocolExamples": "RSVP (Resource Reservation Protocol), SIP Call Admission Control (CAC), MPLS-TE",
       "primaryUses": [
-        "Quality of Service (QoS) guarantees in 5G cellular slices and VoIP networks",
-        "Resource Reservation Protocol (RSVP / IntServ, RFC 2205)",
-        "Traffic policing and shaping at ISP customer ingress interfaces",
-        "Cloud API rate limiting and admission queues"
-      ],
-      "standardRfc": "RFC 2211 (Specification of Controlled-Load Network Element Service)"
+        "VoIP SIP Call Gateways",
+        "5G Network Slicing & QoS Guarantees",
+        "Enterprise Video Conferencing"
+      ]
     },
-    "learningObjectives": [
-      "Define admission control and identify it as an open-loop congestion prevention technique",
-      "Explain the telephone busy signal analogy and resource reservation contracts",
-      "Master the Leaky Bucket algorithm (rigid constant output rate)",
-      "Master the Token Bucket algorithm (bursty transmission up to bucket depth)",
-      "Contrast traffic shaping (smoothing transmission) with traffic policing (dropping violations)"
-    ],
     "prerequisitesList": [
       {
-        "concept": "Congestion Fundamentals",
-        "meaning": "Understanding buffer overflows, packet loss, and throughput collapse"
+        "concept": "Virtual Circuits vs. Datagrams",
+        "meaning": "Connection-oriented state setup along paths vs connectionless packet routing."
+      },
+      {
+        "concept": "Quality of Service (QoS)",
+        "meaning": "Service bounds for bandwidth, latency, jitter, and packet loss."
+      },
+      {
+        "concept": "Resource Reservation",
+        "meaning": "Locking link capacity and buffer slots for specific flows."
       }
     ],
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/52/Leaky_bucket_analogy.svg",
-    "imageCaption": "Figure 3.18: Open-Loop Congestion Prevention: Leaky Bucket and Token Bucket Traffic Shaping.",
+    "learningObjectives": [
+      "Define Admission Control and explain its role in preventing network overload.",
+      "Describe the classroom capacity analogy from the syllabus.",
+      "Trace the 5-step lifecycle of an admission request (Request -> Check -> Decide -> Accept/Reject -> Reserve).",
+      "Solve numerical admission control problems comparing requested bandwidth against residual link capacity.",
+      "Differentiate between Resource-based, Policy-based, and QoS-based admission control.",
+      "Analyze the trade-offs of admission control in enterprise and telecommunication networks."
+    ],
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/OSPF_Areas.svg/800px-OSPF_Areas.svg.png",
+    "imageCaption": "Figure 5.2: Admission Control reserves network resources along virtual circuits, ensuring guaranteed Quality of Service.",
     "sections": {
-      "overview": "\n        <p class=\"mb-3\">\n          <strong>Admission Control</strong> is an open-loop congestion prevention technique in which a network refuses to accept new traffic or establish new virtual circuits unless sufficient network resources (link bandwidth and router buffer space) are guaranteed along the entire path.\n        </p>\n        <p class=\"mb-3\">\n          <strong>The Telephone Network Analogy:</strong> When all telephone circuits between two cities are in use, dialing a number returns a fast busy signal. The telephone network does not attempt to squeeze a new call onto an overloaded line (which would cause all conversations to become garbled noise); it refuses the new call so existing calls remain crystal clear. Admission control applies this exact principle to computer networks.\n        </p>\n      ",
-      "howItWorks": "\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">1. Virtual Circuit Admission Control</h3>\n        <p class=\"mb-3 text-xs\">\n          In virtual-circuit networks (such as ATM, MPLS, or modern 5G cellular network slices), when a host requests a new connection, it supplies a <strong>traffic descriptor</strong> specifying its peak rate, average rate, and maximum burst size.\n        </p>\n        <ul class=\"list-disc pl-5 space-y-1.5 text-xs mb-4\">\n          <li>Each router along the proposed path evaluates its available bandwidth and buffer reserves.</li>\n          <li>If all routers can guarantee the requested QoS without jeopardizing existing connections, the circuit is admitted.</li>\n          <li>If any single router is experiencing congestion or cannot guarantee capacity, the connection is rejected.</li>\n        </ul>\n\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">2. Traffic Shaping: Leaky Bucket vs. Token Bucket</h3>\n        <p class=\"mb-3 text-xs\">To make admission control work, user traffic must conform to agreed transmission profiles using traffic shapers:</p>\n\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-3 text-xs mb-4\">\n          <div class=\"p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n            <h4 class=\"font-bold text-emerald-700 dark:text-emerald-300 mb-1 flex items-center gap-1.5\">\n              <span>🪣 The Leaky Bucket Algorithm</span>\n            </h4>\n            <p class=\"text-slate-600 dark:text-slate-300 leading-relaxed mb-2\">\n              Imagine a bucket with a small hole in the bottom. No matter how bursty water is poured into the bucket, water leaks out at a <strong>strictly constant rate</strong>. If the bucket overflows, excess packets are discarded or queued.\n            </p>\n            <div class=\"p-2 rounded bg-emerald-50 dark:bg-emerald-950/40 text-[11px] font-mono text-emerald-800 dark:text-emerald-200\">\n              Output Rate: Perfectly constant (rigid). Eliminates all burstiness.\n            </div>\n          </div>\n\n          <div class=\"p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700\">\n            <h4 class=\"font-bold text-blue-700 dark:text-blue-300 mb-1 flex items-center gap-1.5\">\n              <span>🪙 The Token Bucket Algorithm</span>\n            </h4>\n            <p class=\"text-slate-600 dark:text-slate-300 leading-relaxed mb-2\">\n              A bucket holds tokens generated at a constant rate (\rho) up to a capacity (C). To transmit a packet, a sender must capture and discard tokens equal to the packet size. If the bucket is full, packets can be transmitted in a <strong>regulated burst</strong> at full line speed!\n            </p>\n            <div class=\"p-2 rounded bg-blue-50 dark:bg-blue-950/40 text-[11px] font-mono text-blue-800 dark:text-blue-200\">\n              Output Rate: Accommodates bursts up to capacity (C), while bounding long-term average rate to (\rho).\n            </div>\n          </div>\n        </div>\n      ",
-      "technicalDetails": "\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">3. Mathematical Formula for Maximum Burst Duration</h3>\n        <p class=\"text-xs mb-2\">\n          In a Token Bucket with capacity (C) bytes, token generation rate (\rho) bytes/sec, and maximum physical link output transmission rate (M) bytes/sec ((M > \rho)):\n        </p>\n        <div class=\"p-3 bg-slate-100 dark:bg-slate-800 rounded font-mono text-xs mb-3 text-center\">\n          Maximum Burst Duration: <strong>S = C / (M - ρ)</strong><br/>\n          Maximum Burst Volume: <strong>E = C + ρ · S = (C · M) / (M - ρ)</strong>\n        </div>\n        <p class=\"text-xs text-slate-500\">\n          During a burst, tokens are drained at rate (M - \rho) until empty, at which point transmission drops to rate (\rho).\n        </p>\n      ",
+      "overview": "\n      <h3>1. What Is Admission Control?</h3>\n      <p>\n        <strong>Admission Control</strong> is a proactive congestion avoidance technique in which the network checks available resources before permitting a new connection or traffic flow to enter.\n      </p>\n      <p>\n        If the network determines that sufficient bandwidth, buffer space, router processing power, and delay bounds exist to accommodate the new traffic <em>without degrading the performance of existing active flows</em>, the connection request is <strong>accepted</strong> and resources are reserved. If resources are insufficient, the request is <strong>rejected</strong> or deferred.\n      </p>\n\n      <div class=\"p-4 my-3 bg-blue-50 dark:bg-blue-950/40 border-l-4 border-blue-500 rounded-r-lg\">\n        <h4 class=\"font-bold text-blue-800 dark:text-blue-200 text-sm mb-1\">Classroom Analogy from the Syllabus</h4>\n        <p class=\"text-xs text-blue-900 dark:text-blue-300\">\n          Imagine a classroom designed to safely accommodate a maximum of <strong>50 students</strong>. Currently, <strong>48 students</strong> are seated inside.<br/>\n          If a group of <strong>10 new students</strong> arrives and demands to enter, letting all of them in would overcrowd the room (58 students), creating unsafe and chaotic conditions.<br/>\n          Instead, the administrator applies <strong>Admission Control</strong>: only <strong>2 more students</strong> are allowed inside to reach the safe limit of 50, and the remaining 8 students are instructed to wait or attend another session.<br/>\n          In computer networking, admission control operates in the exact same manner: it prevents resource overcrowding by regulating the admission of new flows.\n        </p>\n      </div>\n\n      <h4>Why Admission Control Is Essential</h4>\n      <p class=\"text-xs\">\n        Without admission control, as traffic demand grows beyond link capacity, every user's experience degrades simultaneously. In a VoIP or video conferencing environment, if 100 calls share a 10 Mbps pipe when only 80 calls can be supported cleanly, all 100 calls become robotic, distorted, and unlistenable. With admission control, 80 calls receive flawless studio-grade audio, while the 21st through 30th callers receive a busy signal.\n      </p>\n    ",
+      "howItWorks": "\n      <h3>2. The 5-Step Admission Control Process</h3>\n      <div class=\"space-y-2.5 my-3 text-xs\">\n        <div class=\"p-3 bg-white dark:bg-slate-800 border rounded-lg flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-blue-100 text-blue-700 font-bold rounded\">Step 1</span>\n          <div>\n            <strong>New Traffic Flow Request:</strong> A client device or application transmits a reservation request specifying its desired traffic characteristics (e.g., peak rate, mean rate, burst size) and Quality of Service (QoS) requirements.\n          </div>\n        </div>\n        <div class=\"p-3 bg-white dark:bg-slate-800 border rounded-lg flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-indigo-100 text-indigo-700 font-bold rounded\">Step 2</span>\n          <div>\n            <strong>Resource Checking:</strong> Intermediate routers along the proposed transit path inspect their local resource state tables:\n            <ul class=\"list-disc pl-5 mt-1 space-y-0.5 text-slate-600 dark:text-slate-300\">\n              <li>Available unreserved link bandwidth.</li>\n              <li>Free buffer capacity in router queues.</li>\n              <li>CPU processing cycles for packet classification.</li>\n              <li>End-to-end accumulated queuing delay and jitter.</li>\n            </ul>\n          </div>\n        </div>\n        <div class=\"p-3 bg-white dark:bg-slate-800 border rounded-lg flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-purple-100 text-purple-700 font-bold rounded\">Step 3</span>\n          <div>\n            <strong>Decision-Making:</strong> The network determines whether admitting this flow will violate existing SLA agreements for currently running connections.\n          </div>\n        </div>\n        <div class=\"p-3 bg-white dark:bg-slate-800 border rounded-lg flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-emerald-100 text-emerald-700 font-bold rounded\">Step 4</span>\n          <div>\n            <strong>Accept or Reject:</strong>\n            <ul class=\"list-disc pl-5 mt-1 space-y-0.5\">\n              <li><strong class=\"text-emerald-600\">Accept:</strong> If sufficient resources exist at all intermediate hops, a confirmation message is returned to the host.</li>\n              <li><strong class=\"text-rose-600\">Reject:</strong> If any single router along the path has insufficient headroom, the request is rejected or placed in a waiting queue.</li>\n            </ul>\n          </div>\n        </div>\n        <div class=\"p-3 bg-white dark:bg-slate-800 border rounded-lg flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-amber-100 text-amber-700 font-bold rounded\">Step 5</span>\n          <div>\n            <strong>Resource Reservation:</strong> In guaranteed-service architectures (such as IntServ with RSVP), routers allocate and lock the requested bandwidth, guaranteeing deterministic performance for the life of the flow.\n          </div>\n        </div>\n      </div>\n\n      <h4>Step-by-Step PDF Syllabus Example</h4>\n      <p class=\"text-xs\">\n        Consider a high-speed backbone link with a total capacity of <strong>100 Mbps</strong>.\n      </p>\n      <div class=\"p-3 my-2 bg-slate-50 dark:bg-slate-900 border rounded font-mono text-xs space-y-1\">\n        <div>Total Link Bandwidth ($C$) = 100 Mbps</div>\n        <div>Current Active Traffic ($T_{active}$) = 70 Mbps</div>\n        <div class=\"text-blue-600 font-bold\">Available Bandwidth ($B_{avail}$) = 100 - 70 = 30 Mbps</div>\n      </div>\n\n      <div class=\"overflow-x-auto my-3\">\n        <table class=\"w-full text-xs text-left border border-slate-200 dark:border-slate-700\">\n          <thead class=\"bg-slate-100 dark:bg-slate-800 font-bold\">\n            <tr>\n              <th class=\"p-2 border\">Request Sequence</th>\n              <th class=\"p-2 border\">Requested Bandwidth</th>\n              <th class=\"p-2 border\">Available Capacity</th>\n              <th class=\"p-2 border\">Evaluation</th>\n              <th class=\"p-2 border\">Decision</th>\n            </tr>\n          </thead>\n          <tbody class=\"divide-y divide-slate-200 dark:divide-slate-700\">\n            <tr>\n              <td class=\"p-2 border font-medium\">Request 1 (Video Stream)</td>\n              <td class=\"p-2 border font-mono\">20 Mbps</td>\n              <td class=\"p-2 border font-mono\">30 Mbps</td>\n              <td class=\"p-2 border\">$20\\text{ Mbps} \\le 30\\text{ Mbps}$</td>\n              <td class=\"p-2 border font-bold text-emerald-600\">ACCEPTED</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-medium\">Post-Request 1 State</td>\n              <td class=\"p-2 border font-mono\">-</td>\n              <td class=\"p-2 border font-mono text-purple-600 font-bold\">30 - 20 = 10 Mbps</td>\n              <td class=\"p-2 border font-mono\">Remaining = 10 Mbps</td>\n              <td class=\"p-2 border text-slate-500\">Updated State</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-medium\">Request 2 (Data Backup)</td>\n              <td class=\"p-2 border font-mono\">25 Mbps</td>\n              <td class=\"p-2 border font-mono\">10 Mbps</td>\n              <td class=\"p-2 border text-rose-600\">$25\\text{ Mbps} > 10\\text{ Mbps}$</td>\n              <td class=\"p-2 border font-bold text-rose-600\">REJECTED</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n      <p class=\"text-xs text-slate-600 dark:text-slate-300\">\n        <em>Key takeaway:</em> The network rejects Request 2 because admitting 25 Mbps into a 10 Mbps remaining allocation would exceed total capacity, instantly creating severe buffer bloat and packet drops for both existing streams.\n      </p>\n    ",
+      "technicalDetails": "\n      <h3>3. The Three Types of Admission Control</h3>\n      <div class=\"grid grid-cols-1 md:grid-cols-3 gap-3 my-3 text-xs\">\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded border\">\n          <h4 class=\"font-bold text-blue-600 mb-1\">1. Resource-Based</h4>\n          <p class=\"text-slate-600 dark:text-slate-300\">\n            Directly checks whether measurable physical hardware resources (link bandwidth, queue buffer slots, CPU cycles) are strictly greater than the requested flow parameters.\n          </p>\n        </div>\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded border\">\n          <h4 class=\"font-bold text-purple-600 mb-1\">2. Policy-Based</h4>\n          <p class=\"text-slate-600 dark:text-slate-300\">\n            Admissions are granted or denied based on administrative business rules, user subscription tiers (e.g., Enterprise VIP vs Free), time of day, or departmental priority.\n          </p>\n        </div>\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded border\">\n          <h4 class=\"font-bold text-emerald-600 mb-1\">3. QoS-Based</h4>\n          <p class=\"text-slate-600 dark:text-slate-300\">\n            Evaluates strict performance bounds: maximum end-to-end latency, packet loss probability ($< 10^{-5}$), and jitter variance required for high-fidelity communication.\n          </p>\n        </div>\n      </div>\n\n      <h4>Quality of Service (QoS) Parameter Requirements</h4>\n      <div class=\"overflow-x-auto my-2\">\n        <table class=\"w-full text-xs text-left border border-slate-200 dark:border-slate-700\">\n          <thead class=\"bg-slate-100 dark:bg-slate-800 font-bold\">\n            <tr>\n              <th class=\"p-2 border\">Application Type</th>\n              <th class=\"p-2 border\">Bandwidth Need</th>\n              <th class=\"p-2 border\">Latency Tolerance</th>\n              <th class=\"p-2 border\">Jitter Tolerance</th>\n              <th class=\"p-2 border\">Packet Loss Tolerance</th>\n            </tr>\n          </thead>\n          <tbody class=\"divide-y divide-slate-200 dark:divide-slate-700\">\n            <tr>\n              <td class=\"p-2 border font-medium\">Voice over IP (VoIP)</td>\n              <td class=\"p-2 border\">Low (64–100 kbps)</td>\n              <td class=\"p-2 border text-rose-600 font-bold\">Ultra-Low (< 150 ms)</td>\n              <td class=\"p-2 border text-rose-600 font-bold\">Ultra-Low (< 30 ms)</td>\n              <td class=\"p-2 border\">Moderate (< 1–2%)</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-medium\">Video Conferencing</td>\n              <td class=\"p-2 border\">Medium–High (2–10 Mbps)</td>\n              <td class=\"p-2 border text-rose-600 font-bold\">Low (< 200 ms)</td>\n              <td class=\"p-2 border\">Low (< 40 ms)</td>\n              <td class=\"p-2 border\">Low (< 1%)</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-medium\">Video Streaming (VoD)</td>\n              <td class=\"p-2 border\">High (5–25 Mbps)</td>\n              <td class=\"p-2 border\">High (Tolerates seconds via client buffer)</td>\n              <td class=\"p-2 border\">High (Absorbed by buffer)</td>\n              <td class=\"p-2 border\">Low (TCP retransmits)</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-medium\">File Transfer (FTP/HTTP)</td>\n              <td class=\"p-2 border\">Elastic (Uses available)</td>\n              <td class=\"p-2 border\">High (Tolerates delay)</td>\n              <td class=\"p-2 border\">Very High</td>\n              <td class=\"p-2 border text-rose-600 font-bold\">Strict 0% (Must be lossless)</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    ",
       "workedExamples": {
-        "level1": "\n          <strong>Leaky Bucket vs Token Bucket Output Comparison:</strong><br/>\n          A host sends 12 MB of data in a sudden 1-second burst into a shaper configured for 2 MB/sec average:<br/>\n          • <strong>Leaky Bucket:</strong> Smooths the output to exactly 2 MB/sec steadily over 6 seconds.<br/>\n          • <strong>Token Bucket (Capacity = 4 MB):</strong> Instantly releases 4 MB at wire speed (100 Mbps) using accumulated tokens, then transmits the remaining 8 MB at 2 MB/sec over the next 4 seconds.\n        ",
-        "level2": "\n          <strong>Token Bucket Maximum Burst Calculation:</strong><br/>\n          Given: Bucket capacity (C = 1\text{ MB}), Token fill rate (\rho = 2\text{ MB/sec}), Max line rate (M = 10\text{ MB/sec}).<br/>\n          • Maximum burst time (S = \frac{C}{M - \rho} = \frac{1}{10 - 2} = \frac{1}{8}\text{ sec} = mathbf{0.125\text{ seconds}}).<br/>\n          • Maximum burst volume (E = M \times S = 10 \times 0.125 = mathbf{1.25\text{ MB}}).\n        ",
-        "level3": "\n          <strong>Traffic Policing vs Traffic Shaping:</strong><br/>\n          An enterprise buys a 50 Mbps CIR committed service on a 1 Gbps physical port from an ISP.<br/>\n          • <strong>Traffic Shaping (Customer side):</strong> Buffers outgoing packets in memory and paces them out at 50 Mbps, avoiding packet loss.<br/>\n          • <strong>Traffic Policing (ISP edge router):</strong> Inspects incoming rate with a token bucket. If rate exceeds 50 Mbps, excess packets are <strong>instantly dropped</strong> or remarked with high discard eligibility (DSCP AF to BE).\n        "
+        "level1": {
+          "title": "Level 1 (Intuitive): Single-Link Capacity Admission Check",
+          "problem": "A router trunk interface has an aggregate capacity of 50 Mbps. Currently, 38 Mbps is utilized by active flows. Application A requests a 7 Mbps video stream. Application B subsequently requests a 6 Mbps audio-visual stream. Which application is admitted and which is rejected?",
+          "solution": "\n          <p><strong>Step 1: Calculate initial available capacity:</strong></p>\n          $$B_{avail} = 50\\text{ Mbps} - 38\\text{ Mbps} = 12\\text{ Mbps}$$\n          <p><strong>Step 2: Evaluate Application A (requires 7 Mbps):</strong></p>\n          <p>Since $7\\text{ Mbps} \\le 12\\text{ Mbps}$, Application A is <strong>ACCEPTED</strong>.</p>\n          <p>Remaining capacity becomes: $12\\text{ Mbps} - 7\\text{ Mbps} = 5\\text{ Mbps}$.</p>\n          <p><strong>Step 3: Evaluate Application B (requires 6 Mbps):</strong></p>\n          <p>Since $6\\text{ Mbps} > 5\\text{ Mbps}$, the network cannot satisfy Application B without overloading the link. Application B is <strong>REJECTED</strong>.</p>\n        "
+        },
+        "level2": {
+          "title": "Level 2 (Standard): Multi-Hop Bottleneck Admission Check",
+          "problem": "A virtual circuit path consists of three hops: Link 1 (Residual Bandwidth = 40 Mbps), Link 2 (Residual Bandwidth = 15 Mbps), and Link 3 (Residual Bandwidth = 30 Mbps). A client requests admission for a flow requiring 20 Mbps with deterministic latency. Will the request be admitted?",
+          "solution": "\n          <p><strong>Step 1: Determine the bottleneck residual bandwidth along the end-to-end path:</strong></p>\n          $$B_{path} = \\min(B_1, B_2, B_3) = \\min(40, 15, 30) = 15\\text{ Mbps}$$\n          <p><strong>Step 2: Compare requested bandwidth against bottleneck capacity:</strong></p>\n          <p>The requested bandwidth is $20\\text{ Mbps}$. Since $20\\text{ Mbps} > 15\\text{ Mbps}$, Link 2 would become overloaded.</p>\n          <p><strong>Conclusion:</strong></p>\n          <p>The admission control request is <strong>REJECTED</strong> across this path. The network may attempt to find an alternate path with $\\ge 20\\text{ Mbps}$ capacity or decline the session.</p>\n        "
+        },
+        "level3": {
+          "title": "Level 3 (Advanced): Statistical Multiplexing vs Peak Allocation",
+          "problem": "A 100 Mbps link supports independent VoIP calls. Each call has a peak rate of 64 kbps, but is active only 40% of the time (activity factor $\\alpha = 0.40$). Under deterministic peak rate admission control, how many calls can be admitted? If statistical admission allows oversubscription assuming average rate allocation, how many calls could theoretically be admitted?",
+          "solution": "\n          <p><strong>Step 1: Peak Rate Admission (Zero Risk):</strong></p>\n          $$N_{peak} = \\frac{100\\text{ Mbps}}{64\\text{ kbps}} = \\frac{100,000\\text{ kbps}}{64\\text{ kbps}} = 1,562\\text{ calls}$$\n          <p><strong>Step 2: Average Rate Statistical Multiplexing:</strong></p>\n          $$\\text{Average Rate per Call} = 64\\text{ kbps} \\times 0.40 = 25.6\\text{ kbps}$$\n          $$N_{statistical} = \\frac{100,000\\text{ kbps}}{25.6\\text{ kbps}} = 3,906\\text{ calls}$$\n          <p><strong>Analysis:</strong> Statistical admission control permits $2.5\\times$ more calls ($3,906$ vs $1,562$), but carries a non-zero probability of brief packet queuing if many callers speak simultaneously.</p>\n        "
+        }
       },
-      "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 text-xs\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800\">\n            <h4 class=\"font-bold text-emerald-800 dark:text-emerald-300 mb-2\">Advantages of Admission Control</h4>\n            <ul class=\"space-y-1 list-disc pl-4 text-slate-700 dark:text-slate-300\">\n              <li>Provides absolute, deterministic Quality of Service (QoS) guarantees.</li>\n              <li>Prevents total congestion collapse by limiting total network load.</li>\n              <li>Token Bucket allows legitimate bursty traffic without dropping packets.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/30 rounded-lg border border-rose-200 dark:border-rose-800\">\n            <h4 class=\"font-bold text-rose-800 dark:text-rose-300 mb-2\">Limitations</h4>\n            <ul class=\"space-y-1 list-disc pl-4 text-slate-700 dark:text-slate-300\">\n              <li>Rejects connections during peak hours even if capacity exists elsewhere.</li>\n              <li>Requires pre-connection signaling protocols (RSVP) which do not scale easily across the open public Internet.</li>\n            </ul>\n          </div>\n        </div>\n      ",
+      "advantagesLimitations": "\n      <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 my-3 text-xs\">\n        <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded border border-emerald-200 dark:border-emerald-800\">\n          <h4 class=\"font-bold text-emerald-800 dark:text-emerald-200 mb-2\">Advantages of Admission Control</h4>\n          <ul class=\"space-y-1.5 text-slate-700 dark:text-slate-300\">\n            <li>✔ <strong>Protects Existing Active Flows:</strong> Once admitted, users enjoy flawless QoS without degradation.</li>\n            <li>✔ <strong>Prevents Congestion Collapse:</strong> Keeps total offered load strictly within network capacity.</li>\n            <li>✔ <strong>Guarantees Deterministic Latency & Jitter:</strong> Essential for real-time mission-critical applications.</li>\n            <li>✔ <strong>Supports Service Level Agreements (SLAs):</strong> Allows ISPs to monetize guaranteed bandwidth tiers.</li>\n          </ul>\n        </div>\n        <div class=\"p-3 bg-rose-50 dark:bg-rose-950/30 rounded border border-rose-200 dark:border-rose-800\">\n          <h4 class=\"font-bold text-rose-800 dark:text-rose-200 mb-2\">Limitations & Disadvantages</h4>\n          <ul class=\"space-y-1.5 text-slate-700 dark:text-slate-300\">\n            <li>✘ <strong>Rejects Legitimate Users:</strong> New connection requests receive busy signals when capacity is full.</li>\n            <li>✘ <strong>Underutilization Risk:</strong> Conservative peak-rate reservation can leave significant bandwidth unutilized.</li>\n            <li>✘ <strong>Signaling Overhead:</strong> Requires complex reservation protocols (e.g. RSVP) and state tables in routers.</li>\n            <li>✘ <strong>Incompatible with Best-Effort Datagrams:</strong> Cannot easily be applied to pure connectionless IP without session tracking.</li>\n          </ul>\n        </div>\n      </div>\n    ",
       "whereUsed": [
-        "Cellular 4G/5G Voice over LTE (VoLTE) and Emergency E911 calling",
-        "Carrier Ethernet ingress policing and SLA bandwidth enforcement",
-        "Video streaming CDN rate pacing and API Gateway token bucket throttling"
+        "Cellular 4G/5G Radio Access Networks (RAN): Base stations blocking incoming phone calls or video handovers when radio resource blocks are saturated.",
+        "VoIP / SIP Gateways: Call Admission Control (CAC) limiting simultaneous active voice codecs to avoid robotic audio distortion.",
+        "Enterprise MPLS VPNs: RSVP-TE checking available bandwidth along label switched paths prior to admitting database replication flows."
       ],
-      "commonMistakes": "\n        <ul class=\"space-y-2 text-xs\">\n          <li><strong>Confusing Leaky Bucket with Token Bucket:</strong> The Leaky Bucket outputs packets at a rigid, fixed rate with zero burstiness. The Token Bucket allows bursts up to the capacity of the bucket at full line rate.</li>\n          <li><strong>Confusing shaping with policing:</strong> Traffic shaping delays and buffers packets; traffic policing simply discards packets that violate the rate contract.</li>\n        </ul>\n      ",
-      "compareWith": "leaky-bucket-vs-token-bucket",
+      "commonMistakes": "\n      <ul class=\"list-disc pl-5 text-xs space-y-1.5 text-slate-600 dark:text-slate-300\">\n        <li><strong>Thinking Admission Control Drops Packets:</strong> Admission control operates at the <em>session setup stage</em> by declining new flows; it does not drop packets of established flows.</li>\n        <li><strong>Confusing Peak Rate with Average Rate:</strong> Reserving peak bandwidth guarantees zero drops but wastes capacity; reserving average bandwidth risks momentary congestion during bursts.</li>\n      </ul>\n    ",
+      "compareWith": "\n      <h4>Comparison: Admission Control vs. Traffic Throttling</h4>\n      <div class=\"overflow-x-auto my-2\">\n        <table class=\"w-full text-xs text-left border border-slate-200 dark:border-slate-700\">\n          <thead class=\"bg-slate-100 dark:bg-slate-800 font-bold\">\n            <tr>\n              <th class=\"p-2 border\">Dimension</th>\n              <th class=\"p-2 border\">Admission Control</th>\n              <th class=\"p-2 border\">Traffic Throttling</th>\n            </tr>\n          </thead>\n          <tbody class=\"divide-y divide-slate-200 dark:divide-slate-700\">\n            <tr>\n              <td class=\"p-2 border font-semibold\">Point of Intervention</td>\n              <td class=\"p-2 border font-bold text-blue-600\">At session initiation (Pre-transmission)</td>\n              <td class=\"p-2 border font-bold text-purple-600\">During active data transfer (In-flight)</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold\">Primary Action</td>\n              <td class=\"p-2 border\">Accept or reject entire new traffic flows</td>\n              <td class=\"p-2 border\">Slow down or shape transmission rates</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold\">User Experience</td>\n              <td class=\"p-2 border\">Admitted users get 100% quality; rejected get busy signal</td>\n              <td class=\"p-2 border\">All users share degradation through slower speeds</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    ",
       "quiz": [
         {
-          "question": "Admission control is categorized as which type of congestion control approach?",
+          "question": "What is the primary function of Admission Control in computer networks?",
           "options": [
-            "Closed-loop dynamic feedback",
-            "Open-loop proactive prevention",
-            "Load shedding",
-            "Pure flooding"
+            "To encrypt packet payloads at line rate",
+            "To accept or reject a new traffic flow based on resource availability before allowing it to enter",
+            "To discard random packets when router memory is completely full",
+            "To assign IP addresses to new wireless laptops"
           ],
           "answer": 1,
-          "explanation": "Admission control is an open-loop prevention technique because it prevents congestion from occurring by rejecting connections before they start."
+          "explanation": "Admission Control proactively checks whether sufficient network bandwidth, buffer capacity, and QoS headroom exist before admitting a new connection flow."
         },
         {
-          "question": "How does the output rate of a Leaky Bucket compare to a Token Bucket?",
+          "question": "Under the classroom analogy presented in the syllabus, what happens when 10 students attempt to enter a 50-person room that already has 48 students?",
           "options": [
-            "Leaky bucket has a perfectly constant output rate, while token bucket allows regulated bursts up to bucket capacity",
-            "Token bucket has a constant output rate, while leaky bucket allows bursts",
-            "Both have identical output rates",
-            "Neither allows traffic to pass"
+            "All 10 are allowed in and 8 existing students are thrown out",
+            "The classroom collapses completely",
+            "Only 2 students are admitted to reach the 50-person safe capacity, and the other 8 are declined or asked to wait",
+            "The classroom size automatically expands to 60 seats"
           ],
-          "answer": 0,
-          "explanation": "The Leaky Bucket algorithm enforces a rigid constant output rate, whereas the Token Bucket algorithm allows bursts of packets up to the bucket capacity."
+          "answer": 2,
+          "explanation": "Admission control permits only 2 students so that the safe maximum capacity of 50 is not exceeded, protecting the comfort and safety of those already inside."
         },
         {
-          "question": "In a Token Bucket algorithm, what must a packet obtain before it can be transmitted onto the wire?",
+          "question": "A link has a capacity of 100 Mbps with 70 Mbps currently active. Flow 1 requests 20 Mbps and Flow 2 requests 25 Mbps. Under basic admission control, what is the outcome?",
           "options": [
-            "A MAC address",
-            "Tokens equal to its length in bytes",
-            "A new IP header",
-            "Permission from the DNS server"
+            "Both Flow 1 and Flow 2 are accepted",
+            "Both Flow 1 and Flow 2 are rejected",
+            "Flow 1 is accepted (leaving 10 Mbps available), and Flow 2 is rejected because 25 Mbps exceeds the remaining 10 Mbps",
+            "Flow 2 is accepted and Flow 1 is rejected"
+          ],
+          "answer": 2,
+          "explanation": "Residual bandwidth is 100 - 70 = 30 Mbps. Flow 1 takes 20 Mbps, leaving 10 Mbps. Flow 2 requires 25 Mbps, which exceeds 10 Mbps, so Flow 2 must be rejected."
+        },
+        {
+          "question": "Which of the following traffic types has the strictest requirement for low latency and low jitter?",
+          "options": [
+            "Background operating system file updates",
+            "Voice over IP (VoIP) and real-time audio communication",
+            "Bulk email transfers via SMTP",
+            "Static image downloads via HTTP"
           ],
           "answer": 1,
-          "explanation": "A packet must capture and consume tokens corresponding to its byte size from the token bucket to be transmitted."
-        },
-        {
-          "question": "What is the difference between traffic shaping and traffic policing?",
-          "options": [
-            "Traffic shaping buffers excess packets; traffic policing discards or remarks excess packets",
-            "Traffic policing is done by the police department",
-            "Traffic shaping only works on IPv6",
-            "There is no difference"
-          ],
-          "answer": 0,
-          "explanation": "Traffic shaping smooths traffic by buffering excess packets; traffic policing immediately drops or remarks non-conforming packets."
+          "explanation": "Interactive voice communications require one-way latency below 150 ms and minimal jitter to ensure natural conversation without choppy audio or lag."
         }
       ],
       "references": [
         {
-          "cite": "A.S. Tanenbaum & D.J. Wetherall, Computer Networks, 6th Ed., Ch. 5.3.3",
-          "url": ""
+          "cite": "RFC 2205: Resource ReSerVation Protocol (RSVP) Functional Specification, IETF.",
+          "url": "https://datatracker.ietf.org/doc/html/rfc2205"
         },
         {
-          "cite": "RFC 2211: Specification of Controlled-Load Network Element Service",
-          "url": "https://datatracker.ietf.org/doc/html/rfc2211"
+          "cite": "ITU-T Recommendation Q.2931: Call Admission Control Architecture, International Telecommunication Union.",
+          "url": "https://www.itu.int"
+        },
+        {
+          "cite": "Cisco Systems: Quality of Service Design Principles and CAC Mechanisms.",
+          "url": "https://www.cisco.com"
         }
       ]
     },
@@ -2715,121 +2751,140 @@ const TOPICS_U3_EXT = {
   "traffic-throttling": {
     "id": "traffic-throttling",
     "title": "Traffic Throttling",
-    "unit": "Unit 3 – Network Layer",
+    "unit": "Unit 3: Network Layer",
     "unitId": "unit3",
-    "level": "Level 1 — Core Topic",
-    "category": "network",
-    "difficulty": "Advanced",
-    "readingTime": "20 min read",
-    "standard": "Tanenbaum Ch 5.3.4 / RFC 3168 (ECN) / Kurose & Ross Ch 3.7",
-    "oneLiner": "Closed-loop feedback mechanisms including choke packets, hop-by-hop damping, and Explicit Congestion Notification (ECN).",
-    "quickAnswer": "Traffic Throttling is a closed-loop congestion control approach where routers dynamically monitor buffer queue levels and notify senders to reduce their transmission rates when congestion begins. Notification is delivered via Choke Packets, Hop-by-Hop Choke Packets (which damp intermediate links immediately), or Explicit Congestion Notification (ECN) bits in IP and TCP headers.",
-    "whyItMatters": "Traffic throttling provides the essential closed-loop dynamic feedback that keeps the global Internet stable. Instead of passively dropping packets when queues overflow, modern routers signal congestion early using ECN, allowing TCP senders to cut their congestion windows before a single packet is lost.",
+    "level": "Core Syllabus",
+    "category": "Congestion Control Approaches",
+    "difficulty": "Intermediate",
+    "readingTime": "13 min",
+    "standard": "IETF RFC 3168 (ECN) / RFC 2697 (srTCM)",
+    "oneLiner": "Congestion management technique that limits and shapes transmission rates to prevent excessive traffic from overloading network resources.",
+    "quickAnswer": "Traffic Throttling dynamically or statically restricts data transmission rates into a network. By applying rate limits, traffic shaping (Token Bucket, Leaky Bucket), or closed-loop feedback signals (choke packets, ECN), it ensures senders do not push data faster than routers can forward it.",
+    "whyItMatters": "Bursty data sources can momentarily swamp router buffers, causing massive packet drops and TCP retransmission timeouts. Traffic throttling smooths out bursty flows, guarantees fair bandwidth sharing among competing users, and provides graceful rate reduction when intermediate nodes experience incipient congestion.",
     "infobox": {
-      "prerequisites": [
-        "admission-control"
-      ],
-      "relatedConcepts": [
-        "load-shedding",
-        "traffic-aware-routing"
-      ],
-      "compareWith": [
-        "choke-packets-vs-ecn"
-      ],
+      "approachType": "Closed-Loop / Rate Regulation & Traffic Shaping",
+      "primaryGoal": "Control transmission rate to match available network capacity",
+      "coreAlgorithms": "Token Bucket Algorithm (bursts allowed), Leaky Bucket Algorithm (steady rate)",
+      "feedbackSignals": "Choke Packets, Hop-by-Hop Choke, Explicit Congestion Notification (ECN)",
+      "keyAnalogy": "Highway ramp meters regulating the entry rate of merging cars",
       "primaryUses": [
-        "Explicit Congestion Notification (ECN, RFC 3168) in IP and TCP headers",
-        "Data Center TCP (DCTCP) sub-millisecond congestion feedback",
-        "Random Early Detection (RED) with ECN marking in core routers",
-        "Active Queue Management (AQM) on broadband cable and fiber modems"
-      ],
-      "standardRfc": "RFC 3168 (The Addition of Explicit Congestion Notification to IP)"
+        "Cloud API Gateway Rate Limiting",
+        "Broadband Traffic Shaping & CIR",
+        "TCP Window Throttling & ECN"
+      ]
     },
-    "learningObjectives": [
-      "Understand the closed-loop feedback philosophy: monitor, detect, notify, throttle",
-      "Explain how Choke Packets operate and why propagation delay limits their effectiveness",
-      "Describe Hop-by-Hop Choke Packets and how they provide immediate relief",
-      "Analyze Explicit Congestion Notification (ECN) using IP header ECN bits (ECT, CE)",
-      "Trace how TCP endpoints respond to ECN using ECE and CWR flags"
-    ],
     "prerequisitesList": [
       {
-        "concept": "TCP Congestion Control",
-        "meaning": "Understanding congestion windows (cwnd) and multiplicative decrease"
+        "concept": "Throughput vs. Bandwidth",
+        "meaning": "Actual delivered data rate vs maximum physical transmission capacity."
+      },
+      {
+        "concept": "Buffer Queues & Tail Drop",
+        "meaning": "How unshaped packet bursts exhaust router FIFO queues and trigger drops."
+      },
+      {
+        "concept": "Open-Loop vs Closed-Loop Control",
+        "meaning": "Static pre-transmission pacing vs dynamic feedback-driven rate reduction."
       }
     ],
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/89/Token_bucket_analogy.svg",
-    "imageCaption": "Figure 3.19: Closed-Loop Traffic Throttling: Choke Packets and Explicit Congestion Notification (ECN).",
+    "learningObjectives": [
+      "Define Traffic Throttling and explain its 5-step operational cycle.",
+      "Differentiate between Rate Limiting, Traffic Policing, and Traffic Shaping.",
+      "Explain the mechanics of the Token Bucket Algorithm and its mathematical burst formula.",
+      "Explain the mechanics of the Leaky Bucket Algorithm and how it produces a constant output rate.",
+      "Compare Token Bucket and Leaky Bucket using the master 5-point comparison matrix.",
+      "Describe feedback mechanisms: Choke packets, Hop-by-hop choke, and ECN (RFC 3168)."
+    ],
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Count_to_infinity.png/800px-Count_to_infinity.png",
+    "imageCaption": "Figure 5.3: Traffic Throttling employs Leaky and Token Bucket algorithms to pace transmission and protect router queues.",
     "sections": {
-      "overview": "\n        <p class=\"mb-3\">\n          <strong>Traffic Throttling</strong> is a family of <strong>closed-loop congestion control</strong> mechanisms in which routers actively monitor their internal queuing state and, upon detecting imminent congestion, signal the source hosts to reduce their transmission rate.\n        </p>\n        <p class=\"mb-3\">\n          Closed-loop congestion control operates in four sequential steps:\n        </p>\n        <ol class=\"list-decimal pl-5 space-y-1 text-xs mb-3\">\n          <li><strong>Monitor the system:</strong> Measure average queue lengths and utilization.</li>\n          <li><strong>Detect congestion:</strong> Trigger a threshold when queue size exceeds warning levels (e.g., 75% full).</li>\n          <li><strong>Signal congestion:</strong> Send notifications back to the traffic sources.</li>\n          <li><strong>Throttle transmission:</strong> Sources reduce their sending rates (e.g., halving the TCP congestion window).</li>\n        </ol>\n      ",
-      "howItWorks": "\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">1. Classic Choke Packets</h3>\n        <p class=\"mb-3 text-xs\">\n          In the classic choke packet approach, whenever a router's queue exceeds a critical threshold, the router generates an <strong>ICMP Source Quench / Choke Packet</strong> and transmits it directly back to the source address of the incoming packet.\n        </p>\n        <div class=\"p-3 bg-slate-100 dark:bg-slate-800 rounded font-mono text-xs mb-3\">\n          [Router R] detects queue > 80% ➔ Generates Choke Packet ➔ Transmits back to Source Host A.<br/>\n          Source Host A receives Choke Packet ➔ Halves sending rate for 100 ms.\n        </div>\n        <p class=\"text-xs mb-4 text-slate-500\">\n          <em>Limitation on High-Speed Long-Distance Networks:</em> On a trans-oceanic fiber link (100 ms RTT) transmitting at 100 Gbps, by the time the choke packet reaches the source host, <strong>over 1 gigabyte of additional packets</strong> has already been transmitted into the network!\n        </p>\n\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">2. Hop-by-Hop Choke Packets</h3>\n        <p class=\"mb-3 text-xs\">\n          To solve the long propagation delay of end-to-end choke packets, <strong>Hop-by-Hop Choke Packets</strong> take effect at every intermediate router along the reverse path:\n        </p>\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700 font-mono text-xs mb-4\">\n          • When Router R3 generates a choke packet for R1, adjacent router R2 intercepts it.<br/>\n          • Router R2 <strong>immediately throttles its own forwarding rate</strong> to R3, providing instantaneous relief at R3's congested buffer!<br/>\n          • R2 then forwards the choke packet onward to R1.<br/>\n          <em>Result:</em> Upstream buffers absorb the traffic immediately without waiting for the source host to react.\n        </div>\n\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">3. Explicit Congestion Notification (ECN - RFC 3168)</h3>\n        <p class=\"text-xs mb-3\">\n          Modern Internet routers avoid generating extra choke packets (which ironically add more packets to a congested network!). Instead, they use <strong>ECN (Explicit Congestion Notification)</strong> by flipping bits in the IP and TCP headers:\n        </p>\n        <div class=\"space-y-2 text-xs mb-4\">\n          <div class=\"p-2.5 bg-blue-50 dark:bg-blue-950/40 rounded border border-blue-200 dark:border-blue-800\">\n            <strong>1. IP Header ECN Bits (Bits 6 & 7 in DiffServ Octet):</strong><br/>\n            • <code>00</code>: Non-ECN Capable Transport<br/>\n            • <code>01</code> or <code>10</code>: ECN-Capable Transport (ECT)<br/>\n            • <code>11</code>: <strong>Congestion Experienced (CE)</strong>. Set by the congested router instead of dropping the packet!\n          </div>\n          <div class=\"p-2.5 bg-emerald-50 dark:bg-emerald-950/40 rounded border border-emerald-200 dark:border-emerald-800\">\n            <strong>2. TCP Header Notification (ECE and CWR Flags):</strong><br/>\n            • Destination receives the IP packet with <code>CE = 11</code>.<br/>\n            • In its returning TCP ACK, destination sets the <strong>ECE (ECN-Echo)</strong> flag.<br/>\n            • Sender sees <code>ECE = 1</code>, halves its congestion window (multiplicative decrease), and sets the <strong>CWR (Congestion Window Reduced)</strong> flag in its next packet to acknowledge receipt.\n          </div>\n        </div>\n      ",
-      "technicalDetails": "\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">4. Data Center TCP (DCTCP)</h3>\n        <p class=\"text-xs mb-3\">\n          In hyperscaler cloud data centers (Microsoft Azure, AWS), <strong>Data Center TCP (DCTCP)</strong> uses ECN with ultra-low buffer thresholds (e.g., marking CE when queue length exceeds just 20 packets). Senders scale their window reduction proportionally to the fraction of marked packets, keeping switch queues near-empty and latency under 10 microseconds!\n        </p>\n      ",
+      "overview": "\n      <h3>1. What Is Traffic Throttling?</h3>\n      <p>\n        <strong>Traffic Throttling</strong> is a congestion control approach in which the rate of data transmission is deliberately regulated and paced to prevent excessive traffic from overwhelming routers and links.\n      </p>\n      <p>\n        Rather than allowing endpoints to blast packets at full wire speed into an already saturated path, the network or the sender limits the transmission rate to a safe, sustainable operating point.\n      </p>\n\n      <div class=\"p-3 my-3 bg-amber-50 dark:bg-amber-950/40 border-l-4 border-amber-500 rounded-r-lg text-xs\">\n        <strong>Syllabus Example of Throttling:</strong><br/>\n        Suppose a high-speed data backup application attempts to transmit data at <strong>100 Mbps</strong> into the corporate WAN. The network administrator's QoS policy restricts this application class to a maximum of <strong>40 Mbps</strong>.<br/>\n        When traffic throttling is engaged:\n        <ul class=\"list-disc pl-5 mt-1 space-y-0.5\">\n          <li><strong>Transmission Rate Before Throttling:</strong> 100 Mbps</li>\n          <li><strong>Allowed Configured Rate:</strong> 40 Mbps</li>\n          <li><strong>Excess Rate Throttled / Shaped:</strong> 60 Mbps (held back in buffers or delayed)</li>\n          <li><strong>Effective Output Rate:</strong> Clamped exactly to 40 Mbps</li>\n        </ul>\n      </div>\n\n      <h4>The 5-Step Operational Cycle of Throttling</h4>\n      <div class=\"space-y-2 my-2 text-xs\">\n        <div class=\"p-2.5 bg-white dark:bg-slate-800 border rounded flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-blue-100 text-blue-700 font-bold rounded\">Step 1</span>\n          <div><strong>Monitor Traffic Rate:</strong> Measure incoming packet arrival rates against configured service profiles.</div>\n        </div>\n        <div class=\"p-2.5 bg-white dark:bg-slate-800 border rounded flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-indigo-100 text-indigo-700 font-bold rounded\">Step 2</span>\n          <div><strong>Identify Excessive Traffic:</strong> Detect when instantaneous or average rates exceed Committed Information Rate (CIR).</div>\n        </div>\n        <div class=\"p-2.5 bg-white dark:bg-slate-800 border rounded flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-purple-100 text-purple-700 font-bold rounded\">Step 3</span>\n          <div><strong>Apply Rate Limit / Shaping:</strong> Engage traffic conditioning mechanisms (queue buffering or token allocation).</div>\n        </div>\n        <div class=\"p-2.5 bg-white dark:bg-slate-800 border rounded flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-amber-100 text-amber-700 font-bold rounded\">Step 4</span>\n          <div><strong>Control Packet Transmission:</strong> Delay and pace outbound packets to conform to the target rate profile.</div>\n        </div>\n        <div class=\"p-2.5 bg-white dark:bg-slate-800 border rounded flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-emerald-100 text-emerald-700 font-bold rounded\">Step 5</span>\n          <div><strong>Continuous Monitoring:</strong> Dynamically adjust throttling thresholds based on feedback signals from the core network.</div>\n        </div>\n      </div>\n    ",
+      "howItWorks": "\n      <h3>2. The Two Foundational Traffic Shaping Algorithms</h3>\n      <p>\n        Traffic shaping regulates the average rate and burstiness of data streams. The two classical algorithms studied across computer networking are the <strong>Token Bucket</strong> and <strong>Leaky Bucket</strong> algorithms.\n      </p>\n\n      <h4>A. The Token Bucket Algorithm (Allows Regulated Bursts)</h4>\n      <p class=\"text-xs\">\n        The Token Bucket algorithm uses an abstract bucket of capacity $\\beta$ tokens. Tokens are continuously deposited into the bucket at a constant rate of $\\rho$ tokens per second:\n      </p>\n      <ul class=\"list-disc pl-5 text-xs space-y-1 my-2\">\n        <li>If the bucket becomes completely full, newly generated tokens overflow and are discarded.</li>\n        <li>To transmit a packet of length $b$ bytes, $b$ tokens must be removed from the bucket.</li>\n        <li>If enough tokens are present in the bucket, the packet is transmitted immediately at full line rate.</li>\n        <li>If insufficient tokens are present, the packet must either wait in a queue until tokens accumulate or be marked non-conformant.</li>\n      </ul>\n      <p class=\"text-xs\">\n        <strong>Mathematical Maximum Burst Duration:</strong> If a burst arrives at the maximum link transmission speed $C$ (where $C > \\rho$), and the bucket is initially full (holding $\\beta$ tokens), the maximum duration $S$ that the burst can sustain full wire speed is:\n      </p>\n      <div class=\"p-3 my-2 bg-slate-100 dark:bg-slate-800 rounded font-mono text-xs text-center\">\n        $$S = \\frac{\\beta}{C - \\rho}$$\n      </div>\n      <p class=\"text-xs text-center\">\n        The maximum number of bytes transmitted during this burst is $M = C \\cdot S = \\frac{C \\cdot \\beta}{C - \\rho}$.\n      </p>\n\n      <h4>B. The Leaky Bucket Algorithm (Strict Constant Output Rate)</h4>\n      <p class=\"text-xs\">\n        The Leaky Bucket algorithm models a bucket with a small hole in the bottom:\n      </p>\n      <ul class=\"list-disc pl-5 text-xs space-y-1 my-2\">\n        <li>Packets can arrive at completely unpredictable, bursty rates, filling the bucket queue.</li>\n        <li>Water (packets) leaks out of the hole at a <strong>strictly constant, uniform rate</strong> $r$, regardless of how full the bucket is.</li>\n        <li>If water is poured into the bucket faster than it leaks out, the bucket fills up. If an arriving packet finds the bucket full, it overflows and the packet is discarded.</li>\n      </ul>\n\n      <h4>Master Comparison: Token Bucket vs. Leaky Bucket</h4>\n      <div class=\"overflow-x-auto my-3\">\n        <table class=\"w-full text-xs text-left border border-slate-200 dark:border-slate-700\">\n          <thead class=\"bg-slate-100 dark:bg-slate-800 font-bold\">\n            <tr>\n              <th class=\"p-2 border\">Feature Dimension</th>\n              <th class=\"p-2 border\">Token Bucket Algorithm</th>\n              <th class=\"p-2 border\">Leaky Bucket Algorithm</th>\n            </tr>\n          </thead>\n          <tbody class=\"divide-y divide-slate-200 dark:divide-slate-700\">\n            <tr>\n              <td class=\"p-2 border font-semibold\">Burst Handling</td>\n              <td class=\"p-2 border font-bold text-emerald-600\">Allows controlled bursts up to bucket capacity $\\beta$</td>\n              <td class=\"p-2 border text-slate-600\">Completely smooths bursts; enforces rigid constant rate</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold\">Output Rate Profile</td>\n              <td class=\"p-2 border\">Can transmit at full line speed during bursts; long-term average capped at $\\rho$</td>\n              <td class=\"p-2 border font-bold text-blue-600\">Strictly constant, uniform packet output rate $r$</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold\">What Is Discarded On Overflow?</td>\n              <td class=\"p-2 border font-bold text-purple-600\">Tokens are discarded; packets remain safe in queue</td>\n              <td class=\"p-2 border font-bold text-rose-600\">Packets are dropped when the buffer queue overflows</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold\">Transmission Condition</td>\n              <td class=\"p-2 border\">Packets send when sufficient tokens are accumulated</td>\n              <td class=\"p-2 border\">Packets release on periodic timer ticks from FIFO queue</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold\">Ideal Use Cases</td>\n              <td class=\"p-2 border\">Web browsing, HTTP API calls, bursty data transfers</td>\n              <td class=\"p-2 border\">Constant Bit Rate (CBR) voice, ATM networks, video pacing</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    ",
+      "technicalDetails": "\n      <h3>3. Closed-Loop Feedback Mechanisms for Throttling</h3>\n      <p>\n        How do intermediate routers tell upstream senders to slow down? Networks use several feedback mechanisms:\n      </p>\n\n      <h4>1. Choke Packets</h4>\n      <p class=\"text-xs\">\n        When a router queue crosses a critical high-water mark (e.g., $75\\%$ full), the router generates a special control packet called a <strong>Choke Packet</strong> (such as an ICMP Source Quench) and sends it backward to the source host. Upon receiving the choke packet, the source cuts its transmission rate by a factor (e.g., $50\\%$).\n      </p>\n\n      <h4>2. Hop-by-Hop Choke Packets</h4>\n      <p class=\"text-xs\">\n        In long-distance high-speed networks, sending a choke packet all the way back to the source takes significant time (hundreds of milliseconds). By the time the source slows down, thousands more packets have arrived and been dropped.<br/>\n        In <strong>Hop-by-Hop Choke</strong>, every intermediate router that forwards the choke packet immediately throttles its own outbound transmission toward the congested router, providing immediate local relief within a single round-trip hop.\n      </p>\n\n      <h4>3. Explicit Congestion Notification (ECN - RFC 3168)</h4>\n      <p class=\"text-xs\">\n        Rather than generating separate choke packets or dropping packets, modern routers use the 2-bit ECN field in the IP header (bits 6 and 7 of the IPv4 DiffServ / IPv6 Traffic Class field):\n      </p>\n      <ul class=\"list-disc pl-5 text-xs space-y-1 my-2\">\n        <li><code>00</code>: Non ECN-Capable Transport (Non-ECT)</li>\n        <li><code>01</code> or <code>10</code>: ECN-Capable Transport (ECT)</li>\n        <li><code>11</code>: <strong>Congestion Encountered (CE)</strong> - marked by an intermediate router when its queue is getting full.</li>\n      </ul>\n      <p class=\"text-xs\">\n        The destination host sees the CE bit and reflects it back to the sender via the TCP header's <code>ECE</code> (ECN-Echo) flag. The sender responds by cutting its congestion window (<code>cwnd</code>), throttling traffic <em>without suffering any packet loss</em>!\n      </p>\n    ",
       "workedExamples": {
-        "level1": "\n          <strong>Standard ECN Marking Flow:</strong><br/>\n          1. Web Server transmits an IP packet with <code>ECT(0) = 10</code>.<br/>\n          2. Edge router queue crosses the Random Early Detection (RED) threshold.<br/>\n          3. Rather than dropping the packet, the router rewrites the ECN bits to <code>CE = 11</code>.<br/>\n          4. Client receives packet, sets <code>ECE = 1</code> in its ACK.<br/>\n          5. Web Server throttles its congestion window without any retransmissions!\n        ",
-        "level2": "\n          <strong>Hop-by-Hop vs End-to-End Latency Trace:</strong><br/>\n          Path: Host A ➔ R1 (5 ms) ➔ R2 (20 ms) ➔ R3 (congested).<br/>\n          • End-to-end choke packet delay: (20 + 5 = 25\text{ ms}) to reach Host A.<br/>\n          • Hop-by-hop choke packet: takes only <strong>20 ms</strong> to reach R2. R2 instantly slows down, saving R3 buffer space 5 ms earlier.\n        ",
-        "level3": "\n          <strong>Throughput Collapse Prevention:</strong><br/>\n          Without ECN, when router queues overflow, 50 TCP flows drop packets simultaneously, causing <strong>Global TCP Synchronization</strong> (all 50 senders enter slow-start together, dropping link utilization to 20%).<br/>\n          With ECN and RED marking, packets are marked early and independently, maintaining link utilization at 95%+.\n        "
+        "level1": {
+          "title": "Level 1 (Intuitive): Token Accumulation and Consumption",
+          "problem": "A token bucket algorithm generates tokens at a rate of 10 tokens/second and has a capacity of 50 tokens. The bucket is currently completely full (50 tokens). A burst of 30 packets arrives simultaneously, where each packet consumes 1 token. How many tokens remain in the bucket, and are any packets delayed?",
+          "solution": "\n          <p><strong>Step 1: Check token requirement:</strong></p>\n          <p>30 packets require $30 \\times 1 = 30\\text{ tokens}$.</p>\n          <p><strong>Step 2: Compare against available tokens:</strong></p>\n          <p>The bucket holds 50 tokens. Since $50 \\ge 30$, all 30 packets are transmitted immediately with zero queuing delay.</p>\n          <p><strong>Step 3: Calculate remaining tokens:</strong></p>\n          $$\\text{Remaining Tokens} = 50 - 30 = 20\\text{ tokens}$$\n        "
+        },
+        "level2": {
+          "title": "Level 2 (Standard): Maximum Burst Duration Calculation",
+          "problem": "A computer connects to a network via a 100 Mbps transmission link. The network provider enforces a Token Bucket profile with bucket capacity $\\beta = 2\\text{ Megabytes}$ ($16\\text{ Megabits}$) and token arrival rate $\\rho = 20\\text{ Mbps}$. What is the maximum duration $S$ that the computer can transmit at full link speed (100 Mbps)?",
+          "solution": "\n          <p><strong>Step 1: Identify parameters:</strong></p>\n          <ul>\n            <li>Bucket capacity $\\beta = 16\\text{ Mbits}$</li>\n            <li>Token generation rate $\\rho = 20\\text{ Mbps}$</li>\n            <li>Maximum wire rate $C = 100\\text{ Mbps}$</li>\n          </ul>\n          <p><strong>Step 2: Apply the maximum burst duration formula:</strong></p>\n          $$S = \\frac{\\beta}{C - \\rho} = \\frac{16\\text{ Mbits}}{100\\text{ Mbps} - 20\\text{ Mbps}} = \\frac{16}{80} = 0.20\\text{ seconds} = 200\\text{ ms}$$\n          <p><strong>Step 3: Total data transmitted during burst:</strong></p>\n          $$M = C \\cdot S = 100\\text{ Mbps} \\times 0.20\\text{ s} = 20\\text{ Megabits} = 2.5\\text{ Megabytes}$$\n          <p><strong>Conclusion:</strong> The host can blast at full 100 Mbps wire rate for exactly 200 ms. After 200 ms, its rate is throttled back to the token arrival rate of 20 Mbps.</p>\n        "
+        },
+        "level3": {
+          "title": "Level 3 (Advanced): Leaky Bucket Buffer Overflow Calculation",
+          "problem": "A Leaky Bucket has a buffer capacity of 1 Megabyte and leaks at a constant rate of 2 Megabytes/second. A sudden burst of data arrives at a constant rate of 6 Megabytes/second for a duration of 0.5 seconds. Will the bucket overflow? If so, how many Megabytes of data are discarded?",
+          "solution": "\n          <p><strong>Step 1: Calculate total data arriving in 0.5 seconds:</strong></p>\n          $$\\text{Incoming Data} = 6\\text{ MB/s} \\times 0.5\\text{ s} = 3.0\\text{ MB}$$\n          <p><strong>Step 2: Calculate data leaked during 0.5 seconds:</strong></p>\n          $$\\text{Leaked Data} = 2\\text{ MB/s} \\times 0.5\\text{ s} = 1.0\\text{ MB}$$\n          <p><strong>Step 3: Calculate net accumulation in the bucket:</strong></p>\n          $$\\text{Net Inflow} = 3.0\\text{ MB} - 1.0\\text{ MB} = 2.0\\text{ MB}$$\n          <p><strong>Step 4: Compare with bucket capacity (1 MB):</strong></p>\n          <p>The bucket can only hold 1.0 MB. Since net inflow is 2.0 MB, the bucket overflows by:</p>\n          $$\\text{Discarded Data} = 2.0\\text{ MB} - 1.0\\text{ MB} = 1.0\\text{ Megabyte}$$\n          <p><strong>Result:</strong> 1.0 MB of packets are successfully leaked, 1.0 MB remains queued in the bucket, and <strong>1.0 MB is discarded</strong> due to buffer overflow.</p>\n        "
+        }
       },
-      "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 text-xs\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800\">\n            <h4 class=\"font-bold text-emerald-800 dark:text-emerald-300 mb-2\">Advantages of ECN Throttling</h4>\n            <ul class=\"space-y-1 list-disc pl-4 text-slate-700 dark:text-slate-300\">\n              <li>Zero packet loss: signals congestion before buffer overflow occurs.</li>\n              <li>Eliminates retransmission latency and TCP timeout stalls.</li>\n              <li>Conserves network bandwidth by in-band header bit marking.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/30 rounded-lg border border-rose-200 dark:border-rose-800\">\n            <h4 class=\"font-bold text-rose-800 dark:text-rose-300 mb-2\">Implementation Issues</h4>\n            <ul class=\"space-y-1 list-disc pl-4 text-slate-700 dark:text-slate-300\">\n              <li>Requires support from both end hosts and intermediate routers.</li>\n              <li>Misconfigured legacy firewalls occasionally drop ECN-marked packets.</li>\n            </ul>\n          </div>\n        </div>\n      ",
+      "advantagesLimitations": "\n      <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 my-3 text-xs\">\n        <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded border border-emerald-200 dark:border-emerald-800\">\n          <h4 class=\"font-bold text-emerald-800 dark:text-emerald-200 mb-2\">Advantages of Traffic Throttling</h4>\n          <ul class=\"space-y-1.5 text-slate-700 dark:text-slate-300\">\n            <li>✔ <strong>Eliminates Congestion Collapse:</strong> Paces senders to match bottleneck capacity.</li>\n            <li>✔ <strong>Promotes Fairness:</strong> Prevents aggressive, greedy users from monopolizing bandwidth.</li>\n            <li>✔ <strong>Reduces Buffer Bloat:</strong> Shorter queues in intermediate routers lower latency and jitter.</li>\n            <li>✔ <strong>Enables Zero-Loss Signaling:</strong> Protocols like ECN signal congestion before drops occur.</li>\n          </ul>\n        </div>\n        <div class=\"p-3 bg-rose-50 dark:bg-rose-950/30 rounded border border-rose-200 dark:border-rose-800\">\n          <h4 class=\"font-bold text-rose-800 dark:text-rose-200 mb-2\">Disadvantages & Limitations</h4>\n          <ul class=\"space-y-1.5 text-slate-700 dark:text-slate-300\">\n            <li>✘ <strong>Increases Packet Latency:</strong> Traffic shaping introduces artificial buffering delay at the sender.</li>\n            <li>✘ <strong>Requires Complex Policing State:</strong> Routers must maintain token buckets and state for thousands of flows.</li>\n            <li>✘ <strong>Feedback Delay Lag:</strong> Choke packets take finite propagation time; senders cannot react instantaneously.</li>\n          </ul>\n        </div>\n      </div>\n    ",
       "whereUsed": [
-        "Modern Linux, Windows 11, and macOS TCP stacks (ECN enabled by default)",
-        "Cloud Hyperscale Datacenters (Microsoft Azure, AWS, Google Cloud)",
-        "Apple iOS Low Latency Low Loss Scalable Throughput (L4S) standards"
+        "Cloud API Gateways (AWS API Gateway, Cloudflare): Token bucket rate limiters enforcing per-key request quotas.",
+        "ISP Residential Service Profiles: Pacing subscriber uploads and downloads according to purchased bandwidth tiers.",
+        "TCP Congestion Control Engines (BBR, Cubic): Dynamically adjusting congestion windows to bottleneck bandwidth.",
+        "Cellular Base Stations (4G/5G): Throttling subscriber data speeds after monthly data quota thresholds."
       ],
-      "commonMistakes": "\n        <ul class=\"space-y-2 text-xs\">\n          <li><strong>Believing ECN requires generating new packets:</strong> ECN is an in-band mechanism that flips 2 existing bits in transit packets; it never generates additional packets.</li>\n          <li><strong>Confusing ECE and CWR flags:</strong> ECE (ECN-Echo) is sent by the receiver to notify the sender; CWR (Congestion Window Reduced) is sent by the sender to confirm it has throttled.</li>\n        </ul>\n      ",
-      "compareWith": "choke-packets-vs-ecn",
+      "commonMistakes": "\n      <ul class=\"list-disc pl-5 text-xs space-y-1.5 text-slate-600 dark:text-slate-300\">\n        <li><strong>Confusing Token Bucket with Leaky Bucket:</strong> Token Bucket permits bursty transmissions as long as tokens exist; Leaky Bucket forces a rigid constant output rate.</li>\n        <li><strong>Assuming Throttling Always Discards Data:</strong> Shaping buffers excess packets in a queue and releases them smoothly; only strict policing discards packets.</li>\n      </ul>\n    ",
+      "compareWith": "\n      <h4>Comparison: Traffic Policing vs. Traffic Shaping</h4>\n      <div class=\"overflow-x-auto my-2\">\n        <table class=\"w-full text-xs text-left border border-slate-200 dark:border-slate-700\">\n          <thead class=\"bg-slate-100 dark:bg-slate-800 font-bold\">\n            <tr>\n              <th class=\"p-2 border\">Attribute</th>\n              <th class=\"p-2 border\">Traffic Policing</th>\n              <th class=\"p-2 border\">Traffic Shaping</th>\n            </tr>\n          </thead>\n          <tbody class=\"divide-y divide-slate-200 dark:divide-slate-700\">\n            <tr>\n              <td class=\"p-2 border font-semibold\">Handling of Excess Traffic</td>\n              <td class=\"p-2 border font-bold text-rose-600\">Discards or remarkes excess packets immediately</td>\n              <td class=\"p-2 border font-bold text-emerald-600\">Buffers excess packets in a queue and delays them</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold\">Queue Memory Required</td>\n              <td class=\"p-2 border\">None (Stateless packet inspection)</td>\n              <td class=\"p-2 border\">Requires buffer queues to hold delayed packets</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold\">Impact on Latency</td>\n              <td class=\"p-2 border\">No added delay (packets either pass or drop)</td>\n              <td class=\"p-2 border\">Introduces queuing delay to smooth packet delivery</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    ",
       "quiz": [
         {
-          "question": "What bits in the IPv4 / IPv6 header does a router set to '11' to signal Congestion Experienced (CE)?",
+          "question": "Which traffic shaping algorithm allows controlled bursts of data while enforcing a long-term average rate?",
           "options": [
-            "TTL bits",
-            "ECN (Explicit Congestion Notification) bits in Traffic Class / ToS",
-            "Version bits",
-            "Checksum bits"
+            "Leaky Bucket Algorithm",
+            "Token Bucket Algorithm",
+            "Dijkstra SPF Algorithm",
+            "Pure ALOHA Protocol"
           ],
           "answer": 1,
-          "explanation": "Routers mark the two ECN bits in the IPv4 Type of Service (DiffServ) or IPv6 Traffic Class field to '11' (CE) to signal congestion."
+          "explanation": "The Token Bucket algorithm accumulates tokens up to its bucket capacity, allowing senders to transmit at full wire speed during bursts as long as tokens are available."
         },
         {
-          "question": "What is the primary advantage of Hop-by-Hop Choke Packets over end-to-end Choke Packets?",
+          "question": "What is the characteristic output of a Leaky Bucket Algorithm?",
           "options": [
-            "They use more bandwidth",
-            "They take immediate effect at upstream intermediate routers without waiting for the source host to respond",
-            "They turn off router power",
-            "They convert IPv4 into IPv6"
+            "Bursts of unlimited size",
+            "Strictly constant, uniform packet output rate",
+            "Output rate proportional to receiver CPU temperature",
+            "Zero packets transmitted during idle periods"
           ],
           "answer": 1,
-          "explanation": "Hop-by-hop choke packets slow down intermediate routers immediately, buffering traffic upstream rather than waiting for the distant source host."
+          "explanation": "A Leaky Bucket produces a strictly steady, uniform output rate regardless of how bursty the incoming traffic is."
         },
         {
-          "question": "When a receiving host receives an IP packet with ECN bits set to CE (11), how does it notify the sender?",
+          "question": "In Explicit Congestion Notification (ECN, RFC 3168), how does a router notify endpoints of incipient congestion?",
           "options": [
-            "It sends an email to the network administrator",
-            "It sets the ECE (ECN-Echo) flag in its returning TCP ACK packet",
-            "It disconnects from the Internet",
-            "It discards all subsequent packets"
+            "By immediately dropping 50% of all incoming packets",
+            "By marking the 2-bit ECN field (11 - Congestion Encountered) in the IP header without dropping the packet",
+            "By broadcasting an ARP request to all LAN ports",
+            "By tearing down the BGP peering session"
           ],
           "answer": 1,
-          "explanation": "The receiver reflects the congestion notification by setting the ECE (ECN-Echo) flag in its returning TCP acknowledgment."
+          "explanation": "ECN allows intermediate routers to set the CE (Congestion Encountered) bits in the IP header of packets when queues build up, warning endpoints without having to drop packets."
         },
         {
-          "question": "How does the source host confirm to the receiver that it has reduced its congestion window in response to ECE?",
+          "question": "If a token bucket has capacity beta = 10 Mb, token generation rate rho = 2 Mbps, and link wire speed C = 10 Mbps, what is the maximum burst duration S?",
           "options": [
-            "By setting the SYN flag",
-            "By setting the CWR (Congestion Window Reduced) flag in its next packet",
-            "By sending a FIN packet",
-            "By increasing its window size"
+            "1.25 seconds",
+            "5.0 seconds",
+            "0.50 seconds",
+            "10.0 seconds"
           ],
-          "answer": 1,
-          "explanation": "The sender sets the CWR (Congestion Window Reduced) flag in its next outgoing data segment to acknowledge the rate reduction."
+          "answer": 0,
+          "explanation": "S = beta / (C - rho) = 10 / (10 - 2) = 10 / 8 = 1.25 seconds."
         }
       ],
       "references": [
         {
-          "cite": "RFC 3168: The Addition of Explicit Congestion Notification (ECN) to IP",
+          "cite": "RFC 3168: The Addition of Explicit Congestion Notification (ECN) to IP, IETF.",
           "url": "https://datatracker.ietf.org/doc/html/rfc3168"
         },
         {
-          "cite": "A.S. Tanenbaum & D.J. Wetherall, Computer Networks, 6th Ed., Ch. 5.3.4",
-          "url": ""
+          "cite": "RFC 2697: A Single Rate Three Color Marker (Traffic Policing & Shaping), IETF.",
+          "url": "https://datatracker.ietf.org/doc/html/rfc2697"
+        },
+        {
+          "cite": "A.S. Tanenbaum & D.J. Wetherall, Computer Networks, 6th Edition: Traffic Shaping Algorithms.",
+          "url": "https://www.pearson.com"
         }
       ]
     },
@@ -2839,126 +2894,144 @@ const TOPICS_U3_EXT = {
   "load-shedding": {
     "id": "load-shedding",
     "title": "Load Shedding",
-    "unit": "Unit 3 – Network Layer",
+    "unit": "Unit 3: Network Layer",
     "unitId": "unit3",
-    "level": "Level 1 — Core Topic",
-    "category": "network",
-    "difficulty": "Advanced",
-    "readingTime": "15 min read",
-    "standard": "Tanenbaum Ch 5.3.5 / RFC 2309 / Kurose & Ross Ch 3.7",
-    "oneLiner": "Systematic packet discard policies when buffers overflow: contrasting the Wine Policy (file transfers) with the Milk Policy (multimedia).",
-    "quickAnswer": "Load Shedding is the final line of defense against network congestion where routers systematically discard packets when queue buffers are completely saturated. Discard decisions follow specialized policies: the Wine Policy drops newly arrived packets while preserving older packets already near their destination (ideal for file transfers), whereas the Milk Policy drops stale old packets while preserving fresh incoming packets (ideal for real-time video/voice).",
-    "whyItMatters": "When traffic overwhelms all routing and throttling defenses, queues inevitably overflow. Random packet dropping causes catastrophic TCP global synchronization and retransmission storms. Intelligent load shedding policies like Random Early Detection (RED) and priority discard maintain application quality of service even during severe overloads.",
+    "level": "Core Syllabus",
+    "category": "Congestion Control Approaches",
+    "difficulty": "Intermediate",
+    "readingTime": "13 min",
+    "standard": "IETF RFC 2309 (Active Queue Management & RED)",
+    "oneLiner": "Last-resort congestion control technique where overloaded routers deliberately drop selected packets to prevent complete system collapse.",
+    "quickAnswer": "Load Shedding is a reactive congestion control technique where a router or network that cannot handle all incoming packets deliberately discards selected packets. By shedding excess load, the router prevents its buffers and processing queues from overflowing uncontrollably, preserving service for remaining traffic.",
+    "whyItMatters": "When incoming packet arrival rates exceed forwarding capacity, router queues fill completely. Without intelligent load shedding, routers experience tail-drop, dropping critical network control packets and causing global synchronization across all TCP connections. Load shedding provides an orderly, prioritized safety valve during emergency overload.",
     "infobox": {
-      "prerequisites": [
-        "traffic-throttling"
-      ],
-      "relatedConcepts": [
-        "admission-control",
-        "traffic-aware-routing"
-      ],
-      "compareWith": [
-        "wine-vs-milk-policy"
-      ],
+      "approachType": "Reactive / Emergency Packet Discard Policy",
+      "primaryGoal": "Prevent complete router collapse and buffer exhaustion during extreme overload",
+      "keyPolicies": "Random Discard, Priority-Based Discard, Wine Policy (File Transfer), Milk Policy (Streaming)",
+      "whenApplied": "When router queues cross critical capacity thresholds (> 90% full)",
+      "keyAnalogy": "Power utility implementing rolling blackouts during an extreme electricity demand crisis",
       "primaryUses": [
-        "Router queue management during severe network denial-of-service (DoS) attacks",
-        "Active Queue Management (Random Early Detection - RED, CoDel, PIE)",
-        "Differentiated Services (DiffServ) Per-Hop Behaviors (RFC 2597 Assured Forwarding)",
-        "Real-time video conferencing (WebRTC, Zoom) latency optimization"
-      ],
-      "standardRfc": "RFC 2309 (Recommendations on Queue Management and Congestion Avoidance)"
+        "Core Router Active Queue Management (RED)",
+        "DDoS Attack Mitigation & Packet Filtering",
+        "High-Speed Edge Gateway Protection"
+      ]
     },
-    "learningObjectives": [
-      "Define load shedding and explain why it is the final line of defense against congestion",
-      "Contrast the Wine Policy with the Milk Policy and match each to its appropriate application",
-      "Explain Random Early Detection (RED) and how probabilistic packet dropping prevents synchronization",
-      "Understand Priority Discard using DiffServ IP Precedence / DSCP bits",
-      "Explain the danger of Tail Drop queue management"
-    ],
     "prerequisitesList": [
       {
-        "concept": "Buffer Queuing in Routers",
-        "meaning": "Understanding FIFO queue overflows and packet loss"
+        "concept": "Router Buffer Architecture",
+        "meaning": "Hardware FIFO packet queues, memory bounds, and tail-drop mechanics."
+      },
+      {
+        "concept": "Packet Header Classification",
+        "meaning": "IP Type of Service (ToS) and Differentiated Services Code Point (DSCP)."
+      },
+      {
+        "concept": "TCP Retransmission & Loss",
+        "meaning": "How packet drops signal congestion and trigger window deflation."
       }
     ],
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Traffic_policing_and_shaping.svg",
-    "imageCaption": "Figure 3.20: Intelligent Load Shedding Discard Policies: Wine Policy vs Milk Policy.",
+    "learningObjectives": [
+      "Define Load Shedding and explain why it is essential during router buffer exhaustion.",
+      "Trace the step-by-step packet discard calculation from the syllabus (100 buffer, 90 full, 30 arrive).",
+      "Compare the four types of Load Shedding: Random, Priority-based, Application-based, and Selective.",
+      "Differentiate between the famous Wine Policy and Milk Policy with application examples.",
+      "Synthesize the master comparison matrix of all four congestion control approaches from the syllabus.",
+      "Memorize the road traffic analogies for examination preparation."
+    ],
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Internet_map_1024.jpg/800px-Internet_map_1024.jpg",
+    "imageCaption": "Figure 5.4: Load Shedding discards lower-priority packets during extreme overload to prevent full network collapse.",
     "sections": {
-      "overview": "\n        <p class=\"mb-3\">\n          When all proactive congestion prevention approaches (traffic-aware routing, admission control, and traffic throttling) fail to hold back the tide of incoming traffic, router queue buffers inevitably fill to capacity.\n        </p>\n        <p class=\"mb-3\">\n          <strong>Load Shedding</strong> is the final, emergency line of defense in computer networks. When a router is completely inundated with more packets than its memory can hold, it systematically and intentionally discards a subset of packets to keep the remaining traffic flowing.\n        </p>\n      ",
-      "howItWorks": "\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">1. Discard Policies: Wine vs. Milk</h3>\n        <p class=\"mb-3 text-xs\">\n          The central question in load shedding is: <em>Which packets should be dropped?</em> The answer depends entirely on the application:\n        </p>\n\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-3 text-xs mb-4\">\n          <div class=\"p-3 bg-white dark:bg-slate-800 rounded-lg border-l-4 border-purple-500 shadow-sm\">\n            <h4 class=\"font-bold text-purple-700 dark:text-purple-300 mb-1 flex items-center gap-1.5\">\n              <span>🍷 The Wine Policy (\"Older is Better\")</span>\n            </h4>\n            <p class=\"text-slate-600 dark:text-slate-300 leading-relaxed mb-2\">\n              Like fine wine, packets become more valuable as they age. A packet that has already traversed 10 router hops has consumed substantial network bandwidth and is very close to its destination.\n            </p>\n            <div class=\"p-2 rounded bg-purple-50 dark:bg-purple-950/40 text-[11px] font-mono text-purple-800 dark:text-purple-200\">\n              <strong>Action:</strong> Discard newly arrived incoming packets; preserve older packets in the queue.<br/>\n              <strong>Best For:</strong> Reliable file transfers (FTP, HTTP downloads, database replication).\n            </div>\n          </div>\n\n          <div class=\"p-3 bg-white dark:bg-slate-800 rounded-lg border-l-4 border-amber-500 shadow-sm\">\n            <h4 class=\"font-bold text-amber-700 dark:text-amber-300 mb-1 flex items-center gap-1.5\">\n              <span>🥛 The Milk Policy (\"Freshness is Essential\")</span>\n            </h4>\n            <p class=\"text-slate-600 dark:text-slate-300 leading-relaxed mb-2\">\n              Like fresh milk, data spoils quickly. For real-time applications, an old packet that has been delayed in a buffer is completely useless because the playback deadline has already expired.\n            </p>\n            <div class=\"p-2 rounded bg-amber-50 dark:bg-amber-950/40 text-[11px] font-mono text-amber-800 dark:text-amber-200\">\n              <strong>Action:</strong> Discard stale, old packets sitting in the queue; preserve and forward fresh incoming packets.<br/>\n              <strong>Best For:</strong> Real-time streaming video, VoIP voice calls, and online gaming.\n            </div>\n          </div>\n        </div>\n\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">2. Random Early Detection (RED)</h3>\n        <p class=\"mb-3 text-xs\">\n          The traditional default router behavior was <strong>Tail Drop</strong>: accept packets until the buffer is 100% full, then discard all subsequent packets. Tail Drop causes two catastrophic problems:\n        </p>\n        <ul class=\"list-disc pl-5 space-y-1 text-xs mb-3\">\n          <li><strong>Global TCP Synchronization:</strong> Multiple TCP flows experience loss at the exact same moment, halving their windows simultaneously and leaving the link underutilized.</li>\n          <li><strong>Bufferbloat:</strong> Packets sit in massive queues for seconds, causing high latency.</li>\n        </ul>\n        <p class=\"text-xs mb-3\">\n          <strong>Random Early Detection (RED)</strong> computes an exponential weighted moving average of the queue length. When the average crosses a minimum threshold (min_{th}), the router begins dropping (or ECN marking) packets <strong>probabilistically</strong>. As queue size approaches (max_{th}), drop probability linearly rises to 1.0. This gently signals individual TCP senders to slow down at different times, maintaining steady maximum throughput!\n        </p>\n      ",
-      "technicalDetails": "\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">3. Priority Discard (DiffServ Assured Forwarding)</h3>\n        <p class=\"text-xs mb-3\">\n          Modern IP networks mark packets with a <strong>Drop Precedence</strong> in the DiffServ octet (RFC 2597). During congestion:\n        </p>\n        <table class=\"wiki-table w-full text-xs font-mono mb-4 text-center\">\n          <thead>\n            <tr class=\"bg-gray-100 dark:bg-gray-800\">\n              <th>Traffic Class</th>\n              <th>DSCP Value</th>\n              <th>Drop Precedence</th>\n              <th>Treatment During Overload</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr><td class=\"font-bold font-sans\">AF11</td><td>001010</td><td>Low Drop</td><td>Preserved; highest priority delivery.</td></tr>\n            <tr><td class=\"font-bold font-sans\">AF12</td><td>001100</td><td>Medium Drop</td><td>Dropped only during severe congestion.</td></tr>\n            <tr><td class=\"font-bold font-sans\">AF13</td><td>001110</td><td>High Drop</td><td>First to be shed when buffer utilization rises.</td></tr>\n          </tbody>\n        </table>\n      ",
+      "overview": "\n      <h3>1. What Is Load Shedding?</h3>\n      <p>\n        <strong>Load Shedding</strong> is a congestion control approach in which a network or router deliberately discards selected packets when it becomes severely overloaded.\n      </p>\n      <p>\n        When incoming traffic exceeds the hardware capacity of routers and transmission links to process or buffer, the network cannot deliver every packet. Rather than allowing queues to grow without bound until the entire operating system crashes or all flows time out simultaneously, the router proactively sheds a portion of its load.\n      </p>\n\n      <div class=\"p-3 my-3 bg-purple-50 dark:bg-purple-950/40 border-l-4 border-purple-500 rounded-r-lg text-xs\">\n        <strong>Electrical Power Grid Analogy:</strong><br/>\n        The term <em>load shedding</em> originates from electrical power utilities. During an extreme heatwave when air conditioner demand exceeds power plant generation capacity, the utility intentionally shuts off power to selected non-critical neighborhoods (rolling blackouts). This intentional sacrifice of a few circuits prevents the entire regional electrical grid from suffering a catastrophic blackout. In networking, routers sacrifice selected packets to prevent total communication collapse.\n      </div>\n\n      <h4>Why Is Load Shedding Needed?</h4>\n      <p class=\"text-xs\">\n        Consider a core router that has a maximum processing and forwarding capacity of <strong>1,000 packets per second</strong>. Suppose during a sudden traffic surge, packets arrive at a rate of <strong>1,500 packets per second</strong>:\n      </p>\n      <ul class=\"list-disc pl-5 text-xs space-y-1 my-2\">\n        <li>The router faces an immediate deficit of 500 packets every single second.</li>\n        <li>Within seconds, finite router buffer memory is completely exhausted.</li>\n        <li>If no packets are shed, queuing delays skyrocket to tens of seconds, causing all senders to assume their packets were lost and retransmit even more packets!</li>\n      </ul>\n\n      <h4>The 5-Step Load Shedding Procedure</h4>\n      <div class=\"space-y-2 my-2 text-xs\">\n        <div class=\"p-2.5 bg-white dark:bg-slate-800 border rounded flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-blue-100 text-blue-700 font-bold rounded\">Step 1</span>\n          <div><strong>Monitor Buffer Occupancy:</strong> The router tracks current queue depth against high-water thresholds.</div>\n        </div>\n        <div class=\"p-2.5 bg-white dark:bg-slate-800 border rounded flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-indigo-100 text-indigo-700 font-bold rounded\">Step 2</span>\n          <div><strong>Detect Overload Condition:</strong> Queue occupancy crosses emergency threshold (e.g., $> 90\\%$ full).</div>\n        </div>\n        <div class=\"p-2.5 bg-white dark:bg-slate-800 border rounded flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-purple-100 text-purple-700 font-bold rounded\">Step 3</span>\n          <div><strong>Select Packets for Discard:</strong> Apply discard policy (Random, Priority, Wine, or Milk) to identify target packets.</div>\n        </div>\n        <div class=\"p-2.5 bg-white dark:bg-slate-800 border rounded flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-rose-100 text-rose-700 font-bold rounded\">Step 4</span>\n          <div><strong>Discard Selected Packets:</strong> Remove chosen packets from buffer memory or drop upon arrival.</div>\n        </div>\n        <div class=\"p-2.5 bg-white dark:bg-slate-800 border rounded flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-emerald-100 text-emerald-700 font-bold rounded\">Step 5</span>\n          <div><strong>Forward Prioritized Traffic:</strong> Safely process and transmit the remaining high-priority packets.</div>\n        </div>\n      </div>\n    ",
+      "howItWorks": "\n      <h3>2. Numerical Example from the Syllabus</h3>\n      <p class=\"text-xs\">\n        Consider a router interface buffer with the following parameters:\n      </p>\n      <div class=\"overflow-x-auto my-2\">\n        <table class=\"w-full text-xs text-left border border-slate-200 dark:border-slate-700\">\n          <thead class=\"bg-slate-100 dark:bg-slate-800 font-bold\">\n            <tr>\n              <th class=\"p-2 border\">Parameter</th>\n              <th class=\"p-2 border\">Value</th>\n              <th class=\"p-2 border\">Physical Meaning</th>\n            </tr>\n          </thead>\n          <tbody class=\"divide-y divide-slate-200 dark:divide-slate-700\">\n            <tr>\n              <td class=\"p-2 border font-medium\">Total Buffer Capacity</td>\n              <td class=\"p-2 border font-mono\">100 packets</td>\n              <td class=\"p-2 border\">Maximum physical slots in the router queue</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-medium\">Packets Currently Stored</td>\n              <td class=\"p-2 border font-mono\">90 packets</td>\n              <td class=\"p-2 border\">Queue is currently 90% full</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-medium\">New Packets Arriving in Burst</td>\n              <td class=\"p-2 border font-mono\">30 packets</td>\n              <td class=\"p-2 border\">Sudden incoming burst from multiple endpoints</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-medium text-blue-600 font-bold\">Available Buffer Spaces</td>\n              <td class=\"p-2 border font-mono text-blue-600 font-bold\">100 - 90 = 10 packets</td>\n              <td class=\"p-2 border\">Free memory slots remaining</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-medium text-rose-600 font-bold\">Packets That Must Be Discarded</td>\n              <td class=\"p-2 border font-mono text-rose-600 font-bold\">30 - 10 = 20 packets</td>\n              <td class=\"p-2 border font-bold text-rose-600\">Shedded Load (Dropped)</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n      <p class=\"text-xs text-slate-600 dark:text-slate-300\">\n        <em>Outcome:</em> Exactly 10 packets can be admitted into the buffer queue. The excess <strong>20 packets must be discarded</strong>. How the router chooses <em>which</em> 20 packets to drop depends on its load shedding policy.\n      </p>\n\n      <h4>The Four Types of Load Shedding</h4>\n      <div class=\"grid grid-cols-1 sm:grid-cols-2 gap-3 my-3 text-xs\">\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded border\">\n          <h4 class=\"font-bold text-blue-600 mb-1\">1. Random Load Shedding</h4>\n          <p class=\"text-slate-600 dark:text-slate-300\">\n            Packets are chosen for dropping at random (or probabilistically, as in Random Early Detection - RED). Prevents global synchronization of TCP senders.\n          </p>\n        </div>\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded border\">\n          <h4 class=\"font-bold text-purple-600 mb-1\">2. Priority-Based Load Shedding</h4>\n          <p class=\"text-slate-600 dark:text-slate-300\">\n            Inspects the IP Precedence or DSCP bits in the packet header. Lower-priority traffic (e.g. background bulk sync) is dropped first; mission-critical control traffic is protected.\n          </p>\n        </div>\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded border\">\n          <h4 class=\"font-bold text-amber-600 mb-1\">3. Application-Based Load Shedding</h4>\n          <p class=\"text-slate-600 dark:text-slate-300\">\n            Drops traffic according to application type. For example, in MPEG video, dropping non-reference B-frames causes minimal degradation, whereas dropping key I-frames destroys video playback.\n          </p>\n        </div>\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded border\">\n          <h4 class=\"font-bold text-emerald-600 mb-1\">4. Selective Load Shedding (Wine vs. Milk)</h4>\n          <p class=\"text-slate-600 dark:text-slate-300\">\n            Drops packets based on packet age and transit distance, optimized for specific application transport semantics.\n          </p>\n        </div>\n      </div>\n\n      <h4>The Classic Selective Discard Policies: Wine vs. Milk</h4>\n      <div class=\"grid grid-cols-1 md:grid-cols-2 gap-3 my-3 text-xs\">\n        <div class=\"p-3 bg-purple-50 dark:bg-purple-950/30 rounded border border-purple-200 dark:border-purple-800\">\n          <h5 class=\"font-bold text-purple-700 dark:text-purple-300 mb-1\">🍷 Wine Policy (\"Old is better than New\")</h5>\n          <p class=\"text-slate-600 dark:text-slate-300\">\n            Like fine wine, older packets have accumulated significant value! If a packet has already traveled through 10 intermediate hops, discarding it now wastes all the upstream bandwidth and CPU resources already invested in it.\n          </p>\n          <ul class=\"list-disc pl-5 mt-2 space-y-1\">\n            <li><strong>Action:</strong> Discard newly arrived packets at ingress; protect older packets that are almost at their destination.</li>\n            <li><strong>Best suited for:</strong> <strong>File transfers (FTP) and reliable TCP traffic</strong>, where retransmitting an almost-delivered packet wastes network work.</li>\n          </ul>\n        </div>\n        <div class=\"p-3 bg-amber-50 dark:bg-amber-950/30 rounded border border-amber-200 dark:border-amber-800\">\n          <h5 class=\"font-bold text-amber-700 dark:text-amber-300 mb-1\">🥛 Milk Policy (\"Fresh is better than Stale\")</h5>\n          <p class=\"text-slate-600 dark:text-slate-300\">\n            Like fresh milk, data is only good when fresh; old data spoils quickly! In real-time communications, packets delayed in queues are useless because their presentation deadline has already passed.\n          </p>\n          <ul class=\"list-disc pl-5 mt-2 space-y-1\">\n            <li><strong>Action:</strong> Discard stale, old buffered packets; keep and forward newly arrived packets.</li>\n            <li><strong>Best suited for:</strong> <strong>Real-time multimedia, VoIP, and live video streaming</strong>, where an old delayed audio frame is discarded anyway by the receiver.</li>\n          </ul>\n        </div>\n      </div>\n    ",
+      "technicalDetails": "\n      <h3>3. Master Comparison of All Four Congestion Approaches</h3>\n      <p class=\"text-xs\">\n        This master comparison table is one of the most critical sections for university and technical examinations:\n      </p>\n      <div class=\"overflow-x-auto my-3\">\n        <table class=\"w-full text-xs text-left border border-slate-200 dark:border-slate-700\">\n          <thead class=\"bg-slate-100 dark:bg-slate-800 font-bold\">\n            <tr>\n              <th class=\"p-2 border\">Feature</th>\n              <th class=\"p-2 border\">Traffic-Aware Routing</th>\n              <th class=\"p-2 border\">Admission Control</th>\n              <th class=\"p-2 border\">Traffic Throttling</th>\n              <th class=\"p-2 border\">Load Shedding</th>\n            </tr>\n          </thead>\n          <tbody class=\"divide-y divide-slate-200 dark:divide-slate-700\">\n            <tr>\n              <td class=\"p-2 border font-semibold\">Main Purpose</td>\n              <td class=\"p-2 border\">Avoid congested routes</td>\n              <td class=\"p-2 border\">Prevent excessive new traffic from entering</td>\n              <td class=\"p-2 border\">Limit and pace data transmission rates</td>\n              <td class=\"p-2 border font-bold text-rose-600\">Discard selected packets during emergency overload</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold\">Primary Action</td>\n              <td class=\"p-2 border\">Change or select alternative paths</td>\n              <td class=\"p-2 border\">Accept or reject new flow requests</td>\n              <td class=\"p-2 border\">Control traffic speed via queues/tokens</td>\n              <td class=\"p-2 border font-bold text-rose-600\">Drop packets</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold\">When Applied?</td>\n              <td class=\"p-2 border\">During route selection or link monitoring</td>\n              <td class=\"p-2 border font-bold text-blue-600\">Before admitting a new flow (Session setup)</td>\n              <td class=\"p-2 border\">When traffic rate exceeds configured limit</td>\n              <td class=\"p-2 border font-bold text-purple-600\">When buffer resources are critically overwhelmed</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold\">Resource Requirement</td>\n              <td class=\"p-2 border\">Network telemetry and topology state</td>\n              <td class=\"p-2 border\">End-to-end resource availability info</td>\n              <td class=\"p-2 border\">Rate counters, token buckets, shaping queues</td>\n              <td class=\"p-2 border\">Buffer occupancy and packet priority tags</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold\">Main Benefit</td>\n              <td class=\"p-2 border text-emerald-600 font-bold\">Optimal traffic distribution</td>\n              <td class=\"p-2 border text-emerald-600 font-bold\">Guarantees QoS for admitted flows</td>\n              <td class=\"p-2 border text-emerald-600 font-bold\">Prevents buffer overflow without drops</td>\n              <td class=\"p-2 border text-emerald-600 font-bold\">Prevents total network crash / collapse</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold\">Main Disadvantage</td>\n              <td class=\"p-2 border text-rose-600\">Monitoring overhead; route flapping</td>\n              <td class=\"p-2 border text-rose-600\">Rejects legitimate new connection requests</td>\n              <td class=\"p-2 border text-rose-600\">Introduces queuing delay at sender</td>\n              <td class=\"p-2 border text-rose-600\">Directly causes packet loss</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n\n      <h4>Easy Road Traffic Analogies to Remember (From Syllabus)</h4>\n      <div class=\"p-3 my-2 bg-slate-100 dark:bg-slate-800 rounded text-xs space-y-1.5\">\n        <div>🚗 <strong>Traffic-Aware Routing:</strong> Choose a less congested highway to reach your destination.</div>\n        <div>🛑 <strong>Admission Control:</strong> Do not allow more cars onto the highway when the road is already at capacity.</div>\n        <div>🚦 <strong>Traffic Throttling:</strong> Use ramp meters at highway entrances to regulate how quickly vehicles merge.</div>\n        <div>🗑️ <strong>Load Shedding:</strong> Tow away or remove selected vehicles from the highway when gridlock threatens to paralyze the entire city.</div>\n      </div>\n    ",
       "workedExamples": {
-        "level1": "\n          <strong>Application Mapping for Discard Policies:</strong><br/>\n          • User downloading a 10 GB Linux ISO via BitTorrent ➔ <strong>Wine Policy</strong> (older packets have consumed bandwidth; dropping an old packet wastes all previous hops).<br/>\n          • User on a Zoom video conference ➔ <strong>Milk Policy</strong> (a video frame delayed by 300 ms will cause stutter; drop the old frame so the live camera feed stays in real-time sync!).\n        ",
-        "level2": "\n          <strong>RED Probability Calculation:</strong><br/>\n          RED thresholds: (min_{th} = 20\text{ packets}, max_{th} = 80\text{ packets}, P_{max} = 0.1).<br/>\n          Current average queue length = 50 packets.<br/>\n          • Drop probability: (P_b = P_{max} \times \frac{\text{avg} - min_{th}}{max_{th} - min_{th}} = 0.1 \times \frac{50 - 20}{80 - 20} = 0.1 \times \frac{30}{60} = mathbf{0.05\text{ (5%)}}).<br/>\n          Roughly 1 in every 20 packets is randomly dropped or marked, gently signaling TCP senders without crashing throughput.\n        ",
-        "level3": "\n          <strong>CoDel (Controlled Delay) Active Queue Management:</strong><br/>\n          Modern alternative to RED: instead of measuring queue byte length, CoDel measures <strong>packet sojourn time</strong> (how long each packet waits in the queue).<br/>\n          If minimum sojourn time over a 100 ms sliding window exceeds a target (e.g. 5 ms), CoDel drops a single packet and sets an interval timer. It automatically distinguishes harmless temporary traffic bursts from persistent bufferbloat!\n        "
+        "level1": {
+          "title": "Level 1 (Intuitive): Router Buffer Discard Calculation",
+          "problem": "A router has an internal buffer that can hold 200 packets. Currently, 175 packets are sitting in the queue. A sudden burst of 60 packets arrives at the interface before any queued packet can be transmitted. Calculate the number of available buffer spaces and the number of packets that must be discarded under load shedding.",
+          "solution": "\n          <p><strong>Step 1: Calculate available buffer capacity:</strong></p>\n          $$\\text{Available Buffer} = 200 - 175 = 25\\text{ packets}$$\n          <p><strong>Step 2: Calculate packets that can be stored:</strong></p>\n          <p>The router can store exactly 25 of the incoming 60 packets.</p>\n          <p><strong>Step 3: Calculate discarded packets:</strong></p>\n          $$\\text{Discarded Packets} = 60 - 25 = 35\\text{ packets}$$\n          <p><strong>Result:</strong> 25 packets enter the queue; <strong>35 packets are shed (discarded)</strong>.</p>\n        "
+        },
+        "level2": {
+          "title": "Level 2 (Standard): Priority-Based Discard Evaluation",
+          "problem": "A congested router buffer holds 40 packets: 10 VoIP packets (DSCP EF, Priority 1), 15 Video packets (DSCP AF, Priority 2), and 15 File Transfer packets (Best Effort, Priority 3). The router must shed 20 packets immediately to relieve critical queue pressure. Under Priority-Based Load Shedding, how many packets of each traffic class are discarded?",
+          "solution": "\n          <p><strong>Step 1: Discard lowest-priority traffic first (Priority 3 - Best Effort File Transfer):</strong></p>\n          <p>There are 15 File Transfer packets. Discarding all 15 packets leaves: $20 - 15 = 5\\text{ packets}$ still needed to be shed.</p>\n          <p><strong>Step 2: Discard from the next lowest priority class (Priority 2 - Video):</strong></p>\n          <p>There are 15 Video packets. The router sheds 5 Video packets, leaving 10 Video packets intact.</p>\n          <p><strong>Step 3: Evaluate highest priority class (Priority 1 - VoIP):</strong></p>\n          <p>VoIP is fully protected. 0 VoIP packets are dropped.</p>\n          <p><strong>Summary of Discards:</strong></p>\n          <ul>\n            <li>File Transfer Packets Discarded: <strong>15</strong> (100% of class)</li>\n            <li>Video Packets Discarded: <strong>5</strong></li>\n            <li>VoIP Packets Discarded: <strong>0</strong> (Fully preserved)</li>\n          </ul>\n        "
+        },
+        "level3": {
+          "title": "Level 3 (Advanced): Selective Load Shedding (Wine vs Milk Policy)",
+          "problem": "A router buffer holds two flows: Flow A (an interactive video conference call where packets delayed past 200 ms are useless) and Flow B (a reliable TCP database backup where packets have already crossed 8 intermediate hops). The buffer is full and an arriving packet needs space. Which policy should the router apply to each flow, and which specific packet should be dropped?",
+          "solution": "\n          <p><strong>Step 1: Analysis for Flow A (Interactive Video Conference):</strong></p>\n          <p>Flow A requires the <strong>Milk Policy (\"Fresh is better than Stale\")</strong>. The router should discard the <em>oldest</em> queued packet in Flow A's buffer, because that packet has likely missed its playback deadline, and admit the fresh newly arrived packet.</p>\n          <p><strong>Step 2: Analysis for Flow B (TCP Database Backup):</strong></p>\n          <p>Flow B requires the <strong>Wine Policy (\"Old is better than New\")</strong>. Packets in Flow B have already consumed 8 hops of upstream network resources. Dropping an old packet near the destination forces a costly full retransmission. The router should discard the <em>newly arrived</em> packet or drop from an ingress router instead of shedding an old packet that is almost delivered.</p>\n        "
+        }
       },
-      "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 text-xs\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800\">\n            <h4 class=\"font-bold text-emerald-800 dark:text-emerald-300 mb-2\">Advantages of Intelligent Load Shedding</h4>\n            <ul class=\"space-y-1 list-disc pl-4 text-slate-700 dark:text-slate-300\">\n              <li>Keeps routers functional and prevents memory exhaustion crashes during traffic spikes.</li>\n              <li>Milk policy drastically improves real-time audio and video perceptual quality.</li>\n              <li>RED prevents TCP global synchronization and keeps link throughput near 100%.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/30 rounded-lg border border-rose-200 dark:border-rose-800\">\n            <h4 class=\"font-bold text-rose-800 dark:text-rose-300 mb-2\">Inherent Consequences</h4>\n            <ul class=\"space-y-1 list-disc pl-4 text-slate-700 dark:text-slate-300\">\n              <li>Packet discard forces higher-layer retransmissions for reliable TCP flows.</li>\n              <li>Requires careful threshold tuning to avoid prematurely dropping packets.</li>\n            </ul>\n          </div>\n        </div>\n      ",
+      "advantagesLimitations": "\n      <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 my-3 text-xs\">\n        <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded border border-emerald-200 dark:border-emerald-800\">\n          <h4 class=\"font-bold text-emerald-800 dark:text-emerald-200 mb-2\">Advantages of Load Shedding</h4>\n          <ul class=\"space-y-1.5 text-slate-700 dark:text-slate-300\">\n            <li>✔ <strong>Prevents Total Network Collapse:</strong> Sacrifices some traffic so the rest can survive.</li>\n            <li>✔ <strong>Relieves Overloaded Routers Instantly:</strong> Drops buffer occupancy immediately.</li>\n            <li>✔ <strong>Protects High-Priority Communications:</strong> Voice and network control packets remain intact.</li>\n            <li>✔ <strong>Prevents Buffer Bloat:</strong> Eliminates excessive multi-second queuing delays.</li>\n          </ul>\n        </div>\n        <div class=\"p-3 bg-rose-50 dark:bg-rose-950/30 rounded border border-rose-200 dark:border-rose-800\">\n          <h4 class=\"font-bold text-rose-800 dark:text-rose-200 mb-2\">Disadvantages & Risks</h4>\n          <ul class=\"space-y-1.5 text-slate-700 dark:text-slate-300\">\n            <li>✘ <strong>Directly Causes Packet Loss:</strong> Dropped packets trigger TCP retransmissions.</li>\n            <li>✘ <strong>Degrades Application Performance:</strong> File transfers slow down and video frames glitch.</li>\n            <li>✘ <strong>Wasted Upstream Bandwidth:</strong> Dropping packets that already crossed multiple hops wastes the energy and bandwidth used to transport them.</li>\n          </ul>\n        </div>\n      </div>\n    ",
       "whereUsed": [
-        "Internet Service Provider core router Active Queue Management (AQM)",
-        "Cable modems and broadband routers running CoDel to defeat Bufferbloat",
-        "Video conferencing platforms (Zoom, Google Meet, Microsoft Teams)"
+        "Active Queue Management (RED/WRED): Core routers discarding packets probabilistically before buffer exhaustion to prevent TCP global synchronization.",
+        "DDoS Mitigation Scrubbers: Edge appliances shedding malicious volumetric flood packets while admitting clean user traffic.",
+        "FinTech High-Frequency Trading Gateways: Dropping stale market pricing packets in favor of the freshest bid/ask updates."
       ],
-      "commonMistakes": "\n        <ul class=\"space-y-2 text-xs\">\n          <li><strong>Confusing Wine and Milk policies:</strong> Wine policy discards new packets to save old ones (best for file transfers); Milk policy discards old packets to favor new ones (best for real-time video).</li>\n          <li><strong>Thinking Tail Drop is a desirable policy:</strong> Tail drop is the primitive default that causes TCP synchronization and bufferbloat; RED and CoDel are far superior.</li>\n        </ul>\n      ",
-      "compareWith": "wine-vs-milk-policy",
+      "commonMistakes": "\n      <ul class=\"list-disc pl-5 text-xs space-y-1.5 text-slate-600 dark:text-slate-300\">\n        <li><strong>Confusing Wine Policy with Milk Policy:</strong> Remember: Wine improves with age (keep old packets for file transfers); Milk spoils with age (discard old packets for streaming).</li>\n        <li><strong>Treating Load Shedding as Normal Operation:</strong> Load shedding is an emergency defense mechanism, not a routine method for traffic shaping.</li>\n      </ul>\n    ",
+      "compareWith": "\n      <h4>Comparison: Tail Drop vs. Intelligent Load Shedding (RED)</h4>\n      <div class=\"overflow-x-auto my-2\">\n        <table class=\"w-full text-xs text-left border border-slate-200 dark:border-slate-700\">\n          <thead class=\"bg-slate-100 dark:bg-slate-800 font-bold\">\n            <tr>\n              <th class=\"p-2 border\">Feature</th>\n              <th class=\"p-2 border\">Tail Drop (Naive Discard)</th>\n              <th class=\"p-2 border\">Intelligent Load Shedding (RED / Priority)</th>\n            </tr>\n          </thead>\n          <tbody class=\"divide-y divide-slate-200 dark:divide-slate-700\">\n            <tr>\n              <td class=\"p-2 border font-semibold\">Drop Timing</td>\n              <td class=\"p-2 border text-rose-600 font-bold\">Only when buffer is 100% completely full</td>\n              <td class=\"p-2 border font-bold text-emerald-600\">Proactively when average queue crosses threshold</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold\">TCP Global Synchronization</td>\n              <td class=\"p-2 border text-rose-600 font-bold\">Severe: All TCP connections drop windows together</td>\n              <td class=\"p-2 border font-bold text-emerald-600\">Prevented: Staggers drops across random connections</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold\">Priority Awareness</td>\n              <td class=\"p-2 border\">None: Blindly drops whatever packet arrives last</td>\n              <td class=\"p-2 border font-bold text-blue-600\">Respects DSCP, QoS tags, and packet age (Wine/Milk)</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    ",
       "quiz": [
         {
-          "question": "Under the 'Milk Policy' of load shedding, which packets are discarded during buffer congestion?",
+          "question": "Under the Milk Policy of selective load shedding, which packets are discarded during congestion?",
           "options": [
-            "Newly arrived incoming packets",
-            "Older, stale packets sitting in the queue, preserving fresh incoming packets",
-            "All packets containing numbers",
-            "Only packets destined for web servers"
+            "The newly arrived fresh packets",
+            "The old, stale packets whose playback deadlines have likely already passed",
+            "Only packets with even IP addresses",
+            "All packets containing text files"
           ],
           "answer": 1,
-          "explanation": "Under the Milk Policy, old packets are discarded because in real-time streaming, stale data is useless and fresh data is preferred."
+          "explanation": "The Milk Policy states that fresh packets are better than old packets. In real-time streaming, delayed packets are useless, so the oldest buffered packets are dropped."
         },
         {
-          "question": "Which application benefits most from the 'Wine Policy' of load shedding?",
+          "question": "Under the Wine Policy of selective load shedding, why are older packets preserved over newly arrived packets?",
           "options": [
-            "VoIP voice calling",
-            "Live video streaming",
-            "File transfer (FTP / HTTP downloads)",
-            "Online multiplayer gaming"
+            "Because old packets contain alcohol",
+            "Because older packets have already consumed significant upstream bandwidth and hops, so dropping them wastes completed network work",
+            "Because older packets are smaller in byte size",
+            "Because newer packets are always encrypted"
+          ],
+          "answer": 1,
+          "explanation": "In file transfers, older packets that have already traversed multiple hops represent significant invested network resources. Discarding them near the destination forces a costly full retransmission."
+        },
+        {
+          "question": "A router has 100 buffer spaces with 90 currently occupied. 30 new packets arrive. How many packets must be discarded?",
+          "options": [
+            "10 packets",
+            "20 packets",
+            "30 packets",
+            "0 packets"
+          ],
+          "answer": 1,
+          "explanation": "Available space = 100 - 90 = 10 packets. 30 arrive, so 10 can be stored and 30 - 10 = 20 packets must be discarded."
+        },
+        {
+          "question": "Which road traffic analogy accurately represents Load Shedding?",
+          "options": [
+            "Choosing a less congested highway",
+            "Ramp meters controlling entry speeds",
+            "Towing or discarding selected vehicles when gridlock paralyzes the road",
+            "Painting lanes with reflective lines"
           ],
           "answer": 2,
-          "explanation": "File transfers benefit from the Wine policy because older packets already close to their destination are preserved, saving previously expended transmission work."
-        },
-        {
-          "question": "What is the primary problem with simple 'Tail Drop' queue management in routers?",
-          "options": [
-            "It speeds up file transfers too much",
-            "It causes TCP Global Synchronization and high bufferbloat latency",
-            "It burns out router power supplies",
-            "It deletes routing tables"
-          ],
-          "answer": 1,
-          "explanation": "Tail drop drops packets from many connections simultaneously, causing global synchronization where all senders throttle at once."
-        },
-        {
-          "question": "How does Random Early Detection (RED) prevent congestion collapse?",
-          "options": [
-            "By shutting down the router",
-            "By randomly dropping or ECN-marking packets with increasing probability as average queue length grows, signaling senders early",
-            "By increasing buffer size to infinity",
-            "By eliminating the IP header"
-          ],
-          "answer": 1,
-          "explanation": "RED drops or marks packets probabilistically when average queue length exceeds a threshold, smoothing throughput without abrupt drop storms."
+          "explanation": "Load shedding is analogous to removing or towing away selected vehicles when the highway is completely gridlocked to allow remaining vehicles to move."
         }
       ],
       "references": [
         {
-          "cite": "A.S. Tanenbaum & D.J. Wetherall, Computer Networks, 6th Ed., Ch. 5.3.5",
-          "url": ""
+          "cite": "RFC 2309: Recommendations on Queue Management and Congestion Avoidance in the Internet, IETF.",
+          "url": "https://datatracker.ietf.org/doc/html/rfc2309"
         },
         {
-          "cite": "RFC 2309: Recommendations on Queue Management and Congestion Avoidance in the Internet",
-          "url": "https://datatracker.ietf.org/doc/html/rfc2309"
+          "cite": "S. Floyd & V. Jacobson, Random Early Detection (RED) Gateways for Congestion Avoidance, IEEE/ACM Transactions on Networking.",
+          "url": "https://ieeexplore.ieee.org"
+        },
+        {
+          "cite": "A.S. Tanenbaum & D.J. Wetherall, Computer Networks, 6th Edition: Load Shedding in the Network Layer.",
+          "url": "https://www.pearson.com"
         }
       ]
     },
     "prevTopicId": "traffic-throttling",
-    "nextTopicId": "transport-layer"
+    "nextTopicId": null
   },
   "shortest-path-algorithm": {
     "id": "shortest-path-algorithm",
@@ -3691,124 +3764,142 @@ const TOPICS_U3_EXT = {
     "nextTopicId": "dijkstra"
   },
   "congestion-control": {
-    "id": "traffic-aware-routing",
-    "title": "Traffic-Aware Routing",
-    "unit": "Unit 3 – Network Layer",
+    "id": "congestion-control",
+    "title": "Congestion Control Approaches (Master Overview)",
+    "unit": "Unit 3: Network Layer",
     "unitId": "unit3",
-    "level": "Level 1 — Core Topic",
-    "category": "network",
-    "difficulty": "Advanced",
-    "readingTime": "15 min read",
-    "standard": "Tanenbaum Ch 5.3.2 / Kurose & Ross Ch 5.2 / RFC 2676",
-    "oneLiner": "Dynamically shifting traffic away from congested links by incorporating queuing delays and link loads into routing metrics.",
-    "quickAnswer": "Traffic-Aware Routing is a congestion prevention approach where routing algorithms dynamically incorporate real-time traffic loads (queue lengths, latency, link utilization) into link weight metrics to steer packets around congested hotspots. To prevent catastrophic route oscillations (traffic thrashing back and forth), modern implementations use multi-path routing and metric smoothing.",
-    "whyItMatters": "Standard routing algorithms choose paths based strictly on static topology (bandwidth, hop count), oblivious to traffic jams. When thousands of users stream video, static paths become saturated while alternate links sit idle. Traffic-aware routing balances load dynamically across the entire network topology.",
+    "level": "Core Syllabus",
+    "category": "Congestion Control Approaches",
+    "difficulty": "Intermediate",
+    "readingTime": "12 min",
+    "standard": "IEEE / IETF RFC 2676 (QoS Routing)",
+    "oneLiner": "Dynamic routing approach that selects paths based on real-time traffic conditions, delay, and link utilization to avoid congested bottlenecks.",
+    "quickAnswer": "Traffic-Aware Routing shifts data packet paths dynamically away from heavily loaded, congested links toward underutilized alternative paths with lower delays and higher available bandwidth, rather than relying solely on static link weights or fixed hop counts.",
+    "whyItMatters": "In static routing, traffic piles up on the shortest hop path until queues overflow and packets drop, even while parallel paths sit idle. Traffic-aware routing balances network load, prevents hot-spot congestion, optimizes bandwidth utilization, and lowers average packet delivery latency.",
     "infobox": {
-      "prerequisites": [
-        "dijkstra"
-      ],
-      "relatedConcepts": [
-        "admission-control",
-        "traffic-throttling",
-        "load-shedding"
-      ],
-      "compareWith": [
-        "static-vs-traffic-aware-routing"
-      ],
+      "approachType": "Proactive / Dynamic Routing Adaptation",
+      "primaryGoal": "Route traffic through less congested, low-delay paths",
+      "metricsEvaluated": "Queue length, link utilization (%), RTT delay, available bandwidth",
+      "keyAnalogy": "GPS navigation (e.g., Google Maps) rerouting cars around highway traffic jams",
+      "protocolExamples": "MPLS-TE, SDN OpenFlow Controllers, OSPF-TE, Cisco EIGRP (composite metric)",
       "primaryUses": [
-        "Software-Defined WAN (SD-WAN) dynamic tunnel steering",
-        "Constraint-Based Shortest Path First (CSPF) in MPLS Traffic Engineering",
-        "Content Delivery Network (CDN) backbone link load balancing",
-        "Preventing bottleneck congestion in hyperscaler data center fabrics"
-      ],
-      "standardRfc": "RFC 2676 (QoS Routing in OSPF)"
+        "SD-WAN Multi-Cloud Routing",
+        "Data Center Traffic Engineering",
+        "ISP Backbone Latency Optimization"
+      ]
     },
-    "learningObjectives": [
-      "Understand why static metric routing causes hotspot congestion",
-      "Explain how queue delays and bandwidth utilization are factored into link weights",
-      "Describe the Route Oscillation (Traffic Thrashing) phenomenon",
-      "Analyze techniques to damp oscillations: multi-path routing and metric smoothing",
-      "Contrast open-loop traffic-aware routing with closed-loop throttling"
-    ],
     "prerequisitesList": [
       {
-        "concept": "Shortest Path Routing",
-        "meaning": "Understanding Dijkstra SPF and link weight assignment"
+        "concept": "Static vs. Dynamic Routing",
+        "meaning": "Understanding fixed Dijkstra hop weights vs adaptive runtime metric updates."
+      },
+      {
+        "concept": "Queuing Latency & Buffering",
+        "meaning": "How packet build-up in router memory causes queuing delay and packet loss."
+      },
+      {
+        "concept": "Bandwidth & Utilization",
+        "meaning": "The relationship between arrival rate, link capacity, and percentage saturation."
       }
     ],
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Traffic_policing_and_shaping.svg",
-    "imageCaption": "Figure 3.17: Traffic-Aware Dynamic Routing: Load-Sensitive Path Selection & Oscillation Prevention.",
+    "learningObjectives": [
+      "Define network congestion, its root causes, and its severe performance impacts.",
+      "Explain the fundamental difference between Flow Control and Congestion Control.",
+      "Describe how Traffic-Aware Routing monitors network load and selects optimal paths.",
+      "Analyze the worked numerical comparison of Path A vs. Path B from the PDF syllabus.",
+      "Identify the core techniques: Load-based, Delay-based, and Bandwidth-based routing.",
+      "Evaluate the trade-offs of traffic-aware routing, including route oscillation and monitoring overhead."
+    ],
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Routing_table_concept.svg/800px-Routing_table_concept.svg.png",
+    "imageCaption": "Figure 5.1: Traffic-Aware Routing dynamically balances flows across underutilized links to avoid congested choke points.",
     "sections": {
-      "overview": "\n        <p class=\"mb-3\">\n          Most fundamental routing protocols (such as standard OSPF or RIP) compute routes based on <strong>static metrics</strong> (such as hop count or fixed link bandwidth). While simple, this approach ignores real-time traffic loads. A link may be completely saturated with packets dropped due to buffer overflow, yet the static routing algorithm continues sending all traffic over it because it is theoretically the 'shortest' path.\n        </p>\n        <p class=\"mb-3\">\n          <strong>Traffic-Aware Routing</strong> makes link metrics dynamic functions of the link's current load:\n        </p>\n        <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded border border-emerald-200 dark:border-emerald-800 text-xs mb-3 font-mono text-center font-bold\">\n          Metric = Static Link Delay + (Queue Length / Line Capacity)\n        </div>\n        <p class=\"text-xs\">\n          As a link becomes congested, its reported cost increases, causing subsequent route calculations to naturally divert traffic onto alternate, uncongested paths.\n        </p>\n      ",
-      "howItWorks": "\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">1. The Route Oscillation Problem (Traffic Thrashing)</h3>\n        <p class=\"mb-3 text-xs\">\n          While traffic-aware routing sounds ideal, naive implementations suffer from severe <strong>route oscillations</strong>:\n        </p>\n        <div class=\"space-y-2 text-xs mb-4 font-mono\">\n          <div class=\"p-2.5 bg-slate-100 dark:bg-slate-800 rounded\">\n            1. All traffic is initially routed over Link A (the low-delay link).<br/>\n            2. Link A becomes congested, and its dynamic cost spikes to 100.<br/>\n            3. Link B is empty (cost 10). The next route calculation switches <strong>100% of the traffic</strong> from Link A to Link B!<br/>\n            4. Now Link B becomes saturated (cost 100), while Link A sits completely idle (cost 10).<br/>\n            5. In the next round, all traffic swings back to Link A!\n          </div>\n        </div>\n        <p class=\"text-xs mb-3\">\n          This thrashing leads to unstable packet delays, packet reordering, and routing instability.\n        </p>\n\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">2. Solutions to Prevent Route Oscillations</h3>\n        <ul class=\"list-disc pl-5 space-y-2 text-xs mb-4\">\n          <li><strong>Multi-Path Routing (ECMP & Flowlet Switching):</strong> Instead of shifting all traffic to the best link, routers split traffic across multiple paths proportional to capacity and load.</li>\n          <li><strong>Metric Smoothing (Exponential Moving Average):</strong> Rather than reacting to instantaneous queue spikes, link weights are averaged over time: (\text{Metric}_{new} = alpha cdot \text{Metric}_{old} + (1 - alpha) cdot \text{Load}_{current}).</li>\n          <li><strong>Asynchronous Update Timers:</strong> Routers run their recalculations at randomized, desynchronized intervals so they do not all switch paths simultaneously.</li>\n        </ul>\n      ",
-      "technicalDetails": "\n        <h3 class=\"text-sm font-bold text-gray-900 dark:text-white mb-2\">3. Multi-Protocol Label Switching (MPLS-TE)</h3>\n        <p class=\"text-xs mb-3\">\n          Modern enterprise backbones deploy traffic-aware routing via <strong>MPLS Traffic Engineering (MPLS-TE)</strong>. In MPLS-TE, routers use OSPF-TE or IS-IS-TE extensions to advertise available link bandwidth alongside topology. A head-end router uses <strong>Constraint-Based Shortest Path First (CSPF)</strong> to establish explicit label-switched paths that avoid links exceeding a given utilization threshold (e.g. 70%).\n        </p>\n      ",
+      "overview": "\n      <h3>1. Introduction to Network Congestion</h3>\n      <p>\n        In computer networks, <strong>congestion</strong> occurs when the aggregate volume of data packets entering a network exceeds the physical capacity of routers and communication links to process, buffer, and transmit them efficiently.\n      </p>\n      <div class=\"p-4 my-3 bg-amber-50 dark:bg-amber-950/40 border-l-4 border-amber-500 rounded-r-lg\">\n        <h4 class=\"font-bold text-amber-800 dark:text-amber-200 text-sm mb-1\">Simple Road Analogy</h4>\n        <p class=\"text-xs text-amber-900 dark:text-amber-300\">\n          Think of a highway system with multiple lanes. When too many vehicles enter the highway simultaneously, average vehicle speeds drop, queues form behind toll gates and exits, and travel times spike. Similarly, when too many data packets enter a router, queues fill up, transmission delays soar, and packets get dropped.\n        </p>\n      </div>\n\n      <h4>Real-Life Scenario: Campus Network Overload</h4>\n      <p>\n        Consider a university campus dormitory where 100 students are connected to the same shared Internet gateway:\n      </p>\n      <ul class=\"list-disc pl-5 space-y-1 my-2 text-xs\">\n        <li>Some students are streaming high-definition 4K video.</li>\n        <li>Others are downloading massive software updates and game files.</li>\n        <li>Several are participating in live, interactive video conferencing sessions.</li>\n        <li>Others are gaming online and browsing the web.</li>\n      </ul>\n      <p>\n        If the combined bandwidth requirement exceeds the link's capacity, the router's queue overflows, leading to video buffering, sluggish browsing, packet loss, and connection instability.\n      </p>\n\n      <h4>Primary Causes of Network Congestion</h4>\n      <ol class=\"list-decimal pl-5 space-y-1.5 my-2 text-xs\">\n        <li><strong>Excessive Network Traffic:</strong> Too many simultaneous sending endpoints pumping data into shared pipes.</li>\n        <li><strong>Limited Bandwidth:</strong> Physical link capacities (e.g., a 10 Mbps bottleneck link between 1 Gbps LANs) cannot keep up with traffic bursts.</li>\n        <li><strong>Slow Router Processors:</strong> Routers with constrained CPU or memory architectures struggle to process packet headers and route lookups at line rate.</li>\n        <li><strong>Bursty Traffic Patterns:</strong> Data traffic is rarely smooth; sharp bursts (e.g., file transfers or web page loads) temporarily swamp buffer pools.</li>\n        <li><strong>Network Bottlenecks:</strong> Architectural mismatch where multiple high-speed links feed into a single low-capacity trunk.</li>\n        <li><strong>Poor Traffic Distribution:</strong> Static shortest-path routing sends all packets down a single \"optimal\" path while alternate, slightly longer routes sit idle.</li>\n      </ol>\n\n      <h4>Effects of Network Congestion</h4>\n      <div class=\"overflow-x-auto my-3\">\n        <table class=\"w-full text-xs text-left border border-slate-200 dark:border-slate-700\">\n          <thead class=\"bg-slate-100 dark:bg-slate-800 font-bold\">\n            <tr>\n              <th class=\"p-2 border\">Congestion Effect</th>\n              <th class=\"p-2 border\">Technical Consequence</th>\n            </tr>\n          </thead>\n          <tbody class=\"divide-y divide-slate-200 dark:divide-slate-700\">\n            <tr>\n              <td class=\"p-2 border font-semibold text-rose-600 dark:text-rose-400\">Increased Latency</td>\n              <td class=\"p-2 border\">Packets spend extended periods waiting in router queues (queuing delay dominates).</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold text-rose-600 dark:text-rose-400\">Packet Loss</td>\n              <td class=\"p-2 border\">When packet buffers fill completely, routers discard incoming packets (buffer overflow).</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold text-rose-600 dark:text-rose-400\">Reduced Goodput</td>\n              <td class=\"p-2 border\">Bandwidth is wasted transporting packets that are dropped downstream or retransmitted.</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold text-rose-600 dark:text-rose-400\">Retransmission Storms</td>\n              <td class=\"p-2 border\">TCP senders time out and retransmit dropped packets, compounding the network overload.</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold text-rose-600 dark:text-rose-400\">High Jitter</td>\n              <td class=\"p-2 border\">Fluctuating queue depths introduce wide variations in packet arrival intervals, ruining real-time audio/video.</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n\n      <h4>Congestion Control vs. Flow Control: The Critical Distinction</h4>\n      <p>\n        Students frequently confuse these two foundational concepts:\n      </p>\n      <div class=\"grid grid-cols-1 md:grid-cols-2 gap-3 my-3 text-xs\">\n        <div class=\"p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-200 dark:border-blue-800\">\n          <h5 class=\"font-bold text-blue-700 dark:text-blue-300 mb-1\">Flow Control (End-to-End)</h5>\n          <ul class=\"space-y-1 text-slate-600 dark:text-slate-300\">\n            <li>• <strong>Scope:</strong> Point-to-point between a single sender and single receiver.</li>\n            <li>• <strong>Objective:</strong> Prevents a fast sender from overwhelming a slow receiver's buffer.</li>\n            <li>• <strong>Mechanism:</strong> Sliding window advertisements (e.g., TCP Receiver Window <code>rwnd</code>).</li>\n            <li>• <strong>Perspective:</strong> Receiver capacity only.</li>\n          </ul>\n        </div>\n        <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800\">\n          <h5 class=\"font-bold text-emerald-700 dark:text-emerald-300 mb-1\">Congestion Control (Network-Wide)</h5>\n          <ul class=\"space-y-1 text-slate-600 dark:text-slate-300\">\n            <li>• <strong>Scope:</strong> Global across all intermediate routers, switches, and shared links.</li>\n            <li>• <strong>Objective:</strong> Prevents all senders combined from overloading shared network infrastructure.</li>\n            <li>• <strong>Mechanism:</strong> Traffic-aware routing, admission control, throttling, and load shedding.</li>\n            <li>• <strong>Perspective:</strong> Intermediate network capacity.</li>\n          </ul>\n        </div>\n      </div>\n    ",
+      "howItWorks": "\n      <h3>2. How Traffic-Aware Routing Operates</h3>\n      <p>\n        In traditional static routing (such as standard Dijkstra or RIP), link costs are fixed constants (e.g., $1$ per hop, or inversely proportional to link capacity). When traffic surges along the designated shortest path, the routing protocol continues to funnel all traffic down that path until congestion collapses throughput.\n      </p>\n      <p>\n        <strong>Traffic-Aware Routing</strong> incorporates real-time operational metrics into link cost calculations. Routes are dynamically computed so that paths with high utilization, long queues, or large packet delays appear \"more expensive\", directing subsequent traffic across lightly loaded parallel paths.\n      </p>\n\n      <h4>The 6-Step Operational Lifecycle</h4>\n      <div class=\"space-y-2 my-3 text-xs\">\n        <div class=\"p-2.5 bg-white dark:bg-slate-800 border rounded-lg flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-blue-100 text-blue-700 font-bold rounded\">Step 1</span>\n          <div>\n            <strong>Monitor Network Conditions:</strong> Routers continuously collect telemetry on outgoing links, measuring queue lengths, round-trip packet delays (RTT), packet loss ratios, and link bandwidth utilization.\n          </div>\n        </div>\n        <div class=\"p-2.5 bg-white dark:bg-slate-800 border rounded-lg flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-indigo-100 text-indigo-700 font-bold rounded\">Step 2</span>\n          <div>\n            <strong>Identify Congested Links:</strong> Links whose average queue depth or utilization exceeds configurable thresholds (e.g., $> 75\\%$) are flagged as congested.\n          </div>\n        </div>\n        <div class=\"p-2.5 bg-white dark:bg-slate-800 border rounded-lg flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-purple-100 text-purple-700 font-bold rounded\">Step 3</span>\n          <div>\n            <strong>Evaluate Alternative Routes:</strong> The routing engine computes alternative loop-free paths using dynamic composite cost metrics.\n          </div>\n        </div>\n        <div class=\"p-2.5 bg-white dark:bg-slate-800 border rounded-lg flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-amber-100 text-amber-700 font-bold rounded\">Step 4</span>\n          <div>\n            <strong>Select the Optimal Path:</strong> The route that minimizes end-to-end latency while avoiding congested links is selected.\n          </div>\n        </div>\n        <div class=\"p-2.5 bg-white dark:bg-slate-800 border rounded-lg flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-emerald-100 text-emerald-700 font-bold rounded\">Step 5</span>\n          <div>\n            <strong>Forward Packets:</strong> Traffic flows are switched to the newly chosen path smoothly (often using multipath or flow-hash preservation).\n          </div>\n        </div>\n        <div class=\"p-2.5 bg-white dark:bg-slate-800 border rounded-lg flex items-start space-x-2\">\n          <span class=\"px-2 py-0.5 bg-rose-100 text-rose-700 font-bold rounded\">Step 6</span>\n          <div>\n            <strong>Continuous Feedback & Damping:</strong> Network monitoring continues. Filtering and hysteresis are applied to prevent route flapping between paths.\n          </div>\n        </div>\n      </div>\n\n      <h4>Numerical Example from Syllabus: Path A vs. Path B</h4>\n      <p>\n        Consider a source router $A$ needing to deliver traffic to destination $D$. Two distinct transit paths exist:\n      </p>\n      <ul class=\"list-disc pl-5 text-xs mb-2\">\n        <li><strong>Path 1:</strong> $A \\rightarrow B \\rightarrow D$ (Primary path)</li>\n        <li><strong>Path 2:</strong> $A \\rightarrow C \\rightarrow D$ (Alternative path)</li>\n      </ul>\n      <div class=\"overflow-x-auto my-2\">\n        <table class=\"w-full text-xs text-left border border-slate-200 dark:border-slate-700\">\n          <thead class=\"bg-slate-100 dark:bg-slate-800 font-bold\">\n            <tr>\n              <th class=\"p-2 border\">Evaluated Metric</th>\n              <th class=\"p-2 border\">Path 1 ($A-B-D$)</th>\n              <th class=\"p-2 border\">Path 2 ($A-C-D$)</th>\n              <th class=\"p-2 border\">Better Choice</th>\n            </tr>\n          </thead>\n          <tbody class=\"divide-y divide-slate-200 dark:divide-slate-700\">\n            <tr>\n              <td class=\"p-2 border font-medium\">Estimated End-to-End Delay</td>\n              <td class=\"p-2 border text-rose-600 font-mono\">150 ms</td>\n              <td class=\"p-2 border text-emerald-600 font-mono\">40 ms</td>\n              <td class=\"p-2 border font-bold text-emerald-600\">Path 2 (3.75x lower delay)</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-medium\">Current Link Utilization</td>\n              <td class=\"p-2 border text-rose-600 font-mono\">95% (Near Saturation)</td>\n              <td class=\"p-2 border text-emerald-600 font-mono\">35% (Lightly Loaded)</td>\n              <td class=\"p-2 border font-bold text-emerald-600\">Path 2 (Ample Headroom)</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-medium\">Available Residual Bandwidth</td>\n              <td class=\"p-2 border text-rose-600 font-mono\">5 Mbps</td>\n              <td class=\"p-2 border text-emerald-600 font-mono\">40 Mbps</td>\n              <td class=\"p-2 border font-bold text-emerald-600\">Path 2 (8x more capacity)</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n      <p class=\"text-xs text-slate-600 dark:text-slate-300 mt-2\">\n        <strong>Decision:</strong> Under a static metric, Path 1 might have been chosen because both have 2 hops. But Traffic-Aware Routing detects that Path 1 is choked ($95\\%$ utilization, $150\\text{ ms}$ delay), and reroutes incoming flows to <strong>Path 2</strong> ($35\\%$ utilization, $40\\text{ ms}$ delay), completely bypassing the bottleneck.\n      </p>\n    ",
+      "technicalDetails": "\n      <h3>3. Technical Variations and Mathematical Cost Functions</h3>\n      <p>\n        How is link cost formulated in a traffic-aware system? Rather than a fixed constant, link cost $C(e)$ is a dynamic function of physical link bandwidth and current traffic load.\n      </p>\n\n      <h4>Dynamic Link Weight Formulas</h4>\n      <p>\n        A widely studied mathematical model for dynamic link metric evaluation incorporates queuing delay:\n      </p>\n      <div class=\"p-3 my-2 bg-slate-100 dark:bg-slate-800 rounded font-mono text-xs\">\n        $$C(e) = C_0(e) + \\alpha \\cdot \\frac{U(e)}{1 - U(e)}$$\n      </div>\n      <p class=\"text-xs\">\n        where $C_0(e)$ is the base propagation delay, $U(e) = \\frac{\\lambda(e)}{\\mu(e)}$ is the link utilization ratio (arrival rate over service rate), and $\\alpha$ is a scaling sensitivity constant. As utilization $U(e) \\to 1$ ($100\\%$), the queuing penalty shoots to infinity, compelling routing algorithms to avoid that link.\n      </p>\n\n      <h4>The 4 Core Traffic-Aware Routing Techniques</h4>\n      <div class=\"grid grid-cols-1 sm:grid-cols-2 gap-3 my-3 text-xs\">\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded border\">\n          <div class=\"font-bold text-blue-600 mb-1\">1. Load-Based Routing</div>\n          <p class=\"text-slate-600 dark:text-slate-300\">\n            Directly monitors the instantaneous or moving-average volume of bits traversing a link. Flows are steered toward paths with the lowest total load.\n          </p>\n        </div>\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded border\">\n          <div class=\"font-bold text-indigo-600 mb-1\">2. Delay-Based Routing</div>\n          <p class=\"text-slate-600 dark:text-slate-300\">\n            Measures round-trip time (RTT) and queuing latency using timestamped probing packets. Paths with the shortest observed latency are prioritized.\n          </p>\n        </div>\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded border\">\n          <div class=\"font-bold text-purple-600 mb-1\">3. Bandwidth-Based Routing</div>\n          <p class=\"text-slate-600 dark:text-slate-300\">\n            Evaluates unallocated or residual bandwidth. Often used in Quality of Service Routing (QoSR) to find paths that satisfy minimum throughput guarantees.\n          </p>\n        </div>\n        <div class=\"p-3 bg-white dark:bg-slate-800 rounded border\">\n          <div class=\"font-bold text-emerald-600 mb-1\">4. Adaptive Multipath Routing</div>\n          <p class=\"text-slate-600 dark:text-slate-300\">\n            Splits traffic proportionally across multiple parallel paths (e.g., Equal-Cost or Weighted-Cost Multi-Path, ECMP/WCMP) based on current link capacities.\n          </p>\n        </div>\n      </div>\n\n      <h4>The Route Oscillation (Flapping) Problem & Remedies</h4>\n      <p class=\"text-xs\">\n        The primary operational danger in traffic-aware routing is <strong>route flapping</strong>:\n      </p>\n      <div class=\"p-3 my-2 bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800 rounded text-xs text-rose-800 dark:text-rose-200\">\n        <strong>The Oscillation Cycle:</strong><br/>\n        1. All routers see Path 1 is congested and Path 2 is empty $\\rightarrow$ All traffic shifts to Path 2.<br/>\n        2. Now Path 2 becomes choked and Path 1 empties out $\\rightarrow$ All traffic shifts back to Path 1.<br/>\n        3. Traffic ping-pongs violently back and forth, leading to out-of-order packets and instability.\n      </div>\n      <p class=\"text-xs\">\n        <strong>Mitigations:</strong> Modern networks prevent oscillations by:\n      </p>\n      <ul class=\"list-disc pl-5 text-xs space-y-1\">\n        <li><strong>Exponential Moving Average (EMA):</strong> Smoothing link load metrics over multi-minute windows so transient spikes do not trigger shifts.</li>\n        <li><strong>Hysteresis / Thresholds:</strong> Only rerouting if the alternative path is better by at least a substantial margin (e.g., $> 20\\%$ improvement).</li>\n        <li><strong>Multipath Splitting:</strong> Shifting only a fraction of new flows rather than migrating all existing traffic en masse.</li>\n      </ul>\n    ",
       "workedExamples": {
-        "level1": "\n          <strong>Dynamic Metric Calculation:</strong><br/>\n          A 1 Gbps link has a propagation delay of 5 ms.<br/>\n          • Idle state: Queue length = 0 packets ➔ Dynamic cost = 5 ms.<br/>\n          • Heavy traffic: Queue builds up to 10,000 packets (80 ms queuing delay) ➔ Dynamic cost = (5 + 80 = 85\text{ ms}).<br/>\n          • An alternate 100 Mbps link with a fixed 30 ms delay suddenly becomes the preferred lower-cost path!\n        ",
-        "level2": "\n          <strong>Exponential Moving Average (EMA) Smoothing:</strong><br/>\n          Historical smoothed cost = 20 ms. Current instantaneous load burst = 90 ms. Smoothing factor (alpha = 0.8).<br/>\n          (\text{Smoothed Cost} = (0.8 \times 20) + (0.2 \times 90) = 16 + 18 = mathbf{34\text{ ms}}).<br/>\n          The brief burst only moves the reported metric from 20 to 34 ms, preventing an immediate violent traffic swing.\n        ",
-        "level3": "\n          <strong>Flowlet Switching in Data Centers:</strong><br/>\n          To prevent TCP packet reordering when splitting traffic across multiple paths:<br/>\n          Routers detect 'flowlets'—bursts of packets belonging to the same TCP flow separated by an idle gap greater than path delay difference (e.g., > 50 µs).<br/>\n          Each flowlet is safely switched to the least congested path without causing out-of-order packet arrivals at the destination.\n        "
+        "level1": {
+          "title": "Level 1 (Intuitive): Basic Path Selection under Load",
+          "problem": "A router must forward traffic from host S to host D. Path 1 has an estimated delay of 120 ms with 85% link utilization. Path 2 has an estimated delay of 35 ms with 25% link utilization. Which path will Traffic-Aware Routing select, and why?",
+          "solution": "\n          <p><strong>Step 1: Compare delay and utilization metrics:</strong></p>\n          <ul>\n            <li>Path 1 Delay: $120\\text{ ms}$, Utilization: $85\\%$ (Heavy congestion risk)</li>\n            <li>Path 2 Delay: $35\\text{ ms}$, Utilization: $25\\%$ (Ample headroom)</li>\n          </ul>\n          <p><strong>Step 2: Decision:</strong></p>\n          <p>Traffic-Aware Routing selects <strong>Path 2</strong> because it offers both a substantially lower queuing latency ($35\\text{ ms}$ vs $120\\text{ ms}$) and low link utilization ($25\\%$ vs $85\\%$), preventing packet drops and buffering.</p>\n        "
+        },
+        "level2": {
+          "title": "Level 2 (Standard): Metric Calculation with Queuing Penalty",
+          "problem": "Two paths connect node X to Y. Path A has base propagation delay $C_0 = 10\\text{ ms}$ and utilization $U = 0.90$. Path B has base delay $C_0 = 25\\text{ ms}$ and utilization $U = 0.20$. Using the dynamic metric formula $C = C_0 + 5 \\cdot \\frac{U}{1 - U}$, compute the effective routing cost for each path and determine the selected route.",
+          "solution": "\n          <p><strong>Step 1: Compute cost for Path A:</strong></p>\n          $$C_A = 10 + 5 \\cdot \\frac{0.90}{1 - 0.90} = 10 + 5 \\cdot \\frac{0.90}{0.10} = 10 + 5 \\cdot 9 = 10 + 45 = 55\\text{ ms}$$\n          <p><strong>Step 2: Compute cost for Path B:</strong></p>\n          $$C_B = 25 + 5 \\cdot \\frac{0.20}{1 - 0.20} = 25 + 5 \\cdot \\frac{0.20}{0.80} = 25 + 5 \\cdot 0.25 = 25 + 1.25 = 26.25\\text{ ms}$$\n          <p><strong>Conclusion:</strong></p>\n          <p>Even though Path A has a lower physical base propagation delay ($10\\text{ ms}$ vs $25\\text{ ms}$), its high utilization imposes a massive queuing penalty ($45\\text{ ms}$). Path B yields an effective cost of $26.25\\text{ ms}$, which is less than half of Path A's cost of $55\\text{ ms}$. The router chooses <strong>Path B</strong>.</p>\n        "
+        },
+        "level3": {
+          "title": "Level 3 (Advanced): Preventing Route Oscillation with Threshold Damping",
+          "problem": "A network administrator configures a damping rule: traffic will only be migrated to an alternate path if the alternate path offers at least a 30% reduction in total cost ($C_{alt} < 0.70 \\cdot C_{curr}$). Current Path 1 has cost 50 ms. A telemetry update reports Path 2 has cost 38 ms. Will the router migrate traffic? At what cost on Path 2 would a route shift trigger?",
+          "solution": "\n          <p><strong>Step 1: Evaluate the threshold condition:</strong></p>\n          $$C_{threshold} = 0.70 \\cdot C_{curr} = 0.70 \\cdot 50\\text{ ms} = 35\\text{ ms}$$\n          <p><strong>Step 2: Compare Path 2's reported cost:</strong></p>\n          <p>Path 2 has a cost of $38\\text{ ms}$. Since $38\\text{ ms} > 35\\text{ ms}$, Path 2 is only $24\\%$ better, which fails the $30\\%$ improvement threshold.</p>\n          <p><strong>Result:</strong></p>\n          <p>The router will <strong>NOT</strong> migrate traffic, avoiding an unnecessary route shift. A migration will only trigger when Path 2's cost drops below <strong>35 ms</strong>.</p>\n        "
+        }
       },
-      "advantagesLimitations": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 text-xs\">\n          <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800\">\n            <h4 class=\"font-bold text-emerald-800 dark:text-emerald-300 mb-2\">Benefits</h4>\n            <ul class=\"space-y-1 list-disc pl-4 text-slate-700 dark:text-slate-300\">\n              <li>Maximizes aggregate network throughput and link utilization.</li>\n              <li>Automatically steers packets around localized congestion hotspots.</li>\n              <li>Significantly lowers median end-to-end packet latency.</li>\n            </ul>\n          </div>\n          <div class=\"p-3 bg-rose-50 dark:bg-rose-950/30 rounded-lg border border-rose-200 dark:border-rose-800\">\n            <h4 class=\"font-bold text-rose-800 dark:text-rose-300 mb-2\">Risks</h4>\n            <ul class=\"space-y-1 list-disc pl-4 text-slate-700 dark:text-slate-300\">\n              <li>Prone to violent route oscillations if not damped properly.</li>\n              <li>Out-of-order packet delivery can trigger spurious TCP retransmissions.</li>\n            </ul>\n          </div>\n        </div>\n      ",
+      "advantagesLimitations": "\n      <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 my-3 text-xs\">\n        <div class=\"p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded border border-emerald-200 dark:border-emerald-800\">\n          <h4 class=\"font-bold text-emerald-800 dark:text-emerald-200 mb-2\">Advantages of Traffic-Aware Routing</h4>\n          <ul class=\"space-y-1.5 text-slate-700 dark:text-slate-300\">\n            <li>✔ <strong>Eliminates Traffic Bottlenecks:</strong> Automatically diverts flows away from saturated links.</li>\n            <li>✔ <strong>Improves Network Utilization:</strong> Activates backup and alternate links that would otherwise idle.</li>\n            <li>✔ <strong>Minimizes Average Latency:</strong> Reduces queuing delay across the entire autonomous system.</li>\n            <li>✔ <strong>Reduces Packet Loss:</strong> Lowers the probability of router buffer overflow.</li>\n            <li>✔ <strong>Adapts to Traffic Bursts:</strong> Rapidly responds to unexpected traffic shifts.</li>\n          </ul>\n        </div>\n        <div class=\"p-3 bg-rose-50 dark:bg-rose-950/30 rounded border border-rose-200 dark:border-rose-800\">\n          <h4 class=\"font-bold text-rose-800 dark:text-rose-200 mb-2\">Disadvantages & Practical Challenges</h4>\n          <ul class=\"space-y-1.5 text-slate-700 dark:text-slate-300\">\n            <li>✘ <strong>Monitoring Overhead:</strong> Periodic telemetry exchanges consume control-plane bandwidth.</li>\n            <li>✘ <strong>Route Flapping / Oscillation:</strong> Rapid route changes can cause packets to arrive out of order.</li>\n            <li>✘ <strong>Computational Burden:</strong> Frequently recomputing Dijkstra or Bellman-Ford consumes router CPU cycles.</li>\n            <li>✘ <strong>Stale Information Lag:</strong> Decisions made on delayed telemetry can inadvertently route packets into newly formed congestion.</li>\n          </ul>\n        </div>\n      </div>\n    ",
       "whereUsed": [
-        "Software-Defined WAN (SD-WAN) systems (Cisco Viptela, Silver Peak)",
-        "Google B4 private global backbone network",
-        "Large-scale cloud data center fabrics (ECMP and flowlet switching)"
+        "Software-Defined WAN (SD-WAN): Steering enterprise cloud traffic across MPLS vs Broadband circuits based on live RTT and packet loss.",
+        "Cloud Data Center Interconnects (Google B4, Microsoft SWAN): Global SDN traffic engineering continuously re-optimizing WAN paths.",
+        "MPLS Traffic Engineering (MPLS-TE with RSVP): Core ISP backbones establishing Explicitly Routed Label Switched Paths.",
+        "Content Delivery Networks (CDNs): Akamai and Cloudflare dynamically steering DNS and Anycast routing to uncongested edge POPs."
       ],
-      "commonMistakes": "\n        <ul class=\"space-y-2 text-xs\">\n          <li><strong>Confusing traffic-aware routing with traffic throttling:</strong> Traffic-aware routing changes the path packets take; traffic throttling slows down the sender at the source.</li>\n          <li><strong>Ignoring packet reordering:</strong> Splitting packets of a single TCP connection across different delay paths causes packets to arrive out of order, crippling TCP performance.</li>\n        </ul>\n      ",
-      "compareWith": "static-vs-traffic-aware-routing",
+      "commonMistakes": "\n      <ul class=\"list-disc pl-5 text-xs space-y-1.5 text-slate-600 dark:text-slate-300\">\n        <li><strong>Confusing Congestion Control with Flow Control:</strong> Flow control is strictly sender-to-receiver (TCP sliding window); congestion control manages shared network links and intermediate router queues.</li>\n        <li><strong>Assuming Shortest Path is Always Fastest:</strong> A 1-hop link running at 99% utilization has vastly higher queuing delay than a 3-hop path running at 10% load.</li>\n        <li><strong>Ignoring Route Oscillation:</strong> Unconstrained dynamic routing leads to instability; commercial systems always employ dampening, moving averages, or flow-based pinning.</li>\n      </ul>\n    ",
+      "compareWith": "\n      <h4>Comparison: Static Routing vs. Traffic-Aware Routing</h4>\n      <div class=\"overflow-x-auto my-2\">\n        <table class=\"w-full text-xs text-left border border-slate-200 dark:border-slate-700\">\n          <thead class=\"bg-slate-100 dark:bg-slate-800 font-bold\">\n            <tr>\n              <th class=\"p-2 border\">Feature</th>\n              <th class=\"p-2 border\">Static / Traditional Routing</th>\n              <th class=\"p-2 border\">Traffic-Aware Routing</th>\n            </tr>\n          </thead>\n          <tbody class=\"divide-y divide-slate-200 dark:divide-slate-700\">\n            <tr>\n              <td class=\"p-2 border font-semibold\">Routing Metric</td>\n              <td class=\"p-2 border\">Fixed constants (Hop count, static link speed)</td>\n              <td class=\"p-2 border font-bold text-blue-600\">Dynamic (Delay, current utilization, queue depth)</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold\">Reaction to Overload</td>\n              <td class=\"p-2 border\">None; continues to pile packets onto congested link</td>\n              <td class=\"p-2 border font-bold text-emerald-600\">Reroutes flows to less congested alternative paths</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold\">Stability</td>\n              <td class=\"p-2 border\">Very high (routes never change unless topology breaks)</td>\n              <td class=\"p-2 border\">Requires dampening to avoid route flapping</td>\n            </tr>\n            <tr>\n              <td class=\"p-2 border font-semibold\">Control Overhead</td>\n              <td class=\"p-2 border\">Minimal</td>\n              <td class=\"p-2 border\">Requires continuous telemetry monitoring and calculation</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    ",
       "quiz": [
         {
-          "question": "What is the primary objective of traffic-aware routing?",
+          "question": "What is the primary condition that causes network congestion?",
           "options": [
-            "To encrypt all user data packets",
-            "To incorporate current link loads and queuing delays into routing metrics to steer traffic away from congested hotspots",
-            "To ensure all packets follow the same physical cable",
-            "To increase router power consumption"
+            "A computer is powered off unexpectedly",
+            "Incoming traffic exceeds the available processing and transmission capacity of network resources",
+            "A router changes its MAC address",
+            "A packet header is encrypted"
           ],
           "answer": 1,
-          "explanation": "Traffic-aware routing factors real-time queuing delays and link utilization into routing metrics to divert packets away from congested links."
+          "explanation": "Network congestion occurs when incoming data volume exceeds the capacity of routers and transmission links to process and forward packets efficiently."
         },
         {
-          "question": "What major problem occurs if a traffic-aware algorithm shifts all traffic to an uncongested link immediately?",
+          "question": "Which of the following metrics does Traffic-Aware Routing consider when selecting a path?",
           "options": [
-            "Route oscillation (traffic thrashing back and forth between links)",
-            "Permanent cable damage",
-            "Router memory erasure",
-            "IP address depletion"
+            "Monitor screen brightness",
+            "Operating system version of the sender",
+            "Current network load, queue length, and available bandwidth",
+            "File extension of the payload"
           ],
-          "answer": 0,
-          "explanation": "Rapidly shifting all traffic causes the newly chosen link to become congested while the old link becomes empty, triggering continuous oscillations."
+          "answer": 2,
+          "explanation": "Traffic-Aware Routing takes real-time operational parameters into account, including link utilization, queuing delay, available bandwidth, and packet loss."
         },
         {
-          "question": "Which technique helps prevent route oscillations in traffic-aware routing?",
+          "question": "How does Flow Control fundamentally differ from Congestion Control?",
           "options": [
-            "Metric smoothing using exponential moving averages and multi-path routing",
-            "Disabling all routing tables",
-            "Using only 10 Mbps links",
-            "Setting hop count to 16"
+            "Flow control protects the receiver from being overwhelmed; Congestion control protects intermediate network resources",
+            "Flow control changes IP addresses; Congestion control changes MAC addresses",
+            "Flow control runs on routers; Congestion control runs only on switches",
+            "They are two identical terms for the exact same mechanism"
           ],
           "answer": 0,
-          "explanation": "Metric smoothing dampens rapid swings and multi-path routing spreads traffic smoothly across multiple available links."
+          "explanation": "Flow control is an end-to-end mechanism between a sender and receiver (e.g. TCP receive window), while congestion control manages traffic across shared intermediate network routers and links."
         },
         {
-          "question": "In MPLS networks, which protocol extension allows routers to establish explicit paths avoiding congested links?",
+          "question": "What is the primary operational danger of unconstrained Traffic-Aware Routing?",
           "options": [
-            "MPLS-TE (Traffic Engineering) using CSPF",
-            "RIPv1",
-            "ARP",
-            "DHCPv6"
+            "Infinite IP address exhaustion",
+            "Route oscillation (flapping) where traffic shifts back and forth between paths",
+            "Permanently reducing link bandwidth to 0 Mbps",
+            "Disabling all Ethernet interfaces"
           ],
-          "answer": 0,
-          "explanation": "MPLS Traffic Engineering (MPLS-TE) uses Constraint-Based Shortest Path First (CSPF) to route tunnels away from saturated links."
+          "answer": 1,
+          "explanation": "When routers shift traffic to an idle path, that path becomes congested, causing routers to shift traffic back. This periodic ping-pong effect is known as route oscillation or flapping."
         }
       ],
       "references": [
         {
-          "cite": "A.S. Tanenbaum & D.J. Wetherall, Computer Networks, 6th Ed., Ch. 5.3.2",
-          "url": ""
+          "cite": "RFC 2676: QoS Routing Mechanisms and OSPF Extensions, IETF.",
+          "url": "https://datatracker.ietf.org/doc/html/rfc2676"
         },
         {
-          "cite": "RFC 2676: QoS Routing Mechanisms and OSPF Extensions",
-          "url": "https://datatracker.ietf.org/doc/html/rfc2676"
+          "cite": "A.S. Tanenbaum & D.J. Wetherall, Computer Networks, 6th Edition, Chapter 5: Congestion Control Algorithms.",
+          "url": "https://www.pearson.com"
+        },
+        {
+          "cite": "Cisco Systems: Traffic Engineering and Quality of Service Architecture Guide.",
+          "url": "https://www.cisco.com"
         }
       ]
     },
