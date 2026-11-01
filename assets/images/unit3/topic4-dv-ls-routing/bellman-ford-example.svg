@@ -1,0 +1,281 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 18px; font-weight: bold; fill: #1e293b; }
+      .subtitle { font-size: 11px; fill: #64748b; }
+      .iter-title { font-size: 12px; font-weight: bold; fill: #1e40af; }
+      .th { font-size: 8.5px; font-weight: bold; fill: #fff; }
+      .td { font-size: 8.5px; fill: #334155; }
+      .td-updated { font-size: 8.5px; fill: #059669; font-weight: bold; }
+      .router-label { font-size: 13px; font-weight: bold; fill: #fff; }
+      .cost { font-size: 10px; font-weight: bold; fill: #EA580C; }
+      .node-name { font-size: 11px; font-weight: bold; fill: #1e293b; }
+    </style>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+
+  <rect width="900" height="600" fill="#f8fafc" rx="8"/>
+  <text x="450" y="30" text-anchor="middle" class="title">Bellman-Ford Algorithm – Distance Table Evolution</text>
+  <text x="450" y="48" text-anchor="middle" class="subtitle">5-node network showing distance convergence over 3 iterations (from node A's perspective)</text>
+
+  <!-- Network Topology -->
+  <g transform="translate(360, 85)">
+    <text x="90" y="-5" text-anchor="middle" style="font-size:11px;font-weight:bold;fill:#475569;">Network Topology</text>
+    <!-- Edges -->
+    <line x1="0" y1="30" x2="90" y2="0" stroke="#94a3b8" stroke-width="2.5"/>
+    <text x="40" y="5" class="cost">1</text>
+    <line x1="90" y1="0" x2="180" y2="30" stroke="#94a3b8" stroke-width="2.5"/>
+    <text x="140" y="5" class="cost">3</text>
+    <line x1="0" y1="30" x2="45" y2="95" stroke="#94a3b8" stroke-width="2.5"/>
+    <text x="8" y="70" class="cost">2</text>
+    <line x1="45" y1="95" x2="135" y2="95" stroke="#94a3b8" stroke-width="2.5"/>
+    <text x="90" y="90" class="cost">1</text>
+    <line x1="135" y1="95" x2="180" y2="30" stroke="#94a3b8" stroke-width="2.5"/>
+    <text x="168" y="70" class="cost">2</text>
+    <line x1="90" y1="0" x2="45" y2="95" stroke="#94a3b8" stroke-width="2"/>
+    <text x="55" y="52" class="cost">4</text>
+    <!-- Nodes -->
+    <circle cx="0" cy="30" r="18" fill="#2563EB" filter="url(#shadow)"/>
+    <text x="0" y="35" text-anchor="middle" class="router-label">A</text>
+    <circle cx="90" cy="0" r="18" fill="#2563EB" filter="url(#shadow)"/>
+    <text x="90" y="5" text-anchor="middle" class="router-label">B</text>
+    <circle cx="180" cy="30" r="18" fill="#2563EB" filter="url(#shadow)"/>
+    <text x="180" y="35" text-anchor="middle" class="router-label">C</text>
+    <circle cx="45" cy="95" r="18" fill="#2563EB" filter="url(#shadow)"/>
+    <text x="45" y="100" text-anchor="middle" class="router-label">D</text>
+    <circle cx="135" cy="95" r="18" fill="#2563EB" filter="url(#shadow)"/>
+    <text x="135" y="100" text-anchor="middle" class="router-label">E</text>
+  </g>
+
+  <!-- Iteration 0: Initial -->
+  <g transform="translate(25, 210)">
+    <rect width="260" height="18" rx="4" fill="#1e40af"/>
+    <text x="130" y="13" text-anchor="middle" style="font-size:10px;font-weight:bold;fill:#fff;">Iteration 0 — Initial (Direct Links Only)</text>
+    <!-- Header -->
+    <rect y="20" width="52" height="16" fill="#3B82F6" stroke="#2563EB"/>
+    <rect x="52" y="20" width="52" height="16" fill="#3B82F6" stroke="#2563EB"/>
+    <rect x="104" y="20" width="52" height="16" fill="#3B82F6" stroke="#2563EB"/>
+    <rect x="156" y="20" width="52" height="16" fill="#3B82F6" stroke="#2563EB"/>
+    <rect x="208" y="20" width="52" height="16" fill="#3B82F6" stroke="#2563EB"/>
+    <text x="26" y="32" text-anchor="middle" class="th">Dest</text>
+    <text x="78" y="32" text-anchor="middle" class="th">via B</text>
+    <text x="130" y="32" text-anchor="middle" class="th">via D</text>
+    <text x="182" y="32" text-anchor="middle" class="th">Best</text>
+    <text x="234" y="32" text-anchor="middle" class="th">Next</text>
+    <!-- Row B -->
+    <rect y="36" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <rect x="52" y="36" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <rect x="104" y="36" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <rect x="156" y="36" width="52" height="16" fill="#dcfce7" stroke="#bbf7d0"/>
+    <rect x="208" y="36" width="52" height="16" fill="#dcfce7" stroke="#bbf7d0"/>
+    <text x="26" y="48" text-anchor="middle" class="td">B</text>
+    <text x="78" y="48" text-anchor="middle" class="td">1</text>
+    <text x="130" y="48" text-anchor="middle" class="td">∞</text>
+    <text x="182" y="48" text-anchor="middle" class="td-updated">1</text>
+    <text x="234" y="48" text-anchor="middle" class="td-updated">B</text>
+    <!-- Row C -->
+    <rect y="52" width="52" height="16" fill="#fff" stroke="#e2e8f0"/>
+    <rect x="52" y="52" width="52" height="16" fill="#fff" stroke="#e2e8f0"/>
+    <rect x="104" y="52" width="52" height="16" fill="#fff" stroke="#e2e8f0"/>
+    <rect x="156" y="52" width="52" height="16" fill="#fff" stroke="#e2e8f0"/>
+    <rect x="208" y="52" width="52" height="16" fill="#fff" stroke="#e2e8f0"/>
+    <text x="26" y="64" text-anchor="middle" class="td">C</text>
+    <text x="78" y="64" text-anchor="middle" class="td">∞</text>
+    <text x="130" y="64" text-anchor="middle" class="td">∞</text>
+    <text x="182" y="64" text-anchor="middle" class="td">∞</text>
+    <text x="234" y="64" text-anchor="middle" class="td">—</text>
+    <!-- Row D -->
+    <rect y="68" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <rect x="52" y="68" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <rect x="104" y="68" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <rect x="156" y="68" width="52" height="16" fill="#dcfce7" stroke="#bbf7d0"/>
+    <rect x="208" y="68" width="52" height="16" fill="#dcfce7" stroke="#bbf7d0"/>
+    <text x="26" y="80" text-anchor="middle" class="td">D</text>
+    <text x="78" y="80" text-anchor="middle" class="td">∞</text>
+    <text x="130" y="80" text-anchor="middle" class="td">2</text>
+    <text x="182" y="80" text-anchor="middle" class="td-updated">2</text>
+    <text x="234" y="80" text-anchor="middle" class="td-updated">D</text>
+    <!-- Row E -->
+    <rect y="84" width="52" height="16" fill="#fff" stroke="#e2e8f0"/>
+    <rect x="52" y="84" width="52" height="16" fill="#fff" stroke="#e2e8f0"/>
+    <rect x="104" y="84" width="52" height="16" fill="#fff" stroke="#e2e8f0"/>
+    <rect x="156" y="84" width="52" height="16" fill="#fff" stroke="#e2e8f0"/>
+    <rect x="208" y="84" width="52" height="16" fill="#fff" stroke="#e2e8f0"/>
+    <text x="26" y="96" text-anchor="middle" class="td">E</text>
+    <text x="78" y="96" text-anchor="middle" class="td">∞</text>
+    <text x="130" y="96" text-anchor="middle" class="td">∞</text>
+    <text x="182" y="96" text-anchor="middle" class="td">∞</text>
+    <text x="234" y="96" text-anchor="middle" class="td">—</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M 290,310 L 310,310" stroke="#3B82F6" stroke-width="2" marker-end="url(#arrowB)"/>
+  <marker id="arrowB" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+    <path d="M0,0 L8,3 L0,6" fill="#3B82F6"/>
+  </marker>
+
+  <!-- Iteration 1 -->
+  <g transform="translate(320, 210)">
+    <rect width="260" height="18" rx="4" fill="#1e40af"/>
+    <text x="130" y="13" text-anchor="middle" style="font-size:10px;font-weight:bold;fill:#fff;">Iteration 1 — After 1st Exchange</text>
+    <rect y="20" width="52" height="16" fill="#3B82F6" stroke="#2563EB"/>
+    <rect x="52" y="20" width="52" height="16" fill="#3B82F6" stroke="#2563EB"/>
+    <rect x="104" y="20" width="52" height="16" fill="#3B82F6" stroke="#2563EB"/>
+    <rect x="156" y="20" width="52" height="16" fill="#3B82F6" stroke="#2563EB"/>
+    <rect x="208" y="20" width="52" height="16" fill="#3B82F6" stroke="#2563EB"/>
+    <text x="26" y="32" text-anchor="middle" class="th">Dest</text>
+    <text x="78" y="32" text-anchor="middle" class="th">via B</text>
+    <text x="130" y="32" text-anchor="middle" class="th">via D</text>
+    <text x="182" y="32" text-anchor="middle" class="th">Best</text>
+    <text x="234" y="32" text-anchor="middle" class="th">Next</text>
+    <!-- Row B -->
+    <rect y="36" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <rect x="52" y="36" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <rect x="104" y="36" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <rect x="156" y="36" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <rect x="208" y="36" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <text x="26" y="48" text-anchor="middle" class="td">B</text>
+    <text x="78" y="48" text-anchor="middle" class="td">1</text>
+    <text x="130" y="48" text-anchor="middle" class="td">6</text>
+    <text x="182" y="48" text-anchor="middle" class="td">1</text>
+    <text x="234" y="48" text-anchor="middle" class="td">B</text>
+    <!-- Row C -->
+    <rect y="52" width="52" height="16" fill="#fff" stroke="#e2e8f0"/>
+    <rect x="52" y="52" width="52" height="16" fill="#dcfce7" stroke="#bbf7d0"/>
+    <rect x="104" y="52" width="52" height="16" fill="#fff" stroke="#e2e8f0"/>
+    <rect x="156" y="52" width="52" height="16" fill="#dcfce7" stroke="#bbf7d0"/>
+    <rect x="208" y="52" width="52" height="16" fill="#dcfce7" stroke="#bbf7d0"/>
+    <text x="26" y="64" text-anchor="middle" class="td">C</text>
+    <text x="78" y="64" text-anchor="middle" class="td-updated">4</text>
+    <text x="130" y="64" text-anchor="middle" class="td">∞</text>
+    <text x="182" y="64" text-anchor="middle" class="td-updated">4</text>
+    <text x="234" y="64" text-anchor="middle" class="td-updated">B</text>
+    <!-- Row D -->
+    <rect y="68" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <rect x="52" y="68" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <rect x="104" y="68" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <rect x="156" y="68" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <rect x="208" y="68" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <text x="26" y="80" text-anchor="middle" class="td">D</text>
+    <text x="78" y="80" text-anchor="middle" class="td">∞</text>
+    <text x="130" y="80" text-anchor="middle" class="td">2</text>
+    <text x="182" y="80" text-anchor="middle" class="td">2</text>
+    <text x="234" y="80" text-anchor="middle" class="td">D</text>
+    <!-- Row E -->
+    <rect y="84" width="52" height="16" fill="#fff" stroke="#e2e8f0"/>
+    <rect x="52" y="84" width="52" height="16" fill="#dcfce7" stroke="#bbf7d0"/>
+    <rect x="104" y="84" width="52" height="16" fill="#dcfce7" stroke="#bbf7d0"/>
+    <rect x="156" y="84" width="52" height="16" fill="#dcfce7" stroke="#bbf7d0"/>
+    <rect x="208" y="84" width="52" height="16" fill="#dcfce7" stroke="#bbf7d0"/>
+    <text x="26" y="96" text-anchor="middle" class="td">E</text>
+    <text x="78" y="96" text-anchor="middle" class="td-updated">∞</text>
+    <text x="130" y="96" text-anchor="middle" class="td-updated">3</text>
+    <text x="182" y="96" text-anchor="middle" class="td-updated">3</text>
+    <text x="234" y="96" text-anchor="middle" class="td-updated">D</text>
+  </g>
+
+  <!-- Arrow 2 -->
+  <path d="M 585,310 L 605,310" stroke="#3B82F6" stroke-width="2" marker-end="url(#arrowB)"/>
+
+  <!-- Iteration 2 -->
+  <g transform="translate(615, 210)">
+    <rect width="260" height="18" rx="4" fill="#059669"/>
+    <text x="130" y="13" text-anchor="middle" style="font-size:10px;font-weight:bold;fill:#fff;">Iteration 2 — Converged ✓</text>
+    <rect y="20" width="52" height="16" fill="#3B82F6" stroke="#2563EB"/>
+    <rect x="52" y="20" width="52" height="16" fill="#3B82F6" stroke="#2563EB"/>
+    <rect x="104" y="20" width="52" height="16" fill="#3B82F6" stroke="#2563EB"/>
+    <rect x="156" y="20" width="52" height="16" fill="#3B82F6" stroke="#2563EB"/>
+    <rect x="208" y="20" width="52" height="16" fill="#3B82F6" stroke="#2563EB"/>
+    <text x="26" y="32" text-anchor="middle" class="th">Dest</text>
+    <text x="78" y="32" text-anchor="middle" class="th">via B</text>
+    <text x="130" y="32" text-anchor="middle" class="th">via D</text>
+    <text x="182" y="32" text-anchor="middle" class="th">Best</text>
+    <text x="234" y="32" text-anchor="middle" class="th">Next</text>
+    <!-- Row B -->
+    <rect y="36" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <rect x="52" y="36" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <rect x="104" y="36" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <rect x="156" y="36" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <rect x="208" y="36" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <text x="26" y="48" text-anchor="middle" class="td">B</text>
+    <text x="78" y="48" text-anchor="middle" class="td">1</text>
+    <text x="130" y="48" text-anchor="middle" class="td">6</text>
+    <text x="182" y="48" text-anchor="middle" class="td">1</text>
+    <text x="234" y="48" text-anchor="middle" class="td">B</text>
+    <!-- Row C -->
+    <rect y="52" width="52" height="16" fill="#fff" stroke="#e2e8f0"/>
+    <rect x="52" y="52" width="52" height="16" fill="#fff" stroke="#e2e8f0"/>
+    <rect x="104" y="52" width="52" height="16" fill="#dcfce7" stroke="#bbf7d0"/>
+    <rect x="156" y="52" width="52" height="16" fill="#fff" stroke="#e2e8f0"/>
+    <rect x="208" y="52" width="52" height="16" fill="#fff" stroke="#e2e8f0"/>
+    <text x="26" y="64" text-anchor="middle" class="td">C</text>
+    <text x="78" y="64" text-anchor="middle" class="td">4</text>
+    <text x="130" y="64" text-anchor="middle" class="td-updated">4</text>
+    <text x="182" y="64" text-anchor="middle" class="td">4</text>
+    <text x="234" y="64" text-anchor="middle" class="td">B</text>
+    <!-- Row D -->
+    <rect y="68" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <rect x="52" y="68" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <rect x="104" y="68" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <rect x="156" y="68" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <rect x="208" y="68" width="52" height="16" fill="#eff6ff" stroke="#dbeafe"/>
+    <text x="26" y="80" text-anchor="middle" class="td">D</text>
+    <text x="78" y="80" text-anchor="middle" class="td">5</text>
+    <text x="130" y="80" text-anchor="middle" class="td">2</text>
+    <text x="182" y="80" text-anchor="middle" class="td">2</text>
+    <text x="234" y="80" text-anchor="middle" class="td">D</text>
+    <!-- Row E -->
+    <rect y="84" width="52" height="16" fill="#fff" stroke="#e2e8f0"/>
+    <rect x="52" y="84" width="52" height="16" fill="#fff" stroke="#e2e8f0"/>
+    <rect x="104" y="84" width="52" height="16" fill="#fff" stroke="#e2e8f0"/>
+    <rect x="156" y="84" width="52" height="16" fill="#fff" stroke="#e2e8f0"/>
+    <rect x="208" y="84" width="52" height="16" fill="#fff" stroke="#e2e8f0"/>
+    <text x="26" y="96" text-anchor="middle" class="td">E</text>
+    <text x="78" y="96" text-anchor="middle" class="td">∞</text>
+    <text x="130" y="96" text-anchor="middle" class="td">3</text>
+    <text x="182" y="96" text-anchor="middle" class="td">3</text>
+    <text x="234" y="96" text-anchor="middle" class="td">D</text>
+  </g>
+
+  <!-- Formula -->
+  <rect x="50" y="370" width="800" height="45" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
+  <text x="450" y="390" text-anchor="middle" style="font-size:12px;font-weight:bold;fill:#1e40af;">Bellman-Ford Equation (applied at each iteration):</text>
+  <text x="450" y="408" text-anchor="middle" style="font-size:13px;fill:#334155;font-family:monospace;">D(A, y) = min { c(A, v) + D(v, y) }  for each neighbor v of A</text>
+
+  <!-- Convergence summary -->
+  <g transform="translate(50, 430)">
+    <rect width="800" height="155" rx="8" fill="#f0fdf4" stroke="#10B981" stroke-width="1.5"/>
+    <text x="400" y="22" text-anchor="middle" style="font-size:12px;font-weight:bold;fill:#059669;">Convergence Summary — Final Shortest Paths from A</text>
+    
+    <!-- Final paths table -->
+    <rect x="200" y="35" width="400" height="20" rx="4" fill="#059669"/>
+    <text x="260" y="49" text-anchor="middle" class="th">Destination</text>
+    <text x="360" y="49" text-anchor="middle" class="th">Shortest Distance</text>
+    <text x="480" y="49" text-anchor="middle" class="th">Path</text>
+    
+    <rect x="200" y="55" width="400" height="18" fill="#fff" stroke="#d1fae5"/>
+    <text x="260" y="68" text-anchor="middle" class="td">B</text>
+    <text x="360" y="68" text-anchor="middle" class="td-updated">1</text>
+    <text x="480" y="68" text-anchor="middle" class="td">A → B</text>
+    
+    <rect x="200" y="73" width="400" height="18" fill="#f0fdf4" stroke="#d1fae5"/>
+    <text x="260" y="86" text-anchor="middle" class="td">C</text>
+    <text x="360" y="86" text-anchor="middle" class="td-updated">4</text>
+    <text x="480" y="86" text-anchor="middle" class="td">A → B → C</text>
+    
+    <rect x="200" y="91" width="400" height="18" fill="#fff" stroke="#d1fae5"/>
+    <text x="260" y="104" text-anchor="middle" class="td">D</text>
+    <text x="360" y="104" text-anchor="middle" class="td-updated">2</text>
+    <text x="480" y="104" text-anchor="middle" class="td">A → D</text>
+    
+    <rect x="200" y="109" width="400" height="18" fill="#f0fdf4" stroke="#d1fae5"/>
+    <text x="260" y="122" text-anchor="middle" class="td">E</text>
+    <text x="360" y="122" text-anchor="middle" class="td-updated">3</text>
+    <text x="480" y="122" text-anchor="middle" class="td">A → D → E</text>
+
+    <text x="400" y="143" text-anchor="middle" style="font-size:9.5px;fill:#64748b;">Algorithm converges after at most (N-1) = 4 iterations for 5 nodes</text>
+  </g>
+</svg>

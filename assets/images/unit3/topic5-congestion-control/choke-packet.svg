@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <marker id="cB" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#2563EB"/></marker>
+    <marker id="cO" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#EA580C"/></marker>
+    <marker id="cG" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#059669"/></marker>
+    <marker id="cR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#DC2626"/></marker>
+  </defs>
+  <style>
+    text { font-family: 'Segoe UI', Arial, sans-serif; }
+    .title { font-size: 18px; font-weight: 700; fill: #1E293B; }
+    .subtitle { font-size: 12px; fill: #64748B; }
+    .label { font-size: 11px; fill: #334155; }
+    .small { font-size: 10px; fill: #64748B; }
+    .stepNum { font-size: 14px; font-weight: 700; fill: #FFF; }
+    .stepLabel { font-size: 12px; font-weight: 600; }
+  </style>
+  <rect width="800" height="500" fill="#FFFFFF" rx="8"/>
+  <text x="400" y="30" text-anchor="middle" class="title">Choke Packet Mechanism</text>
+  <text x="400" y="48" text-anchor="middle" class="subtitle">Step-by-step: How routers signal congestion back to the source</text>
+
+  <!-- ===== STEP 1: Normal flow ===== -->
+  <rect x="15" y="65" width="770" height="80" rx="8" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1"/>
+  
+  <!-- Step circle -->
+  <circle cx="45" cy="95" r="16" fill="#2563EB"/>
+  <text x="45" y="100" text-anchor="middle" class="stepNum">1</text>
+  <text x="80" y="87" class="stepLabel" fill="#2563EB">Source sends packets at high rate</text>
+  <text x="80" y="103" class="small">Data packets flowing through the network toward destination</text>
+
+  <!-- Network elements -->
+  <rect x="230" y="80" width="55" height="30" rx="5" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1.5"/>
+  <text x="257" y="99" text-anchor="middle" class="label" font-weight="600">Source</text>
+
+  <line x1="285" y1="95" x2="380" y2="95" stroke="#3B82F6" stroke-width="2" marker-end="url(#cB)"/>
+  <rect x="310" y="87" width="14" height="10" rx="2" fill="#3B82F6"/>
+  <rect x="330" y="87" width="14" height="10" rx="2" fill="#3B82F6"/>
+  <rect x="350" y="87" width="14" height="10" rx="2" fill="#3B82F6"/>
+
+  <circle cx="400" cy="95" r="18" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5"/>
+  <text x="400" y="99" text-anchor="middle" class="small" font-weight="600">R1</text>
+
+  <line x1="418" y1="95" x2="500" y2="95" stroke="#3B82F6" stroke-width="2" marker-end="url(#cB)"/>
+  <rect x="445" y="87" width="14" height="10" rx="2" fill="#3B82F6"/>
+  <rect x="465" y="87" width="14" height="10" rx="2" fill="#3B82F6"/>
+
+  <circle cx="520" cy="95" r="18" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5"/>
+  <text x="520" y="99" text-anchor="middle" class="small" font-weight="600">R2</text>
+
+  <line x1="538" y1="95" x2="620" y2="95" stroke="#3B82F6" stroke-width="2" marker-end="url(#cB)"/>
+
+  <rect x="625" y="80" width="50" height="30" rx="5" fill="#D1FAE5" stroke="#059669" stroke-width="1.5"/>
+  <text x="650" y="99" text-anchor="middle" class="label" font-weight="600">Dest</text>
+
+  <!-- ===== STEP 2: Congestion detected ===== -->
+  <rect x="15" y="155" width="770" height="90" rx="8" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1"/>
+
+  <circle cx="45" cy="195" r="16" fill="#DC2626"/>
+  <text x="45" y="200" text-anchor="middle" class="stepNum">2</text>
+  <text x="80" y="180" class="stepLabel" fill="#DC2626">Router detects congestion</text>
+  <text x="80" y="196" class="small">Queue utilization exceeds threshold → congestion detected</text>
+  <text x="80" y="212" class="small">Router decides to send a choke packet</text>
+
+  <!-- Network with congested router -->
+  <rect x="230" y="178" width="55" height="30" rx="5" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1.5"/>
+  <text x="257" y="197" text-anchor="middle" class="label" font-weight="600">Source</text>
+
+  <line x1="285" y1="193" x2="380" y2="193" stroke="#3B82F6" stroke-width="2" marker-end="url(#cB)"/>
+  <rect x="310" y="185" width="14" height="10" rx="2" fill="#3B82F6"/>
+  <rect x="330" y="185" width="14" height="10" rx="2" fill="#3B82F6"/>
+  <rect x="350" y="185" width="14" height="10" rx="2" fill="#3B82F6"/>
+
+  <circle cx="400" cy="193" r="18" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5"/>
+  <text x="400" y="197" text-anchor="middle" class="small" font-weight="600">R1</text>
+
+  <line x1="418" y1="193" x2="495" y2="193" stroke="#DC2626" stroke-width="2"/>
+
+  <!-- Congested R2 with queue -->
+  <circle cx="520" cy="193" r="22" fill="#FEE2E2" stroke="#DC2626" stroke-width="2.5"/>
+  <text x="520" y="190" text-anchor="middle" class="small" fill="#DC2626" font-weight="700">R2</text>
+  <text x="520" y="203" text-anchor="middle" style="font-size:8px" fill="#DC2626">FULL!</text>
+
+  <!-- Queue visual -->
+  <rect x="498" y="160" width="44" height="12" rx="2" fill="#FEE2E2" stroke="#DC2626" stroke-width="1"/>
+  <rect x="500" y="162" width="6" height="8" rx="1" fill="#F87171"/>
+  <rect x="508" y="162" width="6" height="8" rx="1" fill="#F87171"/>
+  <rect x="516" y="162" width="6" height="8" rx="1" fill="#F87171"/>
+  <rect x="524" y="162" width="6" height="8" rx="1" fill="#F87171"/>
+  <rect x="532" y="162" width="6" height="8" rx="1" fill="#F87171"/>
+  <text x="520" y="155" text-anchor="middle" class="small" fill="#DC2626">Queue: 95%</text>
+
+  <!-- Alert icon -->
+  <text x="555" y="182" font-size="18" fill="#DC2626">⚠</text>
+
+  <rect x="625" y="178" width="50" height="30" rx="5" fill="#D1FAE5" stroke="#059669" stroke-width="1.5"/>
+  <text x="650" y="197" text-anchor="middle" class="label" font-weight="600">Dest</text>
+
+  <!-- ===== STEP 3: Choke packet sent back ===== -->
+  <rect x="15" y="255" width="770" height="90" rx="8" fill="#FFF7ED" stroke="#FDBA74" stroke-width="1"/>
+
+  <circle cx="45" cy="295" r="16" fill="#EA580C"/>
+  <text x="45" y="300" text-anchor="middle" class="stepNum">3</text>
+  <text x="80" y="280" class="stepLabel" fill="#EA580C">Choke packet sent back to source</text>
+  <text x="80" y="296" class="small">R2 generates a choke packet and sends it back toward the source</text>
+  <text x="80" y="312" class="small">The choke packet identifies the flow causing congestion</text>
+
+  <!-- Network with choke packet traveling back -->
+  <rect x="230" y="278" width="55" height="30" rx="5" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1.5"/>
+  <text x="257" y="297" text-anchor="middle" class="label" font-weight="600">Source</text>
+
+  <!-- Choke packet traveling backward -->
+  <line x1="495" y1="300" x2="290" y2="300" stroke="#EA580C" stroke-width="2.5" marker-end="url(#cO)"/>
+
+  <!-- Choke packet visual -->
+  <rect x="370" y="287" width="65" height="22" rx="4" fill="#FFF7ED" stroke="#F97316" stroke-width="2"/>
+  <text x="402" y="302" text-anchor="middle" class="small" fill="#EA580C" font-weight="700">CHOKE</text>
+
+  <!-- Direction arrow label -->
+  <text x="350" y="325" text-anchor="middle" class="small" fill="#EA580C">← Traveling back to source</text>
+
+  <circle cx="400" cy="293" r="3" fill="#F97316"/>
+
+  <circle cx="520" cy="293" r="22" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
+  <text x="520" y="297" text-anchor="middle" class="small" fill="#DC2626" font-weight="600">R2</text>
+
+  <rect x="625" y="278" width="50" height="30" rx="5" fill="#D1FAE5" stroke="#059669" stroke-width="1.5"/>
+  <text x="650" y="297" text-anchor="middle" class="label" font-weight="600">Dest</text>
+
+  <!-- ===== STEP 4: Source reduces rate ===== -->
+  <rect x="15" y="355" width="770" height="90" rx="8" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1"/>
+
+  <circle cx="45" cy="395" r="16" fill="#059669"/>
+  <text x="45" y="400" text-anchor="middle" class="stepNum">4</text>
+  <text x="80" y="378" class="stepLabel" fill="#059669">Source reduces sending rate</text>
+  <text x="80" y="394" class="small">Source receives choke packet and reduces its transmission rate</text>
+  <text x="80" y="410" class="small">Traffic decreases → congestion eases at R2</text>
+
+  <!-- Network with reduced traffic -->
+  <rect x="230" y="378" width="55" height="30" rx="5" fill="#D1FAE5" stroke="#059669" stroke-width="2"/>
+  <text x="257" y="397" text-anchor="middle" class="label" font-weight="600">Source</text>
+  <text x="257" y="420" text-anchor="middle" class="small" fill="#059669">Rate ↓</text>
+
+  <!-- Fewer packets -->
+  <line x1="285" y1="393" x2="380" y2="393" stroke="#059669" stroke-width="2" marker-end="url(#cG)"/>
+  <rect x="340" y="385" width="14" height="10" rx="2" fill="#10B981"/>
+
+  <circle cx="400" cy="393" r="18" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5"/>
+  <text x="400" y="397" text-anchor="middle" class="small" font-weight="600">R1</text>
+
+  <line x1="418" y1="393" x2="498" y2="393" stroke="#059669" stroke-width="2" marker-end="url(#cG)"/>
+  <rect x="460" y="385" width="14" height="10" rx="2" fill="#10B981"/>
+
+  <!-- R2 now relieved -->
+  <circle cx="520" cy="393" r="22" fill="#D1FAE5" stroke="#059669" stroke-width="2"/>
+  <text x="520" y="390" text-anchor="middle" class="small" fill="#059669" font-weight="700">R2</text>
+  <text x="520" y="403" text-anchor="middle" style="font-size:8px" fill="#059669">OK ✓</text>
+
+  <line x1="542" y1="393" x2="620" y2="393" stroke="#059669" stroke-width="2" marker-end="url(#cG)"/>
+
+  <rect x="625" y="378" width="50" height="30" rx="5" fill="#D1FAE5" stroke="#059669" stroke-width="1.5"/>
+  <text x="650" y="397" text-anchor="middle" class="label" font-weight="600">Dest</text>
+
+  <!-- Before/After rate comparison -->
+  <rect x="700" y="370" width="75" height="70" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="737" y="388" text-anchor="middle" class="small" font-weight="600">Rate:</text>
+  <text x="737" y="404" text-anchor="middle" class="small" fill="#DC2626">Before: 100%</text>
+  <text x="737" y="420" text-anchor="middle" class="small" fill="#059669">After: 50%</text>
+  <line x1="710" y1="410" x2="765" y2="410" stroke="#CBD5E1" stroke-width="0.5"/>
+  <text x="737" y="436" text-anchor="middle" class="small" fill="#059669">✓ Congestion</text>
+  <text x="737" y="440" text-anchor="middle" class="small" fill="#059669"></text>
+
+  <!-- Summary footer -->
+  <rect x="80" y="458" width="640" height="32" rx="6" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1"/>
+  <text x="400" y="479" text-anchor="middle" class="label" fill="#2563EB">Flow: Detect congestion → Generate choke → Source throttles → Congestion clears</text>
+</svg>

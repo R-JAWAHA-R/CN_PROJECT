@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <filter id="ds" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.13"/>
+    </filter>
+    <style>
+      .title { font: bold 20px 'Segoe UI', Arial, sans-serif; fill: #1E293B; }
+      .sub { font: 14px 'Segoe UI', Arial, sans-serif; fill: #64748B; }
+      .nlbl { font: bold 16px 'Segoe UI', Arial, sans-serif; fill: #fff; text-anchor: middle; dominant-baseline: central; }
+      .wlbl { font: bold 13px 'Segoe UI', Arial, sans-serif; fill: #1E293B; text-anchor: middle; }
+      .info { font: 13px 'Segoe UI', Arial, sans-serif; fill: #475569; }
+    </style>
+  </defs>
+
+  <rect width="800" height="500" fill="#FAFBFC" rx="8"/>
+
+  <text x="400" y="35" class="title" text-anchor="middle">Weighted Network Graph — Input for Dijkstra's Algorithm</text>
+  <text x="400" y="55" class="sub" text-anchor="middle">6-node graph with labeled edge weights — source node: A</text>
+
+  <!-- Edges -->
+  <!-- A-B -->
+  <line x1="150" y1="180" x2="350" y2="120" stroke="#94A3B8" stroke-width="2.5"/>
+  <rect x="232" y="133" width="28" height="22" rx="5" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+  <text x="246" y="148" class="wlbl">2</text>
+
+  <!-- A-C -->
+  <line x1="150" y1="180" x2="350" y2="280" stroke="#94A3B8" stroke-width="2.5"/>
+  <rect x="228" y="222" width="28" height="22" rx="5" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+  <text x="242" y="237" class="wlbl">4</text>
+
+  <!-- A-D -->
+  <line x1="150" y1="180" x2="150" y2="370" stroke="#94A3B8" stroke-width="2.5"/>
+  <rect x="126" y="266" width="28" height="22" rx="5" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+  <text x="140" y="281" class="wlbl">7</text>
+
+  <!-- B-C -->
+  <line x1="350" y1="120" x2="350" y2="280" stroke="#94A3B8" stroke-width="2.5"/>
+  <rect x="356" y="192" width="28" height="22" rx="5" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+  <text x="370" y="207" class="wlbl">1</text>
+
+  <!-- B-E -->
+  <line x1="350" y1="120" x2="580" y2="120" stroke="#94A3B8" stroke-width="2.5"/>
+  <rect x="450" y="100" width="28" height="22" rx="5" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+  <text x="464" y="115" class="wlbl">5</text>
+
+  <!-- C-D -->
+  <line x1="350" y1="280" x2="150" y2="370" stroke="#94A3B8" stroke-width="2.5"/>
+  <rect x="232" y="318" width="28" height="22" rx="5" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+  <text x="246" y="333" class="wlbl">3</text>
+
+  <!-- C-E -->
+  <line x1="350" y1="280" x2="580" y2="120" stroke="#94A3B8" stroke-width="2.5"/>
+  <rect x="455" y="188" width="28" height="22" rx="5" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+  <text x="469" y="203" class="wlbl">8</text>
+
+  <!-- C-F -->
+  <line x1="350" y1="280" x2="580" y2="370" stroke="#94A3B8" stroke-width="2.5"/>
+  <rect x="450" y="318" width="28" height="22" rx="5" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+  <text x="464" y="333" class="wlbl">2</text>
+
+  <!-- D-F -->
+  <line x1="150" y1="370" x2="580" y2="370" stroke="#94A3B8" stroke-width="2.5"/>
+  <rect x="350" y="375" width="28" height="22" rx="5" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+  <text x="364" y="390" class="wlbl">6</text>
+
+  <!-- E-F -->
+  <line x1="580" y1="120" x2="580" y2="370" stroke="#94A3B8" stroke-width="2.5"/>
+  <rect x="588" y="238" width="28" height="22" rx="5" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+  <text x="602" y="253" class="wlbl">3</text>
+
+  <!-- Nodes -->
+  <!-- A (source - highlighted) -->
+  <circle cx="150" cy="180" r="26" fill="#EA580C" stroke="#C2410C" stroke-width="2" filter="url(#ds)"/>
+  <text x="150" y="180" class="nlbl" style="font-size:18px">A</text>
+  <text x="150" y="155" style="font:bold 11px 'Segoe UI',sans-serif; fill:#EA580C; text-anchor:middle;">SOURCE</text>
+
+  <!-- B -->
+  <circle cx="350" cy="120" r="26" fill="#3B82F6" filter="url(#ds)"/>
+  <text x="350" y="120" class="nlbl">B</text>
+
+  <!-- C -->
+  <circle cx="350" cy="280" r="26" fill="#3B82F6" filter="url(#ds)"/>
+  <text x="350" y="280" class="nlbl">C</text>
+
+  <!-- D -->
+  <circle cx="150" cy="370" r="26" fill="#3B82F6" filter="url(#ds)"/>
+  <text x="150" y="370" class="nlbl">D</text>
+
+  <!-- E -->
+  <circle cx="580" cy="120" r="26" fill="#3B82F6" filter="url(#ds)"/>
+  <text x="580" y="120" class="nlbl">E</text>
+
+  <!-- F -->
+  <circle cx="580" cy="370" r="26" fill="#3B82F6" filter="url(#ds)"/>
+  <text x="580" y="370" class="nlbl">F</text>
+
+  <!-- Info box -->
+  <rect x="630" y="160" width="155" height="150" rx="8" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1"/>
+  <text x="707" y="185" style="font:bold 14px 'Segoe UI',sans-serif; fill:#1E40AF; text-anchor:middle;">Graph Info</text>
+  <line x1="640" y1="193" x2="775" y2="193" stroke="#BFDBFE" stroke-width="1"/>
+  <text x="650" y="215" class="info">Nodes: 6 (A–F)</text>
+  <text x="650" y="237" class="info">Edges: 10</text>
+  <text x="650" y="259" class="info">Source: A</text>
+  <text x="650" y="281" class="info">Weights: 1–8</text>
+  <text x="650" y="303" class="info">Undirected graph</text>
+
+  <!-- Legend -->
+  <rect x="30" y="450" width="740" height="40" rx="6" fill="#FFF7ED" stroke="#FDBA74"/>
+  <circle cx="60" cy="470" r="10" fill="#EA580C"/>
+  <text x="78" y="475" class="info">Source node</text>
+  <circle cx="190" cy="470" r="10" fill="#3B82F6"/>
+  <text x="208" y="475" class="info">Other nodes</text>
+  <rect x="318" y="461" width="24" height="18" rx="4" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+  <text x="355" y="475" class="info">Edge weight</text>
+  <line x1="470" y1="470" x2="510" y2="470" stroke="#94A3B8" stroke-width="2.5"/>
+  <text x="520" y="475" class="info">Undirected edge</text>
+</svg>

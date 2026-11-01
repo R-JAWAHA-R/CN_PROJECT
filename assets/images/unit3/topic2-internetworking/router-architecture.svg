@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 520">
+  <defs>
+    <filter id="shadow3" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.1"/>
+    </filter>
+    <marker id="arrowB" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrowG" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#059669"/>
+    </marker>
+    <marker id="arrowO" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#EA580C"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: 'Segoe UI', Arial, sans-serif; }
+    .title { font-size: 18px; font-weight: 700; fill: #1E293B; }
+    .subtitle { font-size: 11px; fill: #64748B; }
+    .label { font-size: 11px; font-weight: 600; }
+    .small { font-size: 9px; fill: #64748B; }
+    .port-label { font-size: 9px; font-weight: 600; }
+  </style>
+
+  <!-- Background -->
+  <rect width="850" height="520" fill="#FAFBFC" rx="8"/>
+  <rect x="1" y="1" width="848" height="518" fill="none" stroke="#E2E8F0" rx="8" stroke-width="1.5"/>
+
+  <!-- Title -->
+  <text x="425" y="30" text-anchor="middle" class="title">Router Internal Architecture</text>
+  <text x="425" y="48" text-anchor="middle" class="subtitle">Packet flow: Input Ports → Switching Fabric → Output Ports, controlled by Routing Processor</text>
+
+  <!-- Routing Processor (Top) -->
+  <rect x="240" y="65" width="370" height="75" rx="10" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2" filter="url(#shadow3)"/>
+  <rect x="260" y="78" width="40" height="30" rx="4" fill="#7C3AED"/>
+  <text x="280" y="97" text-anchor="middle" fill="white" font-size="8" font-weight="700">CPU</text>
+  <text x="315" y="88" class="label" fill="#7C3AED">Routing Processor</text>
+  <text x="315" y="102" class="small">• Executes routing protocols (OSPF, BGP, RIP)</text>
+  <text x="315" y="114" class="small">• Builds &amp; maintains routing table</text>
+  <text x="315" y="126" class="small">• Handles management &amp; control plane</text>
+  <!-- Routing table icon -->
+  <rect x="540" y="80" width="52" height="44" rx="4" fill="white" stroke="#7C3AED" stroke-width="1"/>
+  <line x1="540" y1="92" x2="592" y2="92" stroke="#7C3AED" stroke-width="0.8"/>
+  <line x1="540" y1="102" x2="592" y2="102" stroke="#E9D5FF" stroke-width="0.5"/>
+  <line x1="540" y1="112" x2="592" y2="112" stroke="#E9D5FF" stroke-width="0.5"/>
+  <text x="566" y="89" text-anchor="middle" font-size="7" fill="#7C3AED" font-weight="600">Routing Table</text>
+
+  <!-- Vertical connection from Routing Processor to Switching Fabric -->
+  <line x1="425" y1="140" x2="425" y2="185" stroke="#7C3AED" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="445" y="168" font-size="8" fill="#7C3AED">Control</text>
+
+  <!-- Input Ports (Left) -->
+  <rect x="30" y="190" width="165" height="250" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="2" filter="url(#shadow3)"/>
+  <text x="112" y="212" text-anchor="middle" class="label" fill="#2563EB">Input Ports</text>
+
+  <!-- Input Port 0 -->
+  <rect x="48" y="225" width="130" height="55" rx="6" fill="white" stroke="#93C5FD" stroke-width="1.2"/>
+  <text x="60" y="240" class="port-label" fill="#2563EB">Port 0 (Gi0/0)</text>
+  <rect x="55" y="248" width="35" height="20" rx="3" fill="#DBEAFE" stroke="#93C5FD" stroke-width="0.8"/>
+  <text x="72" y="262" text-anchor="middle" font-size="7" fill="#2563EB">Line</text>
+  <rect x="95" y="248" width="35" height="20" rx="3" fill="#BFDBFE" stroke="#93C5FD" stroke-width="0.8"/>
+  <text x="112" y="262" text-anchor="middle" font-size="7" fill="#2563EB">Link</text>
+  <rect x="135" y="248" width="35" height="20" rx="3" fill="#93C5FD" stroke="#3B82F6" stroke-width="0.8"/>
+  <text x="152" y="262" text-anchor="middle" font-size="7" fill="#1E40AF">Lookup</text>
+
+  <!-- Input Port 1 -->
+  <rect x="48" y="290" width="130" height="55" rx="6" fill="white" stroke="#93C5FD" stroke-width="1.2"/>
+  <text x="60" y="305" class="port-label" fill="#2563EB">Port 1 (Gi0/1)</text>
+  <rect x="55" y="313" width="35" height="20" rx="3" fill="#DBEAFE" stroke="#93C5FD" stroke-width="0.8"/>
+  <text x="72" y="327" text-anchor="middle" font-size="7" fill="#2563EB">Line</text>
+  <rect x="95" y="313" width="35" height="20" rx="3" fill="#BFDBFE" stroke="#93C5FD" stroke-width="0.8"/>
+  <text x="112" y="327" text-anchor="middle" font-size="7" fill="#2563EB">Link</text>
+  <rect x="135" y="313" width="35" height="20" rx="3" fill="#93C5FD" stroke="#3B82F6" stroke-width="0.8"/>
+  <text x="152" y="327" text-anchor="middle" font-size="7" fill="#1E40AF">Lookup</text>
+
+  <!-- Input Port 2 -->
+  <rect x="48" y="355" width="130" height="55" rx="6" fill="white" stroke="#93C5FD" stroke-width="1.2"/>
+  <text x="60" y="370" class="port-label" fill="#2563EB">Port 2 (Gi0/2)</text>
+  <rect x="55" y="378" width="35" height="20" rx="3" fill="#DBEAFE" stroke="#93C5FD" stroke-width="0.8"/>
+  <text x="72" y="392" text-anchor="middle" font-size="7" fill="#2563EB">Line</text>
+  <rect x="95" y="378" width="35" height="20" rx="3" fill="#BFDBFE" stroke="#93C5FD" stroke-width="0.8"/>
+  <text x="112" y="392" text-anchor="middle" font-size="7" fill="#2563EB">Link</text>
+  <rect x="135" y="378" width="35" height="20" rx="3" fill="#93C5FD" stroke="#3B82F6" stroke-width="0.8"/>
+  <text x="152" y="392" text-anchor="middle" font-size="7" fill="#1E40AF">Lookup</text>
+
+  <!-- Switching Fabric (Center) -->
+  <rect x="250" y="190" width="200" height="250" rx="10" fill="#FFF7ED" stroke="#EA580C" stroke-width="2" filter="url(#shadow3)"/>
+  <text x="350" y="212" text-anchor="middle" class="label" fill="#EA580C">Switching Fabric</text>
+
+  <!-- Crossbar pattern -->
+  <line x1="280" y1="235" x2="420" y2="235" stroke="#FDBA74" stroke-width="1.5"/>
+  <line x1="280" y1="280" x2="420" y2="280" stroke="#FDBA74" stroke-width="1.5"/>
+  <line x1="280" y1="325" x2="420" y2="325" stroke="#FDBA74" stroke-width="1.5"/>
+  <line x1="280" y1="370" x2="420" y2="370" stroke="#FDBA74" stroke-width="1.5"/>
+  <line x1="300" y1="225" x2="300" y2="400" stroke="#FDBA74" stroke-width="1.5"/>
+  <line x1="350" y1="225" x2="350" y2="400" stroke="#FDBA74" stroke-width="1.5"/>
+  <line x1="400" y1="225" x2="400" y2="400" stroke="#FDBA74" stroke-width="1.5"/>
+
+  <!-- Crossing points -->
+  <circle cx="300" cy="235" r="4" fill="#EA580C"/>
+  <circle cx="350" cy="280" r="4" fill="#EA580C"/>
+  <circle cx="400" cy="325" r="4" fill="#EA580C"/>
+  <circle cx="300" cy="370" r="4" fill="#F97316" opacity="0.4"/>
+  <circle cx="350" cy="325" r="4" fill="#F97316" opacity="0.4"/>
+  <circle cx="400" cy="280" r="4" fill="#F97316" opacity="0.4"/>
+
+  <!-- Fabric type labels -->
+  <text x="350" y="415" text-anchor="middle" font-size="8" fill="#EA580C" font-weight="600">Crossbar / Bus / Shared Memory</text>
+
+  <!-- Output Ports (Right) -->
+  <rect x="505" y="190" width="165" height="250" rx="10" fill="#ECFDF5" stroke="#059669" stroke-width="2" filter="url(#shadow3)"/>
+  <text x="587" y="212" text-anchor="middle" class="label" fill="#059669">Output Ports</text>
+
+  <!-- Output Port 0 -->
+  <rect x="522" y="225" width="130" height="55" rx="6" fill="white" stroke="#6EE7B7" stroke-width="1.2"/>
+  <text x="534" y="240" class="port-label" fill="#059669">Port 0 (Gi0/0)</text>
+  <rect x="530" y="248" width="35" height="20" rx="3" fill="#6EE7B7" stroke="#059669" stroke-width="0.8"/>
+  <text x="547" y="262" text-anchor="middle" font-size="7" fill="#065F46">Queue</text>
+  <rect x="570" y="248" width="35" height="20" rx="3" fill="#A7F3D0" stroke="#6EE7B7" stroke-width="0.8"/>
+  <text x="587" y="262" text-anchor="middle" font-size="7" fill="#065F46">Link</text>
+  <rect x="610" y="248" width="35" height="20" rx="3" fill="#D1FAE5" stroke="#6EE7B7" stroke-width="0.8"/>
+  <text x="627" y="262" text-anchor="middle" font-size="7" fill="#065F46">Line</text>
+
+  <!-- Output Port 1 -->
+  <rect x="522" y="290" width="130" height="55" rx="6" fill="white" stroke="#6EE7B7" stroke-width="1.2"/>
+  <text x="534" y="305" class="port-label" fill="#059669">Port 1 (Gi0/1)</text>
+  <rect x="530" y="313" width="35" height="20" rx="3" fill="#6EE7B7" stroke="#059669" stroke-width="0.8"/>
+  <text x="547" y="327" text-anchor="middle" font-size="7" fill="#065F46">Queue</text>
+  <rect x="570" y="313" width="35" height="20" rx="3" fill="#A7F3D0" stroke="#6EE7B7" stroke-width="0.8"/>
+  <text x="587" y="327" text-anchor="middle" font-size="7" fill="#065F46">Link</text>
+  <rect x="610" y="313" width="35" height="20" rx="3" fill="#D1FAE5" stroke="#6EE7B7" stroke-width="0.8"/>
+  <text x="627" y="327" text-anchor="middle" font-size="7" fill="#065F46">Line</text>
+
+  <!-- Output Port 2 -->
+  <rect x="522" y="355" width="130" height="55" rx="6" fill="white" stroke="#6EE7B7" stroke-width="1.2"/>
+  <text x="534" y="370" class="port-label" fill="#059669">Port 2 (Gi0/2)</text>
+  <rect x="530" y="378" width="35" height="20" rx="3" fill="#6EE7B7" stroke="#059669" stroke-width="0.8"/>
+  <text x="547" y="392" text-anchor="middle" font-size="7" fill="#065F46">Queue</text>
+  <rect x="570" y="378" width="35" height="20" rx="3" fill="#A7F3D0" stroke="#6EE7B7" stroke-width="0.8"/>
+  <text x="587" y="392" text-anchor="middle" font-size="7" fill="#065F46">Link</text>
+  <rect x="610" y="378" width="35" height="20" rx="3" fill="#D1FAE5" stroke="#6EE7B7" stroke-width="0.8"/>
+  <text x="627" y="392" text-anchor="middle" font-size="7" fill="#065F46">Line</text>
+
+  <!-- Flow arrows: Input to Switching Fabric -->
+  <line x1="195" y1="252" x2="248" y2="252" stroke="#2563EB" stroke-width="2.5" marker-end="url(#arrowB)"/>
+  <line x1="195" y1="317" x2="248" y2="317" stroke="#2563EB" stroke-width="2.5" marker-end="url(#arrowB)"/>
+  <line x1="195" y1="382" x2="248" y2="382" stroke="#2563EB" stroke-width="2.5" marker-end="url(#arrowB)"/>
+
+  <!-- Flow arrows: Switching Fabric to Output -->
+  <line x1="452" y1="252" x2="520" y2="252" stroke="#059669" stroke-width="2.5" marker-end="url(#arrowG)"/>
+  <line x1="452" y1="317" x2="520" y2="317" stroke="#059669" stroke-width="2.5" marker-end="url(#arrowG)"/>
+  <line x1="452" y1="382" x2="520" y2="382" stroke="#059669" stroke-width="2.5" marker-end="url(#arrowG)"/>
+
+  <!-- Incoming/Outgoing labels -->
+  <text x="15" y="255" font-size="9" fill="#2563EB" font-weight="600">IN →</text>
+  <text x="15" y="320" font-size="9" fill="#2563EB" font-weight="600">IN →</text>
+  <text x="15" y="385" font-size="9" fill="#2563EB" font-weight="600">IN →</text>
+
+  <text x="680" y="255" font-size="9" fill="#059669" font-weight="600">→ OUT</text>
+  <text x="680" y="320" font-size="9" fill="#059669" font-weight="600">→ OUT</text>
+  <text x="680" y="385" font-size="9" fill="#059669" font-weight="600">→ OUT</text>
+
+  <!-- Packet flow highlight -->
+  <rect x="700" y="62" width="135" height="80" rx="8" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.2"/>
+  <text x="767" y="80" text-anchor="middle" font-size="10" fill="#92400E" font-weight="700">Packet Flow</text>
+  <text x="767" y="95" text-anchor="middle" font-size="8" fill="#92400E">1. Arrive at Input Port</text>
+  <text x="767" y="107" text-anchor="middle" font-size="8" fill="#92400E">2. Lookup destination</text>
+  <text x="767" y="119" text-anchor="middle" font-size="8" fill="#92400E">3. Switch to Output Port</text>
+  <text x="767" y="131" text-anchor="middle" font-size="8" fill="#92400E">4. Queue &amp; transmit</text>
+
+  <!-- Bottom legend -->
+  <rect x="120" y="460" width="610" height="45" rx="8" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="425" y="478" text-anchor="middle" font-size="10" fill="#475569" font-weight="600">Data Plane (forwarding) vs Control Plane (routing decisions)</text>
+  <text x="425" y="495" text-anchor="middle" font-size="9" fill="#94A3B8">Input/Output ports &amp; switching fabric handle data plane • Routing processor handles control plane</text>
+</svg>

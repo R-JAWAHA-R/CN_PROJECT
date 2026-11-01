@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 520">
+  <defs>
+    <marker id="flArrow1" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+      <path d="M0,0 L7,2.5 L0,5 Z" fill="#2563EB"/>
+    </marker>
+    <marker id="flArrow2" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+      <path d="M0,0 L7,2.5 L0,5 Z" fill="#EA580C"/>
+    </marker>
+    <marker id="flArrow3" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+      <path d="M0,0 L7,2.5 L0,5 Z" fill="#059669"/>
+    </marker>
+    <filter id="flSh" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="1" dy="1.5" stdDeviation="1.5" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .title { font: bold 20px 'Segoe UI', Arial, sans-serif; fill: #1E293B; }
+      .sub { font: 13px 'Segoe UI', Arial, sans-serif; fill: #64748B; }
+      .nlbl { font: bold 14px 'Segoe UI', Arial, sans-serif; fill: #fff; text-anchor: middle; dominant-baseline: central; }
+      .stageTitle { font: bold 15px 'Segoe UI', Arial, sans-serif; fill: #1E293B; text-anchor: middle; }
+      .stageNum { font: bold 12px 'Segoe UI', Arial, sans-serif; text-anchor: middle; }
+      .info { font: 12px 'Segoe UI', Arial, sans-serif; fill: #475569; }
+    </style>
+  </defs>
+
+  <rect width="850" height="520" fill="#FAFBFC" rx="8"/>
+
+  <text x="425" y="32" class="title" text-anchor="middle">Flooding Algorithm — Packet Propagation</text>
+  <text x="425" y="52" class="sub" text-anchor="middle">Source sends packet to all neighbors; each neighbor forwards to all its neighbors (except sender)</text>
+
+  <!-- ===== STAGE 1: Source sends to neighbors ===== -->
+  <rect x="10" y="68" width="270" height="340" rx="8" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <rect x="10" y="68" width="270" height="30" rx="8" fill="#2563EB"/>
+  <rect x="10" y="88" width="270" height="10" fill="#2563EB"/>
+  <text x="145" y="89" style="font:bold 13px 'Segoe UI',sans-serif; fill:white; text-anchor:middle;">Stage 1: Hop 0 → Hop 1</text>
+
+  <!-- Network topology stage 1 -->
+  <!-- Edges (background) -->
+  <line x1="145" y1="170" x2="70" y2="250" stroke="#CBD5E1" stroke-width="1.5"/>
+  <line x1="145" y1="170" x2="220" y2="250" stroke="#CBD5E1" stroke-width="1.5"/>
+  <line x1="145" y1="170" x2="145" y2="280" stroke="#CBD5E1" stroke-width="1.5"/>
+  <line x1="70" y1="250" x2="70" y2="350" stroke="#CBD5E1" stroke-width="1.5"/>
+  <line x1="220" y1="250" x2="220" y2="350" stroke="#CBD5E1" stroke-width="1.5"/>
+  <line x1="70" y1="250" x2="145" y2="280" stroke="#CBD5E1" stroke-width="1.5"/>
+  <line x1="220" y1="250" x2="145" y2="280" stroke="#CBD5E1" stroke-width="1.5"/>
+  <line x1="70" y1="350" x2="145" y2="280" stroke="#CBD5E1" stroke-width="1.5"/>
+  <line x1="220" y1="350" x2="145" y2="280" stroke="#CBD5E1" stroke-width="1.5"/>
+  <line x1="70" y1="350" x2="220" y2="350" stroke="#CBD5E1" stroke-width="1.5"/>
+
+  <!-- Flooding arrows from S -->
+  <line x1="135" y1="184" x2="82" y2="238" stroke="#2563EB" stroke-width="2.5" marker-end="url(#flArrow1)"/>
+  <line x1="155" y1="184" x2="208" y2="238" stroke="#2563EB" stroke-width="2.5" marker-end="url(#flArrow1)"/>
+  <line x1="145" y1="192" x2="145" y2="258" stroke="#2563EB" stroke-width="2.5" marker-end="url(#flArrow1)"/>
+
+  <!-- Nodes -->
+  <circle cx="145" cy="170" r="20" fill="#DC2626" filter="url(#flSh)"/>
+  <text x="145" y="170" class="nlbl">S</text>
+  <text x="145" y="148" style="font:bold 10px sans-serif; fill:#DC2626; text-anchor:middle;">SOURCE</text>
+
+  <circle cx="70" cy="250" r="18" fill="#60A5FA" filter="url(#flSh)"/>
+  <text x="70" y="250" class="nlbl" style="font-size:12px">B</text>
+  <circle cx="220" cy="250" r="18" fill="#60A5FA" filter="url(#flSh)"/>
+  <text x="220" y="250" class="nlbl" style="font-size:12px">C</text>
+  <circle cx="145" cy="280" r="18" fill="#60A5FA" filter="url(#flSh)"/>
+  <text x="145" y="280" class="nlbl" style="font-size:12px">D</text>
+
+  <circle cx="70" cy="350" r="18" fill="white" stroke="#CBD5E1" stroke-width="1.5" filter="url(#flSh)"/>
+  <text x="70" y="350" style="font:bold 12px sans-serif; fill:#64748B; text-anchor:middle; dominant-baseline:central;">E</text>
+  <circle cx="220" cy="350" r="18" fill="white" stroke="#CBD5E1" stroke-width="1.5" filter="url(#flSh)"/>
+  <text x="220" y="350" style="font:bold 12px sans-serif; fill:#64748B; text-anchor:middle; dominant-baseline:central;">F</text>
+
+  <text x="145" y="395" class="info" style="text-anchor:middle;">S sends packet to</text>
+  <text x="145" y="410" class="info" style="text-anchor:middle; font-weight:bold;">B, C, D (all neighbors)</text>
+
+  <!-- ===== STAGE 2: Neighbors forward ===== -->
+  <rect x="290" y="68" width="270" height="340" rx="8" fill="#FFF7ED" stroke="#FDBA74"/>
+  <rect x="290" y="68" width="270" height="30" rx="8" fill="#EA580C"/>
+  <rect x="290" y="88" width="270" height="10" fill="#EA580C"/>
+  <text x="425" y="89" style="font:bold 13px 'Segoe UI',sans-serif; fill:white; text-anchor:middle;">Stage 2: Hop 1 → Hop 2</text>
+
+  <!-- Network topology stage 2 -->
+  <line x1="425" y1="170" x2="350" y2="250" stroke="#CBD5E1" stroke-width="1.5"/>
+  <line x1="425" y1="170" x2="500" y2="250" stroke="#CBD5E1" stroke-width="1.5"/>
+  <line x1="425" y1="170" x2="425" y2="280" stroke="#CBD5E1" stroke-width="1.5"/>
+  <line x1="350" y1="250" x2="350" y2="350" stroke="#CBD5E1" stroke-width="1.5"/>
+  <line x1="500" y1="250" x2="500" y2="350" stroke="#CBD5E1" stroke-width="1.5"/>
+  <line x1="350" y1="250" x2="425" y2="280" stroke="#CBD5E1" stroke-width="1.5"/>
+  <line x1="500" y1="250" x2="425" y2="280" stroke="#CBD5E1" stroke-width="1.5"/>
+  <line x1="350" y1="350" x2="425" y2="280" stroke="#CBD5E1" stroke-width="1.5"/>
+  <line x1="500" y1="350" x2="425" y2="280" stroke="#CBD5E1" stroke-width="1.5"/>
+  <line x1="350" y1="350" x2="500" y2="350" stroke="#CBD5E1" stroke-width="1.5"/>
+
+  <!-- Flooding arrows from B, C, D to E, F -->
+  <line x1="350" y1="268" x2="350" y2="330" stroke="#EA580C" stroke-width="2.5" marker-end="url(#flArrow2)"/>
+  <line x1="362" y1="262" x2="414" y2="270" stroke="#EA580C" stroke-width="2" marker-end="url(#flArrow2)"/>
+  <line x1="500" y1="268" x2="500" y2="330" stroke="#EA580C" stroke-width="2.5" marker-end="url(#flArrow2)"/>
+  <line x1="488" y1="262" x2="436" y2="270" stroke="#EA580C" stroke-width="2" marker-end="url(#flArrow2)"/>
+  <line x1="435" y1="292" x2="490" y2="340" stroke="#EA580C" stroke-width="2" marker-end="url(#flArrow2)"/>
+  <line x1="415" y1="292" x2="360" y2="340" stroke="#EA580C" stroke-width="2" marker-end="url(#flArrow2)"/>
+
+  <!-- Nodes stage 2 -->
+  <circle cx="425" cy="170" r="20" fill="#DC2626" filter="url(#flSh)"/>
+  <text x="425" y="170" class="nlbl">S</text>
+
+  <circle cx="350" cy="250" r="18" fill="#F97316" filter="url(#flSh)"/>
+  <text x="350" y="250" class="nlbl" style="font-size:12px">B</text>
+  <circle cx="500" cy="250" r="18" fill="#F97316" filter="url(#flSh)"/>
+  <text x="500" y="250" class="nlbl" style="font-size:12px">C</text>
+  <circle cx="425" cy="280" r="18" fill="#F97316" filter="url(#flSh)"/>
+  <text x="425" y="280" class="nlbl" style="font-size:12px">D</text>
+
+  <circle cx="350" cy="350" r="18" fill="#60A5FA" filter="url(#flSh)"/>
+  <text x="350" y="350" class="nlbl" style="font-size:12px">E</text>
+  <circle cx="500" cy="350" r="18" fill="#60A5FA" filter="url(#flSh)"/>
+  <text x="500" y="350" class="nlbl" style="font-size:12px">F</text>
+
+  <text x="425" y="395" class="info" style="text-anchor:middle;">B, C, D each forward</text>
+  <text x="425" y="410" class="info" style="text-anchor:middle; font-weight:bold;">to all their neighbors</text>
+
+  <!-- ===== STAGE 3: All reached ===== -->
+  <rect x="570" y="68" width="270" height="340" rx="8" fill="#F0FDF4" stroke="#BBF7D0"/>
+  <rect x="570" y="68" width="270" height="30" rx="8" fill="#059669"/>
+  <rect x="570" y="88" width="270" height="10" fill="#059669"/>
+  <text x="705" y="89" style="font:bold 13px 'Segoe UI',sans-serif; fill:white; text-anchor:middle;">Stage 3: All Nodes Reached</text>
+
+  <!-- Network stage 3 -->
+  <line x1="705" y1="170" x2="630" y2="250" stroke="#10B981" stroke-width="2"/>
+  <line x1="705" y1="170" x2="780" y2="250" stroke="#10B981" stroke-width="2"/>
+  <line x1="705" y1="170" x2="705" y2="280" stroke="#10B981" stroke-width="2"/>
+  <line x1="630" y1="250" x2="630" y2="350" stroke="#10B981" stroke-width="2"/>
+  <line x1="780" y1="250" x2="780" y2="350" stroke="#10B981" stroke-width="2"/>
+  <line x1="630" y1="250" x2="705" y2="280" stroke="#10B981" stroke-width="2"/>
+  <line x1="780" y1="250" x2="705" y2="280" stroke="#10B981" stroke-width="2"/>
+  <line x1="630" y1="350" x2="705" y2="280" stroke="#10B981" stroke-width="2"/>
+  <line x1="780" y1="350" x2="705" y2="280" stroke="#10B981" stroke-width="2"/>
+  <line x1="630" y1="350" x2="780" y2="350" stroke="#10B981" stroke-width="2"/>
+
+  <!-- All nodes green -->
+  <circle cx="705" cy="170" r="20" fill="#059669" filter="url(#flSh)"/>
+  <text x="705" y="170" class="nlbl">S</text>
+  <circle cx="630" cy="250" r="18" fill="#059669" filter="url(#flSh)"/>
+  <text x="630" y="250" class="nlbl" style="font-size:12px">B</text>
+  <circle cx="780" cy="250" r="18" fill="#059669" filter="url(#flSh)"/>
+  <text x="780" y="250" class="nlbl" style="font-size:12px">C</text>
+  <circle cx="705" cy="280" r="18" fill="#059669" filter="url(#flSh)"/>
+  <text x="705" y="280" class="nlbl" style="font-size:12px">D</text>
+  <circle cx="630" cy="350" r="18" fill="#059669" filter="url(#flSh)"/>
+  <text x="630" y="350" class="nlbl" style="font-size:12px">E</text>
+  <circle cx="780" cy="350" r="18" fill="#059669" filter="url(#flSh)"/>
+  <text x="780" y="350" class="nlbl" style="font-size:12px">F</text>
+
+  <!-- Checkmarks -->
+  <text x="705" y="148" style="font:bold 16px sans-serif; fill:#059669; text-anchor:middle;">✓</text>
+  <text x="630" y="228" style="font:bold 14px sans-serif; fill:#059669; text-anchor:middle;">✓</text>
+  <text x="780" y="228" style="font:bold 14px sans-serif; fill:#059669; text-anchor:middle;">✓</text>
+  <text x="705" y="305" style="font:bold 14px sans-serif; fill:#059669; text-anchor:middle;">✓</text>
+  <text x="630" y="375" style="font:bold 14px sans-serif; fill:#059669; text-anchor:middle;">✓</text>
+  <text x="780" y="375" style="font:bold 14px sans-serif; fill:#059669; text-anchor:middle;">✓</text>
+
+  <text x="705" y="395" class="info" style="text-anchor:middle; font-weight:bold; color:#059669;">All nodes received</text>
+  <text x="705" y="410" class="info" style="text-anchor:middle;">the packet ✓</text>
+
+  <!-- Legend / Summary bar -->
+  <rect x="10" y="420" width="830" height="90" rx="6" fill="#fff" stroke="#E2E8F0"/>
+  <text x="425" y="445" style="font:bold 14px 'Segoe UI',sans-serif; fill:#1E293B; text-anchor:middle;">Flooding Characteristics</text>
+
+  <circle cx="40" cy="470" r="8" fill="#DC2626"/>
+  <text x="55" y="475" class="info">Source node</text>
+
+  <circle cx="160" cy="470" r="8" fill="#60A5FA"/>
+  <text x="175" y="475" class="info">Newly reached</text>
+
+  <circle cx="295" cy="470" r="8" fill="#F97316"/>
+  <text x="310" y="475" class="info">Forwarding</text>
+
+  <circle cx="410" cy="470" r="8" fill="#059669"/>
+  <text x="425" y="475" class="info">Completed</text>
+
+  <text x="40" y="498" style="font:11px 'Segoe UI',sans-serif; fill:#64748B;">• Guarantees delivery if any path exists</text>
+  <text x="310" y="498" style="font:11px 'Segoe UI',sans-serif; fill:#64748B;">• Generates many duplicate packets</text>
+  <text x="590" y="498" style="font:11px 'Segoe UI',sans-serif; fill:#64748B;">• Uses TTL or sequence numbers to limit</text>
+</svg>

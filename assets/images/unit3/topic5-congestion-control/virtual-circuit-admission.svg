@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+  <defs>
+    <marker id="vG" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#059669"/></marker>
+    <marker id="vR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#DC2626"/></marker>
+    <marker id="vB" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#2563EB"/></marker>
+  </defs>
+  <style>
+    text { font-family: 'Segoe UI', Arial, sans-serif; }
+    .title { font-size: 18px; font-weight: 700; fill: #1E293B; }
+    .subtitle { font-size: 12px; fill: #64748B; }
+    .label { font-size: 11px; fill: #334155; }
+    .small { font-size: 10px; fill: #64748B; }
+    .bw { font-size: 9px; font-weight: 600; }
+  </style>
+  <rect width="800" height="520" fill="#FFFFFF" rx="8"/>
+  <text x="400" y="28" text-anchor="middle" class="title">Admission Control in Virtual Circuit Networks</text>
+  <text x="400" y="46" text-anchor="middle" class="subtitle">New VC setup request evaluated: all links must have sufficient bandwidth</text>
+
+  <!-- ===== SCENARIO 1: ACCEPTED (Top) ===== -->
+  <rect x="15" y="58" width="770" height="195" rx="8" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5"/>
+  <text x="400" y="78" text-anchor="middle" class="label" font-weight="700" fill="#059669">Scenario 1: VC Setup Request ACCEPTED ✓ (Requested: 3 Mbps)</text>
+
+  <!-- Source -->
+  <rect x="35" y="105" width="65" height="40" rx="6" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1.5"/>
+  <text x="67" y="122" text-anchor="middle" class="label" font-weight="600">Source</text>
+  <text x="67" y="137" text-anchor="middle" class="small" fill="#2563EB">Host A</text>
+
+  <!-- Router A -->
+  <circle cx="200" cy="125" r="24" fill="#D1FAE5" stroke="#059669" stroke-width="2"/>
+  <text x="200" y="122" text-anchor="middle" class="label" font-weight="600">R1</text>
+  <text x="200" y="134" text-anchor="middle" class="bw" fill="#059669">✓</text>
+
+  <!-- Link 1 capacity -->
+  <line x1="100" y1="125" x2="176" y2="125" stroke="#059669" stroke-width="2.5" marker-end="url(#vG)"/>
+  <rect x="115" y="100" width="50" height="22" rx="3" fill="#D1FAE5" stroke="#059669" stroke-width="1"/>
+  <text x="140" y="113" text-anchor="middle" class="bw" fill="#059669">10 Mbps</text>
+  <text x="140" y="92" text-anchor="middle" class="small" fill="#059669">Avail: 5</text>
+
+  <!-- Router B -->
+  <circle cx="360" cy="125" r="24" fill="#D1FAE5" stroke="#059669" stroke-width="2"/>
+  <text x="360" y="122" text-anchor="middle" class="label" font-weight="600">R2</text>
+  <text x="360" y="134" text-anchor="middle" class="bw" fill="#059669">✓</text>
+
+  <!-- Link 2 -->
+  <line x1="224" y1="125" x2="336" y2="125" stroke="#059669" stroke-width="2.5" marker-end="url(#vG)"/>
+  <rect x="255" y="100" width="50" height="22" rx="3" fill="#D1FAE5" stroke="#059669" stroke-width="1"/>
+  <text x="280" y="113" text-anchor="middle" class="bw" fill="#059669">8 Mbps</text>
+  <text x="280" y="92" text-anchor="middle" class="small" fill="#059669">Avail: 4</text>
+
+  <!-- Router C -->
+  <circle cx="520" cy="125" r="24" fill="#D1FAE5" stroke="#059669" stroke-width="2"/>
+  <text x="520" y="122" text-anchor="middle" class="label" font-weight="600">R3</text>
+  <text x="520" y="134" text-anchor="middle" class="bw" fill="#059669">✓</text>
+
+  <!-- Link 3 -->
+  <line x1="384" y1="125" x2="496" y2="125" stroke="#059669" stroke-width="2.5" marker-end="url(#vG)"/>
+  <rect x="415" y="100" width="50" height="22" rx="3" fill="#D1FAE5" stroke="#059669" stroke-width="1"/>
+  <text x="440" y="113" text-anchor="middle" class="bw" fill="#059669">6 Mbps</text>
+  <text x="440" y="92" text-anchor="middle" class="small" fill="#059669">Avail: 3</text>
+
+  <!-- Destination -->
+  <rect x="620" y="105" width="65" height="40" rx="6" fill="#D1FAE5" stroke="#059669" stroke-width="1.5"/>
+  <text x="652" y="122" text-anchor="middle" class="label" font-weight="600">Dest</text>
+  <text x="652" y="137" text-anchor="middle" class="small" fill="#059669">Host B</text>
+
+  <!-- Link 4 -->
+  <line x1="544" y1="125" x2="618" y2="125" stroke="#059669" stroke-width="2.5" marker-end="url(#vG)"/>
+  <rect x="558" y="100" width="50" height="22" rx="3" fill="#D1FAE5" stroke="#059669" stroke-width="1"/>
+  <text x="583" y="113" text-anchor="middle" class="bw" fill="#059669">5 Mbps</text>
+  <text x="583" y="92" text-anchor="middle" class="small" fill="#059669">Avail: 3</text>
+
+  <!-- Result accepted -->
+  <rect x="700" y="95" width="70" height="55" rx="6" fill="#059669"/>
+  <text x="735" y="118" text-anchor="middle" font-size="22" fill="#FFF">✓</text>
+  <text x="735" y="138" text-anchor="middle" class="small" fill="#FFF" font-weight="600">ACCEPT</text>
+
+  <!-- VC path visual -->
+  <path d="M100,155 Q200,175 360,175 Q520,175 620,155" fill="none" stroke="#059669" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="360" y="190" text-anchor="middle" class="small" fill="#059669">New VC established (3 Mbps allocated on each link)</text>
+
+  <!-- Check annotations -->
+  <text x="140" y="170" text-anchor="middle" class="small" fill="#059669">5≥3 ✓</text>
+  <text x="280" y="170" text-anchor="middle" class="small" fill="#059669">4≥3 ✓</text>
+  <text x="440" y="170" text-anchor="middle" class="small" fill="#059669">3≥3 ✓</text>
+  <text x="583" y="170" text-anchor="middle" class="small" fill="#059669">3≥3 ✓</text>
+
+  <!-- ===== SCENARIO 2: REJECTED (Bottom) ===== -->
+  <rect x="15" y="268" width="770" height="195" rx="8" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1.5"/>
+  <text x="400" y="288" text-anchor="middle" class="label" font-weight="700" fill="#DC2626">Scenario 2: VC Setup Request REJECTED ✗ (Requested: 5 Mbps)</text>
+
+  <!-- Source -->
+  <rect x="35" y="315" width="65" height="40" rx="6" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1.5"/>
+  <text x="67" y="332" text-anchor="middle" class="label" font-weight="600">Source</text>
+  <text x="67" y="347" text-anchor="middle" class="small" fill="#2563EB">Host C</text>
+
+  <!-- Router A -->
+  <circle cx="200" cy="335" r="24" fill="#D1FAE5" stroke="#059669" stroke-width="2"/>
+  <text x="200" y="332" text-anchor="middle" class="label" font-weight="600">R1</text>
+  <text x="200" y="344" text-anchor="middle" class="bw" fill="#059669">✓</text>
+
+  <!-- Link 1 -->
+  <line x1="100" y1="335" x2="176" y2="335" stroke="#059669" stroke-width="2.5" marker-end="url(#vG)"/>
+  <rect x="115" y="310" width="50" height="22" rx="3" fill="#D1FAE5" stroke="#059669" stroke-width="1"/>
+  <text x="140" y="323" text-anchor="middle" class="bw" fill="#059669">10 Mbps</text>
+  <text x="140" y="302" text-anchor="middle" class="small" fill="#059669">Avail: 7</text>
+
+  <!-- Router B -->
+  <circle cx="360" cy="335" r="24" fill="#D1FAE5" stroke="#059669" stroke-width="2"/>
+  <text x="360" y="332" text-anchor="middle" class="label" font-weight="600">R2</text>
+  <text x="360" y="344" text-anchor="middle" class="bw" fill="#059669">✓</text>
+
+  <!-- Link 2 -->
+  <line x1="224" y1="335" x2="336" y2="335" stroke="#059669" stroke-width="2.5" marker-end="url(#vG)"/>
+  <rect x="255" y="310" width="50" height="22" rx="3" fill="#D1FAE5" stroke="#059669" stroke-width="1"/>
+  <text x="280" y="323" text-anchor="middle" class="bw" fill="#059669">8 Mbps</text>
+  <text x="280" y="302" text-anchor="middle" class="small" fill="#059669">Avail: 6</text>
+
+  <!-- Router C - BOTTLENECK -->
+  <circle cx="520" cy="335" r="24" fill="#FEE2E2" stroke="#DC2626" stroke-width="2.5"/>
+  <text x="520" y="332" text-anchor="middle" class="label" fill="#DC2626" font-weight="700">R3</text>
+  <text x="520" y="344" text-anchor="middle" class="bw" fill="#DC2626">✗</text>
+
+  <!-- Link 3 - BOTTLENECK -->
+  <line x1="384" y1="335" x2="496" y2="335" stroke="#DC2626" stroke-width="2.5" marker-end="url(#vR)"/>
+  <rect x="415" y="310" width="50" height="22" rx="3" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="440" y="323" text-anchor="middle" class="bw" fill="#DC2626">6 Mbps</text>
+  <text x="440" y="302" text-anchor="middle" class="small" fill="#DC2626">Avail: 2 ⚠</text>
+
+  <!-- Destination -->
+  <rect x="620" y="315" width="65" height="40" rx="6" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="652" y="332" text-anchor="middle" class="label">Dest</text>
+  <text x="652" y="347" text-anchor="middle" class="small">Host D</text>
+
+  <!-- Link 4 -->
+  <line x1="544" y1="335" x2="618" y2="335" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="558" y="310" width="50" height="22" rx="3" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1"/>
+  <text x="583" y="323" text-anchor="middle" class="bw" fill="#94A3B8">5 Mbps</text>
+  <text x="583" y="302" text-anchor="middle" class="small" fill="#94A3B8">Avail: 4</text>
+
+  <!-- Result rejected -->
+  <rect x="700" y="305" width="70" height="55" rx="6" fill="#DC2626"/>
+  <text x="735" y="328" text-anchor="middle" font-size="22" fill="#FFF">✗</text>
+  <text x="735" y="348" text-anchor="middle" class="small" fill="#FFF" font-weight="600">REJECT</text>
+
+  <!-- Check annotations -->
+  <text x="140" y="380" text-anchor="middle" class="small" fill="#059669">7≥5 ✓</text>
+  <text x="280" y="380" text-anchor="middle" class="small" fill="#059669">6≥5 ✓</text>
+  <text x="440" y="380" text-anchor="middle" class="small" fill="#DC2626" font-weight="600">2&lt;5 ✗ FAIL</text>
+  <text x="583" y="380" text-anchor="middle" class="small" fill="#94A3B8">—skipped—</text>
+
+  <!-- Bottleneck callout -->
+  <rect x="440" y="395" width="160" height="40" rx="5" fill="#FEF2F2" stroke="#DC2626" stroke-width="1"/>
+  <text x="520" y="412" text-anchor="middle" class="small" fill="#DC2626" font-weight="600">⚠ Bottleneck Link!</text>
+  <text x="520" y="426" text-anchor="middle" class="small" fill="#DC2626">Only 2 Mbps free, need 5</text>
+  <line x1="440" y1="358" x2="480" y2="395" stroke="#DC2626" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- Bottom Summary -->
+  <rect x="80" y="475" width="640" height="35" rx="6" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1"/>
+  <text x="400" y="497" text-anchor="middle" class="label" fill="#2563EB">Rule: A VC is admitted only if <tspan font-weight="700">every link</tspan> along the path has enough available bandwidth</text>
+</svg>

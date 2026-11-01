@@ -1,0 +1,165 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+  <defs>
+    <marker id="eB" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#2563EB"/></marker>
+    <marker id="eO" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#EA580C"/></marker>
+    <marker id="eG" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#059669"/></marker>
+    <marker id="eP" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#7C3AED"/></marker>
+  </defs>
+  <style>
+    text { font-family: 'Segoe UI', Arial, sans-serif; }
+    .title { font-size: 18px; font-weight: 700; fill: #1E293B; }
+    .subtitle { font-size: 12px; fill: #64748B; }
+    .label { font-size: 11px; fill: #334155; }
+    .small { font-size: 10px; fill: #64748B; }
+    .bit { font-family: 'Consolas', monospace; font-size: 10px; font-weight: 600; }
+  </style>
+  <rect width="800" height="520" fill="#FFFFFF" rx="8"/>
+  <text x="400" y="28" text-anchor="middle" class="title">ECN — Explicit Congestion Notification</text>
+  <text x="400" y="46" text-anchor="middle" class="subtitle">Router marks packets instead of dropping them; no packet loss required to signal congestion</text>
+
+  <!-- Main flow diagram -->
+  <!-- Step labels at top -->
+  <rect x="25" y="60" width="750" height="30" rx="4" fill="#F1F5F9"/>
+  <text x="140" y="80" text-anchor="middle" class="label" font-weight="600" fill="#2563EB">① Send Packet</text>
+  <text x="340" y="80" text-anchor="middle" class="label" font-weight="600" fill="#DC2626">② Router Marks ECN</text>
+  <text x="530" y="80" text-anchor="middle" class="label" font-weight="600" fill="#7C3AED">③ Dest Echoes ECN</text>
+  <text x="700" y="80" text-anchor="middle" class="label" font-weight="600" fill="#059669">④ Source Slows</text>
+
+  <!-- Source -->
+  <rect x="25" y="110" width="75" height="50" rx="8" fill="#DBEAFE" stroke="#3B82F6" stroke-width="2"/>
+  <text x="62" y="132" text-anchor="middle" class="label" font-weight="600">Source</text>
+  <text x="62" y="150" text-anchor="middle" class="small" fill="#2563EB">Sender</text>
+
+  <!-- Router 1 (normal) -->
+  <circle cx="200" cy="135" r="24" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2"/>
+  <text x="200" y="132" text-anchor="middle" class="label" font-weight="600">R1</text>
+  <text x="200" y="145" text-anchor="middle" class="small" fill="#059669">OK</text>
+
+  <!-- Router 2 (congested - marks ECN) -->
+  <circle cx="370" cy="135" r="28" fill="#FEF2F2" stroke="#DC2626" stroke-width="2.5"/>
+  <text x="370" y="128" text-anchor="middle" class="label" fill="#DC2626" font-weight="700">R2</text>
+  <text x="370" y="143" text-anchor="middle" class="small" fill="#DC2626">Congested</text>
+  <text x="370" y="100" text-anchor="middle" class="small" fill="#DC2626" font-weight="600">⚠ Sets ECN bit</text>
+
+  <!-- Router 3 (normal) -->
+  <circle cx="530" cy="135" r="24" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2"/>
+  <text x="530" y="132" text-anchor="middle" class="label" font-weight="600">R3</text>
+  <text x="530" y="145" text-anchor="middle" class="small" fill="#059669">OK</text>
+
+  <!-- Destination -->
+  <rect x="625" y="110" width="75" height="50" rx="8" fill="#D1FAE5" stroke="#059669" stroke-width="2"/>
+  <text x="662" y="132" text-anchor="middle" class="label" font-weight="600">Dest</text>
+  <text x="662" y="150" text-anchor="middle" class="small" fill="#059669">Receiver</text>
+
+  <!-- Forward path arrows -->
+  <line x1="100" y1="135" x2="176" y2="135" stroke="#3B82F6" stroke-width="2" marker-end="url(#eB)"/>
+  <line x1="224" y1="135" x2="342" y2="135" stroke="#3B82F6" stroke-width="2" marker-end="url(#eB)"/>
+  <line x1="398" y1="135" x2="506" y2="135" stroke="#DC2626" stroke-width="2" marker-end="url(#eO)"/>
+  <line x1="554" y1="135" x2="623" y2="135" stroke="#DC2626" stroke-width="2" marker-end="url(#eO)"/>
+
+  <!-- Packet before marking (ECN=00) -->
+  <rect x="130" y="117" width="40" height="25" rx="4" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1.5"/>
+  <text x="150" y="128" text-anchor="middle" class="bit" fill="#2563EB">PKT</text>
+  <text x="150" y="139" text-anchor="middle" class="bit" fill="#3B82F6">ECN=00</text>
+
+  <!-- Packet at R2 being marked -->
+  <rect x="260" y="117" width="40" height="25" rx="4" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1.5"/>
+  <text x="280" y="128" text-anchor="middle" class="bit" fill="#2563EB">PKT</text>
+  <text x="280" y="139" text-anchor="middle" class="bit" fill="#3B82F6">ECN=00</text>
+
+  <!-- Arrow showing marking -->
+  <path d="M300,130 L340,130" fill="none" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="320" y="125" text-anchor="middle" class="small" fill="#DC2626">mark!</text>
+
+  <!-- Packet after marking (ECN=11) -->
+  <rect x="440" y="117" width="40" height="25" rx="4" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+  <text x="460" y="128" text-anchor="middle" class="bit" fill="#DC2626">PKT</text>
+  <text x="460" y="139" text-anchor="middle" class="bit" fill="#DC2626">ECN=11</text>
+
+  <!-- Marked packet arriving at dest -->
+  <rect x="580" y="117" width="40" height="25" rx="4" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+  <text x="600" y="128" text-anchor="middle" class="bit" fill="#DC2626">PKT</text>
+  <text x="600" y="139" text-anchor="middle" class="bit" fill="#DC2626">ECN=11</text>
+
+  <!-- Return path (ECN Echo) -->
+  <path d="M625,160 Q400,215 100,160" fill="none" stroke="#7C3AED" stroke-width="2.5" marker-end="url(#eP)"/>
+  
+  <!-- ECN Echo packet -->
+  <rect x="310" y="185" width="100" height="28" rx="5" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2"/>
+  <text x="360" y="199" text-anchor="middle" class="bit" fill="#7C3AED">ACK + ECE flag</text>
+  <text x="360" y="210" text-anchor="middle" class="small" fill="#7C3AED">← Echo back to source</text>
+
+  <!-- Source response -->
+  <rect x="25" y="175" width="75" height="22" rx="4" fill="#D1FAE5" stroke="#059669" stroke-width="1"/>
+  <text x="62" y="190" text-anchor="middle" class="small" fill="#059669" font-weight="600">Rate ↓</text>
+
+  <!-- ===== IP Header Detail ===== -->
+  <rect x="25" y="240" width="750" height="120" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="400" y="262" text-anchor="middle" class="label" font-weight="700">IP Header — ECN Field Detail (2 bits in TOS/DSCP field)</text>
+
+  <!-- ECN bit table -->
+  <rect x="60" y="275" width="155" height="30" rx="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1"/>
+  <text x="137" y="287" text-anchor="middle" class="bit" fill="#2563EB">ECN = 00</text>
+  <text x="137" y="300" text-anchor="middle" class="small">Not ECN-Capable</text>
+
+  <rect x="235" y="275" width="155" height="30" rx="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1"/>
+  <text x="312" y="287" text-anchor="middle" class="bit" fill="#2563EB">ECN = 01 or 10</text>
+  <text x="312" y="300" text-anchor="middle" class="small">ECN-Capable (ECT)</text>
+
+  <rect x="410" y="275" width="155" height="30" rx="4" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="487" y="287" text-anchor="middle" class="bit" fill="#DC2626">ECN = 11 (CE)</text>
+  <text x="487" y="300" text-anchor="middle" class="small" fill="#DC2626">Congestion Experienced</text>
+
+  <rect x="585" y="275" width="155" height="30" rx="4" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1.5"/>
+  <text x="662" y="287" text-anchor="middle" class="bit" fill="#7C3AED">TCP: ECE flag</text>
+  <text x="662" y="300" text-anchor="middle" class="small" fill="#7C3AED">Echo in ACK to source</text>
+
+  <!-- Flow arrows between fields -->
+  <line x1="312" y1="310" x2="410" y2="310" stroke="#DC2626" stroke-width="1" marker-end="url(#eO)"/>
+  <text x="360" y="325" text-anchor="middle" class="small" fill="#DC2626">Router marks 01/10 → 11</text>
+
+  <line x1="487" y1="310" x2="585" y2="310" stroke="#7C3AED" stroke-width="1" marker-end="url(#eP)"/>
+  <text x="536" y="325" text-anchor="middle" class="small" fill="#7C3AED">Dest sees CE → ECE</text>
+
+  <!-- ===== Step-by-step summary ===== -->
+  <rect x="25" y="375" width="750" height="130" rx="8" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1"/>
+  <text x="400" y="398" text-anchor="middle" class="label" font-weight="700" fill="#059669">ECN Process — Step by Step</text>
+
+  <!-- Step boxes -->
+  <rect x="45" y="410" width="155" height="75" rx="6" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5"/>
+  <circle cx="60" cy="425" r="10" fill="#2563EB"/>
+  <text x="60" y="429" text-anchor="middle" class="small" fill="#FFF" font-weight="700">1</text>
+  <text x="122" y="428" text-anchor="middle" class="label" font-weight="600" fill="#2563EB">Source Sends</text>
+  <text x="122" y="445" text-anchor="middle" class="small">Packet has ECN=01/10</text>
+  <text x="122" y="460" text-anchor="middle" class="small">(ECN-capable transport)</text>
+  <text x="122" y="475" text-anchor="middle" class="small">Packet flows normally</text>
+
+  <rect x="220" y="410" width="155" height="75" rx="6" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+  <circle cx="235" cy="425" r="10" fill="#DC2626"/>
+  <text x="235" y="429" text-anchor="middle" class="small" fill="#FFF" font-weight="700">2</text>
+  <text x="297" y="428" text-anchor="middle" class="label" font-weight="600" fill="#DC2626">Router Marks</text>
+  <text x="297" y="445" text-anchor="middle" class="small">Congestion detected at R2</text>
+  <text x="297" y="460" text-anchor="middle" class="small" fill="#DC2626">Sets ECN = 11 (CE)</text>
+  <text x="297" y="475" text-anchor="middle" class="small">Packet NOT dropped!</text>
+
+  <rect x="395" y="410" width="155" height="75" rx="6" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1.5"/>
+  <circle cx="410" cy="425" r="10" fill="#7C3AED"/>
+  <text x="410" y="429" text-anchor="middle" class="small" fill="#FFF" font-weight="700">3</text>
+  <text x="472" y="428" text-anchor="middle" class="label" font-weight="600" fill="#7C3AED">Dest Echoes</text>
+  <text x="472" y="445" text-anchor="middle" class="small">Destination sees ECN=11</text>
+  <text x="472" y="460" text-anchor="middle" class="small" fill="#7C3AED">Sets ECE flag in TCP ACK</text>
+  <text x="472" y="475" text-anchor="middle" class="small">Sends ACK back to source</text>
+
+  <rect x="570" y="410" width="155" height="75" rx="6" fill="#F0FDF4" stroke="#059669" stroke-width="1.5"/>
+  <circle cx="585" cy="425" r="10" fill="#059669"/>
+  <text x="585" y="429" text-anchor="middle" class="small" fill="#FFF" font-weight="700">4</text>
+  <text x="647" y="428" text-anchor="middle" class="label" font-weight="600" fill="#059669">Source Reacts</text>
+  <text x="647" y="445" text-anchor="middle" class="small">Source receives ECE in ACK</text>
+  <text x="647" y="460" text-anchor="middle" class="small" fill="#059669">Reduces sending rate</text>
+  <text x="647" y="475" text-anchor="middle" class="small">Sets CWR flag in next pkt</text>
+
+  <!-- Connecting arrows -->
+  <line x1="200" y1="447" x2="218" y2="447" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#eO)"/>
+  <line x1="375" y1="447" x2="393" y2="447" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#eP)"/>
+  <line x1="550" y1="447" x2="568" y2="447" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#eG)"/>
+</svg>

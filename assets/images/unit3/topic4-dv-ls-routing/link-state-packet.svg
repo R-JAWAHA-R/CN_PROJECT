@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 20px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 13px; fill: #475569; }
+      .hdr { font-size: 12px; font-weight: bold; fill: #ffffff; text-anchor: middle; }
+    </style>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="400" y="38" text-anchor="middle" class="title">Link State Packet (LSP) Internal Structure</text>
+  <text x="400" y="58" text-anchor="middle" class="sub">Header Fields &amp; Neighbor Adjacency Records Flooded by Each Router</text>
+
+  <!-- Left: Packet Structure Layout -->
+  <g transform="translate(60, 95)" filter="url(#shadow)">
+    <!-- Base Outer Box -->
+    <rect width="320" height="340" rx="8" fill="#ffffff" stroke="#3b82f6" stroke-width="2"/>
+    <rect width="320" height="36" rx="8 8 0 0" fill="#1e40af"/>
+    <text x="160" y="24" class="hdr" font-size="14">Link State Packet (LSP) Layout</text>
+
+    <!-- Source ID Field -->
+    <g transform="translate(15, 50)">
+      <rect width="290" height="42" rx="4" fill="#2563eb"/>
+      <text x="145" y="22" class="hdr">Source Router ID (e.g. Router A / 192.168.1.1)</text>
+      <text x="145" y="36" class="hdr" font-size="9" fill="#bfdbfe">Originating Node Identifier</text>
+    </g>
+
+    <!-- Sequence Number Field -->
+    <g transform="translate(15, 100)">
+      <rect width="290" height="42" rx="4" fill="#0284c7"/>
+      <text x="145" y="22" class="hdr">Sequence Number (32-bit Integer)</text>
+      <text x="145" y="36" class="hdr" font-size="9" fill="#bae6fd">Detects duplicates &amp; out-of-order packets</text>
+    </g>
+
+    <!-- Age Field -->
+    <g transform="translate(15, 150)">
+      <rect width="290" height="42" rx="4" fill="#0d9488"/>
+      <text x="145" y="22" class="hdr">Age / TTL (Time To Live in Seconds)</text>
+      <text x="145" y="36" class="hdr" font-size="9" fill="#99f6e4">Decrements every second; purged at zero</text>
+    </g>
+
+    <!-- Neighbor Array Header -->
+    <g transform="translate(15, 200)">
+      <rect width="290" height="125" rx="4" fill="#f8fafc" stroke="#cbd5e1"/>
+      <text x="145" y="22" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e293b">List of Directly Connected Links:</text>
+      
+      <!-- Entry 1 -->
+      <rect x="10" y="32" width="270" height="26" rx="3" fill="#ecfdf5" stroke="#10b981"/>
+      <text x="20" y="49" font-size="11" font-weight="bold" fill="#047857">Neighbor: Router B | Link Cost: 4</text>
+
+      <!-- Entry 2 -->
+      <rect x="10" y="62" width="270" height="26" rx="3" fill="#ecfdf5" stroke="#10b981"/>
+      <text x="20" y="79" font-size="11" font-weight="bold" fill="#047857">Neighbor: Router C | Link Cost: 2</text>
+
+      <!-- Entry 3 -->
+      <rect x="10" y="92" width="270" height="26" rx="3" fill="#ecfdf5" stroke="#10b981"/>
+      <text x="20" y="109" font-size="11" font-weight="bold" fill="#047857">Neighbor: Router E | Link Cost: 6</text>
+    </g>
+  </g>
+
+  <!-- Right: Field Functions Detail Cards -->
+  <g transform="translate(420, 95)">
+    <!-- Sequence Number Role -->
+    <g transform="translate(0, 0)" filter="url(#shadow)">
+      <rect width="320" height="100" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+      <text x="18" y="25" font-size="13" font-weight="bold" fill="#0284c7">1. Sequence Number Wrapping:</text>
+      <text x="18" y="48" font-size="11.5" fill="#334155">32-bit counter incremented with each new update. If a router receives an LSP with a sequence number ≤ one already in database, it is discarded as duplicate.</text>
+      <text x="18" y="85" font-size="10.5" fill="#64748b">Prevents infinite flooding loops across network cycles.</text>
+    </g>
+
+    <!-- Age Field Role -->
+    <g transform="translate(0, 115)" filter="url(#shadow)">
+      <rect width="320" height="100" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+      <text x="18" y="25" font-size="13" font-weight="bold" fill="#0d9488">2. Aging &amp; Crash Recovery:</text>
+      <text x="18" y="48" font-size="11.5" fill="#334155">Age field starts at 60 (or 3600s in OSPF) and decrements at each hop and every second in memory.</text>
+      <text x="18" y="85" font-size="10.5" fill="#64748b">When Age reaches 0, router flushes obsolete link state from LSDB.</text>
+    </g>
+
+    <!-- Acknowledgement & Retransmit -->
+    <g transform="translate(0, 230)" filter="url(#shadow)">
+      <rect width="320" height="105" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+      <text x="18" y="25" font-size="13" font-weight="bold" fill="#1e40af">3. Reliable Transmission:</text>
+      <text x="18" y="48" font-size="11.5" fill="#334155">LSPs are acknowledged explicitly (ACK flag / Link State Ack). Unacknowledged packets are retransmitted to ensure 100% synchronized topological state.</text>
+      <text x="18" y="90" font-size="10.5" fill="#059669" font-weight="bold">Result: Consistent global Link State Database (LSDB)</text>
+    </g>
+  </g>
+
+  <!-- Bottom note -->
+  <text x="400" y="465" text-anchor="middle" font-size="11.5" fill="#64748b">OSPF Type 1 (Router LSA) and IS-IS LSP both implement this standardized architecture.</text>
+</svg>

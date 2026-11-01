@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <marker id="aG" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#059669"/></marker>
+    <marker id="aR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#DC2626"/></marker>
+    <marker id="aB" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#2563EB"/></marker>
+  </defs>
+  <style>
+    text { font-family: 'Segoe UI', Arial, sans-serif; }
+    .title { font-size: 18px; font-weight: 700; fill: #1E293B; }
+    .subtitle { font-size: 12px; fill: #64748B; }
+    .label { font-size: 11px; fill: #334155; }
+    .small { font-size: 10px; fill: #64748B; }
+  </style>
+  <rect width="800" height="500" fill="#FFFFFF" rx="8"/>
+  <text x="400" y="30" text-anchor="middle" class="title">Admission Control</text>
+  <text x="400" y="48" text-anchor="middle" class="subtitle">New flows are accepted or rejected based on available network capacity</text>
+
+  <!-- Incoming Flow Requests (left side) -->
+  <text x="80" y="80" text-anchor="middle" class="label" font-weight="600">Incoming Flow Requests</text>
+
+  <!-- Flow 1 - Accepted -->
+  <rect x="25" y="95" width="110" height="38" rx="6" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1.5"/>
+  <text x="80" y="112" text-anchor="middle" class="label">Flow A</text>
+  <text x="80" y="126" text-anchor="middle" class="small">Video: 5 Mbps</text>
+
+  <!-- Flow 2 - Accepted -->
+  <rect x="25" y="145" width="110" height="38" rx="6" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1.5"/>
+  <text x="80" y="162" text-anchor="middle" class="label">Flow B</text>
+  <text x="80" y="176" text-anchor="middle" class="small">VoIP: 1 Mbps</text>
+
+  <!-- Flow 3 - Accepted -->
+  <rect x="25" y="195" width="110" height="38" rx="6" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1.5"/>
+  <text x="80" y="212" text-anchor="middle" class="label">Flow C</text>
+  <text x="80" y="226" text-anchor="middle" class="small">Web: 2 Mbps</text>
+
+  <!-- Flow 4 - Rejected -->
+  <rect x="25" y="260" width="110" height="38" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="80" y="277" text-anchor="middle" class="label" fill="#DC2626">Flow D</text>
+  <text x="80" y="291" text-anchor="middle" class="small" fill="#DC2626">Stream: 8 Mbps</text>
+
+  <!-- Flow 5 - Rejected -->
+  <rect x="25" y="310" width="110" height="38" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="80" y="327" text-anchor="middle" class="label" fill="#DC2626">Flow E</text>
+  <text x="80" y="341" text-anchor="middle" class="small" fill="#DC2626">Backup: 12 Mbps</text>
+
+  <!-- Arrows to admission controller -->
+  <line x1="135" y1="114" x2="240" y2="180" stroke="#3B82F6" stroke-width="1.5" marker-end="url(#aB)"/>
+  <line x1="135" y1="164" x2="240" y2="185" stroke="#3B82F6" stroke-width="1.5" marker-end="url(#aB)"/>
+  <line x1="135" y1="214" x2="240" y2="200" stroke="#3B82F6" stroke-width="1.5" marker-end="url(#aB)"/>
+  <line x1="135" y1="279" x2="240" y2="215" stroke="#DC2626" stroke-width="1.5" marker-end="url(#aR)"/>
+  <line x1="135" y1="329" x2="240" y2="225" stroke="#DC2626" stroke-width="1.5" marker-end="url(#aR)"/>
+
+  <!-- Admission Controller (Gateway) -->
+  <rect x="245" y="140" width="140" height="120" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.5"/>
+  <text x="315" y="165" text-anchor="middle" class="label" font-weight="700" fill="#2563EB">🚦 Admission</text>
+  <text x="315" y="182" text-anchor="middle" class="label" font-weight="700" fill="#2563EB">Controller</text>
+
+  <!-- Capacity meter -->
+  <rect x="265" y="195" width="100" height="14" rx="3" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1"/>
+  <rect x="265" y="195" width="72" height="14" rx="3" fill="#F97316"/>
+  <text x="315" y="205" text-anchor="middle" class="small" fill="#FFF" font-weight="600">72% used</text>
+  <text x="315" y="225" text-anchor="middle" class="small">Capacity: 10 Mbps</text>
+  <text x="315" y="238" text-anchor="middle" class="small">Available: 2.8 Mbps</text>
+  <text x="315" y="252" text-anchor="middle" class="small" fill="#059669">Accepts ≤ 2.8 Mbps</text>
+
+  <!-- Accepted flows → network (green arrows) -->
+  <line x1="385" y1="170" x2="465" y2="140" stroke="#059669" stroke-width="2" marker-end="url(#aG)"/>
+  <line x1="385" y1="185" x2="465" y2="180" stroke="#059669" stroke-width="2" marker-end="url(#aG)"/>
+  <line x1="385" y1="200" x2="465" y2="215" stroke="#059669" stroke-width="2" marker-end="url(#aG)"/>
+
+  <!-- Green checkmarks for accepted -->
+  <text x="430" y="138" text-anchor="middle" font-size="16" fill="#059669">✓</text>
+  <text x="430" y="178" text-anchor="middle" font-size="16" fill="#059669">✓</text>
+  <text x="430" y="218" text-anchor="middle" font-size="16" fill="#059669">✓</text>
+
+  <!-- Rejected flows (red X) -->
+  <text x="200" y="248" text-anchor="middle" font-size="20" fill="#DC2626">✗</text>
+  <text x="200" y="290" text-anchor="middle" font-size="20" fill="#DC2626">✗</text>
+
+  <!-- Rejection arrows -->
+  <line x1="200" y1="260" x2="145" y2="285" stroke="#DC2626" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#aR)"/>
+  <line x1="200" y1="295" x2="145" y2="330" stroke="#DC2626" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#aR)"/>
+  <text x="188" y="318" class="small" fill="#DC2626" font-weight="600">Rejected!</text>
+  <text x="188" y="333" class="small" fill="#DC2626">Insufficient capacity</text>
+
+  <!-- Network cloud -->
+  <ellipse cx="570" cy="180" rx="100" ry="65" fill="#F0FDF4" stroke="#86EFAC" stroke-width="2"/>
+  <text x="570" y="165" text-anchor="middle" class="label" font-weight="600" fill="#059669">Network</text>
+  <text x="570" y="182" text-anchor="middle" class="small" fill="#059669">QoS Maintained</text>
+  <text x="570" y="197" text-anchor="middle" class="small" fill="#059669">No Congestion</text>
+
+  <!-- Active flows in network -->
+  <text x="570" y="218" text-anchor="middle" class="small">Active: A(5) + B(1) + C(2)</text>
+  <text x="570" y="232" text-anchor="middle" class="small" fill="#059669">= 8 Mbps / 10 Mbps</text>
+
+  <!-- Destination -->
+  <rect x="700" y="160" width="70" height="40" rx="6" fill="#D1FAE5" stroke="#059669" stroke-width="1.5"/>
+  <text x="735" y="184" text-anchor="middle" class="label" fill="#059669">Dest</text>
+  <line x1="670" y1="180" x2="698" y2="180" stroke="#059669" stroke-width="2" marker-end="url(#aG)"/>
+
+  <!-- Summary Section -->
+  <rect x="80" y="380" width="640" height="100" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="400" y="405" text-anchor="middle" class="label" font-weight="700" fill="#1E293B">How Admission Control Works</text>
+
+  <rect x="100" y="415" width="185" height="50" rx="5" fill="#D1FAE5" stroke="#059669" stroke-width="1"/>
+  <text x="192" y="435" text-anchor="middle" class="label" fill="#059669" font-weight="600">1. Check Capacity</text>
+  <text x="192" y="450" text-anchor="middle" class="small">Can the network handle</text>
+  <text x="192" y="462" text-anchor="middle" class="small">this new flow?</text>
+
+  <rect x="308" y="415" width="185" height="50" rx="5" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1"/>
+  <text x="400" y="435" text-anchor="middle" class="label" fill="#2563EB" font-weight="600">2. Decision</text>
+  <text x="400" y="450" text-anchor="middle" class="small">Accept if resources available</text>
+  <text x="400" y="462" text-anchor="middle" class="small">Reject if would cause congestion</text>
+
+  <rect x="516" y="415" width="185" height="50" rx="5" fill="#FFF7ED" stroke="#FDBA74" stroke-width="1"/>
+  <text x="608" y="435" text-anchor="middle" class="label" fill="#EA580C" font-weight="600">3. Maintain QoS</text>
+  <text x="608" y="450" text-anchor="middle" class="small">Existing flows get</text>
+  <text x="608" y="462" text-anchor="middle" class="small">guaranteed performance</text>
+</svg>

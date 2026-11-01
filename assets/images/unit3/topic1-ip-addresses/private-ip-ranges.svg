@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 20px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 13px; fill: #475569; }
+      .card-title { font-size: 14px; font-weight: bold; fill: #1e293b; }
+      .mono { font-family: 'Consolas', monospace; font-size: 13px; font-weight: bold; }
+    </style>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="400" y="35" text-anchor="middle" class="title">Private IP Address Ranges (RFC 1918)</text>
+  <text x="400" y="55" text-anchor="middle" class="sub">Non-routable on public internet; translated via NAT (Network Address Translation)</text>
+
+  <!-- Left Side: 3 Private Classes -->
+  <g transform="translate(50, 85)">
+    <!-- Class A -->
+    <g transform="translate(0, 0)" filter="url(#shadow)">
+      <rect width="360" height="95" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+      <rect width="360" height="28" rx="8" fill="#eff6ff"/>
+      <text x="15" y="19" class="card-title" fill="#1d4ed8">Class A Private Range (10.0.0.0/8)</text>
+      <text x="15" y="48" class="mono" fill="#2563eb">10.0.0.0 — 10.255.255.255</text>
+      <text x="15" y="68" font-size="11.5" fill="#475569">Total: 16,777,216 addresses (1 block of 24 host bits)</text>
+      <text x="15" y="85" font-size="11" fill="#64748b">Use: Large enterprises, cloud VPCs (AWS/GCP), big campuses</text>
+    </g>
+
+    <!-- Class B -->
+    <g transform="translate(0, 110)" filter="url(#shadow)">
+      <rect width="360" height="95" rx="8" fill="#ffffff" stroke="#059669" stroke-width="1.5"/>
+      <rect width="360" height="28" rx="8" fill="#ecfdf5"/>
+      <text x="15" y="19" class="card-title" fill="#047857">Class B Private Range (172.16.0.0/12)</text>
+      <text x="15" y="48" class="mono" fill="#059669">172.16.0.0 — 172.31.255.255</text>
+      <text x="15" y="68" font-size="11.5" fill="#475569">Total: 1,048,576 addresses (16 contiguous /16 blocks)</text>
+      <text x="15" y="85" font-size="11" fill="#64748b">Use: Medium to large organizations, university departments</text>
+    </g>
+
+    <!-- Class C -->
+    <g transform="translate(0, 220)" filter="url(#shadow)">
+      <rect width="360" height="95" rx="8" fill="#ffffff" stroke="#ea580c" stroke-width="1.5"/>
+      <rect width="360" height="28" rx="8" fill="#fff7ed"/>
+      <text x="15" y="19" class="card-title" fill="#c2410c">Class C Private Range (192.168.0.0/16)</text>
+      <text x="15" y="48" class="mono" fill="#ea580c">192.168.0.0 — 192.168.255.255</text>
+      <text x="15" y="68" font-size="11.5" fill="#475569">Total: 65,536 addresses (256 contiguous /24 blocks)</text>
+      <text x="15" y="85" font-size="11" fill="#64748b">Use: Home Wi-Fi routers, small offices, default subnets</text>
+    </g>
+  </g>
+
+  <!-- Right Side: NAT Gateway Interaction Visual -->
+  <g transform="translate(450, 95)" filter="url(#shadow)">
+    <!-- Private Cloud -->
+    <rect width="300" height="305" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+    <rect width="300" height="35" rx="10" fill="#f1f5f9"/>
+    <text x="150" y="23" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">Private LAN + NAT Gateway</text>
+
+    <!-- Internal Host -->
+    <rect x="25" y="55" width="250" height="40" rx="6" fill="#eff6ff" stroke="#3b82f6"/>
+    <text x="35" y="75" font-size="11" font-weight="bold" fill="#1e40af">Host: 192.168.1.100</text>
+    <text x="35" y="89" font-size="10" fill="#3b82f6">Src Port: 54321</text>
+
+    <!-- NAT Router -->
+    <path d="M 150 95 L 150 125" stroke="#3b82f6" stroke-width="2" marker-end="url(#arr)"/>
+    <rect x="25" y="125" width="250" height="60" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+    <text x="150" y="145" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">NAT Router / Firewall</text>
+    <text x="150" y="162" text-anchor="middle" font-size="10.5" fill="#b45309">Translates 192.168.1.100:54321</text>
+    <text x="150" y="176" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#b45309">➔ Public IP 203.0.113.5:10045</text>
+
+    <!-- Public Internet Cloud -->
+    <path d="M 150 185 L 150 215" stroke="#059669" stroke-width="2"/>
+    <rect x="25" y="215" width="250" height="65" rx="6" fill="#ecfdf5" stroke="#10b981"/>
+    <text x="150" y="238" text-anchor="middle" font-size="12" font-weight="bold" fill="#047857">Public Internet</text>
+    <text x="150" y="255" text-anchor="middle" font-size="10.5" fill="#059669">Web Server: 142.250.190.46</text>
+    <text x="150" y="269" text-anchor="middle" font-size="10" fill="#047857">Sees packets from Public IP only</text>
+  </g>
+
+  <!-- Note -->
+  <text x="400" y="450" text-anchor="middle" font-size="12" fill="#475569">Loopback (127.0.0.0/8) and APIPA (169.254.0.0/16) are special reserved IPv4 ranges.</text>
+</svg>

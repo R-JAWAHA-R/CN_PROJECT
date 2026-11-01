@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+  <style>
+    text { font-family: 'Segoe UI', Arial, sans-serif; }
+    .title { font-size: 18px; font-weight: 700; fill: #1E293B; }
+    .subtitle { font-size: 12px; fill: #64748B; }
+    .label { font-size: 11px; fill: #334155; }
+    .small { font-size: 10px; fill: #64748B; }
+    .age { font-size: 9px; font-weight: 600; }
+  </style>
+  <rect width="800" height="520" fill="#FFFFFF" rx="8"/>
+  <text x="400" y="28" text-anchor="middle" class="title">Wine vs. Milk — Load Shedding Policies</text>
+  <text x="400" y="48" text-anchor="middle" class="subtitle">Which packets to drop? Depends on whether old or new data is more valuable</text>
+
+  <!-- ===== WINE POLICY (Left) ===== -->
+  <rect x="15" y="65" width="375" height="435" rx="10" fill="#FAF5FF" stroke="#C084FC" stroke-width="2"/>
+
+  <!-- Wine icon / header -->
+  <rect x="30" y="78" width="345" height="55" rx="6" fill="#7C3AED" opacity="0.9"/>
+  <text x="202" y="100" text-anchor="middle" font-size="20" fill="#FFF">🍷</text>
+  <text x="202" y="120" text-anchor="middle" class="label" fill="#FFF" font-weight="700">WINE POLICY — Drop NEW Packets</text>
+
+  <!-- Metaphor -->
+  <rect x="35" y="145" width="335" height="45" rx="5" fill="#F5F3FF" stroke="#C084FC" stroke-width="1"/>
+  <text x="202" y="163" text-anchor="middle" class="label" fill="#7C3AED" font-weight="600">🍷 "Wine gets better with age"</text>
+  <text x="202" y="180" text-anchor="middle" class="small" fill="#7C3AED">Old data is more valuable → preserve it</text>
+
+  <!-- Queue visualization -->
+  <text x="202" y="210" text-anchor="middle" class="label" font-weight="600">Router Queue:</text>
+
+  <rect x="40" y="220" width="320" height="55" rx="5" fill="#F3E8FF" stroke="#C084FC" stroke-width="1.5"/>
+
+  <!-- Old packets (kept - green border) -->
+  <rect x="48" y="228" width="36" height="40" rx="4" fill="#D1FAE5" stroke="#059669" stroke-width="2"/>
+  <text x="66" y="245" text-anchor="middle" class="age" fill="#059669">OLD</text>
+  <text x="66" y="260" text-anchor="middle" class="age" fill="#059669">t=0</text>
+
+  <rect x="90" y="228" width="36" height="40" rx="4" fill="#D1FAE5" stroke="#059669" stroke-width="2"/>
+  <text x="108" y="245" text-anchor="middle" class="age" fill="#059669">OLD</text>
+  <text x="108" y="260" text-anchor="middle" class="age" fill="#059669">t=1</text>
+
+  <rect x="132" y="228" width="36" height="40" rx="4" fill="#D1FAE5" stroke="#059669" stroke-width="2"/>
+  <text x="150" y="245" text-anchor="middle" class="age" fill="#059669">OLD</text>
+  <text x="150" y="260" text-anchor="middle" class="age" fill="#059669">t=2</text>
+
+  <rect x="174" y="228" width="36" height="40" rx="4" fill="#FEF9C3" stroke="#EAB308" stroke-width="1.5"/>
+  <text x="192" y="245" text-anchor="middle" class="age" fill="#CA8A04">MED</text>
+  <text x="192" y="260" text-anchor="middle" class="age" fill="#CA8A04">t=5</text>
+
+  <rect x="216" y="228" width="36" height="40" rx="4" fill="#FEF9C3" stroke="#EAB308" stroke-width="1.5"/>
+  <text x="234" y="245" text-anchor="middle" class="age" fill="#CA8A04">MED</text>
+  <text x="234" y="260" text-anchor="middle" class="age" fill="#CA8A04">t=7</text>
+
+  <!-- New packets (dropped - red X) -->
+  <rect x="264" y="228" width="36" height="40" rx="4" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
+  <text x="282" y="245" text-anchor="middle" class="age" fill="#DC2626">NEW</text>
+  <text x="282" y="260" text-anchor="middle" class="age" fill="#DC2626">t=9</text>
+  <line x1="264" y1="228" x2="300" y2="268" stroke="#DC2626" stroke-width="2.5"/>
+  <line x1="300" y1="228" x2="264" y2="268" stroke="#DC2626" stroke-width="2.5"/>
+
+  <rect x="306" y="228" width="36" height="40" rx="4" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
+  <text x="324" y="245" text-anchor="middle" class="age" fill="#DC2626">NEW</text>
+  <text x="324" y="260" text-anchor="middle" class="age" fill="#DC2626">t=10</text>
+  <line x1="306" y1="228" x2="342" y2="268" stroke="#DC2626" stroke-width="2.5"/>
+  <line x1="342" y1="228" x2="306" y2="268" stroke="#DC2626" stroke-width="2.5"/>
+
+  <!-- Labels -->
+  <text x="108" y="290" text-anchor="middle" class="small" fill="#059669" font-weight="600">✓ KEPT (old)</text>
+  <text x="300" y="290" text-anchor="middle" class="small" fill="#DC2626" font-weight="600">✗ DROPPED (new)</text>
+
+  <!-- Use case -->
+  <rect x="35" y="305" width="335" height="80" rx="6" fill="#FFFFFF" stroke="#C084FC" stroke-width="1"/>
+  <text x="202" y="325" text-anchor="middle" class="label" font-weight="700" fill="#7C3AED">Best For: File Transfer (FTP)</text>
+  <text x="55" y="345" class="small">• Old packets represent data already partially received</text>
+  <text x="55" y="362" class="small">• Dropping them wastes all prior transmission effort</text>
+  <text x="55" y="379" class="small" fill="#7C3AED">• Keep old → complete the transfer faster</text>
+
+  <!-- Example -->
+  <rect x="35" y="395" width="335" height="90" rx="6" fill="#F5F3FF" stroke="#C084FC" stroke-width="1"/>
+  <text x="202" y="415" text-anchor="middle" class="label" font-weight="600" fill="#7C3AED">Example: Large File Download</text>
+  <text x="55" y="435" class="small">File: [████████░░] 80% received</text>
+  <text x="55" y="452" class="small" fill="#059669">→ Keep old pkts (the 80% already sent)</text>
+  <text x="55" y="469" class="small" fill="#DC2626">→ Drop new pkts (sender will retransmit)</text>
+
+  <!-- ===== MILK POLICY (Right) ===== -->
+  <rect x="410" y="65" width="375" height="435" rx="10" fill="#F0FDF4" stroke="#86EFAC" stroke-width="2"/>
+
+  <!-- Milk icon / header -->
+  <rect x="425" y="78" width="345" height="55" rx="6" fill="#059669" opacity="0.9"/>
+  <text x="597" y="100" text-anchor="middle" font-size="20" fill="#FFF">🥛</text>
+  <text x="597" y="120" text-anchor="middle" class="label" fill="#FFF" font-weight="700">MILK POLICY — Drop OLD Packets</text>
+
+  <!-- Metaphor -->
+  <rect x="430" y="145" width="335" height="45" rx="5" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1"/>
+  <text x="597" y="163" text-anchor="middle" class="label" fill="#059669" font-weight="600">🥛 "Fresh milk is better than old milk"</text>
+  <text x="597" y="180" text-anchor="middle" class="small" fill="#059669">New data is more valuable → preserve it</text>
+
+  <!-- Queue visualization -->
+  <text x="597" y="210" text-anchor="middle" class="label" font-weight="600">Router Queue:</text>
+
+  <rect x="435" y="220" width="320" height="55" rx="5" fill="#DCFCE7" stroke="#86EFAC" stroke-width="1.5"/>
+
+  <!-- Old packets (dropped - red X) -->
+  <rect x="443" y="228" width="36" height="40" rx="4" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
+  <text x="461" y="245" text-anchor="middle" class="age" fill="#DC2626">OLD</text>
+  <text x="461" y="260" text-anchor="middle" class="age" fill="#DC2626">t=0</text>
+  <line x1="443" y1="228" x2="479" y2="268" stroke="#DC2626" stroke-width="2.5"/>
+  <line x1="479" y1="228" x2="443" y2="268" stroke="#DC2626" stroke-width="2.5"/>
+
+  <rect x="485" y="228" width="36" height="40" rx="4" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
+  <text x="503" y="245" text-anchor="middle" class="age" fill="#DC2626">OLD</text>
+  <text x="503" y="260" text-anchor="middle" class="age" fill="#DC2626">t=1</text>
+  <line x1="485" y1="228" x2="521" y2="268" stroke="#DC2626" stroke-width="2.5"/>
+  <line x1="521" y1="228" x2="485" y2="268" stroke="#DC2626" stroke-width="2.5"/>
+
+  <rect x="527" y="228" width="36" height="40" rx="4" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
+  <text x="545" y="245" text-anchor="middle" class="age" fill="#DC2626">OLD</text>
+  <text x="545" y="260" text-anchor="middle" class="age" fill="#DC2626">t=2</text>
+  <line x1="527" y1="228" x2="563" y2="268" stroke="#DC2626" stroke-width="2.5"/>
+  <line x1="563" y1="228" x2="527" y2="268" stroke="#DC2626" stroke-width="2.5"/>
+
+  <!-- Medium packets -->
+  <rect x="575" y="228" width="36" height="40" rx="4" fill="#FEF9C3" stroke="#EAB308" stroke-width="1.5"/>
+  <text x="593" y="245" text-anchor="middle" class="age" fill="#CA8A04">MED</text>
+  <text x="593" y="260" text-anchor="middle" class="age" fill="#CA8A04">t=5</text>
+
+  <!-- New packets (kept - green) -->
+  <rect x="617" y="228" width="36" height="40" rx="4" fill="#D1FAE5" stroke="#059669" stroke-width="2"/>
+  <text x="635" y="245" text-anchor="middle" class="age" fill="#059669">NEW</text>
+  <text x="635" y="260" text-anchor="middle" class="age" fill="#059669">t=9</text>
+
+  <rect x="659" y="228" width="36" height="40" rx="4" fill="#D1FAE5" stroke="#059669" stroke-width="2"/>
+  <text x="677" y="245" text-anchor="middle" class="age" fill="#059669">NEW</text>
+  <text x="677" y="260" text-anchor="middle" class="age" fill="#059669">t=10</text>
+
+  <rect x="701" y="228" width="36" height="40" rx="4" fill="#D1FAE5" stroke="#059669" stroke-width="2"/>
+  <text x="719" y="245" text-anchor="middle" class="age" fill="#059669">NEW</text>
+  <text x="719" y="260" text-anchor="middle" class="age" fill="#059669">t=11</text>
+
+  <!-- Labels -->
+  <text x="503" y="290" text-anchor="middle" class="small" fill="#DC2626" font-weight="600">✗ DROPPED (old)</text>
+  <text x="677" y="290" text-anchor="middle" class="small" fill="#059669" font-weight="600">✓ KEPT (new)</text>
+
+  <!-- Use case -->
+  <rect x="430" y="305" width="335" height="80" rx="6" fill="#FFFFFF" stroke="#86EFAC" stroke-width="1"/>
+  <text x="597" y="325" text-anchor="middle" class="label" font-weight="700" fill="#059669">Best For: Real-Time / Streaming</text>
+  <text x="450" y="345" class="small">• Old data (e.g., old video frames) is stale/useless</text>
+  <text x="450" y="362" class="small">• Newer data is what the user actually needs now</text>
+  <text x="450" y="379" class="small" fill="#059669">• Keep new → better real-time experience</text>
+
+  <!-- Example -->
+  <rect x="430" y="395" width="335" height="90" rx="6" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1"/>
+  <text x="597" y="415" text-anchor="middle" class="label" font-weight="600" fill="#059669">Example: Live Video Call</text>
+  <text x="450" y="435" class="small">Frames: [Old:F1 F2 F3] [New:F8 F9 F10]</text>
+  <text x="450" y="452" class="small" fill="#DC2626">→ Drop old frames F1-F3 (already stale)</text>
+  <text x="450" y="469" class="small" fill="#059669">→ Keep new frames F8-F10 (current video)</text>
+
+  <!-- Bottom comparison -->
+  <rect x="130" y="505" width="540" height="10" rx="3" fill="#F1F5F9"/>
+  <text x="202" y="513" text-anchor="middle" class="small" fill="#7C3AED" font-weight="600">🍷 Old = Valuable</text>
+  <text x="400" y="513" text-anchor="middle" class="small" fill="#64748B">vs</text>
+  <text x="597" y="513" text-anchor="middle" class="small" fill="#059669" font-weight="600">🥛 New = Valuable</text>
+</svg>
