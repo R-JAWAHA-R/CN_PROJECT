@@ -2587,6 +2587,9 @@
                 icon.className = "fa-solid fa-moon text-gray-700 text-sm";
                 localStorage.setItem('gfg_theme', 'light');
             }
+            if (typeof KnowledgeGraphModule !== 'undefined' && KnowledgeGraphModule.drawGraphCanvas) {
+                KnowledgeGraphModule.drawGraphCanvas();
+            }
         }
 
         if (localStorage.getItem('gfg_theme') === 'dark' || (!localStorage.getItem('gfg_theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {

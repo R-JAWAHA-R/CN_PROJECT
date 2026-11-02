@@ -1856,3 +1856,474 @@
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+
+/* ==========================================================================
+   COMPREHENSIVE DARK MODE TEXT VISIBILITY & CONTRAST OVERRIDES
+   ========================================================================== */
+
+/* Lead Section & Article Typography */
+.dark .wiki-lead-section {
+  color: #e2e8f0 !important;
+}
+
+.dark .wiki-lead-text {
+  color: #e2e8f0 !important;
+}
+
+.dark .wiki-main-column {
+  color: #e2e8f0;
+}
+
+.dark .wiki-article-title {
+  color: #ffffff !important;
+}
+
+.dark .wiki-article-tagline {
+  color: #cbd5e1 !important;
+}
+
+.dark .bc-current {
+  color: #f8fafc !important;
+}
+
+.dark .wiki-subheading {
+  color: #f8fafc !important;
+}
+
+.dark .wiki-section-heading {
+  color: #f8fafc !important;
+  border-bottom-color: #333333 !important;
+}
+
+.dark .wiki-section-body {
+  color: #cbd5e1 !important;
+}
+
+.dark .wiki-section-body h3,
+.dark .wiki-section-body h4,
+.dark .wiki-section-body h5,
+.dark .wiki-section-body h6 {
+  color: #f8fafc !important;
+}
+
+.dark .wiki-section-body p {
+  color: #cbd5e1 !important;
+}
+
+.dark .wiki-section-body strong,
+.dark .wiki-section-body b {
+  color: #ffffff !important;
+}
+
+.dark .wiki-section-body li,
+.dark .wiki-bullet-list li,
+.dark .wiki-ordered-list li {
+  color: #cbd5e1 !important;
+}
+
+.dark .wiki-badge-level {
+  background: #27272a !important;
+  color: #cbd5e1 !important;
+  border: 1px solid #3f3f46 !important;
+}
+
+/* Callout Boxes (Note, Info, Warning, ELI10, Analogy) */
+.dark .wiki-callout.note {
+  background: rgba(16, 185, 129, 0.12) !important;
+  border-left-color: #10b981 !important;
+  color: #d1fae5 !important;
+}
+
+.dark .wiki-callout.note .callout-header {
+  color: #6ee7b7 !important;
+  font-weight: 800;
+}
+
+.dark .wiki-callout.note p,
+.dark .wiki-callout.note li,
+.dark .wiki-callout.note span,
+.dark .wiki-callout.note strong {
+  color: #d1fae5 !important;
+}
+
+.dark .wiki-callout.info {
+  background: rgba(2, 132, 199, 0.12) !important;
+  border-left-color: #0284c7 !important;
+  color: #e0f2fe !important;
+}
+
+.dark .wiki-callout.info .callout-header {
+  color: #7dd3fc !important;
+  font-weight: 800;
+}
+
+.dark .wiki-callout.info p,
+.dark .wiki-callout.info li,
+.dark .wiki-callout.info span,
+.dark .wiki-callout.info strong {
+  color: #e0f2fe !important;
+}
+
+.dark .wiki-callout.warning {
+  background: rgba(245, 158, 11, 0.12) !important;
+  border-left-color: #f59e0b !important;
+  color: #fef3c7 !important;
+}
+
+.dark .wiki-callout.warning .callout-header {
+  color: #fde047 !important;
+  font-weight: 800;
+}
+
+.dark .wiki-callout.warning p,
+.dark .wiki-callout.warning li,
+.dark .wiki-callout.warning span,
+.dark .wiki-callout.warning strong {
+  color: #fef3c7 !important;
+}
+
+.dark .wiki-callout.eli10 {
+  background: rgba(217, 119, 6, 0.12) !important;
+  border-left-color: #d97706 !important;
+  color: #fef3c7 !important;
+}
+
+.dark .wiki-callout.eli10 .callout-header {
+  color: #fbbf24 !important;
+  font-weight: 800;
+}
+
+.dark .wiki-callout.eli10 p,
+.dark .wiki-callout.eli10 span {
+  color: #fef3c7 !important;
+}
+
+.dark .wiki-callout.analogy {
+  background: rgba(16, 185, 129, 0.12) !important;
+  border-left-color: #10b981 !important;
+  color: #d1fae5 !important;
+}
+
+.dark .wiki-callout.analogy .callout-header {
+  color: #34d399 !important;
+  font-weight: 800;
+}
+
+.dark .wiki-callout.analogy p,
+.dark .wiki-callout.analogy span {
+  color: #d1fae5 !important;
+}
+
+/* Formulas, Diagrams & Gotchas */
+.dark .wiki-formula-box {
+  background: #18181b !important;
+  border-color: #333333 !important;
+  color: #f8fafc !important;
+}
+
+.dark .wiki-formula-desc {
+  color: #94a3b8 !important;
+}
+
+.dark .wiki-diagram-box {
+  background: #18181b !important;
+  border-color: #333333 !important;
+  color: #cbd5e1 !important;
+}
+
+.dark .mistake-card {
+  background: #2a1215 !important;
+  border-color: #4c1d24 !important;
+  color: #fecdd3 !important;
+}
+
+.dark .mistake-card h5,
+.dark .mistake-card strong {
+  color: #ffe4e6 !important;
+}
+
+.dark .mistake-badge {
+  color: #fb7185 !important;
+}
+
+/* All Tables: Modern, Wiki, and Dijkstra */
+.dark .modern-table,
+.dark .wiki-table,
+.dark .dijkstra-step-table {
+  background: #18181b !important;
+  border-color: #333333 !important;
+}
+
+.dark .modern-table th,
+.dark .wiki-table th,
+.dark .dijkstra-step-table th {
+  background: #27272a !important;
+  color: #f8fafc !important;
+  border-color: #3f3f46 !important;
+}
+
+.dark .modern-table td,
+.dark .wiki-table td,
+.dark .dijkstra-step-table td {
+  background: transparent !important;
+  color: #cbd5e1 !important;
+  border-color: #333333 !important;
+}
+
+.dark .modern-table tr:nth-child(even),
+.dark .wiki-table tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+.dark .modern-table tr:hover td {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.dark .dijkstra-step-table td.selected-min {
+  background: rgba(16, 185, 129, 0.2) !important;
+  color: #4ade80 !important;
+  border-color: #10b981 !important;
+}
+
+/* Floating Infobox & TOC */
+.dark .wiki-infobox {
+  background: #18181b !important;
+  border-color: #333333 !important;
+}
+
+.dark .infobox-header {
+  color: #f8fafc !important;
+  border-bottom-color: #0284c7 !important;
+}
+
+.dark .infobox-header h3 {
+  color: #f8fafc !important;
+}
+
+.dark .infobox-header .infobox-sub {
+  color: #94a3b8 !important;
+}
+
+.dark .infobox-badge {
+  color: #94a3b8 !important;
+}
+
+.dark .infobox-label,
+.dark .infobox-table th {
+  background: transparent !important;
+  color: #94a3b8 !important;
+  border-color: #333333 !important;
+}
+
+.dark .infobox-value,
+.dark .infobox-table td {
+  background: transparent !important;
+  color: #f1f5f9 !important;
+  border-color: #333333 !important;
+}
+
+.dark .infobox-value strong {
+  color: #ffffff !important;
+}
+
+.dark .infobox-link-chip {
+  background: rgba(2, 132, 199, 0.2) !important;
+  color: #38bdf8 !important;
+}
+
+.dark .infobox-link-chip:hover {
+  background: rgba(2, 132, 199, 0.35) !important;
+}
+
+.dark .wiki-toc-box {
+  background: #18181b !important;
+  border-color: #333333 !important;
+}
+
+.dark .wiki-toc-header {
+  color: #f8fafc !important;
+  border-bottom-color: #333333 !important;
+}
+
+.dark .wiki-toc-list a {
+  color: #cbd5e1 !important;
+}
+
+.dark .wiki-toc-list a:hover {
+  color: #4ade80 !important;
+}
+
+/* Topic Catalog Cards */
+.dark .topic-catalog-card {
+  background: #1e1e1e !important;
+  border-color: #333333 !important;
+}
+
+.dark .topic-catalog-card:hover {
+  border-color: #52525b !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4) !important;
+}
+
+.dark .catalog-card-title {
+  color: #f8fafc !important;
+}
+
+.dark .catalog-card-desc {
+  color: #cbd5e1 !important;
+}
+
+.dark .catalog-card-meta {
+  color: #94a3b8 !important;
+}
+
+.dark .read-article-btn {
+  background: #008000 !important;
+  color: #ffffff !important;
+}
+
+.dark .read-article-btn:hover {
+  background: #005b00 !important;
+}
+
+/* Article Navigation / Pagers */
+.dark .wiki-pager-btn {
+  background: #18181b !important;
+  border-color: #333333 !important;
+  color: #e2e8f0 !important;
+}
+
+.dark .wiki-pager-btn:hover {
+  background: #27272a !important;
+  border-color: #10b981 !important;
+}
+
+.dark .pager-dir {
+  color: #94a3b8 !important;
+}
+
+.dark .pager-title {
+  color: #f8fafc !important;
+}
+
+.dark .wiki-pager-card {
+  background: #18181b !important;
+  border-color: #333333 !important;
+}
+
+.dark .wiki-pager-card:hover {
+  border-color: #10b981 !important;
+}
+
+/* Search Modal & Concept Explain Modal */
+.dark .search-modal {
+  background: #1e1e1e !important;
+  border-color: #333333 !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6) !important;
+}
+
+.dark .search-modal-header {
+  border-bottom-color: #333333 !important;
+}
+
+.dark .search-modal-header input {
+  color: #f8fafc !important;
+}
+
+.dark .search-item:hover {
+  background: #27272a !important;
+}
+
+.dark .search-item-info h4 {
+  color: #f8fafc !important;
+}
+
+.dark .search-item-info p {
+  color: #94a3b8 !important;
+}
+
+.dark .explain-modal-card {
+  background: #1e1e1e !important;
+  border-color: #333333 !important;
+  color: #e2e8f0 !important;
+}
+
+/* Simulators, Packet & Bit Fields */
+.dark .simulator-shell {
+  background: #18181b !important;
+  border-color: #333333 !important;
+}
+
+.dark .sim-title {
+  color: #f8fafc !important;
+}
+
+.dark .sim-display-area {
+  background: #121212 !important;
+  border-color: #333333 !important;
+}
+
+.dark .bit-box {
+  background: #27272a !important;
+  border-color: #3f3f46 !important;
+  color: #f8fafc !important;
+}
+
+.dark .packet-field {
+  background: #27272a !important;
+  border-color: #3f3f46 !important;
+  color: #f8fafc !important;
+}
+
+.dark .crc-step-title {
+  color: #f8fafc !important;
+}
+
+.dark .timeline-desc {
+  color: #cbd5e1 !important;
+}
+
+.dark .state-box {
+  background: #18181b !important;
+  border-color: #333333 !important;
+  color: #e2e8f0 !important;
+}
+
+/* Practice & Quiz Components */
+.dark .practice-q-text {
+  color: #f8fafc !important;
+}
+
+.dark .practice-opt-label {
+  background: #18181b !important;
+  border-color: #333333 !important;
+  color: #e2e8f0 !important;
+}
+
+.dark .practice-opt-label:hover {
+  background: #27272a !important;
+}
+
+.dark .quiz-solution-box {
+  background: #062015 !important;
+  border-color: #10b981 !important;
+  color: #d1fae5 !important;
+}
+
+.dark .quiz-card-header h3 {
+  color: #f8fafc !important;
+}
+
+.dark .quiz-option-text {
+  color: #e2e8f0 !important;
+}
+
+/* Citations & Resources */
+.dark .res-title {
+  color: #f8fafc !important;
+}
+
+.dark .ref-item,
+.dark .ref-text {
+  color: #cbd5e1 !important;
+}

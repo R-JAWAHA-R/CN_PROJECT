@@ -1094,3 +1094,370 @@ body {
     display: none;
   }
 }
+
+
+/* ========================================================
+   GLOBAL DARK MODE TYPOGRAPHY & CONTRAST ENHANCEMENTS
+   ======================================================== */
+.dark body {
+  background-color: var(--bg-app);
+  color: var(--text-main);
+}
+
+.dark .brand-title {
+  color: #f8fafc;
+}
+
+.dark .profile-name {
+  color: #f8fafc;
+}
+
+.dark .sidebar-section-label {
+  color: #64748b;
+}
+
+.dark .sidebar-link {
+  color: #94a3b8;
+}
+
+.dark .sidebar-link:hover {
+  background: #27272a;
+  color: #f8fafc;
+}
+
+.dark .sidebar-link.active {
+  background: var(--accent-green-bg);
+  color: var(--accent-green-text);
+}
+
+.dark .motivational-quote {
+  color: #94a3b8;
+}
+
+/* Home Welcome Banner */
+.dark .welcome-banner {
+  background: linear-gradient(135deg, #18181b 0%, #1e1e1e 50%, #27272a 100%) !important;
+  border: 1px solid #333333;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.dark .welcome-text h2 {
+  color: #ffffff !important;
+}
+
+.dark .welcome-text p {
+  color: #cbd5e1 !important;
+}
+
+.dark .better-note {
+  color: #4ade80 !important;
+}
+
+/* Dashboard Statistics & Progress */
+.dark .stat-card-header {
+  color: #f8fafc;
+}
+
+.dark .ring-percent-text {
+  color: #ffffff;
+}
+
+.dark .stat-subtitle {
+  color: #94a3b8;
+}
+
+.dark .section-title {
+  color: #f8fafc;
+}
+
+.dark .view-all-link {
+  color: #94a3b8;
+}
+
+.dark .view-all-link:hover {
+  color: #4ade80;
+}
+
+/* Continue Card */
+.dark .continue-card {
+  background: #1e1e1e;
+  border-color: #333333;
+  background-image: 
+    radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.12) 0px, transparent 40%),
+    radial-gradient(at 80% 20%, rgba(2, 132, 199, 0.08) 0px, transparent 50%);
+}
+
+.dark .continue-lesson {
+  color: #ffffff;
+}
+
+/* Unit Cards */
+.dark .unit-card-pill {
+  background: #1e1e1e;
+  border-color: #333333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark .unit-card-pill:hover {
+  border-color: #52525b;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+.dark .unit-card-title {
+  color: #ffffff;
+}
+
+.dark .unit-card-tasks {
+  color: #94a3b8;
+}
+
+.dark .unit-card-btn-arrow {
+  background: #27272a;
+  border-color: #3f3f46;
+  color: #4ade80;
+}
+
+/* Study Schedule */
+.dark .schedule-item {
+  background: #27272a;
+  border-color: #3f3f46;
+  color: #f1f5f9;
+}
+
+.dark .schedule-item:hover {
+  background: #3f3f46;
+}
+
+.dark .schedule-name {
+  color: #f8fafc;
+}
+
+/* Study Cards & Workspace */
+.dark .study-card {
+  background: #1e1e1e;
+  border-color: #333333;
+  color: #e2e8f0;
+}
+
+.dark .study-card-header {
+  border-bottom-color: #333333;
+}
+
+.dark .study-card-title {
+  color: #ffffff;
+}
+
+.dark .resource-cite-badge {
+  background: #27272a;
+  border-color: #3f3f46;
+  color: #cbd5e1;
+}
+
+.dark .resource-cite-badge:hover {
+  background: #008000;
+  color: #ffffff;
+  border-color: #008000;
+}
+
+.dark .concept-explanation {
+  color: #cbd5e1;
+}
+
+.dark .concept-explanation p {
+  color: #cbd5e1;
+}
+
+.dark .concept-explanation strong {
+  color: #ffffff;
+}
+
+/* Worked Examples */
+.dark .worked-example-box {
+  background: #18181b;
+  border-left-color: #10b981;
+  color: #e2e8f0;
+}
+
+.dark .worked-example-box .example-title {
+  color: #60a5fa;
+}
+
+.dark .worked-example-box.purple {
+  background: #191424;
+  border-left-color: #a855f7;
+}
+
+.dark .worked-example-box.purple .example-title {
+  color: #c084fc;
+}
+
+.dark .worked-example-box.blue {
+  background: #0f172a;
+  border-left-color: #38bdf8;
+}
+
+.dark .worked-example-box.blue .example-title {
+  color: #7dd3fc;
+}
+
+.dark .worked-example-box.green {
+  background: #062015;
+  border-left-color: #10b981;
+}
+
+.dark .worked-example-box.green .example-title {
+  color: #4ade80;
+}
+
+.dark .worked-example-box.amber {
+  background: #231908;
+  border-left-color: #f59e0b;
+}
+
+.dark .worked-example-box.amber .example-title {
+  color: #fbbf24;
+}
+
+/* Topic Navigator */
+.dark .topic-navigator-bar {
+  background: #1e1e1e;
+  border-color: #333333;
+}
+
+.dark .nav-bar-title {
+  color: #94a3b8;
+}
+
+.dark .topic-nav-btn {
+  background: #27272a;
+  border-color: #3f3f46;
+  color: #cbd5e1;
+}
+
+.dark .topic-nav-btn:hover {
+  background: #3f3f46;
+  color: #ffffff;
+}
+
+.dark .topic-nav-btn.active {
+  background: rgba(0, 128, 0, 0.25);
+  color: #4ade80;
+  border-color: #10b981;
+}
+
+/* ========================================================
+   UNIVERSAL TAILWIND UTILITY COLOR CONTRAST FIXES
+   ======================================================== */
+.dark .text-gray-950,
+.dark .text-slate-950,
+.dark .text-black {
+  color: #ffffff !important;
+}
+
+.dark .text-gray-900,
+.dark .text-slate-900,
+.dark .text-zinc-900,
+.dark .text-neutral-900 {
+  color: #f8fafc !important;
+}
+
+.dark .text-gray-800,
+.dark .text-slate-800,
+.dark .text-zinc-800,
+.dark .text-neutral-800 {
+  color: #f1f5f9 !important;
+}
+
+.dark .text-gray-700,
+.dark .text-slate-700,
+.dark .text-zinc-700,
+.dark .text-neutral-700 {
+  color: #e2e8f0 !important;
+}
+
+.dark .text-gray-600,
+.dark .text-slate-600,
+.dark .text-zinc-600,
+.dark .text-neutral-600 {
+  color: #cbd5e1 !important;
+}
+
+.dark .text-gray-500,
+.dark .text-slate-500,
+.dark .text-zinc-500,
+.dark .text-neutral-500 {
+  color: #94a3b8 !important;
+}
+
+/* Global Inversion for Inline Dark Color Declarations */
+.dark [style*="color: #1e293b"],
+.dark [style*="color:#1e293b"],
+.dark [style*="color: #0f172a"],
+.dark [style*="color:#0f172a"],
+.dark [style*="color: #334155"],
+.dark [style*="color:#334155"],
+.dark [style*="color: #000000"],
+.dark [style*="color: #000"],
+.dark [style*="color: black"] {
+  color: #f8fafc !important;
+}
+
+.dark [style*="color: #475569"],
+.dark [style*="color:#475569"],
+.dark [style*="color: #64748b"],
+.dark [style*="color:#64748b"] {
+  color: #cbd5e1 !important;
+}
+
+.dark [style*="color: #166534"],
+.dark [style*="color:#166534"],
+.dark [style*="color: #047857"],
+.dark [style*="color:#047857"],
+.dark [style*="color: #15803d"],
+.dark [style*="color:#15803d"] {
+  color: #86efac !important;
+}
+
+.dark [style*="color: #0284c7"],
+.dark [style*="color:#0284c7"],
+.dark [style*="color: #075985"],
+.dark [style*="color:#075985"],
+.dark [style*="color: #0369a1"],
+.dark [style*="color:#0369a1"],
+.dark [style*="color: #1d4ed8"],
+.dark [style*="color:#1d4ed8"] {
+  color: #7dd3fc !important;
+}
+
+.dark [style*="color: #b45309"],
+.dark [style*="color:#b45309"],
+.dark [style*="color: #92400e"],
+.dark [style*="color:#92400e"],
+.dark [style*="color: #451a03"],
+.dark [style*="color:#451a03"] {
+  color: #fde047 !important;
+}
+
+.dark [style*="color: #be123c"],
+.dark [style*="color:#be123c"] {
+  color: #fda4af !important;
+}
+
+.dark [style*="color: #7c3aed"],
+.dark [style*="color:#7c3aed"],
+.dark [style*="color: #5e35b1"],
+.dark [style*="color:#5e35b1"] {
+  color: #c084fc !important;
+}
+
+/* Global Inversion for Light Card Backgrounds in Dark Mode */
+.dark [style*="background: #ffffff"],
+.dark [style*="background:#ffffff"],
+.dark [style*="background: white"],
+.dark [style*="background: #f8fafc"],
+.dark [style*="background:#f8fafc"],
+.dark [style*="background: #f1f5f9"],
+.dark [style*="background:#f1f5f9"] {
+  background: #1e1e1e !important;
+  border-color: #333333 !important;
+}

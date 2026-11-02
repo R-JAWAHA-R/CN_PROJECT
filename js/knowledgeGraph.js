@@ -92,7 +92,7 @@ const KnowledgeGraphModule = {
           </div>
         </div>
 
-        <div class="bg-gray-50" style="width: 100%; height: 600px; border: 1px solid var(--border-light); border-radius: 14px; position: relative; overflow: hidden; box-shadow: inset 0 2px 8px rgba(0,0,0,0.02);">
+        <div class="bg-gray-50 dark:bg-gray-900" style="width: 100%; height: 600px; border: 1px solid var(--border-light); border-radius: 14px; position: relative; overflow: hidden; box-shadow: inset 0 2px 8px rgba(0,0,0,0.02);">
           <canvas id="knowledge-graph-canvas" style="width: 100%; height: 100%; display: block;"></canvas>
           <div id="graph-node-tooltip" style="position: absolute; display: none; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(8px); color: #ffffff; padding: 0.5rem 0.85rem; border-radius: 8px; font-size: 0.8rem; pointer-events: none; z-index: 10; box-shadow: 0 10px 25px rgba(0,0,0,0.2);"></div>
         </div>
@@ -229,6 +229,8 @@ const KnowledgeGraphModule = {
     const scaleX = w / 780;
     const scaleY = h / 920;
 
+    const isDark = typeof document !== 'undefined' && document.documentElement.classList.contains('dark');
+
     // Draw Edges
     KnowledgeGraphModule.graphEdges.forEach(edge => {
       const n1 = KnowledgeGraphModule.graphNodes.find(n => n.id === edge[0]);
@@ -244,13 +246,13 @@ const KnowledgeGraphModule = {
         ctx.lineTo(n2.x * scaleX, n2.y * scaleY);
 
         if (isFilteredOut) {
-          ctx.strokeStyle = '#f1f5f9';
+          ctx.strokeStyle = isDark ? '#27272a' : '#f1f5f9';
           ctx.lineWidth = 1;
         } else if (isHovered) {
           ctx.strokeStyle = '#10b981';
           ctx.lineWidth = 3;
         } else {
-          ctx.strokeStyle = '#e2e8f0';
+          ctx.strokeStyle = isDark ? '#3f3f46' : '#e2e8f0';
           ctx.lineWidth = 1.8;
         }
         ctx.stroke();
@@ -282,7 +284,7 @@ const KnowledgeGraphModule = {
       // Main circle
       ctx.beginPath();
       ctx.arc(nx, ny, radius, 0, Math.PI * 2);
-      ctx.fillStyle = '#ffffff';
+      ctx.fillStyle = isDark ? '#18181b' : '#ffffff';
       ctx.fill();
       ctx.lineWidth = isHovered ? 3.5 : 2.5;
       ctx.strokeStyle = node.color;
@@ -295,7 +297,7 @@ const KnowledgeGraphModule = {
       ctx.fill();
 
       // Label
-      ctx.fillStyle = isHovered ? '#0f172a' : '#334155';
+      ctx.fillStyle = isDark ? (isHovered ? '#ffffff' : '#e2e8f0') : (isHovered ? '#0f172a' : '#334155');
       ctx.font = isHovered ? 'bold 11.5px "Plus Jakarta Sans", sans-serif' : '600 10.5px "Plus Jakarta Sans", sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'top';
