@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="boxBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="boxGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="boxAmber" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+    <linearGradient id="boxPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="boxRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#b91c1c"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="800" height="420" rx="16" fill="url(#bgGrad)"/>
+  <rect x="2" y="2" width="796" height="416" rx="14" fill="none" stroke="#334155" stroke-width="1.5"/>
+  <text x="30" y="42" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Hamming Code (7,4) Bit Layout & Parity Coverage</text>
+  <text x="30" y="66" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#94a3b8">Forouzan Ch. 10.3 – Powers-of-2 Position Allocation</text>
+  
+  <g transform="translate(40, 110)">
+    <!-- 7 Slots -->
+    <rect x="0" y="40" width="720" height="70" rx="10" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+    
+      <g transform="translate(15, 48)">
+        <rect width="85" height="54" rx="6" fill="url(#boxAmber)"/>
+        <text x="42" y="24" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#ffffff">P1</text>
+        <text x="42" y="44" text-anchor="middle" font-family="system-ui" font-size="10" fill="#f1f5f9">Bit Pos 1</text>
+      </g>
+    
+      <g transform="translate(115, 48)">
+        <rect width="85" height="54" rx="6" fill="url(#boxAmber)"/>
+        <text x="42" y="24" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#ffffff">P2</text>
+        <text x="42" y="44" text-anchor="middle" font-family="system-ui" font-size="10" fill="#f1f5f9">Bit Pos 2</text>
+      </g>
+    
+      <g transform="translate(215, 48)">
+        <rect width="85" height="54" rx="6" fill="url(#boxBlue)"/>
+        <text x="42" y="24" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#ffffff">D3</text>
+        <text x="42" y="44" text-anchor="middle" font-family="system-ui" font-size="10" fill="#f1f5f9">Bit Pos 3</text>
+      </g>
+    
+      <g transform="translate(315, 48)">
+        <rect width="85" height="54" rx="6" fill="url(#boxAmber)"/>
+        <text x="42" y="24" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#ffffff">P4</text>
+        <text x="42" y="44" text-anchor="middle" font-family="system-ui" font-size="10" fill="#f1f5f9">Bit Pos 4</text>
+      </g>
+    
+      <g transform="translate(415, 48)">
+        <rect width="85" height="54" rx="6" fill="url(#boxBlue)"/>
+        <text x="42" y="24" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#ffffff">D5</text>
+        <text x="42" y="44" text-anchor="middle" font-family="system-ui" font-size="10" fill="#f1f5f9">Bit Pos 5</text>
+      </g>
+    
+      <g transform="translate(515, 48)">
+        <rect width="85" height="54" rx="6" fill="url(#boxBlue)"/>
+        <text x="42" y="24" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#ffffff">D6</text>
+        <text x="42" y="44" text-anchor="middle" font-family="system-ui" font-size="10" fill="#f1f5f9">Bit Pos 6</text>
+      </g>
+    
+      <g transform="translate(615, 48)">
+        <rect width="85" height="54" rx="6" fill="url(#boxBlue)"/>
+        <text x="42" y="24" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#ffffff">D7</text>
+        <text x="42" y="44" text-anchor="middle" font-family="system-ui" font-size="10" fill="#f1f5f9">Bit Pos 7</text>
+      </g>
+    
+  </g>
+
+  <!-- Parity Coverage Sets -->
+  <g transform="translate(60, 240)">
+    <rect width="680" height="135" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+    <text x="25" y="30" font-family="monospace" font-size="13" font-weight="bold" fill="#fbbf24">P1 (Pos 1, binary xx1):</text>
+    <text x="230" y="30" font-family="system-ui" font-size="13" fill="#cbd5e1">Checks bits 1, 3, 5, 7  →  P1 = D3 ⊕ D5 ⊕ D7</text>
+
+    <text x="25" y="65" font-family="monospace" font-size="13" font-weight="bold" fill="#fbbf24">P2 (Pos 2, binary x1x):</text>
+    <text x="230" y="65" font-family="system-ui" font-size="13" fill="#cbd5e1">Checks bits 2, 3, 6, 7  →  P2 = D3 ⊕ D6 ⊕ D7</text>
+
+    <text x="25" y="100" font-family="monospace" font-size="13" font-weight="bold" fill="#fbbf24">P4 (Pos 4, binary 1xx):</text>
+    <text x="230" y="100" font-family="system-ui" font-size="13" fill="#cbd5e1">Checks bits 4, 5, 6, 7  →  P4 = D5 ⊕ D6 ⊕ D7</text>
+    
+    <text x="25" y="125" font-family="system-ui" font-size="11" fill="#94a3b8">Syndrome S = (s4 s2 s1)_2 identifies the exact bit position in error (0 = no error)</text>
+  </g>
+
+</svg>

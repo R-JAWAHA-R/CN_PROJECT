@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="boxBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="boxGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="boxAmber" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+    <linearGradient id="boxPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="boxRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#b91c1c"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="800" height="420" rx="16" fill="url(#bgGrad)"/>
+  <rect x="2" y="2" width="796" height="416" rx="14" fill="none" stroke="#334155" stroke-width="1.5"/>
+  <text x="30" y="42" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Cyclic Redundancy Check (CRC) Modulo-2 Arithmetic</text>
+  <text x="30" y="66" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#94a3b8">Forouzan Ch. 10.4 – Polynomial Generator & Shift-XOR Division</text>
+  
+  <g transform="translate(50, 100)">
+    <rect width="330" height="270" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="165" y="30" text-anchor="middle" font-family="system-ui" font-size="14" font-weight="bold" fill="#60a5fa">SENDER (Division)</text>
+    <text x="20" y="65" font-family="monospace" font-size="12" fill="#cbd5e1">Dataword:     100100</text>
+    <text x="20" y="90" font-family="monospace" font-size="12" fill="#cbd5e1">Divisor G(x): 1101 (degree 3)</text>
+    <text x="20" y="115" font-family="monospace" font-size="12" fill="#fbbf24">Appended:     100100 000</text>
+    <rect x="20" y="130" width="290" height="65" rx="6" fill="#0f172a"/>
+    <text x="30" y="152" font-family="monospace" font-size="11" fill="#38bdf8">Modulo-2 Division (XOR):</text>
+    <text x="30" y="172" font-family="monospace" font-size="11" fill="#a7f3d0">Remainder (FCS) = 001</text>
+    <rect x="20" y="210" width="290" height="38" rx="6" fill="url(#boxGreen)"/>
+    <text x="165" y="234" text-anchor="middle" font-family="monospace" font-size="13" font-weight="bold" fill="#ffffff">Codeword: 100100 001</text>
+  </g>
+
+  <g transform="translate(420, 100)">
+    <rect width="330" height="270" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+    <text x="165" y="30" text-anchor="middle" font-family="system-ui" font-size="14" font-weight="bold" fill="#34d399">RECEIVER (Verification)</text>
+    <text x="20" y="65" font-family="monospace" font-size="12" fill="#cbd5e1">Received:     100100 001</text>
+    <text x="20" y="90" font-family="monospace" font-size="12" fill="#cbd5e1">Divisor G(x): 1101</text>
+    <rect x="20" y="115" width="290" height="80" rx="6" fill="#0f172a"/>
+    <text x="30" y="140" font-family="monospace" font-size="11" fill="#38bdf8">Divide Received by G(x):</text>
+    <text x="30" y="162" font-family="monospace" font-size="12" font-weight="bold" fill="#34d399">Syndrome Remainder = 000 ✓</text>
+    <text x="30" y="182" font-family="system-ui" font-size="10" fill="#94a3b8">Remainder 0 → No error detected</text>
+    <rect x="20" y="210" width="290" height="38" rx="6" fill="url(#boxBlue)"/>
+    <text x="165" y="234" text-anchor="middle" font-family="system-ui" font-size="13" font-weight="bold" fill="#ffffff">Deliver Dataword to Network Layer</text>
+  </g>
+
+</svg>

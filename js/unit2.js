@@ -13,7 +13,7 @@ const Unit2Module = {
       title: "TOPIC 1 – DATA LINK LAYER FUNDAMENTALS",
       shortTitle: "Topic 1 – DLL Fundamentals",
       desc: "Node-to-node frame delivery, position in OSI, 5 responsibilities, framing, flow and error control.",
-      badge: "8 Subtopics",
+      badge: "23 Subtopics • 3 Folders",
       type: "folder",
       items: [
         { id: "u2-dll-intro", title: "Introduction to Data Link Layer", type: "document", time: "15 min" },
@@ -23,7 +23,46 @@ const Unit2Module = {
         { id: "u2-dll-services", title: "Services Provided to the Network Layer", type: "document", time: "20 min" },
         { id: "framing", title: "Framing Methods", type: "document", time: "25 min" },
         { id: "flow-control", title: "Flow Control", type: "document", time: "20 min" },
-        { id: "u2-error-control", title: "Error Control", type: "document", time: "25 min" }
+        { id: "u2-error-control", title: "Error Control", type: "document", time: "25 min" },
+        {
+          id: "folder-error-detection-codes",
+          title: "Error Detection and Correction Codes",
+          type: "folder",
+          desc: "Principles of error detection, correction, redundancy, Hamming distance, and coding techniques",
+          items: [
+            { id: "u2-intro-error-detection", title: "Introduction to Error Detection", type: "document", time: "15 min" },
+            { id: "u2-intro-error-correction", title: "Introduction to Error Correction", type: "document", time: "15 min" },
+            { id: "u2-redundancy-error-control", title: "Redundancy and Error Control", type: "document", time: "18 min" },
+            { id: "u2-hamming-distance", title: "Hamming Distance", type: "document", time: "20 min" },
+            { id: "u2-detection-vs-correction", title: "Error Detection vs Error Correction", type: "document", time: "18 min" },
+            { id: "u2-error-techniques", title: "Error Detection and Correction Techniques", type: "document", time: "22 min" }
+          ]
+        },
+        {
+          id: "folder-hamming-code",
+          title: "Hamming Code",
+          type: "folder",
+          desc: "Linear single-error correcting codes, bit layout, parity calculations, and syndrome decoding",
+          items: [
+            { id: "u2-hamming-working-principle", title: "Working Principle", type: "document", time: "18 min" },
+            { id: "u2-hamming-code-calculation", title: "Hamming Code Calculation", type: "document", time: "25 min" },
+            { id: "u2-hamming-detection-correction", title: "Error Detection and Correction Using Hamming Code", type: "document", time: "25 min" },
+            { id: "u2-hamming-numerical-problems", title: "Numerical Problems", type: "document", time: "30 min" }
+          ]
+        },
+        {
+          id: "folder-crc",
+          title: "Cyclic Redundancy Check (CRC)",
+          type: "folder",
+          desc: "Cyclic codes, generator polynomials, modulo-2 binary division, and FCS verification",
+          items: [
+            { id: "u2-crc-intro", title: "Introduction to CRC", type: "document", time: "15 min" },
+            { id: "u2-crc-working-principle", title: "CRC Working Principle", type: "document", time: "20 min" },
+            { id: "u2-crc-generator-polynomial", title: "Generator Polynomial", type: "document", time: "22 min" },
+            { id: "u2-crc-binary-division", title: "CRC Calculation Using Binary Division", type: "document", time: "25 min" },
+            { id: "u2-crc-numerical-problems", title: "CRC Numerical Problems", type: "document", time: "30 min" }
+          ]
+        }
       ]
     },
     {
@@ -32,11 +71,22 @@ const Unit2Module = {
       title: "TOPIC 2 – DATA LINK LAYER PROTOCOLS",
       shortTitle: "Topic 2 – DLL Protocols",
       desc: "Noiseless and noisy channel protocols, Stop-and-Wait, Go-Back-N, and Selective Repeat ARQ.",
-      badge: "9 Subtopics • 2 Folders",
+      badge: "18 Subtopics • 4 Folders",
       type: "folder",
       items: [
         { id: "u2-dll-protocols-intro", title: "Introduction to Data Link Layer Protocols", type: "document", time: "15 min" },
         { id: "u2-protocol-classification", title: "Classification of Protocols", type: "document", time: "15 min" },
+        {
+          id: "folder-simplex-variations",
+          title: "Simplex Protocol and Its Variations",
+          type: "folder",
+          desc: "Unrestricted Simplex, Simplex Stop-and-Wait, and Stop-and-Wait for Noisy Channels",
+          items: [
+            { id: "u2-unrestricted-simplex", title: "Unrestricted Simplex Protocol", type: "document", time: "15 min" },
+            { id: "u2-simplex-stop-and-wait", title: "Simplex Stop-and-Wait Protocol", type: "document", time: "18 min" },
+            { id: "u2-simplex-noisy-channels", title: "Simplex Protocol for Noisy Channels", type: "document", time: "25 min" }
+          ]
+        },
         {
           id: "folder-noiseless-protocols",
           title: "Protocols for Noiseless Channels",
@@ -56,6 +106,20 @@ const Unit2Module = {
             { id: "stop-and-wait", title: "Stop-and-Wait ARQ", type: "document", time: "25 min" },
             { id: "go-back-n", title: "Go-Back-N ARQ", type: "document", time: "30 min" },
             { id: "selective-repeat", title: "Selective Repeat ARQ", type: "document", time: "30 min" }
+          ]
+        },
+        {
+          id: "folder-sliding-window",
+          title: "Sliding Window Protocols",
+          type: "folder",
+          desc: "Sender and receiver window frames, window sizing, dynamic movement, and piggybacking",
+          items: [
+            { id: "u2-sliding-window-intro", title: "Introduction to Sliding Window Protocol", type: "document", time: "18 min" },
+            { id: "u2-sender-receiver-window", title: "Sender Window and Receiver Window", type: "document", time: "22 min" },
+            { id: "u2-sliding-window-size", title: "Window Size", type: "document", time: "18 min" },
+            { id: "u2-sliding-window-working-principle", title: "Working Principle", type: "document", time: "25 min" },
+            { id: "u2-piggybacking", title: "Piggybacking", type: "document", time: "15 min" },
+            { id: "u2-sliding-window-vs-stop-and-wait", title: "Sliding Window vs Stop-and-Wait", type: "document", time: "20 min" }
           ]
         },
         { id: "comparison-noiseless-noisy", title: "Comparison of Noiseless and Noisy Channel Protocols", type: "document", time: "15 min" },
@@ -149,7 +213,7 @@ const Unit2Module = {
       title: "TOPIC 6 – ETHERNET MAC SUBLAYER PROTOCOL",
       shortTitle: "Topic 6 – Ethernet MAC Protocol",
       desc: "IEEE 802.3 Ethernet, 48-bit MAC addresses, frame formats, CSMA/CD operation, and binary backoff.",
-      badge: "9 Subtopics",
+      badge: "14 Subtopics • 1 Folder",
       type: "folder",
       items: [
         { id: "ethernet", title: "Introduction to Ethernet", type: "document", time: "25 min" },
@@ -220,7 +284,20 @@ const Unit2Module = {
         { id: "u2-forwarding-and-filtering", title: "Forwarding and Filtering", type: "document", time: "20 min" },
         { id: "u2-bridge-flooding", title: "Flooding", type: "document", time: "15 min" },
         { id: "u2-spanning-tree-protocol", title: "Spanning Tree Protocol (STP)", type: "document", time: "30 min" },
-        { id: "u2-bridges-vs-switches", title: "Bridges vs Switches", type: "document", time: "20 min" }
+        { id: "u2-bridges-vs-switches", title: "Bridges vs Switches", type: "document", time: "20 min" },
+        {
+          id: "folder-bridge-applications",
+          title: "Uses and Applications of Bridges",
+          type: "folder",
+          desc: "Purpose, collision domain segmentation, traffic filtering, LAN interconnection, and trade-offs",
+          items: [
+            { id: "u2-bridges-purpose", title: "Purpose of Bridges", type: "document", time: "15 min" },
+            { id: "u2-bridges-network-segmentation", title: "Network Segmentation", type: "document", time: "18 min" },
+            { id: "u2-bridges-traffic-filtering", title: "Traffic Filtering", type: "document", time: "18 min" },
+            { id: "u2-bridges-connecting-lan-segments", title: "Connecting LAN Segments", type: "document", time: "20 min" },
+            { id: "u2-bridges-advantages-limitations", title: "Advantages and Limitations of Bridges", type: "document", time: "18 min" }
+          ]
+        }
       ]
     },
     {
