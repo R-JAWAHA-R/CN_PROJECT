@@ -1122,6 +1122,18 @@ const TOPIC_CHAPTER_MAP = {
       "unitId": "unit3",
       "unit": "Unit 3: Network Layer"
   },
+  "u2-checksum": {
+      "chapNum": 1,
+      "chapTitle": "TOPIC 1 – DATA LINK LAYER FUNDAMENTALS",
+      "unitId": "unit2",
+      "unit": "Unit 2 – Data Link Layer"
+  },
+  "checksum": {
+      "chapNum": 1,
+      "chapTitle": "TOPIC 1 – DATA LINK LAYER FUNDAMENTALS",
+      "unitId": "unit2",
+      "unit": "Unit 2 – Data Link Layer"
+  },
   "u2-intro-error-detection": {
       "chapNum": 1,
       "chapTitle": "TOPIC 1 – DATA LINK LAYER FUNDAMENTALS",

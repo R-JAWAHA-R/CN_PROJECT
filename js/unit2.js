@@ -13,7 +13,7 @@ const Unit2Module = {
       title: "TOPIC 1 – DATA LINK LAYER FUNDAMENTALS",
       shortTitle: "Topic 1 – DLL Fundamentals",
       desc: "Node-to-node frame delivery, position in OSI, 5 responsibilities, framing, flow and error control.",
-      badge: "23 Subtopics • 3 Folders",
+      badge: "24 Subtopics • 3 Folders",
       type: "folder",
       items: [
         { id: "u2-dll-intro", title: "Introduction to Data Link Layer", type: "document", time: "15 min" },
@@ -35,7 +35,8 @@ const Unit2Module = {
             { id: "u2-redundancy-error-control", title: "Redundancy and Error Control", type: "document", time: "18 min" },
             { id: "u2-hamming-distance", title: "Hamming Distance", type: "document", time: "20 min" },
             { id: "u2-detection-vs-correction", title: "Error Detection vs Error Correction", type: "document", time: "18 min" },
-            { id: "u2-error-techniques", title: "Error Detection and Correction Techniques", type: "document", time: "22 min" }
+            { id: "u2-error-techniques", title: "Error Detection and Correction Techniques", type: "document", time: "22 min" },
+            { id: "u2-checksum", title: "Checksum (Error Detection & 1's Complement)", type: "document", time: "20 min" }
           ]
         },
         {
