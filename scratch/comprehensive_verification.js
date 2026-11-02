@@ -37,13 +37,15 @@ console.log('=== SYSTEM SIMULATION CHECK ===');
 console.log('Total topics in TOPIC_REPOSITORY:', Object.keys(global.TOPIC_REPOSITORY || {}).length);
 
 const newlyAddedTopics = [
-  // Part 1: Error Detection and Correction Codes (6)
+  // Part 1: Error Detection and Correction Codes (7)
   'u2-intro-error-detection',
   'u2-intro-error-correction',
   'u2-redundancy-error-control',
   'u2-hamming-distance',
   'u2-detection-vs-correction',
   'u2-error-techniques',
+  'u2-checksum',
+  'checksum',
   // Part 1: Hamming Code (4)
   'u2-hamming-working-principle',
   'u2-hamming-code-calculation',
