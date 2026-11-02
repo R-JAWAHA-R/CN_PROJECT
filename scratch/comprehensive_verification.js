@@ -3,7 +3,7 @@ const fs = require('fs');
 global.window = global;
 global.localStorage = {
   getItem: () => '{}',
-  setItem: () => {}
+  setItem: () => { }
 };
 global.completedTopics = [];
 
