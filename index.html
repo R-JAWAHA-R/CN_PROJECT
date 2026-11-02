@@ -529,6 +529,7 @@
     <script src="js/topics_u2.js"></script>
     <script src="js/topics_u2_extended.js"></script>
     <script src="js/topics_u2_syllabus.js"></script>
+    <script src="js/topics_u2_additional.js"></script>
     <script src="js/topics_u3.js"></script>
     <script src="js/topics_u3_extended.js"></script>
     <script src="js/topics_u4.js"></script>
@@ -636,6 +637,43 @@
                                 id: "u2-error-control",
                                 title: "Error Control",
                                 type: "document"
+                            },
+                            {
+                                id: "folder-error-detection-codes",
+                                title: "Error Detection and Correction Codes",
+                                type: "folder",
+                                items: [
+                                    { id: "u2-intro-error-detection", title: "Introduction to Error Detection", type: "document" },
+                                    { id: "u2-intro-error-correction", title: "Introduction to Error Correction", type: "document" },
+                                    { id: "u2-redundancy-error-control", title: "Redundancy and Error Control", type: "document" },
+                                    { id: "u2-hamming-distance", title: "Hamming Distance", type: "document" },
+                                    { id: "u2-detection-vs-correction", title: "Error Detection vs Error Correction", type: "document" },
+                                    { id: "u2-error-techniques", title: "Error Detection and Correction Techniques", type: "document" },
+                                    { id: "u2-checksum", title: "Checksum (Error Detection & 1's Complement)", type: "document" }
+                                ]
+                            },
+                            {
+                                id: "folder-hamming-code",
+                                title: "Hamming Code",
+                                type: "folder",
+                                items: [
+                                    { id: "u2-hamming-working-principle", title: "Working Principle", type: "document" },
+                                    { id: "u2-hamming-code-calculation", title: "Hamming Code Calculation", type: "document" },
+                                    { id: "u2-hamming-detection-correction", title: "Error Detection and Correction Using Hamming Code", type: "document" },
+                                    { id: "u2-hamming-numerical-problems", title: "Numerical Problems", type: "document" }
+                                ]
+                            },
+                            {
+                                id: "folder-crc",
+                                title: "Cyclic Redundancy Check (CRC)",
+                                type: "folder",
+                                items: [
+                                    { id: "u2-crc-intro", title: "Introduction to CRC", type: "document" },
+                                    { id: "u2-crc-working-principle", title: "CRC Working Principle", type: "document" },
+                                    { id: "u2-crc-generator-polynomial", title: "Generator Polynomial", type: "document" },
+                                    { id: "u2-crc-binary-division", title: "CRC Calculation Using Binary Division", type: "document" },
+                                    { id: "u2-crc-numerical-problems", title: "CRC Numerical Problems", type: "document" }
+                                ]
                             }
                         ],
                         subtopicIds: [
@@ -646,7 +684,12 @@
                             "u2-dll-services",
                             "framing",
                             "flow-control",
-                            "u2-error-control"
+                            "u2-error-control",
+                            "u2-intro-error-detection", "u2-intro-error-correction", "u2-redundancy-error-control",
+                            "u2-hamming-distance", "u2-detection-vs-correction", "u2-error-techniques",
+                            "u2-hamming-working-principle", "u2-hamming-code-calculation", "u2-hamming-detection-correction",
+                            "u2-hamming-numerical-problems", "u2-crc-intro", "u2-crc-working-principle",
+                            "u2-crc-generator-polynomial", "u2-crc-binary-division", "u2-crc-numerical-problems"
                         ]
                     },
                     {
@@ -665,6 +708,16 @@
                                 id: "u2-protocol-classification",
                                 title: "Classification of Protocols",
                                 type: "document"
+                            },
+                            {
+                                id: "folder-simplex-variations",
+                                title: "Simplex Protocol and Its Variations",
+                                type: "folder",
+                                items: [
+                                    { id: "u2-unrestricted-simplex", title: "Unrestricted Simplex Protocol", type: "document" },
+                                    { id: "u2-simplex-stop-and-wait", title: "Simplex Stop-and-Wait Protocol", type: "document" },
+                                    { id: "u2-simplex-noisy-channels", title: "Simplex Protocol for Noisy Channels", type: "document" }
+                                ]
                             },
                             {
                                 id: "folder-noiseless-protocols",
@@ -703,6 +756,20 @@
                                         title: "Selective Repeat ARQ",
                                         type: "document"
                                     }
+                                ]
+                            },
+                            
+                            {
+                                id: "folder-sliding-window",
+                                title: "Sliding Window Protocols",
+                                type: "folder",
+                                items: [
+                                    { id: "u2-sliding-window-intro", title: "Introduction to Sliding Window Protocol", type: "document" },
+                                    { id: "u2-sender-receiver-window", title: "Sender Window and Receiver Window", type: "document" },
+                                    { id: "u2-sliding-window-size", title: "Window Size", type: "document" },
+                                    { id: "u2-sliding-window-working-principle", title: "Working Principle", type: "document" },
+                                    { id: "u2-piggybacking", title: "Piggybacking", type: "document" },
+                                    { id: "u2-sliding-window-vs-stop-and-wait", title: "Sliding Window vs Stop-and-Wait", type: "document" }
                                 ]
                             },
                             {
@@ -1172,6 +1239,18 @@
                                 id: "u2-bridges-vs-switches",
                                 title: "Bridges vs Switches",
                                 type: "document"
+                            },
+                            {
+                                id: "folder-bridge-applications",
+                                title: "Uses and Applications of Bridges",
+                                type: "folder",
+                                items: [
+                                    { id: "u2-bridges-purpose", title: "Purpose of Bridges", type: "document" },
+                                    { id: "u2-bridges-network-segmentation", title: "Network Segmentation", type: "document" },
+                                    { id: "u2-bridges-traffic-filtering", title: "Traffic Filtering", type: "document" },
+                                    { id: "u2-bridges-connecting-lan-segments", title: "Connecting LAN Segments", type: "document" },
+                                    { id: "u2-bridges-advantages-limitations", title: "Advantages and Limitations of Bridges", type: "document" }
+                                ]
                             }
                         ],
                         subtopicIds: [
@@ -1183,7 +1262,9 @@
                             "u2-forwarding-and-filtering",
                             "u2-bridge-flooding",
                             "u2-spanning-tree-protocol",
-                            "u2-bridges-vs-switches"
+                            "u2-bridges-vs-switches",
+                            "u2-bridges-purpose", "u2-bridges-network-segmentation", "u2-bridges-traffic-filtering",
+                            "u2-bridges-connecting-lan-segments", "u2-bridges-advantages-limitations"
                         ]
                     },
                     {

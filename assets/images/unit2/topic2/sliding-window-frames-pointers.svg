@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="boxBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="boxGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="boxAmber" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+    <linearGradient id="boxPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="boxRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#b91c1c"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="800" height="420" rx="16" fill="url(#bgGrad)"/>
+  <rect x="2" y="2" width="796" height="416" rx="14" fill="none" stroke="#334155" stroke-width="1.5"/>
+  <text x="30" y="42" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Sliding Window Protocol: Window Frames & Pointers</text>
+  <text x="30" y="66" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#94a3b8">Forouzan Ch. 11.5 – Sequence Modulo 2^m & Dynamic Slide</text>
+  
+  <!-- Sender Window -->
+  <g transform="translate(50, 100)">
+    <text x="0" y="25" font-family="system-ui" font-size="15" font-weight="bold" fill="#60a5fa">SENDER WINDOW (Size W = 4, Modulo 8)</text>
+    <rect x="0" y="45" width="700" height="65" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <!-- Boxes 0 to 7 -->
+    
+        <g transform="translate(20, 53)">
+          <rect width="72" height="49" rx="6" fill="#065f46"/>
+          <text x="36" y="24" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#ffffff">0</text>
+          <text x="36" y="40" text-anchor="middle" font-family="system-ui" font-size="9" fill="#e2e8f0">Sent/ACKed</text>
+        </g>
+      
+        <g transform="translate(102, 53)">
+          <rect width="72" height="49" rx="6" fill="#065f46"/>
+          <text x="36" y="24" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#ffffff">1</text>
+          <text x="36" y="40" text-anchor="middle" font-family="system-ui" font-size="9" fill="#e2e8f0">Sent/ACKed</text>
+        </g>
+      
+        <g transform="translate(184, 53)">
+          <rect width="72" height="49" rx="6" fill="#1e40af"/>
+          <text x="36" y="24" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#ffffff">2</text>
+          <text x="36" y="40" text-anchor="middle" font-family="system-ui" font-size="9" fill="#e2e8f0">Outstanding</text>
+        </g>
+      
+        <g transform="translate(266, 53)">
+          <rect width="72" height="49" rx="6" fill="#1e40af"/>
+          <text x="36" y="24" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#ffffff">3</text>
+          <text x="36" y="40" text-anchor="middle" font-family="system-ui" font-size="9" fill="#e2e8f0">Outstanding</text>
+        </g>
+      
+        <g transform="translate(348, 53)">
+          <rect width="72" height="49" rx="6" fill="#92400e"/>
+          <text x="36" y="24" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#ffffff">4</text>
+          <text x="36" y="40" text-anchor="middle" font-family="system-ui" font-size="9" fill="#e2e8f0">Usable</text>
+        </g>
+      
+        <g transform="translate(430, 53)">
+          <rect width="72" height="49" rx="6" fill="#92400e"/>
+          <text x="36" y="24" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#ffffff">5</text>
+          <text x="36" y="40" text-anchor="middle" font-family="system-ui" font-size="9" fill="#e2e8f0">Usable</text>
+        </g>
+      
+        <g transform="translate(512, 53)">
+          <rect width="72" height="49" rx="6" fill="#334155"/>
+          <text x="36" y="24" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#ffffff">6</text>
+          <text x="36" y="40" text-anchor="middle" font-family="system-ui" font-size="9" fill="#e2e8f0">Not Sent</text>
+        </g>
+      
+        <g transform="translate(594, 53)">
+          <rect width="72" height="49" rx="6" fill="#334155"/>
+          <text x="36" y="24" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#ffffff">7</text>
+          <text x="36" y="40" text-anchor="middle" font-family="system-ui" font-size="9" fill="#e2e8f0">Not Sent</text>
+        </g>
+      
+    <!-- Sliding Window Outline -->
+    <rect x="180" y="40" width="335" height="75" rx="10" fill="none" stroke="#f59e0b" stroke-width="3" stroke-dasharray="8,4"/>
+    <text x="345" y="135" text-anchor="middle" font-family="system-ui" font-size="12" font-weight="bold" fill="#fbbf24">Current Sender Window [2, 3, 4, 5]</text>
+  </g>
+
+  <!-- Pointers -->
+  <g transform="translate(60, 260)">
+    <rect width="680" height="115" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+    <text x="25" y="30" font-family="monospace" font-size="13" font-weight="bold" fill="#60a5fa">S_f (Oldest unacknowledged frame) = 2:</text>
+    <text x="360" y="30" font-family="system-ui" font-size="12" fill="#cbd5e1">Left boundary of the window</text>
+
+    <text x="25" y="60" font-family="monospace" font-size="13" font-weight="bold" fill="#34d399">S_n (Next frame to transmit) = 4:</text>
+    <text x="360" y="60" font-family="system-ui" font-size="12" fill="#cbd5e1">Frames 2 and 3 sent, awaiting ACKs</text>
+
+    <text x="25" y="90" font-family="monospace" font-size="13" font-weight="bold" fill="#f59e0b">When ACK 3 arrives:</text>
+    <text x="360" y="90" font-family="system-ui" font-size="12" fill="#fbbf24">S_f advances to 3; window slides right to [3, 4, 5, 6]</text>
+  </g>
+
+</svg>

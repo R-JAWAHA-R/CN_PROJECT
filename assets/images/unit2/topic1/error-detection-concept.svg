@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="boxBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="boxGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="boxAmber" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+    <linearGradient id="boxPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="boxRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#b91c1c"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="800" height="420" rx="16" fill="url(#bgGrad)"/>
+  <rect x="2" y="2" width="796" height="416" rx="14" fill="none" stroke="#334155" stroke-width="1.5"/>
+  <text x="30" y="42" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f8fafc">Error Detection: Sender to Receiver Model</text>
+  <text x="30" y="66" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#94a3b8">Forouzan Ch. 10.1 – Redundancy & Verification</text>
+  
+  <!-- Sender -->
+  <g transform="translate(40, 110)">
+    <rect width="200" height="230" rx="12" fill="#1e293b" stroke="#3b82f6" stroke-width="2" filter="url(#shadow)"/>
+    <text x="100" y="32" text-anchor="middle" font-family="system-ui" font-size="15" font-weight="bold" fill="#60a5fa">SENDER NODE</text>
+    <rect x="25" y="55" width="150" height="42" rx="6" fill="#334155"/>
+    <text x="100" y="81" text-anchor="middle" font-family="system-ui" font-size="13" fill="#f8fafc">Dataword (k bits)</text>
+    <path d="M 100 97 L 100 120" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="25" y="120" width="150" height="42" rx="6" fill="url(#boxBlue)"/>
+    <text x="100" y="146" text-anchor="middle" font-family="system-ui" font-size="13" font-weight="bold" fill="#ffffff">Generator Function</text>
+    <rect x="25" y="175" width="150" height="38" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="100" y="199" text-anchor="middle" font-family="monospace" font-size="12" fill="#38bdf8">Codeword (n bits)</text>
+  </g>
+
+  <!-- Channel with Noise -->
+  <g transform="translate(270, 195)">
+    <line x1="0" y1="30" x2="230" y2="30" stroke="#f59e0b" stroke-width="3" stroke-dasharray="6,4"/>
+    <circle cx="115" cy="30" r="26" fill="#dc2626" opacity="0.9" filter="url(#shadow)"/>
+    <text x="115" y="27" text-anchor="middle" font-family="system-ui" font-size="10" font-weight="bold" fill="#ffffff">NOISE</text>
+    <text x="115" y="40" text-anchor="middle" font-family="system-ui" font-size="9" fill="#fecaca">Bit Flips</text>
+    <text x="115" y="80" text-anchor="middle" font-family="system-ui" font-size="12" fill="#fbbf24">Transmission Channel</text>
+  </g>
+
+  <!-- Receiver -->
+  <g transform="translate(530, 110)">
+    <rect width="230" height="255" rx="12" fill="#1e293b" stroke="#10b981" stroke-width="2" filter="url(#shadow)"/>
+    <text x="115" y="32" text-anchor="middle" font-family="system-ui" font-size="15" font-weight="bold" fill="#34d399">RECEIVER NODE</text>
+    <rect x="25" y="55" width="180" height="38" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="115" y="79" text-anchor="middle" font-family="monospace" font-size="12" fill="#38bdf8">Received (n bits)</text>
+    <rect x="25" y="105" width="180" height="42" rx="6" fill="url(#boxGreen)"/>
+    <text x="115" y="131" text-anchor="middle" font-family="system-ui" font-size="13" font-weight="bold" fill="#ffffff">Checker / Verifier</text>
+    <g transform="translate(35, 165)">
+      <rect width="70" height="32" rx="6" fill="#059669"/>
+      <text x="35" y="21" text-anchor="middle" font-family="system-ui" font-size="11" font-weight="bold" fill="#ffffff">Valid: ACK</text>
+      <rect x="90" width="70" height="32" rx="6" fill="#dc2626"/>
+      <text x="125" y="21" text-anchor="middle" font-family="system-ui" font-size="11" font-weight="bold" fill="#ffffff">Error: Drop</text>
+    </g>
+    <text x="115" y="228" text-anchor="middle" font-family="system-ui" font-size="11" fill="#94a3b8">Binary Decision: Correct / Corrupted</text>
+  </g>
+
+</svg>

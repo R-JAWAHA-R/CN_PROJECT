@@ -1,0 +1,501 @@
+
+--- PAGE 481 (Index 480) ---
+444 CHAPTER 14 WIRELESS LANs
+Table 14.5 Exercise 12 (continued)
+",',., , .. ~-~, .. ~'~'~ -."". -_.__.__._-*~-
+Fields IEEE 802.3 Field Size IEEE 802.11 Field Size
+D/ID
+SC
+PDU length
+Data and padding
+Frame body
+FCS (CRC)
+--- PAGE 482 (Index 481) ---
+CHAPTER 15
+Connecting LANs, Backbone
+Networks, and Virtual LANs
+LAN s do not normally operate in isolation. They are connected to one another or to the
+Internet. To connect LANs, or segments ofLANs, we use connecting devices. Connecting
+devices can operate in different layers of the Internet model. In this chapter, we discuss
+only those that operate in the physical and data link layers; we discuss those that operate
+in the first three layers in Chapter 19.
+After discussing some connecting devices, we show how they are used to create
+backbone networks. Finally, we discuss virtual local area networks (VLANs).
+15.1 CONNECTING DEVICES
+In this section, we divide connecting devices into five different categories based on the
+layer in which they operate in a network, as shown in Figure 15.1.
+Figure 15.1 Five categories of connecting devices
+Application Application
+Gateway
+Transport Transport
+Network Network
+Data link Data link
+Physical Physical
+The five categories contain devices which can be defined as
+1. Those which operate below the physical layer such as a passive hub.
+2. Those which operate at the physical layer (a repeater or an active hub).
+3. Those which operate at the physical and data link layers (a bridge or a two-layer
+switch).
+445
+--- PAGE 483 (Index 482) ---
+446 CHAPTER 15 CONNECTING LANs, BACKBONE NETWORKS, AND VIRTUAL LANs
+4. Those which operate at the physical, data link, and network layers (a router or a
+three-layer switch).
+5. Those which can operate at all five layers (a gateway).
+Passive Hubs
+A passive hub is just a connector. It connects the wires coming from different branches.
+In a star-topology Ethernet LAN, a passive hub is just a point where the signals coming
+from different stations collide; the hub is the collision point. This type of a hub is part
+of the media; its location in the Internet model is below the physical layer.
+Repeaters
+A repeater is a device that operates only in the physical layer. Signals that carry infor­
+mation within a network can travel a fixed distance before attenuation endangers the
+integrity of the data. A repeater receives a signal and, before it becomes too weak or
+corrupted, regenerates the original bit pattern. The repeater then sends the refreshed
+signal. A repeater can extend the physical length of a LAN, as shown in Figure 15.2.
+Figure 15.2 A repeater connecting two segments of a LAN
+5 5
+4 4
+3 3
+2 2
+I 1
+Segment I Segment 2
+A repeater does not actually connect two LANs; it connects two segments of the
+same LAN. The segments connected are still part of one single LAN. A repeater is not
+a device that can connect two LANs of different protocols.
+A repeater connects segments of a LAN.
+A repeater can overcome the 10Base5 Ethernet length restriction. In this standard,
+the length of the cable is limited to 500 m. To extend this length, we divide the cable
+into segments and install repeaters between segments. Note that the whole network is
+still considered one LAN, but the portions of the network separated by repeaters are
+called segments. The repeater acts as a two-port node, but operates only in the physical
+layer. When it receives a frame from any of the ports, it regenerates and forwards it to
+the other port.
+--- PAGE 484 (Index 483) ---
+SECTION 15.1 CONNECTING DEVICES 447
+A repeater forwards every frame; it has no filtering capability.
+It is tempting to compare a repeater to an amplifier, but the comparison is inaccurate.
+An amplifier cannot discriminate between the intended signal and noise; it amplifies
+equally everything fed into it. A repeater does not amplify the signal; it regenerates the
+signal. When it receives a weakened or corrupted signal, it creates a copy, bit for bit, at
+the original strength.
+A repeater is a regenerator, not an amplifier.
+The location of a repeater on a link is vital. A repeater must be placed so that a sig­
+nal reaches it before any noise changes the meaning of any of its bits. A little noise can
+alter the precision of a bit's voltage without destroying its identity (see Figure 15.3). If
+the corrupted bit travels much farther, however, accumulated noise can change its
+meaning completely. At that point, the original voltage is not recoverable, and the error
+needs to be corrected. A repeater placed on the line before the legibility of the signal
+becomes lost can still read the signal well enough to determine the intended voltages
+and replicate them in their original form.
+Figure 15.3 Function of a repeater
+;:;::::·J,*lI(-~cJ"--'---""'.cJ---,--(lrr~
+signal signal
+a. Right-to-teft transmission.
+b. Left-to·right transmission.
+Active Hubs
+An active hub is actually a multipart repeater. It is normally used to create connections
+between stations in a physical star topology. We have seen examples of hubs in some
+Ethernet implementations (lOBase-T, for example). However, hubs can also be used to
+create multiple levels of hierarchy, as shown in Figure 15.4. The hierarchical use of
+hubs removes the length limitation of 10Base-T (100 m).
+Bridges
+A bridge operates in both the physical and the data link layer. As a physical layer
+device, it regenerates the signal it receives. As a data link layer device, the bridge can
+check the physical (MAC) addresses (source and destination) contained in the frame.
+--- PAGE 485 (Index 484) ---
+448 CHAPTER 15 CONNECTING LANs, BACKBONE NETWORKS, AND VIRTUAL LANs
+Figure 15.4 A hierarchy of hubs
+Filtering
+One may ask, What is the difference in functionality between a bridge and a repeater?
+A bridge has filtering capability. It can check the destination address of a frame and
+decide if the frame should be forwarded or dropped. If the frame is to be forwarded, the
+decision must specify the port. A bridge has a table that maps addresses to ports.
+A bridge has a table nsed in filtering decisions.
+Let us give an example. In Figure 15.5, two LANs are connected by a bridge. If a
+frame destined for station 712B13456142 arrives at port 1, the bridge consults its table to
+find the departing port. According to its table, frames for 7l2B 13456142 leave through
+port 1; therefore, there is no need for forwarding, and the frame is dropped. On the
+other hand, if a frame for 712B13456141 arrives at port 2, the departing port is port 1
+Figure 15.5 A bridge connecting two LANs
+5
+4
+3
+2
+1
+2 2
+1 f-+,---l1-l1
+5
+4
+3
+2
+I
+Address Port
+71:2B: 13:45:61:41 1
+71:2B: 13:45:61:42 1
+64:2B: 13:45:61:12 2
+64:28:13:45:61:13 2
+Bridge Table
+64:2B: 13:45:61: 12 64:2B: 13:45:61: 13
+LAN 2LAN 1
+71:28: 13:45:61:41 71 :2B: 13:45:61:42
+r r 0
+--- PAGE 486 (Index 485) ---
+SECTION 15.1 CONNECTING DEVICES 449
+and the frame is forwarded. In the first case, LAN 2 remains free of traffic; in the sec­
+ond case, both LANs have traffic. In our example, we show a two-port bridge; in reality
+a bridge usually has more ports.
+Note also that a bridge does not change the physical addresses contained in the
+frame.
+A bridge does not change the physical (MAC) addresses in a frame.
+Transparent Bridges
+A transparent bridge is a bridge in which the stations are completely unaware of the
+bridge's existence. If a bridge is added or deleted from the system, reconfiguration of
+the stations is unnecessary. According to the IEEE 802.1 d specification, a system
+equipped with transparent bridges must meet three criteria:
+I. Frames must be forwarded from one station to another.
+2. The forwarding table is automatically made by learning frame movements in the
+network.
+3. Loops in the system must be prevented.
+Forwarding A transparent bridge must correctly forward the frames, as discussed in
+the previous section.
+Learning The earliest bridges had forwarding tables that were static. The systems
+administrator would manually enter each table entry during bridge setup. Although the
+process was simple, it was not practical. If a station was added or deleted, the table had to
+be modified manually. The same was true if a station's MAC address changed, which is
+not a rare event. For example, putting in a new network card means a new MAC address.
+A better solution to the static table is a dynamic table that maps addresses to ports
+automatically. To make a table dynamic, we need a bridge that gradually learns from
+the frame movements. To do this, the bridge inspects both the destination and the
+source addresses. The destination address is used for the forwarding decision (table
+lookup); the source address is used for adding entries to the table and for updating pur­
+poses. Let us elaborate on this process by using Figure 15.6.
+1. When station A sends a frame to station D, the bridge does not have an entry for
+either D or A. The frame goes out from all three ports; the frame floods the net­
+work. However, by looking at the source address, the bridge learns that station A
+must be located on the LAN connected to port 1. This means that frames destined
+for A, in the future, must be sent out through port 1. The bridge adds this entry to
+its table. The table has its first entry now.
+2. When station E sends a frame to station A, the bridge has an entry for A, so it for­
+wards the frame only to port 1. There is no flooding. In addition, it uses the source
+address of the frame, E, to add a second entry to the table.
+3. When station B sends a frame to C, the bridge has no entry for C, so once again it
+floods the network and adds one more entry to the table.
+4. The process of learning continues as the bridge forwards frames.
+--- PAGE 487 (Index 486) ---
+450 CHAPTER 15 CONNECTING LANs, BACKBONE NETWORKS, AND VIRTUAL LANs
+Figure 15.6 A learning bridge and the process of learning
+r-------JL------, 3
+1--------1
+LAN 2 D-'""'T"--"---'""'T"--c:;]
+LAN 1 D-......I.--~-.....L._-c;;]
+LAN 3
+Address Port Address Port
+A 1
+Address Port
+A 1
+E 3
+Address Port
+A 1
+E 3
+B I
+a. Original b. After A sends
+a frame to D
+c. After E sends
+a frame to A
+d. After B sends
+a frame to C
+Loop Problem Transparent bridges work fine as long as there are no redundant
+bridges in the system. Systems administrators, however, like to have redundant bridges
+(more than one bridge between a pair of LANs) to make the system more reliable. If a
+bridge fails, another bridge takes over until the failed one is repaired or replaced.
+Redundancy can create loops in the system, which is very undesirable. Figure 15.7
+shows a very simple example of a loop created in a system with two LANs connected
+by two bridges.
+1. Station A sends a frame to station D. The tables of both bridges are empty. Both
+forward the frame and update their tables based on the source address A.
+2. Now there are two copies of the frame on LAN 2. The copy sent out by bridge 1 is
+received by bridge 2, which does not have any information about the destination
+address D; it floods the bridge. The copy sent out by bridge 2 is received by bridge 1
+and is sent out for lack of information about D. Note that each frame is handled
+separately because bridges, as two nodes on a network sharing the medium, use an
+access method such as CSMA/CD. The tables of both bridges are updated, but still
+there is no information for destination D.
+3. Now there are two copies of the frame on LAN 1. Step 2 is repeated, and both copies
+flood the network.
+4. The process continues on and on. Note that bridges are also repeaters and regen­
+erate frames. So in each iteration, there are newly generated fresh copies of the
+frames.
+To solve the looping problem, the IEEE specification requires that bridges use the
+spanning tree algorithm to create a loopless topology.
+--- PAGE 488 (Index 487) ---
+SECTION 15.1 CONNECTING DEVICES 451
+Figure 15.7 Loop problem in a learning bridge
+LAN 1 LAN 1
+LAN 2 LAN 2
+a. Station A sends a frame to station D b. Both bridges forward the frame
+c. Both bridges forward the frame d. Both bridges forward the frame
+Spanning Tree
+In graph theory, a spanning tree is a graph in which there is no loop. In a bridged
+LAN, this means creating a topology in which each LAN can be reached from any
+other LAN through one path only (no loop). We cannot change the physical topology of
+the system because of physical connections between cables and bridges, but we can
+create a logical topology that overlays the physical one. Figure 15.8 shows a system
+with four LANs and five bridges. We have shown the physical system and its represen­
+tation in graph theory. Although some textbooks represent the LANs as nodes and the
+bridges as the connecting arcs, we have shown both LANs and bridges as nodes. The
+connecting arcs show the connection of a LAN to a bridge and vice versa. To find
+the spanning tree, we need to assign a cost (metric) to each arc. The interpretation of
+the cost is left up to the systems administrator. It may be the path with minimum hops
+(nodes), the path with minimum delay, or the path with maximum bandwidth. If two
+ports have the same shortest value, the systems administrator just chooses one. We have
+chosen the minimum hops. However, as we will see in Chapter 22, the hop count is nor­
+mally 1 from a bridge to the LAN and 0 in the reverse direction.
+The process to find the spanning tree involves three steps:
+1. Every bridge has a built-in ID (normally the serial number, which is unique). Each
+bridge broadcasts this ID so that all bridges know which one has the smallest ID.
+The bridge with the smallest ID is selected as the root bridge (root of the tree). We
+assume that bridge B1 has the smallest ID. It is, therefore, selected as the root
+bridge.
+--- PAGE 489 (Index 488) ---
+452 CHAPTER 15 CONNECTING LANs, BACKBONE NETWORKS, AND VIRTUAL LANs
+Figure 15.8 A system of connected LANs and its graph representation
+LAN 2 LAN 3
+a. Actual system
+~o
+1----+-
+! ----+- 0 ----+-f---...:...----{ LAN 1 }---'------l
+~O ~l
+f---";"! ----+------( LAN 4 r--O-----+------l
+~O ~!
+o----+­LAN 2 )-------{
+~l
+b. Graph representation with cost assigned to each arc
+2. The algorithm tries to find the shortest path (a path with the shortest cost) from the root
+bridge to every other bridge or LAN. The shortest path can be found by examining the
+total cost from the root bridge to the destination. Figure 15.9 shows the shortest paths.
+3. The combination of the shortest paths creates the shortest tree, which is also shown
+in Figure 15.9.
+4. Based on the spanning tree, we mark the ports that are part of the spanning tree, the
+forwarding ports, which forward a frame that the bridge receives. We also mark
+those ports that are not part of the spanning tree, the blocking ports, which block
+the frames received by the bridge. Figure 15.10 shows the physical systems of
+LANs with forwarding points (solid lines) and blocking ports (broken lines).
+Note that there is only one single path from any LAN to any other LAN in the
+spanning tree system. This means there is only one single path from one LAN to any
+other LAN. No loops are created. You can prove to yourself that there is only one path
+from LAN 1 to LAN 2, LAN 3, or LAN 4. Similarly, there is only one path from LAN 2
+to LAN 1, LAN 3, and LAN 4. The same is true for LAN 3 and LAN 4.
+Dynamic Algorithm We have described the spanning tree algorithm as though it
+required manual entries. This is not true. Each bridge is equipped with a software pack­
+age that carries out this process dynamically. The bridges send special messages to one
+another, called bridge protocol data units (BPDUs), to update the spanning tree. The
+spanning tree is updated when there is a change in the system such as a failure of a
+bridge or an addition or deletion of bridges.
+--- PAGE 490 (Index 489) ---
+SECTION 15.1 CONNECTING DEVICES 453
+Figure 15.9 Finding the shortest paths and the spanning tree in a system of bridges
+,
+y
+---~2
+'- - - - - - - - - - - - - ~ 1
+m~!a-------< LAN 1 j------j
+, ,, ,
+, , : y LAN 2 j------j
+I I 1 1
+, : t LAN 4 ~------i
+, , 1
+~ ~ : : : : : : : : : : : : : :: : : : : : : ~-~ - - - - - - - - - - - - - - ~ 2
+a. Shortest paths
+Root of
+spanning tree
+------( LAN 1 }-------\
+j--------!B 3
+-~-
+1--------( LAN 4 }-------\B 5
+b. Spanning tree
+Figure 15.10 Forwarding and blocking ports after using spanning tree algorithm
+LANl
+Root bridge
+LAN 2
+1
+Igf
+';l2
+10
+.£
+1i=Q
+1
+LAN 4
+LAN 3
+Ports 2 and 3 of bridge B3 are blocking ports (no frame is sent out of these ports).
+Port 1 of bridge B5 is also a blocking port (no frame is sent out of this port).
+Source Routing Bridges
+Another way to prevent loops in a system with redundant bridges is to use source routing
+bridges. A transparent bridge's duties include filtering frames, forwarding, and blocking.
+In a system that has source routing bridges, these duties are performed by the source
+station and, to some extent, the destination station.
+--- PAGE 491 (Index 490) ---
+454 CHAPTER 15 CONNECTING LANs, BACKBONE NE7WORKS, AND VIRTUAL LANs
+In source routing, a sending station defines the bridges that the frame must visit.
+The addresses of these bridges are included in the frame. In other words, the frame con­
+tains not only the source and destination addresses, but also the addresses of all bridges
+to be visited.
+The source gets these bridge addresses through the exchange of special frames
+with the destination prior to sending the data frame.
+Source routing bridges were designed by IEEE to be used with Token Ring LANs.
+These LANs are not very common today.
+Bridges Connecting Different LANs
+Theoretically a bridge should be able to connect LANs using different protocols at the
+data link layer, such as an Ethernet LAN to a wireless LAN. However, there are many
+issues to be considered:
+o Frame format. Each LAN type has its own frame format (compare an Ethernet
+frame with a wireless LAN frame).
+D Maximum data size. If an incoming frame's size is too large for the destination
+LAN, the data must be fragmented into several frames. The data then need to be
+reassembled at the destination. However, no protocol at the data link layer allows
+the fragmentation and reassembly of frames. We will see in Chapter 19 that this is
+allowed in the network layer. The bridge must therefore discard any frames too
+large for its system.
+o Data rate. Each LAN type has its own data rate. (Compare the 10-Mbps data rate
+of an Ethernet with the I-Mbps data rate of a wireless LAN.) The bridge must
+buffer the frame to compensate for this difference.
+D Bit order. Each LAN type has its own strategy in the sending of bits. Some send
+the most significant bit in a byte first; others send the least significant bit first.
+o Security. Some LANs, such as wireless LANs, implement security measures in
+the data link layer. Other LANs, such as Ethernet, do not. Security often involves
+encryption (see Chapter 30). When a bridge receives a frame from a wireless LAN,
+it needs to decrypt the message before forwarding it to an Ethernet LAN.
+D Multimedia support. Some LANs support multimedia and the quality of services
+needed for this type of communication; others do not.
+Two-Layer Switches
+When we use the term switch, we must be careful because a switch can mean two dif­
+ferent things. We must clarify the term by adding the level at which the device operates.
+We can have a two-layer switch or a three-layer switch. A three-layer switch is used at
+the network layer; it is a kind of router. The two-layer switch performs at the physical
+and data link layers.
+A two-layer switch is a bridge, a bridge with many ports and a design that allows
+better (faster) performance. A bridge with a few ports can connect a few LANs
+together. A bridge with many ports may be able to allocate a unique port to each station,
+with each station on its own independent entity. This means no competing traffic (no
+collision, as we saw in Ethernet).
+--- PAGE 492 (Index 491) ---
+SECTION 15.1 CONNECTING DEVICES 455
+A two-layer switch, as a bridge does, makes a filtering decision based on the MAC
+address of the frame it received. However, a two-layer switch can be more sophisti­
+cated. It can have a buffer to hold the frames for processing. It can have a switching fac­
+tor that forwards the frames faster. Some new two-layer switches, called cut-through
+switches, have been designed to forward the frame as soon as they check the MAC
+addresses in the header of the frame.
+Routers
+A router is a three-layer device that routes packets based on their logical addresses
+(host-to-host addressing). A router normally connects LANs and WANs in the Internet
+and has a routing table that is used for making decisions about the route. The routing
+tables are normally dynamic and are updated using routing protocols. We discuss rout­
+ers and routing in greater detail in Chapters 19 and 21. Figure 15.11 shows a part of the
+Internet that uses routers to connect LANs and WANs.
+Figure 15.11 Routers connecting independent LANs and WANs
+WAN
+----------------------~
+To the rest
+of the Internet
+Three- Layer Switches
+A three-layer switch is a router, but a faster and more sophisticated. The switching fabric
+in a three-layer switch allows faster table lookup and forwarding. In this book, we use
+the terms router and three-layer switch interchangeably.
+Gateway
+Although some textbooks use the terms gateway and router interchangeably, most of the
+literature distinguishes between the two. A gateway is normally a computer that operates
+in all five layers of the Internet or seven layers of OSI model. A gateway takes an
+application message, reads it, and interprets it. This means that it can be used as a
+connecting device between two internetworks that use different models. For example,
+a network designed to use the OSI model can be connected to another network using
+the Internet model. The gateway connecting the two systems can take a frame as
+it arrives from the first system, move it up to the OSI application layer, and remove the
+message.
+--- PAGE 493 (Index 492) ---
+456 CHAPTER 15 CONNECTING LANs, BACKBONE NETWORKS, AND VIRTUAL LANs
+Gateways can provide security. In Chapter 32, we learn that the gateway is used to
+filter unwanted application-layer messages.
+15.2 BACKBONE NETWORKS
+Some connecting devices discussed in this chapter can be used to connect LANs in a
+backbone network. A backbone network allows several LANs to be connected. In a
+backbone network, no station is directly connected to the backbone; the stations are
+part of a LAN, and the backbone connects the LANs. The backbone is itself a LAN
+that uses a LAN protocol such as Ethernet; each connection to the backbone is itself
+another LAN.
+Although many different architectures can be used for a backbone, we discuss only
+the two most common: the bus and the star.
+Bus Backbone
+In a bus backbone, the topology of the backbone is a bus. The backbone itself can use
+one of the protocols that support a bus topology such as lOBase5 or lOBase2.
+In a bus backbone, the topology of the backbone is a bus.
+Bus backbones are normally used as a distribution backbone to connect different
+buildings in an organization. Each building can comprise either a single LAN or
+another backbone (normally a star backbone). A good example of a bus backbone is
+one that connects single- or multiple-floor buildings on a campus. Each single-floor
+building usually has a single LAN. Each multiple-floor building has a backbone (usu­
+ally a star) that connects each LAN on a floor. A bus backbone can interconnect these
+LANs and backbones. Figure 15.12 shows an example of a bridge-based backbone with
+four LANs.
+Figure 15.12 Bus backbone
+--- PAGE 494 (Index 493) ---
+SECTION 15.2 BACKBONE NETWORKS 457
+In Figure 15.12, if a station in a LAN needs to send a frame to another station in
+the same LAN, the corresponding bridge blocks the frame; the frame never reaches
+the backbone. However, if a station needs to send a frame to a station in another LAN, the
+bridge passes the frame to the backbone, which is received by the appropriate bridge
+and is delivered to the destination LAN. Each bridge connected to the backbone has a
+table that shows the stations on the LAN side of the bridge. The blocking or delivery of
+a frame is based on the contents of this table.
+Star Backbone
+In a star backbone, sometimes called a collapsed or switched backbone, the topology
+of the backbone is a star. In this configuration, the backbone is just one switch (that is
+why it is called, erroneously, a collapsed backbone) that connects the LANs.
+In a star backbone, the topology of the backbone is a star;
+the backbone is just one switch.
+Figure 15.13 shows a star backbone. Note that, in this configuration, the switch
+does the job of the backbone and at the same time connects the LANs.
+Figure 15.13 Star backbone
+Backbone
+Switch
+Star backbones are mostly used as a distribution backbone inside a building. In a
+multifloor building, we usually find one LAN that serves each particular floor. A star
+backbone connects these LANs. The backbone network, which is just a switch, can be
+installed in the basement or the first floor, and separate cables can run from the switch
+to each LAN. If the individual LANs have a physical star topology, either the hubs (or
+switches) can be installed in a closet on the corresponding floor, or all can be installed
+close to the switch. We often find a rack or chassis in the basement where the backbone
+switch and all hubs or switches are installed.
+Connecting Remote LANs
+Another common application for a backbone network is to connect remote LANs.
+This type of backbone network is useful when a company has several offices with
+LANs and needs to connect them. The connection can be done through bridges,
+--- PAGE 495 (Index 494) ---
+458 CHAPTER 15 CONNECTING IANs, BACKBONE NETWORKS, AND VIRTUAL IANs
+sometimes called remote bridges. The bridges act as connecting devices connecting
+LANs and point-to-point networks, such as leased telephone lines or ADSL lines.
+The point-to-point network in this case is considered a LAN without stations. The
+point-to-point link can use a protocol such as PPP. Figure 15.14 shows a backbone
+connecting remote LANs.
+Figure 15.14 Connecting remote IANs with bridges
+Point-to-point link
+Bridge
+LAN 2
+A point-to-point link acts as a LAN in a remote backbone connected by remote bridges.
+15.3 VIRTUAL LANs
+A station is considered part of a LAN if it physically belongs to that LAN. The criterion
+of membership is geographic. What happens if we need a virtual connection between
+two stations belonging to two different physical LANs? We can roughly define a virtual
+local area network (VLAN) as a local area network configured by software, not by
+physical wiring.
+Let us use an example to elaborate on this definition. Figure 15.15 shows a
+switched LAN in an engineering firm in which 10 stations are grouped into three LANs
+that are connected by a switch. The first four engineers work together as the first group,
+the next three engineers work together as the second group, and the last three engineers
+work together as the third group. The LAN is configured to allow this arrangement.
+But what would happen if the administrators needed to move two engineers from
+the first group to the third group, to speed up the project being done by the third group?
+The LAN configuration would need to be changed. The network technician must
+rewire. The problem is repeated if, in another week, the two engineers move back to
+their previous group. In a switched LAN, changes in the work group mean physical
+changes in the network configuration.
