@@ -47,10 +47,10 @@ const TOPICS_U2_EXT = {
       primaryUses: ["Ethernet links, Wi-Fi associations, Point-to-Point serial links, cellular radio links"]
     },
     image: {
-      url: "assets/images/topic1/dll-design-issues-architecture.svg",
+      url: "assets/images/unit2/topic1/dll-design-issues-architecture.svg",
       caption: "Figure: Data Link Layer Design Issues & Frame Encapsulation across Intermediate Network Nodes."
     },
-    "imageUrl": "assets/images/topic1/dll-design-issues-architecture.svg",
+    "imageUrl": "assets/images/unit2/topic1/dll-design-issues-architecture.svg",
     "imageCaption": "Figure 1.7: Major Design Issues of the Data Link Layer (Services, Framing, Flow, and Error Control).",
     sections: {
       overview: "",

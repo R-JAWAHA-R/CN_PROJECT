@@ -65,7 +65,7 @@ var TOPICS_U2 = {
         "Ethernet LANs, Point-to-Point Protocol (PPP), HDLC serial links, Wi-Fi 802.11"
       ]
     },
-    "imageUrl": "assets/images/topic1/bit-stuffing-mechanism.svg",
+    "imageUrl": "assets/images/unit2/topic1/bit-stuffing-mechanism.svg",
     "imageCaption": "Figure: Framing Boundary Delineation & Bit Stuffing with 01111110 Flag Delimiters.",
     "sections": {
       "overview": "the Data Link Layer function in which a continuous sequence of bits received from the Physical Layer is organized into protocol-defined <strong>frames</strong>. The protocol establishes exact rules allowing the receiver to recognize frame boundaries, interpret header metadata, and safely extract the payload for delivery to the Network Layer.",
@@ -174,7 +174,7 @@ var TOPICS_U2 = {
           "url": "https://standards.ieee.org"
         }
       ],
-      "imageUrl": "assets/images/topic1/bit-stuffing-mechanism.svg",
+      "imageUrl": "assets/images/unit2/topic1/bit-stuffing-mechanism.svg",
       "imageCaption": "Figure: Framing Boundary Delineation & Bit Stuffing with 01111110 Flag Delimiters."
     },
     "prevTopicId": "dll-design-issues",
@@ -294,12 +294,12 @@ var TOPICS_U2 = {
           "url": "https://www.rfc-editor.org/rfc/rfc1662"
         }
       ],
-      "imageUrl": "assets/images/topic1/bit-stuffing-mechanism.svg",
+      "imageUrl": "assets/images/unit2/topic1/bit-stuffing-mechanism.svg",
       "imageCaption": "Figure: Byte Stuffing (Character-Oriented) vs. Bit Stuffing (Bit-Oriented) Delimiting."
     },
     "prevTopicId": "framing",
     "nextTopicId": "bit-stuffing",
-    "imageUrl": "assets/images/topic1/bit-stuffing-mechanism.svg",
+    "imageUrl": "assets/images/unit2/topic1/bit-stuffing-mechanism.svg",
     "imageCaption": "Figure: Byte Stuffing (Character-Oriented) vs. Bit Stuffing (Bit-Oriented) Delimiting."
   },
   "bit-stuffing": {
@@ -412,12 +412,12 @@ var TOPICS_U2 = {
           "url": "https://www.iso.org"
         }
       ],
-      "imageUrl": "assets/images/topic1/bit-stuffing-mechanism.svg",
+      "imageUrl": "assets/images/unit2/topic1/bit-stuffing-mechanism.svg",
       "imageCaption": "Figure: Bit Stuffing Rule: Zero-bit inserted after every 5 consecutive 1s in payload."
     },
     "prevTopicId": "byte-stuffing",
     "nextTopicId": "error-detection",
-    "imageUrl": "assets/images/topic1/bit-stuffing-mechanism.svg",
+    "imageUrl": "assets/images/unit2/topic1/bit-stuffing-mechanism.svg",
     "imageCaption": "Figure: Bit Stuffing Rule: Zero-bit inserted after every 5 consecutive 1s in payload."
   },
   "error-detection": {
@@ -546,7 +546,7 @@ var TOPICS_U2 = {
     },
     "prevTopicId": "bit-stuffing",
     "nextTopicId": "parity",
-    "imageUrl": "assets/images/topic1/error-control-taxonomy.svg",
+    "imageUrl": "assets/images/unit2/topic1/error-control-taxonomy.svg",
     "imageCaption": "Figure: Error Detection Techniques: Parity Check, Checksum, and Cyclic Redundancy Check (CRC)."
   },
   "parity": {
@@ -652,7 +652,7 @@ var TOPICS_U2 = {
     },
     "prevTopicId": "error-detection",
     "nextTopicId": "checksum",
-    "imageUrl": "assets/images/topic1/parity-generation-checking.svg",
+    "imageUrl": "assets/images/unit2/topic1/parity-generation-checking.svg",
     "imageCaption": "Figure: Simple Parity & Two-Dimensional Parity Check Architecture."
   },
   "checksum": {
@@ -759,7 +759,7 @@ var TOPICS_U2 = {
     },
     "prevTopicId": "parity",
     "nextTopicId": "hamming-code",
-    "imageUrl": "assets/images/topic1/internet-checksum-calculation.svg",
+    "imageUrl": "assets/images/unit2/topic1/internet-checksum-calculation.svg",
     "imageCaption": "Figure: Internet Checksum 16-bit 1's Complement Addition Architecture."
   },
   "hamming-code": {
@@ -910,7 +910,7 @@ var TOPICS_U2 = {
     },
     "prevTopicId": "checksum",
     "nextTopicId": "crc",
-    "imageUrl": "assets/images/topic1/hamming-code-7-4-matrix.svg",
+    "imageUrl": "assets/images/unit2/topic1/hamming-code-7-4-matrix.svg",
     "imageCaption": "Figure: Hamming(7,4) Single Error Correction, Double Error Detection (SECDED) Venn Diagram."
   },
   "crc": {
@@ -1061,7 +1061,7 @@ var TOPICS_U2 = {
     },
     "prevTopicId": "hamming-code",
     "nextTopicId": "flow-control",
-    "imageUrl": "assets/images/topic1/crc-modulo-2-division.svg",
+    "imageUrl": "assets/images/unit2/topic1/crc-modulo-2-division.svg",
     "imageCaption": "Figure: Cyclic Redundancy Check (CRC) Polynomial Division Hardware Architecture with Linear Feedback Shift Registers."
   },
   "flow-control": {
@@ -1112,7 +1112,7 @@ var TOPICS_U2 = {
         "Ethernet PAUSE frames (802.3x), TCP Sliding Window, serial XON/XOFF"
       ]
     },
-    "imageUrl": "assets/images/topic1/flow-control-models.svg",
+    "imageUrl": "assets/images/unit2/topic1/flow-control-models.svg",
     "imageCaption": "Figure: Flow Control Mechanism: Preventing Fast Sender from Overwhelming Slow Receiver.",
     "sections": {
       "overview": "the set of mechanisms that regulates the amount or rate of unacknowledged data a sender may transmit, matching transmission speed to the receiving station's memory and processing capacity.",
@@ -1164,7 +1164,7 @@ var TOPICS_U2 = {
           "url": "https://www.pearson.com"
         }
       ],
-      "imageUrl": "assets/images/topic1/flow-control-models.svg",
+      "imageUrl": "assets/images/unit2/topic1/flow-control-models.svg",
       "imageCaption": "Figure: Flow Control Mechanism: Preventing Fast Sender from Overwhelming Slow Receiver."
     },
     "prevTopicId": "crc",
@@ -1222,7 +1222,7 @@ var TOPICS_U2 = {
         "TFTP, simple embedded RF links, legacy serial modems"
       ]
     },
-    "imageUrl": "assets/images/topic1/flow-control-models.svg",
+    "imageUrl": "assets/images/unit2/topic1/flow-control-models.svg",
     "imageCaption": "Figure: Stop-and-Wait ARQ on Noisy Channels: Timer, Retransmission, and Alternating 0/1 ACKs.",
     "sections": {
       "overview": "a fundamental Automatic Repeat reQuest (ARQ) protocol in which the sender transmits a single frame and waits for an acknowledgment from the receiver before dispatching the subsequent frame.",
@@ -1274,7 +1274,7 @@ var TOPICS_U2 = {
           "url": "https://www.pearson.com"
         }
       ],
-      "imageUrl": "assets/images/topic1/flow-control-models.svg",
+      "imageUrl": "assets/images/unit2/topic1/flow-control-models.svg",
       "imageCaption": "Figure: Stop-and-Wait ARQ on Noisy Channels: Timer, Retransmission, and Alternating 0/1 ACKs."
     },
     "prevTopicId": "simplex-protocol",
@@ -1383,7 +1383,7 @@ var TOPICS_U2 = {
     },
     "prevTopicId": "stop-and-wait",
     "nextTopicId": "go-back-n",
-    "imageUrl": "assets/images/topic2/sliding-window-frame-sequence.svg",
+    "imageUrl": "assets/images/unit2/topic2/sliding-window-frame-sequence.svg",
     "imageCaption": "Figure: General Sliding Window Protocol Architecture: Send Window, Receive Window, and Buffer Slots."
   },
   "go-back-n": {
@@ -1737,7 +1737,7 @@ var TOPICS_U2 = {
     },
     "prevTopicId": "collision-free-protocols",
     "nextTopicId": "mac-address",
-    "imageUrl": "assets/images/topic6/ethernet-architecture-overview.svg",
+    "imageUrl": "assets/images/unit2/topic6/ethernet-architecture-overview.svg",
     "imageCaption": "Figure: Ethernet IEEE 802.3 Architecture, 10BASE-T/100BASE-TX Topology, and CSMA/CD Medium Access."
   },
   "mac-address": {
@@ -1856,7 +1856,7 @@ var TOPICS_U2 = {
     },
     "prevTopicId": "ethernet",
     "nextTopicId": "wireless-lan-protocols",
-    "imageUrl": "assets/images/topic6/mac-address-format-structure.svg",
+    "imageUrl": "assets/images/unit2/topic6/mac-address-format-structure.svg",
     "imageCaption": "Figure: 48-bit Ethernet MAC Address Structure: 24-bit OUI (IEEE Assigned) + 24-bit NIC Serial Identifier."
   },
   "arp": {
@@ -1966,7 +1966,7 @@ var TOPICS_U2 = {
     },
     "prevTopicId": "network-devices",
     "nextTopicId": "vlan",
-    "imageUrl": "assets/images/topic10/arp-request-broadcast-reply-unicast.svg",
+    "imageUrl": "assets/images/unit2/topic10/arp-request-broadcast-reply-unicast.svg",
     "imageCaption": "Figure: Address Resolution Protocol (ARP): Resolving 32-bit IP Addresses to 48-bit MAC Hardware Addresses."
   },
   "vlan": {
@@ -2074,7 +2074,7 @@ var TOPICS_U2 = {
     },
     "prevTopicId": "arp",
     "nextTopicId": "network-layer",
-    "imageUrl": "assets/images/topic9/vlan-802-1q-tagging-trunking.svg",
+    "imageUrl": "assets/images/unit2/topic9/vlan-802-1q-tagging-trunking.svg",
     "imageCaption": "Figure: Virtual LANs (IEEE 802.1Q): Logical Network Segmentation within Physical Switches."
   }
 };
