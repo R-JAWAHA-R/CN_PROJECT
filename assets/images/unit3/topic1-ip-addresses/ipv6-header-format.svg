@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 20px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 13px; fill: #475569; }
+      .field-name { font-size: 13px; font-weight: bold; fill: #ffffff; text-anchor: middle; }
+      .field-bits { font-size: 10px; fill: rgba(255,255,255,0.85); text-anchor: middle; }
+    </style>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="400" y="35" text-anchor="middle" class="title">IPv6 Base Header Format (Fixed 40 Bytes)</text>
+  <text x="400" y="55" text-anchor="middle" class="sub">Simplified, fixed-size header for fast router processing (Streamlined compared to IPv4)</text>
+
+  <!-- Bit ruler -->
+  <g transform="translate(60, 80)">
+    <text x="0" y="-8" font-size="11" fill="#64748b">Bit 0</text>
+    <text x="85" y="-8" font-size="11" fill="#64748b">4</text>
+    <text x="255" y="-8" font-size="11" fill="#64748b">12</text>
+    <text x="680" y="-8" text-anchor="end" font-size="11" fill="#64748b">31</text>
+    
+    <!-- Row 1: Version, Traffic Class, Flow Label -->
+    <rect x="0" y="0" width="85" height="55" rx="4" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+    <text x="42" y="27" class="field-name">Version</text>
+    <text x="42" y="44" class="field-bits">4 bits</text>
+
+    <rect x="85" y="0" width="170" height="55" rx="4" fill="#0284c7" stroke="#ffffff" stroke-width="2"/>
+    <text x="170" y="27" class="field-name">Traffic Class</text>
+    <text x="170" y="44" class="field-bits">8 bits (QoS / DiffServ)</text>
+
+    <rect x="255" y="0" width="425" height="55" rx="4" fill="#0d9488" stroke="#ffffff" stroke-width="2"/>
+    <text x="467" y="27" class="field-name">Flow Label</text>
+    <text x="467" y="44" class="field-bits">20 bits (Real-time flow tracking)</text>
+
+    <!-- Row 2: Payload Length, Next Header, Hop Limit -->
+    <rect x="0" y="60" width="340" height="55" rx="4" fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
+    <text x="170" y="87" class="field-name">Payload Length</text>
+    <text x="170" y="104" class="field-bits">16 bits (Data length after 40-byte header)</text>
+
+    <rect x="340" y="60" width="170" height="55" rx="4" fill="#d97706" stroke="#ffffff" stroke-width="2"/>
+    <text x="425" y="87" class="field-name">Next Header</text>
+    <text x="425" y="104" class="field-bits">8 bits (Protocol or Extension)</text>
+
+    <rect x="510" y="60" width="170" height="55" rx="4" fill="#ea580c" stroke="#ffffff" stroke-width="2"/>
+    <text x="595" y="87" class="field-name">Hop Limit</text>
+    <text x="595" y="104" class="field-bits">8 bits (Replaces IPv4 TTL)</text>
+
+    <!-- Row 3: Source IP Address -->
+    <rect x="0" y="120" width="680" height="65" rx="4" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+    <text x="340" y="150" class="field-name" font-size="15">Source IP Address</text>
+    <text x="340" y="170" class="field-bits" font-size="12">128 bits (16 octets)</text>
+
+    <!-- Row 4: Destination IP Address -->
+    <rect x="0" y="190" width="680" height="65" rx="4" fill="#7c3aed" stroke="#ffffff" stroke-width="2"/>
+    <text x="340" y="220" class="field-name" font-size="15">Destination IP Address</text>
+    <text x="340" y="240" class="field-bits" font-size="12">128 bits (16 octets)</text>
+  </g>
+
+  <!-- Key Improvements Box -->
+  <g transform="translate(60, 360)">
+    <rect width="680" height="95" rx="8" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.2" filter="url(#shadow)"/>
+    <text x="20" y="24" font-size="13" font-weight="bold" fill="#1e40af">Key IPv6 Header Optimizations Over IPv4:</text>
+    <text x="20" y="46" font-size="11.5" fill="#1e3a8a">• Fixed 40-byte base size enables hardware pipelined switching (no variable Options field in base header).</text>
+    <text x="20" y="66" font-size="11.5" fill="#1e3a8a">• No Checksum field: Avoids recomputing checksum at every router hop (relies on L2 CRC and L4 TCP/UDP).</text>
+    <text x="20" y="86" font-size="11.5" fill="#1e3a8a">• Extension Headers daisy-chained via 'Next Header' pointer for Routing, Fragmentation, and ESP Security.</text>
+  </g>
+</svg>

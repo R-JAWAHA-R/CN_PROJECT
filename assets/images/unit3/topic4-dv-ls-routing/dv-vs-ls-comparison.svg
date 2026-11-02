@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 20px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 13px; fill: #475569; }
+      .hdr { font-size: 13px; font-weight: bold; fill: #ffffff; text-anchor: middle; }
+      .crit { font-size: 11.5px; font-weight: bold; fill: #1e293b; }
+      .dv { font-size: 11px; fill: #1e40af; }
+      .ls { font-size: 11px; fill: #065f46; }
+    </style>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="400" y="35" text-anchor="middle" class="title">Distance Vector vs. Link State Routing</text>
+  <text x="400" y="55" text-anchor="middle" class="sub">Head-to-Head Comparison Across Key Networking Dimensions</text>
+
+  <!-- Table -->
+  <g transform="translate(35, 75)" filter="url(#shadow)">
+    <!-- Header -->
+    <rect x="0" y="0" width="190" height="36" rx="6 0 0 0" fill="#334155"/>
+    <text x="95" y="23" class="hdr">Comparison Factor</text>
+
+    <rect x="190" y="0" width="270" height="36" fill="#2563eb"/>
+    <text x="325" y="23" class="hdr">Distance Vector (e.g. RIP)</text>
+
+    <rect x="460" y="0" width="270" height="36" rx="0 6 0 0" fill="#059669"/>
+    <text x="595" y="23" class="hdr">Link State (e.g. OSPF, IS-IS)</text>
+
+    <!-- Row 1 -->
+    <g transform="translate(0, 36)">
+      <rect width="730" height="34" fill="#ffffff"/>
+      <text x="15" y="21" class="crit">Topology Knowledge</text>
+      <text x="205" y="21" class="dv">Local view only (distance to destinations via neighbors)</text>
+      <text x="475" y="21" class="ls">Global view (identical entire network map in LSDB)</text>
+    </g>
+
+    <!-- Row 2 -->
+    <g transform="translate(0, 70)">
+      <rect width="730" height="34" fill="#f8fafc"/>
+      <text x="15" y="21" class="crit">Core Algorithm</text>
+      <text x="205" y="21" class="dv">Distributed Bellman-Ford / Ford-Fulkerson</text>
+      <text x="475" y="21" class="ls">Dijkstra's Shortest Path First (SPF)</text>
+    </g>
+
+    <!-- Row 3 -->
+    <g transform="translate(0, 104)">
+      <rect width="730" height="34" fill="#ffffff"/>
+      <text x="15" y="21" class="crit">Convergence Speed</text>
+      <text x="205" y="21" class="dv">Slow (prone to Count-to-Infinity &amp; routing loops)</text>
+      <text x="475" y="21" class="ls">Very Fast (typically sub-second convergence)</text>
+    </g>
+
+    <!-- Row 4 -->
+    <g transform="translate(0, 138)">
+      <rect width="730" height="34" fill="#f8fafc"/>
+      <text x="15" y="21" class="crit">Update Transmission</text>
+      <text x="205" y="21" class="dv">Periodic full table broadcast to immediate neighbors</text>
+      <text x="475" y="21" class="ls">Event-driven incremental LSPs flooded to all nodes</text>
+    </g>
+
+    <!-- Row 5 -->
+    <g transform="translate(0, 172)">
+      <rect width="730" height="34" fill="#ffffff"/>
+      <text x="15" y="21" class="crit">Bandwidth Overhead</text>
+      <text x="205" y="21" class="dv">High steady-state overhead (sends entire table)</text>
+      <text x="475" y="21" class="ls">Low steady-state overhead (only HELLO + on changes)</text>
+    </g>
+
+    <!-- Row 6 -->
+    <g transform="translate(0, 206)">
+      <rect width="730" height="34" fill="#f8fafc"/>
+      <text x="15" y="21" class="crit">Memory &amp; CPU Usage</text>
+      <text x="205" y="21" class="dv">Minimal (stores only neighbor distance vectors)</text>
+      <text x="475" y="21" class="ls">Higher (stores complete graph, runs O(N log N) SPF)</text>
+    </g>
+
+    <!-- Row 7 -->
+    <g transform="translate(0, 240)">
+      <rect width="730" height="34" fill="#ffffff"/>
+      <text x="15" y="21" class="crit">Scalability Limit</text>
+      <text x="205" y="21" class="dv">Small networks (e.g. RIP limited to 15 hops)</text>
+      <text x="475" y="21" class="ls">Very Large (hierarchical multi-area scaling)</text>
+    </g>
+
+    <!-- Row 8 -->
+    <g transform="translate(0, 274)">
+      <rect width="730" height="34" fill="#f8fafc"/>
+      <text x="15" y="21" class="crit">Traffic Metric</text>
+      <text x="205" y="21" class="dv">Usually simple Hop Count</text>
+      <text x="475" y="21" class="ls">Configurable Link Cost based on Interface Bandwidth</text>
+    </g>
+
+    <!-- Row 9 -->
+    <g transform="translate(0, 308)">
+      <rect width="730" height="34" rx="0 0 6 6" fill="#ffffff"/>
+      <text x="15" y="21" class="crit">Typical Protocols</text>
+      <text x="205" y="21" class="dv" font-weight="bold">RIP v1/v2, RIPng, IGRP</text>
+      <text x="475" y="21" class="ls" font-weight="bold">OSPF v2/v3, IS-IS</text>
+    </g>
+  </g>
+
+  <!-- Summary Bottom Banner -->
+  <text x="400" y="465" text-anchor="middle" font-size="12" fill="#475569">Hybrid protocol note: EIGRP (Cisco) combines Distance Vector simplicity with Link State fast convergence via DUAL algorithm.</text>
+</svg>

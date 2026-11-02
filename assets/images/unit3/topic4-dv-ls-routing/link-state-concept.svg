@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 20px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 13px; fill: #475569; }
+      .step-t { font-size: 13px; font-weight: bold; fill: #1e40af; }
+      .step-d { font-size: 11px; fill: #334155; }
+    </style>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="400" y="38" text-anchor="middle" class="title">Link State Routing: The 5-Step Process</text>
+  <text x="400" y="58" text-anchor="middle" class="sub">How Every Router Independently Learns Complete Network Topology and Computes Shortest Paths</text>
+
+  <!-- 5 Cards Horizontal Flow -->
+  <g transform="translate(30, 95)">
+    <!-- Step 1 -->
+    <g transform="translate(0, 0)" filter="url(#shadow)">
+      <rect width="135" height="240" rx="8" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5"/>
+      <rect width="135" height="32" rx="8 8 0 0" fill="#eff6ff"/>
+      <circle cx="20" cy="16" r="10" fill="#2563eb"/>
+      <text x="20" y="20" text-anchor="middle" font-size="10" font-weight="bold" fill="#ffffff">1</text>
+      <text x="35" y="21" class="step-t">Discover</text>
+      <text x="12" y="60" class="step-d" font-weight="bold">Discover Neighbors:</text>
+      <text x="12" y="80" class="step-d">Send HELLO packet on every link.</text>
+      <text x="12" y="115" class="step-d">Learn immediate neighbor router identities &amp; network addresses.</text>
+      <rect x="15" y="180" width="105" height="40" rx="4" fill="#eff6ff"/>
+      <text x="67" y="204" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e40af">HELLO Packet</text>
+    </g>
+
+    <!-- Step 2 -->
+    <g transform="translate(150, 0)" filter="url(#shadow)">
+      <rect width="135" height="240" rx="8" fill="#ffffff" stroke="#059669" stroke-width="1.5"/>
+      <rect width="135" height="32" rx="8 8 0 0" fill="#ecfdf5"/>
+      <circle cx="20" cy="16" r="10" fill="#059669"/>
+      <text x="20" y="20" text-anchor="middle" font-size="10" font-weight="bold" fill="#ffffff">2</text>
+      <text x="35" y="21" class="step-t" fill="#047857">Measure</text>
+      <text x="12" y="60" class="step-d" font-weight="bold">Measure Link Cost:</text>
+      <text x="12" y="80" class="step-d">Send ECHO packet.</text>
+      <text x="12" y="115" class="step-d">Calculate Round-Trip Time (RTT) or assign administrative bandwidth metric.</text>
+      <rect x="15" y="180" width="105" height="40" rx="4" fill="#ecfdf5"/>
+      <text x="67" y="204" text-anchor="middle" font-size="10" font-weight="bold" fill="#065f46">ECHO / Delay</text>
+    </g>
+
+    <!-- Step 3 -->
+    <g transform="translate(300, 0)" filter="url(#shadow)">
+      <rect width="135" height="240" rx="8" fill="#ffffff" stroke="#d97706" stroke-width="1.5"/>
+      <rect width="135" height="32" rx="8 8 0 0" fill="#fffbeb"/>
+      <circle cx="20" cy="16" r="10" fill="#d97706"/>
+      <text x="20" y="20" text-anchor="middle" font-size="10" font-weight="bold" fill="#ffffff">3</text>
+      <text x="35" y="21" class="step-t" fill="#b45309">Build LSP</text>
+      <text x="12" y="60" class="step-d" font-weight="bold">Construct LSP:</text>
+      <text x="12" y="80" class="step-d">Build Link State Packet containing:</text>
+      <text x="12" y="105" class="step-d">• Router ID</text>
+      <text x="12" y="125" class="step-d">• Seq Number</text>
+      <text x="12" y="145" class="step-d">• (Neighbor, Cost)</text>
+      <rect x="15" y="180" width="105" height="40" rx="4" fill="#fef3c7"/>
+      <text x="67" y="204" text-anchor="middle" font-size="10" font-weight="bold" fill="#92400e">Build LSP</text>
+    </g>
+
+    <!-- Step 4 -->
+    <g transform="translate(450, 0)" filter="url(#shadow)">
+      <rect width="135" height="240" rx="8" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5"/>
+      <rect width="135" height="32" rx="8 8 0 0" fill="#f5f3ff"/>
+      <circle cx="20" cy="16" r="10" fill="#7c3aed"/>
+      <text x="20" y="20" text-anchor="middle" font-size="10" font-weight="bold" fill="#ffffff">4</text>
+      <text x="35" y="21" class="step-t" fill="#6d28d9">Flood LSP</text>
+      <text x="12" y="60" class="step-d" font-weight="bold">Reliable Flooding:</text>
+      <text x="12" y="80" class="step-d">Broadcast LSP to all interfaces.</text>
+      <text x="12" y="115" class="step-d">Routers acknowledge and reflood to guarantee identical LSDB globally.</text>
+      <rect x="15" y="180" width="105" height="40" rx="4" fill="#ede9fe"/>
+      <text x="67" y="204" text-anchor="middle" font-size="10" font-weight="bold" fill="#5b21b6">Flood All</text>
+    </g>
+
+    <!-- Step 5 -->
+    <g transform="translate(600, 0)" filter="url(#shadow)">
+      <rect width="135" height="240" rx="8" fill="#ffffff" stroke="#dc2626" stroke-width="1.5"/>
+      <rect width="135" height="32" rx="8 8 0 0" fill="#fef2f2"/>
+      <circle cx="20" cy="16" r="10" fill="#dc2626"/>
+      <text x="20" y="20" text-anchor="middle" font-size="10" font-weight="bold" fill="#ffffff">5</text>
+      <text x="35" y="21" class="step-t" fill="#b91c1c">Dijkstra</text>
+      <text x="12" y="60" class="step-d" font-weight="bold">Compute Paths:</text>
+      <text x="12" y="80" class="step-d">Run Dijkstra's SPF Algorithm locally on complete topology graph.</text>
+      <text x="12" y="130" class="step-d">Populate forwarding table with optimal next hops.</text>
+      <rect x="15" y="180" width="105" height="40" rx="4" fill="#fee2e2"/>
+      <text x="67" y="204" text-anchor="middle" font-size="10" font-weight="bold" fill="#991b1b">SPF Tree</text>
+    </g>
+  </g>
+
+  <!-- Contrast Callout -->
+  <g transform="translate(30, 360)">
+    <rect width="740" height="95" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" filter="url(#shadow)"/>
+    <text x="20" y="25" font-size="13" font-weight="bold" fill="#1e293b">Key Difference from Distance Vector:</text>
+    <text x="20" y="48" font-size="11.5" fill="#334155"><tspan font-weight="bold" fill="#2563eb">Link State (Global):</tspan> "Tell everybody about your immediate neighbors" ➔ Each router has a 100% complete, identical map of the entire network.</text>
+    <text x="20" y="70" font-size="11.5" fill="#334155"><tspan font-weight="bold" fill="#ea580c">Distance Vector (Decentralized):</tspan> "Tell your immediate neighbors about the whole world" ➔ Routers only know estimated distances from neighbors ("routing by rumor").</text>
+  </g>
+</svg>

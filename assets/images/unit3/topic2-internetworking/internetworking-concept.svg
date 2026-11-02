@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 520">
+  <defs>
+    <filter id="shadow1" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrow1" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#6B7280"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: 'Segoe UI', Arial, sans-serif; }
+    .title { font-size: 18px; font-weight: 700; fill: #1E293B; }
+    .subtitle { font-size: 11px; fill: #64748B; }
+    .net-label { font-size: 13px; font-weight: 600; }
+    .dev-label { font-size: 10px; fill: #374151; font-weight: 500; }
+    .desc { font-size: 9.5px; fill: #64748B; }
+  </style>
+
+  <!-- Background -->
+  <rect width="850" height="520" fill="#FAFBFC" rx="8"/>
+  <rect x="1" y="1" width="848" height="518" fill="none" stroke="#E2E8F0" rx="8" stroke-width="1.5"/>
+
+  <!-- Title -->
+  <text x="425" y="32" text-anchor="middle" class="title">Internetworking – Connecting Heterogeneous Networks</text>
+  <text x="425" y="50" text-anchor="middle" class="subtitle">Multiple network types interconnected through routers and gateways</text>
+
+  <!-- LAN 1 (Blue) - Top Left -->
+  <rect x="30" y="75" width="200" height="150" rx="12" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2" filter="url(#shadow1)"/>
+  <text x="130" y="98" text-anchor="middle" class="net-label" fill="#2563EB">LAN (Ethernet)</text>
+  <!-- PCs -->
+  <rect x="50" y="115" width="36" height="28" rx="3" fill="#BFDBFE" stroke="#3B82F6" stroke-width="1.2"/>
+  <rect x="56" y="110" width="24" height="18" rx="2" fill="#93C5FD" stroke="#3B82F6" stroke-width="1"/>
+  <text x="68" y="155" text-anchor="middle" class="desc">PC1</text>
+
+  <rect x="112" y="115" width="36" height="28" rx="3" fill="#BFDBFE" stroke="#3B82F6" stroke-width="1.2"/>
+  <rect x="118" y="110" width="24" height="18" rx="2" fill="#93C5FD" stroke="#3B82F6" stroke-width="1"/>
+  <text x="130" y="155" text-anchor="middle" class="desc">PC2</text>
+
+  <rect x="174" y="115" width="36" height="28" rx="3" fill="#BFDBFE" stroke="#3B82F6" stroke-width="1.2"/>
+  <rect x="180" y="110" width="24" height="18" rx="2" fill="#93C5FD" stroke="#3B82F6" stroke-width="1"/>
+  <text x="192" y="155" text-anchor="middle" class="desc">PC3</text>
+
+  <!-- Switch -->
+  <rect x="95" y="175" width="70" height="26" rx="4" fill="#3B82F6" stroke="#2563EB" stroke-width="1.2"/>
+  <text x="130" y="192" text-anchor="middle" fill="white" font-size="10" font-weight="600">Switch</text>
+  <line x1="68" y1="143" x2="115" y2="175" stroke="#3B82F6" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="130" y1="143" x2="130" y2="175" stroke="#3B82F6" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="192" y1="143" x2="145" y2="175" stroke="#3B82F6" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- WAN (Orange) - Top Right -->
+  <rect x="610" y="75" width="210" height="150" rx="12" fill="#FFF7ED" stroke="#F97316" stroke-width="2" filter="url(#shadow1)"/>
+  <text x="715" y="98" text-anchor="middle" class="net-label" fill="#EA580C">WAN (Wide Area)</text>
+  <!-- Nodes -->
+  <circle cx="660" cy="140" r="18" fill="#FED7AA" stroke="#F97316" stroke-width="1.5"/>
+  <text x="660" y="144" text-anchor="middle" font-size="8" fill="#9A3412">Node</text>
+  <circle cx="770" cy="130" r="18" fill="#FED7AA" stroke="#F97316" stroke-width="1.5"/>
+  <text x="770" y="134" text-anchor="middle" font-size="8" fill="#9A3412">Node</text>
+  <circle cx="715" cy="185" r="18" fill="#FED7AA" stroke="#F97316" stroke-width="1.5"/>
+  <text x="715" y="189" text-anchor="middle" font-size="8" fill="#9A3412">Node</text>
+  <line x1="676" y1="148" x2="700" y2="175" stroke="#F97316" stroke-width="1.2"/>
+  <line x1="755" y1="140" x2="730" y2="175" stroke="#F97316" stroke-width="1.2"/>
+  <line x1="678" y1="137" x2="752" y2="133" stroke="#F97316" stroke-width="1.2"/>
+
+  <!-- MAN (Green) - Bottom Left -->
+  <rect x="30" y="320" width="200" height="150" rx="12" fill="#ECFDF5" stroke="#10B981" stroke-width="2" filter="url(#shadow1)"/>
+  <text x="130" y="343" text-anchor="middle" class="net-label" fill="#059669">MAN (Metropolitan)</text>
+  <!-- Buildings -->
+  <rect x="55" y="360" width="30" height="45" rx="2" fill="#A7F3D0" stroke="#10B981" stroke-width="1.2"/>
+  <rect x="60" y="365" width="6" height="8" rx="1" fill="#059669"/>
+  <rect x="72" y="365" width="6" height="8" rx="1" fill="#059669"/>
+  <rect x="60" y="378" width="6" height="8" rx="1" fill="#059669"/>
+  <rect x="72" y="378" width="6" height="8" rx="1" fill="#059669"/>
+  <text x="70" y="418" text-anchor="middle" class="desc">Bldg A</text>
+
+  <rect x="155" y="360" width="30" height="45" rx="2" fill="#A7F3D0" stroke="#10B981" stroke-width="1.2"/>
+  <rect x="160" y="365" width="6" height="8" rx="1" fill="#059669"/>
+  <rect x="172" y="365" width="6" height="8" rx="1" fill="#059669"/>
+  <rect x="160" y="378" width="6" height="8" rx="1" fill="#059669"/>
+  <rect x="172" y="378" width="6" height="8" rx="1" fill="#059669"/>
+  <text x="170" y="418" text-anchor="middle" class="desc">Bldg B</text>
+
+  <line x1="85" y1="385" x2="155" y2="385" stroke="#10B981" stroke-width="2"/>
+  <text x="120" y="445" text-anchor="middle" class="desc">Fiber Ring</text>
+
+  <!-- Wireless LAN (Purple) - Bottom Right -->
+  <rect x="610" y="320" width="210" height="150" rx="12" fill="#F5F3FF" stroke="#8B5CF6" stroke-width="2" filter="url(#shadow1)"/>
+  <text x="715" y="343" text-anchor="middle" class="net-label" fill="#7C3AED">Wireless LAN (Wi-Fi)</text>
+  <!-- AP and devices -->
+  <circle cx="715" cy="380" r="14" fill="#C4B5FD" stroke="#8B5CF6" stroke-width="1.5"/>
+  <text x="715" y="384" text-anchor="middle" font-size="7" fill="#5B21B6" font-weight="600">AP</text>
+  <!-- Waves -->
+  <path d="M 695 368 Q 715 350 735 368" fill="none" stroke="#8B5CF6" stroke-width="1" opacity="0.5"/>
+  <path d="M 690 362 Q 715 340 740 362" fill="none" stroke="#8B5CF6" stroke-width="1" opacity="0.3"/>
+  <!-- Mobile devices -->
+  <rect x="660" y="415" width="20" height="30" rx="3" fill="#DDD6FE" stroke="#8B5CF6" stroke-width="1"/>
+  <text x="670" y="458" text-anchor="middle" class="desc">Phone</text>
+  <rect x="740" y="415" width="28" height="20" rx="3" fill="#DDD6FE" stroke="#8B5CF6" stroke-width="1"/>
+  <text x="754" y="448" text-anchor="middle" class="desc">Laptop</text>
+  <line x1="708" y1="392" x2="672" y2="415" stroke="#8B5CF6" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="722" y1="392" x2="750" y2="415" stroke="#8B5CF6" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- Central Routers/Gateways -->
+  <!-- Router 1 -->
+  <rect x="310" y="135" width="80" height="38" rx="6" fill="#1E293B" stroke="#0F172A" stroke-width="1.5" filter="url(#shadow1)"/>
+  <text x="350" y="150" text-anchor="middle" fill="#F1F5F9" font-size="10" font-weight="600">Router /</text>
+  <text x="350" y="163" text-anchor="middle" fill="#94A3B8" font-size="9">Gateway 1</text>
+
+  <!-- Router 2 -->
+  <rect x="460" y="135" width="80" height="38" rx="6" fill="#1E293B" stroke="#0F172A" stroke-width="1.5" filter="url(#shadow1)"/>
+  <text x="500" y="150" text-anchor="middle" fill="#F1F5F9" font-size="10" font-weight="600">Router /</text>
+  <text x="500" y="163" text-anchor="middle" fill="#94A3B8" font-size="9">Gateway 2</text>
+
+  <!-- Router 3 -->
+  <rect x="310" y="380" width="80" height="38" rx="6" fill="#1E293B" stroke="#0F172A" stroke-width="1.5" filter="url(#shadow1)"/>
+  <text x="350" y="395" text-anchor="middle" fill="#F1F5F9" font-size="10" font-weight="600">Router /</text>
+  <text x="350" y="408" text-anchor="middle" fill="#94A3B8" font-size="9">Gateway 3</text>
+
+  <!-- Router 4 -->
+  <rect x="460" y="380" width="80" height="38" rx="6" fill="#1E293B" stroke="#0F172A" stroke-width="1.5" filter="url(#shadow1)"/>
+  <text x="500" y="395" text-anchor="middle" fill="#F1F5F9" font-size="10" font-weight="600">Router /</text>
+  <text x="500" y="408" text-anchor="middle" fill="#94A3B8" font-size="9">Gateway 4</text>
+
+  <!-- Connections: LAN to Router 1 -->
+  <line x1="230" y1="155" x2="310" y2="155" stroke="#6B7280" stroke-width="2" marker-end="url(#arrow1)"/>
+  <!-- WAN to Router 2 -->
+  <line x1="540" y1="155" x2="610" y2="155" stroke="#6B7280" stroke-width="2" marker-end="url(#arrow1)"/>
+  <!-- MAN to Router 3 -->
+  <line x1="230" y1="399" x2="310" y2="399" stroke="#6B7280" stroke-width="2" marker-end="url(#arrow1)"/>
+  <!-- WLAN to Router 4 -->
+  <line x1="540" y1="399" x2="610" y2="399" stroke="#6B7280" stroke-width="2" marker-end="url(#arrow1)"/>
+
+  <!-- Inter-router links -->
+  <line x1="390" y1="154" x2="460" y2="154" stroke="#EF4444" stroke-width="2"/>
+  <line x1="390" y1="399" x2="460" y2="399" stroke="#EF4444" stroke-width="2"/>
+  <line x1="350" y1="173" x2="350" y2="380" stroke="#EF4444" stroke-width="2"/>
+  <line x1="500" y1="173" x2="500" y2="380" stroke="#EF4444" stroke-width="2"/>
+  <line x1="390" y1="165" x2="460" y2="388" stroke="#EF4444" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <line x1="460" y1="165" x2="390" y2="388" stroke="#EF4444" stroke-width="1.2" stroke-dasharray="4,3"/>
+
+  <!-- Central label -->
+  <rect x="385" y="260" width="80" height="36" rx="18" fill="#FEE2E2" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="425" y="283" text-anchor="middle" font-size="11" fill="#DC2626" font-weight="700">Internet</text>
+
+  <!-- Legend -->
+  <rect x="270" y="478" width="310" height="28" rx="6" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+  <rect x="282" y="487" width="12" height="10" rx="2" fill="#3B82F6"/>
+  <text x="300" y="496" font-size="9" fill="#475569">LAN</text>
+  <rect x="332" y="487" width="12" height="10" rx="2" fill="#F97316"/>
+  <text x="350" y="496" font-size="9" fill="#475569">WAN</text>
+  <rect x="382" y="487" width="12" height="10" rx="2" fill="#10B981"/>
+  <text x="400" y="496" font-size="9" fill="#475569">MAN</text>
+  <rect x="432" y="487" width="12" height="10" rx="2" fill="#8B5CF6"/>
+  <text x="450" y="496" font-size="9" fill="#475569">WLAN</text>
+  <rect x="492" y="487" width="12" height="10" rx="2" fill="#1E293B"/>
+  <text x="510" y="496" font-size="9" fill="#475569">Router/GW</text>
+</svg>

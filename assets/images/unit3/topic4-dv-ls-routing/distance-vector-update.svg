@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 20px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 13px; fill: #475569; }
+      .math { font-family: 'Cambria Math', 'Times New Roman', serif; font-size: 16px; font-weight: bold; fill: #1e40af; }
+      .th { font-size: 11px; font-weight: bold; fill: #ffffff; text-anchor: middle; }
+      .td { font-size: 11px; fill: #1e293b; text-anchor: middle; }
+    </style>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="400" y="38" text-anchor="middle" class="title">Distance Vector Update &amp; Bellman-Ford Equation</text>
+  <text x="400" y="58" text-anchor="middle" class="sub">How a Router Computes Least-Cost Path using Neighbor Vectors</text>
+
+  <!-- Formula Banner -->
+  <g transform="translate(60, 80)" filter="url(#shadow)">
+    <rect width="680" height="60" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="340" y="27" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e40af">Bellman-Ford Optimization Equation (Distributed Formulation):</text>
+    <text x="340" y="48" text-anchor="middle" class="math">D_x(y) = min_v { c(x, v) + D_v(y) }</text>
+  </g>
+
+  <!-- Left: Neighbor Vector Inflow -->
+  <g transform="translate(60, 160)" filter="url(#shadow)">
+    <rect width="210" height="190" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect width="210" height="30" rx="8 8 0 0" fill="#2563eb"/>
+    <text x="105" y="20" class="th">Received Vector from Neighbor V</text>
+    
+    <g transform="translate(15, 45)">
+      <text x="0" y="20" font-size="11" font-weight="bold" fill="#475569">Link Cost: c(X, V) = 2</text>
+      <line x1="0" y1="28" x2="180" y2="28" stroke="#e2e8f0"/>
+      <text x="0" y="50" font-size="11" fill="#1e293b">Dest A: D_v(A) = 5 ➔ 2+5 = 7</text>
+      <text x="0" y="75" font-size="11" fill="#1e293b">Dest B: D_v(B) = 3 ➔ 2+3 = <tspan font-weight="bold" fill="#059669">5</tspan></text>
+      <text x="0" y="100" font-size="11" fill="#1e293b">Dest C: D_v(C) = 8 ➔ 2+8 = 10</text>
+      <text x="0" y="125" font-size="11" fill="#1e293b">Dest D: D_v(D) = 1 ➔ 2+1 = <tspan font-weight="bold" fill="#059669">3</tspan></text>
+    </g>
+  </g>
+
+  <!-- Center Arrow -->
+  <g transform="translate(295, 230)">
+    <path d="M 0 20 L 70 20" stroke="#059669" stroke-width="3"/>
+    <polygon points="70,14 85,20 70,26" fill="#059669"/>
+    <text x="42" y="12" text-anchor="middle" font-size="11" font-weight="bold" fill="#059669">EVALUATE</text>
+    <text x="42" y="38" text-anchor="middle" font-size="9.5" fill="#475569">Compare vs Old</text>
+  </g>
+
+  <!-- Right: Router X Updated Table -->
+  <g transform="translate(400, 160)" filter="url(#shadow)">
+    <rect width="340" height="190" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect width="340" height="30" rx="8 8 0 0" fill="#059669"/>
+    <text x="170" y="20" class="th">Router X Forwarding Table (Updated)</text>
+
+    <!-- Table Header -->
+    <rect x="15" y="40" width="310" height="25" fill="#f1f5f9"/>
+    <text x="45" y="56" class="td" font-weight="bold">Dest</text>
+    <text x="110" y="56" class="td" font-weight="bold">Old Cost</text>
+    <text x="180" y="56" class="td" font-weight="bold">New Cost</text>
+    <text x="260" y="56" class="td" font-weight="bold">Next Hop</text>
+
+    <!-- Rows -->
+    <g transform="translate(15, 70)">
+      <text x="30" y="15" class="td">A</text>
+      <text x="95" y="15" class="td">6</text>
+      <text x="165" y="15" class="td">6 (No change)</text>
+      <text x="245" y="15" class="td">W</text>
+
+      <line x1="0" y1="24" x2="310" y2="24" stroke="#f1f5f9"/>
+
+      <text x="30" y="38" class="td">B</text>
+      <text x="95" y="38" class="td">7</text>
+      <text x="165" y="38" class="td" font-weight="bold" fill="#059669">5 (Cheaper!)</text>
+      <text x="245" y="38" class="td" font-weight="bold" fill="#059669">V</text>
+
+      <line x1="0" y1="47" x2="310" y2="47" stroke="#f1f5f9"/>
+
+      <text x="30" y="61" class="td">C</text>
+      <text x="95" y="61" class="td">9</text>
+      <text x="165" y="61" class="td">9 (No change)</text>
+      <text x="245" y="61" class="td">W</text>
+
+      <line x1="0" y1="70" x2="310" y2="70" stroke="#f1f5f9"/>
+
+      <text x="30" y="84" class="td">D</text>
+      <text x="95" y="84" class="td">∞</text>
+      <text x="165" y="84" class="td" font-weight="bold" fill="#059669">3 (New route!)</text>
+      <text x="245" y="84" class="td" font-weight="bold" fill="#059669">V</text>
+    </g>
+  </g>
+
+  <!-- Bottom Explanatory Callout -->
+  <g transform="translate(60, 370)">
+    <rect width="680" height="95" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.2" filter="url(#shadow)"/>
+    <text x="20" y="24" font-size="13" font-weight="bold" fill="#1e293b">Triggered Update Propagation Rule:</text>
+    <text x="20" y="46" font-size="11.5" fill="#334155">1. When Router X discovers an updated minimum cost (Dest B = 5, Dest D = 3), its distance vector changes.</text>
+    <text x="20" y="66" font-size="11.5" fill="#334155">2. Router X immediately sends its new distance vector to all of its neighbors (triggered update).</text>
+    <text x="20" y="86" font-size="11.5" fill="#64748b">3. Iteration continues until all nodes have matching, stable tables with no further cost changes (convergence reached).</text>
+  </g>
+</svg>

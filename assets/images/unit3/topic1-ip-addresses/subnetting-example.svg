@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 20px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 13px; fill: #475569; }
+      .box-title { font-size: 13px; font-weight: bold; fill: #1e293b; }
+      .val { font-size: 11px; fill: #334155; }
+      .bold { font-weight: bold; }
+    </style>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="400" y="35" text-anchor="middle" class="title">Subnetting a /24 Network into 4 Subnets (/26)</text>
+  <text x="400" y="55" text-anchor="middle" class="sub">Dividing 192.168.1.0/24 by borrowing 2 host bits (2² = 4 subnets, 2⁶ - 2 = 62 usable hosts each)</text>
+
+  <!-- Base Network Box -->
+  <rect x="220" y="75" width="360" height="65" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="2" filter="url(#shadow)"/>
+  <text x="400" y="100" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e40af">Original Block: 192.168.1.0/24</text>
+  <text x="400" y="122" text-anchor="middle" font-size="12" fill="#3b82f6">Total: 256 Addresses (254 Usable Hosts) | Mask: 255.255.255.0</text>
+
+  <!-- Split arrows -->
+  <path d="M 280 140 L 140 190" stroke="#64748b" stroke-width="2" stroke-dasharray="4,3"/>
+  <path d="M 360 140 L 310 190" stroke="#64748b" stroke-width="2" stroke-dasharray="4,3"/>
+  <path d="M 440 140 L 490 190" stroke="#64748b" stroke-width="2" stroke-dasharray="4,3"/>
+  <path d="M 520 140 L 660 190" stroke="#64748b" stroke-width="2" stroke-dasharray="4,3"/>
+
+  <!-- Subnet 1 -->
+  <g transform="translate(40, 195)">
+    <rect width="165" height="235" rx="8" fill="#ffffff" stroke="#10b981" stroke-width="1.8" filter="url(#shadow)"/>
+    <rect width="165" height="35" rx="8" fill="#ecfdf5"/>
+    <text x="82" y="23" text-anchor="middle" class="box-title" fill="#047857">Subnet 1 (00)</text>
+    <text x="12" y="60" class="val bold">Network ID:</text>
+    <text x="12" y="76" class="val" fill="#059669">192.168.1.0/26</text>
+    <text x="12" y="105" class="val bold">Host Range:</text>
+    <text x="12" y="121" class="val">192.168.1.1</text>
+    <text x="12" y="137" class="val">to 192.168.1.62</text>
+    <text x="12" y="165" class="val bold">Broadcast:</text>
+    <text x="12" y="181" class="val" fill="#dc2626">192.168.1.63</text>
+    <text x="12" y="210" class="val bold" fill="#2563eb">Usable: 62 Hosts</text>
+  </g>
+
+  <!-- Subnet 2 -->
+  <g transform="translate(225, 195)">
+    <rect width="165" height="235" rx="8" fill="#ffffff" stroke="#3b82f6" stroke-width="1.8" filter="url(#shadow)"/>
+    <rect width="165" height="35" rx="8" fill="#eff6ff"/>
+    <text x="82" y="23" text-anchor="middle" class="box-title" fill="#1d4ed8">Subnet 2 (01)</text>
+    <text x="12" y="60" class="val bold">Network ID:</text>
+    <text x="12" y="76" class="val" fill="#2563eb">192.168.1.64/26</text>
+    <text x="12" y="105" class="val bold">Host Range:</text>
+    <text x="12" y="121" class="val">192.168.1.65</text>
+    <text x="12" y="137" class="val">to 192.168.1.126</text>
+    <text x="12" y="165" class="val bold">Broadcast:</text>
+    <text x="12" y="181" class="val" fill="#dc2626">192.168.1.127</text>
+    <text x="12" y="210" class="val bold" fill="#2563eb">Usable: 62 Hosts</text>
+  </g>
+
+  <!-- Subnet 3 -->
+  <g transform="translate(410, 195)">
+    <rect width="165" height="235" rx="8" fill="#ffffff" stroke="#f59e0b" stroke-width="1.8" filter="url(#shadow)"/>
+    <rect width="165" height="35" rx="8" fill="#fffbeb"/>
+    <text x="82" y="23" text-anchor="middle" class="box-title" fill="#b45309">Subnet 3 (10)</text>
+    <text x="12" y="60" class="val bold">Network ID:</text>
+    <text x="12" y="76" class="val" fill="#d97706">192.168.1.128/26</text>
+    <text x="12" y="105" class="val bold">Host Range:</text>
+    <text x="12" y="121" class="val">192.168.1.129</text>
+    <text x="12" y="137" class="val">to 192.168.1.190</text>
+    <text x="12" y="165" class="val bold">Broadcast:</text>
+    <text x="12" y="181" class="val" fill="#dc2626">192.168.1.191</text>
+    <text x="12" y="210" class="val bold" fill="#2563eb">Usable: 62 Hosts</text>
+  </g>
+
+  <!-- Subnet 4 -->
+  <g transform="translate(595, 195)">
+    <rect width="165" height="235" rx="8" fill="#ffffff" stroke="#8b5cf6" stroke-width="1.8" filter="url(#shadow)"/>
+    <rect width="165" height="35" rx="8" fill="#f5f3ff"/>
+    <text x="82" y="23" text-anchor="middle" class="box-title" fill="#6d28d9">Subnet 4 (11)</text>
+    <text x="12" y="60" class="val bold">Network ID:</text>
+    <text x="12" y="76" class="val" fill="#7c3aed">192.168.1.192/26</text>
+    <text x="12" y="105" class="val bold">Host Range:</text>
+    <text x="12" y="121" class="val">192.168.1.193</text>
+    <text x="12" y="137" class="val">to 192.168.1.254</text>
+    <text x="12" y="165" class="val bold">Broadcast:</text>
+    <text x="12" y="181" class="val" fill="#dc2626">192.168.1.255</text>
+    <text x="12" y="210" class="val bold" fill="#2563eb">Usable: 62 Hosts</text>
+  </g>
+
+  <!-- Footer note -->
+  <text x="400" y="465" text-anchor="middle" font-size="12" fill="#475569">New Subnet Mask for all 4 subnets: 255.255.255.192 (/26 = 11111111.11111111.11111111.11000000)</text>
+</svg>

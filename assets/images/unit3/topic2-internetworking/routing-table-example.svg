@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 20px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 13px; fill: #475569; }
+      .th { font-size: 12px; font-weight: bold; fill: #ffffff; text-anchor: middle; }
+      .td { font-size: 12px; fill: #1e293b; text-anchor: middle; }
+      .td-mono { font-family: 'Consolas', monospace; font-size: 12px; fill: #1e293b; text-anchor: middle; }
+    </style>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="400" y="38" text-anchor="middle" class="title">Router Forwarding Table (Routing Table Anatomy)</text>
+  <text x="400" y="58" text-anchor="middle" class="sub">Routing decision via Longest Prefix Matching (LPM) on Destination IP</text>
+
+  <!-- Table Container -->
+  <g transform="translate(50, 85)" filter="url(#shadow)">
+    <!-- Table Header -->
+    <rect x="0" y="0" width="700" height="35" rx="6 6 0 0" fill="#1e293b"/>
+    <text x="80" y="22" class="th">Destination Network</text>
+    <text x="210" y="22" class="th">Subnet Mask</text>
+    <text x="320" y="22" class="th">Prefix</text>
+    <text x="430" y="22" class="th">Next-Hop IP</text>
+    <text x="540" y="22" class="th">Out Interface</text>
+    <text x="640" y="22" class="th">Metric / Cost</text>
+
+    <!-- Row 1: Directly Connected -->
+    <g transform="translate(0, 35)">
+      <rect width="700" height="36" fill="#ffffff"/>
+      <text x="80" y="22" class="td-mono" font-weight="bold" fill="#059669">192.168.1.0</text>
+      <text x="210" y="22" class="td-mono">255.255.255.0</text>
+      <text x="320" y="22" class="td">/24</text>
+      <text x="430" y="22" class="td" fill="#059669" font-weight="bold">Directly Connected</text>
+      <text x="540" y="22" class="td-mono">eth0</text>
+      <text x="640" y="22" class="td">0</text>
+    </g>
+
+    <!-- Row 2: Subnet with specific next hop -->
+    <g transform="translate(0, 71)">
+      <rect width="700" height="36" fill="#f8fafc"/>
+      <text x="80" y="22" class="td-mono" font-weight="bold" fill="#2563eb">10.0.0.0</text>
+      <text x="210" y="22" class="td-mono">255.0.0.0</text>
+      <text x="320" y="22" class="td">/8</text>
+      <text x="430" y="22" class="td-mono">192.168.1.254</text>
+      <text x="540" y="22" class="td-mono">eth0</text>
+      <text x="640" y="22" class="td">1 (OSPF)</text>
+    </g>
+
+    <!-- Row 3: Specific Subnet (/28) -->
+    <g transform="translate(0, 107)">
+      <rect width="700" height="36" fill="#ffffff"/>
+      <text x="80" y="22" class="td-mono" font-weight="bold" fill="#7c3aed">172.16.50.0</text>
+      <text x="210" y="22" class="td-mono">255.255.255.240</text>
+      <text x="320" y="22" class="td">/28</text>
+      <text x="430" y="22" class="td-mono">10.10.1.2</text>
+      <text x="540" y="22" class="td-mono">eth1</text>
+      <text x="640" y="22" class="td">3 (BGP)</text>
+    </g>
+
+    <!-- Row 4: Point to Point Link -->
+    <g transform="translate(0, 143)">
+      <rect width="700" height="36" fill="#f8fafc"/>
+      <text x="80" y="22" class="td-mono" font-weight="bold" fill="#059669">10.10.1.0</text>
+      <text x="210" y="22" class="td-mono">255.255.255.252</text>
+      <text x="320" y="22" class="td">/30</text>
+      <text x="430" y="22" class="td" fill="#059669" font-weight="bold">Directly Connected</text>
+      <text x="540" y="22" class="td-mono">eth1</text>
+      <text x="640" y="22" class="td">0</text>
+    </g>
+
+    <!-- Row 5: Host Route (/32) -->
+    <g transform="translate(0, 179)">
+      <rect width="700" height="36" fill="#ffffff"/>
+      <text x="80" y="22" class="td-mono" font-weight="bold" fill="#ea580c">198.51.100.1</text>
+      <text x="210" y="22" class="td-mono">255.255.255.255</text>
+      <text x="320" y="22" class="td">/32</text>
+      <text x="430" y="22" class="td-mono">10.10.1.2</text>
+      <text x="540" y="22" class="td-mono">eth1</text>
+      <text x="640" y="22" class="td">1 (Host Route)</text>
+    </g>
+
+    <!-- Row 6: Default Gateway -->
+    <g transform="translate(0, 215)">
+      <rect width="700" height="36" rx="0 0 6 6" fill="#eff6ff"/>
+      <text x="80" y="22" class="td-mono" font-weight="bold" fill="#dc2626">0.0.0.0</text>
+      <text x="210" y="22" class="td-mono">0.0.0.0</text>
+      <text x="320" y="22" class="td" font-weight="bold" fill="#dc2626">/0</text>
+      <text x="430" y="22" class="td-mono" font-weight="bold" fill="#dc2626">203.0.113.1</text>
+      <text x="540" y="22" class="td-mono" font-weight="bold">eth2</text>
+      <text x="640" y="22" class="td" fill="#dc2626">Default Route</text>
+    </g>
+  </g>
+
+  <!-- Explanation Box -->
+  <g transform="translate(50, 355)">
+    <rect width="700" height="110" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" filter="url(#shadow)"/>
+    <text x="20" y="25" font-size="13" font-weight="bold" fill="#1e293b">Longest Prefix Match (LPM) Rule:</text>
+    <text x="20" y="48" font-size="11.5" fill="#334155">When multiple table entries match an incoming destination IP, the router selects the match with the <tspan font-weight="bold" fill="#2563eb">highest prefix length</tspan> (most specific mask).</text>
+    <text x="20" y="70" font-size="11.5" fill="#334155">Example: An incoming packet for <tspan font-weight="bold">172.16.50.5</tspan> matches both /0 (default) and /28. The router forwards via <tspan font-weight="bold" fill="#7c3aed">eth1 (Next-hop: 10.10.1.2)</tspan> because /28 is more specific than /0.</text>
+    <text x="20" y="92" font-size="11.5" fill="#64748b">If no specific route matches, the packet falls through to the Default Route (0.0.0.0/0). If no default route exists, it is dropped with ICMP "Network Unreachable".</text>
+  </g>
+</svg>
