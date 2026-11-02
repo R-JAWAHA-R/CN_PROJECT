@@ -77,7 +77,7 @@ const KnowledgeGraphModule = {
       <!-- Graph Canvas Card -->
       <div class="study-card" style="margin-top: 1.5rem;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.75rem;">
-          <div style="font-size: 1rem; font-weight: 800; color: #1e293b; display: flex; align-items: center; gap: 0.5rem;">
+          <div class="text-slate-800 dark:text-slate-100" style="font-size: 1rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem;">
             <span>🕸️ Semantic Knowledge Graph</span>
             <span class="brand-badge" style="background: #ede7f6; color: #7c3aed;">34 Nodes</span>
           </div>
@@ -92,12 +92,12 @@ const KnowledgeGraphModule = {
           </div>
         </div>
 
-        <div style="width: 100%; height: 600px; background: #fafafa; border: 1px solid var(--border-light); border-radius: 14px; position: relative; overflow: hidden; box-shadow: inset 0 2px 8px rgba(0,0,0,0.02);">
+        <div class="bg-gray-50" style="width: 100%; height: 600px; border: 1px solid var(--border-light); border-radius: 14px; position: relative; overflow: hidden; box-shadow: inset 0 2px 8px rgba(0,0,0,0.02);">
           <canvas id="knowledge-graph-canvas" style="width: 100%; height: 100%; display: block;"></canvas>
           <div id="graph-node-tooltip" style="position: absolute; display: none; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(8px); color: #ffffff; padding: 0.5rem 0.85rem; border-radius: 8px; font-size: 0.8rem; pointer-events: none; z-index: 10; box-shadow: 0 10px 25px rgba(0,0,0,0.2);"></div>
         </div>
 
-        <div style="margin-top: 1rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: #64748b; flex-wrap: wrap; gap: 0.5rem;">
+        <div class="text-slate-500 dark:text-slate-300" style="margin-top: 1rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; flex-wrap: wrap; gap: 0.5rem;">
           <div>
             💡 <strong>Pro Tip:</strong> Hover over any node to highlight connections. Click to open its "Explain This" popover!
           </div>

@@ -5,7 +5,7 @@ const App = {
   activeUnit: "unit2",
   resourceFilter: "all",
 
-  init: function() {
+  init: function () {
     App.bindNavigation();
     App.bindKeyboardShortcuts();
 
@@ -20,7 +20,7 @@ const App = {
     }
   },
 
-  handleHashRoute: function() {
+  handleHashRoute: function () {
     const rawHash = window.location.hash.replace(/^#\/?/, '').trim();
     if (!rawHash || rawHash === 'home') {
       App.loadView('home', null, false);
@@ -41,7 +41,7 @@ const App = {
     }
   },
 
-  bindNavigation: function() {
+  bindNavigation: function () {
     document.querySelectorAll('[data-view]').forEach(el => {
       el.addEventListener('click', (e) => {
         e.preventDefault();
@@ -51,7 +51,7 @@ const App = {
     });
   },
 
-  loadTopic: function(topicId, updateHash = true) {
+  loadTopic: function (topicId, updateHash = true) {
     App.activeView = 'topic-' + topicId;
 
     if (updateHash) {
@@ -92,8 +92,8 @@ const App = {
       if (window.renderMathInElement) {
         renderMathInElement(mainContainer, {
           delimiters: [
-            {left: '$$', right: '$$', display: true},
-            {left: '$', right: '$', display: false}
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false }
           ],
           throwOnError: false
         });
@@ -105,7 +105,7 @@ const App = {
     }, 80);
   },
 
-  loadView: function(viewName, targetParam, updateHash = true) {
+  loadView: function (viewName, targetParam, updateHash = true) {
     App.activeView = viewName;
 
     if (updateHash) {
@@ -174,8 +174,8 @@ const App = {
       if (window.renderMathInElement) {
         renderMathInElement(mainContainer, {
           delimiters: [
-            {left: '$$', right: '$$', display: true},
-            {left: '$', right: '$', display: false}
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false }
           ],
           throwOnError: false
         });
@@ -187,7 +187,7 @@ const App = {
     }, 80);
   },
 
-  loadComparison: function(compKey, updateHash = true) {
+  loadComparison: function (compKey, updateHash = true) {
     if (updateHash) {
       location.hash = '#/comparisons/' + (compKey || '');
     }
@@ -195,8 +195,8 @@ const App = {
   },
 
   // 1. HOME DASHBOARD (GEEKSFORGEEKS PORTAL STYLE)
-  renderHomeDashboard: function(container) {
-    const totalCount = typeof getTotalTopicsCount === 'function' ? getTotalTopicsCount() : 90;
+  renderHomeDashboard: function (container) {
+    const totalCount = typeof getTotalTopicsCount === 'function' ? getTotalTopicsCount() : 168;
     const completed = (typeof completedTopics !== 'undefined' ? completedTopics.length : 0);
     const pct = Math.round((completed / totalCount) * 100);
 
@@ -206,13 +206,13 @@ const App = {
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div class="space-y-2 max-w-2xl">
             <div class="inline-flex items-center space-x-2 px-2.5 py-1 rounded-full bg-gfg-light dark:bg-gray-800 text-gfg-green border border-gfg-green/30 text-[11px] font-bold uppercase tracking-wider">
-              <span>Jabak Portal</span>
+              <span>Jabak </span>
               <span>•</span>
-              <span>Semester V Academic Syllabus</span>
+              <span>Created by Jabak & co.</span>
             </div>
             <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">JABAK Computer Networks Encyclopedia</h2>
             <p class="text-xs md:text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-              University-grade study portal and interactive practice suite covering all 5 curricular units, 90 comprehensive encyclopedic articles, interactive protocol laboratories, and GATE exam test sets.
+              University-grade study portal covering all 5 curricular units, ${totalCount} syllabus topics and lessons, interactive protocol laboratories, and GATE exam test sets.
             </p>
             <div class="flex flex-wrap gap-2 pt-2">
               <button onclick="App.loadView('unit1')" class="px-4 py-2 bg-gfg-green hover:bg-gfg-dark text-white rounded text-xs font-semibold shadow-sm transition-all flex items-center space-x-1.5">
@@ -245,48 +245,6 @@ const App = {
         </div>
       </div>
 
-      <!-- 4 Core Metric Stat Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <div class="bg-white dark:bg-gfg-darkcard p-4 rounded-lg border border-gray-200 dark:border-gfg-darkborder shadow-sm flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-lg bg-gfg-light dark:bg-gray-800 text-gfg-green flex items-center justify-center text-lg">
-            <i class="fa-solid fa-book-open"></i>
-          </div>
-          <div>
-            <div class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase">Curriculum</div>
-            <div class="text-base font-extrabold text-gray-900 dark:text-white">90 Full Topics</div>
-          </div>
-        </div>
-
-        <div class="bg-white dark:bg-gfg-darkcard p-4 rounded-lg border border-gray-200 dark:border-gfg-darkborder shadow-sm flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-blue-500 flex items-center justify-center text-lg">
-            <i class="fa-solid fa-toolbox"></i>
-          </div>
-          <div>
-            <div class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase">Interactive Tools</div>
-            <div class="text-base font-extrabold text-gray-900 dark:text-white">5 Simulators</div>
-          </div>
-        </div>
-
-        <div class="bg-white dark:bg-gfg-darkcard p-4 rounded-lg border border-gray-200 dark:border-gfg-darkborder shadow-sm flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-lg bg-purple-50 dark:bg-purple-900/30 text-purple-500 flex items-center justify-center text-lg">
-            <i class="fa-solid fa-graduation-cap"></i>
-          </div>
-          <div>
-            <div class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase">Exam Practice</div>
-            <div class="text-base font-extrabold text-gray-900 dark:text-white">50+ GATE MCQs</div>
-          </div>
-        </div>
-
-        <div class="bg-white dark:bg-gfg-darkcard p-4 rounded-lg border border-gray-200 dark:border-gfg-darkborder shadow-sm flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-lg bg-amber-50 dark:bg-amber-900/30 text-amber-500 flex items-center justify-center text-lg">
-            <i class="fa-solid fa-scale-balanced"></i>
-          </div>
-          <div>
-            <div class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase">Comparisons</div>
-            <div class="text-base font-extrabold text-gray-900 dark:text-white">12 Matrices</div>
-          </div>
-        </div>
-      </div>
 
       <!-- Curriculum Units (5 Units Grid) -->
       <div class="mb-8">
@@ -430,7 +388,7 @@ const App = {
   },
 
   // 2. MASTER TOPIC DIRECTORY (WIKIPEDIA CATALOG)
-  renderMasterTopicDirectory: function(container) {
+  renderMasterTopicDirectory: function (container) {
     container.innerHTML = `
       <div class="welcome-banner" style="background: linear-gradient(100deg, #f0fdf4 0%, #e0f2fe 100%);">
         <div class="welcome-text">
@@ -575,7 +533,7 @@ const App = {
   },
 
   // 3. INTERACTIVE LABS HUB
-  renderInteractiveLabsHub: function(container) {
+  renderInteractiveLabsHub: function (container) {
     container.innerHTML = `
       <div class="welcome-banner" style="background: linear-gradient(100deg, #e0f2fe 0%, #ede7f6 100%);">
         <div class="welcome-text">
@@ -688,7 +646,7 @@ const App = {
   },
 
   // 4. RESOURCE HUB
-  renderResourcesHub: function(container) {
+  renderResourcesHub: function (container) {
     container.innerHTML = `
       <div class="welcome-banner" style="background: linear-gradient(100deg, #dcfce7 0%, #e0f2fe 100%);">
         <div class="welcome-text">
@@ -713,12 +671,12 @@ const App = {
     App.renderResourceCards();
   },
 
-  filterResources: function(cat) {
+  filterResources: function (cat) {
     App.resourceFilter = cat;
     App.renderResourcesHub(document.getElementById('main-content-container'));
   },
 
-  renderResourceCards: function() {
+  renderResourceCards: function () {
     const grid = document.getElementById('resources-cards-grid');
     if (!grid) return;
 
@@ -755,7 +713,7 @@ const App = {
   },
 
   // 5. "EXPLAIN THIS" POPOVER SYSTEM
-  openExplainModal: function(conceptId) {
+  openExplainModal: function (conceptId) {
     const c = CONCEPT_REGISTRY[conceptId];
     if (!c) return;
 
@@ -792,9 +750,9 @@ const App = {
             <div style="font-size: 0.75rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.35rem;">Prerequisites:</div>
             <div style="display: flex; gap: 0.35rem; flex-wrap: wrap;">
               ${(c.prerequisites || []).map(p => {
-                const preConcept = CONCEPT_REGISTRY[p];
-                return `<button class="topic-nav-btn" onclick="App.openExplainModal('${p}')" style="font-size: 0.75rem; padding: 0.2rem 0.6rem; background: #ffffff; border: 1px solid #cbd5e1;">${preConcept ? preConcept.name : p}</button>`;
-              }).join('')}
+      const preConcept = CONCEPT_REGISTRY[p];
+      return `<button class="topic-nav-btn" onclick="App.openExplainModal('${p}')" style="font-size: 0.75rem; padding: 0.2rem 0.6rem; background: #ffffff; border: 1px solid #cbd5e1;">${preConcept ? preConcept.name : p}</button>`;
+    }).join('')}
             </div>
           </div>
           <div>
@@ -823,14 +781,14 @@ const App = {
     modal.classList.add('active');
   },
 
-  closeExplainModal: function() {
+  closeExplainModal: function () {
     const modal = document.getElementById('explain-this-modal');
     if (modal) modal.classList.remove('active');
     const overlay = document.getElementById('search-modal-overlay');
     if (overlay) overlay.classList.remove('active');
   },
 
-  autoLinkConcepts: function(container) {
+  autoLinkConcepts: function (container) {
     if (!container || typeof CONCEPT_REGISTRY === 'undefined') return;
     const elements = container.querySelectorAll('.concept-explanation p, .worked-example-box p');
     const conceptKeys = Object.keys(CONCEPT_REGISTRY).sort((a, b) => b.length - a.length);
@@ -857,7 +815,7 @@ const App = {
     });
   },
 
-  jumpFromConcept: function(conceptId) {
+  jumpFromConcept: function (conceptId) {
     if (typeof TOPIC_REPOSITORY !== 'undefined' && TOPIC_REPOSITORY[conceptId]) {
       App.loadTopic(conceptId);
       return;
@@ -884,7 +842,7 @@ const App = {
   },
 
   // 6. THREE-TIER SEARCH SYSTEM (Page 47 of Blueprint)
-  bindKeyboardShortcuts: function() {
+  bindKeyboardShortcuts: function () {
     window.addEventListener('keydown', (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
@@ -897,7 +855,7 @@ const App = {
     });
   },
 
-  openSearchModal: function() {
+  openSearchModal: function () {
     const overlay = document.getElementById('search-modal-overlay');
     if (overlay) overlay.classList.add('active');
     const modal = document.getElementById('search-modal-box');
@@ -910,14 +868,14 @@ const App = {
     App.handleGlobalSearch("");
   },
 
-  closeSearchModal: function() {
+  closeSearchModal: function () {
     const overlay = document.getElementById('search-modal-overlay');
     if (overlay) overlay.classList.remove('active');
     const modal = document.getElementById('search-modal-box');
     if (modal) modal.classList.remove('active');
   },
 
-  handleGlobalSearch: function(query) {
+  handleGlobalSearch: function (query) {
     const q = query.toLowerCase().trim();
     const resultsContainer = document.getElementById('search-results-box');
 

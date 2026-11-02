@@ -271,7 +271,7 @@
                     <div id="progress-bar" class="bg-gfg-green h-full w-0 transition-all duration-300"></div>
                 </div>
                 <div class="flex items-center justify-between mt-2 text-[11px] text-gray-500 dark:text-gray-400">
-                    <span><strong id="completed-count-text" class="text-gfg-green font-bold">0</strong> of 90
+                    <span><strong id="completed-count-text" class="text-gfg-green font-bold">0</strong> of <span id="progress-total-count">168</span>
                         completed</span>
                     <button onclick="resetProgress()"
                         class="hover:text-red-500 transition-colors underline cursor-pointer text-[10px]">Reset</button>
@@ -330,7 +330,7 @@
             <!-- Bottom Information Footer -->
             <div
                 class="p-3 border-t border-gray-200 dark:border-gfg-darkborder bg-gray-50 dark:bg-gray-800 text-[11px] text-gray-500 dark:text-gray-400 flex items-center justify-between shrink-0">
-                <span>Total Topics: <strong id="total-topics-count" class="text-gfg-green font-bold">90</strong></span>
+                <span>Total Topics: <strong id="total-topics-count" class="text-gfg-green font-bold">168</strong></span>
                 <span class="text-gray-400 text-[10px]">Sem-V Kurose &amp; Ross</span>
             </div>
         </aside>
@@ -549,7 +549,7 @@
 
     <!-- PORTAL CONTROLLER & INTERACTIVE SUITE -->
     <script>
-        // SYLLABUS CURRICULUM DEFINITION (All 90 topics categorized across 5 units)
+        // SYLLABUS CURRICULUM DEFINITION (All syllabus topics categorized across 5 units)
         const syllabusModules = [
             {
                 id: "unit1",
@@ -1627,10 +1627,12 @@
             const pt = document.getElementById('progress-text');
             const ct = document.getElementById('completed-count-text');
             const totalCountEl = document.getElementById('total-topics-count');
+            const progressTotalEl = document.getElementById('progress-total-count');
             if (pb) pb.style.width = pct + '%';
             if (pt) pt.textContent = pct + '%';
             if (ct) ct.textContent = count;
             if (totalCountEl) totalCountEl.textContent = total;
+            if (progressTotalEl) progressTotalEl.textContent = total;
         }
 
         function toggleModule(modId) {

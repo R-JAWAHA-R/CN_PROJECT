@@ -1602,6 +1602,10 @@
   color: #f3f4f6;
 }
 
+.dark .wiki-article-tagline {
+  color: #d4d4d8;
+}
+
 .dark .wiki-infobox {
   background: #18181b;
   border-color: #27272a;
@@ -1723,6 +1727,41 @@
 .dark .wiki-section-body,
 .dark .concept-explanation {
   color: #d4d4d8;
+}
+
+.dark .sim-btn.secondary {
+  background: #27272a;
+  border-color: #52525b;
+  color: #e4e4e7;
+}
+
+.dark .sim-btn.secondary:hover:not(:disabled) {
+  background: #3f3f46;
+}
+
+.dark .sim-btn.secondary:disabled {
+  background: #27272a;
+  border-color: #3f3f46;
+  color: #a1a1aa;
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.dark .quiz-toggle-sol-btn {
+  background: #27272a;
+  border-color: #52525b;
+  color: #e4e4e7;
+}
+
+.dark .quiz-toggle-sol-btn:hover {
+  background: #3f3f46;
+  border-color: #71717a;
+}
+
+.dark .quiz-solution-box {
+  background: #18181b;
+  border-color: #166534;
+  color: #d1fae5;
 }
 
 .dark .practice-opt-label {

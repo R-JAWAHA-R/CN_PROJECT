@@ -1,0 +1,49 @@
+
+      !!!IMPORTANT!!!
+      do not touch this file for operation in the codebase or in the future 
+      this is just me to know what are all the lines and changes that i have made from the codebase
+      
+      the below block was remove from app.js from line number 247 to 248 l̥
+      {<!-- 4 Core Metric Stat Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="bg-white dark:bg-gfg-darkcard p-4 rounded-lg border border-gray-200 dark:border-gfg-darkborder shadow-sm flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-lg bg-gfg-light dark:bg-gray-800 text-gfg-green flex items-center justify-center text-lg">
+            <i class="fa-solid fa-book-open"></i>
+          </div>
+          <div>
+            <div class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase">Curriculum</div>
+            <div class="text-base font-extrabold text-gray-900 dark:text-white">90 Full Topics</div>
+          </div>
+        </div>
+        
+        <div class="bg-white dark:bg-gfg-darkcard p-4 rounded-lg border border-gray-200 dark:border-gfg-darkborder shadow-sm flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-blue-500 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-toolbox"></i>
+          </div>
+          <div>
+            <div class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase">Interactive Tools</div>
+            <div class="text-base font-extrabold text-gray-900 dark:text-white">5 Simulators</div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gfg-darkcard p-4 rounded-lg border border-gray-200 dark:border-gfg-darkborder shadow-sm flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-lg bg-purple-50 dark:bg-purple-900/30 text-purple-500 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <div>
+            <div class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase">Exam Practice</div>
+            <div class="text-base font-extrabold text-gray-900 dark:text-white">50+ GATE MCQs</div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gfg-darkcard p-4 rounded-lg border border-gray-200 dark:border-gfg-darkborder shadow-sm flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-lg bg-amber-50 dark:bg-amber-900/30 text-amber-500 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-scale-balanced"></i>
+          </div>
+          <div>
+            <div class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase">Comparisons</div>
+            <div class="text-base font-extrabold text-gray-900 dark:text-white">12 Matrices</div>
+          </div>
+        </div>
+      </div>
+      }
