@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 500">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 20px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 13px; fill: #64748b; }
+      .fld-title { font-size: 13px; font-weight: bold; fill: #ffffff; }
+      .fld-desc { font-size: 10px; fill: #ffffff; opacity: 0.9; }
+      .bit-h { font-size: 10px; font-weight: bold; fill: #64748b; }
+      .note { font-size: 10.5px; fill: #334155; }
+    </style>
+  </defs>
+
+  <rect width="840" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <text x="420" y="32" text-anchor="middle" class="title">User Datagram Protocol (UDP): 8-Byte Fixed Header Format</text>
+  <text x="420" y="52" text-anchor="middle" class="sub">RFC 768 / Forouzan Figure 23.9 — Minimalist 64-Bit Overhead with Optional 1's Complement Checksum</text>
+
+  <!-- Bit ruler (0 to 31 bits) -->
+  <g transform="translate(40, 75)">
+    <rect width="760" height="24" rx="4" fill="#e2e8f0"/>
+    <text x="95" y="16" text-anchor="middle" class="bit-h">Bit 0</text>
+    <text x="380" y="16" text-anchor="middle" class="bit-h">Bit 15 | Bit 16</text>
+    <text x="665" y="16" text-anchor="middle" class="bit-h">Bit 31</text>
+  </g>
+
+  <!-- Row 1: Source Port (16 bits) and Destination Port (16 bits) -->
+  <g transform="translate(40, 105)">
+    <!-- Source Port -->
+    <rect x="0" y="0" width="375" height="70" rx="6" fill="#2563eb" stroke="#1d4ed8" stroke-width="1.5"/>
+    <text x="187" y="30" text-anchor="middle" class="fld-title">Source Port Number (16 Bits)</text>
+    <text x="187" y="48" text-anchor="middle" class="fld-desc">Port of sending process (0 to 65,535)</text>
+    <text x="187" y="60" text-anchor="middle" font-size="9" fill="#bfdbfe">Optional (set to 0 if no reply expected)</text>
+
+    <!-- Destination Port -->
+    <rect x="385" y="0" width="375" height="70" rx="6" fill="#0891b2" stroke="#0e7490" stroke-width="1.5"/>
+    <text x="572" y="30" text-anchor="middle" class="fld-title">Destination Port Number (16 Bits)</text>
+    <text x="572" y="48" text-anchor="middle" class="fld-desc">Port of receiving process on destination host</text>
+    <text x="572" y="60" text-anchor="middle" font-size="9" fill="#cffafe">Mandatory: Used by receiver to demultiplex packet</text>
+  </g>
+
+  <!-- Row 2: Length (16 bits) and Checksum (16 bits) -->
+  <g transform="translate(40, 185)">
+    <!-- UDP Length -->
+    <rect x="0" y="0" width="375" height="70" rx="6" fill="#059669" stroke="#047857" stroke-width="1.5"/>
+    <text x="187" y="30" text-anchor="middle" class="fld-title">Total Length (16 Bits)</text>
+    <text x="187" y="48" text-anchor="middle" class="fld-desc">Header (8 bytes) + Data Payload (Bytes)</text>
+    <text x="187" y="60" text-anchor="middle" font-size="9" fill="#a7f3d0">Min: 8 bytes (no data) | Max: 65,535 bytes</text>
+
+    <!-- Checksum -->
+    <rect x="385" y="0" width="375" height="70" rx="6" fill="#7c3aed" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="572" y="30" text-anchor="middle" class="fld-title">Checksum (16 Bits)</text>
+    <text x="572" y="48" text-anchor="middle" class="fld-desc">1's complement sum over pseudo-header + UDP + data</text>
+    <text x="572" y="60" text-anchor="middle" font-size="9" fill="#ddd6fe">Optional in IPv4 (all 0s if unused) | Mandatory in IPv6</text>
+  </g>
+
+  <!-- Row 3: Application Data Payload -->
+  <g transform="translate(40, 265)">
+    <rect x="0" y="0" width="760" height="55" rx="6" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="380" y="28" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">Application Data Payload (Variable Length)</text>
+    <text x="380" y="45" text-anchor="middle" font-size="10.5" fill="#64748b">DNS Query/Response, RTP Audio Packet, DHCP Request, SNMP Trap, NTP Timestamp</text>
+  </g>
+
+  <!-- Pseudo-Header Diagram for Checksum -->
+  <g transform="translate(40, 335)">
+    <rect width="760" height="145" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="25" y="24" font-size="13" font-weight="bold" fill="#0f172a">The 12-Byte IPv4 Pseudo-Header for Checksum Protection:</text>
+    
+    <g transform="translate(25, 35)">
+      <rect x="0" y="0" width="220" height="28" fill="#e0e7ff" stroke="#6366f1"/>
+      <text x="110" y="18" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#3730a3">Source IP Address (32 bits)</text>
+
+      <rect x="220" y="0" width="220" height="28" fill="#e0e7ff" stroke="#6366f1"/>
+      <text x="330" y="18" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#3730a3">Destination IP Address (32 bits)</text>
+
+      <rect x="440" y="0" width="60" height="28" fill="#f1f5f9" stroke="#94a3b8"/>
+      <text x="470" y="18" text-anchor="middle" font-size="9" fill="#475569">All 0s (8b)</text>
+
+      <rect x="500" y="0" width="80" height="28" fill="#fef3c7" stroke="#f59e0b"/>
+      <text x="540" y="18" text-anchor="middle" font-size="9" font-weight="bold" fill="#b45309">Proto=17 (8b)</text>
+
+      <rect x="580" y="0" width="130" height="28" fill="#dcfce7" stroke="#22c55e"/>
+      <text x="645" y="18" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#15803d">UDP Length (16b)</text>
+    </g>
+
+    <text x="25" y="85" class="note">• <strong>Purpose of Pseudo-Header:</strong> Verifies that the packet was delivered to the intended destination IP address.</text>
+    <text x="25" y="103" class="note">• If an intermediate router corrupts the destination IP address in the IP header, the receiver's checksum will fail!</text>
+    <text x="25" y="121" class="note">• The pseudo-header exists only during checksum computation in memory and is NEVER transmitted over the physical wire.</text>
+  </g>
+</svg>

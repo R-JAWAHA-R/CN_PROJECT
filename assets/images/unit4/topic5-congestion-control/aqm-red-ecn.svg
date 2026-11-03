@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 500">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 19px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 12.5px; fill: #64748b; }
+      .h-box { font-size: 13px; font-weight: bold; fill: #ffffff; }
+      .lbl { font-size: 10px; fill: #334155; }
+    </style>
+  </defs>
+
+  <rect width="840" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <text x="420" y="30" text-anchor="middle" class="title">Active Queue Management (AQM), RED &amp; Explicit Congestion Notification (ECN)</text>
+  <text x="420" y="48" text-anchor="middle" class="sub">RFC 2309 (RED) / RFC 3168 (ECN) — Preventing Bufferbloat and Global TCP Synchronization</text>
+
+  <!-- Left: Random Early Detection (RED) Curve -->
+  <g transform="translate(40, 75)">
+    <rect width="365" height="390" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <rect width="365" height="32" rx="8" fill="#2563eb"/>
+    <text x="182" y="21" text-anchor="middle" class="h-box">Random Early Detection (RED) Algorithm</text>
+
+    <!-- Graph Canvas inside Card -->
+    <rect x="20" y="45" width="325" height="180" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+    
+    <!-- Axes -->
+    <line x1="45" y1="200" x2="330" y2="200" stroke="#334155" stroke-width="1.5"/>
+    <line x1="45" y1="200" x2="45" y2="60" stroke="#334155" stroke-width="1.5"/>
+    <text x="330" y="215" text-anchor="end" font-size="9" fill="#334155">Average Queue Length (AvgLen) →</text>
+    <text x="40" y="55" font-size="8.5" fill="#334155">Drop Prob (p) →</text>
+
+    <!-- Thresholds -->
+    <line x1="120" y1="60" x2="120" y2="200" stroke="#16a34a" stroke-dasharray="3,3"/>
+    <text x="120" y="215" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#15803d">min_th</text>
+
+    <line x1="220" y1="60" x2="220" y2="200" stroke="#ea580c" stroke-dasharray="3,3"/>
+    <text x="220" y="215" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#c2410c">max_th</text>
+
+    <!-- RED Curve -->
+    <!-- 0 before min_th, linear to max_p at max_th, 1.0 above max_th -->
+    <line x1="45" y1="200" x2="120" y2="200" stroke="#16a34a" stroke-width="2.5"/>
+    <text x="80" y="190" text-anchor="middle" font-size="8" fill="#15803d">p = 0</text>
+
+    <line x1="120" y1="200" x2="220" y2="130" stroke="#ea580c" stroke-width="2.5"/>
+    <text x="170" y="150" font-size="7.5" fill="#c2410c">Linear (0 to max_p)</text>
+
+    <line x1="220" y1="130" x2="220" y2="80" stroke="#dc2626" stroke-width="2" stroke-dasharray="2,2"/>
+    <line x1="220" y1="80" x2="330" y2="80" stroke="#dc2626" stroke-width="2.5"/>
+    <text x="270" y="72" font-size="8" font-weight="bold" fill="#dc2626">p = 1.0 (Drop All)</text>
+
+    <text x="20" y="245" font-size="10.5" font-weight="bold" fill="#0f172a">Three Operating Zones:</text>
+    <text x="20" y="262" class="lbl">• <tspan font-weight="bold" fill="#15803d">AvgLen &lt; min_th:</tspan> Queue safe; 0% packets dropped.</text>
+    <text x="20" y="278" class="lbl">• <tspan font-weight="bold" fill="#c2410c">min_th ≤ AvgLen ≤ max_th:</tspan> Early probabilistic drops/marks.</text>
+    <text x="20" y="294" class="lbl">• <tspan font-weight="bold" fill="#b91c1c">AvgLen &gt; max_th:</tspan> Severe queue overflow; drop 100% of arrivals.</text>
+    <text x="20" y="318" font-size="9" fill="#475569">💡 Prevents <tspan font-weight="bold">Global Synchronization</tspan>, where all TCP connections drop cwnd simultaneously, wasting network link capacity!</text>
+  </g>
+
+  <!-- Right: Explicit Congestion Notification (ECN) -->
+  <g transform="translate(435, 75)">
+    <rect width="365" height="390" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <rect width="365" height="32" rx="8" fill="#059669"/>
+    <text x="182" y="21" text-anchor="middle" class="h-box">Explicit Congestion Notification (ECN)</text>
+
+    <text x="20" y="55" font-size="11" font-weight="bold" fill="#065f46">RFC 3168: Congestion Signaling Without Packet Loss</text>
+    <text x="20" y="72" class="lbl">Traditional TCP treats packet loss as the only signal of congestion.</text>
+    <text x="20" y="86" class="lbl">ECN allows routers to signal congestion BEFORE dropping packets!</text>
+
+    <!-- IP Header Bits -->
+    <rect x="20" y="100" width="325" height="55" rx="5" fill="#eff6ff" stroke="#bfdbfe"/>
+    <text x="35" y="120" font-size="10.5" font-weight="bold" fill="#1e40af">1. In IP Header: 2 ECN Bits (Bits 6 &amp; 7 of ToS/DiffServ)</text>
+    <text x="35" y="136" font-size="9" fill="#334155">• <tspan font-family="Courier New">00:</tspan> Non-ECN-Capable | <tspan font-family="Courier New">01/10 (ECT):</tspan> ECN Capable Transport</text>
+    <text x="35" y="148" font-size="9" font-weight="bold" fill="#dc2626">• <tspan font-family="Courier New">11 (CE):</tspan> Congestion Experienced (Set by congested router!)</text>
+
+    <!-- TCP Header Bits -->
+    <rect x="20" y="165" width="325" height="60" rx="5" fill="#f0fdf4" stroke="#86efac"/>
+    <text x="35" y="185" font-size="10.5" font-weight="bold" fill="#15803d">2. In TCP Header: 2 Flags (ECE &amp; CWR)</text>
+    <text x="35" y="202" font-size="9" fill="#166534">• <tspan font-weight="bold">ECE (ECN-Echo):</tspan> Receiver reflects CE mark back to sender.</text>
+    <text x="35" y="216" font-size="9" fill="#166534">• <tspan font-weight="bold">CWR (Congestion Window Reduced):</tspan> Sender confirms</text>
+    <text x="35" y="226" font-size="8.5" fill="#166534">  it reduced cwnd, instructing receiver to stop sending ECE.</text>
+
+    <!-- Flow Steps -->
+    <rect x="20" y="235" width="325" height="135" rx="5" fill="#fefce8" stroke="#fef08a"/>
+    <text x="30" y="255" font-size="10" font-weight="bold" fill="#854d0e">End-to-End ECN Feedback Loop:</text>
+    <text x="30" y="272" font-size="9" fill="#713f12">1. Sender transmits IP packet with ECT bit set (10).</text>
+    <text x="30" y="288" font-size="9" fill="#713f12">2. Router queue reaches min_th; marks packet with CE (11).</text>
+    <text x="30" y="304" font-size="9" fill="#713f12">3. Receiver notices CE; sends ACK with ECE=1 flag.</text>
+    <text x="30" y="320" font-size="9" fill="#713f12">4. Sender reduces cwnd as if packet was dropped (halves cwnd).</text>
+    <text x="30" y="336" font-size="9" fill="#713f12">5. Sender sets CWR=1 in next packet to acknowledge reduction.</text>
+    <text x="30" y="354" font-size="9" font-weight="bold" fill="#166534">Result: Zero packet loss, zero retransmissions, low queue delay!</text>
+  </g>
+</svg>

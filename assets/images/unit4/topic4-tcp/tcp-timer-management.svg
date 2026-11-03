@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 500">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 19px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 12.5px; fill: #64748b; }
+      .card-t { font-size: 13px; font-weight: bold; fill: #ffffff; }
+      .lbl { font-size: 10.5px; fill: #334155; }
+      .formula { font-family: 'Courier New', monospace; font-size: 10px; font-weight: bold; }
+    </style>
+  </defs>
+
+  <rect width="840" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <text x="420" y="30" text-anchor="middle" class="title">TCP Timer Management: The Four Core Timers</text>
+  <text x="420" y="48" text-anchor="middle" class="sub">Forouzan Section 23.3 / RFC 6298 — Jacobson's RTO, Persistence Probe, Keepalive &amp; 2MSL TIME-WAIT</text>
+
+  <!-- 4 Cards in 2x2 Grid -->
+  <!-- Timer 1: Retransmission Timer (RTO) -->
+  <g transform="translate(40, 70)">
+    <rect width="365" height="195" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+    <rect width="365" height="32" rx="8" fill="#2563eb"/>
+    <text x="182" y="21" text-anchor="middle" class="card-t">1. Retransmission Timer (RTO)</text>
+    <text x="15" y="50" font-size="11" font-weight="bold" fill="#1e40af">Purpose: Detect lost segments and trigger retransmission</text>
+    <text x="15" y="68" class="lbl">• Dynamic calculation using Jacobson's Algorithm (RFC 6298):</text>
+    <rect x="15" y="78" width="335" height="52" rx="4" fill="#ffffff" stroke="#dbeafe"/>
+    <text x="25" y="93" class="formula" fill="#1e3a8a">SRTT = (1 - α)·SRTT + α·RTT      (α = 1/8)</text>
+    <text x="25" y="108" class="formula" fill="#1e3a8a">RTTVAR = (1 - β)·RTTVAR + β·|SRTT - RTT| (β = 1/4)</text>
+    <text x="25" y="122" class="formula" fill="#1e3a8a">RTO = SRTT + 4 × RTTVAR          (Min: 1.0s)</text>
+    <text x="15" y="145" class="lbl">• <tspan font-weight="bold">Karn's Algorithm:</tspan> Never measure RTT for retransmitted packets.</text>
+    <text x="15" y="160" class="lbl">• <tspan font-weight="bold">Exponential Backoff:</tspan> On timeout, double RTO (RTO = 2 × RTO).</text>
+  </g>
+
+  <!-- Timer 2: Persistence Timer -->
+  <g transform="translate(435, 70)">
+    <rect width="365" height="195" rx="8" fill="#fefce8" stroke="#fef08a" stroke-width="1.5"/>
+    <rect width="365" height="32" rx="8" fill="#ca8a04"/>
+    <text x="182" y="21" text-anchor="middle" class="card-t">2. Persistence Timer</text>
+    <text x="15" y="50" font-size="11" font-weight="bold" fill="#854d0e">Purpose: Prevent Zero-Window Deadlock</text>
+    <text x="15" y="68" class="lbl">• Problem: Receiver advertises rwnd = 0. Later, receiver buffer frees up and sends rwnd = 2000, but this ACK is LOST!</text>
+    <text x="15" y="92" class="lbl">• Result without timer: Deadlock! Sender waits for window update, receiver waits for incoming data forever.</text>
+    <rect x="15" y="108" width="335" height="42" rx="4" fill="#ffffff" stroke="#fef9c3"/>
+    <text x="25" y="124" class="formula" fill="#713f12">• Action: Sender periodically transmits a 1-byte</text>
+    <text x="25" y="138" class="formula" fill="#713f12">  Zero-Window Probe (ZWP) segment.</text>
+    <text x="15" y="165" class="lbl">• Receiver responds with current rwnd, breaking the deadlock!</text>
+    <text x="15" y="180" class="lbl">• Interval: Uses exponential backoff (typically 5s up to 60s).</text>
+  </g>
+
+  <!-- Timer 3: Keepalive Timer -->
+  <g transform="translate(40, 280)">
+    <rect width="365" height="195" rx="8" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1.5"/>
+    <rect width="365" height="32" rx="8" fill="#059669"/>
+    <text x="182" y="21" text-anchor="middle" class="card-t">3. Keepalive Timer</text>
+    <text x="15" y="50" font-size="11" font-weight="bold" fill="#065f46">Purpose: Detect crashed or unreachable peer on idle line</text>
+    <text x="15" y="68" class="lbl">• Prevents servers from holding resources for defunct clients.</text>
+    <text x="15" y="84" class="lbl">• Default duration: Typically <tspan font-weight="bold">2 hours</tspan> of complete silence.</text>
+    <rect x="15" y="95" width="335" height="48" rx="4" fill="#ffffff" stroke="#d1fae5"/>
+    <text x="25" y="112" class="formula" fill="#047857">• Sends 9 probe segments, spaced 75 seconds apart.</text>
+    <text x="25" y="126" class="formula" fill="#047857">• If no response after all probes: RST connection</text>
+    <text x="25" y="138" class="formula" fill="#047857">  and free server socket memory.</text>
+    <text x="15" y="160" class="lbl">• Optional in base TCP; enabled via SO_KEEPALIVE socket option.</text>
+    <text x="15" y="175" class="lbl">• Used widely in long-lived database connections and proxies.</text>
+  </g>
+
+  <!-- Timer 4: TIME-WAIT (2MSL) Timer -->
+  <g transform="translate(435, 280)">
+    <rect width="365" height="195" rx="8" fill="#faf5ff" stroke="#e9d5ff" stroke-width="1.5"/>
+    <rect width="365" height="32" rx="8" fill="#7c3aed"/>
+    <text x="182" y="21" text-anchor="middle" class="card-t">4. TIME-WAIT (2MSL) Timer</text>
+    <text x="15" y="50" font-size="11" font-weight="bold" fill="#581c87">Purpose: Graceful connection teardown &amp; packet draining</text>
+    <text x="15" y="68" class="lbl">• Runs on active-close endpoint after sending final ACK to FIN.</text>
+    <text x="15" y="84" class="lbl">• Duration: 2 × Maximum Segment Lifetime (<tspan font-weight="bold">2MSL</tspan> = 1 to 2 mins).</text>
+    <rect x="15" y="95" width="335" height="48" rx="4" fill="#ffffff" stroke="#f3e8ff"/>
+    <text x="25" y="112" class="formula" fill="#581c87">Reason 1: Ensure final ACK reached server.</text>
+    <text x="25" y="126" class="formula" fill="#581c87">If ACK lost, server resends FIN; client re-ACKs.</text>
+    <text x="25" y="138" class="formula" fill="#581c87">Reason 2: Drain lingering packets from network routes.</text>
+    <text x="15" y="160" class="lbl">• Prevents duplicate packets of old connection from interfering with</text>
+    <text x="15" y="175" class="lbl">  a new connection on the same IP:Port socket pair.</text>
+  </g>
+</svg>

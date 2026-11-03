@@ -309,7 +309,7 @@ const App = {
             <div>
               <div class="flex items-center justify-between mb-2">
                 <span class="px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 text-[10px] font-bold">Unit IV</span>
-                <span class="text-[11px] text-gray-500">10 Articles</span>
+                <span class="text-[11px] text-gray-500">5 Topics • 21 Subtopics</span>
               </div>
               <h4 class="font-bold text-sm text-gray-900 dark:text-white group-hover:text-gfg-green transition-colors">Transport Layer &amp; Reliability</h4>
               <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">UDP vs TCP, 3-way handshake, sequence numbers, flow control window (rwnd), AIMD, and Slow Start congestion.</p>

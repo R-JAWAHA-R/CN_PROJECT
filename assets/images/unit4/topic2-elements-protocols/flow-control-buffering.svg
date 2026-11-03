@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 500">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 19px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 12.5px; fill: #64748b; }
+      .buf-title { font-size: 12.5px; font-weight: bold; fill: #ffffff; }
+      .cell { stroke: #94a3b8; stroke-width: 1; }
+      .cell-t { font-size: 9px; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="840" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <text x="420" y="32" text-anchor="middle" class="title">Transport Layer Flow Control &amp; Circular Buffering</text>
+  <text x="420" y="52" text-anchor="middle" class="sub">Forouzan Figure 23.14 &amp; 23.24 — Matching Producer Application Speed with Receiver Consumer Rate</text>
+
+  <!-- Sender Buffer -->
+  <g transform="translate(40, 80)">
+    <rect width="760" height="155" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <rect width="760" height="30" rx="8" fill="#2563eb"/>
+    <text x="20" y="20" class="buf-title">Sender Circular Buffer (Transmission Window Management)</text>
+
+    <!-- Buffer Blocks -->
+    <!-- Sent & ACKed: 1 to 200 -->
+    <rect x="30" y="50" width="160" height="45" fill="#cbd5e1"/>
+    <text x="110" y="73" text-anchor="middle" font-size="10" font-weight="bold" fill="#475569">Sent &amp; ACKed</text>
+    <text x="110" y="87" text-anchor="middle" font-size="8.5" fill="#64748b">(Can be overwritten)</text>
+
+    <!-- Usable Window (Sent in flight + Usable) -->
+    <rect x="190" y="45" width="340" height="55" rx="6" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="6,3"/>
+    <text x="360" y="40" text-anchor="middle" font-size="11" font-weight="bold" fill="#2563eb">Sender Sliding Window = min(rwnd, cwnd)</text>
+
+    <!-- Sent but unacked -->
+    <rect x="190" y="50" width="180" height="45" fill="#fed7aa"/>
+    <text x="280" y="73" text-anchor="middle" font-size="10" font-weight="bold" fill="#9a3412">Sent, Awaiting ACK</text>
+    <text x="280" y="87" text-anchor="middle" font-size="8.5" fill="#c2410c">In-flight (Bytes 201–380)</text>
+
+    <!-- Usable not yet sent -->
+    <rect x="370" y="50" width="160" height="45" fill="#bbf7d0"/>
+    <text x="450" y="73" text-anchor="middle" font-size="10" font-weight="bold" fill="#166534">Usable Window</text>
+    <text x="450" y="87" text-anchor="middle" font-size="8.5" fill="#15803d">Can send now (381–540)</text>
+
+    <!-- Cannot send -->
+    <rect x="530" y="50" width="200" height="45" fill="#f1f5f9"/>
+    <text x="630" y="73" text-anchor="middle" font-size="10" font-weight="bold" fill="#64748b">Outside Window</text>
+    <text x="630" y="87" text-anchor="middle" font-size="8.5" fill="#94a3b8">Cannot send until window opens</text>
+
+    <!-- Pointers -->
+    <text x="190" y="125" font-size="9.5" font-weight="bold" fill="#2563eb">↑ Left Edge (Moves Right as ACKs arrive: CLOSING)</text>
+    <text x="530" y="125" font-size="9.5" font-weight="bold" fill="#16a34a">↑ Right Edge (Moves Right as rwnd opens: OPENING)</text>
+    <text x="30" y="142" font-size="9.5" fill="#475569">• Window Shrinking (moving right edge to the left) is strictly forbidden in RFC 9293 because it causes confusion.</text>
+  </g>
+
+  <!-- Receiver Buffer & rwnd Advertisement -->
+  <g transform="translate(40, 255)">
+    <rect width="760" height="155" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <rect width="760" height="30" rx="8" fill="#10b981"/>
+    <text x="20" y="20" class="buf-title">Receiver Socket Buffer (Advertised Window = rwnd)</text>
+
+    <!-- Received and Read -->
+    <rect x="30" y="50" width="220" height="45" fill="#cbd5e1"/>
+    <text x="140" y="73" text-anchor="middle" font-size="10" font-weight="bold" fill="#475569">Received &amp; Read by App</text>
+    <text x="140" y="87" text-anchor="middle" font-size="8.5" fill="#64748b">Removed via recv()</text>
+
+    <!-- Received not yet read -->
+    <rect x="250" y="50" width="230" height="45" fill="#fef08a"/>
+    <text x="365" y="73" text-anchor="middle" font-size="10" font-weight="bold" fill="#854d0e">Buffered in Kernel</text>
+    <text x="365" y="87" text-anchor="middle" font-size="8.5" fill="#a16207">Awaiting application read</text>
+
+    <!-- Empty Space = rwnd -->
+    <rect x="480" y="50" width="250" height="45" fill="#bbf7d0" stroke="#16a34a" stroke-width="2"/>
+    <text x="605" y="73" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#166534">Free Buffer Space = rwnd</text>
+    <text x="605" y="87" text-anchor="middle" font-size="8.5" fill="#15803d">Advertised to sender in TCP header</text>
+
+    <text x="30" y="125" font-size="10" font-weight="bold" fill="#0f172a">rwnd Formula: rwnd = Total Buffer Size - (LastByteReceived - LastByteRead)</text>
+    <text x="30" y="142" font-size="9.5" fill="#475569">• If application reads slowly, rwnd shrinks to 0 (Zero Window). Sender pauses and starts Persist Timer!</text>
+  </g>
+
+  <!-- Silly Window Syndrome Footer -->
+  <g transform="translate(40, 425)">
+    <rect width="760" height="60" rx="6" fill="#fef2f2" stroke="#fca5a5"/>
+    <text x="20" y="20" font-size="11" font-weight="bold" fill="#991b1b">⚠️ Silly Window Syndrome (SWS) &amp; Dual Solutions:</text>
+    <text x="20" y="35" font-size="9.5" fill="#7f1d1d">• Problem: Transferring tiny 1-byte payloads wrapped in 40 bytes of header (97.5% overhead)!</text>
+    <text x="20" y="48" font-size="9.5" fill="#7f1d1d">• Receiver Solution (Clark): Advertise rwnd = 0 until free space is at least min(MSS, Buffer/2). | Sender Solution (Nagle): Buffer small writes until full MSS or ACK arrives.</text>
+  </g>
+</svg>

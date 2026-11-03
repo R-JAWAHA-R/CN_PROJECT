@@ -828,65 +828,201 @@ const TOPIC_CHAPTER_MAP = {
       "unitId": "unit3",
       "unit": "Unit 3: Network Layer"
   },
+  // ================= UNIT 4 - TRANSPORT LAYER =================
+  // TOPIC 1 – TRANSPORT LAYER SERVICES AND BERKELEY SOCKETS
+  "u4-transport-services": {
+      "chapNum": 1,
+      "chapTitle": "Topic 1 – Transport Layer Services and Berkeley Sockets",
+      "unitId": "unit4",
+      "unit": "Unit 4 – Transport Layer"
+  },
+  "u4-berkeley-sockets": {
+      "chapNum": 1,
+      "chapTitle": "Topic 1 – Transport Layer Services and Berkeley Sockets",
+      "unitId": "unit4",
+      "unit": "Unit 4 – Transport Layer"
+  },
+  "u4-socket-programming-example": {
+      "chapNum": 1,
+      "chapTitle": "Topic 1 – Transport Layer Services and Berkeley Sockets",
+      "unitId": "unit4",
+      "unit": "Unit 4 – Transport Layer"
+  },
   "transport-layer": {
       "chapNum": 1,
-      "chapTitle": "Topic 1: Transport Protocols (UDP & TCP)",
+      "chapTitle": "Topic 1 – Transport Layer Services and Berkeley Sockets",
       "unitId": "unit4",
-      "unit": "Unit 4: Transport Layer"
+      "unit": "Unit 4 – Transport Layer"
   },
-  "tcp": {
-      "chapNum": 1,
-      "chapTitle": "Topic 1: Transport Protocols (UDP & TCP)",
+
+  // TOPIC 2 – ELEMENTS OF TRANSPORT PROTOCOLS
+  "u4-transport-addressing": {
+      "chapNum": 2,
+      "chapTitle": "Topic 2 – Elements of Transport Protocols",
       "unitId": "unit4",
-      "unit": "Unit 4: Transport Layer"
+      "unit": "Unit 4 – Transport Layer"
+  },
+  "u4-connection-establishment": {
+      "chapNum": 2,
+      "chapTitle": "Topic 2 – Elements of Transport Protocols",
+      "unitId": "unit4",
+      "unit": "Unit 4 – Transport Layer"
+  },
+  "u4-connection-release": {
+      "chapNum": 2,
+      "chapTitle": "Topic 2 – Elements of Transport Protocols",
+      "unitId": "unit4",
+      "unit": "Unit 4 – Transport Layer"
+  },
+  "u4-flow-control-buffering": {
+      "chapNum": 2,
+      "chapTitle": "Topic 2 – Elements of Transport Protocols",
+      "unitId": "unit4",
+      "unit": "Unit 4 – Transport Layer"
+  },
+
+  // TOPIC 3 – UDP (USER DATAGRAM PROTOCOL)
+  "u4-intro-udp": {
+      "chapNum": 3,
+      "chapTitle": "Topic 3 – UDP (User Datagram Protocol)",
+      "unitId": "unit4",
+      "unit": "Unit 4 – Transport Layer"
+  },
+  "u4-udp-services-characteristics": {
+      "chapNum": 3,
+      "chapTitle": "Topic 3 – UDP (User Datagram Protocol)",
+      "unitId": "unit4",
+      "unit": "Unit 4 – Transport Layer"
+  },
+  "u4-udp-segment-format": {
+      "chapNum": 3,
+      "chapTitle": "Topic 3 – UDP (User Datagram Protocol)",
+      "unitId": "unit4",
+      "unit": "Unit 4 – Transport Layer"
+  },
+  "u4-udp-vs-tcp": {
+      "chapNum": 3,
+      "chapTitle": "Topic 3 – UDP (User Datagram Protocol)",
+      "unitId": "unit4",
+      "unit": "Unit 4 – Transport Layer"
   },
   "udp": {
-      "chapNum": 1,
-      "chapTitle": "Topic 1: Transport Protocols (UDP & TCP)",
+      "chapNum": 3,
+      "chapTitle": "Topic 3 – UDP (User Datagram Protocol)",
       "unitId": "unit4",
-      "unit": "Unit 4: Transport Layer"
+      "unit": "Unit 4 – Transport Layer"
   },
   "udp-header": {
-      "chapNum": 1,
-      "chapTitle": "Topic 1: Transport Protocols (UDP & TCP)",
+      "chapNum": 3,
+      "chapTitle": "Topic 3 – UDP (User Datagram Protocol)",
       "unitId": "unit4",
-      "unit": "Unit 4: Transport Layer"
+      "unit": "Unit 4 – Transport Layer"
+  },
+
+  // TOPIC 4 – TCP (TRANSMISSION CONTROL PROTOCOL)
+  "u4-intro-tcp": {
+      "chapNum": 4,
+      "chapTitle": "Topic 4 – TCP (Transmission Control Protocol)",
+      "unitId": "unit4",
+      "unit": "Unit 4 – Transport Layer"
+  },
+  "u4-tcp-segment-header": {
+      "chapNum": 4,
+      "chapTitle": "Topic 4 – TCP (Transmission Control Protocol)",
+      "unitId": "unit4",
+      "unit": "Unit 4 – Transport Layer"
+  },
+  "u4-tcp-connection-establishment": {
+      "chapNum": 4,
+      "chapTitle": "Topic 4 – TCP (Transmission Control Protocol)",
+      "unitId": "unit4",
+      "unit": "Unit 4 – Transport Layer"
+  },
+  "u4-tcp-connection-release": {
+      "chapNum": 4,
+      "chapTitle": "Topic 4 – TCP (Transmission Control Protocol)",
+      "unitId": "unit4",
+      "unit": "Unit 4 – Transport Layer"
+  },
+  "u4-tcp-sliding-window": {
+      "chapNum": 4,
+      "chapTitle": "Topic 4 – TCP (Transmission Control Protocol)",
+      "unitId": "unit4",
+      "unit": "Unit 4 – Transport Layer"
+  },
+  "u4-tcp-timer-management": {
+      "chapNum": 4,
+      "chapTitle": "Topic 4 – TCP (Transmission Control Protocol)",
+      "unitId": "unit4",
+      "unit": "Unit 4 – Transport Layer"
+  },
+  "tcp": {
+      "chapNum": 4,
+      "chapTitle": "Topic 4 – TCP (Transmission Control Protocol)",
+      "unitId": "unit4",
+      "unit": "Unit 4 – Transport Layer"
   },
   "tcp-three-way-handshake": {
-      "chapNum": 1,
-      "chapTitle": "Topic 1: Transport Protocols (UDP & TCP)",
+      "chapNum": 4,
+      "chapTitle": "Topic 4 – TCP (Transmission Control Protocol)",
       "unitId": "unit4",
-      "unit": "Unit 4: Transport Layer"
+      "unit": "Unit 4 – Transport Layer"
   },
   "tcp-header": {
-      "chapNum": 2,
-      "chapTitle": "Topic 2: Connection Management & Flow Control",
+      "chapNum": 4,
+      "chapTitle": "Topic 4 – TCP (Transmission Control Protocol)",
       "unitId": "unit4",
-      "unit": "Unit 4: Transport Layer"
+      "unit": "Unit 4 – Transport Layer"
   },
   "sequence-number": {
-      "chapNum": 2,
-      "chapTitle": "Topic 2: Connection Management & Flow Control",
+      "chapNum": 4,
+      "chapTitle": "Topic 4 – TCP (Transmission Control Protocol)",
       "unitId": "unit4",
-      "unit": "Unit 4: Transport Layer"
+      "unit": "Unit 4 – Transport Layer"
   },
   "acknowledgement": {
-      "chapNum": 2,
-      "chapTitle": "Topic 2: Connection Management & Flow Control",
+      "chapNum": 4,
+      "chapTitle": "Topic 4 – TCP (Transmission Control Protocol)",
       "unitId": "unit4",
-      "unit": "Unit 4: Transport Layer"
+      "unit": "Unit 4 – Transport Layer"
   },
   "tcp-flow-control": {
-      "chapNum": 2,
-      "chapTitle": "Topic 2: Connection Management & Flow Control",
+      "chapNum": 4,
+      "chapTitle": "Topic 4 – TCP (Transmission Control Protocol)",
       "unitId": "unit4",
-      "unit": "Unit 4: Transport Layer"
+      "unit": "Unit 4 – Transport Layer"
+  },
+
+  // TOPIC 5 – CONGESTION CONTROL
+  "u4-intro-congestion-control": {
+      "chapNum": 5,
+      "chapTitle": "Topic 5 – Congestion Control",
+      "unitId": "unit4",
+      "unit": "Unit 4 – Transport Layer"
+  },
+  "u4-congestion-control-mechanisms": {
+      "chapNum": 5,
+      "chapTitle": "Topic 5 – Congestion Control",
+      "unitId": "unit4",
+      "unit": "Unit 4 – Transport Layer"
+  },
+  "u4-tcp-congestion-control": {
+      "chapNum": 5,
+      "chapTitle": "Topic 5 – Congestion Control",
+      "unitId": "unit4",
+      "unit": "Unit 4 – Transport Layer"
+  },
+  "u4-congestion-network-performance": {
+      "chapNum": 5,
+      "chapTitle": "Topic 5 – Congestion Control",
+      "unitId": "unit4",
+      "unit": "Unit 4 – Transport Layer"
   },
   "tcp-congestion-control": {
-      "chapNum": 2,
-      "chapTitle": "Topic 2: Connection Management & Flow Control",
+      "chapNum": 5,
+      "chapTitle": "Topic 5 – Congestion Control",
       "unitId": "unit4",
-      "unit": "Unit 4: Transport Layer"
+      "unit": "Unit 4 – Transport Layer"
   },
   "application-layer": {
       "chapNum": 1,

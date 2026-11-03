@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 500">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 19px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 12.5px; fill: #64748b; }
+      .win-t { font-size: 13px; font-weight: bold; fill: #ffffff; }
+      .lbl { font-size: 10.5px; fill: #334155; }
+    </style>
+  </defs>
+
+  <rect width="840" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <text x="420" y="30" text-anchor="middle" class="title">TCP Byte-Level Sliding Window Dynamics</text>
+  <text x="420" y="48" text-anchor="middle" class="sub">Forouzan Section 23.3 &amp; Examples 23.4–23.6 — Window Movements (Opening, Closing, Shrinking)</text>
+
+  <!-- Formula Card -->
+  <g transform="translate(40, 70)">
+    <rect width="760" height="70" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+    <text x="25" y="24" font-size="12.5" font-weight="bold" fill="#1e40af">Master Window Sizing Formula:</text>
+    <rect x="25" y="32" width="340" height="28" rx="4" fill="#2563eb"/>
+    <text x="195" y="51" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">Window Size = min(rwnd, cwnd)</text>
+    <text x="380" y="44" font-size="10" fill="#1e40af">• <tspan font-weight="bold">rwnd:</tspan> Advertised by receiver to prevent buffer overflow (Flow Control)</text>
+    <text x="380" y="58" font-size="10" fill="#1e40af">• <tspan font-weight="bold">cwnd:</tspan> Maintained by sender to prevent network collapse (Congestion Control)</text>
+  </g>
+
+  <!-- 3 Window Movements Detailed -->
+  <g transform="translate(40, 155)">
+    <!-- 1. Opening -->
+    <g transform="translate(0, 0)">
+      <rect width="240" height="150" rx="6" fill="#ffffff" stroke="#bbf7d0" stroke-width="1.2"/>
+      <rect width="240" height="28" rx="6" fill="#16a34a"/>
+      <text x="120" y="19" text-anchor="middle" font-size="11" font-weight="bold" fill="#ffffff">1. Window Opening</text>
+      <text x="15" y="48" font-size="10.5" font-weight="bold" fill="#15803d">Right Edge Moves Right</text>
+      <text x="15" y="66" class="lbl">• Triggered when receiver buffer</text>
+      <text x="15" y="80" class="lbl">  frees space and advertises a</text>
+      <text x="15" y="94" class="lbl">  larger rwnd credit.</text>
+      <text x="15" y="114" class="lbl">• Allows more bytes to be</text>
+      <text x="15" y="128" class="lbl">  transmitted immediately.</text>
+    </g>
+
+    <!-- 2. Closing -->
+    <g transform="translate(260, 0)">
+      <rect width="240" height="150" rx="6" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.2"/>
+      <rect width="240" height="28" rx="6" fill="#2563eb"/>
+      <text x="120" y="19" text-anchor="middle" font-size="11" font-weight="bold" fill="#ffffff">2. Window Closing</text>
+      <text x="15" y="48" font-size="10.5" font-weight="bold" fill="#1e40af">Left Edge Moves Right</text>
+      <text x="15" y="66" class="lbl">• Triggered when sender receives</text>
+      <text x="15" y="80" class="lbl">  cumulative ACKs confirming</text>
+      <text x="15" y="94" class="lbl">  in-flight bytes reached receiver.</text>
+      <text x="15" y="114" class="lbl">• Acknowledged bytes are freed</text>
+      <text x="15" y="128" class="lbl">  from circular retransmit buffer.</text>
+    </g>
+
+    <!-- 3. Shrinking -->
+    <g transform="translate(520, 0)">
+      <rect width="240" height="150" rx="6" fill="#ffffff" stroke="#fecaca" stroke-width="1.2"/>
+      <rect width="240" height="28" rx="6" fill="#dc2626"/>
+      <text x="120" y="19" text-anchor="middle" font-size="11" font-weight="bold" fill="#ffffff">3. Window Shrinking</text>
+      <text x="15" y="48" font-size="10.5" font-weight="bold" fill="#991b1b">Right Edge Moves Left (Forbidden!)</text>
+      <text x="15" y="66" class="lbl">• Would occur if receiver pulls</text>
+      <text x="15" y="80" class="lbl">  back advertised credit.</text>
+      <text x="15" y="100" class="lbl">• <tspan font-weight="bold" fill="#b91c1c">RFC 9293 strongly discourages:</tspan></text>
+      <text x="15" y="116" class="lbl">  Causes packet drop confusion</text>
+      <text x="15" y="130" class="lbl">  if data was already in transit!</text>
+    </g>
+  </g>
+
+  <!-- Solved Example Box -->
+  <g transform="translate(40, 320)">
+    <rect width="760" height="150" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="25" y="24" font-size="12.5" font-weight="bold" fill="#0f172a">Solved Numerical: Forouzan Example 23.4 &amp; 23.5</text>
+    
+    <g transform="translate(25, 38)">
+      <text x="0" y="16" font-size="10.5" fill="#334155"><tspan font-weight="bold">Given:</tspan> Receiver Host B has total buffer = 5,000 bytes. Currently, 2,000 bytes have been received and remain unread by application.</text>
+      <text x="0" y="32" font-size="10.5" fill="#166534"><tspan font-weight="bold">Calculation 1 (rwnd):</tspan> rwnd = Buffer Size - Unread Bytes = 5,000 - 2,000 = <tspan font-weight="bold">3,000 bytes</tspan>.</text>
+      <text x="0" y="48" font-size="10.5" fill="#334155"><tspan font-weight="bold">Given Sender State:</tspan> Sender Host A has current congestion window cwnd = 3,500 bytes.</text>
+      <text x="0" y="64" font-size="10.5" fill="#1d4ed8"><tspan font-weight="bold">Calculation 2 (Window Size):</tspan> Window Size = min(rwnd, cwnd) = min(3,000, 3,500) = <tspan font-weight="bold">3,000 bytes</tspan>.</text>
+      <text x="0" y="80" font-size="9.5" fill="#64748b">• Flow control restricts the sender here, because the receiver buffer (3000) is smaller than network bandwidth capacity (3500)!</text>
+      <text x="0" y="96" font-size="9.5" fill="#64748b">• If the application now reads 1,000 bytes, rwnd expands to 4,000 bytes. Then Window Size = min(4,000, 3,500) = 3,500 bytes.</text>
+    </g>
+  </g>
+</svg>

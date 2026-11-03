@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 520">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 20px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 13px; fill: #64748b; }
+      .th { font-size: 12px; font-weight: bold; fill: #ffffff; }
+      .td-p { font-size: 11px; font-weight: bold; fill: #1e293b; }
+      .td-tcp { font-size: 10px; fill: #1e40af; }
+      .td-udp { font-size: 10px; fill: #065f46; }
+    </style>
+  </defs>
+
+  <rect width="840" height="520" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <text x="420" y="30" text-anchor="middle" class="title">Comprehensive Protocol Comparison: TCP vs. UDP</text>
+  <text x="420" y="48" text-anchor="middle" class="sub">Architectural Trade-Off: Reliability &amp; Congestion Control vs. Raw Speed &amp; Low Latency</text>
+
+  <!-- Table Container -->
+  <g transform="translate(40, 65)">
+    <!-- Header Row -->
+    <rect x="0" y="0" width="180" height="32" fill="#334155"/>
+    <text x="90" y="21" text-anchor="middle" class="th">Feature / Metric</text>
+
+    <rect x="180" y="0" width="290" height="32" fill="#2563eb"/>
+    <text x="325" y="21" text-anchor="middle" class="th">TCP (Transmission Control Protocol)</text>
+
+    <rect x="470" y="0" width="290" height="32" fill="#059669"/>
+    <text x="615" y="21" text-anchor="middle" class="th">UDP (User Datagram Protocol)</text>
+
+    <!-- Rows -->
+    <!-- Row 1: Connection Model -->
+    <g transform="translate(0, 32)">
+      <rect width="180" height="36" fill="#f1f5f9" stroke="#cbd5e1"/>
+      <text x="15" y="22" class="td-p">Connection Model</text>
+      <rect x="180" width="290" height="36" fill="#eff6ff" stroke="#cbd5e1"/>
+      <text x="195" y="22" class="td-tcp">Connection-Oriented (3-Way Handshake)</text>
+      <rect x="470" width="290" height="36" fill="#ecfdf5" stroke="#cbd5e1"/>
+      <text x="485" y="22" class="td-udp">Connectionless (0-RTT, no setup state)</text>
+    </g>
+
+    <!-- Row 2: Reliability -->
+    <g transform="translate(0, 68)">
+      <rect width="180" height="36" fill="#f8fafc" stroke="#cbd5e1"/>
+      <text x="15" y="22" class="td-p">Reliability Guarantee</text>
+      <rect x="180" width="290" height="36" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="195" y="22" class="td-tcp">100% Reliable (ACKs, Checksum, Retransmit)</text>
+      <rect x="470" width="290" height="36" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="485" y="22" class="td-udp">Unreliable (Best effort, dropped if lost)</text>
+    </g>
+
+    <!-- Row 3: Transmission Mode -->
+    <g transform="translate(0, 104)">
+      <rect width="180" height="36" fill="#f1f5f9" stroke="#cbd5e1"/>
+      <text x="15" y="22" class="td-p">Data Stream Model</text>
+      <rect x="180" width="290" height="36" fill="#eff6ff" stroke="#cbd5e1"/>
+      <text x="195" y="22" class="td-tcp">Byte-Stream (No message boundaries)</text>
+      <rect x="470" width="290" height="36" fill="#ecfdf5" stroke="#cbd5e1"/>
+      <text x="485" y="22" class="td-udp">Datagram-oriented (Preserves boundaries)</text>
+    </g>
+
+    <!-- Row 4: Header Size -->
+    <g transform="translate(0, 140)">
+      <rect width="180" height="36" fill="#f8fafc" stroke="#cbd5e1"/>
+      <text x="15" y="22" class="td-p">Header Overhead</text>
+      <rect x="180" width="290" height="36" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="195" y="22" class="td-tcp">20 to 60 Bytes (Variable, with options)</text>
+      <rect x="470" width="290" height="36" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="485" y="22" class="td-udp">8 Bytes Fixed (Minimal overhead)</text>
+    </g>
+
+    <!-- Row 5: Ordering -->
+    <g transform="translate(0, 176)">
+      <rect width="180" height="36" fill="#f1f5f9" stroke="#cbd5e1"/>
+      <text x="15" y="22" class="td-p">Ordering / Sequencing</text>
+      <rect x="180" width="290" height="36" fill="#eff6ff" stroke="#cbd5e1"/>
+      <text x="195" y="22" class="td-tcp">Strictly in-order delivery via Sequence Nos</text>
+      <rect x="470" width="290" height="36" fill="#ecfdf5" stroke="#cbd5e1"/>
+      <text x="485" y="22" class="td-udp">No sequencing (Arrives out of order)</text>
+    </g>
+
+    <!-- Row 6: Flow & Congestion -->
+    <g transform="translate(0, 212)">
+      <rect width="180" height="36" fill="#f8fafc" stroke="#cbd5e1"/>
+      <text x="15" y="22" class="td-p">Flow &amp; Congestion</text>
+      <rect x="180" width="290" height="36" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="195" y="22" class="td-tcp">Yes (Sliding window rwnd + AIMD cwnd)</text>
+      <rect x="470" width="290" height="36" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="485" y="22" class="td-udp">None (Transmits at application speed)</text>
+    </g>
+
+    <!-- Row 7: Cast Types -->
+    <g transform="translate(0, 248)">
+      <rect width="180" height="36" fill="#f1f5f9" stroke="#cbd5e1"/>
+      <text x="15" y="22" class="td-p">Delivery Modes</text>
+      <rect x="180" width="290" height="36" fill="#eff6ff" stroke="#cbd5e1"/>
+      <text x="195" y="22" class="td-tcp">Unicast Point-to-Point only (One-to-One)</text>
+      <rect x="470" width="290" height="36" fill="#ecfdf5" stroke="#cbd5e1"/>
+      <text x="485" y="22" class="td-udp">Unicast, Multicast, and Broadcast</text>
+    </g>
+
+    <!-- Row 8: Applications -->
+    <g transform="translate(0, 284)">
+      <rect width="180" height="52" fill="#f8fafc" stroke="#cbd5e1"/>
+      <text x="15" y="24" class="td-p">Real-World Uses</text>
+      <text x="15" y="38" font-size="9" fill="#64748b">(Where to choose)</text>
+      <rect x="180" width="290" height="52" fill="#eff6ff" stroke="#cbd5e1"/>
+      <text x="195" y="20" class="td-tcp">Web (HTTP/HTTPS), File Transfer (FTP),</text>
+      <text x="195" y="34" class="td-tcp">Email (SMTP, IMAP), Remote Shell (SSH)</text>
+      <text x="195" y="46" font-size="8.5" fill="#64748b">Where zero data loss is critical</text>
+      <rect x="470" width="290" height="52" fill="#ecfdf5" stroke="#cbd5e1"/>
+      <text x="485" y="20" class="td-udp">DNS lookup, VoIP, Video Streaming,</text>
+      <text x="485" y="34" class="td-udp">Online Multiplayer Games, DHCP, SNMP</text>
+      <text x="485" y="46" font-size="8.5" fill="#64748b">Where speed &gt; retransmission latency</text>
+    </g>
+  </g>
+
+  <!-- Bottom Summary Note -->
+  <rect x="40" y="455" width="760" height="42" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="420" y="473" text-anchor="middle" font-size="11" font-weight="bold" fill="#0f172a">Summary Rule of Thumb:</text>
+  <text x="420" y="489" text-anchor="middle" font-size="10" fill="#475569">Choose TCP when data integrity and completeness matter most; choose UDP when real-time timeliness and low overhead take priority.</text>
+</svg>
