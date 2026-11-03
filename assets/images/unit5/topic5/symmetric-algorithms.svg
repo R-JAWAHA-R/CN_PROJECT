@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  
+  <defs>
+    <filter id="shadow" x="-3%" y="-3%" width="106%" height="106%">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#d97706"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#dc2626"/>
+    </marker>
+    <style>
+      text { font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif; }
+      .title { font-size: 19px; font-weight: 800; fill: #0f172a; }
+      .subtitle { font-size: 12.5px; fill: #64748b; font-weight: 500; }
+      .card-title { font-size: 13px; font-weight: 700; fill: #0f172a; }
+      .label { font-size: 11px; fill: #334155; font-weight: 600; }
+      .sublabel { font-size: 9.5px; fill: #64748b; }
+      .code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 10px; }
+      .badge-text { font-size: 9.5px; font-weight: 700; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="800" height="500" rx="14" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="400" y="32" text-anchor="middle" class="title">Modern Symmetric Ciphers: DES Feistel vs AES SPN</text>
+  <text x="400" y="50" text-anchor="middle" class="subtitle">Forouzan Chapter 30.2 / Shared Secret Key, Block Cipher Rounds &amp; Substitution-Permutation Networks</text>
+
+  <!-- Left: DES (Feistel Structure) -->
+  <rect x="25" y="70" width="365" height="410" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" filter="url(#shadow)"/>
+  <text x="207" y="95" class="card-title" fill="#2563eb" text-anchor="middle">1. Data Encryption Standard (DES)</text>
+  <text x="207" y="112" class="sublabel" text-anchor="middle">64-bit Block, 56-bit Key, 16-Round Feistel Network</text>
+
+  <!-- Input Block -->
+  <rect x="110" y="125" width="195" height="30" rx="5" fill="#eff6ff" stroke="#3b82f6"/>
+  <text x="207" y="145" class="label" text-anchor="middle">64-bit Plaintext Block</text>
+
+  <line x1="207" y1="155" x2="207" y2="175" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="135" y="175" width="145" height="24" rx="4" fill="#f1f5f9"/>
+  <text x="207" y="191" font-size="9" text-anchor="middle">Initial Permutation (IP)</text>
+
+  <!-- Feistel Round i diagram -->
+  <rect x="50" y="210" width="315" height="150" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="60" y="228" font-size="10" font-weight="bold" fill="#0f172a">Structure of Feistel Round $i$ (1 to 16):</text>
+
+  <!-- Left and Right halves -->
+  <rect x="70" y="240" width="110" height="28" rx="4" fill="#dbeafe"/>
+  <text x="125" y="258" font-size="9.5" font-weight="bold" fill="#1e40af" text-anchor="middle">L_{i-1} (32 bits)</text>
+
+  <rect x="230" y="240" width="110" height="28" rx="4" fill="#dbeafe"/>
+  <text x="285" y="258" font-size="9.5" font-weight="bold" fill="#1e40af" text-anchor="middle">R_{i-1} (32 bits)</text>
+
+  <!-- Round function F -->
+  <rect x="230" y="280" width="110" height="28" rx="4" fill="#fef3c7" stroke="#f59e0b"/>
+  <text x="285" y="298" font-size="9" font-weight="bold" fill="#b45309" text-anchor="middle">F(R_{i-1}, K_i)</text>
+
+  <!-- Cross wires -->
+  <path d="M 125 268 L 125 320 L 270 345" stroke="#2563eb" stroke-width="1.5" fill="none" marker-end="url(#arrow-blue)"/>
+  <path d="M 285 308 L 285 325 L 140 345" stroke="#059669" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+
+  <text x="207" y="358" font-size="9" class="code" fill="#0f172a" text-anchor="middle">L_i = R_{i-1}   |   R_i = L_{i-1} oplus F(R_{i-1}, K_i)</text>
+
+  <!-- DES Status -->
+  <rect x="40" y="375" width="335" height="90" rx="6" fill="#fee2e2" stroke="#fca5a5"/>
+  <text x="50" y="395" font-size="10" font-weight="bold" fill="#b91c1c">DES Security Status: DEPRECATED ⚠️</text>
+  <text x="50" y="412" font-size="8.5" fill="#7f1d1d">• 56-bit key space ($2^{56} approx 7.2 	imes 10^{16}$) brute-forced in hours.</text>
+  <text x="50" y="428" font-size="8.5" fill="#7f1d1d">• Triple DES (3DES) uses 168-bit keys ($E_{K1} circ D_{K2} circ E_{K1}$), but slow.</text>
+  <text x="50" y="445" font-size="8.5" font-weight="bold" fill="#b91c1c">Replaced universally by AES (NIST FIPS 197).</text>
+
+  <!-- Right: AES (SPN Structure) -->
+  <rect x="410" y="70" width="365" height="410" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" filter="url(#shadow)"/>
+  <text x="592" y="95" class="card-title" fill="#059669" text-anchor="middle">2. Advanced Encryption Standard (AES)</text>
+  <text x="592" y="112" class="sublabel" text-anchor="middle">128-bit Block, 128/192/256-bit Key, Rijndael SPN Structure</text>
+
+  <!-- 4 Stages in each round -->
+  <rect x="425" y="125" width="335" height="235" rx="6" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="435" y="145" font-size="10.5" font-weight="bold" fill="#15803d">The 4 Transformations of Each AES Round:</text>
+
+  <!-- Stage 1: SubBytes -->
+  <rect x="440" y="155" width="305" height="38" rx="4" fill="#ffffff" stroke="#16a34a"/>
+  <text x="450" y="172" font-size="9.5" font-weight="bold" fill="#15803d">1. SubBytes (Byte Substitution):</text>
+  <text x="450" y="185" font-size="8.5" fill="#475569">Non-linear S-box lookup table providing non-linearity &amp; confusion.</text>
+
+  <!-- Stage 2: ShiftRows -->
+  <rect x="440" y="200" width="305" height="38" rx="4" fill="#ffffff" stroke="#16a34a"/>
+  <text x="450" y="217" font-size="9.5" font-weight="bold" fill="#15803d">2. ShiftRows (Permutation):</text>
+  <text x="450" y="230" font-size="8.5" fill="#475569">Row 0 shifted 0, Row 1 shifted 1, Row 2 shifted 2, Row 3 shifted 3 bytes.</text>
+
+  <!-- Stage 3: MixColumns -->
+  <rect x="440" y="245" width="305" height="38" rx="4" fill="#ffffff" stroke="#16a34a"/>
+  <text x="450" y="262" font-size="9.5" font-weight="bold" fill="#15803d">3. MixColumns (Diffusion):</text>
+  <text x="450" y="275" font-size="8.5" fill="#475569">Matrix multiplication in Galois Field $GF(2^8)$ across columns.</text>
+
+  <!-- Stage 4: AddRoundKey -->
+  <rect x="440" y="290" width="305" height="38" rx="4" fill="#ffffff" stroke="#16a34a"/>
+  <text x="450" y="307" font-size="9.5" font-weight="bold" fill="#15803d">4. AddRoundKey (Key Mixing):</text>
+  <text x="450" y="320" font-size="8.5" fill="#475569">Bitwise XOR of 128-bit state matrix with 128-bit round subkey.</text>
+
+  <rect x="440" y="333" width="305" height="20" rx="3" fill="#dcfce7"/>
+  <text x="592" y="347" font-size="9" font-weight="bold" fill="#166534" text-anchor="middle">Rounds: AES-128 = 10 | AES-192 = 12 | AES-256 = 14</text>
+
+  <!-- AES Strengths -->
+  <rect x="425" y="375" width="335" height="90" rx="6" fill="#dcfce7" stroke="#86efac"/>
+  <text x="435" y="395" font-size="10" font-weight="bold" fill="#15803d">AES Gold Standard Features:</text>
+  <text x="435" y="412" font-size="8.5" fill="#14532d">• Immune to all known cryptanalytic shortcut attacks (linear/differential).</text>
+  <text x="435" y="428" font-size="8.5" fill="#14532d">• Hardware-accelerated on modern Intel/AMD/ARM CPUs (AES-NI instructions).</text>
+  <text x="435" y="445" font-size="8.5" font-weight="bold" fill="#15803d">Encrypted GCM mode provides authenticated encryption (AEAD).</text>
+</svg>

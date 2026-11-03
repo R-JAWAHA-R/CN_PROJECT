@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  
+  <defs>
+    <filter id="shadow" x="-3%" y="-3%" width="106%" height="106%">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#d97706"/>
+    </marker>
+    <style>
+      text { font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif; }
+      .title { font-size: 19px; font-weight: 800; fill: #0f172a; }
+      .subtitle { font-size: 12.5px; fill: #64748b; font-weight: 500; }
+      .card-title { font-size: 13px; font-weight: 700; fill: #0f172a; }
+      .label { font-size: 11px; fill: #334155; font-weight: 600; }
+      .sublabel { font-size: 9.5px; fill: #64748b; }
+      .code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 10px; }
+      .badge-text { font-size: 9.5px; font-weight: 700; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="800" height="500" rx="14" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="400" y="32" text-anchor="middle" class="title">Working of HTTP: Persistent vs Non-Persistent Connections</text>
+  <text x="400" y="50" text-anchor="middle" class="subtitle">Round Trip Time (RTT) Analysis, Pipelining Mechanics &amp; Web Caching</text>
+
+  <!-- Left: Non-Persistent HTTP (HTTP/1.0) -->
+  <rect x="25" y="70" width="365" height="410" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" filter="url(#shadow)"/>
+  <text x="207" y="95" class="card-title" text-anchor="middle">1. Non-Persistent Connection (HTTP/1.0)</text>
+  <text x="207" y="112" class="sublabel" text-anchor="middle">Separate TCP socket created &amp; closed for each object</text>
+
+  <!-- Timelines: Client and Server -->
+  <line x1="100" y1="130" x2="100" y2="400" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="310" y1="130" x2="310" y2="400" stroke="#94a3b8" stroke-width="2"/>
+  <text x="100" y="125" class="label" text-anchor="middle">Client</text>
+  <text x="310" y="125" class="label" text-anchor="middle">Server</text>
+
+  <!-- Handshake 1 -->
+  <line x1="100" y1="145" x2="310" y2="170" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <text x="205" y="152" font-size="8.5" fill="#2563eb" text-anchor="middle">TCP SYN</text>
+
+  <line x1="310" y1="170" x2="100" y2="195" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <text x="205" y="180" font-size="8.5" fill="#2563eb" text-anchor="middle">SYN + ACK (1 RTT)</text>
+
+  <!-- Request Object 1 -->
+  <line x1="100" y1="205" x2="310" y2="230" stroke="#059669" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <text x="205" y="215" font-size="8.5" fill="#059669" text-anchor="middle">GET index.html</text>
+
+  <line x1="310" y1="230" x2="100" y2="255" stroke="#059669" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <text x="205" y="243" font-size="8.5" fill="#059669" text-anchor="middle">200 OK + HTML (1 RTT)</text>
+
+  <!-- Close 1 -->
+  <text x="205" y="270" font-size="8.5" fill="#dc2626" font-style="italic" text-anchor="middle">TCP Connection Closed</text>
+  <line x1="80" y1="275" x2="330" y2="275" stroke="#fca5a5" stroke-dasharray="3,3"/>
+
+  <!-- Handshake 2 for Image -->
+  <line x1="100" y1="290" x2="310" y2="315" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <text x="205" y="298" font-size="8.5" fill="#2563eb" text-anchor="middle">TCP SYN (2nd Object)</text>
+
+  <line x1="310" y1="315" x2="100" y2="340" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <text x="205" y="325" font-size="8.5" fill="#2563eb" text-anchor="middle">SYN + ACK</text>
+
+  <line x1="100" y1="345" x2="310" y2="370" stroke="#059669" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <text x="205" y="355" font-size="8.5" fill="#059669" text-anchor="middle">GET logo.png</text>
+
+  <line x1="310" y1="370" x2="100" y2="395" stroke="#059669" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <text x="205" y="385" font-size="8.5" fill="#059669" text-anchor="middle">200 OK + PNG</text>
+
+  <rect x="40" y="420" width="335" height="45" rx="6" fill="#fee2e2" stroke="#f87171"/>
+  <text x="207" y="437" font-size="10" font-weight="bold" fill="#b91c1c" text-anchor="middle">Total Delay for N Objects = N × (2 RTT + Trans)</text>
+  <text x="207" y="452" font-size="8.5" fill="#7f1d1d" text-anchor="middle">Heavy server overhead from opening/closing dozens of TCP sockets</text>
+
+  <!-- Right: Persistent HTTP with Pipelining (HTTP/1.1) -->
+  <rect x="410" y="70" width="365" height="410" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" filter="url(#shadow)"/>
+  <text x="592" y="95" class="card-title" text-anchor="middle">2. Persistent Connection with Pipelining (HTTP/1.1)</text>
+  <text x="592" y="112" class="sublabel" text-anchor="middle">All assets transferred over a single long-lived TCP socket</text>
+
+  <!-- Timelines: Client and Server -->
+  <line x1="485" y1="130" x2="485" y2="400" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="700" y1="130" x2="700" y2="400" stroke="#94a3b8" stroke-width="2"/>
+  <text x="485" y="125" class="label" text-anchor="middle">Client</text>
+  <text x="700" y="125" class="label" text-anchor="middle">Server</text>
+
+  <!-- Single Handshake -->
+  <line x1="485" y1="145" x2="700" y2="170" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <text x="592" y="152" font-size="8.5" fill="#2563eb" text-anchor="middle">TCP SYN (Only ONCE!)</text>
+
+  <line x1="700" y1="170" x2="485" y2="195" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <text x="592" y="180" font-size="8.5" fill="#2563eb" text-anchor="middle">SYN + ACK (1 RTT)</text>
+
+  <!-- Request 1 -->
+  <line x1="485" y1="205" x2="700" y2="230" stroke="#059669" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <text x="592" y="215" font-size="8.5" fill="#059669" text-anchor="middle">GET index.html</text>
+
+  <!-- Pipelined Requests 2 & 3 without waiting! -->
+  <line x1="485" y1="225" x2="700" y2="250" stroke="#d97706" stroke-width="1.5" marker-end="url(#arrow-amber)"/>
+  <text x="592" y="235" font-size="8.5" fill="#d97706" text-anchor="middle">GET style.css (Pipelined)</text>
+
+  <line x1="485" y1="245" x2="700" y2="270" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="592" y="255" font-size="8.5" fill="#7c3aed" text-anchor="middle">GET script.js (Pipelined)</text>
+
+  <!-- Server sends back-to-back responses -->
+  <line x1="700" y1="275" x2="485" y2="300" stroke="#059669" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <text x="592" y="285" font-size="8.5" fill="#059669" text-anchor="middle">200 OK HTML</text>
+
+  <line x1="700" y1="305" x2="485" y2="330" stroke="#d97706" stroke-width="1.5" marker-end="url(#arrow-amber)"/>
+  <text x="592" y="315" font-size="8.5" fill="#d97706" text-anchor="middle">200 OK CSS</text>
+
+  <line x1="700" y1="335" x2="485" y2="360" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="592" y="345" font-size="8.5" fill="#7c3aed" text-anchor="middle">200 OK JS</text>
+
+  <rect x="425" y="420" width="335" height="45" rx="6" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="592" y="437" font-size="10" font-weight="bold" fill="#15803d" text-anchor="middle">Total Delay = 1 RTT (Handshake) + 1 RTT (HTML) + N × (Trans)</text>
+  <text x="592" y="452" font-size="8.5" fill="#166534" text-anchor="middle">Dramatic speedup: Low TCP slow-start overhead, highly efficient</text>
+</svg>

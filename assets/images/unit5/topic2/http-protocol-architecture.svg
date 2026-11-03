@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  
+  <defs>
+    <filter id="shadow" x="-3%" y="-3%" width="106%" height="106%">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#d97706"/>
+    </marker>
+    <style>
+      text { font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif; }
+      .title { font-size: 19px; font-weight: 800; fill: #0f172a; }
+      .subtitle { font-size: 12.5px; fill: #64748b; font-weight: 500; }
+      .card-title { font-size: 13px; font-weight: 700; fill: #0f172a; }
+      .label { font-size: 11px; fill: #334155; font-weight: 600; }
+      .sublabel { font-size: 9.5px; fill: #64748b; }
+      .code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 10px; }
+      .badge-text { font-size: 9.5px; font-weight: 700; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="800" height="500" rx="14" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="400" y="32" text-anchor="middle" class="title">HTTP Architecture &amp; Protocol Stack</text>
+  <text x="400" y="50" text-anchor="middle" class="subtitle">Client-Server Protocol, Statelessness, TLS Encryption &amp; Transport Abstraction</text>
+
+  <!-- Left: Protocol Stack Layering -->
+  <rect x="30" y="75" width="340" height="385" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" filter="url(#shadow)"/>
+  <text x="200" y="100" class="card-title" text-anchor="middle">HTTP in the Internet Protocol Suite</text>
+  
+  <!-- App Layer -->
+  <rect x="50" y="120" width="300" height="50" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="200" y="142" font-size="12" font-weight="bold" fill="#1e40af" text-anchor="middle">Application Layer: HTTP / HTTPS</text>
+  <text x="200" y="158" font-size="9.5" fill="#3b82f6" text-anchor="middle">HTTP/1.1 (Text) • HTTP/2 (Multiplexed) • HTTP/3 (QUIC)</text>
+
+  <!-- Security Layer (Optional TLS) -->
+  <rect x="50" y="180" width="300" height="42" rx="6" fill="#fdf2f8" stroke="#db2777" stroke-width="1.5"/>
+  <text x="200" y="202" font-size="11" font-weight="bold" fill="#9d174d" text-anchor="middle">TLS 1.3 Encryption Layer (HTTPS Port 443)</text>
+  <text x="200" y="215" font-size="9" fill="#be185d" text-anchor="middle">Confidentiality, Server Authentication &amp; Message Integrity</text>
+
+  <!-- Transport Layer -->
+  <rect x="50" y="232" width="300" height="45" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="200" y="254" font-size="11" font-weight="bold" fill="#15803d" text-anchor="middle">Transport Layer: TCP (Port 80/443) / UDP (QUIC 443)</text>
+  <text x="200" y="268" font-size="9" fill="#166534" text-anchor="middle">Reliable 3-Way Handshake • Flow Control • Retransmission</text>
+
+  <!-- Network Layer -->
+  <rect x="50" y="287" width="300" height="45" rx="6" fill="#f8fafc" stroke="#64748b" stroke-width="1.5"/>
+  <text x="200" y="309" font-size="11" font-weight="bold" fill="#334155" text-anchor="middle">Network Layer: IPv4 / IPv6</text>
+  <text x="200" y="323" font-size="9" fill="#64748b" text-anchor="middle">Host-to-Host Datagram Routing across Internet Routers</text>
+
+  <!-- Data Link & Physical -->
+  <rect x="50" y="342" width="300" height="45" rx="6" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="200" y="364" font-size="11" font-weight="bold" fill="#475569" text-anchor="middle">Data Link &amp; Physical Layers</text>
+  <text x="200" y="378" font-size="9" fill="#64748b" text-anchor="middle">Ethernet 802.3 • Wi-Fi 802.11 • Optical Fiber</text>
+
+  <!-- Key characteristics summary box -->
+  <rect x="50" y="400" width="300" height="50" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+  <text x="200" y="420" font-size="10" font-weight="bold" fill="#b45309" text-anchor="middle">⚡ Stateless Nature of HTTP:</text>
+  <text x="200" y="438" font-size="8.5" fill="#92400e" text-anchor="middle">Server retains no session memory; Cookies &amp; JWTs maintain state.</text>
+
+  <!-- Right: HTTP Evolution & Architecture Components -->
+  <rect x="390" y="75" width="380" height="385" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" filter="url(#shadow)"/>
+  <text x="580" y="100" class="card-title" text-anchor="middle">HTTP Protocol Evolution</text>
+
+  <!-- HTTP/1.0 -->
+  <rect x="410" y="120" width="340" height="65" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="425" y="140" font-size="11" font-weight="bold" fill="#0f172a">HTTP/1.0 (RFC 1945 - Non-Persistent)</text>
+  <text x="425" y="157" font-size="9.5" fill="#475569">• Opens a new TCP connection for every single inline web asset</text>
+  <text x="425" y="172" font-size="9.5" fill="#dc2626">• Severe performance penalty: 2 RTT overhead per image/script</text>
+
+  <!-- HTTP/1.1 -->
+  <rect x="410" y="195" width="340" height="75" rx="8" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="425" y="215" font-size="11" font-weight="bold" fill="#1e40af">HTTP/1.1 (RFC 2616 / 7230 - Persistent)</text>
+  <text x="425" y="232" font-size="9.5" fill="#334155">• Default persistent TCP connections (<tspan class="code">Connection: keep-alive</tspan>)</text>
+  <text x="425" y="247" font-size="9.5" fill="#334155">• Pipelining support &amp; mandatory <tspan class="code">Host:</tspan> header for virtual hosting</text>
+  <text x="425" y="262" font-size="9.5" fill="#d97706">• Bottleneck: Head-of-Line (HoL) blocking at application level</text>
+
+  <!-- HTTP/2 -->
+  <rect x="410" y="280" width="340" height="80" rx="8" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="425" y="300" font-size="11" font-weight="bold" fill="#15803d">HTTP/2 (RFC 7540 - Binary Multiplexing)</text>
+  <text x="425" y="317" font-size="9.5" fill="#334155">• Fully binary framing layer (DATA, HEADERS, SETTINGS)</text>
+  <text x="425" y="332" font-size="9.5" fill="#334155">• Multiplexes dozens of concurrent streams over ONE TCP socket</text>
+  <text x="425" y="347" font-size="9.5" fill="#059669">• HPACK header compression &amp; Server Push capabilities</text>
+
+  <!-- HTTP/3 -->
+  <rect x="410" y="370" width="340" height="75" rx="8" fill="#faf5ff" stroke="#d8b4fe"/>
+  <text x="425" y="390" font-size="11" font-weight="bold" fill="#6d28d9">HTTP/3 (RFC 9114 - QUIC over UDP)</text>
+  <text x="425" y="407" font-size="9.5" fill="#334155">• Replaces TCP with QUIC transport protocol running over UDP</text>
+  <text x="425" y="422" font-size="9.5" fill="#334155">• Eliminates TCP Head-of-Line packet loss blocking</text>
+  <text x="425" y="437" font-size="9.5" fill="#7c3aed">• 0-RTT connection resumption with integrated TLS 1.3 encryption</text>
+</svg>

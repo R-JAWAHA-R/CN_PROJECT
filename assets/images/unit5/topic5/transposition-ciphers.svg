@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  
+  <defs>
+    <filter id="shadow" x="-3%" y="-3%" width="106%" height="106%">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#d97706"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#dc2626"/>
+    </marker>
+    <style>
+      text { font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif; }
+      .title { font-size: 19px; font-weight: 800; fill: #0f172a; }
+      .subtitle { font-size: 12.5px; fill: #64748b; font-weight: 500; }
+      .card-title { font-size: 13px; font-weight: 700; fill: #0f172a; }
+      .label { font-size: 11px; fill: #334155; font-weight: 600; }
+      .sublabel { font-size: 9.5px; fill: #64748b; }
+      .code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 10px; }
+      .badge-text { font-size: 9.5px; font-weight: 700; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="800" height="500" rx="14" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="400" y="32" text-anchor="middle" class="title">Classical Transposition Ciphers: Rail Fence &amp; Columnar</text>
+  <text x="400" y="50" text-anchor="middle" class="subtitle">Forouzan Section 30.2 / Permutation of Character Positions Without Symbol Substitution</text>
+
+  <!-- Left: Rail Fence Cipher -->
+  <rect x="25" y="70" width="365" height="410" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" filter="url(#shadow)"/>
+  <text x="207" y="95" class="card-title" fill="#2563eb" text-anchor="middle">1. Keyless Rail Fence Cipher</text>
+  <text x="207" y="112" class="sublabel" text-anchor="middle">Plaintext written in diagonal zigzag wave across rails</text>
+
+  <!-- Zigzag illustration -->
+  <rect x="40" y="125" width="335" height="150" rx="6" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="50" y="145" font-size="10.5" font-weight="bold" fill="#1e40af">Message: "DEFEND THE EAST WALL" (Depth = 3):</text>
+
+  <!-- Rails Grid -->
+  <text x="60" y="175" class="code" font-size="11" fill="#1e40af" font-weight="bold">Rail 1:  D . . . N . . . E . . . T . . . A . . . L</text>
+  <text x="60" y="205" class="code" font-size="11" fill="#059669" font-weight="bold">Rail 2:  . E . E . D . H . E . S . W . L . .</text>
+  <text x="60" y="235" class="code" font-size="11" fill="#d97706" font-weight="bold">Rail 3:  . . F . . . T . . . A . . . A . . .</text>
+
+  <!-- Read out row by row -->
+  <rect x="40" y="290" width="335" height="80" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="50" y="310" font-size="10" font-weight="bold" fill="#0f172a">Ciphertext Assembly (Row by Row):</text>
+  <text x="50" y="330" font-size="9.5" fill="#334155">Rail 1: <tspan class="code" font-weight="bold" fill="#1e40af">DNETAL</tspan></text>
+  <text x="50" y="346" font-size="9.5" fill="#334155">Rail 2: <tspan class="code" font-weight="bold" fill="#059669">EEDHESWL</tspan></text>
+  <text x="50" y="362" font-size="9.5" fill="#334155">Rail 3: <tspan class="code" font-weight="bold" fill="#d97706">FTAA</tspan></text>
+
+  <rect x="40" y="380" width="335" height="85" rx="6" fill="#dbeafe"/>
+  <text x="50" y="400" font-size="10" font-weight="bold" fill="#1e40af">Resulting Ciphertext:</text>
+  <text x="50" y="420" font-size="11" font-weight="bold" fill="#0f172a" class="code">"DNETAL EEDHESWL FTAA"</text>
+  <text x="50" y="445" font-size="8.5" fill="#1e40af">Decryption reconstructs wave pattern using identical depth parameter.</text>
+
+  <!-- Right: Columnar Transposition Matrix -->
+  <rect x="410" y="70" width="365" height="410" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" filter="url(#shadow)"/>
+  <text x="592" y="95" class="card-title" fill="#059669" text-anchor="middle">2. Keyed Columnar Transposition</text>
+  <text x="592" y="112" class="sublabel" text-anchor="middle">Plaintext written in rows; read out in key permutation order</text>
+
+  <rect x="425" y="125" width="335" height="180" rx="6" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="435" y="145" font-size="10.5" font-weight="bold" fill="#15803d">Key: "HACK" → Alphabetical Order: [3, 1, 2, 4]</text>
+  <text x="435" y="160" font-size="9.5" fill="#475569">Message: "COMPUTER NETWORKS"</text>
+
+  <!-- Matrix Table -->
+  <rect x="445" y="172" width="295" height="120" rx="4" fill="#ffffff" stroke="#16a34a"/>
+  
+  <!-- Header row: Keys and Order -->
+  <rect x="445" y="172" width="295" height="25" fill="#dcfce7"/>
+  <text x="480" y="189" font-size="10" font-weight="bold" fill="#15803d" text-anchor="middle">H (3)</text>
+  <text x="555" y="189" font-size="10" font-weight="bold" fill="#15803d" text-anchor="middle">A (1)</text>
+  <text x="630" y="189" font-size="10" font-weight="bold" fill="#15803d" text-anchor="middle">C (2)</text>
+  <text x="705" y="189" font-size="10" font-weight="bold" fill="#15803d" text-anchor="middle">K (4)</text>
+
+  <!-- Row 1 -->
+  <text x="480" y="212" class="code" font-size="11" text-anchor="middle">C</text>
+  <text x="555" y="212" class="code" font-size="11" text-anchor="middle">O</text>
+  <text x="630" y="212" class="code" font-size="11" text-anchor="middle">M</text>
+  <text x="705" y="212" class="code" font-size="11" text-anchor="middle">P</text>
+
+  <!-- Row 2 -->
+  <text x="480" y="232" class="code" font-size="11" text-anchor="middle">U</text>
+  <text x="555" y="232" class="code" font-size="11" text-anchor="middle">T</text>
+  <text x="630" y="232" class="code" font-size="11" text-anchor="middle">E</text>
+  <text x="705" y="232" class="code" font-size="11" text-anchor="middle">R</text>
+
+  <!-- Row 3 -->
+  <text x="480" y="252" class="code" font-size="11" text-anchor="middle">N</text>
+  <text x="555" y="252" class="code" font-size="11" text-anchor="middle">E</text>
+  <text x="630" y="252" class="code" font-size="11" text-anchor="middle">T</text>
+  <text x="705" y="252" class="code" font-size="11" text-anchor="middle">W</text>
+
+  <!-- Row 4 -->
+  <text x="480" y="272" class="code" font-size="11" text-anchor="middle">O</text>
+  <text x="555" y="272" class="code" font-size="11" text-anchor="middle">R</text>
+  <text x="630" y="272" class="code" font-size="11" text-anchor="middle">K</text>
+  <text x="705" y="272" class="code" font-size="11" text-anchor="middle">S</text>
+
+  <!-- Column read order box -->
+  <rect x="425" y="315" width="335" height="70" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="435" y="335" font-size="9.5" font-weight="bold" fill="#0f172a">Read Out Columns in Numerical Order (1, 2, 3, 4):</text>
+  <text x="435" y="352" font-size="9" fill="#334155">Col 1 ('A'): <tspan class="code" font-weight="bold">O T E R</tspan>  •  Col 2 ('C'): <tspan class="code" font-weight="bold">M E T K</tspan></text>
+  <text x="435" y="368" font-size="9" fill="#334155">Col 3 ('H'): <tspan class="code" font-weight="bold">C U N O</tspan>  •  Col 4 ('K'): <tspan class="code" font-weight="bold">P R W S</tspan></text>
+
+  <rect x="425" y="395" width="335" height="70" rx="6" fill="#dcfce7"/>
+  <text x="435" y="415" font-size="10" font-weight="bold" fill="#15803d">Final Ciphertext:</text>
+  <text x="435" y="435" font-size="11" font-weight="bold" fill="#0f172a" class="code">"OTER METK CUNO PRWS"</text>
+  <text x="435" y="453" font-size="8.5" fill="#166534">Notice: Exactly preserves letter frequencies; alters only positional indices!</text>
+</svg>

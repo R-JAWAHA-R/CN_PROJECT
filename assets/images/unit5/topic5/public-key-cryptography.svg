@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  
+  <defs>
+    <filter id="shadow" x="-3%" y="-3%" width="106%" height="106%">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#d97706"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#dc2626"/>
+    </marker>
+    <style>
+      text { font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif; }
+      .title { font-size: 19px; font-weight: 800; fill: #0f172a; }
+      .subtitle { font-size: 12.5px; fill: #64748b; font-weight: 500; }
+      .card-title { font-size: 13px; font-weight: 700; fill: #0f172a; }
+      .label { font-size: 11px; fill: #334155; font-weight: 600; }
+      .sublabel { font-size: 9.5px; fill: #64748b; }
+      .code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 10px; }
+      .badge-text { font-size: 9.5px; font-weight: 700; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="800" height="500" rx="14" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="400" y="32" text-anchor="middle" class="title">Public Key Cryptography &amp; Diffie-Hellman Key Exchange</text>
+  <text x="400" y="50" text-anchor="middle" class="subtitle">Forouzan Section 30.3 / Asymmetric Key Pairs, Trapdoor One-Way Functions &amp; Shared Secret Derivation</text>
+
+  <!-- Left: Asymmetric Key Pair Dual Roles -->
+  <rect x="25" y="70" width="365" height="410" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" filter="url(#shadow)"/>
+  <text x="207" y="95" class="card-title" fill="#2563eb" text-anchor="middle">1. Asymmetric Key Pair Paradigm</text>
+  <text x="207" y="112" class="sublabel" text-anchor="middle">Mathematically linked Public Key ($K_{pub}$) and Private Key ($K_{priv}$)</text>
+
+  <!-- Application 1: Confidentiality -->
+  <rect x="40" y="125" width="335" height="150" rx="6" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="50" y="145" font-size="10.5" font-weight="bold" fill="#1e40af">Application A: Public Key Encryption (Confidentiality)</text>
+  
+  <rect x="50" y="155" width="90" height="40" rx="4" fill="#ffffff" stroke="#3b82f6"/>
+  <text x="95" y="172" font-size="9" font-weight="bold" text-anchor="middle">Sender (Alice)</text>
+  <text x="95" y="185" font-size="8" fill="#64748b" text-anchor="middle">Plaintext $P$</text>
+
+  <path d="M 140 175 L 180 175" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+
+  <rect x="185" y="155" width="85" height="40" rx="4" fill="#dbeafe"/>
+  <text x="227" y="172" font-size="8.5" font-weight="bold" fill="#1e40af" text-anchor="middle">Bob's Public Key</text>
+  <text x="227" y="185" class="code" font-size="8" fill="#1e40af" text-anchor="middle">K_{pub, Bob}</text>
+
+  <path d="M 270 175 L 305 175" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+
+  <rect x="310" y="155" width="55" height="40" rx="4" fill="#fee2e2"/>
+  <text x="337" y="172" font-size="8.5" font-weight="bold" fill="#b91c1c" text-anchor="middle">Cipher</text>
+  <text x="337" y="185" font-size="8" fill="#b91c1c" text-anchor="middle">$C$</text>
+
+  <text x="50" y="220" font-size="9" fill="#1e40af">• Alice encrypts with <tspan font-weight="bold">Bob's Public Key</tspan>.</text>
+  <text x="50" y="236" font-size="9" fill="#1e40af">• <tspan font-weight="bold">Only Bob</tspan> can decrypt using his secret <tspan font-weight="bold">Private Key</tspan> $K_{priv, Bob}$.</text>
+  <text x="50" y="252" font-size="8.5" fill="#475569">• Solves the Key Distribution Problem: No shared secret needed in advance!</text>
+
+  <!-- Application 2: Digital Signatures -->
+  <rect x="40" y="290" width="335" height="175" rx="6" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="50" y="310" font-size="10.5" font-weight="bold" fill="#15803d">Application B: Digital Signature (Authentication)</text>
+
+  <rect x="50" y="325" width="90" height="40" rx="4" fill="#ffffff" stroke="#16a34a"/>
+  <text x="95" y="342" font-size="9" font-weight="bold" text-anchor="middle">Sender (Alice)</text>
+  <text x="95" y="355" font-size="8" fill="#64748b" text-anchor="middle">Signs with Private</text>
+
+  <path d="M 140 345 L 180 345" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+
+  <rect x="185" y="325" width="85" height="40" rx="4" fill="#dcfce7"/>
+  <text x="227" y="342" font-size="8.5" font-weight="bold" fill="#15803d" text-anchor="middle">Alice's Private Key</text>
+  <text x="227" y="355" class="code" font-size="8" fill="#15803d" text-anchor="middle">K_{priv, Alice}</text>
+
+  <path d="M 270 345 L 305 345" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+
+  <rect x="310" y="325" width="55" height="40" rx="4" fill="#fef3c7"/>
+  <text x="337" y="342" font-size="8.5" font-weight="bold" fill="#b45309" text-anchor="middle">Signature</text>
+  <text x="337" y="355" font-size="8" fill="#b45309" text-anchor="middle">$S$</text>
+
+  <text x="50" y="390" font-size="9" fill="#15803d">• Alice signs hash with her secret <tspan font-weight="bold">Private Key</tspan>.</text>
+  <text x="50" y="406" font-size="9" fill="#15803d">• <tspan font-weight="bold">Anyone</tspan> can verify using Alice's <tspan font-weight="bold">Public Key</tspan> $K_{pub, Alice}$.</text>
+  <text x="50" y="422" font-size="9" fill="#15803d">• Guarantees Authenticity, Integrity &amp; Non-Repudiation!</text>
+  <text x="50" y="440" font-size="8.5" fill="#166534">Basis for X.509 Certificates, TLS Handshakes &amp; Code Signing.</text>
+
+  <!-- Right: Diffie-Hellman Key Exchange -->
+  <rect x="410" y="70" width="365" height="410" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" filter="url(#shadow)"/>
+  <text x="592" y="95" class="card-title" fill="#059669" text-anchor="middle">2. Diffie-Hellman Key Exchange</text>
+  <text x="592" y="112" class="sublabel" text-anchor="middle">Derives a shared symmetric session key over an insecure link</text>
+
+  <!-- Public parameters -->
+  <rect x="425" y="125" width="335" height="45" rx="6" fill="#fef3c7" stroke="#fde68a"/>
+  <text x="435" y="143" font-size="10" font-weight="bold" fill="#b45309">Global Public Domain Parameters:</text>
+  <text x="435" y="160" font-size="9.5" fill="#78350f" class="code">Large Prime: p   |   Primitive Root (Generator): g</text>
+
+  <!-- Alice and Bob Columns -->
+  <rect x="430" y="180" width="150" height="200" rx="6" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="505" y="202" font-size="10.5" font-weight="bold" fill="#1e40af" text-anchor="middle">Alice</text>
+  <text x="440" y="222" font-size="8.5" fill="#334155">1. Pick private secret:</text>
+  <text x="440" y="237" class="code" font-size="9" fill="#2563eb">a in {2, dots, p-2}</text>
+  <text x="440" y="257" font-size="8.5" fill="#334155">2. Compute public value:</text>
+  <text x="440" y="272" class="code" font-size="9" fill="#2563eb">A = g^a pmod p</text>
+  <text x="440" y="295" font-size="8.5" fill="#334155">3. Sends A to Bob →</text>
+  <text x="440" y="325" font-size="8.5" fill="#334155">4. Computes Shared Key:</text>
+  <text x="440" y="342" class="code" font-size="10" font-weight="bold" fill="#059669">K = B^a pmod p</text>
+
+  <rect x="610" y="180" width="150" height="200" rx="6" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="685" y="202" font-size="10.5" font-weight="bold" fill="#15803d" text-anchor="middle">Bob</text>
+  <text x="620" y="222" font-size="8.5" fill="#334155">1. Pick private secret:</text>
+  <text x="620" y="237" class="code" font-size="9" fill="#16a34a">b in {2, dots, p-2}</text>
+  <text x="620" y="257" font-size="8.5" fill="#334155">2. Compute public value:</text>
+  <text x="620" y="272" class="code" font-size="9" fill="#16a34a">B = g^b pmod p</text>
+  <text x="620" y="295" font-size="8.5" fill="#334155">← Sends B to Alice</text>
+  <text x="620" y="325" font-size="8.5" fill="#334155">4. Computes Shared Key:</text>
+  <text x="620" y="342" class="code" font-size="10" font-weight="bold" fill="#059669">K = A^b pmod p</text>
+
+  <!-- Key Equality match -->
+  <rect x="425" y="390" width="335" height="75" rx="6" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="592" y="410" font-size="10" font-weight="bold" fill="#15803d" text-anchor="middle">Identical Shared Secret: $K = g^{ab} pmod p$</text>
+  <text x="592" y="428" font-size="8.5" fill="#14532d" text-anchor="middle">Eavesdropper sees only $(p, g, A, B)$. Computing $a$ or $b$ requires solving</text>
+  <text x="592" y="443" font-size="8.5" font-weight="bold" fill="#14532d" text-anchor="middle">The Discrete Logarithm Problem (computationally infeasible for large $p$).</text>
+</svg>

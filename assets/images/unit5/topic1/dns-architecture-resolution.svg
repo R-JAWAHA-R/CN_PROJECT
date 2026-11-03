@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  
+  <defs>
+    <filter id="shadow" x="-3%" y="-3%" width="106%" height="106%">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#d97706"/>
+    </marker>
+    <style>
+      text { font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif; }
+      .title { font-size: 19px; font-weight: 800; fill: #0f172a; }
+      .subtitle { font-size: 12.5px; fill: #64748b; font-weight: 500; }
+      .card-title { font-size: 13px; font-weight: 700; fill: #0f172a; }
+      .label { font-size: 11px; fill: #334155; font-weight: 600; }
+      .sublabel { font-size: 9.5px; fill: #64748b; }
+      .code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 10px; }
+      .badge-text { font-size: 9.5px; font-weight: 700; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="800" height="500" rx="14" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="400" y="32" text-anchor="middle" class="title">DNS Hierarchy & Resolution Architecture</text>
+  <text x="400" y="50" text-anchor="middle" class="subtitle">Distributed Domain Name Space & Recursive vs Iterative Resolution (RFC 1034 / 1035)</text>
+
+  <!-- Left: Domain Name Hierarchy Tree -->
+  <rect x="25" y="70" width="370" height="410" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" filter="url(#shadow)"/>
+  <text x="40" y="94" class="card-title">1. Hierarchical Domain Name Space</text>
+  <text x="40" y="110" class="sublabel">Inverted tree structure organized into administrative zones</text>
+
+  <!-- Root -->
+  <rect x="170" y="125" width="80" height="30" rx="6" fill="#0f172a"/>
+  <text x="210" y="144" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">Root (.)</text>
+
+  <!-- Level 1: TLD -->
+  <line x1="210" y1="155" x2="100" y2="185" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="210" y1="155" x2="210" y2="185" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="210" y1="155" x2="320" y2="185" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <rect x="65" y="185" width="70" height="26" rx="5" fill="#2563eb"/>
+  <text x="100" y="202" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">.com</text>
+
+  <rect x="175" y="185" width="70" height="26" rx="5" fill="#2563eb"/>
+  <text x="210" y="202" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">.edu</text>
+
+  <rect x="285" y="185" width="70" height="26" rx="5" fill="#2563eb"/>
+  <text x="320" y="202" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">.org / .in</text>
+
+  <!-- Level 2: Second Level Domains -->
+  <line x1="100" y1="211" x2="65" y2="245" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="100" y1="211" x2="135" y2="245" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="210" y1="211" x2="210" y2="245" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="320" y1="211" x2="320" y2="245" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <rect x="35" y="245" width="60" height="24" rx="4" fill="#0d9488"/>
+  <text x="65" y="261" fill="#ffffff" font-size="9.5" font-weight="600" text-anchor="middle">google</text>
+
+  <rect x="105" y="245" width="60" height="24" rx="4" fill="#0d9488"/>
+  <text x="135" y="261" fill="#ffffff" font-size="9.5" font-weight="600" text-anchor="middle">amazon</text>
+
+  <rect x="180" y="245" width="60" height="24" rx="4" fill="#0d9488"/>
+  <text x="210" y="261" fill="#ffffff" font-size="9.5" font-weight="600" text-anchor="middle">pondiuni</text>
+
+  <rect x="290" y="245" width="60" height="24" rx="4" fill="#0d9488"/>
+  <text x="320" y="261" fill="#ffffff" font-size="9.5" font-weight="600" text-anchor="middle">wikipedia</text>
+
+  <!-- Level 3: Leaf Nodes / Hostnames -->
+  <line x1="65" y1="269" x2="65" y2="300" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="210" y1="269" x2="210" y2="300" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <rect x="35" y="300" width="60" height="22" rx="4" fill="#64748b"/>
+  <text x="65" y="315" fill="#ffffff" font-size="9" text-anchor="middle">mail</text>
+
+  <rect x="180" y="300" width="60" height="22" rx="4" fill="#64748b"/>
+  <text x="210" y="315" fill="#ffffff" font-size="9" text-anchor="middle">www</text>
+
+  <!-- FQDN vs PQDN explanation box -->
+  <rect x="40" y="340" width="340" height="120" rx="8" fill="#f1f5f9"/>
+  <text x="50" y="360" font-size="11" font-weight="bold" fill="#0f172a">Key Resource Records (RFC 1035):</text>
+  <text x="50" y="380" font-size="10" fill="#334155" class="code">• A: Hostname → IPv4 (e.g. 142.250.190.46)</text>
+  <text x="50" y="398" font-size="10" fill="#334155" class="code">• AAAA: Hostname → IPv6 (128-bit address)</text>
+  <text x="50" y="416" font-size="10" fill="#334155" class="code">• CNAME: Canonical Name (Alias mapping)</text>
+  <text x="50" y="434" font-size="10" fill="#334155" class="code">• MX: Mail Exchange server priority & domain</text>
+  <text x="50" y="452" font-size="10" fill="#334155" class="code">• NS: Authoritative Name Server for the zone</text>
+
+  <!-- Right: 8-Step Iterative Resolution Flow -->
+  <rect x="410" y="70" width="365" height="410" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" filter="url(#shadow)"/>
+  <text x="425" y="94" class="card-title">2. Iterative & Recursive Resolution Flow</text>
+  <text x="425" y="110" class="sublabel">Client (Resolver) queries Local DNS Server (Recursive)</text>
+
+  <!-- Client Host -->
+  <rect x="425" y="130" width="85" height="42" rx="6" fill="#f8fafc" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="467" y="148" class="label" text-anchor="middle">Client PC</text>
+  <text x="467" y="162" class="sublabel" text-anchor="middle">Stub Resolver</text>
+
+  <!-- Local DNS Server -->
+  <rect x="425" y="240" width="85" height="45" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="467" y="258" class="label" fill="#1d4ed8" text-anchor="middle">Local DNS</text>
+  <text x="467" y="273" class="sublabel" fill="#1e40af" text-anchor="middle">(Cache/Recursive)</text>
+
+  <!-- Step 1 & 8 between client and local DNS -->
+  <path d="M 467 172 L 467 240" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <text x="473" y="200" font-size="9.5" font-weight="bold" fill="#2563eb">1. Query</text>
+  <text x="473" y="215" font-size="9" fill="#059669">8. IP Reply</text>
+
+  <!-- Root Server -->
+  <rect x="640" y="130" width="120" height="38" rx="6" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+  <text x="700" y="147" class="label" text-anchor="middle">Root Server (.)</text>
+  <text x="700" y="160" class="sublabel" text-anchor="middle">13 Root Clusters</text>
+
+  <!-- TLD Server -->
+  <rect x="640" y="240" width="120" height="38" rx="6" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+  <text x="700" y="257" class="label" text-anchor="middle">TLD Server (.edu)</text>
+  <text x="700" y="270" class="sublabel" text-anchor="middle">Top-Level Domain</text>
+
+  <!-- Authoritative Server -->
+  <rect x="640" y="350" width="120" height="38" rx="6" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+  <text x="700" y="367" class="label" text-anchor="middle">Auth DNS (pondiuni)</text>
+  <text x="700" y="380" class="sublabel" text-anchor="middle">Official Records</text>
+
+  <!-- Arrows to Root (2 & 3) -->
+  <path d="M 510 245 C 550 200, 580 160, 640 145" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="550" y="170" font-size="9" font-weight="bold" fill="#475569">2. Query Root</text>
+  <path d="M 640 155 C 580 180, 560 210, 510 252" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="565" y="210" font-size="8.5" fill="#475569">3. Refer to .edu</text>
+
+  <!-- Arrows to TLD (4 & 5) -->
+  <line x1="510" y1="260" x2="638" y2="255" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="545" y="252" font-size="9" font-weight="bold" fill="#475569">4. Query TLD</text>
+  <line x1="640" y1="268" x2="512" y2="273" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="545" y="285" font-size="8.5" fill="#475569">5. Refer to pondiuni</text>
+
+  <!-- Arrows to Auth (6 & 7) -->
+  <path d="M 510 280 C 550 310, 580 340, 640 360" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="540" y="325" font-size="9" font-weight="bold" fill="#475569">6. Query Auth</text>
+  <path d="M 640 372 C 580 360, 550 320, 510 285" fill="none" stroke="#059669" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <text x="555" y="355" font-size="9" font-weight="bold" fill="#059669">7. Returns IP!</text>
+
+  <!-- Bottom port badge -->
+  <rect x="425" y="420" width="335" height="40" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+  <text x="592" y="437" font-size="10" font-weight="bold" fill="#b45309" text-anchor="middle">Port 53: UDP for Standard Queries (< 512 bytes)</text>
+  <text x="592" y="451" font-size="9" fill="#92400e" text-anchor="middle">TCP Port 53 used for Zone Transfers (AXFR) and Large Responses (EDNS0)</text>
+</svg>
