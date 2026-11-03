@@ -1,0 +1,323 @@
+/* CHECKSUM GUARD — Dedicated Arcade Simulation Stylesheet */
+/* Data Link Layer Checksum Error Detection Game */
+
+.cg-wrapper {
+  background: radial-gradient(circle at 50% 20%, #151d38 0%, #0a0f1d 70%, #060913 100%);
+  color: #e2e8f0;
+  border-radius: 16px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(14, 165, 233, 0.15);
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle CRT Scanline overlay */
+.cg-wrapper::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+/* Top Arcade HUD Header */
+.cg-hud-header {
+  position: relative;
+  z-index: 3;
+  background: rgba(10, 15, 29, 0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+  padding: 1rem 1.5rem;
+}
+
+/* Transmission Arena Canvas Shell */
+.cg-arena-container {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  background: #070b14;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+  overflow: hidden;
+  z-index: 3;
+}
+
+.cg-arena-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Status Banner */
+.cg-status-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  background: rgba(15, 23, 42, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  z-index: 3;
+  position: relative;
+}
+
+/* Stage Panels */
+.cg-stage-panel {
+  position: relative;
+  z-index: 3;
+  padding: 1.5rem;
+  background: rgba(10, 15, 29, 0.6);
+}
+
+/* Bit Display Grid & Bit Tokens */
+.cg-bit-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.cg-word-group {
+  display: inline-flex;
+  gap: 4px;
+  padding: 6px 8px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 8px;
+  position: relative;
+}
+
+.cg-word-group.checksum-group {
+  border-color: rgba(168, 85, 247, 0.4);
+  background: rgba(88, 28, 135, 0.2);
+}
+
+.cg-bit-box {
+  width: 32px;
+  height: 38px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #1e293b;
+  color: #38bdf8;
+  font-family: 'Fira Code', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 6px;
+  border: 1px solid #334155;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.cg-bit-box.interactive {
+  cursor: pointer;
+}
+
+.cg-bit-box.interactive:hover {
+  transform: translateY(-2px) scale(1.05);
+  border-color: #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+  background: #0f172a;
+}
+
+.cg-bit-box.bit-flipped {
+  background: #7f1d1d !important;
+  color: #fecaca !important;
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 16px rgba(239, 68, 68, 0.8) !important;
+  animation: cg-pulse-red 1s infinite alternate;
+}
+
+.cg-bit-box.bit-highlight-clean {
+  background: #064e3b;
+  color: #a7f3d0;
+  border-color: #10b981;
+}
+
+.cg-bit-index {
+  font-size: 8px;
+  color: #64748b;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+/* Animations */
+@keyframes cg-pulse-red {
+  from {
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+    border-color: #f87171;
+  }
+  to {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.9);
+    border-color: #ef4444;
+  }
+}
+
+@keyframes cg-glow-blue {
+  from {
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+  }
+  to {
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.7);
+  }
+}
+
+/* Step-by-Step Calculation Table */
+.cg-calc-box {
+  background: #0d1322;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 10px;
+  padding: 1.25rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+  overflow-x: auto;
+}
+
+.cg-calc-step {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cg-calc-step:last-child {
+  border-bottom: none;
+}
+
+/* Arcade Buttons */
+.cg-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 8px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.cg-btn-cyan {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
+  border-color: #38bdf8;
+  box-shadow: 0 4px 15px rgba(2, 132, 199, 0.35);
+}
+
+.cg-btn-cyan:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
+  transform: translateY(-1px);
+}
+
+.cg-btn-emerald {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: #ffffff;
+  border-color: #34d399;
+  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.35);
+}
+
+.cg-btn-emerald:hover:not(:disabled) {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 0 20px rgba(52, 211, 153, 0.6);
+  transform: translateY(-1px);
+}
+
+.cg-btn-purple {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  color: #ffffff;
+  border-color: #a78bfa;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.35);
+}
+
+.cg-btn-purple:hover:not(:disabled) {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  box-shadow: 0 0 20px rgba(167, 139, 250, 0.6);
+  transform: translateY(-1px);
+}
+
+.cg-btn-danger {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: #ffffff;
+  border-color: #f87171;
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.35);
+}
+
+.cg-btn-danger:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  box-shadow: 0 0 20px rgba(248, 113, 113, 0.6);
+  transform: translateY(-1px);
+}
+
+.cg-btn-secondary {
+  background: rgba(30, 41, 59, 0.8);
+  color: #cbd5e1;
+  border-color: #475569;
+}
+
+.cg-btn-secondary:hover:not(:disabled) {
+  background: #334155;
+  color: #ffffff;
+  border-color: #94a3b8;
+}
+
+.cg-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Glitch Overlay */
+.cg-glitch-active {
+  animation: cg-glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes cg-glitch-skew {
+  0% { transform: translate(0); }
+  20% { transform: translate(-3px, 3px); }
+  40% { transform: translate(-3px, -3px); }
+  60% { transform: translate(3px, 3px); }
+  80% { transform: translate(3px, -3px); }
+  100% { transform: translate(0); }
+}
+
+/* Sound toggle button */
+.cg-hud-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .cg-arena-container {
+    height: 180px;
+  }
+  .cg-bit-box {
+    width: 26px;
+    height: 32px;
+    font-size: 0.85rem;
+  }
+  .cg-hud-header {
+    padding: 0.75rem 1rem;
+  }
+}
+

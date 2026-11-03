@@ -168,6 +168,12 @@ const App = {
       App.renderResourcesHub(mainContainer);
     } else if (viewName === 'quiz') {
       QuizModule.render(mainContainer);
+    } else if (viewName === 'minigames') {
+      App.renderMiniGamesHub(mainContainer);
+    } else if (viewName === 'checksum-guard') {
+      if (typeof ChecksumGuardGame !== 'undefined') {
+        ChecksumGuardGame.render(mainContainer);
+      }
     }
 
     setTimeout(() => {
@@ -640,6 +646,114 @@ const App = {
           <div class="unit-card-tasks">Unit V • RFC 8017 Cryptography</div>
           <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 1rem;">Calculates modulus n, totient ϕ(n), public e, private d, and encrypts/decrypts live.</p>
           <div class="unit-card-btn-arrow">Launch Lab →</div>
+        </div>
+      </div>
+    `;
+  },
+
+  // 3B. MINI GAMES HUB
+  renderMiniGamesHub: function (container) {
+    container.innerHTML = `
+      <div class="welcome-banner" style="background: radial-gradient(circle at 10% 20%, #0f172a 0%, #1e293b 100%); border: 1px solid rgba(56, 189, 248, 0.3); color: #ffffff;">
+        <div class="welcome-text">
+          <div style="font-size: 0.85rem; font-weight: 800; color: #38bdf8; text-transform: uppercase; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-gamepad"></i> Interactive Gaming Suite
+          </div>
+          <h2 style="color: #ffffff; font-weight: 900; font-size: 1.75rem; margin-bottom: 0.5rem;">MINI GAMES</h2>
+          <p style="color: #94a3b8; font-size: 0.95rem; max-width: 600px;">Learn Computer Networks through interactive games. Experience protocol mechanics, frame transmissions, and error detection first-hand.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 2rem;">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300 flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved text-cyan-600 dark:text-cyan-400"></i> Featured Network Games
+          </h3>
+          <span class="text-xs text-gray-400">1 Available Simulation</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- CHECKSUM GUARD GAME CARD -->
+          <div class="bg-white dark:bg-gfg-darkcard rounded-xl border border-gray-200 dark:border-gray-700 hover:border-cyan-500 dark:hover:border-cyan-400 transition-all duration-300 shadow-md hover:shadow-xl overflow-hidden flex flex-col justify-between group">
+            <div>
+              <!-- Game Card Thumbnail Illustration -->
+              <div class="h-44 bg-gradient-to-br from-slate-900 via-sky-950 to-indigo-950 relative overflow-hidden flex items-center justify-center p-6 border-b border-gray-100 dark:border-gray-800">
+                <div class="absolute inset-0 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px] opacity-25"></div>
+                
+                <!-- Stylized 2D Nodes Illustration -->
+                <div class="relative z-10 flex items-center justify-between w-full max-w-xs px-2">
+                  <div class="flex flex-col items-center">
+                    <div class="w-11 h-11 rounded-xl bg-sky-600/30 border border-sky-400 text-sky-300 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <i class="fa-solid fa-server text-base"></i>
+                    </div>
+                    <span class="text-[9px] font-mono font-bold text-sky-400 mt-1">Sender</span>
+                  </div>
+
+                  <div class="flex-1 flex flex-col items-center mx-2">
+                    <div class="w-full h-0.5 bg-gradient-to-r from-sky-400 via-purple-400 to-emerald-400 relative">
+                      <div class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-cyan-400 shadow-[0_0_8px_#38bdf8] animate-pulse"></div>
+                    </div>
+                    <span class="text-[8px] font-mono text-purple-400 mt-1.5">1's Comp</span>
+                  </div>
+
+                  <div class="flex flex-col items-center">
+                    <div class="w-11 h-11 rounded-xl bg-purple-600/30 border border-purple-400 text-purple-300 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <i class="fa-solid fa-router text-base"></i>
+                    </div>
+                    <span class="text-[9px] font-mono font-bold text-purple-400 mt-1">Router</span>
+                  </div>
+
+                  <div class="flex-1 flex flex-col items-center mx-2">
+                    <div class="w-full h-0.5 bg-gradient-to-r from-purple-400 to-emerald-400 relative"></div>
+                    <span class="text-[8px] font-mono text-emerald-400 mt-1.5">Verify</span>
+                  </div>
+
+                  <div class="flex flex-col items-center">
+                    <div class="w-11 h-11 rounded-xl bg-emerald-600/30 border border-emerald-400 text-emerald-300 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <i class="fa-solid fa-shield-check text-base"></i>
+                    </div>
+                    <span class="text-[9px] font-mono font-bold text-emerald-400 mt-1">Receiver</span>
+                  </div>
+                </div>
+
+                <!-- Floating Badge -->
+                <span class="absolute top-3 right-3 text-[10px] bg-cyan-950/80 text-cyan-300 border border-cyan-500/40 font-bold px-2 py-0.5 rounded-full backdrop-blur-sm">
+                  2D Arcade
+                </span>
+              </div>
+
+              <!-- Card Content -->
+              <div class="p-5 space-y-3">
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
+                    Category: Data Link Layer
+                  </span>
+                  <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                    Concept: Checksum Error Detection
+                  </span>
+                </div>
+
+                <div>
+                  <h4 class="text-base font-black text-gray-900 dark:text-white tracking-tight group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+                    CHECKSUM GUARD
+                  </h4>
+                  <p class="text-xs text-cyan-600 dark:text-cyan-400 font-semibold mt-0.5">Secure the Transmission</p>
+                </div>
+
+                <p class="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">
+                  An interactive Data Link Layer simulation where players calculate checksums, transmit frames, introduce bit errors and verify data integrity.
+                </p>
+              </div>
+            </div>
+
+            <!-- Card Footer / Action Button -->
+            <div class="p-5 pt-0">
+              <button onclick="App.loadView('checksum-guard')" class="w-full py-2.5 px-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white rounded-lg font-bold text-xs flex items-center justify-center gap-2 shadow-md hover:shadow-cyan-500/30 transition-all cursor-pointer">
+                <i class="fa-solid fa-play text-[11px]"></i>
+                <span>Play Now</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     `;
