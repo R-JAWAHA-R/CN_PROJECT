@@ -1,0 +1,390 @@
+/* HAMMING HERO — Dedicated Arcade Simulation Stylesheet */
+/* Hamming Code Error Detection and Single-Bit Correction Game */
+
+.hamming-wrapper {
+  background: radial-gradient(circle at 50% 15%, #101c3d 0%, #080f24 65%, #040816 100%);
+  color: #e2e8f0;
+  border-radius: 16px;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), 0 0 35px rgba(14, 165, 233, 0.15);
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle CRT Scanline overlay */
+.hamming-wrapper::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.22) 50%);
+  background-size: 100% 4px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+/* Top Arcade HUD Header */
+.hamming-hud-header {
+  position: relative;
+  z-index: 3;
+  background: rgba(8, 15, 36, 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+  padding: 1rem 1.5rem;
+}
+
+/* Transmission Arena Canvas Container */
+.hamming-arena-container {
+  position: relative;
+  width: 100%;
+  height: 230px;
+  background: #060b17;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+  overflow: hidden;
+  z-index: 3;
+}
+
+.hamming-arena-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Status Phase Banner */
+.hamming-status-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  z-index: 3;
+  position: relative;
+}
+
+/* Active Stage Panel */
+.hamming-stage-panel {
+  position: relative;
+  z-index: 3;
+  padding: 1.5rem;
+  background: rgba(8, 15, 36, 0.65);
+}
+
+/* Bit Display Grid & Tokens */
+.hamming-bit-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamming-bit-slot {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.hamming-bit-box {
+  width: 38px;
+  height: 44px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #1e293b;
+  font-family: 'Fira Code', monospace;
+  font-size: 1.15rem;
+  font-weight: 800;
+  border-radius: 8px;
+  border: 2px solid #334155;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  position: relative;
+}
+
+/* Data Bit Token */
+.hamming-bit-box.bit-data {
+  background: rgba(14, 165, 233, 0.15);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+/* Parity Bit Token */
+.hamming-bit-box.bit-parity {
+  background: rgba(168, 85, 247, 0.18);
+  color: #c084fc;
+  border-color: rgba(192, 132, 252, 0.45);
+}
+
+/* Corrupted Bit Token (Red Alert Pulse) */
+.hamming-bit-box.bit-corrupted {
+  background: #7f1d1d !important;
+  color: #fecaca !important;
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.9) !important;
+  animation: hamming-pulse-red 1s infinite alternate;
+}
+
+/* Corrected Bit Token (Green Shield Glow) */
+.hamming-bit-box.bit-corrected {
+  background: #064e3b !important;
+  color: #a7f3d0 !important;
+  border-color: #10b981 !important;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.9) !important;
+  animation: hamming-pulse-green 1s infinite alternate;
+}
+
+.hamming-bit-box.interactive {
+  cursor: pointer;
+}
+
+.hamming-bit-box.interactive:hover {
+  transform: translateY(-3px) scale(1.08);
+  border-color: #38bdf8;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.6);
+  background: #0f172a;
+}
+
+.hamming-bit-pos-badge {
+  font-size: 10px;
+  font-family: 'Fira Code', monospace;
+  font-weight: 700;
+  color: #94a3b8;
+}
+
+.hamming-bit-name-badge {
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 1px 4px;
+  border-radius: 4px;
+}
+
+.hamming-bit-name-badge.badge-data {
+  background: rgba(14, 165, 233, 0.2);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.hamming-bit-name-badge.badge-parity {
+  background: rgba(168, 85, 247, 0.2);
+  color: #c084fc;
+  border: 1px solid rgba(192, 132, 252, 0.3);
+}
+
+/* Keyframe Animations */
+@keyframes hamming-pulse-red {
+  from {
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+    border-color: #f87171;
+  }
+  to {
+    box-shadow: 0 0 22px rgba(239, 68, 68, 0.95);
+    border-color: #ef4444;
+  }
+}
+
+@keyframes hamming-pulse-green {
+  from {
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+    border-color: #34d399;
+  }
+  to {
+    box-shadow: 0 0 22px rgba(16, 185, 129, 0.95);
+    border-color: #10b981;
+  }
+}
+
+/* Mode Switcher Tabs */
+.hamming-mode-tab {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-radius: 6px;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.hamming-mode-tab.active {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #38bdf8;
+  box-shadow: 0 0 12px rgba(2, 132, 199, 0.4);
+}
+
+.hamming-mode-tab:not(.active) {
+  background: rgba(30, 41, 59, 0.6);
+  color: #94a3b8;
+  border-color: rgba(51, 65, 85, 0.7);
+}
+
+.hamming-mode-tab:not(.active):hover {
+  background: #334155;
+  color: #ffffff;
+}
+
+/* Calculation & Parity Table */
+.hamming-calc-box {
+  background: #070c1a;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 12px;
+  padding: 1.25rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+  overflow-x: auto;
+}
+
+/* Syndrome Position Pointer */
+.hamming-syndrome-pointer {
+  background: linear-gradient(135deg, rgba(88, 28, 135, 0.4) 0%, rgba(15, 23, 42, 0.8) 100%);
+  border: 1px solid rgba(168, 85, 247, 0.5);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+}
+
+/* Custom Buttons */
+.hamming-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 8px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.hamming-btn-cyan {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
+  border-color: #38bdf8;
+  box-shadow: 0 4px 15px rgba(2, 132, 199, 0.35);
+}
+
+.hamming-btn-cyan:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
+  transform: translateY(-1px);
+}
+
+.hamming-btn-emerald {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: #ffffff;
+  border-color: #34d399;
+  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.35);
+}
+
+.hamming-btn-emerald:hover:not(:disabled) {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 0 20px rgba(52, 211, 153, 0.6);
+  transform: translateY(-1px);
+}
+
+.hamming-btn-purple {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  color: #ffffff;
+  border-color: #a78bfa;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.35);
+}
+
+.hamming-btn-purple:hover:not(:disabled) {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  box-shadow: 0 0 20px rgba(167, 139, 250, 0.6);
+  transform: translateY(-1px);
+}
+
+.hamming-btn-danger {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: #ffffff;
+  border-color: #f87171;
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.35);
+}
+
+.hamming-btn-danger:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  box-shadow: 0 0 20px rgba(248, 113, 113, 0.6);
+  transform: translateY(-1px);
+}
+
+.hamming-btn-secondary {
+  background: rgba(30, 41, 59, 0.8);
+  color: #cbd5e1;
+  border-color: #475569;
+}
+
+.hamming-btn-secondary:hover:not(:disabled) {
+  background: #334155;
+  color: #ffffff;
+  border-color: #94a3b8;
+}
+
+.hamming-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Educational Accordion */
+.hamming-edu-card {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.hamming-edu-header {
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background: rgba(30, 41, 59, 0.5);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.hamming-edu-header:hover {
+  background: rgba(30, 41, 59, 0.8);
+  color: #38bdf8;
+}
+
+.hamming-edu-body {
+  padding: 1rem;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: #cbd5e1;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .hamming-arena-container {
+    height: 180px;
+  }
+  .hamming-bit-box {
+    width: 30px;
+    height: 38px;
+    font-size: 0.95rem;
+  }
+  .hamming-hud-header {
+    padding: 0.75rem 1rem;
+  }
+}
+

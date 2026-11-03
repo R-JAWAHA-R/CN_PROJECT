@@ -178,6 +178,10 @@ const App = {
       if (typeof CRCChallengeGame !== 'undefined') {
         CRCChallengeGame.render(mainContainer);
       }
+    } else if (viewName === 'hamming-hero') {
+      if (typeof HammingHeroGame !== 'undefined') {
+        HammingHeroGame.render(mainContainer);
+      }
     }
 
     setTimeout(() => {
@@ -661,7 +665,7 @@ const App = {
           <h3 class="text-sm font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300 flex items-center gap-2">
             <i class="fa-solid fa-shield-halved text-cyan-600 dark:text-cyan-400"></i> Featured Network Games
           </h3>
-          <span class="text-xs text-gray-400">2 Available Simulations</span>
+          <span class="text-xs text-gray-400">3 Available Simulations</span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -819,6 +823,84 @@ const App = {
             <!-- Card Footer / Action Button -->
             <div class="p-5 pt-0">
               <button onclick="App.loadView('crc-challenge')" class="w-full py-2.5 px-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-lg font-bold text-xs flex items-center justify-center gap-2 shadow-md hover:shadow-emerald-500/30 transition-all cursor-pointer">
+                <i class="fa-solid fa-play text-[11px]"></i>
+                <span>Play Now</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- HAMMING HERO GAME CARD -->
+          <div class="bg-white dark:bg-gfg-darkcard rounded-xl border border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-400 transition-all duration-300 shadow-md hover:shadow-xl overflow-hidden flex flex-col justify-between group">
+            <div>
+              <!-- Game Card Thumbnail Illustration -->
+              <div class="h-44 bg-gradient-to-br from-slate-900 via-purple-950 to-slate-950 relative overflow-hidden flex items-center justify-center p-6 border-b border-gray-100 dark:border-gray-800">
+                <div class="absolute inset-0 bg-[radial-gradient(#c084fc_1px,transparent_1px)] [background-size:16px_16px] opacity-25"></div>
+                
+                <!-- Stylized Error Correction Illustration -->
+                <div class="relative z-10 flex items-center justify-between w-full max-w-xs px-2">
+                  <div class="flex flex-col items-center">
+                    <div class="w-11 h-11 rounded-xl bg-purple-600/30 border border-purple-400 text-purple-300 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <i class="fa-solid fa-wand-magic-sparkles text-base"></i>
+                    </div>
+                    <span class="text-[9px] font-mono font-bold text-purple-400 mt-1">Encode P</span>
+                  </div>
+                  <div class="flex-1 flex flex-col items-center mx-2">
+                    <div class="w-full h-0.5 bg-gradient-to-r from-purple-400 via-red-400 to-emerald-400 relative">
+                      <div class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-purple-400 shadow-[0_0_8px_#c084fc] animate-pulse"></div>
+                    </div>
+                    <span class="text-[8px] font-mono text-red-300 mt-1.5">1-Bit Flip</span>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="w-11 h-11 rounded-xl bg-red-600/30 border border-red-400 text-red-300 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <i class="fa-solid fa-triangle-exclamation text-base"></i>
+                    </div>
+                    <span class="text-[9px] font-mono font-bold text-red-400 mt-1">Noise</span>
+                  </div>
+                  <div class="flex-1 flex flex-col items-center mx-2">
+                    <div class="w-full h-0.5 bg-gradient-to-r from-red-400 to-emerald-400 relative"></div>
+                    <span class="text-[8px] font-mono text-emerald-400 mt-1.5">Syndrome S</span>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="w-11 h-11 rounded-xl bg-emerald-600/30 border border-emerald-400 text-emerald-300 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <i class="fa-solid fa-shield-heart text-base"></i>
+                    </div>
+                    <span class="text-[9px] font-mono font-bold text-emerald-400 mt-1">Auto Correct</span>
+                  </div>
+                </div>
+
+                <!-- Floating Badge -->
+                <span class="absolute top-3 right-3 text-[10px] bg-purple-950/80 text-purple-300 border border-purple-500/40 font-bold px-2 py-0.5 rounded-full backdrop-blur-sm">
+                  FEC Arcade
+                </span>
+              </div>
+
+              <!-- Card Content -->
+              <div class="p-5 space-y-3">
+                <div class="flex flex-wrap items-center gap-1.5">
+                  <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
+                    Category: Data Link Layer
+                  </span>
+                  <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
+                    Concept: Hamming Code
+                  </span>
+                </div>
+
+                <div>
+                  <h4 class="text-base font-black text-gray-900 dark:text-white tracking-tight group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                    HAMMING HERO
+                  </h4>
+                  <p class="text-xs text-purple-600 dark:text-purple-400 font-semibold mt-0.5">The Error Correction Challenge</p>
+                </div>
+
+                <p class="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">
+                  An interactive networking simulation where players generate Hamming Code, introduce transmission errors, calculate syndromes and correct corrupted bits.
+                </p>
+              </div>
+            </div>
+
+            <!-- Card Footer / Action Button -->
+            <div class="p-5 pt-0">
+              <button onclick="App.loadView('hamming-hero')" class="w-full py-2.5 px-4 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white rounded-lg font-bold text-xs flex items-center justify-center gap-2 shadow-md hover:shadow-purple-500/30 transition-all cursor-pointer">
                 <i class="fa-solid fa-play text-[11px]"></i>
                 <span>Play Now</span>
               </button>
