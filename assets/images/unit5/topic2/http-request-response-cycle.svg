@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  
+  <defs>
+    <filter id="shadow" x="-3%" y="-3%" width="106%" height="106%">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#d97706"/>
+    </marker>
+    <style>
+      text { font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif; }
+      .title { font-size: 19px; font-weight: 800; fill: #0f172a; }
+      .subtitle { font-size: 12.5px; fill: #64748b; font-weight: 500; }
+      .card-title { font-size: 13px; font-weight: 700; fill: #0f172a; }
+      .label { font-size: 11px; fill: #334155; font-weight: 600; }
+      .sublabel { font-size: 9.5px; fill: #64748b; }
+      .code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 10px; }
+      .badge-text { font-size: 9.5px; font-weight: 700; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="800" height="500" rx="14" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="400" y="32" text-anchor="middle" class="title">HTTP Request and Response Message Formats</text>
+  <text x="400" y="50" text-anchor="middle" class="subtitle">Complete RFC 7230 / Forouzan Ch. 27 ASCII Transaction Structure</text>
+
+  <!-- Left: Request Message -->
+  <rect x="25" y="70" width="365" height="410" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" filter="url(#shadow)"/>
+  <text x="207" y="94" class="card-title" text-anchor="middle">HTTP Request Message Format</text>
+  <text x="207" y="110" class="sublabel" text-anchor="middle">Client (Browser) → Web Server</text>
+
+  <!-- Request Line Box -->
+  <rect x="40" y="125" width="335" height="50" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="50" y="143" font-size="10.5" font-weight="bold" fill="#1e40af">1. Request-Line (Method + URI + Version):</text>
+  <text x="50" y="162" class="code" fill="#0f172a" font-weight="bold">GET /api/v1/students?dept=cse HTTP/1.1
+</text>
+
+  <!-- Request Headers Box -->
+  <rect x="40" y="185" width="335" height="150" rx="6" fill="#f8fafc" stroke="#94a3b8"/>
+  <text x="50" y="204" font-size="10.5" font-weight="bold" fill="#0f172a">2. Header Lines (Key: Value pairs):</text>
+  <text x="50" y="224" class="code" fill="#334155">Host: www.pondiuni.edu.in
+</text>
+  <text x="50" y="240" class="code" fill="#334155">User-Agent: Mozilla/5.0 (Windows NT 10.0)
+</text>
+  <text x="50" y="256" class="code" fill="#334155">Accept: text/html,application/json
+</text>
+  <text x="50" y="272" class="code" fill="#334155">Accept-Encoding: gzip, deflate, br
+</text>
+  <text x="50" y="288" class="code" fill="#334155">Connection: keep-alive
+</text>
+  <text x="50" y="304" class="code" fill="#334155">Cookie: session_token=xyz987654321
+</text>
+  <text x="50" y="320" class="code" fill="#059669">If-Modified-Since: Tue, 03 Nov 2026 12:00:00 GMT
+</text>
+
+  <!-- Blank line indicator -->
+  <rect x="40" y="342" width="335" height="26" rx="4" fill="#fee2e2" stroke="#f87171"/>
+  <text x="207" y="359" font-size="10" font-weight="bold" fill="#b91c1c" text-anchor="middle">3. Blank Line Carriage Return + Line Feed (
+)</text>
+
+  <!-- Body -->
+  <rect x="40" y="375" width="335" height="90" rx="6" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="50" y="394" font-size="10" font-weight="bold" fill="#0f172a">4. Entity Body (Optional, used in POST/PUT):</text>
+  <text x="50" y="414" class="code" fill="#475569">{ "regNo": "2201501", "name": "Akin" }</text>
+  <text x="50" y="435" font-size="8.5" fill="#64748b">(Empty in standard GET, HEAD, and DELETE requests)</text>
+
+  <!-- Right: Response Message -->
+  <rect x="410" y="70" width="365" height="410" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" filter="url(#shadow)"/>
+  <text x="592" y="94" class="card-title" text-anchor="middle">HTTP Response Message Format</text>
+  <text x="592" y="110" class="sublabel" text-anchor="middle">Web Server → Client (Browser)</text>
+
+  <!-- Status Line Box -->
+  <rect x="425" y="125" width="335" height="50" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="435" y="143" font-size="10.5" font-weight="bold" fill="#15803d">1. Status-Line (Version + Status Code + Phrase):</text>
+  <text x="435" y="162" class="code" fill="#059669" font-weight="bold">HTTP/1.1 200 OK
+</text>
+
+  <!-- Response Headers Box -->
+  <rect x="425" y="185" width="335" height="150" rx="6" fill="#f8fafc" stroke="#94a3b8"/>
+  <text x="435" y="204" font-size="10.5" font-weight="bold" fill="#0f172a">2. Header Lines (Response Metadata):</text>
+  <text x="435" y="224" class="code" fill="#334155">Date: Tue, 03 Nov 2026 15:30:00 GMT
+</text>
+  <text x="435" y="240" class="code" fill="#334155">Server: Apache/2.4.54 (Ubuntu)
+</text>
+  <text x="435" y="256" class="code" fill="#334155">Content-Type: text/html; charset=UTF-8
+</text>
+  <text x="435" y="272" class="code" fill="#334155">Content-Length: 4826
+</text>
+  <text x="435" y="288" class="code" fill="#334155">Set-Cookie: user_auth=abcdef123; Secure; HttpOnly
+</text>
+  <text x="435" y="304" class="code" fill="#334155">Cache-Control: max-age=3600, public
+</text>
+  <text x="435" y="320" class="code" fill="#334155">ETag: "686897696a7c876b7e"
+</text>
+
+  <!-- Blank line indicator -->
+  <rect x="425" y="342" width="335" height="26" rx="4" fill="#fee2e2" stroke="#f87171"/>
+  <text x="592" y="359" font-size="10" font-weight="bold" fill="#b91c1c" text-anchor="middle">3. Blank Line Carriage Return + Line Feed (
+)</text>
+
+  <!-- Body -->
+  <rect x="425" y="375" width="335" height="90" rx="6" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="435" y="394" font-size="10" font-weight="bold" fill="#15803d">4. Entity Body (Delivered Web Content):</text>
+  <text x="435" y="414" class="code" fill="#166534">&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;Unit 5&lt;/title&gt;...</text>
+  <text x="435" y="435" font-size="8.5" fill="#15803d">(Delivers HTML, JSON, CSS, images or binary blobs)</text>
+</svg>

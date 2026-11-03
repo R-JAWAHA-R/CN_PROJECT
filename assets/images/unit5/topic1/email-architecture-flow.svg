@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  
+  <defs>
+    <filter id="shadow" x="-3%" y="-3%" width="106%" height="106%">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#d97706"/>
+    </marker>
+    <style>
+      text { font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif; }
+      .title { font-size: 19px; font-weight: 800; fill: #0f172a; }
+      .subtitle { font-size: 12.5px; fill: #64748b; font-weight: 500; }
+      .card-title { font-size: 13px; font-weight: 700; fill: #0f172a; }
+      .label { font-size: 11px; fill: #334155; font-weight: 600; }
+      .sublabel { font-size: 9.5px; fill: #64748b; }
+      .code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 10px; }
+      .badge-text { font-size: 9.5px; font-weight: 700; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="800" height="500" rx="14" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="400" y="32" text-anchor="middle" class="title">Electronic Mail Architecture & Protocol Mechanics</text>
+  <text x="400" y="50" text-anchor="middle" class="subtitle">Forouzan Scenario 4: User Agents (UA), Mail Transfer Agents (SMTP), & Access Agents (POP3 / IMAP4)</text>
+
+  <!-- Sender Side Box -->
+  <rect x="30" y="75" width="220" height="385" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" filter="url(#shadow)"/>
+  <text x="140" y="98" class="card-title" text-anchor="middle">Sender Site (Alice)</text>
+  
+  <rect x="50" y="120" width="180" height="55" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="140" y="142" class="label" fill="#1e40af" text-anchor="middle">User Agent (UA)</text>
+  <text x="140" y="158" class="sublabel" text-anchor="middle">Outlook / Thunderbird / Webmail</text>
+
+  <!-- Arrow UA to Sender MTA -->
+  <line x1="140" y1="175" x2="140" y2="230" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <text x="148" y="205" font-size="9.5" font-weight="bold" fill="#2563eb">SMTP Push (Port 587)</text>
+
+  <rect x="50" y="235" width="180" height="80" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="1.5"/>
+  <text x="140" y="258" class="label" text-anchor="middle">Sending Mail Server</text>
+  <text x="140" y="275" class="sublabel" text-anchor="middle">MTA Client (Postfix / Sendmail)</text>
+  <text x="140" y="292" font-size="9" fill="#059669" text-anchor="middle">Spool (Outgoing Mail Queue)</text>
+
+  <rect x="50" y="340" width="180" height="100" rx="6" fill="#f1f5f9"/>
+  <text x="60" y="358" font-size="10" font-weight="bold" fill="#0f172a">MIME Extension (RFC 2045):</text>
+  <text x="60" y="375" font-size="9" fill="#475569">• Non-ASCII Text (UTF-8)</text>
+  <text x="60" y="390" font-size="9" fill="#475569">• Audio, Images, Video attachments</text>
+  <text x="60" y="405" font-size="9" fill="#475569">• Base64 & Quoted-Printable</text>
+  <text x="60" y="420" font-size="9" fill="#475569">• Multipart/mixed boundaries</text>
+
+  <!-- Middle Internet Cloud & Relay -->
+  <rect x="290" y="160" width="220" height="180" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="400" y="195" font-size="14" font-weight="bold" fill="#1e40af" text-anchor="middle">Public Internet</text>
+  <text x="400" y="215" font-size="11" fill="#3b82f6" text-anchor="middle">DNS MX Lookup</text>
+  <text x="400" y="232" font-size="9.5" fill="#64748b" text-anchor="middle">Host: recipient-domain.com → Mail IP</text>
+
+  <!-- Big Arrow Sender MTA -> Receiver MTA -->
+  <path d="M 230 260 L 285 260" stroke="#059669" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+  <path d="M 510 260 L 565 260" stroke="#059669" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+  <text x="400" y="280" font-size="12" font-weight="800" fill="#059669" text-anchor="middle">SMTP Relay (Port 25)</text>
+  <text x="400" y="295" font-size="9" fill="#475569" text-anchor="middle">Server-to-Server Push Protocol</text>
+
+  <!-- Receiver Side Box -->
+  <rect x="550" y="75" width="220" height="385" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" filter="url(#shadow)"/>
+  <text x="660" y="98" class="card-title" text-anchor="middle">Receiver Site (Bob)</text>
+
+  <rect x="570" y="225" width="180" height="90" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="1.5"/>
+  <text x="660" y="246" class="label" text-anchor="middle">Receiving Mail Server</text>
+  <text x="660" y="262" class="sublabel" text-anchor="middle">MTA Server (Listens on Port 25)</text>
+  <rect x="585" y="272" width="150" height="28" rx="4" fill="#fef3c7" stroke="#f59e0b"/>
+  <text x="660" y="289" font-size="9.5" font-weight="bold" fill="#b45309" text-anchor="middle">Bob's Mailbox (Stored on Disk)</text>
+
+  <!-- Arrow Receiver MTA down to Bob's UA (Pull) -->
+  <line x1="660" y1="315" x2="660" y2="368" stroke="#d97706" stroke-width="2" marker-end="url(#arrow-amber)"/>
+  <text x="668" y="345" font-size="9.5" font-weight="bold" fill="#d97706">Pull Protocols (MAA)</text>
+
+  <rect x="570" y="375" width="180" height="55" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="660" y="396" class="label" fill="#b45309" text-anchor="middle">User Agent (Bob)</text>
+  <text x="660" y="414" class="sublabel" text-anchor="middle">Pulls Mail on Demand</text>
+
+  <!-- Protocol Comparison Footer on Right -->
+  <rect x="290" y="360" width="220" height="100" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="400" y="380" font-size="10.5" font-weight="bold" fill="#0f172a" text-anchor="middle">POP3 vs IMAP4</text>
+  <text x="305" y="400" font-size="9" fill="#334155"><tspan font-weight="bold">POP3 (Port 110/995):</tspan> Download &amp; delete</text>
+  <text x="305" y="415" font-size="8.5" fill="#64748b">Single device, offline storage</text>
+  <text x="305" y="433" font-size="9" fill="#334155"><tspan font-weight="bold">IMAP4 (Port 143/993):</tspan> Server-sync folders</text>
+  <text x="305" y="448" font-size="8.5" fill="#64748b">Multi-device sync, server search</text>
+</svg>

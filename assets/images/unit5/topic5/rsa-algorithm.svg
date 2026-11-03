@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  
+  <defs>
+    <filter id="shadow" x="-3%" y="-3%" width="106%" height="106%">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#d97706"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#dc2626"/>
+    </marker>
+    <style>
+      text { font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif; }
+      .title { font-size: 19px; font-weight: 800; fill: #0f172a; }
+      .subtitle { font-size: 12.5px; fill: #64748b; font-weight: 500; }
+      .card-title { font-size: 13px; font-weight: 700; fill: #0f172a; }
+      .label { font-size: 11px; fill: #334155; font-weight: 600; }
+      .sublabel { font-size: 9.5px; fill: #64748b; }
+      .code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 10px; }
+      .badge-text { font-size: 9.5px; font-weight: 700; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="800" height="500" rx="14" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="400" y="32" text-anchor="middle" class="title">The RSA Public-Key Cryptographic Algorithm</text>
+  <text x="400" y="50" text-anchor="middle" class="subtitle">Forouzan Section 30.3 / Prime Factorization, Euler Totient $phi(n)$, Keygen, &amp; Worked Example 30.7</text>
+
+  <!-- Left: Step-by-Step RSA Algorithm Flowchart -->
+  <rect x="25" y="70" width="365" height="410" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" filter="url(#shadow)"/>
+  <text x="207" y="95" class="card-title" fill="#2563eb" text-anchor="middle">1. Key Generation Procedure</text>
+
+  <!-- Step 1 -->
+  <rect x="40" y="115" width="335" height="45" rx="5" fill="#eff6ff" stroke="#3b82f6"/>
+  <text x="50" y="133" font-size="9.5" font-weight="bold" fill="#1e40af">Step 1: Choose Two Large Prime Numbers</text>
+  <text x="50" y="148" class="code" font-size="9.5" fill="#0f172a">Select distinct secret primes p and q</text>
+
+  <!-- Step 2 -->
+  <rect x="40" y="168" width="335" height="45" rx="5" fill="#eff6ff" stroke="#3b82f6"/>
+  <text x="50" y="186" font-size="9.5" font-weight="bold" fill="#1e40af">Step 2: Calculate Modulus n</text>
+  <text x="50" y="201" class="code" font-size="9.5" fill="#0f172a">n = p 	imes q   (Announced to Public)</text>
+
+  <!-- Step 3 -->
+  <rect x="40" y="221" width="335" height="45" rx="5" fill="#eff6ff" stroke="#3b82f6"/>
+  <text x="50" y="239" font-size="9.5" font-weight="bold" fill="#1e40af">Step 3: Calculate Euler Totient phi(n)</text>
+  <text x="50" y="254" class="code" font-size="9.5" fill="#0f172a">phi(n) = (p - 1) 	imes (q - 1)   (Kept Secret!)</text>
+
+  <!-- Step 4 -->
+  <rect x="40" y="274" width="335" height="52" rx="5" fill="#fef3c7" stroke="#f59e0b"/>
+  <text x="50" y="292" font-size="9.5" font-weight="bold" fill="#b45309">Step 4: Select Public Exponent e</text>
+  <text x="50" y="306" class="code" font-size="9" fill="#78350f">1 &lt; e &lt; phi(n)   	ext{such that}   gcd(e, phi(n)) = 1</text>
+  <text x="50" y="320" font-size="8" fill="#92400e">(e must be coprime to phi(n); common choices: 3, 17, 65537)</text>
+
+  <!-- Step 5 -->
+  <rect x="40" y="334" width="335" height="52" rx="5" fill="#fef3c7" stroke="#f59e0b"/>
+  <text x="50" y="352" font-size="9.5" font-weight="bold" fill="#b45309">Step 5: Calculate Private Exponent d</text>
+  <text x="50" y="366" class="code" font-size="9" fill="#78350f">d 	imes e equiv 1 pmod{phi(n)} implies d = e^{-1} pmod{phi(n)}</text>
+  <text x="50" y="380" font-size="8" fill="#92400e">(Calculated efficiently via Extended Euclidean Algorithm)</text>
+
+  <!-- Keys Output -->
+  <rect x="40" y="395" width="335" height="70" rx="6" fill="#f0fdf4" stroke="#16a34a"/>
+  <text x="50" y="415" font-size="10" font-weight="bold" fill="#15803d">Final Key Pairs Generated:</text>
+  <text x="50" y="433" font-size="9.5" fill="#14532d"><tspan font-weight="bold">Public Key (Shared with world):</tspan> <tspan class="code font-bold">PU = {e, n}</tspan></text>
+  <text x="50" y="452" font-size="9.5" fill="#14532d"><tspan font-weight="bold">Private Key (Strictly confidential):</tspan> <tspan class="code font-bold">PR = {d, n}</tspan></text>
+
+  <!-- Right: Encryption, Decryption & Forouzan Example 30.7 -->
+  <rect x="410" y="70" width="365" height="410" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" filter="url(#shadow)"/>
+  <text x="592" y="95" class="card-title" fill="#059669" text-anchor="middle">2. Encryption, Decryption &amp; Numerical Proof</text>
+
+  <!-- Formulas Box -->
+  <rect x="425" y="115" width="335" height="70" rx="6" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="435" y="135" font-size="10" font-weight="bold" fill="#15803d">Transformation Mathematical Formulas:</text>
+  <text x="435" y="155" class="code" font-size="10" fill="#0f172a">Encryption (Alice): C = M^e pmod n  quad (M &lt; n)</text>
+  <text x="435" y="173" class="code" font-size="10" fill="#0f172a">Decryption (Bob):   M = C^d pmod n</text>
+
+  <!-- McGraw-Hill Forouzan Example 30.7 Box -->
+  <rect x="425" y="195" width="335" height="195" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="435" y="215" font-size="10.5" font-weight="bold" fill="#0f172a">McGraw-Hill Forouzan Example 30.7 Walkthrough:</text>
+
+  <text x="435" y="235" font-size="9" fill="#334155" class="code">1. Primes chosen: p = 7,  q = 11</text>
+  <text x="435" y="250" font-size="9" fill="#334155" class="code">2. Modulus:       n = 7 	imes 11 = 77</text>
+  <text x="435" y="265" font-size="9" fill="#334155" class="code">3. Totient:       phi(n) = (7-1)(11-1) = 6 	imes 10 = 60</text>
+  <text x="435" y="280" font-size="9" fill="#334155" class="code">4. Public key e:  Choose e = 13  (gcd(13, 60) = 1)</text>
+  <text x="435" y="295" font-size="9" fill="#334155" class="code">5. Private key d: d = 13^{-1} mod 60 = 37</text>
+  <text x="450" y="310" font-size="8" fill="#64748b">(Check: 13 	imes 37 = 481 = (8 	imes 60) + 1 equiv 1 pmod{60} ✓)</text>
+
+  <rect x="435" y="320" width="315" height="24" rx="4" fill="#dbeafe"/>
+  <text x="445" y="336" font-size="9" font-weight="bold" fill="#1e40af">6. Encryption of Plaintext M = 5:</text>
+  <text x="445" y="354" font-size="9" class="code" fill="#0f172a">C = 5^{13} pmod{77} equiv 1,220,703,125 pmod{77} = 26</text>
+
+  <rect x="435" y="362" width="315" height="24" rx="4" fill="#dcfce7"/>
+  <text x="445" y="378" font-size="9" font-weight="bold" fill="#15803d">7. Decryption of Ciphertext C = 26:</text>
+
+  <rect x="425" y="400" width="335" height="65" rx="6" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="435" y="420" font-size="9.5" font-weight="bold" fill="#1e40af">M = 26^{37} pmod{77} = 5   (Plaintext Recovered! ✓)</text>
+  <text x="435" y="438" font-size="8" fill="#475569">Security Foundation: Eve cannot find d without factoring n into p and q.</text>
+  <text x="435" y="453" font-size="8" fill="#475569">For 2048-bit n, factoring takes millions of years on classical computers.</text>
+</svg>

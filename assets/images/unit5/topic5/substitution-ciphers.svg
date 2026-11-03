@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  
+  <defs>
+    <filter id="shadow" x="-3%" y="-3%" width="106%" height="106%">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#d97706"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#dc2626"/>
+    </marker>
+    <style>
+      text { font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif; }
+      .title { font-size: 19px; font-weight: 800; fill: #0f172a; }
+      .subtitle { font-size: 12.5px; fill: #64748b; font-weight: 500; }
+      .card-title { font-size: 13px; font-weight: 700; fill: #0f172a; }
+      .label { font-size: 11px; fill: #334155; font-weight: 600; }
+      .sublabel { font-size: 9.5px; fill: #64748b; }
+      .code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 10px; }
+      .badge-text { font-size: 9.5px; font-weight: 700; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="800" height="500" rx="14" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="400" y="32" text-anchor="middle" class="title">Classical Substitution Ciphers: Caesar &amp; Polyalphabetic</text>
+  <text x="400" y="50" text-anchor="middle" class="subtitle">Forouzan Section 30.2 / Shift Cipher Formulas, Modular Arithmetic &amp; Vigenère Tableau</text>
+
+  <!-- Left: Monoalphabetic Shift Cipher (Caesar) -->
+  <rect x="25" y="70" width="365" height="410" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" filter="url(#shadow)"/>
+  <text x="207" y="95" class="card-title" fill="#2563eb" text-anchor="middle">1. Caesar / Additive Shift Cipher</text>
+  <text x="207" y="112" class="sublabel" text-anchor="middle">Each letter shifted by fixed integer $k in {0, dots, 25}$</text>
+
+  <!-- Mathematical Formulas Box -->
+  <rect x="40" y="125" width="335" height="65" rx="6" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="50" y="145" font-size="10.5" font-weight="bold" fill="#1e40af">Modular Arithmetic Formulation:</text>
+  <text x="50" y="165" font-size="11" fill="#0f172a" class="code">Encryption: C = (P + k) pmod{26}</text>
+  <text x="50" y="180" font-size="11" fill="#0f172a" class="code">Decryption: P = (C - k) pmod{26}</text>
+
+  <!-- Forouzan Example 30.3 Box -->
+  <rect x="40" y="200" width="335" height="150" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="50" y="220" font-size="10.5" font-weight="bold" fill="#0f172a">McGraw-Hill Forouzan Example 30.3 (Key = 15):</text>
+  <text x="50" y="238" font-size="9.5" fill="#475569">Plaintext: <tspan class="code" font-weight="bold">"HELLO"</tspan></text>
+
+  <text x="50" y="258" class="code" font-size="9.5" fill="#334155">• H (07): (07 + 15) mod 26 = 22 → <tspan font-weight="bold" fill="#2563eb">W</tspan></text>
+  <text x="50" y="274" class="code" font-size="9.5" fill="#334155">• E (04): (04 + 15) mod 26 = 19 → <tspan font-weight="bold" fill="#2563eb">T</tspan></text>
+  <text x="50" y="290" class="code" font-size="9.5" fill="#334155">• L (11): (11 + 15) mod 26 = 26 mod 26 = 00 → <tspan font-weight="bold" fill="#2563eb">A</tspan></text>
+  <text x="50" y="306" class="code" font-size="9.5" fill="#334155">• L (11): (11 + 15) mod 26 = 00 → <tspan font-weight="bold" fill="#2563eb">A</tspan></text>
+  <text x="50" y="322" class="code" font-size="9.5" fill="#334155">• O (14): (14 + 15) mod 26 = 29 mod 26 = 03 → <tspan font-weight="bold" fill="#2563eb">D</tspan></text>
+
+  <rect x="50" y="328" width="315" height="18" rx="3" fill="#dbeafe"/>
+  <text x="207" y="341" font-size="9.5" font-weight="bold" fill="#1e40af" text-anchor="middle">Resulting Ciphertext: "WTAAD"</text>
+
+  <!-- Cryptanalysis Vulnerability Box -->
+  <rect x="40" y="360" width="335" height="105" rx="6" fill="#fee2e2" stroke="#fca5a5"/>
+  <text x="50" y="380" font-size="10" font-weight="bold" fill="#b91c1c">Cryptanalysis Vulnerability:</text>
+  <text x="50" y="398" font-size="9" fill="#7f1d1d">• Key Space is only 26 (Trivial brute-force exhaustive search)</text>
+  <text x="50" y="415" font-size="9" fill="#7f1d1d">• Preserves English letter frequency (E = 12.7%, T = 9.1%)</text>
+  <text x="50" y="432" font-size="9" fill="#7f1d1d">• Frequency distribution chart easily unmasks the shift $k$!</text>
+  <text x="50" y="450" font-size="9" font-weight="bold" fill="#991b1b">⚠️ Completely insecure for modern communications.</text>
+
+  <!-- Right: Polyalphabetic Cipher (Vigenère) -->
+  <rect x="410" y="70" width="365" height="410" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" filter="url(#shadow)"/>
+  <text x="592" y="95" class="card-title" fill="#059669" text-anchor="middle">2. Polyalphabetic Vigenère Cipher</text>
+  <text x="592" y="112" class="sublabel" text-anchor="middle">Repeats a keyword to defeat monoalphabetic frequency analysis</text>
+
+  <!-- Vigenere Formula -->
+  <rect x="425" y="125" width="335" height="50" rx="6" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="435" y="145" font-size="10.5" font-weight="bold" fill="#15803d">Keystream Formulation:</text>
+  <text x="435" y="162" font-size="10.5" fill="#0f172a" class="code">C_i = (P_i + K_{i mod m}) pmod{26}</text>
+
+  <!-- Step-by-Step Vigenere Table -->
+  <rect x="425" y="185" width="335" height="150" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="435" y="205" font-size="10.5" font-weight="bold" fill="#0f172a">Example Walkthrough: Plaintext = "ATTACK", Key = "LEMON"</text>
+
+  <rect x="435" y="215" width="315" height="24" rx="4" fill="#f1f5f9"/>
+  <text x="445" y="231" font-size="9.5" font-weight="bold" fill="#334155">Plaintext:   A    T    T    A    C    K</text>
+  <text x="445" y="255" font-size="9.5" font-weight="bold" fill="#d97706">Key Stream:  L    E    M    O    N    L  (Repeated)</text>
+  <text x="445" y="275" font-size="9" fill="#64748b" class="code">P values:    00   19   19   00   02   10</text>
+  <text x="445" y="290" font-size="9" fill="#64748b" class="code">K values:    11   04   12   14   13   11</text>
+  <text x="445" y="305" font-size="9" fill="#15803d" class="code">(P+K)%26:    11   23   05   14   15   21</text>
+
+  <rect x="435" y="312" width="315" height="18" rx="3" fill="#dcfce7"/>
+  <text x="592" y="325" font-size="9.5" font-weight="bold" fill="#15803d" text-anchor="middle">Ciphertext:  L    X    F    O    P    V</text>
+
+  <!-- Vigenere Strengths & Kasiski -->
+  <rect x="425" y="345" width="335" height="120" rx="6" fill="#fef3c7" stroke="#fde68a"/>
+  <text x="435" y="365" font-size="10" font-weight="bold" fill="#b45309">Properties of Polyalphabetic Ciphers:</text>
+  <text x="435" y="383" font-size="9" fill="#92400e">• Same plaintext letter encrypts to different ciphertext letters!</text>
+  <text x="435" y="398" font-size="9" fill="#92400e">(e.g. First 'T' becomes 'X', second 'T' becomes 'F')</text>
+  <text x="435" y="416" font-size="9" fill="#92400e">• Flattens simple letter frequency distributions.</text>
+  <text x="435" y="433" font-size="9" fill="#b45309" font-weight="bold">Breaking Vigenère (Kasiski Test &amp; Friedman Index):</text>
+  <text x="435" y="450" font-size="8.5" fill="#78350f">Repetitions at multiples of keyword length $m$ reveal key length.</text>
+</svg>
