@@ -225,14 +225,11 @@ const App = {
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div class="space-y-2 max-w-2xl">
             <div class="inline-flex items-center space-x-2 px-2.5 py-1 rounded-full bg-gfg-light dark:bg-gray-800 text-gfg-green border border-gfg-green/30 text-[11px] font-bold uppercase tracking-wider">
-              <span>Jabak </span>
+              <span>JABAK </span>
               <span>•</span>
-              <span>Created by Jabak & co.</span>
+              <span> Just A Byte Away from Knowledge </span>
             </div>
-            <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">JABAK Computer Networks Encyclopedia</h2>
-            <p class="text-xs md:text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-              University-grade study portal covering all 5 curricular units, ${totalCount} syllabus topics and lessons, interactive protocol laboratories, and GATE exam test sets.
-            </p>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">JABAK - Computer Networks </h2>
             <div class="flex flex-wrap gap-2 pt-2">
               <button onclick="App.loadView('unit1')" class="px-4 py-2 bg-gfg-green hover:bg-gfg-dark text-white rounded text-xs font-semibold shadow-sm transition-all flex items-center space-x-1.5">
                 <span>Start Unit I (Fundamentals)</span>

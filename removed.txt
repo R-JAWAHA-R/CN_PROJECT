@@ -47,3 +47,12 @@
         </div>
       </div>
       }
+
+
+      removed from app.js from line number 233 to 235
+
+      {
+        <p class="text-xs md:text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+              University-grade study portal covering all 5 curricular units, ${totalCount} syllabus topics and lessons, interactive protocol laboratories, and GATE exam test sets.
+            </p>
+      }
