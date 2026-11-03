@@ -174,6 +174,10 @@ const App = {
       if (typeof ChecksumGuardGame !== 'undefined') {
         ChecksumGuardGame.render(mainContainer);
       }
+    } else if (viewName === 'crc-challenge') {
+      if (typeof CRCChallengeGame !== 'undefined') {
+        CRCChallengeGame.render(mainContainer);
+      }
     }
 
     setTimeout(() => {
@@ -669,7 +673,7 @@ const App = {
           <h3 class="text-sm font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300 flex items-center gap-2">
             <i class="fa-solid fa-shield-halved text-cyan-600 dark:text-cyan-400"></i> Featured Network Games
           </h3>
-          <span class="text-xs text-gray-400">1 Available Simulation</span>
+          <span class="text-xs text-gray-400">2 Available Simulations</span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -753,6 +757,85 @@ const App = {
                 <span>Play Now</span>
               </button>
             </div>
+          </div>
+
+          <!-- CRC CHALLENGE GAME CARD -->
+          <div class="bg-white dark:bg-gfg-darkcard rounded-xl border border-gray-200 dark:border-gray-700 hover:border-emerald-500 dark:hover:border-emerald-400 transition-all duration-300 shadow-md hover:shadow-xl overflow-hidden flex flex-col justify-between group">
+            <div>
+              <!-- Game Card Thumbnail Illustration -->
+              <div class="h-44 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-950 relative overflow-hidden flex items-center justify-center p-6 border-b border-gray-100 dark:border-gray-800">
+                <div class="absolute inset-0 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:16px_16px] opacity-25"></div>
+                
+                <!-- Stylized Modulo-2 Division Illustration -->
+                <div class="relative z-10 flex items-center justify-between w-full max-w-xs px-2">
+                  <div class="flex flex-col items-center">
+                    <div class="w-11 h-11 rounded-xl bg-emerald-600/30 border border-emerald-400 text-emerald-300 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <i class="fa-solid fa-calculator text-base"></i>
+                    </div>
+                    <span class="text-[9px] font-mono font-bold text-emerald-400 mt-1">Data D</span>
+                  </div>
+                  <div class="flex-1 flex flex-col items-center mx-2">
+                    <div class="w-full h-0.5 bg-gradient-to-r from-emerald-400 via-cyan-400 to-purple-400 relative">
+                      <div class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981] animate-pulse"></div>
+                    </div>
+                    <span class="text-[8px] font-mono text-cyan-300 mt-1.5">G(x) XOR Mod-2</span>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="w-11 h-11 rounded-xl bg-purple-600/30 border border-purple-400 text-purple-300 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <i class="fa-solid fa-router text-base"></i>
+                    </div>
+                    <span class="text-[9px] font-mono font-bold text-purple-400 mt-1">Noise Check</span>
+                  </div>
+                  <div class="flex-1 flex flex-col items-center mx-2">
+                    <div class="w-full h-0.5 bg-gradient-to-r from-purple-400 to-emerald-400 relative"></div>
+                    <span class="text-[8px] font-mono text-emerald-400 mt-1.5">Rem == 0?</span>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="w-11 h-11 rounded-xl bg-cyan-600/30 border border-cyan-400 text-cyan-300 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <i class="fa-solid fa-shield-halved text-base"></i>
+                    </div>
+                    <span class="text-[9px] font-mono font-bold text-cyan-400 mt-1">Verify FCS</span>
+                  </div>
+                </div>
+
+                <!-- Floating Badge -->
+                <span class="absolute top-3 right-3 text-[10px] bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 font-bold px-2 py-0.5 rounded-full backdrop-blur-sm">
+                  Polynomial Sim
+                </span>
+              </div>
+
+              <!-- Card Content -->
+              <div class="p-5 space-y-3">
+                <div class="flex flex-wrap items-center gap-1.5">
+                  <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
+                    Category: Data Link Layer
+                  </span>
+                  <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                    Concept: Cyclic Redundancy Check
+                  </span>
+                </div>
+
+                <div>
+                  <h4 class="text-base font-black text-gray-900 dark:text-white tracking-tight group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                    CRC CHALLENGE
+                  </h4>
+                  <p class="text-xs text-emerald-600 dark:text-emerald-400 font-semibold mt-0.5">Detect the Error. Protect the Data.</p>
+                </div>
+
+                <p class="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">
+                  An interactive Data Link Layer simulation where players use binary polynomial division and XOR operations to generate CRC codes, transmit frames, introduce errors, and verify data integrity.
+                </p>
+              </div>
+            </div>
+
+            <!-- Card Footer / Action Button -->
+            <div class="p-5 pt-0">
+              <button onclick="App.loadView('crc-challenge')" class="w-full py-2.5 px-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-lg font-bold text-xs flex items-center justify-center gap-2 shadow-md hover:shadow-emerald-500/30 transition-all cursor-pointer">
+                <i class="fa-solid fa-play text-[11px]"></i>
+                <span>Play Now</span>
+              </button>
+            </div>
+          </div>
           </div>
         </div>
       </div>

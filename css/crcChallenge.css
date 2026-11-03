@@ -1,0 +1,461 @@
+/* CRC CHALLENGE — Futuristic Network Security & Transmission Control Center */
+/* Modulo-2 Polynomial Division & Error Detection Arcade Simulator */
+
+.crc-wrapper {
+  background: radial-gradient(circle at 50% 15%, #0d1a36 0%, #080e1e 65%, #040711 100%);
+  color: #e2e8f0;
+  border-radius: 16px;
+  border: 1px solid rgba(14, 165, 233, 0.25);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), 0 0 35px rgba(6, 182, 212, 0.15);
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle CRT Scanline effect */
+.crc-wrapper::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.22) 50%);
+  background-size: 100% 4px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+/* HUD Top Header */
+.crc-hud-header {
+  position: relative;
+  z-index: 3;
+  background: rgba(8, 14, 30, 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(14, 165, 233, 0.2);
+  padding: 1rem 1.5rem;
+}
+
+/* Transmission Arena Container */
+.crc-arena-container {
+  position: relative;
+  width: 100%;
+  height: 230px;
+  background: #060a14;
+  border-bottom: 1px solid rgba(14, 165, 233, 0.15);
+  overflow: hidden;
+  z-index: 3;
+}
+
+.crc-arena-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Status Banner */
+.crc-status-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  background: rgba(13, 23, 44, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  z-index: 3;
+  position: relative;
+}
+
+/* Active Stage Workspace */
+.crc-stage-panel {
+  position: relative;
+  z-index: 3;
+  padding: 1.5rem;
+  background: rgba(8, 14, 30, 0.65);
+}
+
+/* Long Division Visualizer Table */
+.crc-division-box {
+  background: #050913;
+  border: 1px solid rgba(14, 165, 233, 0.25);
+  border-radius: 12px;
+  padding: 1.5rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  overflow-x: auto;
+  line-height: 1.6;
+}
+
+.crc-div-row {
+  display: flex;
+  white-space: pre;
+}
+
+.crc-char {
+  display: inline-block;
+  width: 18px;
+  text-align: center;
+}
+
+.crc-char-active {
+  color: #38bdf8;
+  font-weight: 700;
+  background: rgba(56, 189, 248, 0.15);
+  border-radius: 3px;
+}
+
+.crc-char-gen {
+  color: #c084fc;
+  font-weight: 700;
+}
+
+.crc-char-xor {
+  color: #34d399;
+  font-weight: 700;
+}
+
+.crc-char-borrow {
+  color: #f59e0b;
+}
+
+.crc-char-rem {
+  color: #fbbf24;
+  font-weight: 800;
+  background: rgba(245, 158, 11, 0.2);
+  border-radius: 3px;
+}
+
+.crc-div-divider {
+  border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+  margin: 2px 0 4px 0;
+}
+
+/* Interactive XOR Challenge Row */
+.crc-xor-interactive-box {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.crc-xor-input-bit {
+  width: 36px;
+  height: 42px;
+  background: #0f172a;
+  border: 2px solid #334155;
+  color: #38bdf8;
+  font-family: 'Fira Code', monospace;
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-align: center;
+  border-radius: 6px;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.crc-xor-input-bit:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+  background: #1e293b;
+}
+
+.crc-xor-input-bit.correct {
+  border-color: #10b981 !important;
+  color: #34d399 !important;
+  background: rgba(16, 185, 129, 0.15) !important;
+}
+
+.crc-xor-input-bit.incorrect {
+  border-color: #ef4444 !important;
+  color: #f87171 !important;
+  background: rgba(239, 68, 68, 0.15) !important;
+}
+
+/* Bit Display Grid & Tokens */
+.crc-bit-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.crc-word-group {
+  display: inline-flex;
+  gap: 4px;
+  padding: 6px 8px;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 8px;
+  position: relative;
+}
+
+.crc-word-group.crc-group {
+  border-color: rgba(168, 85, 247, 0.45);
+  background: rgba(88, 28, 135, 0.22);
+}
+
+.crc-bit-box {
+  width: 34px;
+  height: 40px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #1e293b;
+  color: #38bdf8;
+  font-family: 'Fira Code', monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border-radius: 6px;
+  border: 1px solid #334155;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.crc-bit-box.interactive {
+  cursor: pointer;
+}
+
+.crc-bit-box.interactive:hover {
+  transform: translateY(-2px) scale(1.06);
+  border-color: #38bdf8;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.55);
+  background: #0f172a;
+}
+
+.crc-bit-box.bit-flipped {
+  background: #7f1d1d !important;
+  color: #fecaca !important;
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 18px rgba(239, 68, 68, 0.85) !important;
+  animation: crc-pulse-red 1s infinite alternate;
+}
+
+.crc-bit-box.bit-highlight-clean {
+  background: #064e3b;
+  color: #a7f3d0;
+  border-color: #10b981;
+}
+
+.crc-bit-index {
+  font-size: 8px;
+  color: #64748b;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+/* Animations */
+@keyframes crc-pulse-red {
+  from {
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+    border-color: #f87171;
+  }
+  to {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.95);
+    border-color: #ef4444;
+  }
+}
+
+/* Level Indicator Pills */
+.crc-level-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(14, 165, 233, 0.15);
+  border: 1px solid rgba(14, 165, 233, 0.4);
+  color: #38bdf8;
+}
+
+/* Mode Switcher Tabs */
+.crc-mode-tab {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-radius: 6px;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.crc-mode-tab.active {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #38bdf8;
+  box-shadow: 0 0 12px rgba(2, 132, 199, 0.4);
+}
+
+.crc-mode-tab:not(.active) {
+  background: rgba(30, 41, 59, 0.6);
+  color: #94a3b8;
+  border-color: rgba(51, 65, 85, 0.7);
+}
+
+.crc-mode-tab:not(.active):hover {
+  background: #334155;
+  color: #ffffff;
+}
+
+/* Custom Buttons */
+.crc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 8px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.crc-btn-cyan {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
+  border-color: #38bdf8;
+  box-shadow: 0 4px 15px rgba(2, 132, 199, 0.35);
+}
+
+.crc-btn-cyan:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
+  transform: translateY(-1px);
+}
+
+.crc-btn-emerald {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: #ffffff;
+  border-color: #34d399;
+  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.35);
+}
+
+.crc-btn-emerald:hover:not(:disabled) {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 0 20px rgba(52, 211, 153, 0.6);
+  transform: translateY(-1px);
+}
+
+.crc-btn-purple {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  color: #ffffff;
+  border-color: #a78bfa;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.35);
+}
+
+.crc-btn-purple:hover:not(:disabled) {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  box-shadow: 0 0 20px rgba(167, 139, 250, 0.6);
+  transform: translateY(-1px);
+}
+
+.crc-btn-danger {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: #ffffff;
+  border-color: #f87171;
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.35);
+}
+
+.crc-btn-danger:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  box-shadow: 0 0 20px rgba(248, 113, 113, 0.6);
+  transform: translateY(-1px);
+}
+
+.crc-btn-secondary {
+  background: rgba(30, 41, 59, 0.8);
+  color: #cbd5e1;
+  border-color: #475569;
+}
+
+.crc-btn-secondary:hover:not(:disabled) {
+  background: #334155;
+  color: #ffffff;
+  border-color: #94a3b8;
+}
+
+.crc-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Polynomial Pill Tag */
+.crc-poly-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: rgba(147, 51, 234, 0.2);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  color: #c084fc;
+}
+
+/* Educational Accordion */
+.crc-edu-card {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.crc-edu-header {
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background: rgba(30, 41, 59, 0.5);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.crc-edu-header:hover {
+  background: rgba(30, 41, 59, 0.8);
+  color: #38bdf8;
+}
+
+.crc-edu-body {
+  padding: 1rem;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: #cbd5e1;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .crc-arena-container {
+    height: 180px;
+  }
+  .crc-bit-box {
+    width: 28px;
+    height: 34px;
+    font-size: 0.9rem;
+  }
+  .crc-hud-header {
+    padding: 0.75rem 1rem;
+  }
+  .crc-division-box {
+    font-size: 0.75rem;
+    padding: 1rem;
+  }
+}
+
