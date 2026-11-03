@@ -5,6 +5,8 @@
 const TOPICS_U1 = {
   "computer-network": {
     id: "computer-network",
+    imageUrl: "assets/images/unit1/computer-network-architecture.svg",
+    imageCaption: "Global Internet Architecture: Hierarchical Tier-1, IXPs, Regional ISPs, and Access Networks",
     title: "Computer Networks & The Global Internet Architecture",
     unit: "Unit I: Networking Fundamentals",
     unitId: "unit1",
@@ -109,6 +111,8 @@ const TOPICS_U1 = {
 
   "network-edge-core": {
     id: "network-edge-core",
+    imageUrl: "assets/images/unit1/network-edge-core-access.svg",
+    imageCaption: "Network Edge vs Network Core: Access Networks and Mesh Packet-Switched Router Fabrics",
     title: "Network Edge, Core & Access Networks",
     unit: "Unit I: Networking Fundamentals",
     unitId: "unit1",
@@ -218,6 +222,8 @@ const TOPICS_U1 = {
 
   "hosts-routers-switches": {
     id: "hosts-routers-switches",
+    imageUrl: "assets/images/unit1/network-hardware-devices.svg",
+    imageCaption: "Layer-1, Layer-2, and Layer-3 Network Forwarding: Hosts, Switches, and Routers",
     title: "Network Hardware: Hosts, Routers, Switches & Interface Cards",
     unit: "Unit I: Networking Fundamentals",
     unitId: "unit1",
@@ -322,6 +328,8 @@ const TOPICS_U1 = {
 
   "protocol": {
     id: "protocol",
+    imageUrl: "assets/images/unit1/protocol-interfaces-primitives.svg",
+    imageCaption: "Protocol Architecture: Service Access Points (SAPs) and the Four OSI Service Primitives",
     title: "Network Protocols, Services & Interfaces",
     unit: "Unit I: Networking Fundamentals",
     unitId: "unit1",
@@ -414,6 +422,8 @@ const TOPICS_U1 = {
 
   "osi-model": {
     id: "osi-model",
+    imageUrl: "assets/images/unit1/osi-7-layer-architecture.svg",
+    imageCaption: "The 7-Layer OSI Reference Model (ISO/IEC 7498-1) and Protocol Data Units (PDUs)",
     title: "The 7-Layer OSI Reference Model (ISO/IEC 7498-1)",
     unit: "Unit I: Networking Fundamentals",
     unitId: "unit1",
@@ -506,6 +516,8 @@ const TOPICS_U1 = {
 
   "tcp-ip-model": {
     id: "tcp-ip-model",
+    imageUrl: "assets/images/unit1/tcp-ip-hourglass-architecture.svg",
+    imageCaption: "The TCP/IP Protocol Architecture and Universal Hourglass Model",
     title: "The TCP/IP Protocol Architecture & The Hourglass Model",
     unit: "Unit I: Networking Fundamentals",
     unitId: "unit1",
@@ -606,6 +618,8 @@ const TOPICS_U1 = {
 
   "protocol-stack": {
     id: "protocol-stack",
+    imageUrl: "assets/images/unit1/protocol-stack-encapsulation.svg",
+    imageCaption: "Layered Protocol Stack: Vertical Hardware Transmission vs Horizontal Virtual Peer Protocol Exchange",
     title: "Protocol Stacks & Layered Architecture",
     unit: "Unit I: Networking Fundamentals",
     unitId: "unit1",
@@ -707,6 +721,8 @@ const TOPICS_U1 = {
 
   "encapsulation": {
     id: "encapsulation",
+    imageUrl: "assets/images/unit1/packet-encapsulation-decapsulation.svg",
+    imageCaption: "End-to-End Encapsulation & Decapsulation: Headers, Payloads, and FCS Trailers",
     title: "Encapsulation, Decapsulation & Multiplexing",
     unit: "Unit I: Networking Fundamentals",
     unitId: "unit1",
@@ -796,6 +812,8 @@ const TOPICS_U1 = {
 
   "network-topologies": {
     id: "network-topologies",
+    imageUrl: "assets/images/unit1/network-topologies-comparison.svg",
+    imageCaption: "Comparison of Network Topologies: Star, Full Mesh, Ring, Bus, and Tree Topologies",
     title: "Network Topologies: Mesh, Star, Bus, Ring & Hybrid",
     unit: "Unit I: Networking Fundamentals",
     unitId: "unit1",
@@ -884,6 +902,8 @@ const TOPICS_U1 = {
 
   "circuit-vs-packet-switching": {
     id: "circuit-vs-packet-switching",
+    imageUrl: "assets/images/unit1/circuit-vs-packet-switching.svg",
+    imageCaption: "Circuit Switching (Dedicated Reserved Paths) vs Packet Switching (Statistical Multiplexing & Queues)",
     title: "Circuit Switching vs Packet Switching",
     unit: "Unit I: Networking Fundamentals",
     unitId: "unit1",
@@ -979,6 +999,8 @@ const TOPICS_U1 = {
 
   "transmission-media": {
     id: "transmission-media",
+    imageUrl: "assets/images/unit1/transmission-media-guided-unguided.svg",
+    imageCaption: "Physical Transmission Media: Guided (UTP, Coaxial, Optical Fiber) vs Unguided (Radio, Microwave, IR)",
     title: "Physical Layer Transmission Media: Guided & Unguided",
     unit: "Unit I: Networking Fundamentals",
     unitId: "unit1",
@@ -1082,6 +1104,8 @@ const TOPICS_U1 = {
 
   "network-delay-loss": {
     id: "network-delay-loss",
+    imageUrl: "assets/images/unit1/network-delays-loss-queue.svg",
+    imageCaption: "The Four Principles of Network Delay: Processing, Queuing, Transmission, and Propagation",
     title: "Network Performance: Delays, Loss & Bandwidth-Delay Product",
     unit: "Unit I: Networking Fundamentals",
     unitId: "unit1",
@@ -1182,6 +1206,8 @@ const TOPICS_U1 = {
 
   "multiplexing": {
     id: "multiplexing",
+    imageUrl: "assets/images/unit1/multiplexing-fdm-tdm-wdm.svg",
+    imageCaption: "Multiplexing Techniques: Frequency Division (FDM), Synchronous TDM, Wavelength Division (WDM), and Statistical TDM",
     title: "Multiplexing Techniques: FDM, TDM, WDM & STDM",
     unit: "Unit I: Networking Fundamentals",
     unitId: "unit1",
@@ -1277,6 +1303,8 @@ const TOPICS_U1 = {
 
   "analog-digital-signals": {
     id: "analog-digital-signals",
+    imageUrl: "assets/images/unit1/signals-nyquist-shannon-capacity.svg",
+    imageCaption: "Signal Fundamentals: Nyquist Bit Rate for Noiseless Channels vs Shannon Capacity for Noisy Channels",
     title: "Signal Fundamentals: Bandwidth, Nyquist Rate & Shannon Capacity",
     unit: "Unit I: Networking Fundamentals",
     unitId: "unit1",

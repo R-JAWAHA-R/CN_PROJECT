@@ -3,6 +3,8 @@
 const TOPICS_U3 = {
   "network-layer": {
     id: "network-layer",
+    imageUrl: "assets/images/unit3/topic2-internetworking/internetworking-concept.svg",
+    imageCaption: "Network Layer Architecture: Host-to-Host Delivery, Data Plane vs Control Plane",
     title: "Network Layer: Data Plane vs Control Plane",
     unit: "Unit III: Network Layer & Routing",
     unitId: "unit3",
@@ -82,6 +84,8 @@ const TOPICS_U3 = {
 
   "forwarding": {
     id: "forwarding",
+    imageUrl: "assets/images/unit3/topic2-internetworking/router-architecture.svg",
+    imageCaption: "Data Plane Forwarding Engine: Input Ports, Switching Fabric, and Output Queues",
     title: "Packet Forwarding & Forwarding Tables",
     unit: "Unit III: Network Layer & Routing",
     unitId: "unit3",
@@ -159,6 +163,8 @@ Destination IP: 200.23.16.5
 
   "routing": {
     id: "routing",
+    imageUrl: "assets/images/unit3/topic3-routing-algorithms/routing-algorithm-classification.svg",
+    imageCaption: "Classification of Routing Algorithms: Global vs Decentralized, Static vs Dynamic",
     title: "Routing & Control Plane Architecture",
     unit: "Unit III: Network Layer & Routing",
     unitId: "unit3",
@@ -478,6 +484,8 @@ D_x(z) = min{ c(x,y) + D_y(z) } = 1 + 2 = 3. Converged!`,
 
   "ospf": {
     id: "ospf",
+    imageUrl: "assets/images/unit3/topic4-dv-ls-routing/ospf-areas.svg",
+    imageCaption: "Open Shortest Path First (OSPF) Hierarchical Areas and Link-State Advertising",
     title: "Open Shortest Path First (OSPF)",
     unit: "Unit III: Network Layer & Routing",
     unitId: "unit3",
@@ -565,6 +573,8 @@ D_x(z) = min{ c(x,y) + D_y(z) } = 1 + 2 = 3. Converged!`,
 
   "bgp": {
     id: "bgp",
+    imageUrl: "assets/images/unit3/topic4-dv-ls-routing/dv-vs-ls-comparison.svg",
+    imageCaption: "Inter-Domain Routing: Border Gateway Protocol (BGP-4) Path Vector Mechanism",
     title: "Border Gateway Protocol (BGP-4)",
     unit: "Unit III: Network Layer & Routing",
     unitId: "unit3",
@@ -641,6 +651,8 @@ D_x(z) = min{ c(x,y) + D_y(z) } = 1 + 2 = 3. Converged!`,
 
   "sdn": {
     id: "sdn",
+    imageUrl: "assets/images/unit3/topic2-internetworking/network-interconnection-devices.svg",
+    imageCaption: "Software-Defined Networking (SDN): Decoupled Control Plane and Programmable Switches",
     title: "Software-Defined Networking (SDN)",
     unit: "Unit III: Network Layer & Routing",
     unitId: "unit3",
@@ -888,6 +900,8 @@ D_x(z) = min{ c(x,y) + D_y(z) } = 1 + 2 = 3. Converged!`,
 
   "nat": {
     id: "nat",
+    imageUrl: "assets/images/unit3/topic1-ip-addresses/private-ip-ranges.svg",
+    imageCaption: "Network Address Translation (NAT): Mapping Private IP Ranges to Public WAN Addresses",
     title: "Network Address Translation (NAT & NAPT)",
     unit: "Unit III: Network Layer & Routing",
     unitId: "unit3",

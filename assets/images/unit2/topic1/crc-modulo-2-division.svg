@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="blueCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#172554" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="cyanCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e7490" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#164e63" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="purpleCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#581c87" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#3b0764" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="emeraldCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#065f46" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#022c22" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="amberCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78350f" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#451a03" stop-opacity="0.9"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="900" height="480" rx="16" fill="url(#bgGrad)"/>
+  <rect width="900" height="480" rx="16" fill="none" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Header Section -->
+  <g transform="translate(30, 32)">
+    <rect x="0" y="0" width="8" height="24" rx="3" fill="#38bdf8"/>
+    <text x="18" y="18" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#f8fafc" letter-spacing="0.5">Cyclic Redundancy Check (CRC) Modulo-2 Arithmetic</text>
+    <text x="18" y="38" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="#94a3b8">Binary Modulo-2 Division • XOR Operation Without Carries or Borrows</text>
+  </g>
+
+  <!-- Diagram Content -->
+  <g transform="translate(30, 85)">
+    
+      <g transform="translate(40, 20)">
+        <rect width="400" height="340" rx="10" fill="url(#blueCard)" stroke="#3b82f6" stroke-width="2"/>
+        <text x="200" y="35" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#93c5fd" text-anchor="middle">CRC SENDER ENCODING</text>
+        <text x="40" y="70" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">1. Let dataword be D of k bits.</text>
+        <text x="40" y="95" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">2. Divisor polynomial G(x) of degree r.</text>
+        <text x="40" y="120" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">3. Append r zeros to D: D * 2^r</text>
+        <text x="40" y="145" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">4. Perform modulo-2 division by G.</text>
+        <text x="40" y="170" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">5. Remainder R is the r-bit CRC FCS.</text>
+        <rect x="30" y="200" width="340" height="60" rx="6" fill="#0f172a" stroke="#10b981"/>
+        <text x="200" y="225" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#a7f3d0" text-anchor="middle">Transmitted Codeword:</text>
+        <text x="200" y="248" font-family="system-ui, sans-serif" font-size="13" font-family="monospace" fill="#34d399" text-anchor="middle">Codeword C = [ Data D | Remainder R ]</text>
+      </g>
+      <g transform="translate(460, 20)">
+        <rect width="400" height="340" rx="10" fill="url(#purpleCard)" stroke="#a855f7" stroke-width="2"/>
+        <text x="200" y="35" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#e9d5ff" text-anchor="middle">CRC RECEIVER CHECKING</text>
+        <text x="40" y="70" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">1. Receive n-bit codeword C'.</text>
+        <text x="40" y="95" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">2. Divide C' by same generator G(x).</text>
+        <text x="40" y="120" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">3. Examine remainder (syndrome):</text>
+        <rect x="30" y="145" width="340" height="45" rx="6" fill="#065f46" stroke="#10b981"/>
+        <text x="200" y="173" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#a7f3d0" text-anchor="middle">Remainder == 0 -> ACCEPT (No Error)</text>
+        <rect x="30" y="205" width="340" height="45" rx="6" fill="#7f1d1d" stroke="#ef4444"/>
+        <text x="200" y="233" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#fca5a5" text-anchor="middle">Remainder != 0 -> REJECT (Error Detected)</text>
+        <text x="200" y="290" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">Detects all burst errors of length ≤ r and all odd bit errors</text>
+      </g>
+    
+  </g>
+</svg>

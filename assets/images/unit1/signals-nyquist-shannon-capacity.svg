@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="blueCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#172554" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="cyanCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e7490" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#164e63" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="purpleCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#581c87" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#3b0764" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="emeraldCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#065f46" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#022c22" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="amberCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78350f" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#451a03" stop-opacity="0.9"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="900" height="480" rx="16" fill="url(#bgGrad)"/>
+  <rect width="900" height="480" rx="16" fill="none" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Header Section -->
+  <g transform="translate(30, 32)">
+    <rect x="0" y="0" width="8" height="24" rx="3" fill="#38bdf8"/>
+    <text x="18" y="18" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#f8fafc" letter-spacing="0.5">Signal Fundamentals: Nyquist & Shannon Capacity</text>
+    <text x="18" y="38" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="#94a3b8">Noiseless Channel Bitrate Limit vs Noisy Gaussian Channel Maximum Theoretical Capacity</text>
+  </g>
+
+  <!-- Diagram Content -->
+  <g transform="translate(30, 85)">
+    
+  <!-- Nyquist Box Left -->
+  <g transform="translate(40, 20)">
+    <rect width="400" height="340" rx="10" fill="url(#blueCard)" stroke="#3b82f6" stroke-width="2"/>
+    <text x="200" y="35" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#93c5fd" text-anchor="middle">NYQUIST BIT RATE (Noiseless)</text>
+    
+    <rect x="30" y="60" width="340" height="60" rx="6" fill="#0f172a" stroke="#38bdf8"/>
+    <text x="200" y="95" font-family="system-ui, sans-serif" font-size="18" font-weight="900" fill="#38bdf8" text-anchor="middle">C = 2 * B * log2(L)</text>
+
+    <text x="200" y="150" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#e2e8f0" text-anchor="middle">Variables Definition:</text>
+    <text x="200" y="175" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">B = Analog Bandwidth in Hertz (Hz)</text>
+    <text x="200" y="200" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">L = Number of discrete signal levels</text>
+    <text x="200" y="225" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">C = Theoretical maximum bitrate (bps)</text>
+
+    <rect x="30" y="250" width="340" height="65" rx="6" fill="#1e293b"/>
+    <text x="200" y="275" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#93c5fd" text-anchor="middle">Example (B = 3000 Hz, L = 2 levels):</text>
+    <text x="200" y="295" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#34d399" text-anchor="middle">C = 2 * 3000 * log2(2) = 6,000 bps</text>
+  </g>
+
+  <!-- Shannon Box Right -->
+  <g transform="translate(460, 20)">
+    <rect width="400" height="340" rx="10" fill="url(#purpleCard)" stroke="#a855f7" stroke-width="2"/>
+    <text x="200" y="35" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#e9d5ff" text-anchor="middle">SHANNON CAPACITY (Noisy Channel)</text>
+
+    <rect x="30" y="60" width="340" height="60" rx="6" fill="#0f172a" stroke="#c084fc"/>
+    <text x="200" y="95" font-family="system-ui, sans-serif" font-size="18" font-weight="900" fill="#c084fc" text-anchor="middle">C = B * log2(1 + SNR)</text>
+
+    <text x="200" y="150" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#e2e8f0" text-anchor="middle">Variables Definition:</text>
+    <text x="200" y="175" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">B = Analog Bandwidth in Hertz (Hz)</text>
+    <text x="200" y="200" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">SNR = Signal-to-Noise Ratio (Linear, not dB!)</text>
+    <text x="200" y="225" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">SNR_dB = 10 * log10(SNR)</text>
+
+    <rect x="30" y="250" width="340" height="65" rx="6" fill="#1e293b"/>
+    <text x="200" y="275" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#e9d5ff" text-anchor="middle">Example (B = 3000 Hz, SNR_dB = 30 dB -> SNR = 1000):</text>
+    <text x="200" y="295" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#34d399" text-anchor="middle">C = 3000 * log2(1001) ≈ 29,862 bps (~30 kbps)</text>
+  </g>
+
+  </g>
+</svg>

@@ -1973,39 +1973,53 @@ var TopicPageEngine = {
                 ${(() => {
                   const resolvedImgUrl = topic.imageUrl || topic.image?.url || topic.sections?.imageUrl || topic.sections?.image?.url;
                   const resolvedImgCaption = topic.imageCaption || topic.image?.caption || topic.sections?.imageCaption || topic.sections?.image?.caption;
-                  if (!resolvedImgUrl) return '';
-                  return `
-                  <div class="wiki-img-container mb-4 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-sm p-4 flex flex-col items-center transition-all hover:shadow-md">
-                    <div class="w-full flex items-center justify-between pb-2 mb-2 border-b border-gray-100 dark:border-gray-800 text-[10px] text-gray-500 font-mono">
-                      <span class="flex items-center gap-1 text-blue-600 dark:text-blue-400 font-bold uppercase tracking-wider">
-                        <i class="fa-solid fa-network-wired"></i> Architecture Illustration
-                      </span>
-                      <a href="${resolvedImgUrl}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-500 flex items-center gap-1 transition-colors" title="Open full resolution in new tab">
-                        <span>Full Res</span>
-                        <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
-                      </a>
+                  
+                  let html = '';
+                  if (resolvedImgUrl) {
+                    html += `
+                    <div class="wiki-img-container mb-4 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-sm p-4 flex flex-col items-center transition-all hover:shadow-md">
+                      <div class="w-full flex items-center justify-between pb-2 mb-2 border-b border-gray-100 dark:border-gray-800 text-[10px] text-gray-500 font-mono">
+                        <span class="flex items-center gap-1 text-blue-600 dark:text-blue-400 font-bold uppercase tracking-wider">
+                          <i class="fa-solid fa-network-wired"></i> Architecture Illustration
+                        </span>
+                        <a href="${resolvedImgUrl}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-500 flex items-center gap-1 transition-colors" title="Open full resolution in new tab">
+                          <span>Full Res</span>
+                          <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                        </a>
+                      </div>
+                      <div class="relative w-full flex items-center justify-center p-3 bg-slate-50/70 dark:bg-slate-950/50 rounded-lg overflow-hidden group">
+                        <img src="${resolvedImgUrl}" 
+                             alt="${topic.title} Architecture Diagram" 
+                             loading="lazy" 
+                             referrerpolicy="no-referrer"
+                             class="max-w-full h-auto max-h-[460px] object-contain rounded cursor-pointer transition-transform duration-300 group-hover:scale-[1.01]"
+                             onclick="window.open('${resolvedImgUrl}', '_blank')"
+                             onerror="this.onerror=null; this.closest('.wiki-img-container').classList.add('hidden');" />
+                      </div>
+                      ${resolvedImgCaption ? `
+                        <p class="text-xs text-gray-600 dark:text-gray-300 text-center mt-3 font-medium flex items-center justify-center gap-1.5 px-3">
+                          <i class="fa-solid fa-circle-info text-blue-500 text-[11px] shrink-0"></i>
+                          <span>${resolvedImgCaption}</span>
+                        </p>
+                      ` : ''}
                     </div>
-                    <div class="relative w-full flex items-center justify-center p-3 bg-slate-50/70 dark:bg-slate-950/50 rounded-lg overflow-hidden group">
-                      <img src="${resolvedImgUrl}" 
-                           alt="${topic.title} Architecture Diagram" 
-                           loading="lazy" 
-                           referrerpolicy="no-referrer"
-                           class="max-w-full h-auto max-h-[460px] object-contain rounded cursor-pointer transition-transform duration-300 group-hover:scale-[1.01]"
-                           onclick="window.open('${resolvedImgUrl}', '_blank')"
-                           onerror="this.onerror=null; this.closest('.wiki-img-container').classList.add('hidden');" />
-                    </div>
-                    ${resolvedImgCaption ? `
-                      <p class="text-xs text-gray-600 dark:text-gray-300 text-center mt-3 font-medium flex items-center justify-center gap-1.5 px-3">
-                        <i class="fa-solid fa-circle-info text-blue-500 text-[11px] shrink-0"></i>
-                        <span>${resolvedImgCaption}</span>
-                      </p>
-                    ` : ''}
-                  </div>
-                  `;
-                })()}
+                    `;
+                  }
 
-                <!-- Clean Modern Architecture Diagram (Replaces ASCII/symbols art) -->
-                ${(typeof CleanDiagramEngine !== 'undefined' ? CleanDiagramEngine.getDiagramHtml(topic) : (typeof window !== 'undefined' && window.CleanDiagramEngine ? window.CleanDiagramEngine.getDiagramHtml(topic) : ''))}
+                  const cleanDiag = (typeof CleanDiagramEngine !== 'undefined' ? CleanDiagramEngine.getDiagramHtml(topic) : (typeof window !== 'undefined' && window.CleanDiagramEngine ? window.CleanDiagramEngine.getDiagramHtml(topic) : ''));
+                  
+                  // Only append clean diagram if it's non-empty AND not a redundant Node-to-Node diagram
+                  if (cleanDiag) {
+                    const isNodeToNode = cleanDiag.includes('Node-to-Node Frame Delivery');
+                    if (resolvedImgUrl && isNodeToNode) {
+                      // Suppress redundant generic node-to-node diagram when a dedicated architectural image already exists
+                    } else {
+                      html += cleanDiag;
+                    }
+                  }
+
+                  return html;
+                })()}
               </div>
             </section>
 

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="blueCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#172554" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="cyanCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e7490" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#164e63" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="purpleCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#581c87" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#3b0764" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="emeraldCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#065f46" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#022c22" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="amberCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78350f" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#451a03" stop-opacity="0.9"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="900" height="480" rx="16" fill="url(#bgGrad)"/>
+  <rect width="900" height="480" rx="16" fill="none" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Header Section -->
+  <g transform="translate(30, 32)">
+    <rect x="0" y="0" width="8" height="24" rx="3" fill="#38bdf8"/>
+    <text x="18" y="18" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#f8fafc" letter-spacing="0.5">Hamming Syndrome Decoding Flowchart</text>
+    <text x="18" y="38" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="#94a3b8">Syndrome Bit Calculation (s3, s2, s1) Points Directly to Corrupted Bit Index</text>
+  </g>
+
+  <!-- Diagram Content -->
+  <g transform="translate(30, 85)">
+    
+      <g transform="translate(60, 20)">
+        <rect width="780" height="80" rx="8" fill="url(#blueCard)" stroke="#3b82f6" stroke-width="1.5"/>
+        <text x="390" y="30" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#93c5fd" text-anchor="middle">STEP 1: RECEIVE 7-BIT CODEWORD</text>
+        <rect x="140" y="42" width="500" height="28" rx="4" fill="#0f172a" stroke="#38bdf8"/>
+        <text x="390" y="61" font-family="system-ui, sans-serif" font-size="12" font-family="monospace" fill="#38bdf8" text-anchor="middle">r = [ b1 b2 b3 b4 b5 b6 b7 ]</text>
+      </g>
+      <g transform="translate(60, 115)">
+        <rect width="780" height="110" rx="8" fill="url(#purpleCard)" stroke="#a855f7" stroke-width="1.5"/>
+        <text x="390" y="25" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#e9d5ff" text-anchor="middle">STEP 2: CALCULATE SYNDROME BITS (s3, s2, s1)</text>
+        <g transform="translate(40, 45)">
+          <rect x="0" y="0" width="220" height="45" rx="5" fill="#1e293b"/>
+          <text x="110" y="27" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#c084fc" text-anchor="middle">s1 = b1 ⊕ b3 ⊕ b5 ⊕ b7</text>
+          <rect x="240" y="0" width="220" height="45" rx="5" fill="#1e293b"/>
+          <text x="350" y="27" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#c084fc" text-anchor="middle">s2 = b2 ⊕ b3 ⊕ b6 ⊕ b7</text>
+          <rect x="480" y="0" width="220" height="45" rx="5" fill="#1e293b"/>
+          <text x="590" y="27" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#c084fc" text-anchor="middle">s3 = b4 ⊕ b5 ⊕ b6 ⊕ b7</text>
+        </g>
+      </g>
+      <g transform="translate(60, 240)">
+        <rect width="780" height="100" rx="8" fill="url(#emeraldCard)" stroke="#10b981" stroke-width="1.5"/>
+        <text x="390" y="25" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#a7f3d0" text-anchor="middle">STEP 3: EVALUATE SYNDROME VALUE S = (s3 s2 s1)2</text>
+        <text x="390" y="55" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#fff" text-anchor="middle">If S == 000 (0): Codeword is clean. No bit flipped.</text>
+        <text x="390" y="80" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#fde68a" text-anchor="middle">If S != 000: Binary value of S points to flipped bit index -> INVERT bit b_S to restore clean data!</text>
+      </g>
+    
+  </g>
+</svg>

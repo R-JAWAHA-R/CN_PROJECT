@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="blueCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#172554" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="cyanCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e7490" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#164e63" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="purpleCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#581c87" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#3b0764" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="emeraldCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#065f46" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#022c22" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="amberCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78350f" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#451a03" stop-opacity="0.9"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="900" height="480" rx="16" fill="url(#bgGrad)"/>
+  <rect width="900" height="480" rx="16" fill="none" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Header Section -->
+  <g transform="translate(30, 32)">
+    <rect x="0" y="0" width="8" height="24" rx="3" fill="#38bdf8"/>
+    <text x="18" y="18" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#f8fafc" letter-spacing="0.5">Hamming (7,4) Code Generator & Parity Check Matrices</text>
+    <text x="18" y="38" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="#94a3b8">4 Data Bits (d1..d4) + 3 Parity Bits (p1, p2, p4) = 7-Bit Codeword</text>
+  </g>
+
+  <!-- Diagram Content -->
+  <g transform="translate(30, 85)">
+    
+      <g transform="translate(40, 20)">
+        <rect width="820" height="150" rx="10" fill="url(#blueCard)" stroke="#3b82f6" stroke-width="1.5"/>
+        <text x="410" y="30" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#93c5fd" text-anchor="middle">BIT POSITION ASSIGNMENT (POWERS OF 2 RULE)</text>
+        <g transform="translate(60, 55)">
+          <rect x="0" y="0" width="90" height="45" rx="5" fill="#1e40af"/>
+          <text x="45" y="20" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">Bit 1 (2^0)</text>
+          <text x="45" y="38" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#38bdf8" text-anchor="middle">p1</text>
+          <rect x="100" y="0" width="90" height="45" rx="5" fill="#1e40af"/>
+          <text x="145" y="20" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">Bit 2 (2^1)</text>
+          <text x="145" y="38" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#38bdf8" text-anchor="middle">p2</text>
+          <rect x="200" y="0" width="90" height="45" rx="5" fill="#047857"/>
+          <text x="245" y="20" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">Bit 3 (Data)</text>
+          <text x="245" y="38" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#34d399" text-anchor="middle">d1</text>
+          <rect x="300" y="0" width="90" height="45" rx="5" fill="#1e40af"/>
+          <text x="345" y="20" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">Bit 4 (2^2)</text>
+          <text x="345" y="38" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#38bdf8" text-anchor="middle">p4</text>
+          <rect x="400" y="0" width="90" height="45" rx="5" fill="#047857"/>
+          <text x="445" y="20" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">Bit 5 (Data)</text>
+          <text x="445" y="38" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#34d399" text-anchor="middle">d2</text>
+          <rect x="500" y="0" width="90" height="45" rx="5" fill="#047857"/>
+          <text x="545" y="20" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">Bit 6 (Data)</text>
+          <text x="545" y="38" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#34d399" text-anchor="middle">d3</text>
+          <rect x="600" y="0" width="90" height="45" rx="5" fill="#047857"/>
+          <text x="645" y="20" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">Bit 7 (Data)</text>
+          <text x="645" y="38" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#34d399" text-anchor="middle">d4</text>
+        </g>
+        <text x="410" y="130" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">Parity bits p1, p2, p4 occupy powers of 2. Remaining positions carry data bits d1, d2, d3, d4.</text>
+      </g>
+      <g transform="translate(40, 195)">
+        <rect width="820" height="145" rx="10" fill="url(#purpleCard)" stroke="#a855f7" stroke-width="1.5"/>
+        <text x="410" y="30" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#e9d5ff" text-anchor="middle">PARITY CHECK EQUATIONS (EVEN PARITY)</text>
+        <g transform="translate(80, 50)">
+          <rect x="0" y="0" width="200" height="40" rx="5" fill="#1e293b"/>
+          <text x="100" y="25" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#38bdf8" text-anchor="middle">p1 = d1 ⊕ d2 ⊕ d4</text>
+          <rect x="230" y="0" width="200" height="40" rx="5" fill="#1e293b"/>
+          <text x="330" y="25" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#38bdf8" text-anchor="middle">p2 = d1 ⊕ d3 ⊕ d4</text>
+          <rect x="460" y="0" width="200" height="40" rx="5" fill="#1e293b"/>
+          <text x="560" y="25" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#38bdf8" text-anchor="middle">p4 = d2 ⊕ d3 ⊕ d4</text>
+        </g>
+        <text x="410" y="125" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">Syndrome S = (s3 s2 s1)2 points directly to the erroneous bit position (0 = No Error, 1-7 = Flipped Bit Index).</text>
+      </g>
+    
+  </g>
+</svg>

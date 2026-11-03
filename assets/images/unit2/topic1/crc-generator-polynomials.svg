@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="blueCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#172554" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="cyanCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e7490" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#164e63" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="purpleCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#581c87" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#3b0764" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="emeraldCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#065f46" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#022c22" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="amberCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78350f" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#451a03" stop-opacity="0.9"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="900" height="480" rx="16" fill="url(#bgGrad)"/>
+  <rect width="900" height="480" rx="16" fill="none" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Header Section -->
+  <g transform="translate(30, 32)">
+    <rect x="0" y="0" width="8" height="24" rx="3" fill="#38bdf8"/>
+    <text x="18" y="18" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#f8fafc" letter-spacing="0.5">Standard CRC Generator Polynomials (ITU / IEEE / ANSI)</text>
+    <text x="18" y="38" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="#94a3b8">CRC-8 • CRC-16-IBM • CRC-CCITT • CRC-32 (Ethernet & Wi-Fi Standard)</text>
+  </g>
+
+  <!-- Diagram Content -->
+  <g transform="translate(30, 85)">
+    
+      <g transform="translate(40, 20)">
+        <rect width="820" height="340" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+        <rect x="0" y="0" width="820" height="40" rx="10" fill="#1e293b"/>
+        <text x="100" y="26" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#93c5fd" text-anchor="middle">STANDARD</text>
+        <text x="320" y="26" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#38bdf8" text-anchor="middle">GENERATOR POLYNOMIAL G(x)</text>
+        <text x="590" y="26" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#a7f3d0" text-anchor="middle">DEGREE &amp; APPLICATION</text>
+
+        <!-- CRC-8 -->
+        <line x1="0" y1="40" x2="820" y2="40" stroke="#334155"/>
+        <text x="100" y="70" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">CRC-8 (ATM)</text>
+        <text x="320" y="70" font-family="system-ui, sans-serif" font-size="11" font-family="monospace" fill="#cbd5e1" text-anchor="middle">x^8 + x^2 + x + 1</text>
+        <text x="590" y="70" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">r = 8 bits • ATM Cell Header Error Control</text>
+
+        <!-- CRC-16 -->
+        <line x1="0" y1="95" x2="820" y2="95" stroke="#334155"/>
+        <text x="100" y="125" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">CRC-16-IBM</text>
+        <text x="320" y="125" font-family="system-ui, sans-serif" font-size="11" font-family="monospace" fill="#cbd5e1" text-anchor="middle">x^16 + x^15 + x^2 + 1</text>
+        <text x="590" y="125" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">r = 16 bits • USB, Modbus, ANSI Data Links</text>
+
+        <!-- CRC-CCITT -->
+        <line x1="0" y1="150" x2="820" y2="150" stroke="#334155"/>
+        <text x="100" y="180" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">CRC-CCITT</text>
+        <text x="320" y="180" font-family="system-ui, sans-serif" font-size="11" font-family="monospace" fill="#cbd5e1" text-anchor="middle">x^16 + x^12 + x^5 + 1</text>
+        <text x="590" y="180" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">r = 16 bits • HDLC, X.25, Bluetooth</text>
+
+        <!-- CRC-32 -->
+        <line x1="0" y1="205" x2="820" y2="205" stroke="#334155"/>
+        <text x="100" y="240" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#38bdf8" text-anchor="middle">CRC-32 (IEEE)</text>
+        <text x="320" y="240" font-family="system-ui, sans-serif" font-size="10" font-family="monospace" fill="#38bdf8" text-anchor="middle">x^32 + x^26 + x^23 + x^22 + x^16 + x^12 + ... + 1</text>
+        <text x="590" y="240" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#34d399" text-anchor="middle">r = 32 bits • IEEE 802.3 Ethernet &amp; 802.11 Wi-Fi</text>
+        <text x="410" y="295" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">CRC-32 detects all bursts up to 32 bits, all 1 &amp; 2 bit errors, and 99.99999998% of longer bursts.</text>
+      </g>
+    
+  </g>
+</svg>

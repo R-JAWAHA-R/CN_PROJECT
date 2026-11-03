@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="blueCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#172554" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="cyanCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e7490" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#164e63" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="purpleCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#581c87" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#3b0764" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="emeraldCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#065f46" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#022c22" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="amberCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78350f" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#451a03" stop-opacity="0.9"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="900" height="480" rx="16" fill="url(#bgGrad)"/>
+  <rect width="900" height="480" rx="16" fill="none" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Header Section -->
+  <g transform="translate(30, 32)">
+    <rect x="0" y="0" width="8" height="24" rx="3" fill="#38bdf8"/>
+    <text x="18" y="18" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#f8fafc" letter-spacing="0.5">Redundancy and Block Coding Principles</text>
+    <text x="18" y="38" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="#94a3b8">k-bit Dataword mapped to n-bit Codeword with r Redundant Check Bits (n = k + r)</text>
+  </g>
+
+  <!-- Diagram Content -->
+  <g transform="translate(30, 85)">
+    
+      <g transform="translate(60, 30)">
+        <rect width="340" height="180" rx="10" fill="url(#blueCard)" stroke="#3b82f6" stroke-width="1.5"/>
+        <text x="170" y="35" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#93c5fd" text-anchor="middle">DATAWORD SPACE (2^k)</text>
+        <rect x="40" y="65" width="260" height="50" rx="6" fill="#0f172a" stroke="#38bdf8"/>
+        <text x="170" y="95" font-family="system-ui, sans-serif" font-size="14" font-family="monospace" fill="#38bdf8" text-anchor="middle">k Information Bits</text>
+        <text x="170" y="145" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">Total possible messages = 2^k</text>
+      </g>
+      <g transform="translate(500, 30)">
+        <rect width="340" height="180" rx="10" fill="url(#purpleCard)" stroke="#a855f7" stroke-width="1.5"/>
+        <text x="170" y="35" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#e9d5ff" text-anchor="middle">CODEWORD SPACE (2^n)</text>
+        <rect x="40" y="65" width="260" height="50" rx="6" fill="#0f172a" stroke="#c084fc"/>
+        <text x="170" y="95" font-family="system-ui, sans-serif" font-size="13" font-family="monospace" fill="#c084fc" text-anchor="middle">[ k Data Bits | r Check Bits ]</text>
+        <text x="170" y="145" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">Total possible patterns = 2^n (2^k valid, rest invalid)</text>
+      </g>
+      <!-- Arrow in middle -->
+      <line x1="400" y1="120" x2="500" y2="120" stroke="#f59e0b" stroke-width="4"/>
+      <polygon points="500,120 485,110 485,130" fill="#f59e0b"/>
+      <text x="450" y="105" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#fde68a" text-anchor="middle">Encode</text>
+
+      <!-- Bottom Card -->
+      <g transform="translate(60, 230)">
+        <rect width="780" height="110" rx="10" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+        <text x="390" y="35" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#38bdf8" text-anchor="middle">REDUNDANCY RELATIONSHIP FORMULA</text>
+        <text x="390" y="65" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#a7f3d0" text-anchor="middle">2^r ≥ m + r + 1  (Hamming Bound Formula)</text>
+        <text x="390" y="92" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">Where m = dataword length, r = number of redundant check bits</text>
+      </g>
+    
+  </g>
+</svg>

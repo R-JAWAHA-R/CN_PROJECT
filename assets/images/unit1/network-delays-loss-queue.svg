@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="blueCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#172554" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="cyanCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e7490" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#164e63" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="purpleCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#581c87" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#3b0764" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="emeraldCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#065f46" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#022c22" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="amberCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78350f" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#451a03" stop-opacity="0.9"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="900" height="480" rx="16" fill="url(#bgGrad)"/>
+  <rect width="900" height="480" rx="16" fill="none" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Header Section -->
+  <g transform="translate(30, 32)">
+    <rect x="0" y="0" width="8" height="24" rx="3" fill="#38bdf8"/>
+    <text x="18" y="18" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#f8fafc" letter-spacing="0.5">Four Principles of Network Delay (Kurose & Ross)</text>
+    <text x="18" y="38" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="#94a3b8">Processing Delay • Queuing Delay • Transmission Delay • Propagation Delay</text>
+  </g>
+
+  <!-- Diagram Content -->
+  <g transform="translate(30, 85)">
+    
+  <!-- Four Delay Boxes -->
+  <g transform="translate(30, 20)">
+    <rect width="190" height="200" rx="8" fill="url(#blueCard)" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="95" y="30" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#93c5fd" text-anchor="middle">1. Processing Delay</text>
+    <text x="95" y="55" font-family="system-ui, sans-serif" font-size="16" font-weight="900" fill="#60a5fa" text-anchor="middle">d_proc</text>
+    <text x="95" y="90" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">Examine packet header</text>
+    <text x="95" y="110" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">Verify bit-level CRC checksum</text>
+    <text x="95" y="130" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">Lookup FIB table output port</text>
+    <rect x="20" y="155" width="150" height="30" rx="4" fill="#0f172a"/>
+    <text x="95" y="174" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#38bdf8" text-anchor="middle">&lt; Microseconds (ASIC)</text>
+  </g>
+
+  <g transform="translate(245, 20)">
+    <rect width="190" height="200" rx="8" fill="url(#purpleCard)" stroke="#a855f7" stroke-width="1.5"/>
+    <text x="95" y="30" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#e9d5ff" text-anchor="middle">2. Queuing Delay</text>
+    <text x="95" y="55" font-family="system-ui, sans-serif" font-size="16" font-weight="900" fill="#c084fc" text-anchor="middle">d_queue</text>
+    <text x="95" y="90" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">Wait in output buffer</text>
+    <text x="95" y="110" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">Depends on link congestion (La/R)</text>
+    <text x="95" y="130" font-family="system-ui, sans-serif" font-size="10" fill="#f87171" text-anchor="middle">Buffer full -> PACKET DROP</text>
+    <rect x="20" y="155" width="150" height="30" rx="4" fill="#0f172a"/>
+    <text x="95" y="174" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#c084fc" text-anchor="middle">Variable (0 to Millis)</text>
+  </g>
+
+  <g transform="translate(460, 20)">
+    <rect width="190" height="200" rx="8" fill="url(#cyanCard)" stroke="#06b6d4" stroke-width="1.5"/>
+    <text x="95" y="30" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#a5f3fc" text-anchor="middle">3. Transmission Delay</text>
+    <text x="95" y="55" font-family="system-ui, sans-serif" font-size="16" font-weight="900" fill="#22d3ee" text-anchor="middle">d_trans = L / R</text>
+    <text x="95" y="90" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">Push bits onto physical wire</text>
+    <text x="95" y="110" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">L = Packet length (bits)</text>
+    <text x="95" y="130" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">R = Link transmission rate (bps)</text>
+    <rect x="20" y="155" width="150" height="30" rx="4" fill="#0f172a"/>
+    <text x="95" y="174" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#22d3ee" text-anchor="middle">Independent of Distance</text>
+  </g>
+
+  <g transform="translate(675, 20)">
+    <rect width="190" height="200" rx="8" fill="url(#emeraldCard)" stroke="#10b981" stroke-width="1.5"/>
+    <text x="95" y="30" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#a7f3d0" text-anchor="middle">4. Propagation Delay</text>
+    <text x="95" y="55" font-family="system-ui, sans-serif" font-size="16" font-weight="900" fill="#34d399" text-anchor="middle">d_prop = d / s</text>
+    <text x="95" y="90" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">Signal travel time over medium</text>
+    <text x="95" y="110" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">d = Physical length (meters)</text>
+    <text x="95" y="130" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">s = Speed of light (~2x10^8 m/s)</text>
+    <rect x="20" y="155" width="150" height="30" rx="4" fill="#0f172a"/>
+    <text x="95" y="174" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#34d399" text-anchor="middle">Independent of Packet Size</text>
+  </g>
+
+  <!-- Total Formula Card Bottom -->
+  <g transform="translate(30, 245)">
+    <rect width="835" height="135" rx="10" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    <text x="417" y="35" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#f8fafc" text-anchor="middle">TOTAL NODAL DELAY &amp; BANDWIDTH-DELAY PRODUCT FORMULA</text>
+    <rect x="60" y="55" width="715" height="40" rx="6" fill="#1e293b" stroke="#38bdf8"/>
+    <text x="417" y="80" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#38bdf8" text-anchor="middle">d_nodal = d_proc + d_queue + (L / R) + (d / s)</text>
+    <text x="417" y="118" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">Bandwidth-Delay Product (BDP) = R * RTT  (Maximum volume of in-flight bits filling the pipe)</text>
+  </g>
+
+  </g>
+</svg>

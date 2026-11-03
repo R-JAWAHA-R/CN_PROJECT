@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="blueCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#172554" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="cyanCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e7490" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#164e63" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="purpleCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#581c87" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#3b0764" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="emeraldCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#065f46" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#022c22" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="amberCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78350f" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#451a03" stop-opacity="0.9"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="900" height="480" rx="16" fill="url(#bgGrad)"/>
+  <rect width="900" height="480" rx="16" fill="none" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Header Section -->
+  <g transform="translate(30, 32)">
+    <rect x="0" y="0" width="8" height="24" rx="3" fill="#38bdf8"/>
+    <text x="18" y="18" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#f8fafc" letter-spacing="0.5">End-to-End Packet Encapsulation & Protocol Stacks</text>
+    <text x="18" y="38" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="#94a3b8">Data Encapsulation Traversal: Application -> Transport -> Network -> Data Link -> Bits</text>
+  </g>
+
+  <!-- Diagram Content -->
+  <g transform="translate(30, 85)">
+    
+  <!-- Sender Encapsulation Flow -->
+  <g transform="translate(60, 20)">
+    <rect width="360" height="340" rx="10" fill="url(#blueCard)" stroke="#3b82f6" stroke-width="2"/>
+    <text x="180" y="32" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#93c5fd" text-anchor="middle">SENDER HOST (Encapsulation)</text>
+
+    <!-- Step 1: User Data -->
+    <rect x="30" y="55" width="300" height="35" rx="4" fill="#1e40af"/>
+    <text x="180" y="77" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">Application Data (M)</text>
+
+    <!-- Step 2: TCP Segment -->
+    <rect x="30" y="105" width="300" height="35" rx="4" fill="#0d9488"/>
+    <rect x="30" y="105" width="70" height="35" rx="4" fill="#0f766e"/>
+    <text x="65" y="127" font-family="system-ui, sans-serif" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">TCP Hdr</text>
+    <text x="200" y="127" font-family="system-ui, sans-serif" font-size="11" fill="#fff" text-anchor="middle">Data (M)</text>
+
+    <!-- Step 3: IP Packet -->
+    <rect x="30" y="155" width="300" height="35" rx="4" fill="#6d28d9"/>
+    <rect x="30" y="155" width="60" height="35" rx="4" fill="#5b21b6"/>
+    <text x="60" y="177" font-family="system-ui, sans-serif" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">IP Hdr</text>
+    <rect x="90" y="155" width="55" height="35" fill="#0f766e"/>
+    <text x="117" y="177" font-family="system-ui, sans-serif" font-size="9" fill="#fff" text-anchor="middle">TCP</text>
+    <text x="215" y="177" font-family="system-ui, sans-serif" font-size="10" fill="#fff" text-anchor="middle">Data (M)</text>
+
+    <!-- Step 4: Ethernet Frame -->
+    <rect x="30" y="205" width="300" height="35" rx="4" fill="#059669"/>
+    <rect x="30" y="205" width="55" height="35" rx="4" fill="#047857"/>
+    <text x="57" y="227" font-family="system-ui, sans-serif" font-size="9" font-weight="800" fill="#fff" text-anchor="middle">ETH Hdr</text>
+    <text x="175" y="227" font-family="system-ui, sans-serif" font-size="10" fill="#fff" text-anchor="middle">IP Datagram Payload</text>
+    <rect x="275" y="205" width="55" height="35" rx="4" fill="#b91c1c"/>
+    <text x="302" y="227" font-family="system-ui, sans-serif" font-size="9" font-weight="800" fill="#fff" text-anchor="middle">FCS (CRC)</text>
+
+    <!-- Step 5: Bits -->
+    <rect x="30" y="260" width="300" height="30" rx="4" fill="#0f172a" stroke="#334155"/>
+    <text x="180" y="280" font-family="system-ui, sans-serif" font-size="11" font-family="monospace" fill="#38bdf8" text-anchor="middle">0 1 1 0 1 0 0 1 1 1 0 1 0 0 1 0 ...</text>
+    <text x="180" y="320" font-family="system-ui, sans-serif" font-size="10" fill="#93c5fd" text-anchor="middle">↓ Down the Stack: Add Headers &amp; Trailers</text>
+  </g>
+
+  <!-- Receiver Decapsulation Flow -->
+  <g transform="translate(480, 20)">
+    <rect width="360" height="340" rx="10" fill="url(#purpleCard)" stroke="#a855f7" stroke-width="2"/>
+    <text x="180" y="32" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#e9d5ff" text-anchor="middle">RECEIVER HOST (Decapsulation)</text>
+
+    <rect x="30" y="55" width="300" height="35" rx="4" fill="#1e40af"/>
+    <text x="180" y="77" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">Application Reads Payload (M)</text>
+
+    <rect x="30" y="105" width="300" height="35" rx="4" fill="#0d9488"/>
+    <text x="180" y="127" font-family="system-ui, sans-serif" font-size="11" fill="#fff" text-anchor="middle">TCP Strips Port Hdr &amp; Reassembles</text>
+
+    <rect x="30" y="155" width="300" height="35" rx="4" fill="#6d28d9"/>
+    <text x="180" y="177" font-family="system-ui, sans-serif" font-size="11" fill="#fff" text-anchor="middle">IP Strips IP Hdr &amp; Verifies Destination</text>
+
+    <rect x="30" y="205" width="300" height="35" rx="4" fill="#059669"/>
+    <text x="180" y="227" font-family="system-ui, sans-serif" font-size="11" fill="#fff" text-anchor="middle">NIC Validates FCS Trailer (CRC Check)</text>
+
+    <rect x="30" y="260" width="300" height="30" rx="4" fill="#0f172a" stroke="#334155"/>
+    <text x="180" y="280" font-family="system-ui, sans-serif" font-size="11" font-family="monospace" fill="#34d399" text-anchor="middle">Physical Signals In -> Bit Synchronized</text>
+    <text x="180" y="320" font-family="system-ui, sans-serif" font-size="10" fill="#c084fc" text-anchor="middle">↑ Up the Stack: Strip Headers &amp; Verify Integrity</text>
+  </g>
+
+  </g>
+</svg>

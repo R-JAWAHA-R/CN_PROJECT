@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="blueCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#172554" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="cyanCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e7490" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#164e63" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="purpleCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#581c87" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#3b0764" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="emeraldCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#065f46" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#022c22" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="amberCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78350f" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#451a03" stop-opacity="0.9"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="900" height="480" rx="16" fill="url(#bgGrad)"/>
+  <rect width="900" height="480" rx="16" fill="none" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Header Section -->
+  <g transform="translate(30, 32)">
+    <rect x="0" y="0" width="8" height="24" rx="3" fill="#38bdf8"/>
+    <text x="18" y="18" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#f8fafc" letter-spacing="0.5">Protocol Interfaces, Primitives & SAP Architecture</text>
+    <text x="18" y="38" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="#94a3b8">Service Access Points (SAPs) • Request • Indication • Response • Confirm</text>
+  </g>
+
+  <!-- Diagram Content -->
+  <g transform="translate(30, 85)">
+    
+  <!-- Layer N+1 -->
+  <g transform="translate(60, 20)">
+    <rect width="780" height="70" rx="8" fill="url(#blueCard)" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="400" y="35" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#93c5fd" text-anchor="middle">LAYER N + 1 (Service User / Calling Entity)</text>
+    <text x="400" y="55" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">Application or Transport Process issuing high-level transmission requests</text>
+  </g>
+
+  <!-- Service Access Points (SAP) -->
+  <g transform="translate(60, 110)">
+    <line x1="20" y1="20" x2="760" y2="20" stroke="#f59e0b" stroke-width="3" stroke-dasharray="8,6"/>
+    <circle cx="200" cy="20" r="16" fill="#f59e0b"/>
+    <text x="200" y="24" font-family="system-ui, sans-serif" font-size="10" font-weight="800" fill="#0f172a" text-anchor="middle">SAP 1</text>
+    <circle cx="600" cy="20" r="16" fill="#f59e0b"/>
+    <text x="600" y="24" font-family="system-ui, sans-serif" font-size="10" font-weight="800" fill="#0f172a" text-anchor="middle">SAP 2</text>
+    <text x="400" y="15" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fde68a" text-anchor="middle">SERVICE ACCESS POINTS (SAP): Logical Portals / Interface Boundaries</text>
+  </g>
+
+  <!-- Layer N -->
+  <g transform="translate(60, 155)">
+    <rect width="780" height="85" rx="8" fill="url(#purpleCard)" stroke="#a855f7" stroke-width="2"/>
+    <text x="400" y="30" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#e9d5ff" text-anchor="middle">LAYER N (Service Provider / Protocol Implementation)</text>
+    <text x="400" y="50" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1" text-anchor="middle">Implements protocol state machine, sequence numbers, checksums, and flow control</text>
+    <text x="400" y="68" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#a7f3d0" text-anchor="middle">Peer-to-Peer Virtual Dialogue via Layer N Protocol Data Units (N-PDU)</text>
+  </g>
+
+  <!-- Service Primitives Sequence -->
+  <g transform="translate(60, 260)">
+    <rect width="780" height="110" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+    <text x="400" y="25" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#38bdf8" text-anchor="middle">THE FOUR OSI SERVICE PRIMITIVES</text>
+
+    <rect x="30" y="45" width="160" height="45" rx="6" fill="#1e293b" stroke="#3b82f6"/>
+    <text x="110" y="66" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#93c5fd" text-anchor="middle">1. Request</text>
+    <text x="110" y="80" font-family="system-ui, sans-serif" font-size="9" fill="#94a3b8" text-anchor="middle">User asks for action</text>
+
+    <rect x="220" y="45" width="160" height="45" rx="6" fill="#1e293b" stroke="#10b981"/>
+    <text x="300" y="66" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#a7f3d0" text-anchor="middle">2. Indication</text>
+    <text x="300" y="80" font-family="system-ui, sans-serif" font-size="9" fill="#94a3b8" text-anchor="middle">Provider notifies user</text>
+
+    <rect x="410" y="45" width="160" height="45" rx="6" fill="#1e293b" stroke="#f59e0b"/>
+    <text x="490" y="66" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#fde68a" text-anchor="middle">3. Response</text>
+    <text x="490" y="80" font-family="system-ui, sans-serif" font-size="9" fill="#94a3b8" text-anchor="middle">User acknowledges</text>
+
+    <rect x="600" y="45" width="160" height="45" rx="6" fill="#1e293b" stroke="#a855f7"/>
+    <text x="680" y="66" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#e9d5ff" text-anchor="middle">4. Confirm</text>
+    <text x="680" y="80" font-family="system-ui, sans-serif" font-size="9" fill="#94a3b8" text-anchor="middle">Provider notifies caller</text>
+  </g>
+
+  </g>
+</svg>

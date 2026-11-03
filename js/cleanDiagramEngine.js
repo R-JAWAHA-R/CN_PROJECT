@@ -228,13 +228,53 @@ const CleanDiagramEngine = {
       return this.renderNetworkingDevicesDiagram();
     }
 
-    // 13. Error Detection & Correction (CRC & Hamming)
-    if (id === 'error-detection' || id === 'parity' || id === 'checksum' || id === 'hamming-code' || id === 'crc' || id === 'u2-error-control') {
+    // 13. Error Detection & Correction (CRC, Hamming & Parity)
+    if (id === 'error-detection' || id === 'parity' || id === 'checksum' || id === 'hamming-code' || id === 'crc' || id === 'u2-error-control' ||
+        id === 'u2-intro-error-detection' || id === 'u2-intro-error-correction' || id === 'u2-redundancy-error-control' || id === 'u2-hamming-distance' ||
+        id === 'u2-detection-vs-correction' || id === 'u2-error-techniques' || id === 'u2-hamming-working-principle' || id === 'u2-hamming-code-calculation' ||
+        id === 'u2-hamming-detection-correction' || id === 'u2-hamming-numerical-problems' || id === 'u2-crc-intro' || id === 'u2-crc-working-principle' ||
+        id === 'u2-crc-generator-polynomial' || id === 'u2-crc-binary-division' || id === 'u2-crc-numerical-problems' || id === 'u2-checksum') {
       return this.renderErrorControlDiagram();
     }
 
-    // Default: Clean Layer Encapsulation Flow
-    return this.renderNodeToNodeDiagram(topic);
+    // 14. Additional Simplex and Stop-and-Wait Variants
+    if (id === 'u2-unrestricted-simplex' || id === 'u2-simplex-stop-and-wait' || id === 'u2-simplex-noisy-channels') {
+      return this.renderStopAndWaitDiagram();
+    }
+
+    // 15. Additional Sliding Window Protocols
+    if (id === 'u2-sliding-window-intro' || id === 'u2-sender-receiver-window' || id === 'u2-sliding-window-size' ||
+        id === 'u2-sliding-window-working-principle' || id === 'u2-piggybacking' || id === 'u2-sliding-window-vs-stop-and-wait') {
+      return this.renderSlidingWindowDiagram();
+    }
+
+    // 16. Additional Bridges & Switching Variants
+    if (id === 'u2-bridges-purpose' || id === 'u2-bridges-network-segmentation' || id === 'u2-bridges-traffic-filtering' ||
+        id === 'u2-bridges-connecting-lan-segments' || id === 'u2-bridges-advantages-limitations') {
+      return this.renderSwitchingArchitectureDiagram();
+    }
+
+    // 17. Additional Network Layer & Routing Protocols
+    if (id === 'network-layer' || id === 'forwarding' || id === 'sdn' || id === 'nat') {
+      return this.renderInternetworkingDiagram(id);
+    }
+    if (id === 'routing') {
+      return this.renderRoutingAlgorithmsDiagram(id);
+    }
+    if (id === 'ospf') {
+      return this.renderLinkStateDiagram();
+    }
+    if (id === 'bgp') {
+      return this.renderDistanceVectorDiagram();
+    }
+
+    // ONLY return Node-to-Node diagram for overarching Data Link Layer overview topics
+    if (id === 'data-link-layer' || id === 'u2-dll-intro' || id === 'u2-dll-osi-position' || id === 'u2-dll-overview') {
+      return this.renderNodeToNodeDiagram(topic);
+    }
+
+    // Default: Do not inject irrelevant L2 node-to-node diagrams into unrelated subtopics
+    return '';
   },
 
   // 1. Node-to-Node Delivery & Encapsulation Flow

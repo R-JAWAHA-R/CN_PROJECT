@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="blueCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#172554" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="cyanCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e7490" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#164e63" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="purpleCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#581c87" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#3b0764" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="emeraldCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#065f46" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#022c22" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="amberCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78350f" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#451a03" stop-opacity="0.9"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="900" height="480" rx="16" fill="url(#bgGrad)"/>
+  <rect width="900" height="480" rx="16" fill="none" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Header Section -->
+  <g transform="translate(30, 32)">
+    <rect x="0" y="0" width="8" height="24" rx="3" fill="#38bdf8"/>
+    <text x="18" y="18" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#f8fafc" letter-spacing="0.5">Physical Layer Transmission Media: Guided vs Unguided</text>
+    <text x="18" y="38" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="#94a3b8">Twisted Pair Copper • Coaxial Cable • Fiber Optics • Wireless RF & Microwave</text>
+  </g>
+
+  <!-- Diagram Content -->
+  <g transform="translate(30, 85)">
+    
+  <!-- Guided Media -->
+  <g transform="translate(40, 20)">
+    <rect width="400" height="340" rx="10" fill="url(#blueCard)" stroke="#3b82f6" stroke-width="2"/>
+    <text x="200" y="35" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#93c5fd" text-anchor="middle">GUIDED MEDIA (Bounded / Wired)</text>
+    
+    <rect x="25" y="60" width="350" height="75" rx="6" fill="#0f172a" stroke="#334155"/>
+    <text x="40" y="85" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#60a5fa">Unshielded Twisted Pair (UTP Cat6A)</text>
+    <text x="40" y="105" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1">10 Gbps up to 100 meters • Twisting cancels EMI crosstalk</text>
+    <text x="40" y="122" font-family="system-ui, sans-serif" font-size="9" fill="#94a3b8">Used in: Office LANs, Patch cables, RJ-45</text>
+
+    <rect x="25" y="145" width="350" height="75" rx="6" fill="#0f172a" stroke="#334155"/>
+    <text x="40" y="170" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#60a5fa">Coaxial Cable (RG-6 / 50-75 Ohm)</text>
+    <text x="40" y="190" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1">High shielding against external noise • DOCSIS Cable Internet</text>
+    <text x="40" y="207" font-family="system-ui, sans-serif" font-size="9" fill="#94a3b8">Used in: Cable TV, Cable Modems, Legacy Ethernet (10BASE2)</text>
+
+    <rect x="25" y="230" width="350" height="75" rx="6" fill="#0f172a" stroke="#334155"/>
+    <text x="40" y="255" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#34d399">Optical Fiber (Single-Mode / Multi-Mode)</text>
+    <text x="40" y="275" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1">Total internal reflection • Zero EMI • 100+ Gbps for 40+ km</text>
+    <text x="40" y="292" font-family="system-ui, sans-serif" font-size="9" fill="#94a3b8">Used in: Subsea Cables, Telecom Backbones, FTTH</text>
+  </g>
+
+  <!-- Unguided Media -->
+  <g transform="translate(460, 20)">
+    <rect width="400" height="340" rx="10" fill="url(#emeraldCard)" stroke="#10b981" stroke-width="2"/>
+    <text x="200" y="35" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#a7f3d0" text-anchor="middle">UNGUIDED MEDIA (Wireless / Radio)</text>
+
+    <rect x="25" y="60" width="350" height="75" rx="6" fill="#0f172a" stroke="#334155"/>
+    <text x="40" y="85" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#34d399">Radio Waves (3 kHz to 1 GHz)</text>
+    <text x="40" y="105" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1">Omnidirectional propagation • Passes through walls</text>
+    <text x="40" y="122" font-family="system-ui, sans-serif" font-size="9" fill="#94a3b8">Used in: AM/FM Radio, Cellular Networks (800 MHz - 2.6 GHz)</text>
+
+    <rect x="25" y="145" width="350" height="75" rx="6" fill="#0f172a" stroke="#334155"/>
+    <text x="40" y="170" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#34d399">Microwaves (1 GHz to 300 GHz)</text>
+    <text x="40" y="190" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1">Line-of-sight unidirectional beams • High bandwidth</text>
+    <text x="40" y="207" font-family="system-ui, sans-serif" font-size="9" fill="#94a3b8">Used in: Wi-Fi (2.4/5/6 GHz), Satellite Links, 5G mmWave</text>
+
+    <rect x="25" y="230" width="350" height="75" rx="6" fill="#0f172a" stroke="#334155"/>
+    <text x="40" y="255" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fde68a">Infrared (300 GHz to 400 THz)</text>
+    <text x="40" y="275" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1">Cannot penetrate walls • High security in closed rooms</text>
+    <text x="40" y="292" font-family="system-ui, sans-serif" font-size="9" fill="#94a3b8">Used in: TV remotes, IrDA short-range devices</text>
+  </g>
+
+  </g>
+</svg>

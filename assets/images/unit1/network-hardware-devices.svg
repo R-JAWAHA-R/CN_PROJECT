@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="blueCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#172554" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="cyanCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e7490" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#164e63" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="purpleCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#581c87" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#3b0764" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="emeraldCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#065f46" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#022c22" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="amberCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78350f" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#451a03" stop-opacity="0.9"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="900" height="480" rx="16" fill="url(#bgGrad)"/>
+  <rect width="900" height="480" rx="16" fill="none" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Header Section -->
+  <g transform="translate(30, 32)">
+    <rect x="0" y="0" width="8" height="24" rx="3" fill="#38bdf8"/>
+    <text x="18" y="18" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#f8fafc" letter-spacing="0.5">Network Hardware: Layer-1, Layer-2 & Layer-3 Forwarding</text>
+    <text x="18" y="38" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="#94a3b8">Hosts (L7-L1) • Switches (L2 MAC Forwarding) • Routers (L3 IP Routing)</text>
+  </g>
+
+  <!-- Diagram Content -->
+  <g transform="translate(30, 85)">
+    
+  <!-- Host Column -->
+  <g transform="translate(40, 20)">
+    <rect width="220" height="340" rx="10" fill="url(#blueCard)" stroke="#3b82f6" stroke-width="2"/>
+    <text x="110" y="35" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#93c5fd" text-anchor="middle">END HOST (L1 - L7)</text>
+    <rect x="25" y="60" width="170" height="35" rx="5" fill="#1e40af"/>
+    <text x="110" y="82" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">Application (HTTP/TLS)</text>
+    <rect x="25" y="105" width="170" height="35" rx="5" fill="#2563eb"/>
+    <text x="110" y="127" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">Transport (TCP/UDP)</text>
+    <rect x="25" y="150" width="170" height="35" rx="5" fill="#3b82f6"/>
+    <text x="110" y="172" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">Network (IP / ICMP)</text>
+    <rect x="25" y="195" width="170" height="35" rx="5" fill="#60a5fa"/>
+    <text x="110" y="217" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0f172a" text-anchor="middle">Data Link (Ethernet/WiFi)</text>
+    <rect x="25" y="240" width="170" height="35" rx="5" fill="#93c5fd"/>
+    <text x="110" y="262" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0f172a" text-anchor="middle">Physical (NIC Transceiver)</text>
+    <text x="110" y="310" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">Full 5/7-Layer Stack Implemented</text>
+  </g>
+
+  <!-- Switch Column -->
+  <g transform="translate(320, 90)">
+    <rect width="240" height="270" rx="10" fill="url(#emeraldCard)" stroke="#10b981" stroke-width="2"/>
+    <text x="120" y="35" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#a7f3d0" text-anchor="middle">ETHERNET SWITCH (L2)</text>
+    <rect x="30" y="70" width="180" height="45" rx="5" fill="#059669"/>
+    <text x="120" y="97" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">Layer 2: Data Link (MAC)</text>
+    <rect x="30" y="130" width="180" height="45" rx="5" fill="#34d399"/>
+    <text x="120" y="157" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle">Layer 1: Physical (PHY)</text>
+    <text x="120" y="215" font-family="system-ui, sans-serif" font-size="10" fill="#e2e8f0" text-anchor="middle">Forwards by 48-bit MAC Address</text>
+    <text x="120" y="235" font-family="system-ui, sans-serif" font-size="9" fill="#a7f3d0" text-anchor="middle">Hardware CAM / MAC Learning Table</text>
+  </g>
+
+  <!-- Router Column -->
+  <g transform="translate(620, 50)">
+    <rect width="240" height="310" rx="10" fill="url(#purpleCard)" stroke="#a855f7" stroke-width="2"/>
+    <text x="120" y="35" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#e9d5ff" text-anchor="middle">NETWORK ROUTER (L3)</text>
+    <rect x="30" y="65" width="180" height="40" rx="5" fill="#7e22ce"/>
+    <text x="120" y="90" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">Layer 3: Network (IP FIB)</text>
+    <rect x="30" y="120" width="180" height="40" rx="5" fill="#a855f7"/>
+    <text x="120" y="145" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">Layer 2: Data Link (Framing)</text>
+    <rect x="30" y="175" width="180" height="40" rx="5" fill="#c084fc"/>
+    <text x="120" y="200" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#0f172a" text-anchor="middle">Layer 1: Physical (Bits)</text>
+    <text x="120" y="255" font-family="system-ui, sans-serif" font-size="10" fill="#e2e8f0" text-anchor="middle">Forwards by 32/128-bit IP Address</text>
+    <text x="120" y="275" font-family="system-ui, sans-serif" font-size="9" fill="#e9d5ff" text-anchor="middle">Longest Prefix Match (LPM) Routing</text>
+  </g>
+
+  </g>
+</svg>
