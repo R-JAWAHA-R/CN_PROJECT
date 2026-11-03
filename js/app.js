@@ -106,6 +106,11 @@ const App = {
   },
 
   loadView: function (viewName, targetParam, updateHash = true) {
+    if (App.activeView === 'checksum-guard' && viewName !== 'checksum-guard') {
+      if (typeof ChecksumGuardGame !== 'undefined' && typeof ChecksumGuardGame.cleanup === 'function') {
+        ChecksumGuardGame.cleanup();
+      }
+    }
     App.activeView = viewName;
 
     if (updateHash) {

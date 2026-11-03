@@ -165,7 +165,73 @@
   // ==========================================
   const SoundSystem = {
     audioCtx: null,
-    muted: false,
+    muted: (function () {
+      try {
+        if (typeof sessionStorage !== 'undefined') {
+          return sessionStorage.getItem('cg_sound_muted') === 'true';
+        }
+      } catch (e) {}
+      return false;
+    })(),
+    travelAudio: null,
+
+    initTravelAudio: function () {
+      if (this.travelAudio || typeof Audio === 'undefined') return;
+      try {
+        this.travelAudio = new Audio();
+        this.travelAudio.preload = 'auto';
+        // Support MP3 with fallback to MP4 (AAC)
+        if (this.travelAudio.canPlayType && this.travelAudio.canPlayType('audio/mpeg')) {
+          this.travelAudio.src = 'assets/audio/frameParungaJI.mp3';
+        } else {
+          this.travelAudio.src = 'assets/audio/frameParungaJI.mp4';
+        }
+        this.travelAudio.volume = 0.85;
+      } catch (e) {
+        console.warn('Could not initialize frame travel audio:', e);
+      }
+    },
+
+    playFrameTravel: function () {
+      if (this.muted) return;
+      this.initTravelAudio();
+      if (!this.travelAudio) return;
+
+      try {
+        this.stopFrameTravel();
+        this.travelAudio.currentTime = 0;
+        const playPromise = this.travelAudio.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(function (err) {
+            // Silently handle autoplay restriction or media error
+            console.warn('Frame travel audio playback was deferred or blocked by browser policy:', err);
+          });
+        }
+      } catch (e) {
+        console.warn('Frame travel audio play error:', e);
+      }
+    },
+
+    stopFrameTravel: function () {
+      if (this.travelAudio) {
+        try {
+          this.travelAudio.pause();
+          this.travelAudio.currentTime = 0;
+        } catch (e) {}
+      }
+    },
+
+    setMuted: function (isMuted) {
+      this.muted = !!isMuted;
+      try {
+        if (typeof sessionStorage !== 'undefined') {
+          sessionStorage.setItem('cg_sound_muted', this.muted ? 'true' : 'false');
+        }
+      } catch (e) {}
+      if (this.muted) {
+        this.stopFrameTravel();
+      }
+    },
 
     init: function () {
       if (!this.audioCtx && (window.AudioContext || window.webkitAudioContext)) {
@@ -364,6 +430,7 @@
     },
 
     stopLoop: function () {
+      SoundSystem.stopFrameTravel();
       if (this.animFrameId) {
         cancelAnimationFrame(this.animFrameId);
         this.animFrameId = null;
@@ -374,7 +441,8 @@
       this.state = 'SENDER_TO_ROUTER';
       this.progress = 0;
       this.hasError = false;
-      SoundSystem.transmitStart();
+      // Play custom frame travel audio once as frame departs Sender
+      SoundSystem.playFrameTravel();
 
       const startTime = performance.now();
       const duration = 2000; // ms
@@ -388,6 +456,7 @@
           requestAnimationFrame(step);
         } else {
           this.state = 'AT_ROUTER';
+          SoundSystem.stopFrameTravel();
           SoundSystem.dockRouter();
           if (onComplete) onComplete();
         }
@@ -400,10 +469,10 @@
       this.progress = 0;
       this.hasError = hasCorruptedBit;
 
+      // Play custom frame travel audio once as frame departs Router
+      SoundSystem.playFrameTravel();
       if (hasCorruptedBit) {
         SoundSystem.glitchAlert();
-      } else {
-        SoundSystem.transmitStart();
       }
 
       const startTime = performance.now();
@@ -418,6 +487,7 @@
           requestAnimationFrame(step);
         } else {
           this.state = 'AT_RECEIVER';
+          SoundSystem.stopFrameTravel();
           if (onComplete) onComplete();
         }
       };
@@ -678,6 +748,7 @@
     },
 
     resetToSetup: function () {
+      SoundSystem.stopFrameTravel();
       this.currentPhase = 'SETUP';
       this.checksumResult = null;
       this.frame = null;
@@ -879,6 +950,7 @@
     // Primary entry point called by App.loadView('checksum-guard')
     render: function (targetContainer) {
       this.container = targetContainer;
+      SoundSystem.initTravelAudio();
       this.renderGameShell();
       TransmissionSystem.init(document.getElementById('cg-canvas'));
       this.renderActiveStage();
@@ -936,8 +1008,9 @@
                   <i class="fa-solid fa-bolt text-yellow-400"></i>
                   <span>STREAK: <strong id="cg-stat-streak">${GameState.stats.streak}x</strong></span>
                 </div>
-                <button onclick="ChecksumGuardGame.toggleMute()" id="cg-sound-btn" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-600 transition-colors" title="Toggle Sound FX">
+                <button onclick="ChecksumGuardGame.toggleMute()" id="cg-sound-btn" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-600 transition-all flex items-center gap-1.5 text-xs font-semibold" title="Toggle Sound FX (Currently ${SoundSystem.muted ? 'MUTED' : 'ACTIVE'})" aria-label="Toggle Sound">
                   <i id="cg-sound-icon" class="fa-solid ${SoundSystem.muted ? 'fa-volume-xmark text-red-400' : 'fa-volume-high text-cyan-400'}"></i>
+                  <span id="cg-sound-label" class="${SoundSystem.muted ? 'text-red-400' : 'text-cyan-300'} font-mono text-[10px] tracking-wider">${SoundSystem.muted ? 'SOUND OFF' : 'SOUND ON'}</span>
                 </button>
                 <button onclick="ChecksumGuardGame.resetGame()" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-600 transition-colors" title="Reset Simulation">
                   <i class="fa-solid fa-rotate text-xs"></i>
@@ -1626,15 +1699,30 @@
     },
 
     resetGame: function () {
+      SoundSystem.stopFrameTravel();
       GameState.resetToSetup();
       this.renderActiveStage();
     },
 
+    cleanup: function () {
+      SoundSystem.stopFrameTravel();
+      TransmissionSystem.stopLoop();
+    },
+
     toggleMute: function () {
-      SoundSystem.muted = !SoundSystem.muted;
+      SoundSystem.setMuted(!SoundSystem.muted);
       const icon = document.getElementById('cg-sound-icon');
+      const label = document.getElementById('cg-sound-label');
+      const btn = document.getElementById('cg-sound-btn');
       if (icon) {
         icon.className = `fa-solid ${SoundSystem.muted ? 'fa-volume-xmark text-red-400' : 'fa-volume-high text-cyan-400'}`;
+      }
+      if (label) {
+        label.className = `${SoundSystem.muted ? 'text-red-400' : 'text-cyan-300'} font-mono text-[10px] tracking-wider`;
+        label.textContent = SoundSystem.muted ? 'SOUND OFF' : 'SOUND ON';
+      }
+      if (btn) {
+        btn.title = `Toggle Sound FX (Currently ${SoundSystem.muted ? 'MUTED' : 'ACTIVE'})`;
       }
     }
   };
