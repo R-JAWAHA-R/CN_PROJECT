@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 500">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 20px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 13px; fill: #64748b; }
+      .card-h { font-size: 13px; font-weight: bold; fill: #ffffff; }
+      .card-d { font-size: 10px; fill: #334155; }
+    </style>
+  </defs>
+
+  <rect width="840" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <text x="420" y="32" text-anchor="middle" class="title">User Datagram Protocol (UDP): Architecture &amp; Operation</text>
+  <text x="420" y="52" text-anchor="middle" class="sub">RFC 768 / Forouzan Section 23.2 — Lightweight Connectionless Transport Architecture</text>
+
+  <!-- 3 Flow Columns -->
+  <!-- Col 1: Sending Application -->
+  <g transform="translate(40, 80)">
+    <rect width="230" height="260" rx="8" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.5"/>
+    <rect width="230" height="32" rx="8" fill="#2563eb"/>
+    <text x="115" y="21" text-anchor="middle" class="card-h">1. Application Layer</text>
+    <text x="15" y="55" font-size="11" font-weight="bold" fill="#1e40af">Produces Discrete Messages:</text>
+    <text x="15" y="75" class="card-d">• DNS Query: "What is ip for xyz.com?"</text>
+    <text x="15" y="92" class="card-d">• VoIP Audio Chunk: 20ms G.711 PCM</text>
+    <text x="15" y="109" class="card-d">• Game Player Coordinates (x, y, z)</text>
+    <text x="15" y="126" class="card-d">• DHCP Discover broadcast</text>
+    <rect x="15" y="145" width="200" height="55" rx="5" fill="#eff6ff" stroke="#93c5fd"/>
+    <text x="25" y="165" font-size="9.5" font-weight="bold" fill="#1e3a8a">Message Boundaries Kept:</text>
+    <text x="25" y="180" font-size="9" fill="#1e40af">1 sendto() = Exactly 1 Datagram!</text>
+    <text x="25" y="192" font-size="8.5" fill="#64748b">(No framing / stream concatenation)</text>
+  </g>
+
+  <!-- Col 2: UDP Encapsulation -->
+  <g transform="translate(305, 80)">
+    <rect width="230" height="260" rx="8" fill="#ffffff" stroke="#a7f3d0" stroke-width="1.5"/>
+    <rect width="230" height="32" rx="8" fill="#059669"/>
+    <text x="115" y="21" text-anchor="middle" class="card-h">2. UDP Transport</text>
+    <text x="15" y="55" font-size="11" font-weight="bold" fill="#065f46">8-Byte Header Attached:</text>
+    <rect x="15" y="70" width="200" height="28" rx="4" fill="#059669"/>
+    <text x="115" y="88" text-anchor="middle" font-size="10" font-weight="bold" fill="#ffffff">8-Byte UDP Header</text>
+    <rect x="15" y="102" width="200" height="40" rx="4" fill="#ecfdf5" stroke="#10b981"/>
+    <text x="115" y="126" text-anchor="middle" font-size="10" fill="#065f46">Application Payload Data</text>
+    <text x="15" y="165" class="card-d">• Zero connection handshake</text>
+    <text x="15" y="182" class="card-d">• Zero sequence numbers</text>
+    <text x="15" y="199" class="card-d">• Zero ACKs or retransmits</text>
+    <text x="15" y="216" class="card-d">• Optional 1's complement Checksum</text>
+  </g>
+
+  <!-- Col 3: Network Layer Transmission -->
+  <g transform="translate(570, 80)">
+    <rect width="230" height="260" rx="8" fill="#ffffff" stroke="#e9d5ff" stroke-width="1.5"/>
+    <rect width="230" height="32" rx="8" fill="#7c3aed"/>
+    <text x="115" y="21" text-anchor="middle" class="card-h">3. IP Datagram</text>
+    <text x="15" y="55" font-size="11" font-weight="bold" fill="#581c87">Encapsulated in IP (Proto=17):</text>
+    <rect x="15" y="70" width="200" height="24" rx="4" fill="#7c3aed"/>
+    <text x="115" y="86" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#ffffff">20-Byte IPv4 Header</text>
+    <rect x="15" y="96" width="200" height="20" rx="4" fill="#059669"/>
+    <text x="115" y="110" text-anchor="middle" font-size="9" font-weight="bold" fill="#ffffff">8-Byte UDP Header</text>
+    <rect x="15" y="118" width="200" height="35" rx="4" fill="#faf5ff" stroke="#c084fc"/>
+    <text x="115" y="138" text-anchor="middle" font-size="9.5" fill="#581c87">User Data</text>
+    <text x="15" y="175" class="card-d">• Routers forward independently</text>
+    <text x="15" y="192" class="card-d">• If dropped: Silently discarded</text>
+    <text x="15" y="209" class="card-d">• If corrupted: Checksum drops</text>
+  </g>
+
+  <!-- Bottom Characteristics Bar -->
+  <g transform="translate(40, 360)">
+    <rect width="760" height="110" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="25" y="24" font-size="13" font-weight="bold" fill="#0f172a">Key Operational Strengths of UDP:</text>
+    <g transform="translate(25, 35)">
+      <text x="0" y="14" font-size="10" fill="#334155"><tspan font-weight="bold" fill="#2563eb">1. Zero Connection Setup Delay (0-RTT):</tspan> Immediate transmission without 3-way handshake round trips.</text>
+      <text x="0" y="30" font-size="10" fill="#334155"><tspan font-weight="bold" fill="#059669">2. No Connection State:</tspan> Server does not allocate TCB buffers, enabling millions of simultaneous clients.</text>
+      <text x="0" y="46" font-size="10" fill="#334155"><tspan font-weight="bold" fill="#7c3aed">3. Small Packet Overhead:</tspan> Only 8 bytes of header vs 20-60 bytes in TCP (60% to 87% lower overhead).</text>
+      <text x="0" y="62" font-size="10" fill="#334155"><tspan font-weight="bold" fill="#ea580c">4. No Congestion Throttling:</tspan> Transmits audio/video frames at steady real-time codec rates.</text>
+    </g>
+  </g>
+</svg>

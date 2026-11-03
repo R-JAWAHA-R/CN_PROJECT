@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 500">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 19px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 12.5px; fill: #64748b; }
+      .cat-h { font-size: 13px; font-weight: bold; fill: #ffffff; }
+      .m-box { rx: 5; fill: #ffffff; stroke: #cbd5e1; }
+      .m-t { font-size: 11px; font-weight: bold; fill: #0f172a; }
+      .m-d { font-size: 9.5px; fill: #475569; }
+    </style>
+  </defs>
+
+  <rect width="840" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <text x="420" y="30" text-anchor="middle" class="title">Congestion Control Taxonomy: Open-Loop vs. Closed-Loop</text>
+  <text x="420" y="48" text-anchor="middle" class="sub">Forouzan Section 24.3 / Tanenbaum Section 5.3 — Prevention Policies vs. Dynamic Closed-Loop Feedback</text>
+
+  <!-- Left: Open-Loop (Prevention) -->
+  <g transform="translate(40, 70)">
+    <rect width="365" height="400" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+    <rect width="365" height="34" rx="8" fill="#2563eb"/>
+    <text x="182" y="22" text-anchor="middle" class="cat-h">1. Open-Loop (Prevention Ahead of Time)</text>
+
+    <!-- Description -->
+    <text x="15" y="55" font-size="10.5" font-weight="bold" fill="#1e40af">Goal: Design protocols so congestion never occurs.</text>
+    <text x="15" y="70" font-size="9" fill="#64748b">Policies implemented at source or destination without feedback:</text>
+
+    <!-- Policy 1: Retransmission Policy -->
+    <rect x="15" y="80" width="335" height="48" rx="5" class="m-box"/>
+    <text x="25" y="98" class="m-t">A. Retransmission Policy</text>
+    <text x="25" y="112" class="m-d">Use accurate RTO timers to avoid duplicate retransmission floods.</text>
+
+    <!-- Policy 2: Window Policy -->
+    <rect x="15" y="135" width="335" height="48" rx="5" class="m-box"/>
+    <text x="25" y="153" class="m-t">B. Window Policy (Selective Repeat)</text>
+    <text x="25" y="167" class="m-d">Selective Repeat retransmits only lost packets; Go-Back-N wastes capacity.</text>
+
+    <!-- Policy 3: Acknowledgment Policy -->
+    <rect x="15" y="190" width="335" height="48" rx="5" class="m-box"/>
+    <text x="25" y="208" class="m-t">C. Acknowledgment Policy</text>
+    <text x="25" y="222" class="m-d">Delayed ACKs &amp; NACKs reduce traffic load on return links.</text>
+
+    <!-- Policy 4: Discarding Policy -->
+    <rect x="15" y="245" width="335" height="48" rx="5" class="m-box"/>
+    <text x="25" y="263" class="m-t">D. Discarding Policy</text>
+    <text x="25" y="277" class="m-d">Routers intelligently drop less critical packets (e.g., video B-frames).</text>
+
+    <!-- Policy 5: Admission Policy -->
+    <rect x="15" y="300" width="335" height="48" rx="5" class="m-box"/>
+    <text x="25" y="318" class="m-t">E. Admission Policy (QoS)</text>
+    <text x="25" y="332" class="m-d">Routers refuse new virtual connection setups if congested.</text>
+
+    <text x="15" y="375" font-size="9.5" fill="#475569">Note: Open-loop policies are static; they cannot respond to unexpected traffic surges!</text>
+  </g>
+
+  <!-- Right: Closed-Loop (Removal & Feedback) -->
+  <g transform="translate(435, 70)">
+    <rect width="365" height="400" rx="8" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1.5"/>
+    <rect width="365" height="34" rx="8" fill="#059669"/>
+    <text x="182" y="22" text-anchor="middle" class="cat-h">2. Closed-Loop (Dynamic Removal &amp; Feedback)</text>
+
+    <!-- Description -->
+    <text x="15" y="55" font-size="10.5" font-weight="bold" fill="#065f46">Goal: Detect congestion after it occurs and alleviate it.</text>
+    <text x="15" y="70" font-size="9" fill="#64748b">Operates via closed-loop feedback mechanisms between nodes:</text>
+
+    <!-- Mechanism 1: Backpressure -->
+    <rect x="15" y="80" width="335" height="55" rx="5" class="m-box"/>
+    <text x="25" y="98" class="m-t">A. Backpressure (Hop-by-Hop)</text>
+    <text x="25" y="112" class="m-d">A congested node stops receiving from its upstream neighbor;</text>
+    <text x="25" y="125" class="m-d">pressure propagates node-by-node back to the original source.</text>
+
+    <!-- Mechanism 2: Choke Packet -->
+    <rect x="15" y="142" width="335" height="55" rx="5" class="m-box"/>
+    <text x="25" y="160" class="m-t">B. Choke Packet (Direct ICMP)</text>
+    <text x="25" y="174" class="m-d">Congested router generates a special control packet directly</text>
+    <text x="25" y="187" class="m-d">to the source host ordering it to reduce transmission rate.</text>
+
+    <!-- Mechanism 3: Implicit Signaling -->
+    <rect x="15" y="204" width="335" height="55" rx="5" class="m-box"/>
+    <text x="25" y="222" class="m-t">C. Implicit Signaling (TCP Loss Detection)</text>
+    <text x="25" y="236" class="m-d">Source detects congestion autonomously via delayed ACKs,</text>
+    <text x="25" y="249" class="m-d">increased RTT, or packet loss (3 dup ACKs / Timeout).</text>
+
+    <!-- Mechanism 4: Explicit Signaling -->
+    <rect x="15" y="266" width="335" height="55" rx="5" class="m-box"/>
+    <text x="25" y="284" class="m-t">D. Explicit Signaling (FECN, BECN &amp; ECN)</text>
+    <text x="25" y="298" class="m-d">Routers set congestion notification bits directly in data packets:</text>
+    <text x="25" y="311" class="m-d">• Forward (FECN) or Backward (BECN) / IP ECN (RFC 3168).</text>
+
+    <text x="15" y="375" font-size="9.5" fill="#475569">Modern Internet: TCP relies primarily on Implicit Loss Signaling + Explicit Congestion Notification (ECN)!</text>
+  </g>
+</svg>

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 500">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 19px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 12.5px; fill: #64748b; }
+      .pill-t { font-size: 11px; font-weight: bold; fill: #ffffff; text-anchor: middle; }
+      .d-text { font-size: 9.5px; fill: #475569; }
+    </style>
+  </defs>
+
+  <rect width="840" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <text x="420" y="30" text-anchor="middle" class="title">UDP Services and Protocol Characteristics</text>
+  <text x="420" y="48" text-anchor="middle" class="sub">Forouzan Section 23.2 — Process-to-Process Datagram Delivery with Minimum Transport Overhead</text>
+
+  <!-- 4 Feature Cards Grid -->
+  <g transform="translate(40, 75)">
+    <!-- Card 1 -->
+    <rect x="0" y="0" width="365" height="175" rx="8" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.2"/>
+    <rect x="15" y="15" width="140" height="26" rx="4" fill="#2563eb"/>
+    <text x="85" y="32" class="pill-t">Connectionless Service</text>
+    <text x="15" y="60" font-size="11" font-weight="bold" fill="#1e40af">• Zero Handshake Latency</text>
+    <text x="15" y="76" class="d-text">Each user datagram is an independent entity with no relation</text>
+    <text x="15" y="90" class="d-text">to previous or subsequent datagrams. No connection is opened,</text>
+    <text x="15" y="104" class="d-text">maintained, or closed.</text>
+    <text x="15" y="125" class="d-text">• Ideal for quick request-response queries like DNS and NTP.</text>
+    <text x="15" y="140" class="d-text">• Reduces server load drastically by maintaining zero session state.</text>
+
+    <!-- Card 2 -->
+    <rect x="395" y="0" width="365" height="175" rx="8" fill="#ffffff" stroke="#a7f3d0" stroke-width="1.2"/>
+    <rect x="410" y="15" width="140" height="26" rx="4" fill="#059669"/>
+    <text x="480" y="32" class="pill-t">Unreliable Delivery</text>
+    <text x="410" y="60" font-size="11" font-weight="bold" fill="#065f46">• Best-Effort Service Model</text>
+    <text x="410" y="76" class="d-text">UDP does not guarantee delivery, packet sequencing, or loss</text>
+    <text x="410" y="90" class="d-text">recovery. If a packet is corrupted in transit, the checksum detects</text>
+    <text x="410" y="104" class="d-text">it and the receiver quietly discards it.</text>
+    <text x="410" y="125" class="d-text">• No retransmission timers; application handles error recovery</text>
+    <text x="410" y="140" class="d-text">  if needed (or tolerates dropped samples as in voice calls).</text>
+  </g>
+
+  <g transform="translate(40, 265)">
+    <!-- Card 3 -->
+    <rect x="0" y="0" width="365" height="195" rx="8" fill="#ffffff" stroke="#fed7aa" stroke-width="1.2"/>
+    <rect x="15" y="15" width="160" height="26" rx="4" fill="#ea580c"/>
+    <text x="95" y="32" class="pill-t">Message-Oriented Service</text>
+    <text x="15" y="60" font-size="11" font-weight="bold" fill="#9a3412">• Preserves Message Boundaries</text>
+    <text x="15" y="76" class="d-text">Unlike TCP, which provides a continuous unstructured stream of</text>
+    <text x="15" y="90" class="d-text">bytes, UDP preserves datagram boundaries intact.</text>
+    <text x="15" y="110" class="d-text">• If sender writes 100 bytes via sendto(), receiver reads exactly</text>
+    <text x="15" y="124" class="d-text">  100 bytes via recvfrom() in one single atomic operation.</text>
+    <text x="15" y="144" class="d-text">• Eliminates the need for application-level record delimiters!</text>
+
+    <!-- Card 4 -->
+    <rect x="395" y="0" width="365" height="195" rx="8" fill="#ffffff" stroke="#c084fc" stroke-width="1.2"/>
+    <rect x="410" y="15" width="160" height="26" rx="4" fill="#7c3aed"/>
+    <text x="490" y="32" class="pill-t">Multicast &amp; Broadcast</text>
+    <text x="410" y="60" font-size="11" font-weight="bold" fill="#581c87">• Flexible Transmission Modes</text>
+    <text x="410" y="76" class="d-text">TCP is strictly point-to-point (unicast between 2 endpoints).</text>
+    <text x="410" y="90" class="d-text">UDP inherently supports 1-to-many communication:</text>
+    <text x="410" y="110" class="d-text">• <tspan font-weight="bold">Unicast:</tspan> One sender to one receiver.</text>
+    <text x="410" y="126" class="d-text">• <tspan font-weight="bold">Multicast:</tspan> One sender to a subscribed multicast group (e.g. IPTV).</text>
+    <text x="410" y="142" class="d-text">• <tspan font-weight="bold">Broadcast:</tspan> One sender to all nodes on local subnet (DHCP discover).</text>
+  </g>
+</svg>

@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 520">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 19px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 12.5px; fill: #64748b; }
+      .node-hdr { font-size: 14px; font-weight: bold; fill: #ffffff; }
+      .param { font-family: 'Courier New', monospace; font-size: 10px; font-weight: bold; }
+      .step-lbl { font-size: 11px; font-weight: bold; }
+    </style>
+    <marker id="arr-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#dc2626"/>
+    </marker>
+    <marker id="arr-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <rect width="840" height="520" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <text x="420" y="30" text-anchor="middle" class="title">TCP Symmetric Connection Release (Four-Way Handshake)</text>
+  <text x="420" y="48" text-anchor="middle" class="sub">Forouzan Figure 23.21 — Independent Direction Termination, Half-Close, and TIME-WAIT (2MSL) State</text>
+
+  <!-- Lifelines -->
+  <rect x="80" y="65" width="200" height="35" rx="6" fill="#2563eb"/>
+  <text x="180" y="87" text-anchor="middle" class="node-hdr">💻 Client (Initiator)</text>
+  <line x1="180" y1="100" x2="180" y2="445" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4,4"/>
+
+  <rect x="560" y="65" width="200" height="35" rx="6" fill="#1e293b"/>
+  <text x="660" y="87" text-anchor="middle" class="node-hdr">🖥️ Server (Receiver)</text>
+  <line x1="660" y1="100" x2="660" y2="445" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4,4"/>
+
+  <!-- Both start in ESTABLISHED -->
+  <rect x="110" y="110" width="140" height="24" rx="4" fill="#dcfce7" stroke="#22c55e"/>
+  <text x="180" y="126" text-anchor="middle" font-size="10" font-weight="bold" fill="#15803d">ESTABLISHED</text>
+  <rect x="590" y="110" width="140" height="24" rx="4" fill="#dcfce7" stroke="#22c55e"/>
+  <text x="660" y="126" text-anchor="middle" font-size="10" font-weight="bold" fill="#15803d">ESTABLISHED</text>
+
+  <!-- Step 1: Client sends FIN -->
+  <line x1="180" y1="155" x2="650" y2="190" stroke="#dc2626" stroke-width="2.2" marker-end="url(#arr-r)"/>
+  <rect x="290" y="150" width="260" height="34" rx="5" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="420" y="165" text-anchor="middle" class="step-lbl" fill="#b91c1c">Step 1: Client Active Close (FIN)</text>
+  <text x="420" y="178" text-anchor="middle" class="param" fill="#991b1b">FIN=1, Seq = u, Ack = v</text>
+
+  <!-- State changes -->
+  <rect x="110" y="160" width="140" height="24" rx="4" fill="#fee2e2" stroke="#f87171"/>
+  <text x="180" y="176" text-anchor="middle" font-size="10" font-weight="bold" fill="#991b1b">FIN_WAIT_1</text>
+
+  <rect x="590" y="195" width="140" height="24" rx="4" fill="#fef3c7" stroke="#f59e0b"/>
+  <text x="660" y="211" text-anchor="middle" font-size="10" font-weight="bold" fill="#92400e">CLOSE_WAIT</text>
+
+  <!-- Step 2: Server sends ACK -->
+  <line x1="660" y1="225" x2="190" y2="260" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arr-b)"/>
+  <rect x="290" y="220" width="260" height="34" rx="5" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="420" y="235" text-anchor="middle" class="step-lbl" fill="#1d4ed8">Step 2: Server ACKs Client FIN</text>
+  <text x="420" y="248" text-anchor="middle" class="param" fill="#1e40af">ACK=1, Seq = v, Ack = u + 1</text>
+
+  <rect x="110" y="265" width="140" height="24" rx="4" fill="#e0e7ff" stroke="#818cf8"/>
+  <text x="180" y="281" text-anchor="middle" font-size="10" font-weight="bold" fill="#3730a3">FIN_WAIT_2 (Half-Close)</text>
+
+  <!-- Server sends remaining data & Step 3: Server FIN -->
+  <line x1="660" y1="310" x2="190" y2="345" stroke="#dc2626" stroke-width="2.2" marker-end="url(#arr-r)"/>
+  <rect x="290" y="305" width="260" height="34" rx="5" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="420" y="320" text-anchor="middle" class="step-lbl" fill="#b91c1c">Step 3: Server Sends FIN</text>
+  <text x="420" y="333" text-anchor="middle" class="param" fill="#991b1b">FIN=1, ACK=1, Seq = w, Ack = u + 1</text>
+
+  <rect x="590" y="315" width="140" height="24" rx="4" fill="#fee2e2" stroke="#f87171"/>
+  <text x="660" y="331" text-anchor="middle" font-size="10" font-weight="bold" fill="#991b1b">LAST_ACK</text>
+
+  <!-- Step 4: Client final ACK -->
+  <line x1="180" y1="375" x2="650" y2="405" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arr-b)"/>
+  <rect x="290" y="370" width="260" height="34" rx="5" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="420" y="385" text-anchor="middle" class="step-lbl" fill="#1d4ed8">Step 4: Client Final ACK</text>
+  <text x="420" y="398" text-anchor="middle" class="param" fill="#1e40af">ACK=1, Seq = u + 1, Ack = w + 1</text>
+
+  <rect x="590" y="410" width="140" height="24" rx="4" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text x="660" y="426" text-anchor="middle" font-size="10" font-weight="bold" fill="#475569">CLOSED</text>
+
+  <!-- TIME_WAIT Timer Box -->
+  <rect x="100" y="385" width="160" height="42" rx="5" fill="#fef3c7" stroke="#f59e0b"/>
+  <text x="180" y="401" text-anchor="middle" font-size="10" font-weight="bold" fill="#b45309">TIME_WAIT State</text>
+  <text x="180" y="415" text-anchor="middle" font-size="8.5" fill="#92400e">Timer = 2 × MSL (~120s)</text>
+  <text x="180" y="438" text-anchor="middle" font-size="8.5" fill="#64748b">Transitions to CLOSED after timer</text>
+
+  <!-- Callout Bottom -->
+  <g transform="translate(40, 460)">
+    <rect width="760" height="48" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="20" y="18" font-size="10.5" font-weight="bold" fill="#0f172a">Why the 2MSL TIME-WAIT Timer is Essential:</text>
+    <text x="20" y="32" font-size="9.5" fill="#475569">1. If the final ACK is lost, server retransmits its FIN; client must stay alive to re-ACK so server doesn't get stuck in LAST_ACK.</text>
+    <text x="20" y="44" font-size="9.5" fill="#475569">2. Drains old duplicate packets lingering in network routes before the same port number pair can be reused.</text>
+  </g>
+</svg>

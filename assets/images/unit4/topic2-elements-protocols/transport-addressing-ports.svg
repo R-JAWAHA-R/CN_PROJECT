@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 500">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 20px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 13px; fill: #64748b; }
+      .range-h { font-size: 13px; font-weight: bold; fill: #ffffff; }
+      .lbl { font-size: 11px; fill: #334155; }
+      .bold-lbl { font-size: 11px; font-weight: bold; fill: #0f172a; }
+      .mono { font-family: 'Courier New', monospace; font-size: 10.5px; }
+    </style>
+  </defs>
+
+  <rect width="840" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <text x="420" y="32" text-anchor="middle" class="title">Transport Layer Addressing: 16-Bit Port Numbers &amp; ICANN Ranges</text>
+  <text x="420" y="52" text-anchor="middle" class="sub">Forouzan Figure 23.4 &amp; 23.5 — 65,536 Total Port Numbers &amp; Socket Address Architecture</text>
+
+  <!-- 3 ICANN Ranges Visual Bar -->
+  <g transform="translate(40, 75)">
+    <!-- Total Bar -->
+    <rect width="760" height="30" rx="6" fill="#cbd5e1"/>
+    
+    <!-- Well-known: 0 to 1023 (1024 ports) ~ 12% width for visual clarity -->
+    <rect x="0" y="0" width="160" height="30" rx="6" fill="#2563eb"/>
+    <text x="80" y="20" text-anchor="middle" font-size="11" font-weight="bold" fill="#ffffff">0 – 1023</text>
+
+    <!-- Registered: 1024 to 49151 -->
+    <rect x="160" y="0" width="360" height="30" fill="#0891b2"/>
+    <text x="340" y="20" text-anchor="middle" font-size="11" font-weight="bold" fill="#ffffff">1,024 – 49,151</text>
+
+    <!-- Dynamic/Ephemeral: 49152 to 65535 -->
+    <rect x="520" y="0" width="240" height="30" rx="6" fill="#7c3aed"/>
+    <text x="640" y="20" text-anchor="middle" font-size="11" font-weight="bold" fill="#ffffff">49,152 – 65,535</text>
+  </g>
+
+  <!-- Card 1: Well-Known Ports -->
+  <g transform="translate(40, 125)">
+    <rect width="240" height="190" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+    <rect width="240" height="32" rx="8" fill="#2563eb"/>
+    <text x="120" y="21" text-anchor="middle" class="range-h">1. Well-Known Ports</text>
+    <text x="120" y="50" text-anchor="middle" class="bold-lbl" fill="#1e40af">Range: 0 to 1,023 (1,024 ports)</text>
+    <text x="15" y="70" class="lbl">• Controlled &amp; assigned by IANA/ICANN.</text>
+    <text x="15" y="86" class="lbl">• Reserved for standard universal servers.</text>
+    <text x="15" y="102" class="lbl">• Requires root / admin privileges to bind.</text>
+    <rect x="15" y="115" width="210" height="65" rx="4" fill="#ffffff" stroke="#dbeafe"/>
+    <text x="25" y="132" class="mono" fill="#1e3a8a">• Port 20/21: FTP (Data/Control)</text>
+    <text x="25" y="147" class="mono" fill="#1e3a8a">• Port 22: SSH | Port 25: SMTP</text>
+    <text x="25" y="162" class="mono" fill="#1e3a8a">• Port 53: DNS | Port 80: HTTP</text>
+    <text x="25" y="174" class="mono" fill="#1e3a8a">• Port 443: HTTPS | 123: NTP</text>
+  </g>
+
+  <!-- Card 2: Registered Ports -->
+  <g transform="translate(300, 125)">
+    <rect width="240" height="190" rx="8" fill="#ecfeff" stroke="#a5f3fc" stroke-width="1.5"/>
+    <rect width="240" height="32" rx="8" fill="#0891b2"/>
+    <text x="120" y="21" text-anchor="middle" class="range-h">2. Registered Ports</text>
+    <text x="120" y="50" text-anchor="middle" class="bold-lbl" fill="#155e75">Range: 1,024 to 49,151 (48,128 ports)</text>
+    <text x="15" y="70" class="lbl">• Registered with ICANN by vendors.</text>
+    <text x="15" y="86" class="lbl">• Prevents port number collisions.</text>
+    <text x="15" y="102" class="lbl">• Standard user processes can bind.</text>
+    <rect x="15" y="115" width="210" height="65" rx="4" fill="#ffffff" stroke="#cffafe"/>
+    <text x="25" y="132" class="mono" fill="#164e63">• Port 1433: MS SQL Server</text>
+    <text x="25" y="147" class="mono" fill="#164e63">• Port 3306: MySQL Database</text>
+    <text x="25" y="162" class="mono" fill="#164e63">• Port 5432: PostgreSQL DB</text>
+    <text x="25" y="174" class="mono" fill="#164e63">• Port 8080: Alternate HTTP / Proxy</text>
+  </g>
+
+  <!-- Card 3: Dynamic / Ephemeral Ports -->
+  <g transform="translate(560, 125)">
+    <rect width="240" height="190" rx="8" fill="#faf5ff" stroke="#e9d5ff" stroke-width="1.5"/>
+    <rect width="240" height="32" rx="8" fill="#7c3aed"/>
+    <text x="120" y="21" text-anchor="middle" class="range-h">3. Dynamic / Ephemeral</text>
+    <text x="120" y="50" text-anchor="middle" class="bold-lbl" fill="#581c87">Range: 49,152 to 65,535 (16,384 ports)</text>
+    <text x="15" y="70" class="lbl">• Neither registered nor controlled.</text>
+    <text x="15" y="86" class="lbl">• Automatically assigned by OS to clients.</text>
+    <text x="15" y="102" class="lbl">• Temporary lifetime (freed after close).</text>
+    <rect x="15" y="115" width="210" height="65" rx="4" fill="#ffffff" stroke="#f3e8ff"/>
+    <text x="25" y="132" class="mono" fill="#581c87">• Browser tab opening website</text>
+    <text x="25" y="147" class="mono" fill="#581c87">• Client DNS query to resolver</text>
+    <text x="25" y="162" class="mono" fill="#581c87">• Mobile app background sync</text>
+    <text x="25" y="174" class="mono" fill="#581c87">• Randomly picked by OS kernel</text>
+  </g>
+
+  <!-- Bottom Section: The Socket Address Formula -->
+  <g transform="translate(40, 330)">
+    <rect width="760" height="145" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="25" y="28" font-size="14" font-weight="bold" fill="#0f172a">The Socket Address: Unifying Network and Transport Identification</text>
+    
+    <!-- Formula Box -->
+    <rect x="25" y="45" width="340" height="40" rx="6" fill="#f1f5f9" stroke="#94a3b8"/>
+    <text x="195" y="70" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e293b">Socket Address = IP Address + Port Number</text>
+
+    <!-- Client vs Server Socket Example -->
+    <rect x="385" y="45" width="350" height="40" rx="6" fill="#ecfdf5" stroke="#10b981"/>
+    <text x="560" y="62" text-anchor="middle" font-size="11" font-weight="bold" fill="#065f46">Client: 192.168.1.10 : 54321 (Ephemeral)</text>
+    <text x="560" y="78" text-anchor="middle" font-size="11" font-weight="bold" fill="#065f46">Server: 203.0.113.80 : 443 (Well-Known HTTPS)</text>
+
+    <text x="25" y="110" class="lbl">• A transport connection is uniquely identified across the Internet by a 4-Tuple: (Source IP, Source Port, Dest IP, Dest Port).</text>
+    <text x="25" y="128" class="note">• This allows thousands of simultaneous connections to port 80/443 on the same web server without crosstalk!</text>
+  </g>
+</svg>

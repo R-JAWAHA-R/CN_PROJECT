@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 520">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 19px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 12.5px; fill: #64748b; }
+      .col-h { font-size: 14px; font-weight: bold; fill: #ffffff; }
+      .call-box { rx: 6; stroke-width: 1.5; }
+      .call-t { font-family: 'Courier New', monospace; font-size: 11px; font-weight: bold; }
+      .call-d { font-size: 9.5px; fill: #64748b; }
+      .msg-line { stroke-width: 1.8; stroke-dasharray: 4,3; }
+      .solid-line { stroke-width: 2; }
+    </style>
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arr-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#16a34a"/>
+    </marker>
+    <marker id="arr-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#7c3aed"/>
+    </marker>
+  </defs>
+
+  <rect width="840" height="520" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <text x="420" y="30" text-anchor="middle" class="title">Berkeley Sockets API: TCP Client-Server Interaction Flow</text>
+  <text x="420" y="48" text-anchor="middle" class="sub">Standard POSIX Socket System Calls &amp; Connection Lifecycle</text>
+
+  <!-- Server Column Header -->
+  <rect x="80" y="65" width="280" height="35" rx="6" fill="#1e293b"/>
+  <text x="220" y="87" text-anchor="middle" class="col-h">🖥️ TCP Server (Passive Listener)</text>
+
+  <!-- Client Column Header -->
+  <rect x="480" y="65" width="280" height="35" rx="6" fill="#2563eb"/>
+  <text x="620" y="87" text-anchor="middle" class="col-h">💻 TCP Client (Active Peer)</text>
+
+  <!-- Server Steps -->
+  <!-- 1. socket() -->
+  <rect x="100" y="115" width="240" height="36" rx="6" fill="#ffffff" stroke="#cbd5e1" class="call-box"/>
+  <text x="220" y="131" text-anchor="middle" class="call-t" fill="#0f172a">1. socket(AF_INET, SOCK_STREAM)</text>
+  <text x="220" y="144" text-anchor="middle" class="call-d">Creates endpoint file descriptor</text>
+
+  <!-- 2. bind() -->
+  <rect x="100" y="165" width="240" height="36" rx="6" fill="#ffffff" stroke="#cbd5e1" class="call-box"/>
+  <text x="220" y="181" text-anchor="middle" class="call-t" fill="#0f172a">2. bind(server_ip, server_port)</text>
+  <text x="220" y="194" text-anchor="middle" class="call-d">Binds socket to local IP &amp; well-known port</text>
+
+  <!-- 3. listen() -->
+  <rect x="100" y="215" width="240" height="36" rx="6" fill="#ffffff" stroke="#cbd5e1" class="call-box"/>
+  <text x="220" y="231" text-anchor="middle" class="call-t" fill="#0f172a">3. listen(backlog=5)</text>
+  <text x="220" y="244" text-anchor="middle" class="call-d">Transitions to PASSIVE listening state</text>
+
+  <!-- 4. accept() -->
+  <rect x="100" y="265" width="240" height="42" rx="6" fill="#fef3c7" stroke="#f59e0b" class="call-box"/>
+  <text x="220" y="282" text-anchor="middle" class="call-t" fill="#92400e">4. accept() [BLOCKS]</text>
+  <text x="220" y="297" text-anchor="middle" class="call-d">Waits for client connection; returns newsockfd</text>
+
+  <!-- Client Steps -->
+  <!-- 1. socket() -->
+  <rect x="500" y="165" width="240" height="36" rx="6" fill="#ffffff" stroke="#cbd5e1" class="call-box"/>
+  <text x="620" y="181" text-anchor="middle" class="call-t" fill="#0f172a">1. socket(AF_INET, SOCK_STREAM)</text>
+  <text x="620" y="194" text-anchor="middle" class="call-d">Allocates client socket endpoint</text>
+
+  <!-- 2. connect() -->
+  <rect x="500" y="225" width="240" height="42" rx="6" fill="#e0e7ff" stroke="#6366f1" class="call-box"/>
+  <text x="620" y="242" text-anchor="middle" class="call-t" fill="#3730a3">2. connect(server_addr)</text>
+  <text x="620" y="257" text-anchor="middle" class="call-d">Triggers TCP 3-Way Handshake (SYN)</text>
+
+  <!-- Handshake Arrows -->
+  <line x1="500" y1="260" x2="345" y2="280" stroke="#7c3aed" stroke-width="2" marker-end="url(#arr-purple)"/>
+  <text x="420" y="265" text-anchor="middle" font-size="10" font-weight="bold" fill="#7c3aed">SYN / SYN+ACK / ACK</text>
+
+  <!-- Server Unblocks -->
+  <rect x="100" y="325" width="240" height="36" rx="6" fill="#dcfce7" stroke="#22c55e" class="call-box"/>
+  <text x="220" y="341" text-anchor="middle" class="call-t" fill="#15803d">Connection Established!</text>
+  <text x="220" y="354" text-anchor="middle" class="call-d">Dedicated newsockfd allocated for client</text>
+
+  <!-- Data Exchange -->
+  <rect x="500" y="325" width="240" height="36" rx="6" fill="#ffffff" stroke="#cbd5e1" class="call-box"/>
+  <text x="620" y="341" text-anchor="middle" class="call-t" fill="#0f172a">3. send(sockfd, request_data)</text>
+  <text x="620" y="354" text-anchor="middle" class="call-d">Writes payload bytes to socket buffer</text>
+
+  <line x1="500" y1="350" x2="345" y2="385" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-blue)"/>
+  <text x="420" y="362" text-anchor="middle" font-size="10" font-weight="bold" fill="#2563eb">Application Request (Bytes)</text>
+
+  <!-- Server recv & send -->
+  <rect x="100" y="380" width="240" height="36" rx="6" fill="#ffffff" stroke="#cbd5e1" class="call-box"/>
+  <text x="220" y="396" text-anchor="middle" class="call-t" fill="#0f172a">5. recv() &amp; send(response)</text>
+  <text x="220" y="409" text-anchor="middle" class="call-d">Processes request, transmits result</text>
+
+  <line x1="340" y1="410" x2="495" y2="435" stroke="#16a34a" stroke-width="2" marker-end="url(#arr-green)"/>
+  <text x="420" y="420" text-anchor="middle" font-size="10" font-weight="bold" fill="#16a34a">Server Response (Bytes)</text>
+
+  <!-- Client recv & close -->
+  <rect x="500" y="430" width="240" height="36" rx="6" fill="#ffffff" stroke="#cbd5e1" class="call-box"/>
+  <text x="620" y="446" text-anchor="middle" class="call-t" fill="#0f172a">4. recv() &amp; close(sockfd)</text>
+  <text x="620" y="459" text-anchor="middle" class="call-d">Reads response, initiates FIN release</text>
+
+  <!-- Server close -->
+  <rect x="100" y="435" width="240" height="36" rx="6" fill="#ffffff" stroke="#cbd5e1" class="call-box"/>
+  <text x="220" y="451" text-anchor="middle" class="call-t" fill="#0f172a">6. close(newsockfd)</text>
+  <text x="220" y="464" text-anchor="middle" class="call-d">Closes client connection; loop to accept()</text>
+
+  <!-- Bottom Legend -->
+  <rect x="80" y="485" width="680" height="24" rx="4" fill="#f1f5f9" stroke="#e2e8f0"/>
+  <text x="420" y="501" text-anchor="middle" font-size="10" fill="#475569">💡 Sockets bridge application processes with the kernel TCP/IP stack using standard Unix file descriptor abstractions.</text>
+</svg>

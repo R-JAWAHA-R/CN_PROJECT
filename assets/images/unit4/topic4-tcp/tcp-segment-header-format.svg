@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 540">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 19px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 12.5px; fill: #64748b; }
+      .fld-title { font-size: 12px; font-weight: bold; fill: #ffffff; text-anchor: middle; }
+      .fld-sub { font-size: 9px; fill: #ffffff; opacity: 0.9; text-anchor: middle; }
+      .flag-t { font-size: 9px; font-weight: bold; fill: #ffffff; text-anchor: middle; }
+      .bit-h { font-size: 9.5px; font-weight: bold; fill: #64748b; }
+    </style>
+  </defs>
+
+  <rect width="840" height="540" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <text x="420" y="28" text-anchor="middle" class="title">Transmission Control Protocol (TCP): Segment Header Format</text>
+  <text x="420" y="46" text-anchor="middle" class="sub">RFC 9293 / Forouzan Figure 23.16 — 20 to 60 Bytes Variable Header Structure</text>
+
+  <!-- Bit Ruler -->
+  <g transform="translate(40, 60)">
+    <rect width="760" height="20" rx="4" fill="#e2e8f0"/>
+    <text x="10" y="14" class="bit-h">Bit 0</text>
+    <text x="180" y="14" class="bit-h">Bit 7</text>
+    <text x="375" y="14" class="bit-h">Bit 15 | Bit 16</text>
+    <text x="560" y="14" class="bit-h">Bit 23</text>
+    <text x="735" y="14" class="bit-h">Bit 31</text>
+  </g>
+
+  <!-- Row 1: Source Port (16) & Dest Port (16) -->
+  <g transform="translate(40, 85)">
+    <rect x="0" y="0" width="375" height="50" rx="5" fill="#2563eb" stroke="#1d4ed8"/>
+    <text x="187" y="24" class="fld-title">Source Port Number (16 Bits)</text>
+    <text x="187" y="38" class="fld-sub">Calling process port (e.g., ephemeral 52140)</text>
+
+    <rect x="385" y="0" width="375" height="50" rx="5" fill="#0891b2" stroke="#0e7490"/>
+    <text x="572" y="24" class="fld-title">Destination Port Number (16 Bits)</text>
+    <text x="572" y="38" class="fld-sub">Receiving service port (e.g., HTTP 80, HTTPS 443)</text>
+  </g>
+
+  <!-- Row 2: Sequence Number (32 bits) -->
+  <g transform="translate(40, 140)">
+    <rect x="0" y="0" width="760" height="50" rx="5" fill="#4f46e5" stroke="#4338ca"/>
+    <text x="380" y="24" class="fld-title">Sequence Number (32 Bits)</text>
+    <text x="380" y="38" class="fld-sub">Byte offset of the first data byte in this segment (or ISN during SYN)</text>
+  </g>
+
+  <!-- Row 3: Acknowledgment Number (32 bits) -->
+  <g transform="translate(40, 195)">
+    <rect x="0" y="0" width="760" height="50" rx="5" fill="#059669" stroke="#047857"/>
+    <text x="380" y="24" class="fld-title">Acknowledgment Number (32 Bits) — Cumulative ACK</text>
+    <text x="380" y="38" class="fld-sub">Next expected byte number from sender (Valid only when ACK flag = 1)</text>
+  </g>
+
+  <!-- Row 4: HLEN (4), Reserved (6), 6 Control Flags (6), Window Size (16) -->
+  <g transform="translate(40, 250)">
+    <!-- HLEN -->
+    <rect x="0" y="0" width="95" height="55" rx="4" fill="#d97706" stroke="#b45309"/>
+    <text x="47" y="24" class="fld-title" font-size="11">Data Offset</text>
+    <text x="47" y="36" class="fld-sub">(HLEN, 4b)</text>
+    <text x="47" y="47" class="fld-sub">4-byte words</text>
+
+    <!-- Reserved -->
+    <rect x="100" y="0" width="90" height="55" rx="4" fill="#64748b" stroke="#475569"/>
+    <text x="145" y="24" class="fld-title" font-size="11">Reserved</text>
+    <text x="145" y="38" class="fld-sub">(6 Bits)</text>
+    <text x="145" y="48" class="fld-sub">Must be 0</text>
+
+    <!-- 6 Control Flags: URG, ACK, PSH, RST, SYN, FIN (each ~30px) -->
+    <g transform="translate(195, 0)">
+      <rect x="0" y="0" width="30" height="55" fill="#7c3aed" stroke="#6d28d9"/>
+      <text x="15" y="28" class="flag-t">U</text><text x="15" y="42" font-size="7" fill="#ddd6fe" text-anchor="middle">URG</text>
+
+      <rect x="32" y="0" width="30" height="55" fill="#059669" stroke="#047857"/>
+      <text x="47" y="28" class="flag-t">A</text><text x="47" y="42" font-size="7" fill="#a7f3d0" text-anchor="middle">ACK</text>
+
+      <rect x="64" y="0" width="30" height="55" fill="#2563eb" stroke="#1d4ed8"/>
+      <text x="79" y="28" class="flag-t">P</text><text x="79" y="42" font-size="7" fill="#bfdbfe" text-anchor="middle">PSH</text>
+
+      <rect x="96" y="0" width="30" height="55" fill="#dc2626" stroke="#b91c1c"/>
+      <text x="111" y="28" class="flag-t">R</text><text x="111" y="42" font-size="7" fill="#fecaca" text-anchor="middle">RST</text>
+
+      <rect x="128" y="0" width="30" height="55" fill="#ea580c" stroke="#c2410c"/>
+      <text x="143" y="28" class="flag-t">S</text><text x="143" y="42" font-size="7" fill="#fed7aa" text-anchor="middle">SYN</text>
+
+      <rect x="160" y="0" width="30" height="55" fill="#e11d48" stroke="#be123c"/>
+      <text x="175" y="28" class="flag-t">F</text><text x="175" y="42" font-size="7" fill="#fecdd3" text-anchor="middle">FIN</text>
+    </g>
+
+    <!-- Window Size -->
+    <rect x="390" y="0" width="370" height="55" rx="4" fill="#0d9488" stroke="#0f766e"/>
+    <text x="575" y="24" class="fld-title">Window Size (16 Bits) — Advertised Receive Window (rwnd)</text>
+    <text x="575" y="38" class="fld-sub">Receiver buffer credit (bytes). Multiplied by 2^scale when Window Scale option is active</text>
+  </g>
+
+  <!-- Row 5: Checksum (16) & Urgent Pointer (16) -->
+  <g transform="translate(40, 310)">
+    <rect x="0" y="0" width="375" height="50" rx="5" fill="#7c3aed" stroke="#6d28d9"/>
+    <text x="187" y="24" class="fld-title">Checksum (16 Bits) — Mandatory</text>
+    <text x="187" y="38" class="fld-sub">1's complement sum over pseudo-header, TCP header &amp; data</text>
+
+    <rect x="385" y="0" width="375" height="50" rx="5" fill="#be185d" stroke="#9d174d"/>
+    <text x="572" y="24" class="fld-title">Urgent Pointer (16 Bits)</text>
+    <text x="572" y="38" class="fld-sub">Points to last byte of out-of-band urgent data (Valid only if URG=1)</text>
+  </g>
+
+  <!-- Row 6: Options & Padding (0 to 40 Bytes) -->
+  <g transform="translate(40, 365)">
+    <rect x="0" y="0" width="760" height="45" rx="5" fill="#f1f5f9" stroke="#94a3b8" stroke-dasharray="6,3"/>
+    <text x="380" y="22" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle">Options &amp; Padding (0 to 40 Bytes, padded to 32-bit boundary)</text>
+    <text x="380" y="36" font-size="9" fill="#64748b" text-anchor="middle">MSS (Maximum Segment Size), Window Scale (RFC 7323), SACK Permitted (RFC 2018), Timestamps / PAWS</text>
+  </g>
+
+  <!-- Flags Explanatory Legend -->
+  <g transform="translate(40, 420)">
+    <rect width="760" height="105" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="20" y="20" font-size="11.5" font-weight="bold" fill="#0f172a">Summary of the 6 Fundamental Control Flags:</text>
+    <g transform="translate(20, 32)">
+      <text x="0" y="12" font-size="9.5" fill="#334155"><tspan font-weight="bold" fill="#7c3aed">• URG (Urgent):</tspan> Urgent pointer field is valid; prioritize immediate processing.</text>
+      <text x="0" y="26" font-size="9.5" fill="#334155"><tspan font-weight="bold" fill="#059669">• ACK (Acknowledge):</tspan> Acknowledgment field is valid; set in all packets after initial SYN.</text>
+      <text x="0" y="40" font-size="9.5" fill="#334155"><tspan font-weight="bold" fill="#2563eb">• PSH (Push):</tspan> Request receiver to push buffered data immediately to application without waiting.</text>
+      <text x="0" y="54" font-size="9.5" fill="#334155"><tspan font-weight="bold" fill="#dc2626">• RST (Reset):</tspan> Abort and reset connection immediately (reject invalid segment or crashed host).</text>
+      <text x="400" y="12" font-size="9.5" fill="#334155"><tspan font-weight="bold" fill="#ea580c">• SYN (Synchronize):</tspan> Synchronize sequence numbers during connection establishment.</text>
+      <text x="400" y="26" font-size="9.5" fill="#334155"><tspan font-weight="bold" fill="#e11d48">• FIN (Finish):</tspan> Sender has no more data to transmit; initiate graceful connection release.</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 500">
+  <defs>
+    <style>
+      text { font-family: 'Segoe UI', Arial, sans-serif; }
+      .title { font-size: 19px; font-weight: bold; fill: #1e293b; }
+      .sub { font-size: 12.5px; fill: #64748b; }
+      .h-box { font-size: 13px; font-weight: bold; fill: #ffffff; }
+      .code-t { font-family: 'Courier New', monospace; font-size: 10.5px; font-weight: bold; }
+    </style>
+  </defs>
+
+  <rect width="840" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <text x="420" y="30" text-anchor="middle" class="title">Socket Programming: TCP vs. UDP Socket Lifecycles</text>
+  <text x="420" y="48" text-anchor="middle" class="sub">Comparison of Stream Sockets (SOCK_STREAM) vs Datagram Sockets (SOCK_DGRAM)</text>
+
+  <!-- Left: TCP Stream Sockets -->
+  <g transform="translate(40, 70)">
+    <rect width="365" height="400" rx="8" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.5"/>
+    <rect width="365" height="34" rx="8" fill="#2563eb"/>
+    <text x="182" y="22" text-anchor="middle" class="h-box">TCP Stream Sockets (SOCK_STREAM)</text>
+
+    <!-- Steps -->
+    <rect x="20" y="45" width="325" height="40" rx="5" fill="#eff6ff" stroke="#93c5fd"/>
+    <text x="35" y="62" class="code-t" fill="#1e40af">Server: socket() → bind() → listen()</text>
+    <text x="35" y="76" font-size="9" fill="#64748b">Allocates socket, binds port, sets passive queue</text>
+
+    <rect x="20" y="95" width="325" height="40" rx="5" fill="#fef3c7" stroke="#f59e0b"/>
+    <text x="35" y="112" class="code-t" fill="#92400e">Server: accept() [BLOCKS]</text>
+    <text x="35" y="126" font-size="9" fill="#78350f">Waits for client; creates new dedicated newsockfd</text>
+
+    <rect x="20" y="145" width="325" height="40" rx="5" fill="#eff6ff" stroke="#93c5fd"/>
+    <text x="35" y="162" class="code-t" fill="#1e40af">Client: socket() → connect()</text>
+    <text x="35" y="176" font-size="9" fill="#64748b">Triggers 3-Way Handshake with Server</text>
+
+    <rect x="20" y="195" width="325" height="60" rx="5" fill="#dcfce7" stroke="#22c55e"/>
+    <text x="35" y="214" class="code-t" fill="#15803d">Bidirectional I/O: send() / recv()</text>
+    <text x="35" y="228" font-size="9" fill="#166534">• Continuous stream of bytes (no message boundaries)</text>
+    <text x="35" y="242" font-size="9" fill="#166534">• Guaranteed delivery, flow control &amp; retransmission</text>
+
+    <rect x="20" y="265" width="325" height="45" rx="5" fill="#f1f5f9" stroke="#cbd5e1"/>
+    <text x="35" y="284" class="code-t" fill="#334155">Teardown: close(newsockfd)</text>
+    <text x="35" y="298" font-size="9" fill="#64748b">Triggers 4-Way FIN release handshake; frees FD</text>
+
+    <rect x="20" y="320" width="325" height="65" rx="5" fill="#faf5ff" stroke="#c084fc"/>
+    <text x="35" y="338" font-size="10" font-weight="bold" fill="#7c3aed">Concurrency Pattern:</text>
+    <text x="35" y="354" font-size="9" fill="#581c87">• Concurrent server forks a child process or thread for</text>
+    <text x="35" y="368" font-size="9" fill="#581c87">  each newsockfd, keeping parent listener free!</text>
+  </g>
+
+  <!-- Right: UDP Datagram Sockets -->
+  <g transform="translate(435, 70)">
+    <rect width="365" height="400" rx="8" fill="#ffffff" stroke="#a7f3d0" stroke-width="1.5"/>
+    <rect width="365" height="34" rx="8" fill="#059669"/>
+    <text x="182" y="22" text-anchor="middle" class="h-box">UDP Datagram Sockets (SOCK_DGRAM)</text>
+
+    <!-- Steps -->
+    <rect x="20" y="45" width="325" height="40" rx="5" fill="#ecfdf5" stroke="#6ee7b7"/>
+    <text x="35" y="62" class="code-t" fill="#065f46">Server: socket() → bind()</text>
+    <text x="35" y="76" font-size="9" fill="#64748b">No listen() or accept() calls required!</text>
+
+    <rect x="20" y="95" width="325" height="40" rx="5" fill="#fef3c7" stroke="#f59e0b"/>
+    <text x="35" y="112" class="code-t" fill="#92400e">Server: recvfrom() [BLOCKS]</text>
+    <text x="35" y="126" font-size="9" fill="#78350f">Waits for datagram; extracts sender's IP:Port</text>
+
+    <rect x="20" y="145" width="325" height="40" rx="5" fill="#ecfdf5" stroke="#6ee7b7"/>
+    <text x="35" y="162" class="code-t" fill="#065f46">Client: socket() [No connect() needed!]</text>
+    <text x="35" y="176" font-size="9" fill="#64748b">Transmits immediately without handshake latency</text>
+
+    <rect x="20" y="195" width="325" height="60" rx="5" fill="#dcfce7" stroke="#22c55e"/>
+    <text x="35" y="214" class="code-t" fill="#15803d">I/O: sendto() / recvfrom()</text>
+    <text x="35" y="228" font-size="9" fill="#166534">• Explicit recipient address supplied in every call</text>
+    <text x="35" y="242" font-size="9" fill="#166534">• Preserves datagram message boundaries</text>
+
+    <rect x="20" y="265" width="325" height="45" rx="5" fill="#f1f5f9" stroke="#cbd5e1"/>
+    <text x="35" y="284" class="code-t" fill="#334155">Teardown: close(sockfd)</text>
+    <text x="35" y="298" font-size="9" fill="#64748b">Zero network packets sent; closes local endpoint</text>
+
+    <rect x="20" y="320" width="325" height="65" rx="5" fill="#fef2f2" stroke="#fca5a5"/>
+    <text x="35" y="338" font-size="10" font-weight="bold" fill="#b91c1c">Key Operational Distinction:</text>
+    <text x="35" y="354" font-size="9" fill="#991b1b">• UDP server uses ONE single socket for ALL clients,</text>
+    <text x="35" y="368" font-size="9" fill="#991b1b">  whereas TCP creates a new newsockfd per connection!</text>
+  </g>
+</svg>
